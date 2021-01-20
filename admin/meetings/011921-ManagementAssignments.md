@@ -3,9 +3,9 @@
 
 **Type of meeting:** 
 
-**Which members were present:** Kewen Zhao, Kyeling Ong, Ryan Nishimoto, Ravi Tapia, Dan Magaril, Anshul Birla, Nick Krolikowski, Sim Singh (TA)
+**Which members were present:** Kewen Zhao, Kyeling Ong, Ryan Nishimoto, Ravi Tapia, Dan Magaril, Anshul Birla, Nick Krolikowski, Anastasiia Makhniaieva, Michael Vu
 
-**Members who were not present:** Anastasiia Makhniaieva, Michael Vu
+**Members who were not present:** none
 
 **Where/when meeting was held:** Meeting was held on zoom starting at 8:00 PM on Tuesday, 1/19/21
 
@@ -20,10 +20,10 @@ Worked on creating the team wiki <br>
 
 *Anything on the agenda that was not discussed:* None
 
-*Decisions made:* 
+*Decisions made:* We will be using Anshul's private repo as the source for the project
 
 
 
-**When the meeting finished:** 4:30pm on Friday, 1/15/21
+**When the meeting finished:** 9:10pm on Tuesday, 1/19/21
 
 
