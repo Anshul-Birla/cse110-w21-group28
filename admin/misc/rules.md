@@ -26,12 +26,15 @@
 - Kewen Zhao
   -  k4zhao@ucsd.edu
   -  (510)-888-1295
+- Kyeling Ong
+  - k8ong@ucsd.edu
+  - (510)-888-1295
 -  Ravindran Gabriel Tapia
    - rtapia@ucsd.edu
    - (818)-235-9662
- - Michael Vu
-   - mtvu@ucsd.edu 
-   - (714)-697-4770
+- Michael Vu
+  - mtvu@ucsd.edu 
+  - (714)-697-4770
 
 
 ## Primary Means of Communication
