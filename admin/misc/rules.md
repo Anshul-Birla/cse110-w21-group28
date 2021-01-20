@@ -8,17 +8,32 @@
 - Team Name: The Powell Rangers
 <br/>
 ## Member Info 
-| Name | Email | Phone |
-| ---- | ----- | ----- |
-| Anastasiia Makhniaieva |  amakhnia@ucsd.edu | (510) 953-0073| 
-| Nick Krolikowski | nkroliko@ucsd.edu | (949) 322-9814| 
-| Anshul Birla | anbirla@ucsd.edu | (858)-213-5396 | 
-| Daniil Magaril | dmagaril@ucsd.edu | (858) 414-8837 | 
-| Ryan Nishimoto | rnishimoto@ucsd.edu | (408)-455-7802| 
-| Kewen Zhao | k4zhao@ucsd.edu | (312)-868-6480 | 
-| Kyeling Ong | k8ong@ucsd.edu | (510)-888-1295 | 
-| Ravindran Gabriel Tapia | rtapia@ucsd.edu | (818)-235-9662 | 
-| Michael Vu | mtvu@ucsd.edu | (714)-697-4770 | 
+
+- Anastasiia Makhniaieva
+  - amakhnia@ucsd.edu
+  - (510) 953-0073
+- Nick Krolikowski
+  - nkroliko@ucsd.edu
+  - (949) 322-9814
+- Anshul Birla
+  - anbirla@ucsd.edu
+  - (858)-213-5396
+- Daniil Magaril
+  - dmagaril@ucsd.edu
+  - (858) 414-8837
+- Ryan Nishimoto
+  - rnishimoto@ucsd.edu
+  - (408)-455-7802
+- Kewen Zhao
+  -  k4zhao@ucsd.edu
+  -  (510)-888-1295
+-  Ravindran Gabriel Tapia
+   - rtapia@ucsd.edu
+   - (818)-235-9662
+ - Michael Vu
+   - mtvu@ucsd.edu 
+   - (714)-697-4770
+
 <br/>
 
 ## Primary Means of Communication
