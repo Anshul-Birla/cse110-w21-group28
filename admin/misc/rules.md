@@ -6,7 +6,7 @@
 ## Identification
 - Instructor: Thomas Powell
 - Team Name: The Powell Rangers
-<br/>
+
 ## Member Info 
 
 - Anastasiia Makhniaieva
@@ -34,7 +34,6 @@
    - mtvu@ucsd.edu 
    - (714)-697-4770
 
-<br/>
 
 ## Primary Means of Communication
 All communication will be done on Slack. We expect members to read and respond to messages withing 24 hours (either by reaction or response)
@@ -47,11 +46,9 @@ Team Powell Rangers will meet:
 
 
 Team member's will also be expected to check in on Slack once every day with an update of what they accomplished yesterday, what they will be doing today, and what they plan to accomplish tomorrow. 
-<br>
-<br>
+
 Should additional meetings be necessary, the team will use wehn2meet to coordinate and allow sufficient time for members to fill the form out
-<br>
-<br>
+
 *Additional Notes*: The co-leaders will send out scheduled Zoom meetings at least 12 hours in advance together with the agenda for the meetings. Team members shall let co-leaders know if they can not attend and we will make accommodations, such as recording videos. 
 
 ## Respsonsibilities
@@ -64,8 +61,6 @@ If a team member is not meeting deadlines, the team agrees to first reach out to
 ## Expected of Faculty and TA's 
 If a team member fails to live up to this agreement, the situation may be reported to the staff, but the team will still be responsible for submitting a completed assignment. Staff will be available to meet with teams to resolve issues.
 
-<br>
-<br>
 
 ## Signature
 
