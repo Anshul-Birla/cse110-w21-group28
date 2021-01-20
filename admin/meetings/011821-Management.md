@@ -1,19 +1,19 @@
-Powell Rangers/ Group #28
+## Powell Rangers/ Group #28
 
 
-Type of meeting: 
+**Type of meeting: **
 
-Which members were present: Nick Krolikowski, Anastasiia Makhniaieva, Michael Vu, Kewen Zhao, Kyeling Ong, Ryan Nishimoto, Ravi Tapia, Dan Magaril, Anshul Birla
+**Which members were present:** Nick Krolikowski, Anastasiia Makhniaieva, Michael Vu, Kewen Zhao, Kyeling Ong, Ryan Nishimoto, Ravi Tapia, Dan Magaril, Anshul Birla
 
-Members who were not present: NA
+**Members who were not present:** NA
 
-Where/when meeting was held: January 18, 2021 8-9 pm
+**Where/when meeting was held:** January 18, 2021 8-9 pm
 https://ucsd.zoom.us/j/94341585279
 
-Agenda of what was discussed:
-Old business: none
+**Agenda of what was discussed:**
+*Old business:* none
 
-New business: 
+*New business:* 
 creating a GitHub repository, sharing access with everyone
 the wiki will just be the README for now
 project requirements prefer GitHub wiki over pages, but other students also seemed to be having trouble with this
@@ -47,12 +47,12 @@ backup plan: 10am lecture
 intro video
 record a 10-15 second video of ourselves within the next 24 hours (before 9pm Tuesday) and upload it into the google drive
 
-Anything on the agenda that was not discussed: NA
+*Anything on the agenda that was not discussed:* NA
 
-Decisions made: video idea, the contract details, meeting times, things due and future plans
+*Decisions made:* video idea, the contract details, meeting times, things due and future plans
 
 
-When the meeting finished: January 18, 2021 9:10 pm
+**When the meeting finished:** January 18, 2021 9:10 pm
 
 
 
