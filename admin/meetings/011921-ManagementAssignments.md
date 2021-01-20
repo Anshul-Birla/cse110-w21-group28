@@ -1,24 +1,29 @@
-Powell Rangers/ Group #28
+## Powell Rangers/ Group #28
 
 
-Type of meeting: Finishing assignments
+**Type of meeting:** 
 
-Which members were present: Nick Krolikowski, Anastasiia Makhniaieva, Michael Vu, Kewen Zhao, Kyeling Ong, Ryan Nishimoto, Ravi Tapia, Anshul Birla,
+**Which members were present:** Kewen Zhao, Kyeling Ong, Ryan Nishimoto, Ravi Tapia, Dan Magaril, Anshul Birla, Nick Krolikowski, Sim Singh (TA)
 
-Members who were not present: Dan Magaril
+**Members who were not present:** Anastasiia Makhniaieva, Michael Vu
 
-Where/when meeting was held: 8:00pm in zoom
+**Where/when meeting was held:** Meeting was held on zoom starting at 8:00 PM on Tuesday, 1/19/21
 
-Agenda of what was discussed:
-Old business: 
+**Agenda of what was discussed:**
+*Old business:* None
 
-New business: Finishing the management assignments, Anshul created a new repo using his pro account.
+*New business:*
+Created new Repo using Anshul's pro account <br>
+Recreated the team contract, everyone signed it <br>
+Uploaded meetings to the repo <br>
+Worked on creating the team wiki <br>
 
-Anything on the agenda that was not discussed: 
+*Anything on the agenda that was not discussed:* None
 
-Decisions made: Anshul will create and be the owner of the new group repository.
+*Decisions made:* 
 
-When the meeting finished: 
 
+
+**When the meeting finished:** 4:30pm on Friday, 1/15/21
 
 
