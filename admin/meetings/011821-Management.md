@@ -14,12 +14,11 @@ https://ucsd.zoom.us/j/94341585279
 *Old business:* none
 
 *New business:* 
-creating a GitHub repository, sharing access with everyone
-the wiki will just be the README for now
-project requirements prefer GitHub wiki over pages, but other students also seemed to be having trouble with this
+creating a GitHub repository, sharing access with everyone <br>
+the wiki will just be the README for now <br>
+project requirements prefer GitHub wiki over pages, but other students also seemed to be having trouble with this <br>
 theme:
-team name: Powell Rangers
-a red Power Ranger with a tomato as the head
+team name: Powell Rangers <br>
 team values:
 teamwork, collaboration
 communication
@@ -27,23 +26,23 @@ accountability
 **psychological safety**
 equal distribution of work
 productive meetings + productivity and positivity in general
-Focus on growth and learning, learning from failure or mistakes throughout the project
-Roster of team members
+Focus on growth and learning, learning from failure or mistakes throughout the project <br>
+Roster of team members <br>
 Use messages from our Slack intros + put a link to each member’s personal github page
-Put everything on the powerpoint slides, including github link
+Put everything on the powerpoint slides, including github link <br>
 Logistics for team video
 power ranger backgrounds, each person has their own color
 15-20 seconds per person
 each person makes a small video intro of themself, then compile all the intros together + one video of all of us together at the end
-2.5 minutes total -> 150 seconds / 9 people
+2.5 minutes total -> 150 seconds / 9 people <br>
 team contract
 everyone needs to sign it and then send it back in
-finalize times for meeting twice a week:
+finalize times for meeting twice a week: <br>
 longer meeting: Monday 8-9pm
-shorter standup meetings
-Tuesday 8-8:30 pm
-Thursday 3:30-4pm 
-backup plan: 10am lecture
+shorter standup meetings <br>
+Tuesday 8-8:30 pm <br>
+Thursday 3:30-4pm  <br>
+backup plan: 10am lecture  <br>
 intro video
 record a 10-15 second video of ourselves within the next 24 hours (before 9pm Tuesday) and upload it into the google drive
 
