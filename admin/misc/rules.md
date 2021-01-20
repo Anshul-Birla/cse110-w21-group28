@@ -1,7 +1,6 @@
 # Team Working Agreement 
 ### Term: Winter 2021 
 ### Creation January 11, 2021
-<br/>
 
 ## Identification
 - Instructor: Thomas Powell
