@@ -1,7 +1,7 @@
 ## Powell Rangers/ Group #28
 
 
-**Type of meeting:** 
+**Type of meeting:** Work meeting
 
 **Which members were present:** Kewen Zhao, Kyeling Ong, Ryan Nishimoto, Ravi Tapia, Dan Magaril, Anshul Birla, Nick Krolikowski, Anastasiia Makhniaieva, Michael Vu
 
