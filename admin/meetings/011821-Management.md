@@ -1,13 +1,13 @@
 ## Powell Rangers/ Group #28
 
 
-**Type of meeting: **
+**Type of meeting:** Introductions and discussion on management assignments
 
 **Which members were present:** Nick Krolikowski, Anastasiia Makhniaieva, Michael Vu, Kewen Zhao, Kyeling Ong, Ryan Nishimoto, Ravi Tapia, Dan Magaril, Anshul Birla
 
 **Members who were not present:** NA
 
-**Where/when meeting was held:** January 18, 2021 8-9 pm
+**Where/when meeting was held:** January 18, 2021 8:00 pm
 https://ucsd.zoom.us/j/94341585279
 
 **Agenda of what was discussed:**
