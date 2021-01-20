@@ -25,11 +25,11 @@
   - (408)-455-7802
 - Kewen Zhao
   -  k4zhao@ucsd.edu
-  -  (510)-888-1295
+  -  (312)-868-6480
 - Kyeling Ong
   - k8ong@ucsd.edu
   - (510)-888-1295
--  Ravindran Gabriel Tapia
+- Ravindran Gabriel Tapia
    - rtapia@ucsd.edu
    - (818)-235-9662
 - Michael Vu
@@ -49,7 +49,7 @@ Team Powell Rangers will meet:
 
 Team member's will also be expected to check in on Slack once every day with an update of what they accomplished yesterday, what they will be doing today, and what they plan to accomplish tomorrow. 
 
-Should additional meetings be necessary, the team will use wehn2meet to coordinate and allow sufficient time for members to fill the form out
+Should additional meetings be necessary, the team will use when2meet to coordinate and allow sufficient time for members to fill the form out
 
 *Additional Notes*: The co-leaders will send out scheduled Zoom meetings at least 12 hours in advance together with the agenda for the meetings. Team members shall let co-leaders know if they can not attend and we will make accommodations, such as recording videos. 
 
