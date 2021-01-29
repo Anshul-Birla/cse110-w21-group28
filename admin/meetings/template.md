@@ -2,7 +2,7 @@
 
 **Type of meeting:**
 
-**Which members were present:** Kewen Zhao, Kyeling Ong, Ryan Nishimoto, Ravi Tapia, Dan Magaril, Anshul Birla, Nick Krolikowski, Anastasiia Mackniaieva, Michael Vu
+**Which members were present:** Kewen Zhao, Kyeling Ong, Ryan Nishimoto, Ravi Tapia, Dan Magaril, Anshul Birla, Nick Krolikowski, Anastasiia Makhniaieva, Michael Vu
 
 **Members who were not present:** none
 
@@ -11,15 +11,15 @@
 
 ## Agenda of what was discussed:
 
-*Old business:* None
+**Old business:** None
 
-*New business:* 
+**New business:** 
 
-*Anything on the agenda that was not discussed:*  None
+**Anything on the agenda that was not discussed:**  None
 
 
 ## Concluding notes:
 
-*Decisions made:* 
+**Decisions made:** 
 
 **When the meeting finished:**
