@@ -35,7 +35,7 @@
   + Focus on process, have documents that can be referred to, user-centered design thinking before jumping in, the final product isn’t the focus
   + May have rubrics later on, but currently none
   
-__Deliverables__
+Deliverables
 + Project Pitch - when to work on?
   + Doesn’t have to be finished by Sunday, but should be relatively fleshed out by next week and finished within next two weeks
 + Overarching decisions - what’s considered a big enough decision to be documented?
@@ -62,6 +62,7 @@ __Deliverables__
   + User-centered design - flow of clicking on buttons, etc
     + Might have flows invisible to the user
   + Interface design - includes user-centered design flow + all the parts, i.e. implementation/coding perspective
+
 
 *Anything on the agenda that was not discussed:* None
 
