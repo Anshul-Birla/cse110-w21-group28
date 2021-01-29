@@ -15,6 +15,12 @@
 
 **New business:** 
 + Start work on user personas
+  + Split student role into organized (close to graduating) student and disorganized (just starting college) student
+    + Familiarity with technology
+    + Hobbies might come into play, e.g. cooking
+  + Middle-aged user
+  + Older user
+    + larger font size
 
 **Anything on the agenda that was not discussed:** 
 + Overarching decisions documents
@@ -24,5 +30,6 @@
 
 **Decisions made:** 
 + Work on ideas individually before Sunday
++ Meet again on Sunday
 
-**When the meeting finished:** 
+**When the meeting finished:** 7:29 pm
