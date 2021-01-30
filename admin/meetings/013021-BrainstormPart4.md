@@ -2,9 +2,9 @@
 
 **Type of meeting:** Brainstorming and deliverables for Sunday 1/31/21 deadline
 
-**Which members were present:** Anastasiia Makhniaieva, Anshul Birla, Nick Krolikowski, Kewen Zhao, Kyeling Ong, Ravi Tapia, Ryan Nishimoto
+**Which members were present:** Anastasiia Makhniaieva, Anshul Birla, Nick Krolikowski, Kewen Zhao, Kyeling Ong, Ryan Nishimoto
 
-**Members who were not present:** Dan Magaril, Michael Vu,
+**Members who were not present:** Dan Magaril, Michael Vu, Ravi Tapia
 
 **Where/when meeting was held:** [zoom](https://ucsd.zoom.us/j/93696118730) at 11:35 am on Saturday 1/30/21
 
