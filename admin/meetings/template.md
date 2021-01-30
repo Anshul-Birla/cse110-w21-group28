@@ -4,7 +4,7 @@
 
 **Which members were present:** Kewen Zhao, Kyeling Ong, Ryan Nishimoto, Ravi Tapia, Dan Magaril, Anshul Birla, Nick Krolikowski, Anastasiia Makhniaieva, Michael Vu
 
-**Members who were not present:** none
+**Members who were not present:** None
 
 **Where/when meeting was held:** 
 
