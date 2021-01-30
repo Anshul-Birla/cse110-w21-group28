@@ -1,6 +1,6 @@
 ## Powell Rangers / Group #28
 
-**Type of meeting:** Brainstorming and deliverables for Sunday 1/31/21 deadline
+**Type of meeting:** Brainstorming and deliverables for Sunday 1/31/21 deadline, getting started on other documents
 
 **Which members were present:** Anastasiia Makhniaieva, Anshul Birla,  Michael Vu, Nick Krolikowski, Kewen Zhao, Kyeling Ong, Ravi Tapia, Ryan Nishimoto
 
@@ -29,7 +29,7 @@
   + Rough interface + flowchart
 + Start thinking about the other documents
 
-Main webpage design
++ Main webpage design
   + Timer in center
     + At the top of the timer box display what type of session, e.g. work, long break, short break
   + Volume/sound options
@@ -47,14 +47,15 @@ Main webpage design
   + Additional role of organizer - keep track of project
 
 **Anything on the agenda that was not discussed:** 
-+ ADR: need to finalize roles
++ ADRs: meeting times, how we're deciding roles
 
 
 ## Concluding notes:
 
 **Decisions made:** 
 + Kyeling will be notetaker for all future meetings
-+ [Decisions on webpage design](#main-webpage-design)
++ Decisions on webpage design (see above)
 + Roles: select interests in Slack
++ Nick will make temporary documents in respective GitHub directories by today
 
-**When the meeting finished:** 
+**When the meeting finished:** 12:49 pm
