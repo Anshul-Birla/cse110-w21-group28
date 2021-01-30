@@ -29,7 +29,7 @@
   + Rough interface + flowchart
 + Start thinking about the other documents
 
-+ Main webpage design
+Main webpage design
   + Timer in center
     + At the top of the timer box display what type of session, e.g. work, long break, short break
   + Volume/sound options
