@@ -23,7 +23,7 @@
   + options 7, 7:30, or 8 pm
 + make sure everything is uploaded to GitHub
 
-*Anything on the agenda that was not discussed:*  Npme
+*Anything on the agenda that was not discussed:* None
 
 *Decisions made:* 
 + moving Thursday meeting from 3:30-4 to **7-7:30** (right after meeting with Sim)
