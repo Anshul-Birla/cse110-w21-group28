@@ -28,8 +28,8 @@ https://ucsd.zoom.us/j/94341585279
   + productive meetings + productivity and positivity in general
   + Focus on growth and learning, learning from failure or mistakes throughout the project <br>
 + Roster of team members <br>
-+ Use messages from our Slack intros + put a link to each member’s personal github page
-+ Put everything on the powerpoint slides, including github link <br>
+  + Use messages from our Slack intros + put a link to each member’s personal github page
+  + Put everything on the powerpoint slides, including github link <br>
 + Logistics for team video
   + power ranger backgrounds, each person has their own color
   + 15-20 seconds per person
