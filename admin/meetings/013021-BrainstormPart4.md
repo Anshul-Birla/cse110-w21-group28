@@ -53,7 +53,7 @@
 ## Concluding notes:
 
 **Decisions made:** 
-+ Kyeling will be notetaker for all future meetings
++ Kyeling will take notes for all future meetings
 + Decisions on webpage design (see above)
 + Roles: select interests in Slack
 + Nick will make temporary documents in respective GitHub directories by today
