@@ -1,4 +1,4 @@
-## Powell Rangers/ Group #28
+## Powell Rangers / Group #28
 
 **Type of meeting:** Brainstorming
 
