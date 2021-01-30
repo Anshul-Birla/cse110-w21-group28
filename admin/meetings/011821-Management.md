@@ -11,7 +11,7 @@
 https://ucsd.zoom.us/j/94341585279
 
 **Agenda of what was discussed:**  
-*Old business:* none
+*Old business:* None
 
 *New business:* 
 + creating a GitHub repository, sharing access with everyone <br>
