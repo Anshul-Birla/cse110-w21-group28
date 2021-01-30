@@ -54,7 +54,7 @@
 
 **Decisions made:** 
 + Kyeling will be notetaker for all future meetings
-+ (Decisions on webpage design)[#main-webpage-design]
++ [Decisions on webpage design](#main-webpage-design)
 + Roles: select interests in Slack
 
 **When the meeting finished:** 
