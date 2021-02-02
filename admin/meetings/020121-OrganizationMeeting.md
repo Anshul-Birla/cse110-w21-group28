@@ -20,14 +20,14 @@ Features
 - Focus: bare bones functionality
 - 5 main stages of Pomo Technique
   1. Planning
-    - simple table: task name, estimated pomos, actual pomos taken
+      - simple table: task name, estimated pomos, actual pomos taken
   2. Tracking 
-    - Record completed sessions only
-    - Include distracting thoughts and tally of external distractions
+     - Record completed sessions only
+     - Include distracting thoughts and tally of external distractions
   3. Recording
-    - Add tracked data to spreadsheet or database
+      - Add tracked data to spreadsheet or database
   4. Processing
-    - Assess tracked and recorded data
+     - Assess tracked and recorded data
   5. Visualization
 + Example use cases from lecture:
   + Studying, office environment, health reasons
