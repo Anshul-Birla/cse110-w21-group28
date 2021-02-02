@@ -36,9 +36,9 @@ Features
 
 Teams
 + Estimating time of tasks, finish medium and high fidelity renders first, wireframes
-  + Managers (Nick, Anastasiia) - work on ADRs and Project Roadmap
-  + Coding team (Anshul, Kewen, Dan) will work on exploratory coding for now
-  + Design (Michael, Kyeling, Ravi, Ryuan) will work on documents - interface, design docs, high and medium fidelity renders
+  + Managers *(Nick, Anastasiia)* - work on ADRs and Project Roadmap
+  + Coding team *(Anshul, Kewen, Dan)* will work on exploratory coding for now
+  + Design *(Michael, Kyeling, Ravi, Ryan)* will work on documents - interface, design docs, high and medium fidelity renders
 + Decision: move Javascript and System Diagrams under Coding team task and have HTML/CSS under Design team
 + User Centered Documents is something we'll all work on
 
@@ -46,6 +46,7 @@ Daily standups
 + 10-15 minutes each day
 + Will take notes on them, need an asynchronous document
 + Create Slack channel where everyone throws in their updates, have one person copy paste into GitHub
++ Make a bot to send reminders, have it in by 11:59 pm
 
 To Do this week:
 - Project Roadmap
@@ -54,11 +55,23 @@ To Do this week:
 - Breakout rooms
 - Talk about testing, set up GitHub
 
+Breakout room recap:
+- Design - flowchart similar to Lab 4
+  - Decision question: what should happen when user presses "End session" button or finishes task?
+    - Display stats from session -> option to start new session -> refresh to new timer page
+- Coding
+  - Started on GitHub issues, if anyone has anything to add, ping a member of the coding team or fill out template
+- Slack channels for each team
+  - To account for bus factor, others will still have access to a team's channel but can choose to mute it
+
 **Anything on the agenda that was not discussed:**  None
 
 
 ## Concluding notes:
 
 **Decisions made:** 
++ Starting to form division of roles/teams
++ Design decisions will be coming as Design team finalizes the medium and high fideltiy renders
++ Standup in standups Slack channel by 11:59 each day - Kyeling will add these to GitHub (new standup subfolder within meetings)
 
-**When the meeting finished:**
+**When the meeting finished:** 9:02 pm
