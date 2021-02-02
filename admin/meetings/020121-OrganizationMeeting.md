@@ -21,7 +21,7 @@ Features
 - 5 main stages of Pomo Technique
   1. Planning
     - simple table: task name, estimated pomos, actual pomos taken
-  2. Tracking
+  2. Tracking 
     - Record completed sessions only
     - Include distracting thoughts and tally of external distractions
   3. Recording
