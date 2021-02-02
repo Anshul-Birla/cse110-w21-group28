@@ -13,7 +13,7 @@
 
 **Old business:** None
 
-**New business:** (agenda slides)[https://docs.google.com/presentation/d/10aJ_HnEnxsT2p2N4AwzZ_cxkwlYF7lCvvDDzbIwU7EA/edit]
+**New business:** [agenda slides](https://docs.google.com/presentation/d/10aJ_HnEnxsT2p2N4AwzZ_cxkwlYF7lCvvDDzbIwU7EA/edit)
 
 Features
 - Goal for today: flesh out features for exploratory coding team to start experimenting
