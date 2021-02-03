@@ -1,0 +1,29 @@
+{
+  "name": "cse110-w21-group28",
+  "version": "1.0.0",
+  "description": "Necessary Packages for Development",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test",
+    "lint-js": "eslint --fix --ext .js,.jsx .",
+    "lint-css":"stylelint **/*.css !**/node_modules/** --allow-empty-input --fix",
+    "lint":"npm run lint-js && npm run lint-css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Anshul-Birla/cse110-w21-group28.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Anshul-Birla/cse110-w21-group28/issues"
+  },
+  "homepage": "https://github.com/Anshul-Birla/cse110-w21-group28#readme",
+  "devDependencies": {
+    "eslint": "^7.19.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "stylelint": "^13.9.0",
+    "stylelint-config-standard": "^20.0.0"
+  }
+}
