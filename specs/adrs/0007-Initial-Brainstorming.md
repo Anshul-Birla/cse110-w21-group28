@@ -1,4 +1,4 @@
-# Use Markdown Architectural Decision Records
+# Initial Brainstorm Decisions
 
 ## Context and Problem Statement
 
