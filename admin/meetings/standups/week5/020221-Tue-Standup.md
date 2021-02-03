@@ -86,6 +86,13 @@ Any blockers?
 - Gotta study for another class's test
 
 **Ravi**  
+Previous work day progress  
+- 
+
+Plans for today
+-   
+
+Any blockers?
 - 
 
 **Ryan**  
