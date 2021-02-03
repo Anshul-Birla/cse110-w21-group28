@@ -27,7 +27,9 @@
 
 ### Design Team
 **Kyeling**
-- 
+- Worked with design team on rough flow chart
+- Will start brainstorming for interface design documents before tonight's meeting
+- Not completely clear on the expectations for high fidelity prototype
 
 **Michael**
 - 
