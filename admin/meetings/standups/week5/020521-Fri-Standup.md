@@ -1,5 +1,5 @@
 ## Standup Meeting  
-**Date:** 
+**Date:** 2/5/21
 
 ## General updates:  
  
@@ -79,9 +79,12 @@ Plans for today
 
 **Ravi**  
 Previous work day progress  
-- 
+- finished figma
+
+
 Plans for today  
-- 
+- create sketch of pomo
+
 
 **Ryan**  
 Previous work day progress  
