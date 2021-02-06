@@ -90,7 +90,7 @@ Previous work day progress
 - 
 
 Plans for today
--   
+- 
 
 Any blockers?
 - 

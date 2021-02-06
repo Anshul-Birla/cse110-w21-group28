@@ -1,39 +1,31 @@
-## Standup Meeting
-**Date:**
+## Standup Meeting  
+**Date:**  
 
-## General updates:
-- 
+## General updates:  
  
 
-## Individual updates:
+## Individual updates:  
 
-### Manager Team
-**Anastasia**
--
+### Manager Team  
+**Anastasia**  
+ 
+**Nick**  
 
-**Nick**
--
+### Coding Team  
 
-### Coding Team
+**Anshul**  
 
-**Anshul**
--
+**Dan**  
 
-**Dan**
--
+**Kewen**  
 
-**Kewen**
--
+### Design Team  
 
-### Design Team
-**Kyeling**
-- 
+**Kyeling**  
 
-**Michael**
-- 
+**Michael**  
 
-**Ravi**
-- 
+**Ravi**  
 
-**Ryan**
-- 
+**Ryan**  
+
