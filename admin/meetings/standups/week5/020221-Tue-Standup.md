@@ -87,13 +87,13 @@ Any blockers?
 
 **Ravi**  
 Previous work day progress  
-- 
+- started rough draft of flowchart for website
 
 Plans for today
-- 
+- finalize flowchart
 
 Any blockers?
-- 
+- homework :((
 
 **Ryan**  
 Previous work day progress  
