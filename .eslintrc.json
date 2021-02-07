@@ -10,5 +10,13 @@
         "ecmaVersion": 12
     },
     "rules": {
-    }
+    },
+    "overrides":[
+        {
+            "files": ["*.test.js"],
+            "rules": {
+                "no-undef":"off"
+            }
+        }
+    ]
 }
