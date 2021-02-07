@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [ main ]
 jobs:
-  Check Styles:
+  Check_Styles:
     runs-on: ubuntu-latest
     steps:
       - name: Clone
