@@ -4,8 +4,7 @@
   "description": "Necessary Packages for Development",
   "main": "index.js",
   "scripts": {
-    "start": " npx http-server -c-1",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "test": "jest",
     "lint-js": "eslint --fix --no-error-on-unmatched-pattern --ext .js,.jsx .",
     "lint-css": "stylelint **/*.css !**/node_modules/** --allow-empty-input --fix",
     "lint": "npm run lint-js && npm run lint-css"
@@ -21,23 +20,11 @@
   },
   "homepage": "https://github.com/Anshul-Birla/cse110-w21-group28#readme",
   "devDependencies": {
-    "@babel/plugin-transform-modules-commonjs": "^7.12.13",
     "eslint": "^7.19.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
-    "http-server": "^0.12.3",
     "jest": "^26.6.3",
-    "jest-environment-node": "^26.6.2",
     "stylelint": "^13.9.0",
     "stylelint-config-standard": "^20.0.0"
-  },
-  "babel": {
-    "env": {
-      "test": {
-        "plugins": [
-          "@babel/plugin-transform-modules-commonjs"
-        ]
-      }
-    }
   }
 }

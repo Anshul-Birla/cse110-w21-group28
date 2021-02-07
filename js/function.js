@@ -1,4 +1,5 @@
-function increment(val) {
-  return Number(val) + 1;
-}
-export { increment };
+const functions = {
+  add: (num1, num2) => num1 + num2,
+};
+
+module.exports = functions;

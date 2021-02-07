@@ -10,7 +10,6 @@
         "ecmaVersion": 12
     },
     "rules": {
-        "import/prefer-default-export":"off"
     },
     "overrides":[
         {
