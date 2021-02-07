@@ -15,14 +15,3 @@ jobs:
         run: npm ci
       - name: Lint
         run : npm run lint
-  Tests:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Clone
-        uses: actions/checkout@v2
-      - name: Install Dependencies
-        run: npm ci
-      - name: Unit Test
-        run: npm test
-        
-        
