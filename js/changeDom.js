@@ -1,9 +1,9 @@
-import { increment } from './function';
+import { Timer } from "./timer.js";
 
-const button = document.getElementById('incrementButton');
-const output = document.getElementById('outputIncrement');
-button.addEventListener('click', () => {
-  const oldVal = output.value;
-  const newVal = increment(oldVal);
-  output.value = newVal;
+const output = document.getElementById('timeDisplay');
+const startTimerButton = document.getElementById('startTimer');
+const TimerObj = new Timer(output);
+
+startTimerButton.addEventListener('click', () => {
+  TimerObj.beginTimer();
 });

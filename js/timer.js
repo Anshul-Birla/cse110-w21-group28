@@ -1,27 +1,28 @@
+import { workMode, shortBreakMode, longBreakMode } from "./timerModes.js" 
+
 class Timer {
   constructor(display) {
-    const workTime = 25;
-    const shortBreakTime = 5;
-    const longBreakTime = 10;
-    const workString = 'work';
-    const shortBreakString = 'sBreak';
-    const longBreakString = 'lBreak';
-    const workOrder = [workString, shortBreakString, workString,
-      shortBreakString, workString, longBreakString];
-
+    this.state = '';
     this.stateQueue = [];
+    this.display = display;
+
+    const workOrder = [workMode, shortBreakMode, workMode,
+      shortBreakMode, workMode, longBreakMode];
     for (let i = 0; i < workOrder.length; i += 1) {
       this.stateQueue.push(workOrder[i]);
     }
-    this.display = display;
-    this.stateToTimeMap = new Map();
-    this.stateToTimeMap.set(workString, workTime);
-    this.stateToTimeMap.set(shortBreakString, shortBreakTime);
-    this.stateToTimeMap.set(longBreakString, longBreakTime);
   }
 
-  beginTimer() {
-    let timeRemaining = this.stateToTimeMap.get(this.getNextState());
+  onTimerComplete() {
+    const completedSession = this.stateQueue.shift();
+    this.stateQueue.push(completedSession)
+  }
+
+  /** Starts the timer with the session at the first element in stateQueue */
+  startTimer() {
+    const session = this.stateQueue[0];
+    this.state = session.name;
+    let timeRemaining = session.duration;
     const intervalFunction = setInterval(() => {
       const minutes = Math.floor(timeRemaining / 60);
       const seconds = timeRemaining % 60;
@@ -33,8 +34,9 @@ class Timer {
       }
       this.display.textContent = displayString;
       timeRemaining -= 1;
-      if (timeRemaining === 0) {
+      if (timeRemaining < 0) {
         clearInterval(intervalFunction);
+        this.onTimerComplete();
       }
     }, 1000);
   }
