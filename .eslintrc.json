@@ -11,13 +11,15 @@
     },
     "rules": {
         "import/prefer-default-export":"off",
-        "no-param-reassign":"off"
+        "no-param-reassign":"off",
+        "import/extensions":"off"
     },
     "overrides":[
         {
             "files": ["*.test.js"],
             "rules": {
-                "no-undef":"off"
+                "no-undef":"off",
+                "no-unused-vars":"warn"
             }
         }
     ]

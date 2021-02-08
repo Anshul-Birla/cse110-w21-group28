@@ -1,11 +1,11 @@
-import { workMode, shortBreakMode, longBreakMode } from "./timerModes.js" 
+import { workMode, shortBreakMode, longBreakMode } from './timerModes.js';
 
 class Timer {
-  constructor(display) {
+  constructor(displayTime, displayStatus) {
     this.state = '';
     this.stateQueue = [];
-    this.display = display;
-
+    this.displayTime = displayTime;
+    this.displayStatus = displayStatus;
     const workOrder = [workMode, shortBreakMode, workMode,
       shortBreakMode, workMode, longBreakMode];
     for (let i = 0; i < workOrder.length; i += 1) {
@@ -15,36 +15,36 @@ class Timer {
 
   onTimerComplete() {
     const completedSession = this.stateQueue.shift();
-    this.stateQueue.push(completedSession)
+    this.stateQueue.push(completedSession);
+    this.startTimer();
   }
 
   /** Starts the timer with the session at the first element in stateQueue */
   startTimer() {
     const session = this.stateQueue[0];
     this.state = session.name;
-    let timeRemaining = session.duration;
-    const intervalFunction = setInterval(() => {
-      const minutes = Math.floor(timeRemaining / 60);
-      const seconds = timeRemaining % 60;
-      let displayString = '';
-      if (seconds < 10) {
-        displayString = `${minutes}:0${seconds}`;
-      } else {
-        displayString = `${minutes}:${seconds}`;
-      }
-      this.display.textContent = displayString;
-      timeRemaining -= 1;
-      if (timeRemaining < 0) {
-        clearInterval(intervalFunction);
-        this.onTimerComplete();
-      }
-    }, 1000);
+    this.displayStatus.textContent = this.state;
+    this.countdown(session.duration * 60)
   }
 
-  getNextState() {
-    const nextState = this.stateQueue.shift();
-    this.stateQueue.push(nextState);
-    return nextState;
+  countdown(duration) {
+    const minutes = Math.floor(duration / 60);
+    const seconds = duration % 60;
+    let displayString = '';
+    if (seconds < 10) {
+      displayString = `${minutes}:0${seconds}`;
+    } else {
+      displayString = `${minutes}:${seconds}`;
+    }
+    this.displayTime.textContent = displayString;
+    duration -= 1;
+    if (duration >= 0) {
+      setTimeout(() => {
+        this.countdown(duration);
+      }, 1000);
+    } else {
+      this.onTimerComplete();
+    }
   }
 }
 

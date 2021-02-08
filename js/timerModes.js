@@ -1,15 +1,15 @@
 const workMode = {
-  name:"Working Time",
-  duration:25,
-}
+  name: 'Working Time',
+  duration: 1,
+};
 const shortBreakMode = {
-  name: "Short Break",
+  name: 'Short Break',
   duration: 5,
-}
+};
 
 const longBreakMode = {
-  name:"Long Break",
+  name: 'Long Break',
   duration: 5,
-}
+};
 
-export { workMode, shortBreakMode, longBreakMode}
+export { workMode, shortBreakMode, longBreakMode };

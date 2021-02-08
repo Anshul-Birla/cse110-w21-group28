@@ -1,5 +1,5 @@
 import { Timer } from '../js/timer';
-import { workMode, shortBreakMode, longBreakMode} from '../js/timerModes';
+import { workMode, shortBreakMode, longBreakMode } from '../js/timerModes';
 
 beforeEach(() => {
   jest.useFakeTimers();
@@ -7,65 +7,56 @@ beforeEach(() => {
 });
 
 test('Test Initial State is Nothing', () => {
-  const TimerObj = new Timer(null);
+  const TimerObj = new Timer(null, null);
   expect(TimerObj.state).toBe('');
-})
+});
 
 test('Test First Iteration of Timer', () => {
   document.body.innerHTML = '<div>'
   + '  <p id="displayTime"></p>'
+  + ' <p id="displayStatus"></p>'
   + '</div>';
 
-  const displayElement = document.getElementById('displayTime');
-  const TimerObj = new Timer(displayElement);
+  const displayTime = document.getElementById('displayTime');
+  const displayStatus = document.getElementById('displayStatus');
+  const TimerObj = new Timer(displayTime, displayStatus);
   TimerObj.startTimer();
   expect(TimerObj.state).toBe(workMode.name);
 });
 
-test('Test Second Iteration of Timer', () => {
+test('Test That Queue Gets Updated During Second Iteration Of Timer', () => {
   document.body.innerHTML = '<div>'
   + '  <p id="displayTime"></p>'
+  + ' <p id="displayStatus"></p>'
   + '</div>';
 
-  const displayElement = document.getElementById('displayTime');
-  const TimerObj = new Timer(displayElement);
+  const displayTime = document.getElementById('displayTime');
+  const displayStatus = document.getElementById('displayStatus');
+  const TimerObj = new Timer(displayTime, displayStatus);
+  jest.clearAllTimers();
   TimerObj.startTimer();
-  jest.advanceTimersByTime(1500000);
-  
-  expect(clearInterval).toBeCalled();
-  expect(clearInterval).toHaveBeenCalledTimes(1);
+
+  jest.advanceTimersByTime(workMode.duration*60*1000);
+
   expect(TimerObj.stateQueue[0]).toBe(shortBreakMode);
+  expect(TimerObj.stateQueue[4]).toBe(longBreakMode);
+
 });
 
+test('Test That HTML Gets Updated During Second ', () => {
+  document.body.innerHTML = '<div>'
+  + '  <p id="displayTime"></p>'
+  + ' <p id="displayStatus"></p>'
+  + '</div>';
 
-// test('Check if Set Interval Is Called', () => {
-//   document.body.innerHTML = '<div>'
-//   + '  <p id="displayTime"></p>'
-//   + '</div>';
+  const displayTime = document.getElementById('displayTime');
+  const displayStatus = document.getElementById('displayStatus');
+  const TimerObj = new Timer(displayTime, displayStatus);
+  jest.clearAllTimers();
+  TimerObj.startTimer();
 
-//   jest.useFakeTimers();
+  jest.advanceTimersByTime(workMode.duration*60*1000);
 
-//   const displayElement = document.getElementById('displayTime');
-//   const TimerObj = new Timer(displayElement);
-//   TimerObj.beginTimer();
-//   expect(setInterval).toHaveBeenCalledTimes(1);
-// });
-
-// test('Check if Timer Stops After 25 Minutes After First Pomo', () => {
-//   document.body.innerHTML = '<div>'
-//   + '  <p id="displayTime"></p>'
-//   + '</div>';
-
-//   jest.useFakeTimers();
-//   jest.clearAllTimers();
-
-//   const displayElement = document.getElementById('displayTime');
-//   const TimerObj = new Timer(displayElement);
-//   TimerObj.beginTimer();
-
-//   expect(clearInterval).not.toBeCalled();
-
-//   jest.advanceTimersByTime(1500000);
-//   expect(clearInterval).toBeCalled();
-//   expect(clearInterval).toHaveBeenCalledTimes(1);
-// });
+  expect(displayStatus.textContent).toBe(shortBreakMode.name);
+  expect(displayTime.textContent).toBe(`${shortBreakMode.duration}:00`);
+});
