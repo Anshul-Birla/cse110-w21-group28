@@ -10,13 +10,16 @@
         "ecmaVersion": 12
     },
     "rules": {
-        "import/prefer-default-export":"off"
+        "import/prefer-default-export":"off",
+        "no-param-reassign":"off",
+        "import/extensions":"off"
     },
     "overrides":[
         {
             "files": ["*.test.js"],
             "rules": {
-                "no-undef":"off"
+                "no-undef":"off",
+                "no-unused-vars":"warn"
             }
         }
     ]
