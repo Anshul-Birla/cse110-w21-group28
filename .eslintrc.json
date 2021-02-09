@@ -22,5 +22,6 @@
                 "no-unused-vars":"warn"
             }
         }
-    ]
+    ],
+    "ignorePatterns": ["docs/*"]
 }
