@@ -83,7 +83,7 @@
 }
 
 .manual-toc-title a:hover {
-  color: #039BE5;
+  color: #039be5;
 }
 
 .manual-toc li {
@@ -116,14 +116,17 @@
   display: none;
   margin-left: 1.5em;
 }
+
 .manual-toc .indent-h3 {
   display: none;
   margin-left: 2.5em;
 }
+
 .manual-toc .indent-h4 {
   display: none;
   margin-left: 3.5em;
 }
+
 .manual-toc .indent-h5 {
   display: none;
   margin-left: 4.5em;

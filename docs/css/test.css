@@ -41,11 +41,11 @@ table.test-summary tr.test-interface .toggle {
   padding-top: 0.25em;
 }
 
-table.test-summary tr.test-interface .toggle.opened:before {
+table.test-summary tr.test-interface .toggle.opened::before {
   content: '▼';
 }
 
-table.test-summary tr.test-interface .toggle.closed:before {
+table.test-summary tr.test-interface .toggle.closed::before {
   content: '▶';
 }
 
@@ -53,6 +53,7 @@ table.test-summary .test-target > span {
   display: block;
   margin-top: 4px;
 }
+
 table.test-summary .test-target > span:first-child {
   margin-top: 0;
 }

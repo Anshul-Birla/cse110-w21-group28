@@ -317,4 +317,4 @@ window.esdocSearchIndex = [
     "tests/function.test.js",
     "testFile"
   ]
-]
+];
