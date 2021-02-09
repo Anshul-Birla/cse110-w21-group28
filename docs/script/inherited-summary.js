@@ -1,15 +1,15 @@
-(function(){
+(function () {
   function toggle(ev) {
-    var button = ev.target;
-    var parent = ev.target.parentElement;
-    while(parent) {
+    const button = ev.target;
+    let parent = ev.target.parentElement;
+    while (parent) {
       if (parent.tagName === 'TABLE' && parent.classList.contains('summary')) break;
       parent = parent.parentElement;
     }
 
     if (!parent) return;
 
-    var tbody = parent.querySelector('tbody');
+    const tbody = parent.querySelector('tbody');
     if (button.classList.contains('opened')) {
       button.classList.remove('opened');
       button.classList.add('closed');
@@ -21,8 +21,8 @@
     }
   }
 
-  var buttons = document.querySelectorAll('.inherited-summary thead .toggle');
-  for (var i = 0; i < buttons.length; i++) {
+  const buttons = document.querySelectorAll('.inherited-summary thead .toggle');
+  for (let i = 0; i < buttons.length; i++) {
     buttons[i].addEventListener('click', toggle);
   }
-})();
+}());
