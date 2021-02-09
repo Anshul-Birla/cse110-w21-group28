@@ -6,12 +6,15 @@
   "scripts": {
     "start": " npx http-server -c-1",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage",
-    "lint-js": "eslint --fix --no-error-on-unmatched-pattern --ext .js,.jsx .",
     "test-nc": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "lint-js": "eslint --fix --no-error-on-unmatched-pattern --ext .js,.jsx .",
+    "lint-js:test": "eslint --no-error-on-unmatched-pattern --ext .js,.jsx .",
     "lint-css": "stylelint **/*.css !**/node_modules/** --allow-empty-input --fix",
+    "lint-css:test": "stylelint **/*.css !**/node_modules/** --allow-empty-input --fix",
     "lint": "npm run lint-js && npm run lint-css",
-    "branch": "chmod 777 ./.github/scripts/branch.sh && ./.github/scripts/branch.sh"
-    
+    "lint:test": "npm run lint-js:test && npm run lint-css:test",
+    "branch": "chmod 777 ./.github/scripts/branch.sh && ./.github/scripts/branch.sh",
+    "doc":"./node_modules/.bin/esdoc && ./node_modules/.bin/esdoc -test"
   },
   "repository": {
     "type": "git",
@@ -25,6 +28,8 @@
   "homepage": "https://github.com/Anshul-Birla/cse110-w21-group28#readme",
   "devDependencies": {
     "@babel/plugin-transform-modules-commonjs": "^7.12.13",
+    "esdoc": "^1.1.0",
+    "esdoc-standard-plugin": "^1.0.0",
     "eslint": "^7.19.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
