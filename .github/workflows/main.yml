@@ -16,7 +16,7 @@ jobs:
       - name: Lint
         run : npm run lint
       - name: Branch_Name
-        run: npm run branch $GITHUB.HEAD_REF
+        run: npm run branch "$GITHUB.HEAD_REF"
   Tests:
     runs-on: ubuntu-latest
     steps:
