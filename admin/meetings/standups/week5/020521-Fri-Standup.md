@@ -1,5 +1,5 @@
 ## Standup Meeting  
-**Date:** 
+**Date:** 2/5/21
 
 ## General updates:  
  
