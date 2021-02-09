@@ -1,6 +1,7 @@
 // import { jest } from '@jest/globals'
 import { increment } from '../js/function';
 
+/** @Test {Increment} */
 test('Incrment 2', () => {
   expect(increment(2)).toBe(3);
 });
