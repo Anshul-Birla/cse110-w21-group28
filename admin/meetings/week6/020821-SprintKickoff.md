@@ -91,7 +91,25 @@
     + re-emphasis of previous designs
 
 + Design features consensus:
-
+  + FAQ, scroll down for now
+  + End day button
+  + to do list
+    + check marks and strikethrough
+    + indicate current task/next task
+    + scroll to keep current task at top
+    + fraction to indicate pomos
+  + broken sessions button
+    + click on one button, then click on classification
+  + timer above todo list
+  + *For later:*
+    + settings
+    + stylized timer
+    + edit/delete tasks
+    + hide todo list
+    + hover for stats/FAQ
+    + Interactive help
+    + progress meters
+    
 **Anything on the agenda that was not discussed:**  None
 
 
