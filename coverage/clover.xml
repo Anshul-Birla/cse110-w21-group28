@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1612844305083" clover="3.2.0">
+  <project timestamp="1612844305083" name="All files">
+    <metrics statements="29" coveredstatements="29" conditionals="4" coveredconditionals="4" methods="5" coveredmethods="5" elements="38" coveredelements="38" complexity="0" loc="29" ncloc="29" packages="1" files="2" classes="2"/>
+    <file name="timer.js" path="/home/anshul/anshul/Development/cse110-w21-group28/js/timer.js">
+      <metrics statements="26" coveredstatements="26" conditionals="4" coveredconditionals="4" methods="5" coveredmethods="5"/>
+      <line num="5" count="4" type="stmt"/>
+      <line num="6" count="4" type="stmt"/>
+      <line num="7" count="4" type="stmt"/>
+      <line num="8" count="4" type="stmt"/>
+      <line num="9" count="4" type="stmt"/>
+      <line num="11" count="4" type="stmt"/>
+      <line num="12" count="24" type="stmt"/>
+      <line num="17" count="2" type="stmt"/>
+      <line num="18" count="2" type="stmt"/>
+      <line num="19" count="2" type="stmt"/>
+      <line num="24" count="5" type="stmt"/>
+      <line num="25" count="5" type="stmt"/>
+      <line num="26" count="5" type="stmt"/>
+      <line num="27" count="5" type="stmt"/>
+      <line num="31" count="125" type="stmt"/>
+      <line num="32" count="125" type="stmt"/>
+      <line num="33" count="125" type="stmt"/>
+      <line num="34" count="125" type="cond" truecount="2" falsecount="0"/>
+      <line num="35" count="25" type="stmt"/>
+      <line num="37" count="100" type="stmt"/>
+      <line num="39" count="125" type="stmt"/>
+      <line num="40" count="125" type="stmt"/>
+      <line num="41" count="125" type="cond" truecount="2" falsecount="0"/>
+      <line num="42" count="123" type="stmt"/>
+      <line num="43" count="120" type="stmt"/>
+      <line num="46" count="2" type="stmt"/>
+    </file>
+    <file name="timerModes.js" path="/home/anshul/anshul/Development/cse110-w21-group28/js/timerModes.js">
+      <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <line num="1" count="1" type="stmt"/>
+      <line num="5" count="1" type="stmt"/>
+      <line num="10" count="1" type="stmt"/>
+    </file>
+  </project>
+</coverage>

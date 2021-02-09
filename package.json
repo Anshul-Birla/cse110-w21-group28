@@ -9,7 +9,8 @@
     "lint-js": "eslint --fix --no-error-on-unmatched-pattern --ext .js,.jsx .",
     "test-nc": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "lint-css": "stylelint **/*.css !**/node_modules/** --allow-empty-input --fix",
-    "lint": "npm run lint-js && npm run lint-css"
+    "lint": "npm run lint-js && npm run lint-css",
+    "branch": "chmod 777 ./.githooks/pre-commit && ./.githooks/pre-commit"
     
   },
   "repository": {
