@@ -24,7 +24,7 @@ class Timer {
     const session = this.stateQueue[0];
     this.state = session.name;
     this.displayStatus.textContent = this.state;
-    this.countdown(session.duration * 60)
+    this.countdown(session.duration * 60);
   }
 
   countdown(duration) {

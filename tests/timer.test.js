@@ -36,11 +36,10 @@ test('Test That Queue Gets Updated During Second Iteration Of Timer', () => {
   jest.clearAllTimers();
   TimerObj.startTimer();
 
-  jest.advanceTimersByTime(workMode.duration*60*1000);
+  jest.advanceTimersByTime(workMode.duration * 60 * 1000);
 
   expect(TimerObj.stateQueue[0]).toBe(shortBreakMode);
   expect(TimerObj.stateQueue[4]).toBe(longBreakMode);
-
 });
 
 test('Test That HTML Gets Updated During Second ', () => {
@@ -55,7 +54,7 @@ test('Test That HTML Gets Updated During Second ', () => {
   jest.clearAllTimers();
   TimerObj.startTimer();
 
-  jest.advanceTimersByTime(workMode.duration*60*1000);
+  jest.advanceTimersByTime(workMode.duration * 60 * 1000);
 
   expect(displayStatus.textContent).toBe(shortBreakMode.name);
   expect(displayTime.textContent).toBe(`${shortBreakMode.duration}:00`);
