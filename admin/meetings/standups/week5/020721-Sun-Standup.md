@@ -8,6 +8,9 @@
 
 ### Manager Team  
 **Anastasia**  
++ *Previous work day progress:* Finishing up pitch with Nick
++ *Plans for today:* Finalize pitch and present
++ *Any blockers?* None
  
 **Nick**  
 + *Previous work day progress:* Almost completed pitch
