@@ -34,7 +34,6 @@ table.files-summary td.identifiers > span {
   display: block;
   margin-top: 4px;
 }
-
 table.files-summary td.identifiers > span:first-child {
   margin-top: 0;
 }
