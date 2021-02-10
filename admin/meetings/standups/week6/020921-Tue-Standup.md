@@ -20,6 +20,9 @@
 ### Coding Team  
 
 **Anshul**  
++ *Previous work day progress:* Finished pipeline
++ *Plans for today:* Pipeline deliverable
++ *Any blockers?* no
 
 **Dan**  
 + *Previous work day progress:* Finalized design specs with the team
