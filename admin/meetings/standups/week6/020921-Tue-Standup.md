@@ -41,7 +41,7 @@
 **Michael**  
 + *Previous work day progress:* Discussed sketches in meeting.
 + *Plans for today:* Figure out my task and get started.
-+ *Any blockers?*no
++ *Any blockers?* no
 
 **Ravi**  
 + *Previous work day progress:*  talked about sketches
