@@ -1,6 +1,8 @@
+// these are all variables for the Timer. Changing these will change them universally
+
 const workMode = {
   name: 'Working Time',
-  duration: 1,
+  duration: 25,
 };
 const shortBreakMode = {
   name: 'Short Break',
