@@ -7,3 +7,5 @@ button.addEventListener('click', () => {
   const newVal = increment(oldVal);
   output.value = newVal;
 });
+
+// general list structure: div -> ToDo List -> listelements
