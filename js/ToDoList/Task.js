@@ -2,7 +2,7 @@
  * Task object, stores its id, task name, total expected Pomo Sessions to complete the Task,
  * the number of the current Pomo Session, and whether the task has been completed or not.
  */
-class Task {
+class Task extends HTMLElement {
   // constructor, incrementSession, checkOff
 
   /**
@@ -12,7 +12,8 @@ class Task {
   * @param {number} totalSessions - Projected number of Pomo Sessions needed to complete this task.
   */
   constructor(id, name, totalSessions) {
-    this.id = id;
+    super();
+    this.taskId = id;
     this.name = name;
     this.totalSessions = totalSessions;
     this.currentSessionNum = 0;
@@ -61,6 +62,7 @@ class Task {
     }
 
     this.currentSessionNum += 1;
+    this.textContent = this.currentSessionNum;
 
     if (this.currentSessionNum === this.totalSessions) {
       this.checkOffTask();
@@ -76,3 +78,4 @@ class Task {
 }
 
 export { Task };
+customElements.define('task-item', Task);
