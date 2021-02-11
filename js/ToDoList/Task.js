@@ -19,23 +19,36 @@ class Task {
     this.checked = false;
   }
 
-  /** @type {string} */
-  get name() { return this.name; }
+  // GETTERS AND SETTERS IF WE NEED THEM LATER. Currently, setter causes infinite recursion.
+  /**
+   * @ignore
+   * @type {string} */
+  // get name() { return this.name; }
 
-  /** @type {string} */
-  set name(name) { this.name = name; }
+  /**
+   * @ignore
+   * @type {string} */
+  // set name(name) { this.name = name; }
 
-  /** @type {boolean} */
-  get checked() { return this.checked; }
+  /**
+   * @ignore
+   * @type {boolean} */
+  // get checked() { return this.checked; }
 
-  /** @type {boolean} */
-  set checked(check) { this.checked = check; }
+  /**
+   * @ignore
+   * @type {boolean} */
+  // set checked(check) { this.checked = check; }
 
-  /** @type {number} */
-  get currentSessionNum() { return this.currentSessionNum; }
+  /**
+   * @ignore
+   * @type {number} */
+  // get currentSessionNum() { return this.currentSessionNum; }
 
-  /** @type {number} */
-  set currentSessionNum(num) { this.currentSessionNum = num; }
+  /**
+   * @ignore
+   * @type {number} */
+  // set currentSessionNum(num) { this.currentSessionNum = num; }
 
   /**
    * Increment this task's current session number. Checks off task if all sessions completed.
@@ -43,8 +56,8 @@ class Task {
    * (all sessions have been completed or user has checked off task manually)
    */
   incrementSession() {
-    if (this.completed) {
-      throw (RangeError);
+    if (this.checked) {
+      throw (new RangeError());
     }
 
     this.currentSessionNum += 1;
