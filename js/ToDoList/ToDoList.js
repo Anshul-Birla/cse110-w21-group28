@@ -25,7 +25,7 @@ class ToDoList extends HTMLElement {
       throw new Error('0 Length Task');
     }
 
-    const task = new Task(parseInt(this.idCounter, 10), name, totalSession);
+    const task = new Task(this.idCounter, name, totalSession);
     this.idCounter += 1;
     this.taskList.push(task);
     return task;
@@ -56,7 +56,7 @@ class ToDoList extends HTMLElement {
 
   checkOffTask(taskId) {
     for (let i = 0; i < this.taskList.length; i += 1) {
-      if (this.taskList[i] === taskId) {
+      if (this.taskList[i].taskId === taskId) {
         this.taskList[i].checkOffTask();
         return;
       }
@@ -66,4 +66,4 @@ class ToDoList extends HTMLElement {
 }
 
 export { ToDoList };
-customElements.define('todolist', ToDoList);
+customElements.define('todo-list', ToDoList);

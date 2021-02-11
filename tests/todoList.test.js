@@ -22,9 +22,9 @@ test('Adding Items to List', () => {
   const listLocation = document.getElementById('ToDoListDiv');
   const aList = new ToDoList(listLocation);
   aList.addTask('First Task', 5);
-  expect(aList.taskList).toHaveSize(1);
+  expect(aList.taskList.length).toBe(1);
   aList.addTask('Second Task', 2);
-  expect(aList.taskList).toHaveSize(2);
+  expect(aList.taskList.length).toBe(2);
 });
 
 test('Adding 0 Pomo Length Task', () => {
@@ -70,9 +70,9 @@ test('Preserve special characters in task name', () => {
 test('Check off task', () => {
   const listLocation = document.getElementById('ToDoListDiv');
   const aList = new ToDoList(listLocation);
-  for (let i = 0; i < 12; i += 1) {
+  for (let i = 1; i < 12; i += 1) {
     aList.addTask(`task ${i}`, i);
   }
-  aList.checkOffTask('task 7');
-  expect(aList.taskList[8].checked).toBe(true);
+  aList.checkOffTask(7);
+  expect(aList.taskList[7].checked).toBe(true);
 });
