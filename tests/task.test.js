@@ -59,5 +59,5 @@ test('Error is thrown after incrementing past totalSessions', () => {
   for (let i = 0; i < 5; i += 1) {
     currTask.incrementSession();
   }
-  expect(currTask.incrementSession().toThrow('Cannot Increment Counter Past Completion'));
+  expect(currTask.incrementSession().toThrow(RangeError));
 });
