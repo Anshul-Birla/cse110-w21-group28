@@ -1,24 +1,39 @@
 import { Task } from './Task.js';
 
-class ToDoList {
+class ToDoList extends HTMLElement {
   // constructor, add task (from input fields), add task to dom, get curr task
   /**
    * initialze ToDoList
-   * @param {HTMLElement} listHTML
+   * @param {HTMLElement} HTMLList
    */
-  constructor(listHTML) {
-    this.listParent = listHTML;
+  constructor(HTMLList) {
+    super();
+    this.listParent = HTMLList;
     this.taskList = [];
+    this.idCounter = 0;
   }
 
+  // REMEMBER TO ESCAPE SPECIAL CHARACTERS
   addTask(name, totalSession) {
-    const task = new Task(name, totalSession);
-    this.listParent.appendChild(task);
+    if (name === undefined) {
+      throw new Error('Undefined Name');
+    } else if (name === '') {
+      throw new Error('Empty Name');
+    } else if (totalSession === undefined) {
+      throw new Error('Undefined Length Task');
+    } else if (totalSession === 0) {
+      throw new Error('0 Length Task');
+    }
+
+    const task = new Task(parseInt(this.idCounter, 10), name, totalSession);
+    this.idCounter += 1;
+    this.taskList.push(task);
+    return task;
   }
 
-  addTaskToDom() {
-    this.listHTML.append(null);
-  }
+  // addTaskToDom() {
+  // this.listHTML.append(null);
+  // }
 
   // function function1() {
   //   var ul = document.getElementById("list");
@@ -29,10 +44,26 @@ class ToDoList {
   //   alert(li.id);
   // }
   getCurrentTask() {
-    this.addTask(null, null);
+    for (let i = 0; i < this.taskList.length; i += 1) {
+      if (!this.taskList[i].checked) {
+        return this.taskList[i];
+      }
+    }
+    throw new Error('No Current Task');
   }
 
   //    function deleteTask(){}
+
+  checkOffTask(taskId) {
+    for (let i = 0; i < this.taskList.length; i += 1) {
+      if (this.taskList[i] === taskId) {
+        this.taskList[i].checkOffTask();
+        return;
+      }
+    }
+    throw new Error('Task Not Found');
+  }
 }
 
 export { ToDoList };
+customElements.define('todolist', ToDoList);

@@ -1,11 +1,12 @@
 import { ToDoList } from '../js/ToDoList/ToDoList.js';
 
+/** @Test {ToDoList} */
+
 beforeEach(() => {
   document.body.innerHTML = '<div id="ToDoListDiv>'
-  + '</div>';
+    + '</div>';
 });
 
-/** @Test {ToDoList} */
 test('Construction of empty list', () => {
   const theList = new ToDoList();
   expect(theList.taskList).toEqual([]);
