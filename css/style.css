@@ -1,9 +1,11 @@
 body {
   background-color: bisque;
 }
+
 header {
   background-color: paleturquoise;
 }
+
 #timer {
   position: relative;
   margin: auto;
@@ -11,25 +13,30 @@ header {
   width: 40vw;
   background-color: darkgoldenrod;
 }
-#countdown{
+
+#countdown {
   font-size: xx-large;
   text-align: center;
 }
-#distractionButton{
+
+#distractionButton {
   position: absolute;
   bottom: 0;
   right: 0;
 }
-#startButton{
+
+#startButton {
   position: absolute;
   bottom: 0;
   left: 0;
 }
+
 #tasklist {
   height: 60vh;
   width: 40vw;
   background-color: slategrey;
 }
+
 .icons {
   float: right;
 }
