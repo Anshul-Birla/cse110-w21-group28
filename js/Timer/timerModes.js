@@ -11,7 +11,7 @@ const shortBreakMode = {
 
 const longBreakMode = {
   name: 'Long Break',
-  duration: 5,
+  duration: 15,
 };
 
 export { workMode, shortBreakMode, longBreakMode };
