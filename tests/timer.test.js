@@ -1,5 +1,5 @@
-import { Timer } from '../js/timer';
-import { workMode, shortBreakMode, longBreakMode } from '../js/timerModes';
+import { Timer } from '../js/Timer/timer';
+import { workMode, shortBreakMode, longBreakMode } from '../js/Timer/timerModes';
 
 beforeEach(() => {
   jest.useFakeTimers();
