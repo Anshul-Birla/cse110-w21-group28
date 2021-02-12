@@ -1,12 +1,11 @@
 import { Task } from './Task.js';
 
-class ToDoList extends HTMLElement {
+class ToDoList {
   /**
    * initialze ToDoList
    * @param {HTMLElement} HTMLList - Location where ToDo List is housed
    */
   constructor(HTMLList) {
-    super();
     /**
      * @type {HTMLElement}
      */
@@ -84,12 +83,12 @@ class ToDoList extends HTMLElement {
   /**
    * Will be used by eventListener which will know specific task Id.
    * Checks off task with inputted  Id.
-   * @param {number} taskId - Id of task to check off
+   * @param {string} taskId - Id of task to check off
    * @throws {Task Not Found} - Task with inputted Id does not exist
    */
   checkOffTask(taskId) {
     for (let i = 0; i < this.taskList.length; i += 1) {
-      if (this.taskList[i].taskId === taskId) {
+      if (this.taskList[i].id === taskId) {
         this.taskList[i].checkOffTask();
         return;
       }

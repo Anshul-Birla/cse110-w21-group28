@@ -7,13 +7,13 @@ class Task extends HTMLElement {
 
   /**
   * initialize a Task
-  * @param {number} id - The id of the task. Will be used later for reodering, deleting, etc.
+  * @param {string} id - The id of the task. Will be used later for reodering, deleting, etc.
   * @param {string} name - Task content
   * @param {number} totalSessions - Projected number of Pomo Sessions needed to complete this task.
   */
   constructor(id, name, totalSessions) {
     super();
-    this.taskId = id;
+    this.id = id;
     this.name = name;
     this.totalSessions = totalSessions;
     this.currentSessionNum = 0;

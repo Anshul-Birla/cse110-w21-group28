@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 import { Task } from '../js/ToDoList/Task.js';
 
 /** @Test {Task} */
@@ -9,7 +10,7 @@ test('Test that task with no values is empty', () => {
   expect(currTask.checked).toBe(false);
   expect(currTask.currentSessionNum).toEqual(0);
   expect(currTask.totalSessions).toBe(undefined);
-  expect(currTask.taskId).toBe(undefined);
+  expect(currTask.id == 'undefined').toBeTruthy();
 });
 
 test('Test that task with initialized values is initialized correctly', () => {
@@ -18,7 +19,7 @@ test('Test that task with initialized values is initialized correctly', () => {
   expect(currTask.checked).toBe(false);
   expect(currTask.currentSessionNum).toEqual(0);
   expect(currTask.totalSessions).toEqual(5);
-  expect(currTask.taskId).toBe(0);
+  expect(currTask.id == 0).toBe(true);
 });
 
 test('Increment counter only changes current session number', () => {
@@ -26,13 +27,13 @@ test('Increment counter only changes current session number', () => {
   expect(currTask.name).toBe('Test task');
   expect(currTask.currentSessionNum).toBe(0);
   expect(currTask.totalSessions).toBe(5);
-  expect(currTask.taskId).toBe(0);
+  expect(currTask.id == 0).toBeTruthy();
   expect(currTask.checked).toBe(false);
   currTask.incrementSession();
   expect(currTask.name).toBe('Test task');
   expect(currTask.currentSessionNum).toBe(1);
   expect(currTask.totalSessions).toBe(5);
-  expect(currTask.taskId).toBe(0);
+  expect(currTask.id == 0).toBeTruthy();
   expect(currTask.checked).toBe(false);
 });
 
@@ -41,14 +42,14 @@ test('Increment counter works up to total sessions, task is completed at the end
   expect(currTask.name).toBe('Test task');
   expect(currTask.currentSessionNum).toBe(0);
   expect(currTask.totalSessions).toBe(5);
-  expect(currTask.taskId).toBe(0);
+  expect(currTask.id == 0).toBeTruthy();
   for (let i = 0; i < 5; i += 1) {
     currTask.incrementSession();
   }
   expect(currTask.name).toBe('Test task');
   expect(currTask.currentSessionNum).toBe(5);
   expect(currTask.totalSessions).toBe(5);
-  expect(currTask.taskId).toBe(0);
+  expect(currTask.id == 0).toBeTruthy();
   expect(currTask.checked).toBe(true);
 });
 
@@ -57,7 +58,7 @@ test('Error is thrown after incrementing past totalSessions', () => {
   expect(currTask.name).toBe('Test task');
   expect(currTask.currentSessionNum).toBe(0);
   expect(currTask.totalSessions).toBe(5);
-  expect(currTask.taskId).toBe(0);
+  expect(currTask.id == 0).toBeTruthy();
   for (let i = 0; i < 5; i += 1) {
     currTask.incrementSession();
   }
