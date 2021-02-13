@@ -8,10 +8,6 @@ button.addEventListener('click', () => {
   const newVal = increment(oldVal);
   output.value = newVal;
 });
- 
-
-
-
 
 // get button to start timer
 let startBtnElement = document.getElementById("startButton"); 
@@ -32,5 +28,6 @@ document.getElementById("startButton").addEventListener('click',function(){
       startBtnElement.innerText = "Start";  
       startBtnElement.style.backgroundColor = "Green";
       strt = true;
+
    }
 });
