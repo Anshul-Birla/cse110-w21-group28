@@ -8,26 +8,22 @@ button.addEventListener('click', () => {
   const newVal = increment(oldVal);
   output.value = newVal;
 });
-
-// get button to start timer
-let startBtnElement = document.getElementById("startButton"); 
-// keeps track if Button is a start timer or end button
-let strt = true;
+/**
+ * Start Button
+ * When Clicked, start timer. Switches Text from Start --> End Session (vice versa).
+ */
 let TimerObj = new Timer(document.getElementById('timeDisplay'),document.getElementById('modeDisplay'));
-
-// this starts the Timer on click or ends it 
+// this starts the Timer on click & switches text from 'Start' <--> ' End Session '
 document.getElementById("startButton").addEventListener('click',function(){
-  //switches from start button to end button
-   if(strt == true){
-     startBtnElement.innerText = "End Session"; 
+  // if button is a start button:
+   if(document.getElementById("startButton").innerHTML == "Start"){
+     startBtnElement.innerHTML = "End Session"; 
      startBtnElement.style.backgroundColor = "Grey";
-     strt = false;
      TimerObj.startTimer();
     }else{
-      //switches from end button to star button
+      //switches from end button to start button
       startBtnElement.innerText = "Start";  
       startBtnElement.style.backgroundColor = "Green";
-      strt = true;
 
    }
 });
