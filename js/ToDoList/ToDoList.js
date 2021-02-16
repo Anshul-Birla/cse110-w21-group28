@@ -1,15 +1,7 @@
 import { Task } from './Task.js';
 
 class ToDoList {
-  /**
-   * initialze ToDoList
-   * @param {HTMLElement} HTMLList - Location where ToDo List is housed
-   */
-  constructor(HTMLList) {
-    /**
-     * @type {HTMLElement}
-     */
-    this.listParent = HTMLList;
+  constructor() {
     /**
      * @type {Task[]}
      */
@@ -19,6 +11,7 @@ class ToDoList {
      */
     this.idCounter = 0;
   }
+
 
   // REMEMBER TO ESCAPE SPECIAL CHARACTERS
   /**
@@ -98,4 +91,3 @@ class ToDoList {
 }
 
 export { ToDoList };
-customElements.define('todo-list', ToDoList);

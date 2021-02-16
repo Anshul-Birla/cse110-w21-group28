@@ -1,11 +1,7 @@
-import { increment } from './function';
+import { Task } from "./ToDoList/Task.js";
+const list = document.getElementById("task");
 
-const button = document.getElementById('incrementButton');
-const output = document.getElementById('outputIncrement');
-button.addEventListener('click', () => {
-  const oldVal = output.value;
-  const newVal = increment(oldVal);
-  output.value = newVal;
-});
-
-// general list structure: div -> ToDo List -> listelements
+for (let i = 0; i < 10; i++) {
+  let taskItem = new Task("nof", "efnp", i);
+  list.appendChild(taskItem);
+}

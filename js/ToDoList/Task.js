@@ -7,9 +7,9 @@ class Task extends HTMLElement {
 
   /**
   * initialize a Task
-  * @param {string} id - The id of the task. Will be used later for reodering, deleting, etc.
-  * @param {string} name - Task content
-  * @param {number} totalSessions - Projected number of Pomo Sessions needed to complete this task.
+  * @param {String} id - The id of the task. Will be used later for reodering, deleting, etc.
+  * @param {String} name - Task content
+  * @param {Number} totalSessions - Projected number of Pomo Sessions needed to complete this task.
   */
   constructor(id, name, totalSessions) {
     super();
@@ -19,14 +19,15 @@ class Task extends HTMLElement {
     this.totalSessions = totalSessions;
     this.currentSessionNum = 0;
     this.checked = false;
-    this.setAttribute('class', 'notCheckedOffTask');
+    this.setAttribute('class', 'uncheckedTask');
 
     const checkBox = document.createElement('input');
     checkBox.setAttribute('type', 'checkbox');
     checkBox.setAttribute('id', `checkbox-${this.id}`);
-    checkBox.addEventListener('click', this.checkOffTask());
     this.appendChild(checkBox);
-
+    checkBox.addEventListener('change', () => {
+      this.checkOffTask();
+    });
     const text = document.createElement('p');
     text.setAttribute('id', `text-${this.id}`);
     this.appendChild(text);
@@ -70,7 +71,7 @@ class Task extends HTMLElement {
    */
   checkOffTask() {
     this.checked = true;
-    this.setAttribute('class', 'checkedOffTask');
+    this.setAttribute('class', 'completeTask');
   }
 
   // GETTERS AND SETTERS IF WE NEED THEM LATER. Currently, setter causes infinite recursion.
