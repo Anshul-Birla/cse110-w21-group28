@@ -17,7 +17,7 @@ class TodoListDom {
       try {
         let task = this.todoList.addTask(name, sessions);
         this.displayTask(task);
-      } catch(exception) {
+      } catch (exception) {
         alert(exception);
       }
     });

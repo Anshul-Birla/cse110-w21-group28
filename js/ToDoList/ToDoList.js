@@ -59,24 +59,6 @@ class ToDoList {
     }
     throw new Error('No Current Task');
   }
-
-  //    function deleteTask(){}
-
-  /**
-   * Will be used by eventListener which will know specific task Id.
-   * Checks off task with inputted  Id.
-   * @param {string} taskId - Id of task to check off
-   * @throws {Task Not Found} - Task with inputted Id does not exist
-   */
-  checkOffTask(taskId) {
-    for (let i = 0; i < this.taskList.length; i += 1) {
-      if (this.taskList[i].id === taskId) {
-        this.taskList[i].checkOffTask();
-        return;
-      }
-    }
-    throw new Error('Task Not Found');
-  }
 }
 
 export { ToDoList };
