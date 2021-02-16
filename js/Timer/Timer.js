@@ -1,4 +1,4 @@
-import { workMode, shortBreakMode, longBreakMode } from './timerModes.js';
+import { workMode, shortBreakMode, longBreakMode } from './TimerModes.js';
 
 /**
  * A class for the Timer object. Has functions to start the timer,

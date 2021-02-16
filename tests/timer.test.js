@@ -1,5 +1,5 @@
-import { Timer } from '../js/Timer/timer';
-import { workMode, shortBreakMode, longBreakMode } from '../js/Timer/timerModes';
+import { Timer } from '../js/Timer/Timer';
+import { workMode, shortBreakMode, longBreakMode } from '../js/Timer/TimerModes';
 
 beforeEach(() => {
   jest.useFakeTimers();
@@ -39,7 +39,7 @@ test('Test That Queue Gets Updated During Second Iteration Of Timer', () => {
   jest.advanceTimersByTime(workMode.duration * 60 * 1000);
 
   expect(TimerObj.stateQueue[0]).toBe(shortBreakMode);
-  expect(TimerObj.stateQueue[4]).toBe(longBreakMode);
+  expect(TimerObj.stateQueue[6]).toBe(longBreakMode);
 });
 
 test('Test That HTML Gets Updated During Second ', () => {
