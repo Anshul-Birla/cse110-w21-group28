@@ -567,7 +567,7 @@
     "__docId__": 48,
     "kind": "file",
     "name": "js/changeDom.js",
-    "content": "import { increment } from './function';\n\nconst button = document.getElementById('incrementButton');\nconst output = document.getElementById('outputIncrement');\nbutton.addEventListener('click', () => {\n  const oldVal = output.value;\n  const newVal = increment(oldVal);\n  output.value = newVal;\n});\n",
+    "content": "import { Timer } from './timer.js';\n\n// get where we want to output the Timer information from\nconst output = document.getElementById('timeDisplay');\nconst outputMode = document.getElementById('modeDisplay');\n\n// get button to start timer\nconst startTimerButton = document.getElementById('startTimer');\n\n// instansiate the timer object \nconst TimerObj = new Timer(output, outputMode);\n\n// this starts the Timer on a click\nstartTimerButton.addEventListener('click', () => {\n  TimerObj.startTimer();\n});\n",
     "static": true,
     "longname": "/home/anshul/anshul/Development/cse110-w21-group28/js/changeDom.js",
     "access": "public",
@@ -576,27 +576,6 @@
   },
   {
     "__docId__": 49,
-    "kind": "variable",
-    "name": "button",
-    "memberof": "js/changeDom.js",
-    "static": true,
-    "longname": "js/changeDom.js~button",
-    "access": "public",
-    "export": false,
-    "importPath": "cse110-w21-group28/js/changeDom.js",
-    "importStyle": null,
-    "description": null,
-    "lineNumber": 3,
-    "undocument": true,
-    "type": {
-      "types": [
-        "*"
-      ]
-    },
-    "ignore": true
-  },
-  {
-    "__docId__": 50,
     "kind": "variable",
     "name": "output",
     "memberof": "js/changeDom.js",
@@ -617,31 +596,269 @@
     "ignore": true
   },
   {
-    "__docId__": 51,
-    "kind": "file",
-    "name": "js/function.js",
-    "content": "/**\n * Increments a value by one\n * @param {Number} val    val you want incremented\n * @return {Number} val+1\n */\nfunction increment(val) {\n  return Number(val) + 1;\n}\nexport { increment };\n",
+    "__docId__": 50,
+    "kind": "variable",
+    "name": "outputMode",
+    "memberof": "js/changeDom.js",
     "static": true,
-    "longname": "/home/anshul/anshul/Development/cse110-w21-group28/js/function.js",
+    "longname": "js/changeDom.js~outputMode",
+    "access": "public",
+    "export": false,
+    "importPath": "cse110-w21-group28/js/changeDom.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 5,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 51,
+    "kind": "variable",
+    "name": "startTimerButton",
+    "memberof": "js/changeDom.js",
+    "static": true,
+    "longname": "js/changeDom.js~startTimerButton",
+    "access": "public",
+    "export": false,
+    "importPath": "cse110-w21-group28/js/changeDom.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 8,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 52,
+    "kind": "variable",
+    "name": "TimerObj",
+    "memberof": "js/changeDom.js",
+    "static": true,
+    "longname": "js/changeDom.js~TimerObj",
+    "access": "public",
+    "export": false,
+    "importPath": "cse110-w21-group28/js/changeDom.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 11,
+    "undocument": true,
+    "type": {
+      "types": [
+        "js/timer.js~Timer"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 53,
+    "kind": "file",
+    "name": "js/timer.js",
+    "content": "import { workMode, shortBreakMode, longBreakMode } from './timerModes.js';\n\n/**\n * A class for the Timer object. Has functions to start the timer,\n * display the current mode of the timer and display the time remaining\n */\nclass Timer {\n  /**\n   * Constructor of Time Object. Takes the HTML element of where\n   * you want the time and the status of the timer to be implemented.\n   * HTML Elements must have the 'textElement' attribute.\n   * @param {HTML Element} displayTime\n   * @param {HTML Element} displayStatus\n   */\n  constructor(displayTime, displayStatus) {\n    /**\n     * State of the timer (the current mode)\n     * @type {String}\n     */\n    this.state = '';\n    /**\n     * Queue that stores the Session objects. Rotates to provide\n     * rotation functionality for the timer\n     * @type {Array[Object]}\n     * @property {String} object.name\n     * @property {Number} object.duration\n     */\n    this.stateQueue = [];\n    /**\n     * HTML Tag that is reponsible for displaying the time remaining\n     * @type {HTML_Element}\n     */\n    this.displayTime = displayTime;\n    /**\n     * HTML Tag that is reponsible for displaying the mode of the timer\n     * @type {HTML_Element}\n     */\n    this.displayStatus = displayStatus;\n\n    // this is the order for the timer. It will loop in this order.\n    const workOrder = [workMode, shortBreakMode, workMode,\n      shortBreakMode, workMode, longBreakMode];\n    for (let i = 0; i < workOrder.length; i += 1) {\n      this.stateQueue.push(workOrder[i]);\n    }\n  }\n\n  /**\n   * Function that fires when the timer runs out of time.\n   * Moves on to start the timer again at the end of the function.\n   */\n  onTimerComplete() {\n    const completedSession = this.stateQueue.shift();\n    this.stateQueue.push(completedSession);\n    this.startTimer();\n  }\n\n  /**\n   * Starts the timer for the session at the top of the queue.\n   * Updates the display for the status.\n   */\n  startTimer() {\n    const session = this.stateQueue[0];\n    this.state = session.name;\n    this.displayStatus.textContent = this.state;\n    this.countdown(session.duration * 60);\n  }\n\n  /**\n   * Counts down the timer for duration amount of minutes.\n   * Updates the DOM with current time remaining.\n   * @param {Number} duration\n   */\n  countdown(duration) {\n    const minutes = Math.floor(duration / 60);\n    const seconds = duration % 60;\n    let displayString = '';\n    if (seconds < 10) {\n      displayString = `${minutes}:0${seconds}`;\n    } else {\n      displayString = `${minutes}:${seconds}`;\n    }\n    this.displayTime.textContent = displayString;\n    duration -= 1;\n    if (duration >= 0) {\n      setTimeout(() => {\n        this.countdown(duration);\n      }, 1000);\n    } else {\n      this.onTimerComplete();\n    }\n  }\n}\n\nexport { Timer };\n",
+    "static": true,
+    "longname": "/home/anshul/anshul/Development/cse110-w21-group28/js/timer.js",
     "access": "public",
     "description": null,
     "lineNumber": 1
   },
   {
-    "__docId__": 52,
-    "kind": "function",
-    "name": "increment",
-    "memberof": "js/function.js",
-    "generator": false,
-    "async": false,
+    "__docId__": 54,
+    "kind": "class",
+    "name": "Timer",
+    "memberof": "js/timer.js",
     "static": true,
-    "longname": "js/function.js~increment",
+    "longname": "js/timer.js~Timer",
     "access": "public",
     "export": true,
-    "importPath": "cse110-w21-group28/js/function.js",
-    "importStyle": "{increment}",
-    "description": "Increments a value by one",
-    "lineNumber": 6,
+    "importPath": "cse110-w21-group28/js/timer.js",
+    "importStyle": "{Timer}",
+    "description": "A class for the Timer object. Has functions to start the timer,\ndisplay the current mode of the timer and display the time remaining",
+    "lineNumber": 7,
+    "interface": false
+  },
+  {
+    "__docId__": 55,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "js/timer.js~Timer",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "js/timer.js~Timer#constructor",
+    "access": "public",
+    "description": "Constructor of Time Object. Takes the HTML element of where\nyou want the time and the status of the timer to be implemented.\nHTML Elements must have the 'textElement' attribute.",
+    "lineNumber": 15,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "HTML Element"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "displayTime",
+        "description": ""
+      },
+      {
+        "nullable": null,
+        "types": [
+          "HTML Element"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "displayStatus",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "__docId__": 56,
+    "kind": "member",
+    "name": "state",
+    "memberof": "js/timer.js~Timer",
+    "static": false,
+    "longname": "js/timer.js~Timer#state",
+    "access": "public",
+    "description": "State of the timer (the current mode)",
+    "lineNumber": 20,
+    "type": {
+      "nullable": null,
+      "types": [
+        "String"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 57,
+    "kind": "member",
+    "name": "stateQueue",
+    "memberof": "js/timer.js~Timer",
+    "static": false,
+    "longname": "js/timer.js~Timer#stateQueue",
+    "access": "public",
+    "description": "Queue that stores the Session objects. Rotates to provide\nrotation functionality for the timer",
+    "lineNumber": 28,
+    "properties": [
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "object.name",
+        "description": ""
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "object.duration",
+        "description": ""
+      }
+    ],
+    "type": {
+      "nullable": null,
+      "types": [
+        "Array[Object]"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 58,
+    "kind": "member",
+    "name": "displayTime",
+    "memberof": "js/timer.js~Timer",
+    "static": false,
+    "longname": "js/timer.js~Timer#displayTime",
+    "access": "public",
+    "description": "HTML Tag that is reponsible for displaying the time remaining",
+    "lineNumber": 33,
+    "type": {
+      "nullable": null,
+      "types": [
+        "HTML_Element"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 59,
+    "kind": "member",
+    "name": "displayStatus",
+    "memberof": "js/timer.js~Timer",
+    "static": false,
+    "longname": "js/timer.js~Timer#displayStatus",
+    "access": "public",
+    "description": "HTML Tag that is reponsible for displaying the mode of the timer",
+    "lineNumber": 38,
+    "type": {
+      "nullable": null,
+      "types": [
+        "HTML_Element"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 60,
+    "kind": "method",
+    "name": "onTimerComplete",
+    "memberof": "js/timer.js~Timer",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "js/timer.js~Timer#onTimerComplete",
+    "access": "public",
+    "description": "Function that fires when the timer runs out of time.\nMoves on to start the timer again at the end of the function.",
+    "lineNumber": 52,
+    "params": [],
+    "return": null
+  },
+  {
+    "__docId__": 61,
+    "kind": "method",
+    "name": "startTimer",
+    "memberof": "js/timer.js~Timer",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "js/timer.js~Timer#startTimer",
+    "access": "public",
+    "description": "Starts the timer for the session at the top of the queue.\nUpdates the display for the status.",
+    "lineNumber": 62,
+    "params": [],
+    "return": null
+  },
+  {
+    "__docId__": 63,
+    "kind": "method",
+    "name": "countdown",
+    "memberof": "js/timer.js~Timer",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "js/timer.js~Timer#countdown",
+    "access": "public",
+    "description": "Counts down the timer for duration amount of minutes.\nUpdates the DOM with current time remaining.",
+    "lineNumber": 74,
     "params": [
       {
         "nullable": null,
@@ -650,17 +867,81 @@
         ],
         "spread": false,
         "optional": false,
-        "name": "val",
-        "description": "val you want incremented"
+        "name": "duration",
+        "description": ""
       }
     ],
-    "return": {
-      "nullable": null,
+    "return": null
+  },
+  {
+    "__docId__": 64,
+    "kind": "file",
+    "name": "js/timerModes.js",
+    "content": "// these are all variables for the Timer. Changing these will change them universally\n\nconst workMode = {\n  name: 'Working Time',\n  duration: 25,\n};\nconst shortBreakMode = {\n  name: 'Short Break',\n  duration: 5,\n};\n\nconst longBreakMode = {\n  name: 'Long Break',\n  duration: 5,\n};\n\nexport { workMode, shortBreakMode, longBreakMode };\n",
+    "static": true,
+    "longname": "/home/anshul/anshul/Development/cse110-w21-group28/js/timerModes.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 65,
+    "kind": "variable",
+    "name": "workMode",
+    "memberof": "js/timerModes.js",
+    "static": true,
+    "longname": "js/timerModes.js~workMode",
+    "access": "public",
+    "export": true,
+    "importPath": "cse110-w21-group28/js/timerModes.js",
+    "importStyle": "{workMode}",
+    "description": null,
+    "lineNumber": 3,
+    "undocument": true,
+    "type": {
       "types": [
-        "Number"
-      ],
-      "spread": false,
-      "description": "val+1"
+        "{\"name\": string, \"duration\": number}"
+      ]
+    }
+  },
+  {
+    "__docId__": 66,
+    "kind": "variable",
+    "name": "shortBreakMode",
+    "memberof": "js/timerModes.js",
+    "static": true,
+    "longname": "js/timerModes.js~shortBreakMode",
+    "access": "public",
+    "export": true,
+    "importPath": "cse110-w21-group28/js/timerModes.js",
+    "importStyle": "{shortBreakMode}",
+    "description": null,
+    "lineNumber": 7,
+    "undocument": true,
+    "type": {
+      "types": [
+        "{\"name\": string, \"duration\": number}"
+      ]
+    }
+  },
+  {
+    "__docId__": 67,
+    "kind": "variable",
+    "name": "longBreakMode",
+    "memberof": "js/timerModes.js",
+    "static": true,
+    "longname": "js/timerModes.js~longBreakMode",
+    "access": "public",
+    "export": true,
+    "importPath": "cse110-w21-group28/js/timerModes.js",
+    "importStyle": "{longBreakMode}",
+    "description": null,
+    "lineNumber": 12,
+    "undocument": true,
+    "type": {
+      "types": [
+        "{\"name\": string, \"duration\": number}"
+      ]
     }
   },
   {
@@ -673,53 +954,73 @@
   },
   {
     "kind": "packageJSON",
-    "content": "{\n  \"name\": \"cse110-w21-group28\",\n  \"version\": \"1.0.0\",\n  \"description\": \"Necessary Packages for Development\",\n  \"main\": \"index.js\",\n  \"scripts\": {\n    \"start\": \" npx http-server -c-1\",\n    \"test\": \"node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage\",\n    \"lint-js\": \"eslint --fix --no-error-on-unmatched-pattern --ext .js,.jsx .\",\n    \"test-nc\": \"node --experimental-vm-modules node_modules/jest/bin/jest.js\",\n    \"lint-css\": \"stylelint **/*.css !**/node_modules/** --allow-empty-input --fix\",\n    \"lint\": \"npm run lint-js && npm run lint-css\",\n    \"branch\": \"chmod 777 ./.github/scripts/branch.sh && ./.github/scripts/branch.sh\",\n    \"doc\":\"./node_modules/.bin/esdoc && ./node_modules/.bin/esdoc -test\"\n  },\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"git+https://github.com/Anshul-Birla/cse110-w21-group28.git\"\n  },\n  \"author\": \"\",\n  \"license\": \"ISC\",\n  \"bugs\": {\n    \"url\": \"https://github.com/Anshul-Birla/cse110-w21-group28/issues\"\n  },\n  \"homepage\": \"https://github.com/Anshul-Birla/cse110-w21-group28#readme\",\n  \"devDependencies\": {\n    \"@babel/plugin-transform-modules-commonjs\": \"^7.12.13\",\n    \"esdoc\": \"^1.1.0\",\n    \"esdoc-standard-plugin\": \"^1.0.0\",\n    \"eslint\": \"^7.19.0\",\n    \"eslint-config-airbnb-base\": \"^14.2.1\",\n    \"eslint-plugin-import\": \"^2.22.1\",\n    \"http-server\": \"^0.12.3\",\n    \"jest\": \"^26.6.3\",\n    \"jest-environment-node\": \"^26.6.2\",\n    \"stylelint\": \"^13.9.0\",\n    \"stylelint-config-standard\": \"^20.0.0\"\n  },\n  \"babel\": {\n    \"env\": {\n      \"test\": {\n        \"plugins\": [\n          \"@babel/plugin-transform-modules-commonjs\"\n        ]\n      }\n    }\n  },\n  \"jest\": {\n    \"coverageThreshold\": {\n      \"global\": {\n        \"branches\": 80,\n        \"functions\": 80,\n        \"lines\": 60,\n        \"statements\": -10\n      }\n    }\n  }\n}\n",
+    "content": "{\n  \"name\": \"cse110-w21-group28\",\n  \"version\": \"1.0.0\",\n  \"description\": \"Necessary Packages for Development\",\n  \"main\": \"index.js\",\n  \"scripts\": {\n    \"start\": \" npx http-server -c-1\",\n    \"test\": \"node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage\",\n    \"test-nc\": \"node --experimental-vm-modules node_modules/jest/bin/jest.js\",\n    \"lint-js\": \"eslint --fix --no-error-on-unmatched-pattern --ext .js,.jsx .\",\n    \"lint-js:test\": \"eslint --no-error-on-unmatched-pattern --ext .js,.jsx .\",\n    \"lint-css\": \"stylelint **/*.css !**/node_modules/** --allow-empty-input --fix\",\n    \"lint-css:test\": \"stylelint **/*.css !**/node_modules/** --allow-empty-input --fix\",\n    \"lint\": \"npm run lint-js && npm run lint-css\",\n    \"lint:test\": \"npm run lint-js:test && npm run lint-css:test\",\n    \"branch\": \"chmod 777 ./.github/scripts/branch.sh && ./.github/scripts/branch.sh\",\n    \"doc\":\"./node_modules/.bin/esdoc && ./node_modules/.bin/esdoc -test\"\n  },\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"git+https://github.com/Anshul-Birla/cse110-w21-group28.git\"\n  },\n  \"author\": \"\",\n  \"license\": \"ISC\",\n  \"bugs\": {\n    \"url\": \"https://github.com/Anshul-Birla/cse110-w21-group28/issues\"\n  },\n  \"homepage\": \"https://github.com/Anshul-Birla/cse110-w21-group28#readme\",\n  \"devDependencies\": {\n    \"@babel/plugin-transform-modules-commonjs\": \"^7.12.13\",\n    \"esdoc\": \"^1.1.0\",\n    \"esdoc-standard-plugin\": \"^1.0.0\",\n    \"eslint\": \"^7.19.0\",\n    \"eslint-config-airbnb-base\": \"^14.2.1\",\n    \"eslint-plugin-import\": \"^2.22.1\",\n    \"http-server\": \"^0.12.3\",\n    \"jest\": \"^26.6.3\",\n    \"jest-environment-node\": \"^26.6.2\",\n    \"stylelint\": \"^13.9.0\",\n    \"stylelint-config-standard\": \"^20.0.0\"\n  },\n  \"babel\": {\n    \"env\": {\n      \"test\": {\n        \"plugins\": [\n          \"@babel/plugin-transform-modules-commonjs\"\n        ]\n      }\n    }\n  },\n  \"jest\": {\n    \"coverageThreshold\": {\n      \"global\": {\n        \"branches\": 80,\n        \"functions\": 80,\n        \"lines\": 60,\n        \"statements\": -10\n      }\n    }\n  }\n}\n",
     "longname": "/home/anshul/anshul/Development/cse110-w21-group28/package.json",
     "name": "package.json",
     "static": true,
     "access": "public"
   },
   {
-    "__docId__": 53,
+    "__docId__": 68,
     "kind": "testFile",
-    "name": "tests/function.test.js",
-    "content": "// import { jest } from '@jest/globals'\nimport { increment } from '../js/function';\n\n/** @Test {Increment} */\ntest('Incrment 2', () => {\n  expect(increment(2)).toBe(3);\n});\n\ntest('String increment should still work', () => {\n  expect(increment('2')).toBe(3);\n});\n",
+    "name": "tests/timer.test.js",
+    "content": "import { Timer } from '../js/timer';\nimport { workMode, shortBreakMode, longBreakMode } from '../js/timerModes';\n\nbeforeEach(() => {\n  jest.useFakeTimers();\n  jest.clearAllTimers();\n});\n\ntest('Test Initial State is Nothing', () => {\n  const TimerObj = new Timer(null, null);\n  expect(TimerObj.state).toBe('');\n});\n\ntest('Test First Iteration of Timer', () => {\n  document.body.innerHTML = '<div>'\n  + '  <p id=\"displayTime\"></p>'\n  + ' <p id=\"displayStatus\"></p>'\n  + '</div>';\n\n  const displayTime = document.getElementById('displayTime');\n  const displayStatus = document.getElementById('displayStatus');\n  const TimerObj = new Timer(displayTime, displayStatus);\n  TimerObj.startTimer();\n  expect(TimerObj.state).toBe(workMode.name);\n});\n\ntest('Test That Queue Gets Updated During Second Iteration Of Timer', () => {\n  document.body.innerHTML = '<div>'\n  + '  <p id=\"displayTime\"></p>'\n  + ' <p id=\"displayStatus\"></p>'\n  + '</div>';\n\n  const displayTime = document.getElementById('displayTime');\n  const displayStatus = document.getElementById('displayStatus');\n  const TimerObj = new Timer(displayTime, displayStatus);\n  jest.clearAllTimers();\n  TimerObj.startTimer();\n\n  jest.advanceTimersByTime(workMode.duration * 60 * 1000);\n\n  expect(TimerObj.stateQueue[0]).toBe(shortBreakMode);\n  expect(TimerObj.stateQueue[4]).toBe(longBreakMode);\n});\n\ntest('Test That HTML Gets Updated During Second ', () => {\n  document.body.innerHTML = '<div>'\n  + '  <p id=\"displayTime\"></p>'\n  + ' <p id=\"displayStatus\"></p>'\n  + '</div>';\n\n  const displayTime = document.getElementById('displayTime');\n  const displayStatus = document.getElementById('displayStatus');\n  const TimerObj = new Timer(displayTime, displayStatus);\n  jest.clearAllTimers();\n  TimerObj.startTimer();\n\n  jest.advanceTimersByTime(workMode.duration * 60 * 1000);\n\n  expect(displayStatus.textContent).toBe(shortBreakMode.name);\n  expect(displayTime.textContent).toBe(`${shortBreakMode.duration}:00`);\n});\n",
     "static": true,
-    "longname": "/home/anshul/anshul/Development/cse110-w21-group28/tests/function.test.js",
+    "longname": "/home/anshul/anshul/Development/cse110-w21-group28/tests/timer.test.js",
     "access": null,
     "description": null,
     "lineNumber": 1
   },
   {
-    "__docId__": 54,
+    "__docId__": 69,
     "kind": "test",
     "name": "test0",
     "testId": 0,
-    "memberof": "tests/function.test.js",
+    "memberof": "tests/timer.test.js",
     "testDepth": 0,
     "static": true,
-    "longname": "tests/function.test.js~test0",
+    "longname": "tests/timer.test.js~test0",
     "access": null,
-    "description": "Incrment 2",
-    "lineNumber": 5,
-    "unknown": [
-      {
-        "tagName": "@Test",
-        "tagValue": "{Increment}"
-      }
-    ]
+    "description": "Test Initial State is Nothing",
+    "lineNumber": 9
   },
   {
-    "__docId__": 55,
+    "__docId__": 70,
     "kind": "test",
     "name": "test1",
     "testId": 1,
-    "memberof": "tests/function.test.js",
+    "memberof": "tests/timer.test.js",
     "testDepth": 0,
     "static": true,
-    "longname": "tests/function.test.js~test1",
+    "longname": "tests/timer.test.js~test1",
     "access": null,
-    "description": "String increment should still work",
-    "lineNumber": 9
+    "description": "Test First Iteration of Timer",
+    "lineNumber": 14
+  },
+  {
+    "__docId__": 71,
+    "kind": "test",
+    "name": "test2",
+    "testId": 2,
+    "memberof": "tests/timer.test.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "tests/timer.test.js~test2",
+    "access": null,
+    "description": "Test That Queue Gets Updated During Second Iteration Of Timer",
+    "lineNumber": 27
+  },
+  {
+    "__docId__": 72,
+    "kind": "test",
+    "name": "test3",
+    "testId": 3,
+    "memberof": "tests/timer.test.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "tests/timer.test.js~test3",
+    "access": null,
+    "description": "Test That HTML Gets Updated During Second ",
+    "lineNumber": 45
   }
 ]
