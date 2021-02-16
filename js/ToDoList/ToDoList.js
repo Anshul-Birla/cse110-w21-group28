@@ -33,6 +33,8 @@ class ToDoList {
       throw new Error('Undefined Length Task');
     } else if (totalSession === 0) {
       throw new Error('0 Length Task');
+    } else if (Number.isNaN(totalSession)) {
+      throw new Error('Number Not Passed In');
     }
 
     const task = new Task(this.idCounter, name, totalSession);
@@ -40,19 +42,6 @@ class ToDoList {
     this.taskList.push(task);
     return task;
   }
-
-  // addTaskToDom() {
-  // this.listHTML.append(null);
-  // }
-
-  // function function1() {
-  //   var ul = document.getElementById("list");
-  //   var li = document.createElement("li");
-  //   li.appendChild(document.createTextNode("Four"));
-  //   li.setAttribute("id", "element4"); // added line
-  //   ul.appendChild(li);
-  //   alert(li.id);
-  // }
 
   /**
    * @returns {Task} First unchecked task in the list

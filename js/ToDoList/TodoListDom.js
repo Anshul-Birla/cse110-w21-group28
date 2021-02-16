@@ -8,6 +8,7 @@ class TodoListDom {
     this.listElement = HTMLList;
     this.todoList = new ToDoList();
     this.form = HTMLForm;
+
     this.form.addEventListener('submit', (e) => {
       e.preventDefault();
       let data = new FormData(this.form);
@@ -16,8 +17,8 @@ class TodoListDom {
       try {
         let task = this.todoList.addTask(name, sessions);
         this.displayTask(task);
-      } catch {
-        console.log("error");
+      } catch(exception) {
+        alert(exception);
       }
     });
   }

@@ -1,3 +1,5 @@
+import { classNames } from './TaskVariables.js'
+
 /**
  * Task object, stores its id, task name, total expected Pomo Sessions to complete the Task,
  * the number of the current Pomo Session, and whether the task has been completed or not.
@@ -19,7 +21,7 @@ class Task extends HTMLElement {
     this.totalSessions = totalSessions;
     this.currentSessionNum = 0;
     this.checked = false;
-    this.setAttribute('class', 'uncheckedTask');
+    this.setAttribute('class', classNames.uncheckedTaskClassName);
 
     const checkBox = document.createElement('input');
     checkBox.setAttribute('type', 'checkbox');
@@ -71,7 +73,7 @@ class Task extends HTMLElement {
    */
   checkOffTask() {
     this.checked = true;
-    this.setAttribute('class', 'completeTask');
+    this.setAttribute('class', classNames.completedTaskClassName);
   }
 
   // GETTERS AND SETTERS IF WE NEED THEM LATER. Currently, setter causes infinite recursion.
