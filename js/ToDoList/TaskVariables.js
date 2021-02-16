@@ -3,4 +3,4 @@ const classNames = {
   completedTaskClassName: 'completedTask',
 };
 
-export { classNames }
+export { classNames };

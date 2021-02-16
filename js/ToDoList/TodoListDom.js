@@ -28,6 +28,10 @@ class TodoListDom {
     li.appendChild(newTask);
     this.listElement.appendChild(li);
   }
+
+  getToDoList() {
+    return this.todoList;
+  }
 }
 
 export { TodoListDom };

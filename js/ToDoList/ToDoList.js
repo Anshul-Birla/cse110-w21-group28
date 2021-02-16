@@ -59,6 +59,11 @@ class ToDoList {
     }
     throw new Error('No Current Task');
   }
+
+  onSessionComplete() {
+    let currTask = this.getCurrentTask();
+    currTask.incrementSession();
+  }
 }
 
 export { ToDoList };
