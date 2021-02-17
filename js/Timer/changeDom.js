@@ -1,13 +1,5 @@
-import { increment } from './function';
-import { Timer } from './js/Timer/timer.js';
+import { Timer } from './timer.js';
 
-const button = document.getElementById('incrementButton');
-const output = document.getElementById('outputIncrement');
-button.addEventListener('click', () => {
-  const oldVal = output.value;
-  const newVal = increment(oldVal);
-  output.value = newVal;
-});
 /**
  * Start Button
  * When Clicked, start timer. Switches Text from Start --> End Session (vice versa).
