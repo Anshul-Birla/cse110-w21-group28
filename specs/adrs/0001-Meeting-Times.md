@@ -13,6 +13,6 @@ We scheduled our weekly meeting times
 
 Chosen to have three meetings per week: 
 
-* Monday - 7-8pm
-* Tuesday - 7-7:30 pm
+* Monday - 8-9pm
+* Tuesday - 8-8:30 pm
 * Thursday - 7-7:30 pm
