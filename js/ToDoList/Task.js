@@ -1,5 +1,3 @@
-import { classNames } from './TaskVariables.js'
-
 /**
  * Task object, stores its id, task name, total expected Pomo Sessions to complete the Task,
  * the number of the current Pomo Session, and whether the task has been completed or not.
@@ -9,9 +7,9 @@ class Task extends HTMLElement {
 
   /**
   * initialize a Task
-  * @param {String} id - The id of the task. Will be used later for reodering, deleting, etc.
-  * @param {String} name - Task content
-  * @param {Number} totalSessions - Projected number of Pomo Sessions needed to complete this task.
+  * @param {string} id - The id of the task. Will be used later for reodering, deleting, etc.
+  * @param {string} name - Task content
+  * @param {number} totalSessions - Projected number of Pomo Sessions needed to complete this task.
   */
   constructor(id, name, totalSessions) {
     super();
@@ -21,24 +19,29 @@ class Task extends HTMLElement {
     this.totalSessions = totalSessions;
     this.currentSessionNum = 0;
     this.checked = false;
-    this.setAttribute('class', classNames.uncheckedTaskClassName);
+    this.setAttribute('class', 'notCheckedOffTask');
 
+    const firstCol = document.createElement('td')
     const checkBox = document.createElement('input');
     checkBox.setAttribute('type', 'checkbox');
     checkBox.setAttribute('id', `checkbox-${this.id}`);
-    this.appendChild(checkBox);
-    checkBox.addEventListener('change', () => {
-      this.checkOffTask();
-    });
-    const text = document.createElement('p');
+    checkBox.addEventListener('click', ()=>{this.checkOffTask()});
+    firstCol.appendChild(checkBox);
+    this.appendChild(firstCol);
+
+    const text = document.createElement('td');
     text.setAttribute('id', `text-${this.id}`);
     this.appendChild(text);
     this.updateText();
 
-    const pomoSessions = document.createElement('p');
+    const pomoSessions = document.createElement('td');
     pomoSessions.setAttribute('id', `pomoSessions-${this.id}`);
     this.appendChild(pomoSessions);
     this.updatePomoSessions();
+
+    const deleteBtn = document.createElement('td');
+    deleteBtn.textContent = "x";
+    this.appendChild(deleteBtn);
   }
 
   updateText() {
@@ -73,7 +76,7 @@ class Task extends HTMLElement {
    */
   checkOffTask() {
     this.checked = true;
-    this.setAttribute('class', classNames.completedTaskClassName);
+    this.setAttribute('class', 'checkedOffTask');
   }
 
   // GETTERS AND SETTERS IF WE NEED THEM LATER. Currently, setter causes infinite recursion.

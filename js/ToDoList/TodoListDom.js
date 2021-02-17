@@ -15,17 +15,14 @@ class TodoListDom {
       let data = new FormData(this.form);
       let name = data.get("task-name");
       let sessions = parseInt(data.get("task-length"));
-      try {
+//      try {
         let task = this.todoList.addTask(name, sessions);
         this.displayTask(task);
-      } catch (exception) {
-        alert(exception);
-      }
+  //    } catch (exception) {
+  //      alert(exception);
+//      }
     });
 
-    this.btn.addEventListener('click', (e) =>{
-      this.toggleInputForm();
-    });
   }
 
   toggleInputForm(){
@@ -40,9 +37,9 @@ class TodoListDom {
   }
 
   displayTask(newTask) {
-    const li = document.createElement('li');
-    li.appendChild(newTask);
-    this.listElement.appendChild(li);
+    const tr = document.createElement('tr');
+    tr.appendChild(newTask);
+    this.listElement.appendChild(tr);
     this.form.reset();
   }
 

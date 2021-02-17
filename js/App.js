@@ -15,3 +15,8 @@ const TimerObj = new Timer(timeDisplay, modeDisplay, TDLDom.getToDoList());
 startTimerButton.addEventListener('click', () => {
   TimerObj.startTimer();
 });
+
+btn.addEventListener('click', () => {
+  console.log("here");
+  TDLDom.toggleInputForm();
+})
