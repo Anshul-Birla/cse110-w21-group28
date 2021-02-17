@@ -1,20 +1,50 @@
 window.esdocSearchIndex = [
   [
-    "cse110-w21-group28/js/function.js~increment",
-    "function/index.html#static-function-increment",
-    "<span>increment</span> <span class=\"search-result-import-path\">cse110-w21-group28/js/function.js</span>",
-    "function"
+    "cse110-w21-group28/js/timer.js~timer",
+    "class/js/timer.js~Timer.html",
+    "<span>Timer</span> <span class=\"search-result-import-path\">cse110-w21-group28/js/timer.js</span>",
+    "class"
+  ],
+  [
+    "cse110-w21-group28/js/timermodes.js~longbreakmode",
+    "variable/index.html#static-variable-longBreakMode",
+    "<span>longBreakMode</span> <span class=\"search-result-import-path\">cse110-w21-group28/js/timerModes.js</span>",
+    "variable"
+  ],
+  [
+    "cse110-w21-group28/js/timermodes.js~shortbreakmode",
+    "variable/index.html#static-variable-shortBreakMode",
+    "<span>shortBreakMode</span> <span class=\"search-result-import-path\">cse110-w21-group28/js/timerModes.js</span>",
+    "variable"
+  ],
+  [
+    "cse110-w21-group28/js/timermodes.js~workmode",
+    "variable/index.html#static-variable-workMode",
+    "<span>workMode</span> <span class=\"search-result-import-path\">cse110-w21-group28/js/timerModes.js</span>",
+    "variable"
   ],
   [
     "",
-    "test-file/tests/function.test.js.html#lineNumber5",
-    "Incrment 2",
+    "test-file/tests/timer.test.js.html#lineNumber14",
+    "Test First Iteration of Timer",
     "test"
   ],
   [
     "",
-    "test-file/tests/function.test.js.html#lineNumber9",
-    "String increment should still work",
+    "test-file/tests/timer.test.js.html#lineNumber9",
+    "Test Initial State is Nothing",
+    "test"
+  ],
+  [
+    "",
+    "test-file/tests/timer.test.js.html#lineNumber45",
+    "Test That HTML Gets Updated During Second ",
+    "test"
+  ],
+  [
+    "",
+    "test-file/tests/timer.test.js.html#lineNumber27",
+    "Test That Queue Gets Updated During Second Iteration Of Timer",
     "test"
   ],
   [
@@ -306,15 +336,69 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
-    "js/function.js",
-    "file/js/function.js.html",
-    "js/function.js",
+    "js/timer.js",
+    "file/js/timer.js.html",
+    "js/timer.js",
     "file"
   ],
   [
-    "tests/function.test.js",
-    "test-file/tests/function.test.js.html",
-    "tests/function.test.js",
+    "js/timer.js~timer#constructor",
+    "class/js/timer.js~Timer.html#instance-constructor-constructor",
+    "js/timer.js~Timer#constructor",
+    "method"
+  ],
+  [
+    "js/timer.js~timer#countdown",
+    "class/js/timer.js~Timer.html#instance-method-countdown",
+    "js/timer.js~Timer#countdown",
+    "method"
+  ],
+  [
+    "js/timer.js~timer#displaystatus",
+    "class/js/timer.js~Timer.html#instance-member-displayStatus",
+    "js/timer.js~Timer#displayStatus",
+    "member"
+  ],
+  [
+    "js/timer.js~timer#displaytime",
+    "class/js/timer.js~Timer.html#instance-member-displayTime",
+    "js/timer.js~Timer#displayTime",
+    "member"
+  ],
+  [
+    "js/timer.js~timer#ontimercomplete",
+    "class/js/timer.js~Timer.html#instance-method-onTimerComplete",
+    "js/timer.js~Timer#onTimerComplete",
+    "method"
+  ],
+  [
+    "js/timer.js~timer#starttimer",
+    "class/js/timer.js~Timer.html#instance-method-startTimer",
+    "js/timer.js~Timer#startTimer",
+    "method"
+  ],
+  [
+    "js/timer.js~timer#state",
+    "class/js/timer.js~Timer.html#instance-member-state",
+    "js/timer.js~Timer#state",
+    "member"
+  ],
+  [
+    "js/timer.js~timer#statequeue",
+    "class/js/timer.js~Timer.html#instance-member-stateQueue",
+    "js/timer.js~Timer#stateQueue",
+    "member"
+  ],
+  [
+    "js/timermodes.js",
+    "file/js/timerModes.js.html",
+    "js/timerModes.js",
+    "file"
+  ],
+  [
+    "tests/timer.test.js",
+    "test-file/tests/timer.test.js.html",
+    "tests/timer.test.js",
     "testFile"
   ]
-];
+]
