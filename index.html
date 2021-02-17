@@ -9,6 +9,8 @@
 </head>
 
 <body>
+
+  <!-- Header bar at the top of the page for title text & navigation -->
   <header>
     <h1>
       Version 0 of our Pomo App
@@ -17,17 +19,18 @@
     <button id="statsButton" class="icons"><a href="#Stats">Stats</a></button>
   </header>
 
-
-  <section id="timer">
+  <!-- Container for timer, timer buttons, and distraction button + prompt -->
+  <section id="timerContainer">
     <div id="countdown">
       <p id="modeDisplay"> Pomo-Time!</p>
       <p id="timeDisplay"> 25:00 </p>
-    <br>
-    <button id="startTimer">Start</button>
-    <button id="distractionButton">Distraction</button>
-  </div>
+      <br>
+      <button id="startTimer">Start</button>
+      <button id="distractionButton">Distraction</button>
+    </div>
   </section>
   
+  <!-- Container for task list -->
   <section id="tasklist">
     <h2>To Do</h2>
     <table id="todo">
@@ -57,13 +60,16 @@
     </table>
   </section>
 
+  <!-- Linked section on page under task list for summary & statistics of work sessions -->
   <section id="stats">
     <h2>Stats</h2>
   </section>
   
+  <!-- Linked section at bottom of page under stats for FAQ and instructions on using timer -->
   <section id="faq">
     <h2>FAQ</h2>
   </section>
   <script type="module" src="./js/App.js"></script>
+
 </body>
 </html>
