@@ -1,5 +1,5 @@
 import { increment } from './function';
-import { Timer } from './timer.js';
+import { Timer } from './js/Timer/timer.js';
 
 const button = document.getElementById('incrementButton');
 const output = document.getElementById('outputIncrement');
@@ -14,15 +14,15 @@ button.addEventListener('click', () => {
  */
 const TimerObj = new Timer(document.getElementById('timeDisplay'), document.getElementById('modeDisplay'));
 // this starts the Timer on click & switches text from 'Start' <--> ' End Session '
-document.getElementById('startButton').addEventListener('click', () => {
+document.getElementById('startTimer').addEventListener('click', () => {
   // if button is a start button:
-  if (document.getElementById('startButton').innerHTML == 'Start') {
-    document.getElementById('startButton').innerHTML = 'End Session';
-    document.getElementById('startButton').style.backgroundColor = 'Grey';
+  if (document.getElementById('startTimer').innerHTML == 'Start') {
+    document.getElementById('startTimer').innerHTML = 'End Session';
+    document.getElementById('startTimer').style.backgroundColor = 'Grey';
     TimerObj.startTimer();
   } else {
     // switches from end button to start button
-    document.getElementById('startButton').innerText = 'Start';
-    document.getElementById('startButton').style.backgroundColor = 'Green';
+    document.getElementById('startTimer').innerText = 'Start';
+    document.getElementById('startTimer').style.backgroundColor = 'Green';
   }
 });
