@@ -47,6 +47,9 @@
 + *Any blockers?* other classes
 
 **Ravi**  
++ *Previous work day progress:* looked at how tinder was implemented
++ *Plans for today:* fix start button implementation
++ *Any blockers?* midterm and hw
 
 **Ryan**  
 
