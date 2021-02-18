@@ -1,4 +1,4 @@
-import { Timer } from './timer.js';
+import { Timer } from './Timer.js';
 
 /**
  * Start Button
