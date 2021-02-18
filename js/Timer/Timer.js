@@ -9,10 +9,11 @@ class Timer {
    * Constructor of Time Object. Takes the HTML element of where
    * you want the time and the status of the timer to be implemented.
    * HTML Elements must have the 'textElement' attribute.
-   * @param {HTML Element} displayTime
-   * @param {HTML Element} displayStatus
+   * @param {HTMLElement} startButton
+   * @param {HTMLElement} displayTime
+   * @param {HTMLElement} displayStatus
    */
-  constructor(displayTime, displayStatus) {
+  constructor(startButton, displayTime, displayStatus) {
     /**
      * State of the timer (the current mode)
      * @type {String}
@@ -27,13 +28,18 @@ class Timer {
      */
     this.stateQueue = [];
     /**
+     * HTML Tag that is reponsible for controlling the timer
+     * @type {HTMLElement}
+     */
+    this.startButton = startButton;
+    /**
      * HTML Tag that is reponsible for displaying the time remaining
-     * @type {HTML_Element}
+     * @type {HTMLElement}
      */
     this.displayTime = displayTime;
     /**
      * HTML Tag that is reponsible for displaying the mode of the timer
-     * @type {HTML_Element}
+     * @type {HTMLElement}
      */
     this.displayStatus = displayStatus;
 
@@ -43,6 +49,8 @@ class Timer {
     for (let i = 0; i < workOrder.length; i += 1) {
       this.stateQueue.push(workOrder[i]);
     }
+
+    this.addEventListeners();
   }
 
   /**
@@ -89,6 +97,19 @@ class Timer {
     } else {
       this.onTimerComplete();
     }
+  }
+
+  addEventListeners() {
+    this.startButton.addEventListener('click', () => {
+      if (this.startButton.innerText === 'Start') {
+        this.startButton.innerText = 'End Session';
+        this.startButton.style.backgroundColor = 'Red';
+        this.startTimer();
+      } else {
+        this.startButton.innerText = 'Start';
+        this.startButton.style.backgroundColor = 'Green';
+      }
+    });
   }
 }
 

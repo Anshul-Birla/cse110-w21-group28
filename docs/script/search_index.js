@@ -1,26 +1,26 @@
 window.esdocSearchIndex = [
   [
-    "cse110-w21-group28/js/timer.js~timer",
-    "class/js/timer.js~Timer.html",
-    "<span>Timer</span> <span class=\"search-result-import-path\">cse110-w21-group28/js/timer.js</span>",
+    "cse110-w21-group28/js/timer/timer.js~timer",
+    "class/js/Timer/Timer.js~Timer.html",
+    "<span>Timer</span> <span class=\"search-result-import-path\">cse110-w21-group28/js/Timer/Timer.js</span>",
     "class"
   ],
   [
-    "cse110-w21-group28/js/timermodes.js~longbreakmode",
+    "cse110-w21-group28/js/timer/timermodes.js~longbreakmode",
     "variable/index.html#static-variable-longBreakMode",
-    "<span>longBreakMode</span> <span class=\"search-result-import-path\">cse110-w21-group28/js/timerModes.js</span>",
+    "<span>longBreakMode</span> <span class=\"search-result-import-path\">cse110-w21-group28/js/Timer/TimerModes.js</span>",
     "variable"
   ],
   [
-    "cse110-w21-group28/js/timermodes.js~shortbreakmode",
+    "cse110-w21-group28/js/timer/timermodes.js~shortbreakmode",
     "variable/index.html#static-variable-shortBreakMode",
-    "<span>shortBreakMode</span> <span class=\"search-result-import-path\">cse110-w21-group28/js/timerModes.js</span>",
+    "<span>shortBreakMode</span> <span class=\"search-result-import-path\">cse110-w21-group28/js/Timer/TimerModes.js</span>",
     "variable"
   ],
   [
-    "cse110-w21-group28/js/timermodes.js~workmode",
+    "cse110-w21-group28/js/timer/timermodes.js~workmode",
     "variable/index.html#static-variable-workMode",
-    "<span>workMode</span> <span class=\"search-result-import-path\">cse110-w21-group28/js/timerModes.js</span>",
+    "<span>workMode</span> <span class=\"search-result-import-path\">cse110-w21-group28/js/Timer/TimerModes.js</span>",
     "variable"
   ],
   [
@@ -330,69 +330,87 @@ window.esdocSearchIndex = [
     "external"
   ],
   [
-    "js/changedom.js",
-    "file/js/changeDom.js.html",
-    "js/changeDom.js",
+    "js/app.js",
+    "file/js/App.js.html",
+    "js/App.js",
     "file"
   ],
   [
-    "js/timer.js",
-    "file/js/timer.js.html",
-    "js/timer.js",
+    "js/timer/timer.js",
+    "file/js/Timer/Timer.js.html",
+    "js/Timer/Timer.js",
     "file"
   ],
   [
-    "js/timer.js~timer#constructor",
-    "class/js/timer.js~Timer.html#instance-constructor-constructor",
-    "js/timer.js~Timer#constructor",
+    "js/timer/timer.js~timer#addeventlisteners",
+    "class/js/Timer/Timer.js~Timer.html#instance-method-addEventListeners",
+    "js/Timer/Timer.js~Timer#addEventListeners",
     "method"
   ],
   [
-    "js/timer.js~timer#countdown",
-    "class/js/timer.js~Timer.html#instance-method-countdown",
-    "js/timer.js~Timer#countdown",
+    "js/timer/timer.js~timer#constructor",
+    "class/js/Timer/Timer.js~Timer.html#instance-constructor-constructor",
+    "js/Timer/Timer.js~Timer#constructor",
     "method"
   ],
   [
-    "js/timer.js~timer#displaystatus",
-    "class/js/timer.js~Timer.html#instance-member-displayStatus",
-    "js/timer.js~Timer#displayStatus",
-    "member"
-  ],
-  [
-    "js/timer.js~timer#displaytime",
-    "class/js/timer.js~Timer.html#instance-member-displayTime",
-    "js/timer.js~Timer#displayTime",
-    "member"
-  ],
-  [
-    "js/timer.js~timer#ontimercomplete",
-    "class/js/timer.js~Timer.html#instance-method-onTimerComplete",
-    "js/timer.js~Timer#onTimerComplete",
+    "js/timer/timer.js~timer#countdown",
+    "class/js/Timer/Timer.js~Timer.html#instance-method-countdown",
+    "js/Timer/Timer.js~Timer#countdown",
     "method"
   ],
   [
-    "js/timer.js~timer#starttimer",
-    "class/js/timer.js~Timer.html#instance-method-startTimer",
-    "js/timer.js~Timer#startTimer",
+    "js/timer/timer.js~timer#displaystatus",
+    "class/js/Timer/Timer.js~Timer.html#instance-member-displayStatus",
+    "js/Timer/Timer.js~Timer#displayStatus",
+    "member"
+  ],
+  [
+    "js/timer/timer.js~timer#displaytime",
+    "class/js/Timer/Timer.js~Timer.html#instance-member-displayTime",
+    "js/Timer/Timer.js~Timer#displayTime",
+    "member"
+  ],
+  [
+    "js/timer/timer.js~timer#ontimercomplete",
+    "class/js/Timer/Timer.js~Timer.html#instance-method-onTimerComplete",
+    "js/Timer/Timer.js~Timer#onTimerComplete",
     "method"
   ],
   [
-    "js/timer.js~timer#state",
-    "class/js/timer.js~Timer.html#instance-member-state",
-    "js/timer.js~Timer#state",
+    "js/timer/timer.js~timer#startbutton",
+    "class/js/Timer/Timer.js~Timer.html#instance-member-startButton",
+    "js/Timer/Timer.js~Timer#startButton",
     "member"
   ],
   [
-    "js/timer.js~timer#statequeue",
-    "class/js/timer.js~Timer.html#instance-member-stateQueue",
-    "js/timer.js~Timer#stateQueue",
+    "js/timer/timer.js~timer#starttimer",
+    "class/js/Timer/Timer.js~Timer.html#instance-method-startTimer",
+    "js/Timer/Timer.js~Timer#startTimer",
+    "method"
+  ],
+  [
+    "js/timer/timer.js~timer#state",
+    "class/js/Timer/Timer.js~Timer.html#instance-member-state",
+    "js/Timer/Timer.js~Timer#state",
     "member"
   ],
   [
-    "js/timermodes.js",
-    "file/js/timerModes.js.html",
-    "js/timerModes.js",
+    "js/timer/timer.js~timer#statequeue",
+    "class/js/Timer/Timer.js~Timer.html#instance-member-stateQueue",
+    "js/Timer/Timer.js~Timer#stateQueue",
+    "member"
+  ],
+  [
+    "js/timer/timermodes.js",
+    "file/js/Timer/TimerModes.js.html",
+    "js/Timer/TimerModes.js",
+    "file"
+  ],
+  [
+    "js/timer/changedom.js",
+    "file/js/Timer/changeDom.js.html",
+    "js/Timer/changeDom.js",
     "file"
   ],
   [
