@@ -1,3 +1,7 @@
+* {
+  font-family: Helvetica, sans-serif;
+}
+
 body {
   background-color: bisque;
 }
@@ -9,9 +13,10 @@ header {
 #timerContainer {
   position: relative;
   margin: auto;
-  height: 30vh;
-  width: 40vw;
+  height: 280px;
+  width: 400px;
   background-color: darkgoldenrod;
+  border-radius: 5px;
 }
 
 #countdown {
@@ -19,16 +24,29 @@ header {
   text-align: center;
 }
 
-#distractionButton {
-  position: absolute;
-  bottom: 0;
-  right: 0;
+.pure-button {
+  border-radius: 5px;
 }
 
-#startButton {
+#modeDisplay {
+  position: relative;
+  top: 10px;
+  margin: 10px;
+  font-size: 80%;
+}
+
+#timeDisplay {
+  position: relative;
+  top: 15px;
+  font-size: 275%;
+  margin: 5px;
+}
+
+#distractionButton {
   position: absolute;
-  bottom: 0;
-  left: 0;
+  bottom: 5px;
+  right: 5px;
+  font-size: 40%;
 }
 
 #tasklist {
@@ -37,6 +55,49 @@ header {
   height: 60vh;
   width: 40vw;
   background-color: slategrey;
+}
+
+/* for support for small screens */
+@media screen and (max-width: 500px) {
+  #timerContainer {
+    width: 80vw;
+  }
+
+  @media screen and (max-width: 300px) {
+    #timerContainer {
+      width: 240px;
+    }
+  }
+}
+
+@media screen and (max-height: 550px) {
+  #timerContainer {
+    height: 50vh;
+  }
+
+  @media screen and (max-height: 480px) {
+    #timerContainer {
+      height: 240px;
+    }
+  }
+}
+
+@media screen and (max-width: 500px), (max-height: 550px) {
+  #distractionButton {
+    font-size: 35%;
+  }
+
+  #startTimer {
+    font-size: 75%;
+  }
+
+  #timeDisplay {
+    font-size: 240%;
+  }
+
+  #modeDisplay {
+    font-size: 70%;
+  }
 }
 
 .icons {
