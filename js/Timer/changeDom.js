@@ -8,7 +8,7 @@ const TimerObj = new Timer(document.getElementById('timeDisplay'), document.getE
 // this starts the Timer on click & switches text from 'Start' <--> ' End Session '
 document.getElementById('startTimer').addEventListener('click', () => {
   // if button is a start button:
-  if (document.getElementById('startTimer').innerHTML == 'Start') {
+  if (document.getElementById('startTimer').innerHTML === 'Start') {
     document.getElementById('startTimer').innerHTML = 'End Session';
     document.getElementById('startTimer').style.backgroundColor = 'Grey';
     TimerObj.startTimer();
