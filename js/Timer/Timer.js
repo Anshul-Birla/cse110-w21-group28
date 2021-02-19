@@ -101,7 +101,7 @@ class Timer {
 
   addEventListeners() {
     this.startButton.addEventListener('click', () => {
-      if (this.startButton.textContent] === 'Start') {
+      if (this.startButton.textContent === 'Start') {
         this.startButton.textContent = 'End Session';
         this.startButton.style.backgroundColor = 'Red';
         this.startTimer();
