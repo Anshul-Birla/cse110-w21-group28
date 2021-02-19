@@ -15,9 +15,14 @@
 
 **New business:** 
 + ask for Sim's feedback
-  + looks well-documented so far
+  + documentation looks good for Timer class
 + button styling
-+ 
+  + can use outside code as long as we can explain the decision
++ const should be all capitalized?
++ how much support are we expected to provide for screen size?
+  + e.g. phone, phone sideways, shrink desktop
+  + okay to say we expect people to run this on a laptop, certain ratio screen
++ how much to separate features
 
 **Anything on the agenda that was not discussed:**  None
 
