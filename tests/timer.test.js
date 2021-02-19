@@ -2,37 +2,35 @@ import { Timer } from '../js/Timer/Timer';
 import { workMode, shortBreakMode, longBreakMode } from '../js/Timer/TimerModes';
 
 beforeEach(() => {
+  document.body.innerHTML = '<div>'
+  + '  <p id="displayTime"></p>'
+  + ' <p id="displayStatus"></p>'
+  + '<button id=start>Start</button>'
+  + '</div>';
   jest.useFakeTimers();
   jest.clearAllTimers();
 });
 
 test('Test Initial State is Nothing', () => {
-  const TimerObj = new Timer(null, null);
+  const button = document.getElementById('start');
+  const TimerObj = new Timer(button, null, null);
   expect(TimerObj.state).toBe('');
 });
 
 test('Test First Iteration of Timer', () => {
-  document.body.innerHTML = '<div>'
-  + '  <p id="displayTime"></p>'
-  + ' <p id="displayStatus"></p>'
-  + '</div>';
-
   const displayTime = document.getElementById('displayTime');
   const displayStatus = document.getElementById('displayStatus');
-  const TimerObj = new Timer(displayTime, displayStatus);
+  const button = document.getElementById('start');
+  const TimerObj = new Timer(button, displayTime, displayStatus);
   TimerObj.startTimer();
   expect(TimerObj.state).toBe(workMode.name);
 });
 
 test('Test That Queue Gets Updated During Second Iteration Of Timer', () => {
-  document.body.innerHTML = '<div>'
-  + '  <p id="displayTime"></p>'
-  + ' <p id="displayStatus"></p>'
-  + '</div>';
-
   const displayTime = document.getElementById('displayTime');
   const displayStatus = document.getElementById('displayStatus');
-  const TimerObj = new Timer(displayTime, displayStatus);
+  const button = document.getElementById('start');
+  const TimerObj = new Timer(button, displayTime, displayStatus);
   jest.clearAllTimers();
   TimerObj.startTimer();
 
@@ -43,14 +41,10 @@ test('Test That Queue Gets Updated During Second Iteration Of Timer', () => {
 });
 
 test('Test That HTML Gets Updated During Second ', () => {
-  document.body.innerHTML = '<div>'
-  + '  <p id="displayTime"></p>'
-  + ' <p id="displayStatus"></p>'
-  + '</div>';
-
   const displayTime = document.getElementById('displayTime');
   const displayStatus = document.getElementById('displayStatus');
-  const TimerObj = new Timer(displayTime, displayStatus);
+  const button = document.getElementById('start');
+  const TimerObj = new Timer(button, displayTime, displayStatus);
   jest.clearAllTimers();
   TimerObj.startTimer();
 

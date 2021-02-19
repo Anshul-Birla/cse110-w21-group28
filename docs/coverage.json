@@ -1,24 +1,26 @@
 {
-  "coverage": "56.25%",
-  "expectCount": 16,
-  "actualCount": 9,
+  "coverage": "57.89%",
+  "expectCount": 19,
+  "actualCount": 11,
   "files": {
-    "js/changeDom.js": {
+    "js/App.js": {
       "expectCount": 4,
       "actualCount": 0,
       "undocumentLines": [
+        3,
         4,
         5,
-        8,
-        11
+        7
       ]
     },
-    "js/timer.js": {
-      "expectCount": 9,
-      "actualCount": 9,
-      "undocumentLines": []
+    "js/Timer/Timer.js": {
+      "expectCount": 11,
+      "actualCount": 10,
+      "undocumentLines": [
+        102
+      ]
     },
-    "js/timerModes.js": {
+    "js/Timer/TimerModes.js": {
       "expectCount": 3,
       "actualCount": 0,
       "undocumentLines": [
@@ -26,6 +28,11 @@
         7,
         12
       ]
+    },
+    "js/Timer/changeDom.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
     }
   }
 }
