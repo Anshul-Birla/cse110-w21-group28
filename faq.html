@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 80%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+  from {top:-300px; opacity:0} 
+  to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.close {
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-header {
+  padding: 2px 16px;
+  background-color: salmon;
+  color: white;
+}
+
+.modal-body {padding: 2px 16px;}
+
+</style>
+</head>
+<body>
+
+<h2>Animated Modal with Header and Footer</h2>
+
+<!-- Trigger/Open The Modal -->
+<button id="faqButton">FAQ</button>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="close">&times;</span>
+      <h2>A Pomodoro Ranger Timer is a Pomodoro Timer that would help with productivity</h2>
+    </div>
+    <div class="modal-body">
+      <h2>What is Pomoranger Timer?</h2>
+  		<p>
+    Pomoranger is a Pomodoro Technique timer that works on your computer and mobile devices with an aim to increase your productivity, and reduce stress and anxiety of planning your time. 
+    The aim of this app is to help you focus on any task you are working on, such as studying, writing, or coding. 
+    This app is inspired by
+    <a
+      href="https://francescocirillo.com/pages/pomodoro-technique"
+      target="_blank"
+      rel="noopener"
+      >Pomodoro Technique</a
+    >
+    which is a time management method developed by Francesco Cirillo.
+  </p>
+    </div>
+    <div>
+  <h2>What is Pomodoro Technique?</h2>
+    <p>
+      The Pomodoro Technique is created by Francesco Cirillo for a
+      more productive way to work and study. The technique uses a
+      timer to break down work into intervals, traditionally 25
+      minutes in length, separated by short breaks. Each interval
+      is known as a pomodoro, from the Italian word for 'tomato',
+      after the tomato-shaped kitchen timer that Cirillo used as a
+      university student. -
+      <a
+        href="https://en.wikipedia.org/wiki/Pomodoro_Technique"
+        target="_blank"
+        rel="noopener"
+        >Wikipedia</a
+        >
+    </p>
+</div>
+
+<div>
+  <h2>
+    How to use the Pomodoro Timer?
+  </h2>
+  <ol>
+    <li><strong>Add tasks</strong> to work on today</li>
+    <li>
+      <strong>Set estimated number of pomodoros</strong> (1 pomodoro = 25 minutes) for each task
+    </li>
+    <li><strong>Write out and select a task</strong> to work on in the Todo list</li>
+    <li>
+      <strong>Start timer</strong> and focus on the task for 25 minutes per each task
+    </li>
+    <li>
+       <strong>Take a break</strong> for 5 minutes when the alarm changes color
+    </li>
+    <li>
+       <strong>Iterate</strong> pomodoros until you finish the tasks
+    </li>
+  </ol>
+</div>
+
+<div>
+  <h2>
+    Features of the Pomoranger Timer
+  </h2>
+  <ol>
+    <li><strong>Simple use</strong> of the timer and functionality of the Pomodoro Technique</li>
+    <li>
+      <strong>Todo List </strong> functionality to organize your tasks
+    </li>
+    <li><strong>Statistics </strong> feature to help monitor your progress</li>
+    <li>
+      <strong>Start timer</strong> and focus on the task for 25 minutes
+    </li>
+  </ol>
+</div>
+
+
+  </div>
+
+</div>
+
+<script>
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("faqButton");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+
+</body>
+</html>
