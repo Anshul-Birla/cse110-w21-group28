@@ -37,9 +37,9 @@ class TodoListDom {
   }
 
   displayTask(newTask) {
-    const tr = document.createElement('tr');
-    tr.appendChild(newTask);
-    this.listElement.appendChild(tr);
+    //const tr = document.createElement('tr');
+    //tr.appendChild(newTask);
+    this.listElement.appendChild(newTask);
     this.form.reset();
   }
 

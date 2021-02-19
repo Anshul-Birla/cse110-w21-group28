@@ -2,7 +2,7 @@
  * Task object, stores its id, task name, total expected Pomo Sessions to complete the Task,
  * the number of the current Pomo Session, and whether the task has been completed or not.
  */
-class Task extends HTMLElement {
+class Task extends HTMLTableRowElement {
   // constructor, incrementSession, checkOff
 
   /**
@@ -112,4 +112,4 @@ class Task extends HTMLElement {
 }
 
 export { Task };
-customElements.define('task-item', Task);
+customElements.define('task-item', Task, {extends: 'tr'});
