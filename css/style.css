@@ -6,9 +6,7 @@ header {
   background-color: paleturquoise;
 }
 
-#timerContainer {
-  position: relative;
-  margin: auto;
+#timer {
   height: 30vh;
   width: 40vw;
   background-color: darkgoldenrod;
@@ -32,8 +30,6 @@ header {
 }
 
 #tasklist {
-  position: relative;
-  margin: auto;
   height: 60vh;
   width: 40vw;
   background-color: slategrey;
@@ -41,4 +37,9 @@ header {
 
 .icons {
   float: right;
+}
+
+.section_container {
+  position: relative;
+  margin: auto;
 }
