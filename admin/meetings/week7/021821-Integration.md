@@ -25,7 +25,7 @@
   + for icons, have to bring in SVG yourself
 + FAQ includes html as a pop-up
 + start button in lower left or center?
-  + inconsistency in id naming, changed timerStart to 
+  + inconsistency in id naming, changed timerStart to timerButton
 + make To Do list scrollable
   + html attribute: scrollable = True
 + goals: merge everything by Monday, assign tasks after we see where we are
