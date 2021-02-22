@@ -9,8 +9,14 @@ const addTodoButton = document.getElementById('add-button');
 const startTimerButton = document.getElementById('startTimer');
 
 const TDLDom = new TodoListDom(todoTable, addTodoForm, addTodoButton);
-const TimerObj = new Timer(timeDisplay, modeDisplay, TDLDom.getToDoList());
+const TimerObj = new Timer(timeDisplay, modeDisplay);
 
 startTimerButton.addEventListener('click', () => {
   TimerObj.startTimer();
 });
+
+TimerObj.addEventListener('timer-complete', (e) => {
+  console.log(e.detail.sessionName);
+  TimerObj.startTimer();
+
+})

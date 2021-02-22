@@ -4,7 +4,7 @@ import { workMode, shortBreakMode, longBreakMode } from './TimerModes.js';
  * A class for the Timer object. Has functions to start the timer,
  * display the current mode of the timer and display the time remaining
  */
-class Timer {
+class Timer extends HTMLElement {
   /**
    * Constructor of Time Object. Takes the HTML element of where
    * you want the time and the status of the timer to be implemented.
@@ -13,7 +13,8 @@ class Timer {
    * @param {HTML Element} displayStatus
    * @param {ToDoList}     todoList
    */
-  constructor(displayTime, displayStatus, todoList) {
+  constructor(displayTime, displayStatus) {
+    super();
     /**
      * State of the timer (the current mode)
      * @type {String}
@@ -22,7 +23,7 @@ class Timer {
     /**
      * Queue that stores the Session objects. Rotates to provide
      * rotation functionality for the timer
-     * @type {[Object]}
+     * @type {Object[]}
      * @property {String} object.name
      * @property {Number} object.duration
      */
@@ -37,12 +38,6 @@ class Timer {
      * @type {HTML_Element}
      */
     this.displayStatus = displayStatus;
-
-    /**
-     * TodoList connected to the Timer
-     * @type {ToDoList}
-     */
-    this.todoList = todoList;
 
     // this is the order for the timer. It will loop in this order.
     const workOrder = [workMode, shortBreakMode, workMode,
@@ -59,10 +54,12 @@ class Timer {
   onTimerComplete() {
     const completedSession = this.stateQueue.shift();
     this.stateQueue.push(completedSession);
-    if (completedSession.name === workMode.name) {
-      this.todoList.onSessionComplete();
-    }
-    this.startTimer();
+    const event = new CustomEvent('timer-complete', {
+      detail: {
+        sessionName: completedSession.name,
+      },
+    });
+    this.dispatchEvent(event);
   }
 
   /**
@@ -102,4 +99,5 @@ class Timer {
   }
 }
 
+customElements.define('custom-timer', Timer);
 export { Timer };

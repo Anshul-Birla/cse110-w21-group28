@@ -69,11 +69,6 @@ test('Get currentTask on empty list', () => {
   const aList = new ToDoList(listLocation);
   const currTask = () => { aList.getCurrentTask(); };
   expect(currTask).toThrow('Empty ToDo List');
-  aList.addTask('First Task', 5);
-  aList.addTask('Second Task', 2);
-  aList.checkOffTask('0');
-  aList.checkOffTask('1');
-  expect(currTask).toThrow('No Current Task');
 });
 
 test('Preserve special characters in task name', () => {
@@ -85,16 +80,4 @@ test('Preserve special characters in task name', () => {
   aList.addTask('Second Task', 2);
   const currTask = aList.getCurrentTask();
   expect(currTask.name).toBe(strName);
-});
-
-test('Check off task', () => {
-  const listLocation = document.getElementById('ToDoListDiv');
-  const aList = new ToDoList(listLocation);
-  for (let i = 1; i < 12; i += 1) {
-    aList.addTask(`task ${i}`, i);
-  }
-  aList.checkOffTask('7');
-  expect(aList.taskList[7].checked).toBe(true);
-  const nonExistentTask = () => { aList.checkOffTask('22'); };
-  expect(nonExistentTask).toThrow('Task Not Found');
 });
