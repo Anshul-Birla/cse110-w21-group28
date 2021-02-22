@@ -1,5 +1,6 @@
 import { Timer } from '../js/Timer/Timer';
 import { workMode, shortBreakMode, longBreakMode } from '../js/Timer/TimerModes';
+import { classNames, innerText } from '../js/Timer/TimerHTML';
 
 beforeEach(() => {
   document.body.innerHTML = '<div>'
@@ -52,4 +53,15 @@ test('Test That HTML Gets Updated During Second ', () => {
 
   expect(displayStatus.textContent).toBe(shortBreakMode.name);
   expect(displayTime.textContent).toBe(`${shortBreakMode.duration}:00`);
+});
+
+test('Test That Start Button Functions Properly ', () => {
+  const displayTime = document.getElementById('displayTime');
+  const displayStatus = document.getElementById('displayStatus');
+  const button = document.getElementById('start');
+  const TimerObj = new Timer(button, displayTime, displayStatus);
+  jest.clearAllTimers();
+  button.click();
+  expect(button.textContent).toBe(innerText.stopTimerText);
+  expect(button.class).toBe(classNames.stopButton);
 });

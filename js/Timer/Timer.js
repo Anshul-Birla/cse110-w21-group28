@@ -1,4 +1,5 @@
 import { workMode, shortBreakMode, longBreakMode } from './TimerModes.js';
+import { classNames, innerText } from './TimerHTML.js';
 
 /**
  * A class for the Timer object. Has functions to start the timer,
@@ -99,15 +100,18 @@ class Timer {
     }
   }
 
+  /**
+   * Adds event listener to the start button that was added
+   */
   addEventListeners() {
     this.startButton.addEventListener('click', () => {
-      if (this.startButton.textContent === 'Start') {
-        this.startButton.textContent = 'End Session';
-        this.startButton.style.backgroundColor = 'Red';
+      if (this.startButton.textContent === innerText.startTimerText) {
+        this.startButton.textContent = innerText.stopTimerText;
+        this.startButton.class = classNames.stopButton;
         this.startTimer();
       } else {
-        this.startButton.textContent = 'Start';
-        this.startButton.style.backgroundColor = 'Green';
+        this.startButton.textContent = innerText.startTimerText;
+        this.startButton.class = classNames.startButton;
       }
     });
   }
