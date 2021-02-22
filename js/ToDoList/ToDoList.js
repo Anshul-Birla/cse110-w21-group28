@@ -3,22 +3,25 @@ import { Task } from './Task.js';
 class ToDoList {
   constructor() {
     /**
+     * Array that stores each task
      * @type {Task[]}
      */
     this.taskList = [];
     /**
+     * This is the total task count that is also a way
+     * to give each task a unique id
      * @type {number}
      */
     this.idCounter = 0;
   }
 
-
-  // REMEMBER TO ESCAPE SPECIAL CHARACTERS
   /**
    * @description - Verifies that incoming parameters are non-empty and defined, then creates Task
-   * @param {string} name - Task subject
-   * @param {number} totalSession - Projected number of Pomo Sessions
+   * @param {String} name - Task subject
+   * @param {Number} totalSession - Projected number of Pomo Sessions
+   *
    * @returns {Task} Task object to be placed into DOM
+   *
    * @throws {Undefined Name} - Task name cannot be undefined
    * @throws {Empty Name} - Task name is an empty string
    * @throws {Undefiend Length Task} - Expected number of pomo sessions is undefined
@@ -44,7 +47,10 @@ class ToDoList {
   }
 
   /**
+   * Gets the first unchecked task
+   *
    * @returns {Task} First unchecked task in the list
+   *
    * @throws {'Empty ToDo List'} No tasks can be checked off if no tasks exist
    * @throws {'No Current Task'} All tasks in the list have been checked off
    */
@@ -60,8 +66,12 @@ class ToDoList {
     throw new Error('No Current Task');
   }
 
+  /**
+   * Called by the Timer function when a session is done
+   * Increments the current task
+   */
   onSessionComplete() {
-    let currTask = this.getCurrentTask();
+    const currTask = this.getCurrentTask();
     currTask.incrementSession();
   }
 }

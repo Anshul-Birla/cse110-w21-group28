@@ -3,13 +3,11 @@
  * the number of the current Pomo Session, and whether the task has been completed or not.
  */
 class Task extends HTMLTableRowElement {
-  // constructor, incrementSession, checkOff
-
   /**
-  * initialize a Task
-  * @param {string} id - The id of the task. Will be used later for reodering, deleting, etc.
-  * @param {string} name - Task content
-  * @param {number} totalSessions - Projected number of Pomo Sessions needed to complete this task.
+  * Task construcutor. Initializes the task with appropriate attributes
+  * @param {String} id
+  * @param {String} name
+  * @param {Number} totalSessions
   */
   constructor(id, name, totalSessions) {
     super();
@@ -21,26 +19,46 @@ class Task extends HTMLTableRowElement {
     this.checked = false;
     this.setAttribute('class', 'notCheckedOffTask');
 
-    const firstCol = document.createElement('td')
+    this.setupCheckBox();
+    this.setupTaskText();
+    this.setupDeleteButton();
+    this.setupTotalPomoSessions();
+  }
+
+  setupCheckBox() {
+    const firstCol = document.createElement('td');
     const checkBox = document.createElement('input');
     checkBox.setAttribute('type', 'checkbox');
     checkBox.setAttribute('id', `checkbox-${this.id}`);
-    checkBox.addEventListener('click', ()=>{this.checkOffTask()});
     firstCol.appendChild(checkBox);
     this.appendChild(firstCol);
 
+    checkBox.addEventListener('click', () => {
+      this.checkOffTask();
+    });
+  }
+
+  setupTaskText() {
     const text = document.createElement('td');
     text.setAttribute('id', `text-${this.id}`);
     this.appendChild(text);
     this.updateText();
+  }
 
+  setupTotalPomoSessions() {
     const pomoSessions = document.createElement('td');
     pomoSessions.setAttribute('id', `pomoSessions-${this.id}`);
     this.appendChild(pomoSessions);
     this.updatePomoSessions();
+  }
 
+  /**
+   *
+   * Currently a placeholder until delete functionality happens
+   */
+  setupDeleteButton() {
     const deleteBtn = document.createElement('td');
-    deleteBtn.textContent = "x";
+    deleteBtn.textContent = 'DELETE';
     this.appendChild(deleteBtn);
   }
 
@@ -78,38 +96,7 @@ class Task extends HTMLTableRowElement {
     this.checked = true;
     this.setAttribute('class', 'checkedOffTask');
   }
-
-  // GETTERS AND SETTERS IF WE NEED THEM LATER. Currently, setter causes infinite recursion.
-  /**
-   * @ignore
-   * @type {string} */
-  // get name() { return this.name; }
-
-  /**
-   * @ignore
-   * @type {string} */
-  // set name(name) { this.name = name; }
-
-  /**
-   * @ignore
-   * @type {boolean} */
-  // get checked() { return this.checked; }
-
-  /**
-   * @ignore
-   * @type {boolean} */
-  // set checked(check) { this.checked = check; }
-
-  /**
-   * @ignore
-   * @type {number} */
-  // get currentSessionNum() { return this.currentSessionNum; }
-
-  /**
-   * @ignore
-   * @type {number} */
-  // set currentSessionNum(num) { this.currentSessionNum = num; }
 }
 
 export { Task };
-customElements.define('task-item', Task, {extends: 'tr'});
+customElements.define('task-item', Task, { extends: 'tr' });

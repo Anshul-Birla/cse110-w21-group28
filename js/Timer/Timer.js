@@ -1,6 +1,4 @@
-import { TodoListDom } from '../ToDoList/TodoListDom.js';
 import { workMode, shortBreakMode, longBreakMode } from './TimerModes.js';
-import { ToDoList } from '../ToDoList/ToDoList.js';
 
 /**
  * A class for the Timer object. Has functions to start the timer,
@@ -40,6 +38,10 @@ class Timer {
      */
     this.displayStatus = displayStatus;
 
+    /**
+     * TodoList connected to the Timer
+     * @type {ToDoList}
+     */
     this.todoList = todoList;
 
     // this is the order for the timer. It will loop in this order.
@@ -56,9 +58,10 @@ class Timer {
    */
   onTimerComplete() {
     const completedSession = this.stateQueue.shift();
-    this.stateQueue.push(completedSession);  
-    if (completedSession.name == workMode.name)
+    this.stateQueue.push(completedSession);
+    if (completedSession.name === workMode.name) {
       this.todoList.onSessionComplete();
+    }
     this.startTimer();
   }
 

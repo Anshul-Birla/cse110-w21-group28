@@ -1,48 +1,82 @@
 import { ToDoList } from './ToDoList.js';
+import { HTMLAttributes } from './TodoListDomVariables.js';
+
 class TodoListDom {
   /**
-   *
-   * @param {HTMLElement} HTMLList
+   * @param {HTMLTableElement} HTMLTable
+   * @param {HTMLFormElement} HTMLForm
+   * @param {HTMLButtonElement} HTMLButton
    */
-  constructor(HTMLList, HTMLForm, HTMLBtn) {
-    this.listElement = HTMLList;
+  constructor(HTMLTable, HTMLForm, HTMLButton) {
+    /**
+     * Holds the TodoList so the Dom Manager can acess it
+     * @type {ToDoList}
+     */
     this.todoList = new ToDoList();
+    /**
+     * The form where users input their task
+     * @type {HTMLFormElement}
+     */
     this.form = HTMLForm;
-    this.btn = HTMLBtn;
+    /**
+     * The button where users click to submit their todo's
+     * @type {HTMLButtonElement}
+     */
+    this.button = HTMLButton;
+    /**
+     * The table where the todolist is displayed
+     * @type {HTMLTableElement}
+     */
+    this.table = HTMLTable;
 
-    this.form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      let data = new FormData(this.form);
-      let name = data.get("task-name");
-      let sessions = parseInt(data.get("task-length"));
-//      try {
-        let task = this.todoList.addTask(name, sessions);
-        this.displayTask(task);
-  //    } catch (exception) {
-  //      alert(exception);
-//      }
-    });
-
+    this.setupEventListeners();
   }
 
-  toggleInputForm(){
-    if(this.form.getAttribute('style') == "display: none;"){
+  /**
+   * Sets up the form dissapearing and submit event listeners
+   */
+  setupEventListeners() {
+    this.form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const data = new FormData(this.form);
+      const name = data.get(HTMLAttributes.taskNameId);
+      const sessions = parseInt(data.get(HTMLAttributes.taskPomoSessions), 10);
+      const task = this.todoList.addTask(name, sessions);
+      this.displayTask(task);
+    });
+
+    this.button.addEventListener('click', () => {
+      this.toggleInputForm();
+    });
+  }
+
+  /**
+   * Toggles the visibility of the add task form depending
+   * on the text contained in the button
+   */
+  toggleInputForm() {
+    if (this.form.style.display === 'none') {
       this.form.setAttribute('style', '');
-      this.btn.textContent = "Done";
-    }  else {
-      this.form.setAttribute('style', "display: none;");
-      this.btn.textContent = "Add a task";
+      this.button.textContent = HTMLAttributes.buttonDoneTextContent;
+    } else {
+      this.form.style.display = 'none';
+      this.button.textContent = HTMLAttributes.buttonAddTextContent;
     }
     this.form.reset();
   }
 
+  /**
+   * Adds a task to the table of task
+   * @param {HTMLTableRowElement} newTask
+   */
   displayTask(newTask) {
-    //const tr = document.createElement('tr');
-    //tr.appendChild(newTask);
-    this.listElement.appendChild(newTask);
-    this.form.reset();
+    this.table.appendChild(newTask);
   }
 
+  /**
+   * Returns the todolist object contained inside the class
+   * @returns {ToDoList}
+   */
   getToDoList() {
     return this.todoList;
   }
