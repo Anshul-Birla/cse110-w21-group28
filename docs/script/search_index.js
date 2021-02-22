@@ -6,6 +6,18 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "cse110-w21-group28/js/timer/timerhtml.js~classnames",
+    "variable/index.html#static-variable-classNames",
+    "<span>classNames</span> <span class=\"search-result-import-path\">cse110-w21-group28/js/Timer/TimerHTML.js</span>",
+    "variable"
+  ],
+  [
+    "cse110-w21-group28/js/timer/timerhtml.js~innertext",
+    "variable/index.html#static-variable-innerText",
+    "<span>innerText</span> <span class=\"search-result-import-path\">cse110-w21-group28/js/Timer/TimerHTML.js</span>",
+    "variable"
+  ],
+  [
     "cse110-w21-group28/js/timer/timermodes.js~longbreakmode",
     "variable/index.html#static-variable-longBreakMode",
     "<span>longBreakMode</span> <span class=\"search-result-import-path\">cse110-w21-group28/js/Timer/TimerModes.js</span>",
@@ -25,26 +37,32 @@ window.esdocSearchIndex = [
   ],
   [
     "",
-    "test-file/tests/timer.test.js.html#lineNumber14",
+    "test-file/tests/timer.test.js.html#lineNumber21",
     "Test First Iteration of Timer",
     "test"
   ],
   [
     "",
-    "test-file/tests/timer.test.js.html#lineNumber9",
+    "test-file/tests/timer.test.js.html#lineNumber15",
     "Test Initial State is Nothing",
     "test"
   ],
   [
     "",
-    "test-file/tests/timer.test.js.html#lineNumber45",
+    "test-file/tests/timer.test.js.html#lineNumber44",
     "Test That HTML Gets Updated During Second ",
     "test"
   ],
   [
     "",
-    "test-file/tests/timer.test.js.html#lineNumber27",
+    "test-file/tests/timer.test.js.html#lineNumber30",
     "Test That Queue Gets Updated During Second Iteration Of Timer",
+    "test"
+  ],
+  [
+    "",
+    "test-file/tests/timer.test.js.html#lineNumber58",
+    "Test That Start Button Functions Properly ",
     "test"
   ],
   [
@@ -402,15 +420,15 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
-    "js/timer/timermodes.js",
-    "file/js/Timer/TimerModes.js.html",
-    "js/Timer/TimerModes.js",
+    "js/timer/timerhtml.js",
+    "file/js/Timer/TimerHTML.js.html",
+    "js/Timer/TimerHTML.js",
     "file"
   ],
   [
-    "js/timer/changedom.js",
-    "file/js/Timer/changeDom.js.html",
-    "js/Timer/changeDom.js",
+    "js/timer/timermodes.js",
+    "file/js/Timer/TimerModes.js.html",
+    "js/Timer/TimerModes.js",
     "file"
   ],
   [

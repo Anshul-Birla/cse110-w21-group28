@@ -30,6 +30,8 @@
   <ul>
     
   <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#timer">Timer</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Timer/Timer.js~Timer.html">Timer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-classNames">classNames</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-innerText">innerText</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-longBreakMode">longBreakMode</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-shortBreakMode">shortBreakMode</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-workMode">workMode</a></span></span></li>
@@ -39,6 +41,7 @@
 
 <div class="content" data-ice="content"><h1 data-ice="title">js/Timer/Timer.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { workMode, shortBreakMode, longBreakMode } from &apos;./TimerModes.js&apos;;
+import { classNames, innerText } from &apos;./TimerHTML.js&apos;;
 
 /**
  * A class for the Timer object. Has functions to start the timer,
@@ -139,15 +142,18 @@ class Timer {
     }
   }
 
+  /**
+   * Adds event listener to the start button that was added
+   */
   addEventListeners() {
     this.startButton.addEventListener(&apos;click&apos;, () =&gt; {
-      if (this.startButton.innerText === &apos;Start&apos;) {
-        this.startButton.innerText = &apos;End Session&apos;;
-        this.startButton.style.backgroundColor = &apos;Red&apos;;
+      if (this.startButton.textContent === innerText.startTimerText) {
+        this.startButton.textContent = innerText.stopTimerText;
+        this.startButton.class = classNames.stopButton;
         this.startTimer();
       } else {
-        this.startButton.innerText = &apos;Start&apos;;
-        this.startButton.style.backgroundColor = &apos;Green&apos;;
+        this.startButton.textContent = innerText.startTimerText;
+        this.startButton.class = classNames.startButton;
       }
     });
   }

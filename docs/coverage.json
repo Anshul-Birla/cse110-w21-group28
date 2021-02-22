@@ -4,20 +4,25 @@
   "actualCount": 11,
   "files": {
     "js/App.js": {
-      "expectCount": 4,
+      "expectCount": 3,
       "actualCount": 0,
       "undocumentLines": [
         3,
         4,
-        5,
-        7
+        5
       ]
     },
     "js/Timer/Timer.js": {
       "expectCount": 11,
-      "actualCount": 10,
+      "actualCount": 11,
+      "undocumentLines": []
+    },
+    "js/Timer/TimerHTML.js": {
+      "expectCount": 2,
+      "actualCount": 0,
       "undocumentLines": [
-        102
+        1,
+        6
       ]
     },
     "js/Timer/TimerModes.js": {
@@ -28,11 +33,6 @@
         7,
         12
       ]
-    },
-    "js/Timer/changeDom.js": {
-      "expectCount": 1,
-      "actualCount": 1,
-      "undocumentLines": []
     }
   }
 }

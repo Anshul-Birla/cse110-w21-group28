@@ -567,7 +567,7 @@
     "__docId__": 48,
     "kind": "file",
     "name": "js/App.js",
-    "content": "import { Timer } from './Timer/Timer.js';\n\nconst startButton = document.getElementById('startTimer');\nconst displayTimer = document.getElementById('timeDisplay');\nconst displayMode = document.getElementById('modeDisplay');\n\nconst TimerObj = new Timer(startButton, displayTimer, displayMode);\n",
+    "content": "import { Timer } from './Timer/Timer.js';\n\nconst startButton = document.getElementById('startTimer');\nconst displayTimer = document.getElementById('timeDisplay');\nconst displayMode = document.getElementById('modeDisplay');\n\nnew Timer(startButton, displayTimer, displayMode);\n",
     "static": true,
     "longname": "/home/anshul/anshul/Development/cse110-w21-group28/js/App.js",
     "access": "public",
@@ -639,30 +639,9 @@
   },
   {
     "__docId__": 52,
-    "kind": "variable",
-    "name": "TimerObj",
-    "memberof": "js/App.js",
-    "static": true,
-    "longname": "js/App.js~TimerObj",
-    "access": "public",
-    "export": false,
-    "importPath": "cse110-w21-group28/js/App.js",
-    "importStyle": null,
-    "description": null,
-    "lineNumber": 7,
-    "undocument": true,
-    "type": {
-      "types": [
-        "js/Timer/Timer.js~Timer"
-      ]
-    },
-    "ignore": true
-  },
-  {
-    "__docId__": 53,
     "kind": "file",
     "name": "js/Timer/Timer.js",
-    "content": "import { workMode, shortBreakMode, longBreakMode } from './TimerModes.js';\n\n/**\n * A class for the Timer object. Has functions to start the timer,\n * display the current mode of the timer and display the time remaining\n */\nclass Timer {\n  /**\n   * Constructor of Time Object. Takes the HTML element of where\n   * you want the time and the status of the timer to be implemented.\n   * HTML Elements must have the 'textElement' attribute.\n   * @param {HTMLElement} startButton\n   * @param {HTMLElement} displayTime\n   * @param {HTMLElement} displayStatus\n   */\n  constructor(startButton, displayTime, displayStatus) {\n    /**\n     * State of the timer (the current mode)\n     * @type {String}\n     */\n    this.state = '';\n    /**\n     * Queue that stores the Session objects. Rotates to provide\n     * rotation functionality for the timer\n     * @type {Array[Object]}\n     * @property {String} object.name\n     * @property {Number} object.duration\n     */\n    this.stateQueue = [];\n    /**\n     * HTML Tag that is reponsible for controlling the timer\n     * @type {HTMLElement}\n     */\n    this.startButton = startButton;\n    /**\n     * HTML Tag that is reponsible for displaying the time remaining\n     * @type {HTMLElement}\n     */\n    this.displayTime = displayTime;\n    /**\n     * HTML Tag that is reponsible for displaying the mode of the timer\n     * @type {HTMLElement}\n     */\n    this.displayStatus = displayStatus;\n\n    // this is the order for the timer. It will loop in this order.\n    const workOrder = [workMode, shortBreakMode, workMode,\n      shortBreakMode, workMode, shortBreakMode, workMode, longBreakMode];\n    for (let i = 0; i < workOrder.length; i += 1) {\n      this.stateQueue.push(workOrder[i]);\n    }\n\n    this.addEventListeners();\n  }\n\n  /**\n   * Function that fires when the timer runs out of time.\n   * Moves on to start the timer again at the end of the function.\n   */\n  onTimerComplete() {\n    const completedSession = this.stateQueue.shift();\n    this.stateQueue.push(completedSession);\n    this.startTimer();\n  }\n\n  /**\n   * Starts the timer for the session at the top of the queue.\n   * Updates the display for the status.\n   */\n  startTimer() {\n    const session = this.stateQueue[0];\n    this.state = session.name;\n    this.displayStatus.textContent = this.state;\n    this.countdown(session.duration * 60);\n  }\n\n  /**\n   * Counts down the timer for duration amount of minutes.\n   * Updates the DOM with current time remaining.\n   * @param {Number} duration\n   */\n  countdown(duration) {\n    const minutes = Math.floor(duration / 60);\n    const seconds = duration % 60;\n    let displayString = '';\n    if (seconds < 10) {\n      displayString = `${minutes}:0${seconds}`;\n    } else {\n      displayString = `${minutes}:${seconds}`;\n    }\n    this.displayTime.textContent = displayString;\n    duration -= 1;\n    if (duration >= 0) {\n      setTimeout(() => {\n        this.countdown(duration);\n      }, 1000);\n    } else {\n      this.onTimerComplete();\n    }\n  }\n\n  addEventListeners() {\n    this.startButton.addEventListener('click', () => {\n      if (this.startButton.innerText === 'Start') {\n        this.startButton.innerText = 'End Session';\n        this.startButton.style.backgroundColor = 'Red';\n        this.startTimer();\n      } else {\n        this.startButton.innerText = 'Start';\n        this.startButton.style.backgroundColor = 'Green';\n      }\n    });\n  }\n}\n\nexport { Timer };\n",
+    "content": "import { workMode, shortBreakMode, longBreakMode } from './TimerModes.js';\nimport { classNames, innerText } from './TimerHTML.js';\n\n/**\n * A class for the Timer object. Has functions to start the timer,\n * display the current mode of the timer and display the time remaining\n */\nclass Timer {\n  /**\n   * Constructor of Time Object. Takes the HTML element of where\n   * you want the time and the status of the timer to be implemented.\n   * HTML Elements must have the 'textElement' attribute.\n   * @param {HTMLElement} startButton\n   * @param {HTMLElement} displayTime\n   * @param {HTMLElement} displayStatus\n   */\n  constructor(startButton, displayTime, displayStatus) {\n    /**\n     * State of the timer (the current mode)\n     * @type {String}\n     */\n    this.state = '';\n    /**\n     * Queue that stores the Session objects. Rotates to provide\n     * rotation functionality for the timer\n     * @type {Array[Object]}\n     * @property {String} object.name\n     * @property {Number} object.duration\n     */\n    this.stateQueue = [];\n    /**\n     * HTML Tag that is reponsible for controlling the timer\n     * @type {HTMLElement}\n     */\n    this.startButton = startButton;\n    /**\n     * HTML Tag that is reponsible for displaying the time remaining\n     * @type {HTMLElement}\n     */\n    this.displayTime = displayTime;\n    /**\n     * HTML Tag that is reponsible for displaying the mode of the timer\n     * @type {HTMLElement}\n     */\n    this.displayStatus = displayStatus;\n\n    // this is the order for the timer. It will loop in this order.\n    const workOrder = [workMode, shortBreakMode, workMode,\n      shortBreakMode, workMode, shortBreakMode, workMode, longBreakMode];\n    for (let i = 0; i < workOrder.length; i += 1) {\n      this.stateQueue.push(workOrder[i]);\n    }\n\n    this.addEventListeners();\n  }\n\n  /**\n   * Function that fires when the timer runs out of time.\n   * Moves on to start the timer again at the end of the function.\n   */\n  onTimerComplete() {\n    const completedSession = this.stateQueue.shift();\n    this.stateQueue.push(completedSession);\n    this.startTimer();\n  }\n\n  /**\n   * Starts the timer for the session at the top of the queue.\n   * Updates the display for the status.\n   */\n  startTimer() {\n    const session = this.stateQueue[0];\n    this.state = session.name;\n    this.displayStatus.textContent = this.state;\n    this.countdown(session.duration * 60);\n  }\n\n  /**\n   * Counts down the timer for duration amount of minutes.\n   * Updates the DOM with current time remaining.\n   * @param {Number} duration\n   */\n  countdown(duration) {\n    const minutes = Math.floor(duration / 60);\n    const seconds = duration % 60;\n    let displayString = '';\n    if (seconds < 10) {\n      displayString = `${minutes}:0${seconds}`;\n    } else {\n      displayString = `${minutes}:${seconds}`;\n    }\n    this.displayTime.textContent = displayString;\n    duration -= 1;\n    if (duration >= 0) {\n      setTimeout(() => {\n        this.countdown(duration);\n      }, 1000);\n    } else {\n      this.onTimerComplete();\n    }\n  }\n\n  /**\n   * Adds event listener to the start button that was added\n   */\n  addEventListeners() {\n    this.startButton.addEventListener('click', () => {\n      if (this.startButton.textContent === innerText.startTimerText) {\n        this.startButton.textContent = innerText.stopTimerText;\n        this.startButton.class = classNames.stopButton;\n        this.startTimer();\n      } else {\n        this.startButton.textContent = innerText.startTimerText;\n        this.startButton.class = classNames.startButton;\n      }\n    });\n  }\n}\n\nexport { Timer };\n",
     "static": true,
     "longname": "/home/anshul/anshul/Development/cse110-w21-group28/js/Timer/Timer.js",
     "access": "public",
@@ -670,7 +649,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 54,
+    "__docId__": 53,
     "kind": "class",
     "name": "Timer",
     "memberof": "js/Timer/Timer.js",
@@ -681,11 +660,11 @@
     "importPath": "cse110-w21-group28/js/Timer/Timer.js",
     "importStyle": "{Timer}",
     "description": "A class for the Timer object. Has functions to start the timer,\ndisplay the current mode of the timer and display the time remaining",
-    "lineNumber": 7,
+    "lineNumber": 8,
     "interface": false
   },
   {
-    "__docId__": 55,
+    "__docId__": 54,
     "kind": "constructor",
     "name": "constructor",
     "memberof": "js/Timer/Timer.js~Timer",
@@ -695,7 +674,7 @@
     "longname": "js/Timer/Timer.js~Timer#constructor",
     "access": "public",
     "description": "Constructor of Time Object. Takes the HTML element of where\nyou want the time and the status of the timer to be implemented.\nHTML Elements must have the 'textElement' attribute.",
-    "lineNumber": 16,
+    "lineNumber": 17,
     "params": [
       {
         "nullable": null,
@@ -730,7 +709,7 @@
     ]
   },
   {
-    "__docId__": 56,
+    "__docId__": 55,
     "kind": "member",
     "name": "state",
     "memberof": "js/Timer/Timer.js~Timer",
@@ -738,7 +717,7 @@
     "longname": "js/Timer/Timer.js~Timer#state",
     "access": "public",
     "description": "State of the timer (the current mode)",
-    "lineNumber": 21,
+    "lineNumber": 22,
     "type": {
       "nullable": null,
       "types": [
@@ -749,7 +728,7 @@
     }
   },
   {
-    "__docId__": 57,
+    "__docId__": 56,
     "kind": "member",
     "name": "stateQueue",
     "memberof": "js/Timer/Timer.js~Timer",
@@ -757,7 +736,7 @@
     "longname": "js/Timer/Timer.js~Timer#stateQueue",
     "access": "public",
     "description": "Queue that stores the Session objects. Rotates to provide\nrotation functionality for the timer",
-    "lineNumber": 29,
+    "lineNumber": 30,
     "properties": [
       {
         "nullable": null,
@@ -790,7 +769,7 @@
     }
   },
   {
-    "__docId__": 58,
+    "__docId__": 57,
     "kind": "member",
     "name": "startButton",
     "memberof": "js/Timer/Timer.js~Timer",
@@ -798,7 +777,26 @@
     "longname": "js/Timer/Timer.js~Timer#startButton",
     "access": "public",
     "description": "HTML Tag that is reponsible for controlling the timer",
-    "lineNumber": 34,
+    "lineNumber": 35,
+    "type": {
+      "nullable": null,
+      "types": [
+        "HTMLElement"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 58,
+    "kind": "member",
+    "name": "displayTime",
+    "memberof": "js/Timer/Timer.js~Timer",
+    "static": false,
+    "longname": "js/Timer/Timer.js~Timer#displayTime",
+    "access": "public",
+    "description": "HTML Tag that is reponsible for displaying the time remaining",
+    "lineNumber": 40,
     "type": {
       "nullable": null,
       "types": [
@@ -811,13 +809,13 @@
   {
     "__docId__": 59,
     "kind": "member",
-    "name": "displayTime",
+    "name": "displayStatus",
     "memberof": "js/Timer/Timer.js~Timer",
     "static": false,
-    "longname": "js/Timer/Timer.js~Timer#displayTime",
+    "longname": "js/Timer/Timer.js~Timer#displayStatus",
     "access": "public",
-    "description": "HTML Tag that is reponsible for displaying the time remaining",
-    "lineNumber": 39,
+    "description": "HTML Tag that is reponsible for displaying the mode of the timer",
+    "lineNumber": 45,
     "type": {
       "nullable": null,
       "types": [
@@ -829,25 +827,6 @@
   },
   {
     "__docId__": 60,
-    "kind": "member",
-    "name": "displayStatus",
-    "memberof": "js/Timer/Timer.js~Timer",
-    "static": false,
-    "longname": "js/Timer/Timer.js~Timer#displayStatus",
-    "access": "public",
-    "description": "HTML Tag that is reponsible for displaying the mode of the timer",
-    "lineNumber": 44,
-    "type": {
-      "nullable": null,
-      "types": [
-        "HTMLElement"
-      ],
-      "spread": false,
-      "description": null
-    }
-  },
-  {
-    "__docId__": 61,
     "kind": "method",
     "name": "onTimerComplete",
     "memberof": "js/Timer/Timer.js~Timer",
@@ -857,12 +836,12 @@
     "longname": "js/Timer/Timer.js~Timer#onTimerComplete",
     "access": "public",
     "description": "Function that fires when the timer runs out of time.\nMoves on to start the timer again at the end of the function.",
-    "lineNumber": 60,
+    "lineNumber": 61,
     "params": [],
     "return": null
   },
   {
-    "__docId__": 62,
+    "__docId__": 61,
     "kind": "method",
     "name": "startTimer",
     "memberof": "js/Timer/Timer.js~Timer",
@@ -872,12 +851,12 @@
     "longname": "js/Timer/Timer.js~Timer#startTimer",
     "access": "public",
     "description": "Starts the timer for the session at the top of the queue.\nUpdates the display for the status.",
-    "lineNumber": 70,
+    "lineNumber": 71,
     "params": [],
     "return": null
   },
   {
-    "__docId__": 64,
+    "__docId__": 63,
     "kind": "method",
     "name": "countdown",
     "memberof": "js/Timer/Timer.js~Timer",
@@ -887,7 +866,7 @@
     "longname": "js/Timer/Timer.js~Timer#countdown",
     "access": "public",
     "description": "Counts down the timer for duration amount of minutes.\nUpdates the DOM with current time remaining.",
-    "lineNumber": 82,
+    "lineNumber": 83,
     "params": [
       {
         "nullable": null,
@@ -903,7 +882,7 @@
     "return": null
   },
   {
-    "__docId__": 65,
+    "__docId__": 64,
     "kind": "method",
     "name": "addEventListeners",
     "memberof": "js/Timer/Timer.js~Timer",
@@ -912,14 +891,64 @@
     "static": false,
     "longname": "js/Timer/Timer.js~Timer#addEventListeners",
     "access": "public",
-    "description": null,
-    "lineNumber": 102,
-    "undocument": true,
+    "description": "Adds event listener to the start button that was added",
+    "lineNumber": 106,
     "params": [],
     "return": null
   },
   {
+    "__docId__": 65,
+    "kind": "file",
+    "name": "js/Timer/TimerHTML.js",
+    "content": "const classNames = {\n  stopButton: 'stopTimerButton',\n  startButton: 'startTimerButton',\n};\n\nconst innerText = {\n  stopTimerText: 'End Day',\n  startTimerText: 'Start',\n};\n\nexport { classNames, innerText };\n",
+    "static": true,
+    "longname": "/home/anshul/anshul/Development/cse110-w21-group28/js/Timer/TimerHTML.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
     "__docId__": 66,
+    "kind": "variable",
+    "name": "classNames",
+    "memberof": "js/Timer/TimerHTML.js",
+    "static": true,
+    "longname": "js/Timer/TimerHTML.js~classNames",
+    "access": "public",
+    "export": true,
+    "importPath": "cse110-w21-group28/js/Timer/TimerHTML.js",
+    "importStyle": "{classNames}",
+    "description": null,
+    "lineNumber": 1,
+    "undocument": true,
+    "type": {
+      "types": [
+        "{\"stopButton\": string, \"startButton\": string}"
+      ]
+    }
+  },
+  {
+    "__docId__": 67,
+    "kind": "variable",
+    "name": "innerText",
+    "memberof": "js/Timer/TimerHTML.js",
+    "static": true,
+    "longname": "js/Timer/TimerHTML.js~innerText",
+    "access": "public",
+    "export": true,
+    "importPath": "cse110-w21-group28/js/Timer/TimerHTML.js",
+    "importStyle": "{innerText}",
+    "description": null,
+    "lineNumber": 6,
+    "undocument": true,
+    "type": {
+      "types": [
+        "{\"stopTimerText\": string, \"startTimerText\": string}"
+      ]
+    }
+  },
+  {
+    "__docId__": 68,
     "kind": "file",
     "name": "js/Timer/TimerModes.js",
     "content": "// these are all variables for the Timer. Changing these will change them universally\n\nconst workMode = {\n  name: 'Working Time',\n  duration: 25,\n};\nconst shortBreakMode = {\n  name: 'Short Break',\n  duration: 5,\n};\n\nconst longBreakMode = {\n  name: 'Long Break',\n  duration: 15,\n};\n\nexport { workMode, shortBreakMode, longBreakMode };\n",
@@ -930,7 +959,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 67,
+    "__docId__": 69,
     "kind": "variable",
     "name": "workMode",
     "memberof": "js/Timer/TimerModes.js",
@@ -950,7 +979,7 @@
     }
   },
   {
-    "__docId__": 68,
+    "__docId__": 70,
     "kind": "variable",
     "name": "shortBreakMode",
     "memberof": "js/Timer/TimerModes.js",
@@ -970,7 +999,7 @@
     }
   },
   {
-    "__docId__": 69,
+    "__docId__": 71,
     "kind": "variable",
     "name": "longBreakMode",
     "memberof": "js/Timer/TimerModes.js",
@@ -988,37 +1017,6 @@
         "{\"name\": string, \"duration\": number}"
       ]
     }
-  },
-  {
-    "__docId__": 70,
-    "kind": "file",
-    "name": "js/Timer/changeDom.js",
-    "content": "import { Timer } from './Timer.js';\n\n/**\n * Start Button\n * When Clicked, start timer. Switches Text from Start --> End Session (vice versa).\n */\nconst TimerObj = new Timer(document.getElementById('timeDisplay'), document.getElementById('modeDisplay'));\n// this starts the Timer on click & switches text from 'Start' <--> ' End Session '\ndocument.getElementById('startTimer').addEventListener('click', () => {\n  // if button is a start button:\n  if (document.getElementById('startTimer').innerHTML === 'Start') {\n    document.getElementById('startTimer').innerHTML = 'End Session';\n    document.getElementById('startTimer').style.backgroundColor = 'Grey';\n    TimerObj.startTimer();\n  } else {\n    // switches from end button to start button\n    document.getElementById('startTimer').innerText = 'Start';\n    document.getElementById('startTimer').style.backgroundColor = 'Green';\n  }\n});\n",
-    "static": true,
-    "longname": "/home/anshul/anshul/Development/cse110-w21-group28/js/Timer/changeDom.js",
-    "access": "public",
-    "description": null,
-    "lineNumber": 1
-  },
-  {
-    "__docId__": 71,
-    "kind": "variable",
-    "name": "TimerObj",
-    "memberof": "js/Timer/changeDom.js",
-    "static": true,
-    "longname": "js/Timer/changeDom.js~TimerObj",
-    "access": "public",
-    "export": false,
-    "importPath": "cse110-w21-group28/js/Timer/changeDom.js",
-    "importStyle": null,
-    "description": "Start Button\nWhen Clicked, start timer. Switches Text from Start --> End Session (vice versa).",
-    "lineNumber": 7,
-    "type": {
-      "types": [
-        "js/Timer/Timer.js~Timer"
-      ]
-    },
-    "ignore": true
   },
   {
     "kind": "index",
@@ -1040,7 +1038,7 @@
     "__docId__": 72,
     "kind": "testFile",
     "name": "tests/timer.test.js",
-    "content": "import { Timer } from '../js/Timer/Timer';\nimport { workMode, shortBreakMode, longBreakMode } from '../js/Timer/TimerModes';\n\nbeforeEach(() => {\n  jest.useFakeTimers();\n  jest.clearAllTimers();\n});\n\ntest('Test Initial State is Nothing', () => {\n  const TimerObj = new Timer(null, null);\n  expect(TimerObj.state).toBe('');\n});\n\ntest('Test First Iteration of Timer', () => {\n  document.body.innerHTML = '<div>'\n  + '  <p id=\"displayTime\"></p>'\n  + ' <p id=\"displayStatus\"></p>'\n  + '</div>';\n\n  const displayTime = document.getElementById('displayTime');\n  const displayStatus = document.getElementById('displayStatus');\n  const TimerObj = new Timer(displayTime, displayStatus);\n  TimerObj.startTimer();\n  expect(TimerObj.state).toBe(workMode.name);\n});\n\ntest('Test That Queue Gets Updated During Second Iteration Of Timer', () => {\n  document.body.innerHTML = '<div>'\n  + '  <p id=\"displayTime\"></p>'\n  + ' <p id=\"displayStatus\"></p>'\n  + '</div>';\n\n  const displayTime = document.getElementById('displayTime');\n  const displayStatus = document.getElementById('displayStatus');\n  const TimerObj = new Timer(displayTime, displayStatus);\n  jest.clearAllTimers();\n  TimerObj.startTimer();\n\n  jest.advanceTimersByTime(workMode.duration * 60 * 1000);\n\n  expect(TimerObj.stateQueue[0]).toBe(shortBreakMode);\n  expect(TimerObj.stateQueue[6]).toBe(longBreakMode);\n});\n\ntest('Test That HTML Gets Updated During Second ', () => {\n  document.body.innerHTML = '<div>'\n  + '  <p id=\"displayTime\"></p>'\n  + ' <p id=\"displayStatus\"></p>'\n  + '</div>';\n\n  const displayTime = document.getElementById('displayTime');\n  const displayStatus = document.getElementById('displayStatus');\n  const TimerObj = new Timer(displayTime, displayStatus);\n  jest.clearAllTimers();\n  TimerObj.startTimer();\n\n  jest.advanceTimersByTime(workMode.duration * 60 * 1000);\n\n  expect(displayStatus.textContent).toBe(shortBreakMode.name);\n  expect(displayTime.textContent).toBe(`${shortBreakMode.duration}:00`);\n});\n",
+    "content": "import { Timer } from '../js/Timer/Timer';\nimport { workMode, shortBreakMode, longBreakMode } from '../js/Timer/TimerModes';\nimport { classNames, innerText } from '../js/Timer/TimerHTML';\n\nbeforeEach(() => {\n  document.body.innerHTML = '<div>'\n  + '  <p id=\"displayTime\"></p>'\n  + ' <p id=\"displayStatus\"></p>'\n  + '<button id=start>Start</button>'\n  + '</div>';\n  jest.useFakeTimers();\n  jest.clearAllTimers();\n});\n\ntest('Test Initial State is Nothing', () => {\n  const button = document.getElementById('start');\n  const TimerObj = new Timer(button, null, null);\n  expect(TimerObj.state).toBe('');\n});\n\ntest('Test First Iteration of Timer', () => {\n  const displayTime = document.getElementById('displayTime');\n  const displayStatus = document.getElementById('displayStatus');\n  const button = document.getElementById('start');\n  const TimerObj = new Timer(button, displayTime, displayStatus);\n  TimerObj.startTimer();\n  expect(TimerObj.state).toBe(workMode.name);\n});\n\ntest('Test That Queue Gets Updated During Second Iteration Of Timer', () => {\n  const displayTime = document.getElementById('displayTime');\n  const displayStatus = document.getElementById('displayStatus');\n  const button = document.getElementById('start');\n  const TimerObj = new Timer(button, displayTime, displayStatus);\n  jest.clearAllTimers();\n  TimerObj.startTimer();\n\n  jest.advanceTimersByTime(workMode.duration * 60 * 1000);\n\n  expect(TimerObj.stateQueue[0]).toBe(shortBreakMode);\n  expect(TimerObj.stateQueue[6]).toBe(longBreakMode);\n});\n\ntest('Test That HTML Gets Updated During Second ', () => {\n  const displayTime = document.getElementById('displayTime');\n  const displayStatus = document.getElementById('displayStatus');\n  const button = document.getElementById('start');\n  const TimerObj = new Timer(button, displayTime, displayStatus);\n  jest.clearAllTimers();\n  TimerObj.startTimer();\n\n  jest.advanceTimersByTime(workMode.duration * 60 * 1000);\n\n  expect(displayStatus.textContent).toBe(shortBreakMode.name);\n  expect(displayTime.textContent).toBe(`${shortBreakMode.duration}:00`);\n});\n\ntest('Test That Start Button Functions Properly ', () => {\n  const displayTime = document.getElementById('displayTime');\n  const displayStatus = document.getElementById('displayStatus');\n  const button = document.getElementById('start');\n  const TimerObj = new Timer(button, displayTime, displayStatus);\n  jest.clearAllTimers();\n  button.click();\n  expect(button.textContent).toBe(innerText.stopTimerText);\n  expect(button.class).toBe(classNames.stopButton);\n});\n",
     "static": true,
     "longname": "/home/anshul/anshul/Development/cse110-w21-group28/tests/timer.test.js",
     "access": null,
@@ -1058,7 +1056,7 @@
     "longname": "tests/timer.test.js~test0",
     "access": null,
     "description": "Test Initial State is Nothing",
-    "lineNumber": 9
+    "lineNumber": 15
   },
   {
     "__docId__": 74,
@@ -1071,7 +1069,7 @@
     "longname": "tests/timer.test.js~test1",
     "access": null,
     "description": "Test First Iteration of Timer",
-    "lineNumber": 14
+    "lineNumber": 21
   },
   {
     "__docId__": 75,
@@ -1084,7 +1082,7 @@
     "longname": "tests/timer.test.js~test2",
     "access": null,
     "description": "Test That Queue Gets Updated During Second Iteration Of Timer",
-    "lineNumber": 27
+    "lineNumber": 30
   },
   {
     "__docId__": 76,
@@ -1097,6 +1095,19 @@
     "longname": "tests/timer.test.js~test3",
     "access": null,
     "description": "Test That HTML Gets Updated During Second ",
-    "lineNumber": 45
+    "lineNumber": 44
+  },
+  {
+    "__docId__": 77,
+    "kind": "test",
+    "name": "test4",
+    "testId": 4,
+    "memberof": "tests/timer.test.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "tests/timer.test.js~test4",
+    "access": null,
+    "description": "Test That Start Button Functions Properly ",
+    "lineNumber": 58
   }
 ]
