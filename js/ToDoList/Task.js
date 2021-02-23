@@ -84,6 +84,9 @@ class Task extends HTMLTableRowElement {
     this.appendChild(deleteBtn);
   }
 
+  /**
+   * When delete button is clicked, also remove from local data
+   */
   removeFromLocalStorage(id) {
     for (let i = 0; i < window.localData.length; i += 1) {
       if (window.localData[i][TaskStorage.idIndex] == id) {
@@ -129,6 +132,9 @@ class Task extends HTMLTableRowElement {
     this.updateLocalStorage();
   }
 
+  /**
+   * This updates the localStorage whenever session increases or checked off
+   */
   updateLocalStorage() {
     for (let i = 0; i < window.localData.length; i += 1) {
       if (window.localData[i][TaskStorage.idIndex] == this.id) {

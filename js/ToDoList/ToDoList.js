@@ -20,6 +20,9 @@ class ToDoList {
    * @description - Verifies that incoming parameters are non-empty and defined, then creates Task
    * @param {String} name - Task subject
    * @param {Number} totalSession - Projected number of Pomo Sessions
+   * @param {Number} currentSession - Completed number of Pomo Sessions, if from local
+   * @param {Boolean} checked - Whether the task has been checked, if from local
+   * @param {Boolean} fromLocal - Whether the task is added from local storage, to prevent infinite loop.
    *
    * @returns {Task} Task object to be placed into DOM
    *
@@ -50,19 +53,18 @@ class ToDoList {
       task.checkOffTask();
     }
     this.idCounter += 1;
-    this.addToTaskList(task, fromLocal);
-    return task;
-  }
-
-  addToTaskList(task, fromLocal = false) {
     this.taskList.push(task);
     let arr = [task.id, task.name, task.totalSessions, task.currentSessionNum, task.checked];
     if(!fromLocal){
       window.localData.push(arr);
       this.updateLocalStorage();
     }
+    return task;
   }
 
+  /**
+   * @description - Synchronize window.localData and localStorage
+   */
   updateLocalStorage(){
     console.log("setting localStorage", window.localData);
     localStorage.setItem('tasks', JSON.stringify(window.localData));

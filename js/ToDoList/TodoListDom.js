@@ -34,13 +34,16 @@ class TodoListDom {
     this.renderLocalStorage();
   }
 
+/**
+ * Iterate each local tasks and render them
+ */
   renderLocalStorage() {
       for(let i = 0; i < window.localData.length; i++){
         let name = window.localData[i][TaskStorage.nameIndex];
-        let totalSessions = window.localData[i][TaskStorage.totalSessionIndex];
-        let currentSessions = window.localData[i][TaskStorage.currentSessionIndex];
+        let totalSession = window.localData[i][TaskStorage.totalSessionIndex];
+        let currentSession = window.localData[i][TaskStorage.currentSessionIndex];
         let completed = window.localData[i][TaskStorage.checkedIndex]
-        this.renderTask(name, totalSessions, currentSessions, completed, true);
+        this.renderTask(name, totalSession, currentSession, completed, true);
       }
     }
 
@@ -61,8 +64,15 @@ class TodoListDom {
     });
   }
 
-  renderTask(name, totalSessions, currentSession = 0, checked = false, fromLocal = false){
-    const task = this.todoList.addTask(name, totalSessions, currentSession, checked, fromLocal);
+  /**
+   * @param {String} name
+   * @param {Number} totalSession
+   * @param {Number} currentSession
+   * @param {Boolean} checked
+   * @param {Noolean} fromLocal   
+   */
+  renderTask(name, totalSession, currentSession = 0, checked = false, fromLocal = false){
+    const task = this.todoList.addTask(name, totalSession, currentSession, checked, fromLocal);
     this.displayTask(task);
   }
   /**

@@ -2,7 +2,15 @@ import { TodoListDom } from './ToDoList/TodoListDom.js';
 import { Timer } from './Timer/Timer.js';
 import { workMode } from './Timer/TimerModes.js';
 
+window.localData = [];
 
+if (localStorage.getItem('tasks') !== null) {
+  window.localData = JSON.parse(localStorage.getItem('tasks'));
+  for(let i = 0; i < window.localData.length; i++) {
+    window.localData[i][0] = i;
+  }
+  console.log("local data ", window.localData);
+}
 
 
 const timeDisplay = document.getElementById('timeDisplay');
@@ -12,28 +20,8 @@ const addTodoForm = document.getElementById('add-todo');
 const addTodoButton = document.getElementById('add-button');
 const startTimerButton = document.getElementById('startTimer');
 const TimerObj = new Timer(timeDisplay, modeDisplay);
-let TDLDom;
+const TDLDom = new TodoListDom(todoTable, addTodoForm, addTodoButton);
 
-window.localData = [];
-
-function first() {
-  return new Promise((resolve) => {
-      if (localStorage.getItem('tasks') !== null) {
-        window.localData = JSON.parse(localStorage.getItem('tasks'));
-        for(let i = 0; i < window.localData.length; i++) {
-          window.localData[i][0] = i;
-        }
-        console.log("local data found, ", window.localData);
-      }
-      resolve();
-  });
-}
-
-function second() {
-   TDLDom = new TodoListDom(todoTable, addTodoForm, addTodoButton);
-}
-
-first().then(second); // 1 -> 2
 
 
 startTimerButton.addEventListener('click', () => {
