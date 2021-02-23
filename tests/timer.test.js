@@ -1,6 +1,6 @@
 import { Timer } from '../js/Timer/Timer';
 import {
-  workMode, shortBreakMode, longBreakMode, classNames, innerText,
+  workMode, shortBreakMode, longBreakMode, classNames, buttonText,
 } from '../js/Timer/TimerVariables';
 
 beforeEach(() => {
@@ -75,6 +75,6 @@ test('Test That Clicking Start Twice Changes HTML ', () => {
   jest.clearAllTimers();
   button.click();
   button.click();
-  expect(button.textContent).toBe(innerText.startTimerText);
+  expect(button.textContent).toBe(buttonText.startTimerText);
   expect(button.class).toBe(classNames.startButton);
 });
