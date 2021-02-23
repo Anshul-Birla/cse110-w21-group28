@@ -19,11 +19,11 @@ const classNames = {
   startButton: 'startTimerButton',
 };
 
-const innerText = {
+const buttonText = {
   stopTimerText: 'End Day',
   startTimerText: 'Start',
 };
 
 export {
-  workMode, shortBreakMode, longBreakMode, classNames, innerText,
+  workMode, shortBreakMode, longBreakMode, classNames, buttonText,
 };
