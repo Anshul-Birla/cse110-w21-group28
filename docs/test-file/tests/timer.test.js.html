@@ -41,8 +41,10 @@
 
 <div class="content" data-ice="content"><h1 data-ice="title">tests/timer.test.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { Timer } from &apos;../js/Timer/Timer&apos;;
-import { workMode, shortBreakMode, longBreakMode } from &apos;../js/Timer/TimerModes&apos;;
-import { classNames, innerText } from &apos;../js/Timer/TimerHTML&apos;;
+import {
+  workMode, shortBreakMode, longBreakMode, classNames, innerText,
+} from &apos;../js/Timer/TimerVariables&apos;;
+
 
 beforeEach(() =&gt; {
   document.body.innerHTML = &apos;&lt;div&gt;&apos;
@@ -106,6 +108,18 @@ test(&apos;Test That Start Button Functions Properly &apos;, () =&gt; {
   button.click();
   expect(button.textContent).toBe(innerText.stopTimerText);
   expect(button.class).toBe(classNames.stopButton);
+});
+
+test(&apos;Test That Clicking Start Twice Changes HTML &apos;, () =&gt; {
+  const displayTime = document.getElementById(&apos;displayTime&apos;);
+  const displayStatus = document.getElementById(&apos;displayStatus&apos;);
+  const button = document.getElementById(&apos;start&apos;);
+  const TimerObj = new Timer(button, displayTime, displayStatus);
+  jest.clearAllTimers();
+  button.click();
+  button.click();
+  expect(button.textContent).toBe(innerText.startTimerText);
+  expect(button.class).toBe(classNames.startButton);
 });
 </code></pre>
 

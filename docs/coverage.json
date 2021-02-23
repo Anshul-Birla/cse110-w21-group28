@@ -17,21 +17,15 @@
       "actualCount": 11,
       "undocumentLines": []
     },
-    "js/Timer/TimerHTML.js": {
-      "expectCount": 2,
-      "actualCount": 0,
-      "undocumentLines": [
-        1,
-        6
-      ]
-    },
-    "js/Timer/TimerModes.js": {
-      "expectCount": 3,
+    "js/Timer/TimerVariables.js": {
+      "expectCount": 5,
       "actualCount": 0,
       "undocumentLines": [
         3,
         7,
-        12
+        12,
+        17,
+        22
       ]
     }
   }
