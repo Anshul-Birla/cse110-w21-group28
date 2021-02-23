@@ -8,7 +8,7 @@ import { TaskStorage } from './TodoListDomVariables.js';
  */
 class Task extends HTMLTableRowElement {
   /**
-  * Task construcutor. Initializes the task with appropriate attributes
+  * Task constructor. Initializes the task with appropriate attributes
   * @param {String} id
   * @param {String} name
   * @param {Number} totalSessions
@@ -98,6 +98,7 @@ class Task extends HTMLTableRowElement {
     console.log(id, window.localData);
     localStorage.setItem('tasks', JSON.stringify(window.localData));
   }
+
   /**
    * Update method to edit task name
    */

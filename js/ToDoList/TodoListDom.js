@@ -65,11 +65,12 @@ class TodoListDom {
   }
 
   /**
+   * create a task and add it to todoList and the DOM.
    * @param {String} name
    * @param {Number} totalSession
    * @param {Number} currentSession
    * @param {Boolean} checked
-   * @param {Noolean} fromLocal   
+   * @param {Noolean} fromLocal
    */
   renderTask(name, totalSession, currentSession = 0, checked = false, fromLocal = false){
     const task = this.todoList.addTask(name, totalSession, currentSession, checked, fromLocal);
