@@ -23,7 +23,7 @@ If there are any rules your turned off on the linter, write them below
 - TODO 
   
 ### Reviewers 
-Please checkout the branch and try to find bugs that may have slipped through. Check for confusing code, excessive anonymous functions ( should be short 2-3 line functions if anonymous ), and peformance of the website. 
+Please checkout the branch and try to find bugs that may have slipped through. Check for confusing code, excessive anonymous functions ( should be short 2-3 line functions if anonymous ), and peformance of the website. Check for consistency of code style. 
 
 
 

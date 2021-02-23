@@ -1,0 +1,45 @@
+body {
+  background-color: bisque;
+}
+
+header {
+  background-color: paleturquoise;
+}
+
+#timer {
+  height: 30vh;
+  width: 40vw;
+  background-color: darkgoldenrod;
+}
+
+#countdown {
+  font-size: xx-large;
+  text-align: center;
+}
+
+#distractionButton {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+#startButton {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+#tasklist {
+  height: 60vh;
+  width: 40vw;
+  background-color: slategrey;
+}
+
+.icons {
+  float: right;
+}
+
+.section_container {
+  position: relative;
+  margin: auto;
+}

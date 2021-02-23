@@ -1,4 +1,4 @@
-import { classNames } from './TaskVariables';
+import { classNames } from './TaskVariables.js';
 
 /**
  * Task object, stores its id, task name, total expected Pomo Sessions to complete the Task,
@@ -115,7 +115,6 @@ class Task extends HTMLTableRowElement {
   checkOffTask() {
     this.checked = true;
     this.setAttribute('class', classNames.completedTaskClassName);
-    this.checkBox.checked = true;
   }
 }
 
