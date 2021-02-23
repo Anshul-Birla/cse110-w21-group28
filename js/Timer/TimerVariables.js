@@ -24,4 +24,6 @@ const innerText = {
   startTimerText: 'Start',
 };
 
-export { workMode, shortBreakMode, longBreakMode, classNames, innerText};
+export {
+  workMode, shortBreakMode, longBreakMode, classNames, innerText,
+};
