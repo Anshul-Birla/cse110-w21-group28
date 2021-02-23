@@ -1,6 +1,8 @@
 import { Timer } from '../js/Timer/Timer';
-import { workMode, shortBreakMode, longBreakMode } from '../js/Timer/TimerModes';
-import { classNames, innerText } from '../js/Timer/TimerHTML';
+import {
+  workMode, shortBreakMode, longBreakMode, classNames, innerText,
+} from '../js/Timer/TimerVariables';
+
 
 beforeEach(() => {
   document.body.innerHTML = '<div>'

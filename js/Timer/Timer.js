@@ -1,6 +1,6 @@
-import { workMode, shortBreakMode, longBreakMode } from './TimerModes.js';
-import { classNames, innerText } from './TimerHTML.js';
-
+import {
+  workMode, shortBreakMode, longBreakMode, classNames, innerText 
+} from './TimerVariables.js';
 /**
  * A class for the Timer object. Has functions to start the timer,
  * display the current mode of the timer and display the time remaining
