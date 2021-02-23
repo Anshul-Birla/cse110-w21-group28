@@ -67,3 +67,15 @@ test('Test That Start Button Functions Properly ', () => {
   expect(button.textContent).toBe(innerText.stopTimerText);
   expect(button.class).toBe(classNames.stopButton);
 });
+
+test('Test That Clicking Start Twice Changes HTML ', () => {
+  const displayTime = document.getElementById('displayTime');
+  const displayStatus = document.getElementById('displayStatus');
+  const button = document.getElementById('start');
+  const TimerObj = new Timer(button, displayTime, displayStatus);
+  jest.clearAllTimers();
+  button.click();
+  button.click();
+  expect(button.textContent).toBe(innerText.startTimerText);
+  expect(button.class).toBe(classNames.startButton);
+});
