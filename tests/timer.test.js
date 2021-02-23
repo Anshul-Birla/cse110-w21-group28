@@ -3,7 +3,6 @@ import {
   workMode, shortBreakMode, longBreakMode, classNames, innerText,
 } from '../js/Timer/TimerVariables';
 
-
 beforeEach(() => {
   document.body.innerHTML = '<div>'
   + '  <p id="displayTime"></p>'
