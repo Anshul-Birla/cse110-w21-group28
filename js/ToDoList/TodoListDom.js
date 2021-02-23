@@ -1,5 +1,6 @@
 import { ToDoList } from './ToDoList.js';
 import { HTMLAttributes } from './TodoListDomVariables.js';
+import { TaskStorage } from './TodoListDomVariables.js';
 
 class TodoListDom {
   /**
@@ -30,7 +31,18 @@ class TodoListDom {
     this.table = HTMLTable;
 
     this.setupEventListeners();
+    this.renderLocalStorage();
   }
+
+  renderLocalStorage() {
+      for(let i = 0; i < window.localData.length; i++){
+        let name = window.localData[i][TaskStorage.nameIndex];
+        let totalSessions = window.localData[i][TaskStorage.totalSessionIndex];
+        let currentSessions = window.localData[i][TaskStorage.currentSessionIndex];
+        let completed = window.localData[i][TaskStorage.checkedIndex]
+        this.renderTask(name, totalSessions, currentSessions, completed, true);
+      }
+    }
 
   /**
    * Sets up the form dissapearing and submit event listeners
@@ -41,8 +53,7 @@ class TodoListDom {
       const data = new FormData(this.form);
       const name = data.get(HTMLAttributes.taskNameId);
       const sessions = parseInt(data.get(HTMLAttributes.taskPomoSessions), 10);
-      const task = this.todoList.addTask(name, sessions);
-      this.displayTask(task);
+      this.renderTask(name, sessions);
     });
 
     this.button.addEventListener('click', () => {
@@ -50,6 +61,10 @@ class TodoListDom {
     });
   }
 
+  renderTask(name, totalSessions, currentSession = 0, checked = false, fromLocal = false){
+    const task = this.todoList.addTask(name, totalSessions, currentSession, checked, fromLocal);
+    this.displayTask(task);
+  }
   /**
    * Toggles the visibility of the add task form depending
    * on the text contained in the button

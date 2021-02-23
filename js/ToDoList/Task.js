@@ -1,4 +1,6 @@
 import { classNames } from './TaskVariables.js';
+import { ToDoList } from './ToDoList.js'
+import { TaskStorage } from './TodoListDomVariables.js';
 
 /**
  * Task object, stores its id, task name, total expected Pomo Sessions to complete the Task,
@@ -68,14 +70,31 @@ class Task extends HTMLTableRowElement {
 
   /**
    *
-   * Currently a placeholder until delete functionality happens
+   * Unable to change tasklist in ToDoList class
+   * Only changes window.Data
    */
   setupDeleteButton() {
-    const deleteBtn = document.createElement('td');
+    const item = document.createElement('td')
+    const deleteBtn = document.createElement('button');
+    deleteBtn.addEventListener('click', () => {
+      this.remove();
+      this.removeFromLocalStorage(this.id);
+    });
     deleteBtn.textContent = 'DELETE';
     this.appendChild(deleteBtn);
   }
 
+  removeFromLocalStorage(id) {
+    for (let i = 0; i < window.localData.length; i += 1) {
+      if (window.localData[i][TaskStorage.idIndex] == id) {
+        console.log("removing");
+        window.localData.splice(i, 1);
+        break;
+      }
+    }
+    console.log(id, window.localData);
+    localStorage.setItem('tasks', JSON.stringify(window.localData));
+  }
   /**
    * Update method to edit task name
    */
@@ -107,6 +126,19 @@ class Task extends HTMLTableRowElement {
     if (this.currentSessionNum === this.totalSessions) {
       this.checkOffTask();
     }
+    this.updateLocalStorage();
+  }
+
+  updateLocalStorage() {
+    for (let i = 0; i < window.localData.length; i += 1) {
+      if (window.localData[i][TaskStorage.idIndex] == this.id) {
+        console.log("updating local storage");
+        window.localData[i][TaskStorage.currentSessionIndex] = this.currentSessionNum;
+        window.localData[i][TaskStorage.checkedIndex] = this.checked;
+        break;
+      }
+    }
+    localStorage.setItem('tasks', JSON.stringify(window.localData));
   }
 
   /**
@@ -115,6 +147,7 @@ class Task extends HTMLTableRowElement {
   checkOffTask() {
     this.checked = true;
     this.setAttribute('class', classNames.completedTaskClassName);
+    this.updateLocalStorage();
   }
 }
 

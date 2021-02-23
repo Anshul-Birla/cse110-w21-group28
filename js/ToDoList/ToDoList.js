@@ -2,6 +2,7 @@ import { Task } from './Task.js';
 
 class ToDoList {
   constructor() {
+
     /**
      * Array that stores each task
      * @type {Task[]}
@@ -27,7 +28,7 @@ class ToDoList {
    * @throws {Undefiend Length Task} - Expected number of pomo sessions is undefined
    * @throws {0 Length Task} - Expected number of pomo sessions is 0
    */
-  addTask(name, totalSession) {
+  addTask(name, totalSession, currentSession = 0, checked = false, fromLocal = false) {
     if (name === undefined) {
       throw new Error('Undefined Name');
     } else if (name === '') {
@@ -41,11 +42,31 @@ class ToDoList {
     }
 
     const task = new Task(this.idCounter, name, totalSession);
+    for(let i = 0; i < currentSession; i++){
+      task.incrementSession();
+    }
+    if(checked){
+      console.log("adding checked off task");
+      task.checkOffTask();
+    }
     this.idCounter += 1;
-    this.taskList.push(task);
+    this.addToTaskList(task, fromLocal);
     return task;
   }
 
+  addToTaskList(task, fromLocal = false) {
+    this.taskList.push(task);
+    let arr = [task.id, task.name, task.totalSessions, task.currentSessionNum, task.checked];
+    if(!fromLocal){
+      window.localData.push(arr);
+      this.updateLocalStorage();
+    }
+  }
+
+  updateLocalStorage(){
+    console.log("setting localStorage", window.localData);
+    localStorage.setItem('tasks', JSON.stringify(window.localData));
+  }
   /**
    * Gets the first unchecked task
    *
