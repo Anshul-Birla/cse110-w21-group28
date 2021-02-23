@@ -7,7 +7,7 @@ body {
 }
 
 header {
-  height: auto;
+  overflow: auto;
   background-color: paleturquoise;
 }
 
