@@ -2,13 +2,7 @@ const HTMLAttributes = {
   buttonDoneTextContent: 'done',
   buttonAddTextContent: 'Add A Task',
   taskNameId: 'task-name',
-  taskPomoSessions: 'task-length'
+  taskPomoSessions: 'task-length',
 };
-const TaskStorage = {
-  idIndex: 0,
-  nameIndex: 1,
-  totalSessionIndex: 2,
-  currentSessionIndex: 3,
-  checkedIndex: 4
-}
-export { HTMLAttributes, TaskStorage };
+
+export { HTMLAttributes };

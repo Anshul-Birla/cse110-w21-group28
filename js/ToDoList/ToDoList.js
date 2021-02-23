@@ -2,7 +2,6 @@ import { Task } from './Task.js';
 
 class ToDoList {
   constructor() {
-
     /**
      * Array that stores each task
      * @type {Task[]}
@@ -20,9 +19,6 @@ class ToDoList {
    * @description - Verifies that incoming parameters are non-empty and defined, then creates Task
    * @param {String} name - Task subject
    * @param {Number} totalSession - Projected number of Pomo Sessions
-   * @param {Number} currentSession - Completed number of Pomo Sessions, if from local
-   * @param {Boolean} checked - Whether the task has been checked, if from local
-   * @param {Boolean} fromLocal - Whether the task is added from local storage, to prevent infinite loop.
    *
    * @returns {Task} Task object to be placed into DOM
    *
@@ -31,7 +27,7 @@ class ToDoList {
    * @throws {Undefiend Length Task} - Expected number of pomo sessions is undefined
    * @throws {0 Length Task} - Expected number of pomo sessions is 0
    */
-  addTask(name, totalSession, currentSession = 0, checked = false, fromLocal = false) {
+  addTask(name, totalSession) {
     if (name === undefined) {
       throw new Error('Undefined Name');
     } else if (name === '') {
@@ -45,30 +41,11 @@ class ToDoList {
     }
 
     const task = new Task(this.idCounter, name, totalSession);
-    for(let i = 0; i < currentSession; i++){
-      task.incrementSession();
-    }
-    if(checked){
-      console.log("adding checked off task");
-      task.checkOffTask();
-    }
     this.idCounter += 1;
     this.taskList.push(task);
-    let arr = [task.id, task.name, task.totalSessions, task.currentSessionNum, task.checked];
-    if(!fromLocal){
-      window.localData.push(arr);
-      this.updateLocalStorage();
-    }
     return task;
   }
 
-  /**
-   * @description - Synchronize window.localData and localStorage
-   */
-  updateLocalStorage(){
-    console.log("setting localStorage", window.localData);
-    localStorage.setItem('tasks', JSON.stringify(window.localData));
-  }
   /**
    * Gets the first unchecked task
    *

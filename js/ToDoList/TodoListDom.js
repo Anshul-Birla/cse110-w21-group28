@@ -1,6 +1,5 @@
 import { ToDoList } from './ToDoList.js';
 import { HTMLAttributes } from './TodoListDomVariables.js';
-import { TaskStorage } from './TodoListDomVariables.js';
 
 class TodoListDom {
   /**
@@ -31,31 +30,7 @@ class TodoListDom {
     this.table = HTMLTable;
 
     this.setupEventListeners();
-    this.renderLocalStorage();
   }
-
-/**
- * Fetch local storage, and store them into window.localData
- * Iterate each local tasks and render them
- */
-  renderLocalStorage() {
-      window.localData = [];
-      if (localStorage.getItem('tasks') !== null) {
-        window.localData = JSON.parse(localStorage.getItem('tasks'));
-        for(let i = 0; i < window.localData.length; i++) {
-          window.localData[i][0] = i;
-        }
-        console.log("local data ", window.localData);
-      }
-
-      for(let i = 0; i < window.localData.length; i++){
-        let name = window.localData[i][TaskStorage.nameIndex];
-        let totalSession = window.localData[i][TaskStorage.totalSessionIndex];
-        let currentSession = window.localData[i][TaskStorage.currentSessionIndex];
-        let completed = window.localData[i][TaskStorage.checkedIndex]
-        this.renderTask(name, totalSession, currentSession, completed, true);
-      }
-    }
 
   /**
    * Sets up the form dissapearing and submit event listeners
@@ -66,7 +41,8 @@ class TodoListDom {
       const data = new FormData(this.form);
       const name = data.get(HTMLAttributes.taskNameId);
       const sessions = parseInt(data.get(HTMLAttributes.taskPomoSessions), 10);
-      this.renderTask(name, sessions);
+      const task = this.todoList.addTask(name, sessions);
+      this.displayTask(task);
     });
 
     this.button.addEventListener('click', () => {
@@ -74,18 +50,6 @@ class TodoListDom {
     });
   }
 
-  /**
-   * create a task and add it to todoList and the DOM.
-   * @param {String} name
-   * @param {Number} totalSession
-   * @param {Number} currentSession
-   * @param {Boolean} checked
-   * @param {Noolean} fromLocal
-   */
-  renderTask(name, totalSession, currentSession = 0, checked = false, fromLocal = false){
-    const task = this.todoList.addTask(name, totalSession, currentSession, checked, fromLocal);
-    this.displayTask(task);
-  }
   /**
    * Toggles the visibility of the add task form depending
    * on the text contained in the button
