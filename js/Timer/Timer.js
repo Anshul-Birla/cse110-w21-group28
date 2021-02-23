@@ -1,5 +1,5 @@
 import { workMode, shortBreakMode, longBreakMode } from './TimerModes.js';
-import { classNames, innerText } from './TimerHTML.js';
+import { classNames, buttonText } from './TimerHTML.js';
 
 /**
  * A class for the Timer object. Has functions to start the timer,
@@ -105,12 +105,12 @@ class Timer {
    */
   addEventListeners() {
     this.startButton.addEventListener('click', () => {
-      if (this.startButton.textContent === innerText.startTimerText) {
-        this.startButton.textContent = innerText.stopTimerText;
+      if (this.startButton.textContent === buttonText.startTimerText) {
+        this.startButton.textContent = buttonText.stopTimerText;
         this.startButton.class = classNames.stopButton;
         this.startTimer();
       } else {
-        this.startButton.textContent = innerText.startTimerText;
+        this.startButton.textContent = buttonText.startTimerText;
         this.startButton.class = classNames.startButton;
       }
     });
