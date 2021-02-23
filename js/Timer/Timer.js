@@ -1,5 +1,5 @@
 import { workMode, shortBreakMode, longBreakMode } from './TimerModes.js';
-import { classNames, buttonText } from './TimerHTML.js';
+import { classNames, innerText } from './TimerHTML.js';
 
 /**
  * A class for the Timer object. Has functions to start the timer,

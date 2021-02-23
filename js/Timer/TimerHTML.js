@@ -3,9 +3,9 @@ const classNames = {
   startButton: 'startTimerButton',
 };
 
-const buttonText = {
+const innerText = {
   stopTimerText: 'End Day',
   startTimerText: 'Start',
 };
 
-export { classNames, buttonText };
+export { classNames, innerText };
