@@ -1,24 +1,75 @@
 <!doctype html>
 
-<html lang="en">
+<html lang='en'>
 <head>
-  <meta charset="utf-8">
-  <link rel="shortcut icon" href="#" />
+  <meta charset='utf-8'>
+  <link rel='shortcut icon' href='#' />
+  <link rel='stylesheet' href='./css/style.css' />
   <title>Pomo App</title>
 </head>
 
 <body>
+
+  <!-- Header bar at the top of the page for title text & navigation -->
   <header>
     <h1>
       Version 0 of our Pomo App
     </h1>
+    <button id='faqButton' class='icons'><a href='#FAQ'>FAQ</a></button>
+    <button id='statsButton' class='icons'><a href='#Stats'>Stats</a></button>
   </header>
-  <par>This page currently does not do much :(</par>
-  <br>
-  <br>
-  <p id="modeDisplay">Welcome!</p>
-  <p id="timeDisplay">25:00</p>
-  <button id="startTimer">Start</button>
-  <script type="module" src="./js/Timer/changeDom.js"></script>
+
+  <!-- Container for timer, timer buttons, and distraction button + prompt -->
+  <section id='timer' class='section_container'>
+    <div id='countdown'>
+      <p id='modeDisplay'> Pomo-Time!</p>
+      <p id='timeDisplay'> 25:00 </p>
+      <br>
+      <button id='startTimer' class='button'>Start</button>
+      <button id='distractionButton'>Distraction</button>
+    </div>
+  </section>
+  
+  <!-- Container for task list -->
+  <section id='tasklist' class='section_container'> 
+    <h2>To Do</h2>
+    <table id='todo'>
+      <th>
+        <td>Task</td>
+        <td>Pomos</td>
+        <td>Delete</td>
+      </th>
+      <tr>
+        <td><input type='checkbox' checked></td>
+        <td><s>Pevious task</s></td>
+        <td>(3/3)</td>
+        <td><button>x</button></td>
+      </tr>
+      <tr>
+        <td><input type='checkbox'></td>
+        <td>Current task</td>
+        <td>(2/3)</td>
+        <td><button>x</button></td>
+      </tr>
+      <tr>
+        <td><input type='checkbox'></td>
+        <td>Upcoming task</td>
+        <td>(0/3)</td>
+        <td><button>x</button></td>
+      </tr>
+    </table>
+  </section>
+
+  <!-- Linked section on page under task list for summary & statistics of work sessions -->
+  <section id='stats' class='linked_section'>
+    <h2>Stats</h2>
+  </section>
+  
+  <!-- Linked section at bottom of page under stats for FAQ and instructions on using timer -->
+  <section id='faq' class='linked_section'>
+    <h2>FAQ</h2>
+  </section>
+  <script type='module' src='./js/App.js'></script>
+
 </body>
 </html>

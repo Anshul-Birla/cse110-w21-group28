@@ -9,8 +9,8 @@ class Timer {
    * Constructor of Time Object. Takes the HTML element of where
    * you want the time and the status of the timer to be implemented.
    * HTML Elements must have the 'textElement' attribute.
-   * @param {HTML Element} displayTime
-   * @param {HTML Element} displayStatus
+   * @param {HTMLElement} displayTime
+   * @param {HTMLElement} displayStatus
    */
   constructor(displayTime, displayStatus) {
     /**
