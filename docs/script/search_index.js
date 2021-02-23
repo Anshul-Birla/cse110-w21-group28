@@ -6,62 +6,68 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
-    "cse110-w21-group28/js/timer/timerhtml.js~classnames",
+    "cse110-w21-group28/js/timer/timervariables.js~classnames",
     "variable/index.html#static-variable-classNames",
-    "<span>classNames</span> <span class=\"search-result-import-path\">cse110-w21-group28/js/Timer/TimerHTML.js</span>",
+    "<span>classNames</span> <span class=\"search-result-import-path\">cse110-w21-group28/js/Timer/TimerVariables.js</span>",
     "variable"
   ],
   [
-    "cse110-w21-group28/js/timer/timerhtml.js~innertext",
+    "cse110-w21-group28/js/timer/timervariables.js~innertext",
     "variable/index.html#static-variable-innerText",
-    "<span>innerText</span> <span class=\"search-result-import-path\">cse110-w21-group28/js/Timer/TimerHTML.js</span>",
+    "<span>innerText</span> <span class=\"search-result-import-path\">cse110-w21-group28/js/Timer/TimerVariables.js</span>",
     "variable"
   ],
   [
-    "cse110-w21-group28/js/timer/timermodes.js~longbreakmode",
+    "cse110-w21-group28/js/timer/timervariables.js~longbreakmode",
     "variable/index.html#static-variable-longBreakMode",
-    "<span>longBreakMode</span> <span class=\"search-result-import-path\">cse110-w21-group28/js/Timer/TimerModes.js</span>",
+    "<span>longBreakMode</span> <span class=\"search-result-import-path\">cse110-w21-group28/js/Timer/TimerVariables.js</span>",
     "variable"
   ],
   [
-    "cse110-w21-group28/js/timer/timermodes.js~shortbreakmode",
+    "cse110-w21-group28/js/timer/timervariables.js~shortbreakmode",
     "variable/index.html#static-variable-shortBreakMode",
-    "<span>shortBreakMode</span> <span class=\"search-result-import-path\">cse110-w21-group28/js/Timer/TimerModes.js</span>",
+    "<span>shortBreakMode</span> <span class=\"search-result-import-path\">cse110-w21-group28/js/Timer/TimerVariables.js</span>",
     "variable"
   ],
   [
-    "cse110-w21-group28/js/timer/timermodes.js~workmode",
+    "cse110-w21-group28/js/timer/timervariables.js~workmode",
     "variable/index.html#static-variable-workMode",
-    "<span>workMode</span> <span class=\"search-result-import-path\">cse110-w21-group28/js/Timer/TimerModes.js</span>",
+    "<span>workMode</span> <span class=\"search-result-import-path\">cse110-w21-group28/js/Timer/TimerVariables.js</span>",
     "variable"
   ],
   [
     "",
-    "test-file/tests/timer.test.js.html#lineNumber21",
+    "test-file/tests/timer.test.js.html#lineNumber23",
     "Test First Iteration of Timer",
     "test"
   ],
   [
     "",
-    "test-file/tests/timer.test.js.html#lineNumber15",
+    "test-file/tests/timer.test.js.html#lineNumber17",
     "Test Initial State is Nothing",
     "test"
   ],
   [
     "",
-    "test-file/tests/timer.test.js.html#lineNumber44",
+    "test-file/tests/timer.test.js.html#lineNumber71",
+    "Test That Clicking Start Twice Changes HTML ",
+    "test"
+  ],
+  [
+    "",
+    "test-file/tests/timer.test.js.html#lineNumber46",
     "Test That HTML Gets Updated During Second ",
     "test"
   ],
   [
     "",
-    "test-file/tests/timer.test.js.html#lineNumber30",
+    "test-file/tests/timer.test.js.html#lineNumber32",
     "Test That Queue Gets Updated During Second Iteration Of Timer",
     "test"
   ],
   [
     "",
-    "test-file/tests/timer.test.js.html#lineNumber58",
+    "test-file/tests/timer.test.js.html#lineNumber60",
     "Test That Start Button Functions Properly ",
     "test"
   ],
@@ -420,15 +426,9 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
-    "js/timer/timerhtml.js",
-    "file/js/Timer/TimerHTML.js.html",
-    "js/Timer/TimerHTML.js",
-    "file"
-  ],
-  [
-    "js/timer/timermodes.js",
-    "file/js/Timer/TimerModes.js.html",
-    "js/Timer/TimerModes.js",
+    "js/timer/timervariables.js",
+    "file/js/Timer/TimerVariables.js.html",
+    "js/Timer/TimerVariables.js",
     "file"
   ],
   [
