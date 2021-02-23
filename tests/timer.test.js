@@ -63,7 +63,7 @@ test('Test That Start Button Functions Properly ', () => {
   const TimerObj = new Timer(button, displayTime, displayStatus);
   jest.clearAllTimers();
   button.click();
-  expect(button.textContent).toBe(innerText.stopTimerText);
+  expect(button.textContent).toBe(buttonText.stopTimerText);
   expect(button.class).toBe(classNames.stopButton);
 });
 
