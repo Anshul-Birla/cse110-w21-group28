@@ -59,7 +59,9 @@ class Timer extends HTMLElement {
         sessionName: completedSession.name,
       },
     });
+
     this.dispatchEvent(event);
+    this.startTimer();
   }
 
   /**

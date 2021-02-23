@@ -53,7 +53,6 @@ test('Test That HTML Gets Updated During Second ', () => {
   const TimerObj = new Timer(displayTime, displayStatus);
   jest.clearAllTimers();
   TimerObj.startTimer();
-
   jest.advanceTimersByTime(workMode.duration * 60 * 1000);
 
   expect(displayStatus.textContent).toBe(shortBreakMode.name);

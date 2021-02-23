@@ -73,12 +73,8 @@ class TodoListDom {
     this.table.appendChild(newTask);
   }
 
-  /**
-   * Returns the todolist object contained inside the class
-   * @returns {ToDoList}
-   */
-  getToDoList() {
-    return this.todoList;
+  onSessionComplete() {
+    this.todoList.onSessionComplete();
   }
 }
 

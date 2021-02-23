@@ -1,3 +1,5 @@
+import { classNames } from './TaskVariables';
+
 /**
  * Task object, stores its id, task name, total expected Pomo Sessions to complete the Task,
  * the number of the current Pomo Session, and whether the task has been completed or not.
@@ -17,14 +19,17 @@ class Task extends HTMLTableRowElement {
     this.totalSessions = totalSessions;
     this.currentSessionNum = 0;
     this.checked = false;
-    this.setAttribute('class', 'notCheckedOffTask');
+    this.setAttribute('class', classNames.uncheckedTaskClassName);
 
-    this.setupCheckBox();
-    this.setupTaskText();
+    this.checkBox = this.setupCheckBox();
+    this.taskText = this.setupTaskText();
+    this.pomoSessions = this.setupTotalPomoSessions();
     this.setupDeleteButton();
-    this.setupTotalPomoSessions();
   }
 
+  /**
+   * This sets up the checkbox to check off tasks
+   */
   setupCheckBox() {
     const firstCol = document.createElement('td');
     const checkBox = document.createElement('input');
@@ -36,20 +41,29 @@ class Task extends HTMLTableRowElement {
     checkBox.addEventListener('click', () => {
       this.checkOffTask();
     });
+    return checkBox;
   }
 
+  /**
+   * This sets up the view that will display the taks name
+   */
   setupTaskText() {
     const text = document.createElement('td');
     text.setAttribute('id', `text-${this.id}`);
     this.appendChild(text);
     this.updateText();
+    return text;
   }
 
+  /**
+   * This sets up the view that will display the pomo sessions
+   */
   setupTotalPomoSessions() {
     const pomoSessions = document.createElement('td');
     pomoSessions.setAttribute('id', `pomoSessions-${this.id}`);
     this.appendChild(pomoSessions);
     this.updatePomoSessions();
+    return pomoSessions;
   }
 
   /**
@@ -62,10 +76,16 @@ class Task extends HTMLTableRowElement {
     this.appendChild(deleteBtn);
   }
 
+  /**
+   * Update method to edit task name
+   */
   updateText() {
     this.children[1].textContent = this.name;
   }
 
+  /**
+   * This updates the pomo sessions when a session is complete
+   */
   updatePomoSessions() {
     this.children[2].textContent = `[${this.currentSessionNum}/\
       ${this.totalSessions}]`;
@@ -90,11 +110,12 @@ class Task extends HTMLTableRowElement {
   }
 
   /**
-   * Mark task as completed
+   * Marks a task as completed
    */
   checkOffTask() {
     this.checked = true;
-    this.setAttribute('class', 'checkedOffTask');
+    this.setAttribute('class', classNames.completedTaskClassName);
+    this.checkBox.checked = true;
   }
 }
 

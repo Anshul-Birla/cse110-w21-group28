@@ -1,5 +1,6 @@
 import { TodoListDom } from './ToDoList/TodoListDom.js';
 import { Timer } from './Timer/Timer.js';
+import { workMode } from './Timer/TimerModes.js';
 
 const timeDisplay = document.getElementById('timeDisplay');
 const modeDisplay = document.getElementById('modeDisplay');
@@ -16,7 +17,7 @@ startTimerButton.addEventListener('click', () => {
 });
 
 TimerObj.addEventListener('timer-complete', (e) => {
-  console.log(e.detail.sessionName);
-  TimerObj.startTimer();
-
-})
+  if (e.detail.sessionName === workMode.name) {
+    TDLDom.onSessionComplete();
+  }
+});
