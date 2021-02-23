@@ -7,25 +7,54 @@ body {
 }
 
 header {
+  height: auto;
   background-color: paleturquoise;
 }
 
+.pure-button {
+  background-color: white;
+  border-radius: 5px;
+}
+
+/* header styling */
+.icon-container{
+  display: flex;
+  float: right;
+  font-size: .5em;
+  width: 100px;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.icons {
+  padding: 0;
+  margin: 5px;
+  height: 40px;
+  width: 40px;
+}
+
+.icon-container p {
+  margin: 0;
+  padding: 0;
+}
+
+.icons img {
+  position: relative;
+  top: 2px;
+}
+
+/* timer styling */
 #timerContainer {
   position: relative;
   margin: auto;
   height: 280px;
   width: 400px;
   background-color: darkgoldenrod;
-  border-radius: 5px;
+  border-radius: 10px;
 }
 
 #countdown {
   font-size: xx-large;
   text-align: center;
-}
-
-.pure-button {
-  border-radius: 5px;
 }
 
 #modeDisplay {
@@ -49,6 +78,7 @@ header {
   font-size: 40%;
 }
 
+/* tasklist styling */
 #tasklist {
   position: relative;
   margin: auto;
@@ -100,6 +130,3 @@ header {
   }
 }
 
-.icons {
-  float: right;
-}
