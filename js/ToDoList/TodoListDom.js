@@ -35,9 +35,19 @@ class TodoListDom {
   }
 
 /**
+ * Fetch local storage, and store them into window.localData
  * Iterate each local tasks and render them
  */
   renderLocalStorage() {
+      window.localData = [];
+      if (localStorage.getItem('tasks') !== null) {
+        window.localData = JSON.parse(localStorage.getItem('tasks'));
+        for(let i = 0; i < window.localData.length; i++) {
+          window.localData[i][0] = i;
+        }
+        console.log("local data ", window.localData);
+      }
+
       for(let i = 0; i < window.localData.length; i++){
         let name = window.localData[i][TaskStorage.nameIndex];
         let totalSession = window.localData[i][TaskStorage.totalSessionIndex];
