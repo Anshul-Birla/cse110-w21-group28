@@ -11,4 +11,5 @@ const TaskStorage = {
   currentSessionIndex: 3,
   checkedIndex: 4
 }
+
 export { HTMLAttributes, TaskStorage };
