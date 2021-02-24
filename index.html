@@ -5,8 +5,8 @@
   <meta charset='utf-8'>
   <link rel='shortcut icon' href='#' />
   <link rel='stylesheet' href='./css/style.css' />
-  <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.5/build/pure-min.css" integrity="sha384-LTIDeidl25h2dPxrB2Ekgc9c7sEC3CWGM6HeFmuDNUjX76Ert4Z4IY714dhZHPLd" crossorigin="anonymous">
-  <meta name="viewport" content="width=device-width, initial-scale=1"> 
+  <link rel='stylesheet' href='https://unpkg.com/purecss@2.0.5/build/pure-min.css' integrity='sha384-LTIDeidl25h2dPxrB2Ekgc9c7sEC3CWGM6HeFmuDNUjX76Ert4Z4IY714dhZHPLd' crossorigin='anonymous'>
+  <meta name='viewport' content='width=device-width, initial-scale=1'> 
   <title>Pomo App</title>
 </head>
 
@@ -36,7 +36,6 @@
   <section id='tasklist' class='section_container'> 
     <!-- <h2>To Do</h2> -->
     <table id='todo'>
-<<<<<<< HEAD
       <colgroup>
         <col span='1' id='col1'>
         <col span='1' id='col2'>
@@ -82,20 +81,14 @@
         <td>floccinaucinihilipilification</td>
         <td>(0/3)</td>
       </tr>
-=======
-      <th>
-        <td>Task</td>
-        <td>Pomos</td>
-        <td>Delete</td>
-      </th>
->>>>>>> main
     </table>
-    <form id = "add-todo" style = "display: none;" overflow>
-      <input type="text" name="task-name" placeholder="Add task" class="task-name">
-      <input type="number" name="task-length" placeholder="# of pomos" class="task-length">
-      <input type="submit" style="display: none;">
+    <!-- style = 'display: none;' originally an attribute in form and button but we want it always showing -->
+    <form id ='add-todo' overflow>
+      <input type='text' name='task-name' placeholder='Enter task' class='task-name'>
+      <input type='number' name='task-length' placeholder='Estimated # of pomos' class='task-length' min='1' max='24'>
+      <input type='submit' class='task-submit' value='Add Task!'>
     </form>
-    <button id = "add-button" class="addTaskButton" type="button">Add Task</button>
+    <!-- <button id = 'add-button' class='addTaskButton' type='button'>Add Task</button> --> <!-- taking this out for now -->
   </section>
 
   <!-- Linked section on page under task list for summary & statistics of work sessions -->
@@ -119,9 +112,9 @@
     The aim of this app is to help you focus on any task you are working on, such as studying, writing, or coding. 
     This app is inspired by
     <a
-      href="https://francescocirillo.com/pages/pomodoro-technique"
-      target="_blank"
-      rel="noopener"
+      href='https://francescocirillo.com/pages/pomodoro-technique'
+      target='_blank'
+      rel='noopener'
       >Pomodoro Technique</a
     >
     which is a time management method developed by Francesco Cirillo.
@@ -138,9 +131,9 @@
       after the tomato-shaped kitchen timer that Cirillo used as a
       university student. -
       <a
-        href="https://en.wikipedia.org/wiki/Pomodoro_Technique"
-        target="_blank"
-        rel="noopener"
+        href='https://en.wikipedia.org/wiki/Pomodoro_Technique'
+        target='_blank'
+        rel='noopener'
         >Wikipedia</a
         >
     </p>

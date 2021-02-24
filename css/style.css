@@ -52,7 +52,6 @@ header {
   margin: auto;
 }
 
-<<<<<<< HEAD
 /* css styling for to-do list table */
 table {
   width: 100%;  /* % width of container */
@@ -90,16 +89,20 @@ input[type='checkbox'] {
   width: 20px;
   height: 20px;
   background: white;
-  border-radius: 10px; /* circular check"boxes" */
+  border-radius: 10px; /* circular check"boxes" if uncomment webkit line */
 }
 input[type='checkbox']:checked {
   background: #339E66FF;
   box-shadow: 0 0 0 3px lime;
 }
-td > input[type='checkbox']:checked {
+td > input[type='checkbox']:checked { /* currently doesn't do anything */
   text-decoration: line-through;
 }
-=======
+#col3 { /* currently doesn't do anything */
+  font-weight: bold;
+}
+
+
 .addTaskButton {
   position: absolute;
   color: white;
@@ -114,20 +117,30 @@ td > input[type='checkbox']:checked {
   bottom: 0;
 }
 
-.task-name {
-  position: absolute;
-  font-size: 20px;
-  top: 375px;
-  border-radius: 10px;
-  width: 200px;
+#add-todo {
+  position: -webkit-sticky;
+  position: sticky;
+  /* position: absolute; */
+  bottom: 0px;
 }
 
-.task-length {
-  position: absolute;
+.task-name, .task-length, .task-submit {
   font-size: 20px;
-  width: 130px;
-  top: 375px;
-  left: 205px;
-  border-radius: 10px;
+  border-radius: 25px;
+  height: 50px;
+  padding-left: 15px;
 }
->>>>>>> main
+
+.task-name {
+  width: 70%;
+}
+.task-length {
+  width: 15%;
+}
+.task-submit {
+  width: 11%;
+}
+
+#tasklist {
+  height: 40vh;
+}

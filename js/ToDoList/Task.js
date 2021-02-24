@@ -56,7 +56,7 @@ class Task extends HTMLTableRowElement {
      * @type {HTMLTableDataCellElement}
      */
     this.pomoSessions = this.setupTotalPomoSessions();
-    this.setupDeleteButton();
+    // this.setupDeleteButton();
   }
 
   /**
