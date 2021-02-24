@@ -43,3 +43,40 @@ header {
   position: relative;
   margin: auto;
 }
+
+#distract-popup {
+  display: none;
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+}
+
+#distract-form-container {
+  border-radius: 25px;
+  max-width: 350px;
+  padding: 10px;
+  background-color: #f1f1f1;
+}
+
+#description {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 20px 0;
+  border: none;
+  background: #f1f1f1;
+}
+
+.btn {
+  border-radius: 15px;
+  background-color: #056e08;
+  color: white;
+  padding: 15px 20px;
+  width: 100%;
+  margin-bottom:10px;
+  opacity: 0.8;
+}
+
+.form-container .cancel {
+  border-radius: 15px;
+  background-color: #ad1a1a;
+}

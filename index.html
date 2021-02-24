@@ -7,6 +7,10 @@
   <link rel='stylesheet' href='./css/style.css' />
   <title>Pomo App</title>
 </head>
+<style>
+  body
+  * {box-sizing: border-box;}
+</style>
 
 <body>
 
@@ -69,7 +73,20 @@
   <section id='faq' class='linked_section'>
     <h2>FAQ</h2>
   </section>
-  <script type='module' src='./js/App.js'></script>
 
+  <!-- Distraction Box-->
+  <section class="form-popup" id="distract-popup">
+    <form class="form-container" id="distract-form-container">
+      <h1>Report Distraction</h1>
+  
+      <label><b>Distraction Description</b></label>
+      <input type="text" placeholder="Enter a short description of the distraction" id="description">
+  
+      <button type='button' onclick="submitDistraction()" class="btn" id="submit-button">Submit</button>
+      <button type="button" class="btn cancel" onclick="closeForm()" id="cancel-button">Cancel</button>
+    </form> 
+  </section>
+  <script type='module' src='./js/App.js'></script>
+  <script src="./js/distraction.js"></script>
 </body>
 </html>
