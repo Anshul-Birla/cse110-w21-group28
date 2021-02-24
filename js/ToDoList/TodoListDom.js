@@ -49,6 +49,7 @@ class TodoListDom {
       const sessions = parseInt(data.get(HTMLAttributes.taskPomoSessions), 10);
       const task = this.todoList.addTask(name, sessions);
       this.displayTask(task);
+      this.form.reset();
     });
 
     this.button.addEventListener('click', () => {

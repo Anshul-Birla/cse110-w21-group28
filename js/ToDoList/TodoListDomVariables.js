@@ -1,6 +1,6 @@
 const HTMLAttributes = {
   buttonDoneTextContent: 'Done',
-  buttonAddTextContent: 'Add a Task',
+  buttonAddTextContent: 'Add Task',
   taskNameId: 'task-name',
   taskPomoSessions: 'task-length',
 };
