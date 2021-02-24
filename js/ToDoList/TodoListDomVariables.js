@@ -1,8 +1,8 @@
 const HTMLAttributes = {
   buttonDoneTextContent: 'Done',
-  buttonAddTextContent: 'Add A Task',
+  buttonAddTextContent: 'Add Task',
   taskNameId: 'task-name',
-  taskPomoSessions: 'task-length'
+  taskPomoSessions: 'task-length',
 };
 const TaskStorage = {
   idIndex: 0,

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../">
+  <title data-ice="title">tests/todolistdom.test.js | cse110-w21-group28</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="Necessary Packages for Development"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="cse110-w21-group28"><meta property="twitter:description" content="Necessary Packages for Development"></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  <a href="test.html" data-ice="testLink">Test</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+<a style="position:relative; top:3px;" href="https://github.com/Anshul-Birla/cse110-w21-group28"><img width="20px" src="./image/github.png"></a></header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#timer">Timer</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Timer/Timer.js~Timer.html">Timer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-longBreakMode">longBreakMode</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-shortBreakMode">shortBreakMode</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-workMode">workMode</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#todolist">ToDoList</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/ToDoList/Task.js~Task.html">Task</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/ToDoList/ToDoList.js~ToDoList.html">ToDoList</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/ToDoList/TodoListDom.js~TodoListDom.html">TodoListDom</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-classNames">classNames</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-HTMLAttributes">HTMLAttributes</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">tests/todolistdom.test.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { TodoListDom } from &apos;../js/ToDoList/TodoListDom.js&apos;;
+
+/** @Test {ToDoList} */
+
+beforeEach(() =&gt; {
+  document.body.innerHTML = `&lt;section id=&quot;tasklist&quot; class=&quot;section_container&quot;&gt;
+      &lt;h2&gt;To Do&lt;/h2&gt;
+      &lt;table id=&apos;todo&apos;&gt;
+        &lt;th&gt;
+          &lt;td&gt;Task&lt;/td&gt;
+          &lt;td&gt;Pomos&lt;/td&gt;
+          &lt;td&gt;Delete&lt;/td&gt;
+        &lt;/th&gt;
+      &lt;/table&gt;
+    &lt;/section&gt;
+
+    &lt;div&gt;
+      &lt;form id = &quot;add-todo&quot; style = &quot;display: none;&quot;&gt;
+        &lt;input type=&quot;text&quot; name=&quot;task-name&quot; placeholder=&quot;Write Essay&quot;&gt;
+        &lt;input type=&quot;number&quot; name=&quot;task-length&quot; placeholder=&quot;1&quot;&gt;
+        &lt;input type=&quot;submit&quot;&gt;
+      &lt;/form&gt;
+      &lt;button id = &quot;add-button&quot; type=&quot;button&quot;&gt;Add a task&lt;/button&gt;
+    &lt;/div&gt; `;
+});
+
+test(&apos;Valid construction of TDLDom&apos;, () =&gt; {
+  const tableLocation = document.getElementById(&apos;todo&apos;);
+  const formLocation = document.getElementById(&apos;add-todo&apos;);
+  const btnLocation = document.getElementById(&apos;add-button&apos;);
+  const myDOM = new TodoListDom(tableLocation, formLocation, btnLocation);
+  expect(myDOM.todoList.taskList).toEqual([]);
+});
+
+test(&apos;Add a task&apos;, () =&gt; {
+  const tableLocation = document.getElementById(&apos;todo&apos;);
+  const formLocation = document.getElementById(&apos;add-todo&apos;);
+  const btnLocation = document.getElementById(&apos;add-button&apos;);
+  const myDOM = new TodoListDom(tableLocation, formLocation, btnLocation);
+  formLocation.children[0].setAttribute(&apos;value&apos;, &apos;Write Essay&apos;);
+  formLocation.children[1].value = 2;
+  formLocation.submit();
+  expect(tableLocation.children[1].children[1].textContent).toMatch(new RegExp(&apos;Write *Essay&apos;));
+  expect(tableLocation.children[1].children[2].textContent).toMatch(new RegExp(&apos;\\[0/ *2\\]&apos;));
+});
+
+test(&apos;Increment session &apos;, () =&gt; {
+  const tableLocation = document.getElementById(&apos;todo&apos;);
+  const formLocation = document.getElementById(&apos;add-todo&apos;);
+  const btnLocation = document.getElementById(&apos;add-button&apos;);
+  const myDOM = new TodoListDom(tableLocation, formLocation, btnLocation);
+  formLocation.children[0].value = &apos;Write Essay&apos;;
+  formLocation.children[1].value = 2;
+  formLocation.submit();
+  myDOM.onSessionComplete();
+  expect(tableLocation.children[1].children[1].textContent).toMatch(new RegExp(&apos;Write *Essay&apos;));
+  expect(tableLocation.children[1].children[2].textContent).toMatch(new RegExp(&apos;\\[1/ *2\\]&apos;));
+});
+
+test(&apos;Show and hide form&apos;, () =&gt; {
+  const tableLocation = document.getElementById(&apos;todo&apos;);
+  const formLocation = document.getElementById(&apos;add-todo&apos;);
+  const btnLocation = document.getElementById(&apos;add-button&apos;);
+  const myDOM = new TodoListDom(tableLocation, formLocation, btnLocation);
+  btnLocation.click();
+  expect(formLocation.getAttribute(&apos;style&apos;)).toEqual(&apos;&apos;);
+  btnLocation.click();
+  expect(formLocation.getAttribute(&apos;style&apos;)).toEqual(&apos;display: none;&apos;);
+});
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

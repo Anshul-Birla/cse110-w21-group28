@@ -1,19 +1,21 @@
-import { workMode, shortBreakMode, longBreakMode } from './TimerModes.js';
-
+import {
+  workMode, shortBreakMode, longBreakMode, classNames, buttonText,
+} from './TimerVariables.js';
 /**
  * A class for the Timer object. Has functions to start the timer,
  * display the current mode of the timer and display the time remaining
+ * Class throws the 'timer-complete' event
  */
 class Timer extends HTMLElement {
   /**
    * Constructor of Time Object. Takes the HTML element of where
    * you want the time and the status of the timer to be implemented.
    * HTML Elements must have the 'textElement' attribute.
-   * @param {HTML Element} displayTime
-   * @param {HTML Element} displayStatus
-   * @param {ToDoList}     todoList
+   * @param {HTMLElement} startButton
+   * @param {HTMLElement} displayTime
+   * @param {HTMLElement} displayStatus
    */
-  constructor(displayTime, displayStatus) {
+  constructor(startButton, displayTime, displayStatus) {
     super();
     /**
      * State of the timer (the current mode)
@@ -24,18 +26,23 @@ class Timer extends HTMLElement {
      * Queue that stores the Session objects. Rotates to provide
      * rotation functionality for the timer
      * @type {Object[]}
-     * @property {String} object.name
-     * @property {Number} object.duration
+     * @property {String} object.name name of the session
+     * @property {Number} object.duration duration of the session
      */
     this.stateQueue = [];
     /**
+     * HTML Tag that is reponsible for controlling the timer
+     * @type {HTMLElement}
+     */
+    this.startButton = startButton;
+    /**
      * HTML Tag that is reponsible for displaying the time remaining
-     * @type {HTML_Element}
+     * @type {HTMLElement}
      */
     this.displayTime = displayTime;
     /**
      * HTML Tag that is reponsible for displaying the mode of the timer
-     * @type {HTML_Element}
+     * @type {HTMLElement}
      */
     this.displayStatus = displayStatus;
 
@@ -45,6 +52,8 @@ class Timer extends HTMLElement {
     for (let i = 0; i < workOrder.length; i += 1) {
       this.stateQueue.push(workOrder[i]);
     }
+
+    this.addEventListeners();
   }
 
   /**
@@ -78,7 +87,7 @@ class Timer extends HTMLElement {
   /**
    * Counts down the timer for duration amount of minutes.
    * Updates the DOM with current time remaining.
-   * @param {Number} duration
+   * @param {Number} duration Amount of seconds for the timer to run
    */
   countdown(duration) {
     const minutes = Math.floor(duration / 60);
@@ -98,6 +107,22 @@ class Timer extends HTMLElement {
     } else {
       this.onTimerComplete();
     }
+  }
+
+  /**
+   * Adds event listener to the start button that was added
+   */
+  addEventListeners() {
+    this.startButton.addEventListener('click', () => {
+      if (this.startButton.textContent === buttonText.startTimerText) {
+        this.startButton.textContent = buttonText.stopTimerText;
+        this.startButton.class = classNames.stopButton;
+        this.startTimer();
+      } else {
+        this.startButton.textContent = buttonText.startTimerText;
+        this.startButton.class = classNames.startButton;
+      }
+    });
   }
 }
 

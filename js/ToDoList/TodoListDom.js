@@ -1,9 +1,16 @@
 import { ToDoList } from './ToDoList.js';
 import { HTMLAttributes } from './TodoListDomVariables.js';
 import { TaskStorage } from './TodoListDomVariables.js';
+import { Task } from './Task.js';
 
+/**
+ * Class responsible for providing changes to the DOM for the TodoList
+ * Encapsulates the TodoList class
+ * Done so their is a clear abstraction from DOM Manipulation and Data Manipulation
+ */
 class TodoListDom {
   /**
+   * Initializes the TodoListDom object with its correct member variables
    * @param {HTMLTableElement} HTMLTable
    * @param {HTMLFormElement} HTMLForm
    * @param {HTMLButtonElement} HTMLButton
@@ -35,7 +42,7 @@ class TodoListDom {
   }
 
 /**
- * Fetch local storage, and store them into window.localData 
+ * Fetch local storage, and store them into window.localData
  * Iterate each local tasks and render them
  */
   renderLocalStorage() {
@@ -46,14 +53,21 @@ class TodoListDom {
           window.localData[i][0] = i;
         }
         console.log("local data ", window.localData);
+        localStorage.setItem('tasks', JSON.stringify(window.localData));
       }
 
       for(let i = 0; i < window.localData.length; i++){
         let name = window.localData[i][TaskStorage.nameIndex];
         let totalSession = window.localData[i][TaskStorage.totalSessionIndex];
         let currentSession = window.localData[i][TaskStorage.currentSessionIndex];
-        let completed = window.localData[i][TaskStorage.checkedIndex]
-        this.renderTask(name, totalSession, currentSession, completed, true);
+        let completed = window.localData[i][TaskStorage.checkedIndex];
+        const task = new Task(i, name, totalSession);
+        this.todoList.idCounter += 1;
+        task.currentSessionNum = currentSession;
+        task.checked = completed;
+        this.todoList.taskList.push(task);
+        task.updatePomoSessions();
+        this.displayTask(task);
       }
     }
 
@@ -66,7 +80,9 @@ class TodoListDom {
       const data = new FormData(this.form);
       const name = data.get(HTMLAttributes.taskNameId);
       const sessions = parseInt(data.get(HTMLAttributes.taskPomoSessions), 10);
-      this.renderTask(name, sessions);
+      const task = this.todoList.addTask(name, sessions);
+      this.displayTask(task);
+      this.form.reset();
     });
 
     this.button.addEventListener('click', () => {
@@ -74,18 +90,6 @@ class TodoListDom {
     });
   }
 
-  /**
-   * create a task and add it to todoList and the DOM.
-   * @param {String} name
-   * @param {Number} totalSession
-   * @param {Number} currentSession
-   * @param {Boolean} checked
-   * @param {Noolean} fromLocal
-   */
-  renderTask(name, totalSession, currentSession = 0, checked = false, fromLocal = false){
-    const task = this.todoList.addTask(name, totalSession, currentSession, checked, fromLocal);
-    this.displayTask(task);
-  }
   /**
    * Toggles the visibility of the add task form depending
    * on the text contained in the button
@@ -109,6 +113,9 @@ class TodoListDom {
     this.table.appendChild(newTask);
   }
 
+  /**
+   * This function runs when the timer is done with its working session
+   */
   onSessionComplete() {
     this.todoList.onSessionComplete();
   }

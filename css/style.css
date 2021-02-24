@@ -52,13 +52,13 @@ header {
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
   background: rgb(66, 184, 221);
   padding: 5px 5px 5px 5px;
-  height:7vh;
-  width:40vw;
+  height: 7vh;
+  width: 40vw;
   font-size: 5vh;
   bottom: 0;
 }
 
-.task-name{
+.task-name {
   position: absolute;
   font-size: 20px;
   top: 375px;
@@ -66,7 +66,7 @@ header {
   width: 200px;
 }
 
-.task-length{
+.task-length {
   position: absolute;
   font-size: 20px;
   width: 130px;
@@ -74,19 +74,3 @@ header {
   left: 205px;
   border-radius: 10px;
 }
-
-
-
-
-
-/*
- <div>
-    <form id = "add-todo" style = "display: none;">
-      <input type="text" name="task-name" placeholder="Add task">
-      <input type="number" name="task-length" placeholder="1">
-      <input type="submit">
-    </form>
-    <button id = "add-button" type="button">Add a task</button>
-  </div>
-
-*/

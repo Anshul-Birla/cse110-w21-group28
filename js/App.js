@@ -1,6 +1,6 @@
 import { TodoListDom } from './ToDoList/TodoListDom.js';
 import { Timer } from './Timer/Timer.js';
-import { workMode } from './Timer/TimerModes.js';
+import { workMode } from './Timer/TimerVariables.js';
 
 const timeDisplay = document.getElementById('timeDisplay');
 const modeDisplay = document.getElementById('modeDisplay');
@@ -10,7 +10,7 @@ const addTodoButton = document.getElementById('add-button');
 const startTimerButton = document.getElementById('startTimer');
 
 const TDLDom = new TodoListDom(todoTable, addTodoForm, addTodoButton);
-const TimerObj = new Timer(timeDisplay, modeDisplay);
+const TimerObj = new Timer(startTimerButton, timeDisplay, modeDisplay);
 
 startTimerButton.addEventListener('click', () => {
   TimerObj.startTimer();

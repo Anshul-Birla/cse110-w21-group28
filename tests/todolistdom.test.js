@@ -1,6 +1,10 @@
 import { TodoListDom } from '../js/ToDoList/TodoListDom.js';
 
 /** @Test {ToDoList} */
+var tableLocation;
+var formLocation;
+var btnLocation;
+var myDOM;
 
 beforeEach(() => {
   document.body.innerHTML = `<section id="tasklist" class="section_container">
@@ -22,51 +26,51 @@ beforeEach(() => {
       </form>
       <button id = "add-button" type="button">Add a task</button>
     </div> `;
+    tableLocation = document.getElementById('todo');
+    formLocation = document.getElementById('add-todo');
+    btnLocation = document.getElementById('add-button');
+    myDOM = new TodoListDom(tableLocation, formLocation, btnLocation);
 });
 
-test('Valid construction of TDLDom', ()  => {
-  const tableLocation = document.getElementById('todo');
-  const formLocation = document.getElementById('add-todo');
-  const btnLocation = document.getElementById('add-button');
-  const myDOM = new TodoListDom(tableLocation, formLocation, btnLocation);
+test('Valid construction of TDLDom', () => {
   expect(myDOM.todoList.taskList).toEqual([]);
 });
 
 test('Add a task', () => {
-  const tableLocation = document.getElementById('todo');
-  const formLocation = document.getElementById('add-todo');
-  const btnLocation = document.getElementById('add-button');
-  const myDOM = new TodoListDom(tableLocation, formLocation, btnLocation);
-  formLocation.children[0].setAttribute("value", "Write Essay");
+  formLocation.children[0].setAttribute('value', 'Write Essay');
   formLocation.children[1].value = 2;
   formLocation.submit();
-  //console.log(tableLocation.innerHTML);
-  //console.log(tableLocation.children[1].innerHTML);
   expect(tableLocation.children[1].children[1].textContent).toMatch(new RegExp('Write *Essay'));
   expect(tableLocation.children[1].children[2].textContent).toMatch(new RegExp('\\[0/ *2\\]'));
 });
 
+test('Reload the page with local storage', () => {
+  expect(tableLocation.children[1].children[1].textContent).toMatch(new RegExp('Write *Essay'));
+  expect(tableLocation.children[1].children[2].textContent).toMatch(new RegExp('\\[0/ *2\\]'));
+});
+
+//Now has a task
+test('click remove button', () => {
+  tableLocation.children[1].children[3].click();
+  expect(tableLocation.children[1]).toEqual(undefined);
+  expect(window.localData.length).toEqual(0);
+  localStorage.clear();
+});
+
 test('Increment session ', () => {
-  const tableLocation = document.getElementById('todo');
-  const formLocation = document.getElementById('add-todo');
-  const btnLocation = document.getElementById('add-button');
-  const myDOM = new TodoListDom(tableLocation, formLocation, btnLocation);
-  formLocation.children[0].value = "Write Essay";
+  formLocation.children[0].value = 'Write Essay';
   formLocation.children[1].value = 2;
   formLocation.submit();
   myDOM.onSessionComplete();
   expect(tableLocation.children[1].children[1].textContent).toMatch(new RegExp('Write *Essay'));
   expect(tableLocation.children[1].children[2].textContent).toMatch(new RegExp('\\[1/ *2\\]'));
+  localStorage.clear();
 });
 
-
 test('Show and hide form', () => {
-  const tableLocation = document.getElementById('todo');
-  const formLocation = document.getElementById('add-todo');
-  const btnLocation = document.getElementById('add-button');
-  const myDOM = new TodoListDom(tableLocation, formLocation, btnLocation);
   btnLocation.click();
-  expect(formLocation.getAttribute("style")).toEqual('');
+  expect(formLocation.getAttribute('style')).toEqual('');
   btnLocation.click();
-  expect(formLocation.getAttribute("style")).toEqual("display: none;");
+  expect(formLocation.getAttribute('style')).toEqual('display: none;');
+  localStorage.clear();
 });

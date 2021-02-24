@@ -3,6 +3,7 @@ import { ToDoList } from '../js/ToDoList/ToDoList.js';
 /** @Test {ToDoList} */
 
 beforeEach(() => {
+  window.localData = [];
   document.body.innerHTML = '<div id="ToDoListDiv>'
     + '</div>';
 });
@@ -55,6 +56,13 @@ test('Adding Task w/ empty name', () => {
   expect(errTask).toThrow('Empty Name');
 });
 
+test('Adding Task w/ NaN for PomoSession', () => {
+  const listLocation = document.getElementById('ToDoListDiv');
+  const aList = new ToDoList(listLocation);
+  const errTask = () => { aList.addTask('TempTask', NaN); };
+  expect(errTask).toThrow('Number Not Passed In');
+});
+
 test('Get currentTask', () => {
   const listLocation = document.getElementById('ToDoListDiv');
   const aList = new ToDoList(listLocation);
@@ -69,6 +77,15 @@ test('Get currentTask on empty list', () => {
   const aList = new ToDoList(listLocation);
   const currTask = () => { aList.getCurrentTask(); };
   expect(currTask).toThrow('Empty ToDo List');
+});
+
+test('Get currentTask on list with all completed elements', () => {
+  const listLocation = document.getElementById('ToDoListDiv');
+  const aList = new ToDoList(listLocation);
+  aList.addTask('First Task', 5);
+  aList.getCurrentTask().checkOffTask();
+  const currTask = () => { aList.getCurrentTask(); };
+  expect(currTask).toThrow('No Current Task');
 });
 
 test('Preserve special characters in task name', () => {

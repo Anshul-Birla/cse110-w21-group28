@@ -1,5 +1,4 @@
 import { classNames } from './TaskVariables.js';
-import { ToDoList } from './ToDoList.js'
 import { TaskStorage } from './TodoListDomVariables.js';
 
 /**
@@ -9,28 +8,61 @@ import { TaskStorage } from './TodoListDomVariables.js';
 class Task extends HTMLTableRowElement {
   /**
   * Task construcutor. Initializes the task with appropriate attributes
-  * @param {String} id
-  * @param {String} name
-  * @param {Number} totalSessions
+  * @param {String} id Id of the task
+  * @param {String} name Name of the task
+  * @param {Number} totalSessions Total sessions the task should take
   */
   constructor(id, name, totalSessions) {
     super();
-
+    /**
+     * Stores the id of the task
+     * @type {Number}
+     */
     this.id = id;
+    /**
+     * Stores the name of the task
+     * @type {String}
+     */
     this.name = name;
+    /**
+     * Stores the total sessions anticipated for the task
+     * @type {Number}
+     */
     this.totalSessions = totalSessions;
+    /**
+     * Stores the total amount of sessions spent working on the task
+     * @type {Number}
+     */
     this.currentSessionNum = 0;
+    /**
+     * Stores if the task has been checked off or not
+     * @type {Boolean}
+     */
     this.checked = false;
     this.setAttribute('class', classNames.uncheckedTaskClassName);
 
+    /**
+     * The checkbox attribute for the task
+     * @type {HTMLInputElement}
+     */
     this.checkBox = this.setupCheckBox();
+    /**
+     * Stores the view that shows the task name to the user
+     * @type {HTMLTableDataCellElement}
+     */
     this.taskText = this.setupTaskText();
+    /**
+     * Stores the view that displayes the total pomo sessions spent
+     * and alloted for the tasl
+     * @type {HTMLTableDataCellElement}
+     */
     this.pomoSessions = this.setupTotalPomoSessions();
     this.setupDeleteButton();
   }
 
   /**
    * This sets up the checkbox to check off tasks
+   * @returns {HTMLInputElement}
    */
   setupCheckBox() {
     const firstCol = document.createElement('td');
@@ -39,7 +71,6 @@ class Task extends HTMLTableRowElement {
     checkBox.setAttribute('id', `checkbox-${this.id}`);
     firstCol.appendChild(checkBox);
     this.appendChild(firstCol);
-
     checkBox.addEventListener('click', () => {
       this.checkOffTask();
     });
@@ -48,6 +79,7 @@ class Task extends HTMLTableRowElement {
 
   /**
    * This sets up the view that will display the taks name
+   * @returns {HTMLTableDataCellElement}
    */
   setupTaskText() {
     const text = document.createElement('td');
@@ -59,6 +91,7 @@ class Task extends HTMLTableRowElement {
 
   /**
    * This sets up the view that will display the pomo sessions
+   * @return {HTMLTableDataCellElement}
    */
   setupTotalPomoSessions() {
     const pomoSessions = document.createElement('td');
@@ -90,12 +123,12 @@ class Task extends HTMLTableRowElement {
   removeFromLocalStorage(id) {
     for (let i = 0; i < window.localData.length; i += 1) {
       if (window.localData[i][TaskStorage.idIndex] == id) {
-        console.log("removing");
+        console.log("removing!");
         window.localData.splice(i, 1);
         break;
       }
     }
-    console.log(id, window.localData);
+    this.checked = true;
     localStorage.setItem('tasks', JSON.stringify(window.localData));
   }
   /**
@@ -111,7 +144,7 @@ class Task extends HTMLTableRowElement {
   updatePomoSessions() {
     this.children[2].textContent = `[${this.currentSessionNum}/\
       ${this.totalSessions}]`;
-  } 
+  }
 
   /**
    * Increment this task's current session number. Checks off task if all sessions completed.
@@ -138,7 +171,6 @@ class Task extends HTMLTableRowElement {
   updateLocalStorage() {
     for (let i = 0; i < window.localData.length; i += 1) {
       if (window.localData[i][TaskStorage.idIndex] == this.id) {
-        console.log("updating local storage");
         window.localData[i][TaskStorage.currentSessionIndex] = this.currentSessionNum;
         window.localData[i][TaskStorage.checkedIndex] = this.checked;
         break;
