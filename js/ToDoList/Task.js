@@ -7,7 +7,7 @@ import { classNames } from './TaskVariables.js';
 class Task extends HTMLTableRowElement {
   /**
   * Task construcutor. Initializes the task with appropriate attributes
-  * @param {String} id Id of the task 
+  * @param {String} id Id of the task
   * @param {String} name Name of the task
   * @param {Number} totalSessions Total sessions the task should take
   */

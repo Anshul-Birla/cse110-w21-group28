@@ -2,7 +2,7 @@ import { ToDoList } from './ToDoList.js';
 import { HTMLAttributes } from './TodoListDomVariables.js';
 
 /**
- * Class responsible for providing changes to the DOM for the TodoList 
+ * Class responsible for providing changes to the DOM for the TodoList
  * Encapsulates the TodoList class
  * Done so their is a clear abstraction from DOM Manipulation and Data Manipulation
  */
