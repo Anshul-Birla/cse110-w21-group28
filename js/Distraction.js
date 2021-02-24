@@ -11,15 +11,15 @@ function resetPopUp() {
   distractPopUp.style.display = 'none';
   document.getElementById('description').value = '';
 }
-  
+ 
 distractButton.addEventListener('click', () => {
   if (distractPopUp.style.display === 'block') {
-      resetPopUp();
+    resetPopUp();
   } else {
-      distractPopUp.style.display = 'block';
+    distractPopUp.style.display = 'block';
   }
 });
-  
+
 cancelButton.addEventListener('click', () => {
   resetPopUp();
 });
@@ -37,4 +37,3 @@ submitButton.addEventListener('click', () => {
     resetPopUp();
   }
 });
-
