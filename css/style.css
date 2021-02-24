@@ -74,19 +74,3 @@ header {
   left: 205px;
   border-radius: 10px;
 }
-
-
-
-
-
-/*
- <div>
-    <form id = "add-todo" style = "display: none;">
-      <input type="text" name="task-name" placeholder="Add task">
-      <input type="number" name="task-length" placeholder="1">
-      <input type="submit">
-    </form>
-    <button id = "add-button" type="button">Add a task</button>
-  </div>
-
-*/
