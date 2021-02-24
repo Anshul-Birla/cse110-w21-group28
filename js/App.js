@@ -1,11 +1,7 @@
 import { Timer } from './Timer/Timer.js';
 
-const timeDisplay = document.getElementById('timeDisplay');
-const modeDisplay = document.getElementById('modeDisplay');
-const startTimerButton = document.getElementById('startTimer');
+const startButton = document.getElementById('startTimer');
+const displayTimer = document.getElementById('timeDisplay');
+const displayMode = document.getElementById('modeDisplay');
 
-const TimerObj = new Timer(timeDisplay, modeDisplay);
-
-startTimerButton.addEventListener('click', () => {
-  TimerObj.startTimer();
-});
+new Timer(startButton, displayTimer, displayMode);
