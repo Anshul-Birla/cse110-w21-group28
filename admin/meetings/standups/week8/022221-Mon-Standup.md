@@ -40,11 +40,11 @@ meeting
 + *Any blockers?* no
 
 **Ravi**  
-+*Previous work day progress:*
++ *Previous work day progress:*
 reviewed pr comments
-+*Plans for today:*
++ *Plans for today:*
 meeting/ edit PR
-+*Any Blockers?* none
++ *Any Blockers?* none
 
 **Ryan**  
 + *Previous work day progress:*
