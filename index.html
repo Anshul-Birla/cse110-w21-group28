@@ -5,6 +5,8 @@
   <meta charset='utf-8'>
   <link rel='shortcut icon' href='#' />
   <link rel='stylesheet' href='./css/style.css' />
+  <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.5/build/pure-min.css" integrity="sha384-LTIDeidl25h2dPxrB2Ekgc9c7sEC3CWGM6HeFmuDNUjX76Ert4Z4IY714dhZHPLd" crossorigin="anonymous">
+  <meta name="viewport" content="width=device-width, initial-scale=1"> 
   <title>Pomo App</title>
 </head>
 
@@ -34,6 +36,7 @@
   <section id='tasklist' class='section_container'> 
     <!-- <h2>To Do</h2> -->
     <table id='todo'>
+<<<<<<< HEAD
       <colgroup>
         <col span='1' id='col1'>
         <col span='1' id='col2'>
@@ -79,7 +82,20 @@
         <td>floccinaucinihilipilification</td>
         <td>(0/3)</td>
       </tr>
+=======
+      <th>
+        <td>Task</td>
+        <td>Pomos</td>
+        <td>Delete</td>
+      </th>
+>>>>>>> main
     </table>
+    <form id = "add-todo" style = "display: none;" overflow>
+      <input type="text" name="task-name" placeholder="Add task" class="task-name">
+      <input type="number" name="task-length" placeholder="# of pomos" class="task-length">
+      <input type="submit" style="display: none;">
+    </form>
+    <button id = "add-button" class="addTaskButton" type="button">Add Task</button>
   </section>
 
   <!-- Linked section on page under task list for summary & statistics of work sessions -->
@@ -92,6 +108,85 @@
     <h2>FAQ</h2>
   </section>
   <script type='module' src='./js/App.js'></script>
+  
+  <div id='faq'>
+     
+      <h2>A Pomodoro Ranger Timer is a Pomodoro Timer that would help with productivity</h2>
+   
+      <h2>What is Pomoranger Timer?</h2>
+  		<p>
+    Pomoranger is a Pomodoro Technique timer that works on your computer and mobile devices with an aim to increase your productivity, and reduce stress and anxiety of planning your time. 
+    The aim of this app is to help you focus on any task you are working on, such as studying, writing, or coding. 
+    This app is inspired by
+    <a
+      href="https://francescocirillo.com/pages/pomodoro-technique"
+      target="_blank"
+      rel="noopener"
+      >Pomodoro Technique</a
+    >
+    which is a time management method developed by Francesco Cirillo.
+  </p>
+   
+    <div>
+  <h2>What is Pomodoro Technique?</h2>
+    <p>
+      The Pomodoro Technique is created by Francesco Cirillo for a
+      more productive way to work and study. The technique uses a
+      timer to break down work into intervals, traditionally 25
+      minutes in length, separated by short breaks. Each interval
+      is known as a pomodoro, from the Italian word for 'tomato',
+      after the tomato-shaped kitchen timer that Cirillo used as a
+      university student. -
+      <a
+        href="https://en.wikipedia.org/wiki/Pomodoro_Technique"
+        target="_blank"
+        rel="noopener"
+        >Wikipedia</a
+        >
+    </p>
+</div>
+
+<div>
+  <h2>
+    How to use the Pomodoro Timer?
+  </h2>
+  <ol>
+    <li><strong>Add tasks</strong> to work on today</li>
+    <li>
+      <strong>Set estimated number of pomodoros</strong> (1 pomodoro = 25 minutes) for each task
+    </li>
+    <li><strong>Write out and select a task</strong> to work on in the Todo list</li>
+    <li>
+      <strong>Start timer</strong> and focus on the task for 25 minutes per each task
+    </li>
+    <li>
+       <strong>Take a break</strong> for 5 minutes when the alarm changes color
+    </li>
+    <li>
+       <strong>Iterate</strong> pomodoros until you finish the tasks
+    </li>
+  </ol>
+</div>
+
+<div>
+  <h2>
+    Features of the Pomoranger Timer
+  </h2>
+  <ol>
+    <li><strong>Simple use</strong> of the timer and functionality of the Pomodoro Technique</li>
+    <li>
+      <strong>Todo List </strong> functionality to organize your tasks
+    </li>
+    <li><strong>Statistics </strong> feature to help monitor your progress</li>
+    <li>
+      <strong>Start timer</strong> and focus on the task for 25 minutes
+    </li>
+  </ol>
+</div>
+
+
+</div>
+
 
 </body>
 </html>
