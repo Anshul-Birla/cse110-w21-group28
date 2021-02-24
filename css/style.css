@@ -1,19 +1,20 @@
 * {
   font-family: Helvetica, sans-serif;
+  color: aliceblue;
 }
 
 body {
-  background-color: bisque;
+  background-color: cadetblue;
 }
 
 header {
   overflow: auto;
-  background-color: paleturquoise;
 }
 
 .pure-button {
-  background-color: white;
+  background: lightslategray;
   border-radius: 5px;
+  color: aliceblue;
 }
 
 /* header styling */
@@ -30,6 +31,10 @@ header {
   margin: 5px;
   height: 40px;
   width: 40px;
+  border-style: solid;
+  border-width: 1px;
+  border-color:rgba(245, 245, 245, 0.4);
+
 }
 
 .icon-container p {
@@ -48,7 +53,7 @@ header {
   margin: auto;
   height: 280px;
   width: 400px;
-  background-color: darkgoldenrod;
+  background-color: darkcyan;
   border-radius: 10px;
 }
 
@@ -76,6 +81,15 @@ header {
   bottom: 5px;
   right: 5px;
   font-size: 40%;
+  border-style: solid;
+  border-width: 1px;
+  border-color:rgba(245, 245, 245, 0.4);
+}
+
+#startTimer {
+  border-style: solid;
+  border-width: 2px;
+  border-color:rgba(245, 245, 245, 0.4);
 }
 
 /* tasklist styling */
@@ -84,7 +98,7 @@ header {
   margin: auto;
   height: 60vh;
   width: 40vw;
-  background-color: slategrey;
+  background-color: darkcyan;
 }
 
 /* for support for small screens */
