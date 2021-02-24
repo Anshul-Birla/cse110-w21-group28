@@ -1,3 +1,7 @@
+* {
+  font-family: sans-serif;
+}
+
 body {
   background-color: bisque;
 }
@@ -30,9 +34,11 @@ header {
 }
 
 #tasklist {
-  height: 60vh;
+  height: 30vh;
   width: 40vw;
   background-color: slategrey;
+  overflow-y: scroll;
+  margin-top: 1%;
 }
 
 .icons {
@@ -42,4 +48,43 @@ header {
 .section_container {
   position: relative;
   margin: auto;
+}
+
+/* css styling for to-do list table */
+table {
+  width: 100%;  /* % width of container */
+  border-collapse: collapse; /* gets rid of gaps between columns */
+}
+th, td {
+  padding: 15px;
+}
+th {
+  background-color: #339E66FF;
+  color:white;
+  text-align: left;
+  padding: 20px 10px;
+  font-size: 200%;
+  position: sticky;
+  top: 0px;
+}
+/* color pairs: 
+(#9CC3D5FF, #0063B2FF), (#FCF6F5FF, #89ABE3FF), (#85B3D1FF, #B3C7D6FF) */
+tr:nth-child(even) {
+  background-color: #95DBE5FF;
+  color: #078282FF;
+}
+tr:nth-child(odd) {
+  background-color: #078282FF;
+  color: #95DBE5FF;
+}
+tr:hover {
+  background-color: #f2f2f279;
+}
+
+/* checkbox styling */
+input:checked {
+  box-shadow: 0 0 0 3px #339E66FF;
+}
+tr > input:checked {
+  text-decoration: line-through;
 }
