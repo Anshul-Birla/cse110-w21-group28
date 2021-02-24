@@ -13,17 +13,17 @@ function resetPopUp() {
 }
   
 distractButton.addEventListener('click', () => {
-    if (distractPopUp.style.display === 'block') {
-        resetPopUp();
-    } else {
-        distractPopUp.style.display = 'block';
-    }
+  if (distractPopUp.style.display === 'block') {
+      resetPopUp();
+  } else {
+      distractPopUp.style.display = 'block';
+  }
 });
   
 cancelButton.addEventListener('click', () => {
   resetPopUp();
 });
-  
+
 submitButton.addEventListener('click', () => {
   const description = document.getElementById('description').value;
   const time = document.getElementById('timeDisplay').textContent;
@@ -37,4 +37,4 @@ submitButton.addEventListener('click', () => {
     resetPopUp();
   }
 });
-  
+
