@@ -13,7 +13,11 @@ function resetPopUp() {
 }
   
 distractButton.addEventListener('click', () => {
-  distractPopUp.style.display = 'block';
+    if (distractPopUp.style.display === 'block') {
+        resetPopUp();
+    } else {
+        distractPopUp.style.display = 'block';
+    }
 });
   
 cancelButton.addEventListener('click', () => {
