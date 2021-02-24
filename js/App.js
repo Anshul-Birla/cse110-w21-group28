@@ -13,7 +13,11 @@ const TDLDom = new TodoListDom(todoTable, addTodoForm, addTodoButton);
 const TimerObj = new Timer(startTimerButton, timeDisplay, modeDisplay);
 
 startTimerButton.addEventListener('click', () => {
-  TimerObj.startTimer();
+  if (TimerObj.end) {
+    TimerObj.startTimer();
+  } else {
+    TimerObj.endTimer();
+  }
 });
 
 TimerObj.addEventListener('timer-complete', (e) => {

@@ -45,6 +45,11 @@ class Timer extends HTMLElement {
      * @type {HTMLElement}
      */
     this.displayStatus = displayStatus;
+    /**
+     * Checks if session has ended
+     * @type {Boolean}
+     */
+    this.end = true;
 
     // this is the order for the timer. It will loop in this order.
     const workOrder = [workMode, shortBreakMode, workMode,
@@ -78,10 +83,26 @@ class Timer extends HTMLElement {
    * Updates the display for the status.
    */
   startTimer() {
+    this.end = false;
     const session = this.stateQueue[0];
     this.state = session.name;
     this.displayStatus.textContent = this.state;
     this.countdown(session.duration * 60);
+  }
+
+  /**
+   * Ends the timer.
+   * Updates the display for the status.
+   */
+  endTimer() {
+    this.end = true;
+    this.displayStatus.textContent = "Pomo-Time!";
+    this.displayTime.textContent = '25:00'
+    const workOrder = [workMode, shortBreakMode, workMode,
+      shortBreakMode, workMode, shortBreakMode, workMode, longBreakMode];
+    for (let i = 0; i < workOrder.length; i += 1) {
+      this.stateQueue.push(workOrder[i]);
+    }
   }
 
   /**
@@ -90,6 +111,9 @@ class Timer extends HTMLElement {
    * @param {Number} duration Amount of seconds for the timer to run
    */
   countdown(duration) {
+    if (this.end) {
+      return;
+    }
     const minutes = Math.floor(duration / 60);
     const seconds = duration % 60;
     let displayString = '';
@@ -117,7 +141,7 @@ class Timer extends HTMLElement {
       if (this.startButton.textContent === buttonText.startTimerText) {
         this.startButton.textContent = buttonText.stopTimerText;
         this.startButton.class = classNames.stopButton;
-        this.startTimer();
+        //this.startTimer();
       } else {
         this.startButton.textContent = buttonText.startTimerText;
         this.startButton.class = classNames.startButton;
