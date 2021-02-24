@@ -5,6 +5,8 @@
   <meta charset='utf-8'>
   <link rel='shortcut icon' href='#' />
   <link rel='stylesheet' href='./css/style.css' />
+  <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.5/build/pure-min.css" integrity="sha384-LTIDeidl25h2dPxrB2Ekgc9c7sEC3CWGM6HeFmuDNUjX76Ert4Z4IY714dhZHPLd" crossorigin="anonymous">
+  <meta name="viewport" content="width=device-width, initial-scale=1"> 
   <title>Pomo App</title>
 </head>
 
@@ -40,17 +42,24 @@
         <td>Delete</td>
       </th>
     </table>
-  </section>
-
-  <div>
-    <form id = "add-todo" style = "display: none;">
-      <input type="text" name="task-name" placeholder="Write Essay">
-      <input type="number" name="task-length" placeholder="1">
+    <form id = "add-todo" style = "display: inline;">
+      <input type="text" name="task-name" placeholder="Add task" class="task-name">
+      <input type="number" name="task-length" placeholder="# of pomos" class="task-length">
       <input type="submit">
     </form>
-    <button id = "add-button" type="button">Add a task</button>
-  </div>
+    <button id = "add-button" class="addTaskButton" type="button">Add a task</button>
+  </section>
 
+  <!----
+  <div>
+    <form id = "add-todo" style = "display: none;">
+      <input type="text" name="task-name" placeholder="Add task">
+      <input type="number" name="task-length" placeholder="1">
+      <input type="submit" class="addTaskButton">
+    </form>
+    <button id = "add-button" class="addTaskButton" type="button">Add a task</button>
+  </div>
+-->
   <!-- Linked section on page under task list for summary & statistics of work sessions -->
   <section id='stats' class='linked_section'>
     <h2>Stats</h2>
