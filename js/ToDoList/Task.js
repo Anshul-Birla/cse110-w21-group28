@@ -8,7 +8,7 @@ import { TaskStorage } from './TodoListDomVariables.js';
  */
 class Task extends HTMLTableRowElement {
   /**
-  * Task constructor. Initializes the task with appropriate attributes
+  * Task construcutor. Initializes the task with appropriate attributes
   * @param {String} id
   * @param {String} name
   * @param {Number} totalSessions
@@ -98,7 +98,6 @@ class Task extends HTMLTableRowElement {
     console.log(id, window.localData);
     localStorage.setItem('tasks', JSON.stringify(window.localData));
   }
-
   /**
    * Update method to edit task name
    */
@@ -112,7 +111,7 @@ class Task extends HTMLTableRowElement {
   updatePomoSessions() {
     this.children[2].textContent = `[${this.currentSessionNum}/\
       ${this.totalSessions}]`;
-  }
+  } 
 
   /**
    * Increment this task's current session number. Checks off task if all sessions completed.

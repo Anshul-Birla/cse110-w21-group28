@@ -63,7 +63,7 @@ class ToDoList {
   }
 
   /**
-   * @description - Synchronize window.localData and localStorage
+   * @description - Synchronize window.localData and localStorage 
    */
   updateLocalStorage(){
     console.log("setting localStorage", window.localData);
