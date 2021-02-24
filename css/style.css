@@ -34,8 +34,9 @@ header {
 }
 
 #tasklist {
-  height: 30vh;
-  width: 40vw;
+  height: 50vh;
+  width: 60vw;
+
   background-color: slategrey;
   overflow-y: scroll;
   /* overflow-x: hidden; */
