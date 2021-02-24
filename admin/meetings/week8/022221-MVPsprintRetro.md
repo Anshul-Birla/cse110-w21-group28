@@ -50,7 +50,21 @@
    + checkbox
      + [codepen](https://codepen.io/GeoffreyCrofte/pen/BiHzp)
      + bootstrap - compile single checkbox from it
-   + table
+   + table styling?
+
+what everyone is going to do?
++ Kewen - local storage
+  + clear all button to delete all tasks from local storage or delete one by one
+  + maybe one day expire storage?
+  + implement after implementing delete tasks
++ dev team - discuss later
+  + need people to play around and break stuff
++ Michael - make stop button to stop the timer completely
+  + wait for Ravi's PR to get merged into main
++ Ryan - send color schemes and add svg to stats and faq 
++ Ravi, Nick, Kyeling - styling table
+  + meet Wednesday
++ group - meet Wednesday to film video
 
 **Anything on the agenda that was not discussed:**  None
 
@@ -59,5 +73,6 @@
 
 **Decisions made:** 
 + whoever styles the checkboxes can pick the style
++ increase daily communication by sending daily messages in slack
 
-**When the meeting finished:**
+**When the meeting finished:** 9:03 pm
