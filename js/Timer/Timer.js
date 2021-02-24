@@ -3,15 +3,15 @@ import { workMode, shortBreakMode, longBreakMode } from './TimerModes.js';
 /**
  * A class for the Timer object. Has functions to start the timer,
  * display the current mode of the timer and display the time remaining
+ * Class throws the 'timer-complete' event
  */
 class Timer extends HTMLElement {
   /**
    * Constructor of Time Object. Takes the HTML element of where
    * you want the time and the status of the timer to be implemented.
    * HTML Elements must have the 'textElement' attribute.
-   * @param {HTML Element} displayTime
-   * @param {HTML Element} displayStatus
-   * @param {ToDoList}     todoList
+   * @param {HTML Element} displayTime element where to store the display
+   * @param {HTML Element} displayStatus element where to store the status fo the timer
    */
   constructor(displayTime, displayStatus) {
     super();
@@ -24,8 +24,8 @@ class Timer extends HTMLElement {
      * Queue that stores the Session objects. Rotates to provide
      * rotation functionality for the timer
      * @type {Object[]}
-     * @property {String} object.name
-     * @property {Number} object.duration
+     * @property {String} object.name name of the session
+     * @property {Number} object.duration duration of the session
      */
     this.stateQueue = [];
     /**
@@ -78,7 +78,7 @@ class Timer extends HTMLElement {
   /**
    * Counts down the timer for duration amount of minutes.
    * Updates the DOM with current time remaining.
-   * @param {Number} duration
+   * @param {Number} duration Amount of seconds for the timer to run
    */
   countdown(duration) {
     const minutes = Math.floor(duration / 60);

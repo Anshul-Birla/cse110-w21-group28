@@ -2,8 +2,8 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <base data-ice="baseUrl">
-  <title data-ice="title">Home | cse110-w21-group28</title>
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">js/ToDoList/ToDoList.js | cse110-w21-group28</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
@@ -42,7 +42,95 @@
 </div>
 </nav>
 
-<div class="content" data-ice="content"><div data-ice="index" class="github-markdown"><h1 id="-cse110-w21-group28">-cse110-w21-group28</h1></div>
+<div class="content" data-ice="content"><h1 data-ice="title">js/ToDoList/ToDoList.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { Task } from &apos;./Task.js&apos;;
+
+/**
+ * Queue based TodoList data structure which holds Task objects.
+ * API-like methods to perform operations on the underlying queue
+ */
+class ToDoList {
+  /**
+   * Initializes the todolist array and the counter for id&apos;s
+   */
+  constructor() {
+    /**
+     * Array that stores each task
+     * @type {Task[]}
+     */
+    this.taskList = [];
+    /**
+     * This is the total task count that is also a way
+     * to give each task a unique id
+     * @type {number}
+     */
+    this.idCounter = 0;
+  }
+
+  /**
+   * Verifies that incoming parameters are non-empty and defined, then creates Task
+   * @param {String} name Task subject
+   * @param {Number} totalSession Projected number of Pomo Sessions
+   *
+   * @returns {Task} Task object to be placed into DOM
+   *
+   * @throws {Undefined Name} Task name cannot be undefined
+   * @throws {Empty Name} Task name is an empty string
+   * @throws {Undefiend Length Task} Expected number of pomo sessions is undefined
+   * @throws {0 Length Task} Expected number of pomo sessions is 0
+   */
+  addTask(name, totalSession) {
+    if (name === undefined) {
+      throw new Error(&apos;Undefined Name&apos;);
+    } else if (name === &apos;&apos;) {
+      throw new Error(&apos;Empty Name&apos;);
+    } else if (totalSession === undefined) {
+      throw new Error(&apos;Undefined Length Task&apos;);
+    } else if (totalSession === 0) {
+      throw new Error(&apos;0 Length Task&apos;);
+    } else if (Number.isNaN(totalSession)) {
+      throw new Error(&apos;Number Not Passed In&apos;);
+    }
+
+    const task = new Task(this.idCounter, name, totalSession);
+    this.idCounter += 1;
+    this.taskList.push(task);
+    return task;
+  }
+
+  /**
+   * Gets the first unchecked task
+   *
+   * @returns {Task} First unchecked task in the list
+   *
+   * @throws {&apos;Empty ToDo List&apos;} No tasks can be checked off if no tasks exist
+   * @throws {&apos;No Current Task&apos;} All tasks in the list have been checked off
+   */
+  getCurrentTask() {
+    if (this.taskList.length === 0) {
+      throw new Error(&apos;Empty ToDo List&apos;);
+    }
+    for (let i = 0; i &lt; this.taskList.length; i += 1) {
+      if (!this.taskList[i].checked) {
+        return this.taskList[i];
+      }
+    }
+    throw new Error(&apos;No Current Task&apos;);
+  }
+
+  /**
+   * Called by the Timer function when a session is done
+   * Increments the current task
+   */
+  onSessionComplete() {
+    const currTask = this.getCurrentTask();
+    currTask.incrementSession();
+  }
+}
+
+export { ToDoList };
+</code></pre>
+
 </div>
 
 <footer class="footer">

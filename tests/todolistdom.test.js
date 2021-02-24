@@ -24,7 +24,7 @@ beforeEach(() => {
     </div> `;
 });
 
-test('Valid construction of TDLDom', ()  => {
+test('Valid construction of TDLDom', () => {
   const tableLocation = document.getElementById('todo');
   const formLocation = document.getElementById('add-todo');
   const btnLocation = document.getElementById('add-button');
@@ -37,11 +37,9 @@ test('Add a task', () => {
   const formLocation = document.getElementById('add-todo');
   const btnLocation = document.getElementById('add-button');
   const myDOM = new TodoListDom(tableLocation, formLocation, btnLocation);
-  formLocation.children[0].setAttribute("value", "Write Essay");
+  formLocation.children[0].setAttribute('value', 'Write Essay');
   formLocation.children[1].value = 2;
   formLocation.submit();
-  //console.log(tableLocation.innerHTML);
-  //console.log(tableLocation.children[1].innerHTML);
   expect(tableLocation.children[1].children[1].textContent).toMatch(new RegExp('Write *Essay'));
   expect(tableLocation.children[1].children[2].textContent).toMatch(new RegExp('\\[0/ *2\\]'));
 });
@@ -51,7 +49,7 @@ test('Increment session ', () => {
   const formLocation = document.getElementById('add-todo');
   const btnLocation = document.getElementById('add-button');
   const myDOM = new TodoListDom(tableLocation, formLocation, btnLocation);
-  formLocation.children[0].value = "Write Essay";
+  formLocation.children[0].value = 'Write Essay';
   formLocation.children[1].value = 2;
   formLocation.submit();
   myDOM.onSessionComplete();
@@ -59,14 +57,13 @@ test('Increment session ', () => {
   expect(tableLocation.children[1].children[2].textContent).toMatch(new RegExp('\\[1/ *2\\]'));
 });
 
-
 test('Show and hide form', () => {
   const tableLocation = document.getElementById('todo');
   const formLocation = document.getElementById('add-todo');
   const btnLocation = document.getElementById('add-button');
   const myDOM = new TodoListDom(tableLocation, formLocation, btnLocation);
   btnLocation.click();
-  expect(formLocation.getAttribute("style")).toEqual('');
+  expect(formLocation.getAttribute('style')).toEqual('');
   btnLocation.click();
-  expect(formLocation.getAttribute("style")).toEqual("display: none;");
+  expect(formLocation.getAttribute('style')).toEqual('display: none;');
 });

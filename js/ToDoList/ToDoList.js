@@ -1,6 +1,13 @@
 import { Task } from './Task.js';
 
+/**
+ * Queue based TodoList data structure which holds Task objects.
+ * API-like methods to perform operations on the underlying queue
+ */
 class ToDoList {
+  /**
+   * Initializes the todolist array and the counter for id's
+   */
   constructor() {
     /**
      * Array that stores each task
@@ -16,16 +23,16 @@ class ToDoList {
   }
 
   /**
-   * @description - Verifies that incoming parameters are non-empty and defined, then creates Task
-   * @param {String} name - Task subject
-   * @param {Number} totalSession - Projected number of Pomo Sessions
+   * Verifies that incoming parameters are non-empty and defined, then creates Task
+   * @param {String} name Task subject
+   * @param {Number} totalSession Projected number of Pomo Sessions
    *
    * @returns {Task} Task object to be placed into DOM
    *
-   * @throws {Undefined Name} - Task name cannot be undefined
-   * @throws {Empty Name} - Task name is an empty string
-   * @throws {Undefiend Length Task} - Expected number of pomo sessions is undefined
-   * @throws {0 Length Task} - Expected number of pomo sessions is 0
+   * @throws {Undefined Name} Task name cannot be undefined
+   * @throws {Empty Name} Task name is an empty string
+   * @throws {Undefiend Length Task} Expected number of pomo sessions is undefined
+   * @throws {0 Length Task} Expected number of pomo sessions is 0
    */
   addTask(name, totalSession) {
     if (name === undefined) {

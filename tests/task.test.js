@@ -1,5 +1,6 @@
 /* eslint-disable eqeqeq */
 import { Task } from '../js/ToDoList/Task.js';
+import { classNames } from '../js/ToDoList/TaskVariables.js';
 
 /** @Test {Task} */
 
@@ -20,6 +21,7 @@ test('Test that task with initialized values is initialized correctly', () => {
   expect(currTask.currentSessionNum).toEqual(0);
   expect(currTask.totalSessions).toEqual(5);
   expect(currTask.id == 0).toBe(true);
+  expect(currTask.className).toBe(classNames.uncheckedTaskClassName);
 });
 
 test('Increment counter only changes current session number', () => {
@@ -64,4 +66,11 @@ test('Error is thrown after incrementing past totalSessions', () => {
   }
   const taskIncSession = () => { currTask.incrementSession(); };
   expect(taskIncSession).toThrow(RangeError);
+});
+
+test('Test that Checkbox works properly', () => {
+  const currTask = new Task(0, 'Test task', 5);
+  currTask.checkBox.click();
+  expect(currTask.checked).toBe(true);
+  expect(currTask.className).toBe(classNames.completedTaskClassName);
 });

@@ -2,8 +2,8 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <base data-ice="baseUrl" href="../../">
-  <title data-ice="title">tests/timer.test.js | cse110-w21-group28</title>
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">js/Timer/Timer.js | cse110-w21-group28</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
@@ -42,67 +42,112 @@
 </div>
 </nav>
 
-<div class="content" data-ice="content"><h1 data-ice="title">tests/timer.test.js</h1>
-<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { Timer } from &apos;../js/Timer/Timer&apos;;
-import { workMode, shortBreakMode, longBreakMode } from &apos;../js/Timer/TimerModes&apos;;
+<div class="content" data-ice="content"><h1 data-ice="title">js/Timer/Timer.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { workMode, shortBreakMode, longBreakMode } from &apos;./TimerModes.js&apos;;
 
-beforeEach(() =&gt; {
-  jest.useFakeTimers();
-  jest.clearAllTimers();
-});
+/**
+ * A class for the Timer object. Has functions to start the timer,
+ * display the current mode of the timer and display the time remaining
+ * Class throws the &apos;timer-complete&apos; event
+ */
+class Timer extends HTMLElement {
+  /**
+   * Constructor of Time Object. Takes the HTML element of where
+   * you want the time and the status of the timer to be implemented.
+   * HTML Elements must have the &apos;textElement&apos; attribute.
+   * @param {HTML Element} displayTime element where to store the display
+   * @param {HTML Element} displayStatus element where to store the status fo the timer
+   */
+  constructor(displayTime, displayStatus) {
+    super();
+    /**
+     * State of the timer (the current mode)
+     * @type {String}
+     */
+    this.state = &apos;&apos;;
+    /**
+     * Queue that stores the Session objects. Rotates to provide
+     * rotation functionality for the timer
+     * @type {Object[]}
+     * @property {String} object.name name of the session
+     * @property {Number} object.duration duration of the session
+     */
+    this.stateQueue = [];
+    /**
+     * HTML Tag that is reponsible for displaying the time remaining
+     * @type {HTML_Element}
+     */
+    this.displayTime = displayTime;
+    /**
+     * HTML Tag that is reponsible for displaying the mode of the timer
+     * @type {HTML_Element}
+     */
+    this.displayStatus = displayStatus;
 
-test(&apos;Test Initial State is Nothing&apos;, () =&gt; {
-  const TimerObj = new Timer(null, null);
-  expect(TimerObj.state).toBe(&apos;&apos;);
-});
+    // this is the order for the timer. It will loop in this order.
+    const workOrder = [workMode, shortBreakMode, workMode,
+      shortBreakMode, workMode, shortBreakMode, workMode, longBreakMode];
+    for (let i = 0; i &lt; workOrder.length; i += 1) {
+      this.stateQueue.push(workOrder[i]);
+    }
+  }
 
-test(&apos;Test First Iteration of Timer&apos;, () =&gt; {
-  document.body.innerHTML = &apos;&lt;div&gt;&apos;
-  + &apos;  &lt;p id=&quot;displayTime&quot;&gt;&lt;/p&gt;&apos;
-  + &apos; &lt;p id=&quot;displayStatus&quot;&gt;&lt;/p&gt;&apos;
-  + &apos;&lt;/div&gt;&apos;;
+  /**
+   * Function that fires when the timer runs out of time.
+   * Moves on to start the timer again at the end of the function.
+   */
+  onTimerComplete() {
+    const completedSession = this.stateQueue.shift();
+    this.stateQueue.push(completedSession);
+    const event = new CustomEvent(&apos;timer-complete&apos;, {
+      detail: {
+        sessionName: completedSession.name,
+      },
+    });
 
-  const displayTime = document.getElementById(&apos;displayTime&apos;);
-  const displayStatus = document.getElementById(&apos;displayStatus&apos;);
-  const TimerObj = new Timer(displayTime, displayStatus);
-  TimerObj.startTimer();
-  expect(TimerObj.state).toBe(workMode.name);
-});
+    this.dispatchEvent(event);
+    this.startTimer();
+  }
 
-test(&apos;Test That Queue Gets Updated During Second Iteration Of Timer&apos;, () =&gt; {
-  document.body.innerHTML = &apos;&lt;div&gt;&apos;
-  + &apos;  &lt;p id=&quot;displayTime&quot;&gt;&lt;/p&gt;&apos;
-  + &apos; &lt;p id=&quot;displayStatus&quot;&gt;&lt;/p&gt;&apos;
-  + &apos;&lt;/div&gt;&apos;;
+  /**
+   * Starts the timer for the session at the top of the queue.
+   * Updates the display for the status.
+   */
+  startTimer() {
+    const session = this.stateQueue[0];
+    this.state = session.name;
+    this.displayStatus.textContent = this.state;
+    this.countdown(session.duration * 60);
+  }
 
-  const displayTime = document.getElementById(&apos;displayTime&apos;);
-  const displayStatus = document.getElementById(&apos;displayStatus&apos;);
-  const TimerObj = new Timer(displayTime, displayStatus);
-  jest.clearAllTimers();
-  TimerObj.startTimer();
+  /**
+   * Counts down the timer for duration amount of minutes.
+   * Updates the DOM with current time remaining.
+   * @param {Number} duration Amount of seconds for the timer to run
+   */
+  countdown(duration) {
+    const minutes = Math.floor(duration / 60);
+    const seconds = duration % 60;
+    let displayString = &apos;&apos;;
+    if (seconds &lt; 10) {
+      displayString = `${minutes}:0${seconds}`;
+    } else {
+      displayString = `${minutes}:${seconds}`;
+    }
+    this.displayTime.textContent = displayString;
+    duration -= 1;
+    if (duration &gt;= 0) {
+      setTimeout(() =&gt; {
+        this.countdown(duration);
+      }, 1000);
+    } else {
+      this.onTimerComplete();
+    }
+  }
+}
 
-  jest.advanceTimersByTime(workMode.duration * 60 * 1000);
-
-  expect(TimerObj.stateQueue[0]).toBe(shortBreakMode);
-  expect(TimerObj.stateQueue[6]).toBe(longBreakMode);
-});
-
-test(&apos;Test That HTML Gets Updated During Second &apos;, () =&gt; {
-  document.body.innerHTML = &apos;&lt;div&gt;&apos;
-  + &apos;  &lt;p id=&quot;displayTime&quot;&gt;&lt;/p&gt;&apos;
-  + &apos; &lt;p id=&quot;displayStatus&quot;&gt;&lt;/p&gt;&apos;
-  + &apos;&lt;/div&gt;&apos;;
-
-  const displayTime = document.getElementById(&apos;displayTime&apos;);
-  const displayStatus = document.getElementById(&apos;displayStatus&apos;);
-  const TimerObj = new Timer(displayTime, displayStatus);
-  jest.clearAllTimers();
-  TimerObj.startTimer();
-  jest.advanceTimersByTime(workMode.duration * 60 * 1000);
-
-  expect(displayStatus.textContent).toBe(shortBreakMode.name);
-  expect(displayTime.textContent).toBe(`${shortBreakMode.duration}:00`);
-});
+customElements.define(&apos;custom-timer&apos;, Timer);
+export { Timer };
 </code></pre>
 
 </div>

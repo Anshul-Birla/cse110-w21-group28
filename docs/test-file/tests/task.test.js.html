@@ -2,8 +2,8 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <base data-ice="baseUrl">
-  <title data-ice="title">Home | cse110-w21-group28</title>
+  <base data-ice="baseUrl" href="../../">
+  <title data-ice="title">tests/task.test.js | cse110-w21-group28</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
@@ -42,7 +42,85 @@
 </div>
 </nav>
 
-<div class="content" data-ice="content"><div data-ice="index" class="github-markdown"><h1 id="-cse110-w21-group28">-cse110-w21-group28</h1></div>
+<div class="content" data-ice="content"><h1 data-ice="title">tests/task.test.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/* eslint-disable eqeqeq */
+import { Task } from &apos;../js/ToDoList/Task.js&apos;;
+import { classNames } from &apos;../js/ToDoList/TaskVariables.js&apos;;
+
+/** @Test {Task} */
+
+test(&apos;Test that task with no values is empty&apos;, () =&gt; {
+  const currTask = new Task();
+  expect(currTask.name).toBe(undefined);
+  // console.log(currTask.name);
+  expect(currTask.checked).toBe(false);
+  expect(currTask.currentSessionNum).toEqual(0);
+  expect(currTask.totalSessions).toBe(undefined);
+  expect(currTask.id == &apos;undefined&apos;).toBeTruthy();
+});
+
+test(&apos;Test that task with initialized values is initialized correctly&apos;, () =&gt; {
+  const currTask = new Task(0, &apos;Test task&apos;, 5);
+  expect(currTask.name).toBe(&apos;Test task&apos;);
+  expect(currTask.checked).toBe(false);
+  expect(currTask.currentSessionNum).toEqual(0);
+  expect(currTask.totalSessions).toEqual(5);
+  expect(currTask.id == 0).toBe(true);
+  expect(currTask.className).toBe(classNames.uncheckedTaskClassName);
+});
+
+test(&apos;Increment counter only changes current session number&apos;, () =&gt; {
+  const currTask = new Task(0, &apos;Test task&apos;, 5);
+  expect(currTask.name).toBe(&apos;Test task&apos;);
+  expect(currTask.currentSessionNum).toBe(0);
+  expect(currTask.totalSessions).toBe(5);
+  expect(currTask.id == 0).toBeTruthy();
+  expect(currTask.checked).toBe(false);
+  currTask.incrementSession();
+  expect(currTask.name).toBe(&apos;Test task&apos;);
+  expect(currTask.currentSessionNum).toBe(1);
+  expect(currTask.totalSessions).toBe(5);
+  expect(currTask.id == 0).toBeTruthy();
+  expect(currTask.checked).toBe(false);
+});
+
+test(&apos;Increment counter works up to total sessions, task is completed at the end&apos;, () =&gt; {
+  const currTask = new Task(0, &apos;Test task&apos;, 5);
+  expect(currTask.name).toBe(&apos;Test task&apos;);
+  expect(currTask.currentSessionNum).toBe(0);
+  expect(currTask.totalSessions).toBe(5);
+  expect(currTask.id == 0).toBeTruthy();
+  for (let i = 0; i &lt; 5; i += 1) {
+    currTask.incrementSession();
+  }
+  expect(currTask.name).toBe(&apos;Test task&apos;);
+  expect(currTask.currentSessionNum).toBe(5);
+  expect(currTask.totalSessions).toBe(5);
+  expect(currTask.id == 0).toBeTruthy();
+  expect(currTask.checked).toBe(true);
+});
+
+test(&apos;Error is thrown after incrementing past totalSessions&apos;, () =&gt; {
+  const currTask = new Task(0, &apos;Test task&apos;, 5);
+  expect(currTask.name).toBe(&apos;Test task&apos;);
+  expect(currTask.currentSessionNum).toBe(0);
+  expect(currTask.totalSessions).toBe(5);
+  expect(currTask.id == 0).toBeTruthy();
+  for (let i = 0; i &lt; 5; i += 1) {
+    currTask.incrementSession();
+  }
+  const taskIncSession = () =&gt; { currTask.incrementSession(); };
+  expect(taskIncSession).toThrow(RangeError);
+});
+
+test(&apos;Test that Checkbox works properly&apos;, () =&gt; {
+  const currTask = new Task(0, &apos;Test task&apos;, 5);
+  currTask.checkBox.click();
+  expect(currTask.checked).toBe(true);
+  expect(currTask.className).toBe(classNames.completedTaskClassName);
+});
+</code></pre>
+
 </div>
 
 <footer class="footer">

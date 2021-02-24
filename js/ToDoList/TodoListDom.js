@@ -1,8 +1,14 @@
 import { ToDoList } from './ToDoList.js';
 import { HTMLAttributes } from './TodoListDomVariables.js';
 
+/**
+ * Class responsible for providing changes to the DOM for the TodoList 
+ * Encapsulates the TodoList class
+ * Done so their is a clear abstraction from DOM Manipulation and Data Manipulation
+ */
 class TodoListDom {
   /**
+   * Initializes the TodoListDom object with its correct member variables
    * @param {HTMLTableElement} HTMLTable
    * @param {HTMLFormElement} HTMLForm
    * @param {HTMLButtonElement} HTMLButton
@@ -73,6 +79,9 @@ class TodoListDom {
     this.table.appendChild(newTask);
   }
 
+  /**
+   * This function runs when the timer is done with its working session
+   */
   onSessionComplete() {
     this.todoList.onSessionComplete();
   }

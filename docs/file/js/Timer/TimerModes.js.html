@@ -2,8 +2,8 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <base data-ice="baseUrl">
-  <title data-ice="title">Home | cse110-w21-group28</title>
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">js/Timer/TimerModes.js | cse110-w21-group28</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
@@ -42,7 +42,26 @@
 </div>
 </nav>
 
-<div class="content" data-ice="content"><div data-ice="index" class="github-markdown"><h1 id="-cse110-w21-group28">-cse110-w21-group28</h1></div>
+<div class="content" data-ice="content"><h1 data-ice="title">js/Timer/TimerModes.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">// these are all variables for the Timer. Changing these will change them universally
+
+const workMode = {
+  name: &apos;Working Time&apos;,
+  duration: 25,
+};
+const shortBreakMode = {
+  name: &apos;Short Break&apos;,
+  duration: 5,
+};
+
+const longBreakMode = {
+  name: &apos;Long Break&apos;,
+  duration: 15,
+};
+
+export { workMode, shortBreakMode, longBreakMode };
+</code></pre>
+
 </div>
 
 <footer class="footer">
