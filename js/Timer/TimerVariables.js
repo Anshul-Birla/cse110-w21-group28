@@ -14,4 +14,16 @@ const longBreakMode = {
   duration: 15,
 };
 
-export { workMode, shortBreakMode, longBreakMode };
+const classNames = {
+  stopButton: 'stopTimerButton',
+  startButton: 'startTimerButton',
+};
+
+const buttonText = {
+  stopTimerText: 'End Day',
+  startTimerText: 'Start',
+};
+
+export {
+  workMode, shortBreakMode, longBreakMode, classNames, buttonText,
+};

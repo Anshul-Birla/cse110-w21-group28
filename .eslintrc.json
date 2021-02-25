@@ -13,14 +13,15 @@
         "import/prefer-default-export":"off",
         "no-param-reassign":"off",
         "import/extensions":"off",
-        "ignoreComments": "off"
+        "ignoreComments": "off", 
+        "no-new":"warn"
     },
     "overrides":[
         {
             "files": ["*.test.js"],
             "rules": {
                 "no-undef":"off",
-                "no-unused-vars":"warn"
+                "no-unused-vars":"off"
             }
         }
     ],
