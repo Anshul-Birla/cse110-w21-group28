@@ -150,6 +150,7 @@ h1, b {
   color: black; /* so that text shows up for distraction box against white background */
 }
 
+
 /* css styling for to-do list table */
 table {
   width: 100%;  /* % width of container */
@@ -163,7 +164,7 @@ th, td {
   word-wrap: break-word; /* so that long tasks don't extend the table */
 }
 th {
-  background-color: #339E66FF;
+  background-color: var(--header-color);
   color:white;
   text-align: left;
   padding: 20px 10px;
@@ -173,15 +174,25 @@ th {
 }
 /* color pairs: 
 (#9CC3D5FF, #0063B2FF), (#FCF6F5FF, #89ABE3FF), (#85B3D1FF, #B3C7D6FF) */
+
+:root {
+  /* --even-color: #95DBE5FF;
+  --odd-color: #078282FF; */
+  --even-color: rgba(149, 218, 229, 0.603);
+  --odd-color: darkcyan;
+  --header-color: #339E66FF;
+}
+
 tr:nth-child(even) td {
-  background-color: #95DBE5FF;
-  color: #078282FF;
+  background-color: var(--even-color);
+  /* color: var(--odd-color); */
 }
 tr:nth-child(odd) td {
-  background-color: #078282FF;
-  color: #95DBE5FF;
+  background-color: var(--odd-color);
+  /* color: var(--even-color); */
 }
-tr:hover {
+
+tr:hover td {
   background-color: #f2f2f279;
 }
 
@@ -194,11 +205,7 @@ input[type='checkbox'] {
   border-radius: 10px; /* circular check"boxes" if uncomment webkit line */
 }
 input[type='checkbox']:checked {
-  background: #339E66FF;
   box-shadow: 0 0 0 3px lime;
-}
-td > input[type='checkbox']:checked { /* currently doesn't do anything */
-  text-decoration: line-through;
 }
 
 .col1-checkbox, .col3-pomos, .col4-delete {
@@ -218,9 +225,9 @@ td > input[type='checkbox']:checked { /* currently doesn't do anything */
   position: sticky;
   bottom: 0px;
   width: 100%;
-  background-color: #339E66FF; 
-  padding-top: 5px;
-  padding-bottom: 5px;
+  background-color: var(--header-color); 
+  padding-top: 10px;
+  padding-bottom: 10px;
   min-width: 630px;
 }
 
@@ -246,7 +253,7 @@ td > input[type='checkbox']:checked { /* currently doesn't do anything */
   height: 60px;
   width: 60px;
   position: absolute;
-  bottom: 5px;
+  bottom: 10px;
   color: black;
 }
 
