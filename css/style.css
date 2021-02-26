@@ -198,9 +198,12 @@ input[type='checkbox']:checked {
 td > input[type='checkbox']:checked { /* currently doesn't do anything */
   text-decoration: line-through;
 }
-#col3 { /* currently doesn't do anything */
-  font-weight: bold;
-  color: red;
+
+.col1-checkbox, .col3-pomos, .col4-delete {
+  width: 10%;
+}
+.col2-task {
+  width: 70%;
 }
 
 .delete-button {
