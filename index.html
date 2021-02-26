@@ -70,7 +70,21 @@
   <section id='faq' class='linked_section'>
     <h2>FAQ</h2>
   </section>
+
+  <!-- Distraction Box-->
+  <section class="form-popup" id="distract-popup">
+    <form class="form-container" id="distract-form-container">
+      <h1>Report Distraction</h1>
+  
+      <label><b>Distraction Description</b></label>
+      <input type="text" placeholder="Enter a short description of the distraction" id="description">
+  
+      <button type='button' class="distractFormButton" id="submit-button">Submit</button>
+      <button type="button" class="distractFormButton cancel" id="cancel-button">Cancel</button>
+    </form> 
+  </section>
   <script type='module' src='./js/App.js'></script>
+  <script type='module' src='./js/Distraction.js'></script>
   
   <div id='faq'>
      
@@ -149,7 +163,5 @@
 
 
 </div>
-
-
 </body>
 </html>
