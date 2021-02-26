@@ -210,22 +210,8 @@ td > input[type='checkbox']:checked { /* currently doesn't do anything */
 
 .delete-button {
   color: black;
+  border-radius: 40%;
 }
-
-
-/* .addTaskButton {
-  position: absolute;
-  color: white;
-  border-radius: 4px;
-  border-style: none;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-  background: rgb(66, 184, 221);
-  padding: 5px 5px 5px 5px;
-  height: 7vh;
-  width: 40vw;
-  font-size: 5vh;
-  bottom: 0;
-} */
 
 #add-todo { /* form id */
   position: -webkit-sticky;
@@ -246,6 +232,14 @@ td > input[type='checkbox']:checked { /* currently doesn't do anything */
   padding-right: 15px; /* so that when a user enters a long task it doesn't go past the input bar */
   color: black;
 }
+
+.task-name {
+  width: calc(56% - 60px);
+}
+.task-length {
+  width: calc(42% - 60px);
+}
+
 .task-submit {
   font-size: 40px;
   border-radius: 100%;
@@ -254,13 +248,6 @@ td > input[type='checkbox']:checked { /* currently doesn't do anything */
   position: absolute;
   bottom: 5px;
   color: black;
-}
-
-.task-name {
-  width: calc(0.5 * (100% - 60px));
-}
-.task-length {
-  width: calc(0.4 * (100% - 60px));
 }
 
 .completedTask { /* class name for checked items??? */
