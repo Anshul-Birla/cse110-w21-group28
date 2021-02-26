@@ -2,9 +2,9 @@
 
 **Type of meeting:** finish integrating parts for version 1 of timer
 
-**Which members were present:** Anastasiia Makhniaieva, Anshul Birla, Dan Magaril, Michael Vu, Nick Krolikowski, Kewen Zhao, Kyeling Ong, Ravi Tapia, Ryan Nishimoto
+**Which members were present:** Anastasiia Makhniaieva, Anshul Birla, Dan Magaril, Michael Vu, Nick Krolikowski, Kewen Zhao, Ravi Tapia, Ryan Nishimoto
 
-**Members who were not present:** None
+**Members who were not present:** Kyeling Ong
 
 **Where/when meeting was held:** zoom, 7:00 pm, Thu 2/25/21
 
