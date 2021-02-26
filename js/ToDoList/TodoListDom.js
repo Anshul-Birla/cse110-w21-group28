@@ -42,8 +42,6 @@ class TodoListDom {
    * Sets up the form dissapearing and submit event listeners
    */
   setupEventListeners() {
-    // this.form.setAttribute('style', '');
-
     this.form.addEventListener('submit', (e) => {
       e.preventDefault();
       const data = new FormData(this.form);

@@ -1,12 +1,12 @@
 <!doctype html>
 
-<html lang='en'>
+<html lang="en">
 <head>
-  <meta charset='utf-8'>
-  <link rel='shortcut icon' href='#' />
-  <link rel='stylesheet' href='./css/style.css' />
-  <link rel='stylesheet' href='https://unpkg.com/purecss@2.0.5/build/pure-min.css' integrity='sha384-LTIDeidl25h2dPxrB2Ekgc9c7sEC3CWGM6HeFmuDNUjX76Ert4Z4IY714dhZHPLd' crossorigin='anonymous'>
-  <meta name='viewport' content='width=device-width, initial-scale=1'> 
+  <meta charset="utf-8">
+  <link rel="shortcut icon" href="#" />
+  <link rel="stylesheet" href="./css/buttons-min.css"/>
+  <link rel="stylesheet" href="./css/style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"> 
   <title>Pomo App</title>
 </head>
 
@@ -15,20 +15,31 @@
   <!-- Header bar at the top of the page for title text & navigation -->
   <header>
     <h1>
-      Version 0 of our Pomo App
+      Pomodoro Timer
+      <div class="icon-container">
+        <p>Stats</p>
+        <p>FAQ</p>
+        <button id="statsButton" class="pure-button icons">
+          <img src="./assets/img/barchart.png" width="35" height="35">
+          <a href="#Stats"></a>
+        </button>
+        <button id="faqButton" class="pure-button icons">
+          <img src="./assets/img/question.png" width="35" height="35">
+          <a href="#FAQ"></a>
+        </button>
+      </div>
     </h1>
-    <button id='faqButton' class='icons'><a href='#FAQ'>FAQ</a></button>
-    <button id='statsButton' class='icons'><a href='#Stats'>Stats</a></button>
+    
   </header>
 
   <!-- Container for timer, timer buttons, and distraction button + prompt -->
-  <section id='timer' class='section_container'>
-    <div id='countdown'>
-      <p id='modeDisplay'> Pomo-Time!</p>
-      <p id='timeDisplay'> 25:00 </p>
+  <section id="timerContainer" class="section-container">
+    <div id="countdown">
+      <p id="modeDisplay"> Pomo-Time!</p>
+      <p id="timeDisplay"> 25:00 </p>
       <br>
-      <button id='startTimer' class='button'>Start</button>
-      <button id='distractionButton'>Distraction</button>
+      <button id="startTimer" class="pure-button">Start</button>
+      <button id="distractionButton" class = "pure-button">Distraction</button>
     </div>
   </section>
   
@@ -40,69 +51,92 @@
         <col span='1' id='col1'>
         <col span='1' id='col2'>
         <col span='1' id='col3'>
+        <col span='1' id='col4'>
       </colgroup>
       <tr>
         <th></th>
         <th>TASK</th>
         <th>#</th>
+        <th></th>
       </tr>
       <tr>
         <td><input type='checkbox' class='custom_checkbox' checked></td>
         <td><s>Previous task</s></td>
         <td><s>(3/3)</s></td>
+        <td><button class='delete-button'>x</button></td>
       </tr>
       <tr>
         <td><input type='checkbox' class='custom_checkbox'></td>
         <td>Current task</td>
         <td>(2/3)</td>
+        <td><button class='delete-button'>x</button></td>
       </tr>
       <tr>
         <td><input type='checkbox' class='custom_checkbox'></td>
         <td>Upcoming task</td>
         <td>(0/3)</td>
+        <td><button class='delete-button'>x</button></td>
       </tr>
       <tr>
         <td><input type='checkbox' class='custom_checkbox'></td>
         <td>pneumonoultramicroscopicsilicovolcanoconio-sis floccinaucinihilipilification</td>
         <td>(0/3)</td>
+        <td><button class='delete-button'>x</button></td>
       </tr>
       <tr>
         <td><input type='checkbox' class='custom_checkbox'></td>
         <td>floccinaucinihilipilification</td>
         <td>(0/3)</td>
+        <td><button class='delete-button'>x</button></td>
       </tr>
       <tr>
         <td><input type='checkbox' class='custom_checkbox'></td>
         <td>floccinaucinihilipilification</td>
         <td>(0/3)</td>
+        <td><button class='delete-button'>x</button></td>
       </tr>
       <tr>
         <td><input type='checkbox' class='custom_checkbox'></td>
         <td>floccinaucinihilipilification</td>
         <td>(0/3)</td>
+        <td><button class='delete-button'>x</button></td>
       </tr>
     </table>
     <!-- style = 'display: none;' originally an attribute in form and button but we want it always showing -->
     <form id ='add-todo' overflow>
       <input type='text' name='task-name' placeholder='Enter task' class='task-name'>
       <input type='number' name='task-length' placeholder='Estimated # of pomos' class='task-length' min='1' max='24'>
-      <input type='submit' class='task-submit' value='Add Task!'>
+      <input type='submit' class='task-submit' value='+'>
     </form>
     <!-- <button id = 'add-button' class='addTaskButton' type='button'>Add Task</button> --> <!-- taking this out for now -->
   </section>
 
   <!-- Linked section on page under task list for summary & statistics of work sessions -->
-  <section id='stats' class='linked_section'>
+  <section id="stats" class="linked-section">
     <h2>Stats</h2>
   </section>
   
   <!-- Linked section at bottom of page under stats for FAQ and instructions on using timer -->
-  <section id='faq' class='linked_section'>
+  <section id="faq" class="linked-section">
     <h2>FAQ</h2>
   </section>
-  <script type='module' src='./js/App.js'></script>
+
+  <!-- Distraction Box-->
+  <section class="form-popup" id="distract-popup">
+    <form class="form-container" id="distract-form-container">
+      <h1>Report Distraction</h1>
   
-  <div id='faq'>
+      <label><b>Distraction Description</b></label>
+      <input type="text" placeholder="Enter a short description of the distraction" id="description">
+  
+      <button type="button" class="distractFormButton" id="submit-button">Submit</button>
+      <button type="button" class="distractFormButton cancel" id="cancel-button">Cancel</button>
+    </form> 
+  </section>
+  <script type="module" src="./js/App.js"></script>
+  <script type="module" src="./js/Distraction.js"></script>
+  
+  <div id="faq">
      
       <h2>A Pomodoro Ranger Timer is a Pomodoro Timer that would help with productivity</h2>
    
@@ -179,7 +213,5 @@
 
 
 </div>
-
-
 </body>
 </html>

@@ -1,19 +1,63 @@
 * {
-  font-family: sans-serif;
+  font-family: Helvetica, sans-serif;
+  color: aliceblue;
 }
 
 body {
-  background-color: bisque;
+  background-color: cadetblue;
 }
 
 header {
-  background-color: paleturquoise;
+  overflow: auto;
 }
 
-#timer {
-  height: 30vh;
-  width: 40vw;
-  background-color: darkgoldenrod;
+.pure-button {
+  background: lightslategray;
+  border-radius: 5px;
+  color: aliceblue;
+}
+
+.section-container {
+  position: relative;
+  margin: auto;
+}
+
+/* header styling */
+.icon-container {
+  display: flex;
+  float: right;
+  font-size: 0.5em;
+  width: 100px;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.icons {
+  padding: 0;
+  margin: 5px;
+  height: 40px;
+  width: 40px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgba(245, 245, 245, 0.4);
+}
+
+.icon-container p {
+  margin: 0;
+  padding: 0;
+}
+
+.icons img {
+  position: relative;
+  top: 2px;
+}
+
+/* timer styling */
+#timerContainer {
+  height: 280px;
+  width: 400px;
+  background-color: darkcyan;
+  border-radius: 10px;
 }
 
 #countdown {
@@ -21,44 +65,100 @@ header {
   text-align: center;
 }
 
+#modeDisplay {
+  position: relative;
+  top: 10px;
+  margin: 10px;
+  font-size: 80%;
+}
+
+#timeDisplay {
+  position: relative;
+  top: 15px;
+  font-size: 275%;
+  margin: 5px;
+}
+
 #distractionButton {
   position: absolute;
-  bottom: 0;
-  right: 0;
+  bottom: 5px;
+  right: 5px;
+  font-size: 40%;
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgba(245, 245, 245, 0.4);
 }
 
-#startButton {
-  position: absolute;
-  bottom: 0;
-  left: 0;
+#startTimer {
+  border-style: solid;
+  border-width: 2px;
+  border-color: rgba(245, 245, 245, 0.4);
 }
 
+/* tasklist styling */
 #tasklist {
-  height: 50vh;
-  width: 60vw;
-
-  background-color: slategrey;
+  position: relative;
+  margin: auto;
+  height: 60vh;
+  width: 40vw;
+  background-color: darkcyan;
   overflow-y: scroll;
-  /* overflow-x: hidden; */
   margin-top: 1%;
 }
 
-.icons {
-  float: right;
+#distract-popup {
+  display: none;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
 
-.section_container {
-  position: relative;
-  margin: auto;
+#distract-form-container {
+  border-radius: 25px;
+  max-width: 350px;
+  padding: 10px;
+  background-color: #f1f1f1;
+}
+
+#description {
+  width: 90%;
+  padding: 15px;
+  margin: 5px 0 20px 0;
+  border: none;
+  background: #f1f1f1;
+}
+
+.distractFormButton {
+  border-radius: 15px;
+  background-color: #056e08;
+  color: white;
+  padding: 15px 20px;
+  width: 100%;
+  margin-bottom: 10px;
+  opacity: 0.8;
+}
+
+.form-container .cancel {
+  border-radius: 15px;
+  background-color: #ad1a1a;
+}
+
+h1, b {
+  color: black; /* so that text shows up for distraction box against white background */
 }
 
 /* css styling for to-do list table */
 table {
   width: 100%;  /* % width of container */
   border-collapse: collapse; /* gets rid of gaps between columns */
+  table-layout: fixed; /* this line and */
+  width: 100%;         /* this line allow word-wrap to work */
 }
 th, td {
   padding: 15px;
+  word-wrap: break-word; /* so that long tasks don't extend the table */
 }
 th {
   background-color: #339E66FF;
@@ -71,11 +171,11 @@ th {
 }
 /* color pairs: 
 (#9CC3D5FF, #0063B2FF), (#FCF6F5FF, #89ABE3FF), (#85B3D1FF, #B3C7D6FF) */
-tr:nth-child(even) {
+tr:nth-child(even) td {
   background-color: #95DBE5FF;
   color: #078282FF;
 }
-tr:nth-child(odd) {
+tr:nth-child(odd) td {
   background-color: #078282FF;
   color: #95DBE5FF;
 }
@@ -100,10 +200,15 @@ td > input[type='checkbox']:checked { /* currently doesn't do anything */
 }
 #col3 { /* currently doesn't do anything */
   font-weight: bold;
+  color: red;
+}
+
+.delete-button {
+  color: black;
 }
 
 
-.addTaskButton {
+/* .addTaskButton {
   position: absolute;
   color: white;
   border-radius: 4px;
@@ -115,32 +220,87 @@ td > input[type='checkbox']:checked { /* currently doesn't do anything */
   width: 40vw;
   font-size: 5vh;
   bottom: 0;
-}
+} */
 
 #add-todo {
   position: -webkit-sticky;
   position: sticky;
-  /* position: absolute; */
   bottom: 0px;
+  width: 100%;
+  background-color: #339E66FF; 
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
-.task-name, .task-length, .task-submit {
+.task-name, .task-length {
   font-size: 20px;
   border-radius: 25px;
   height: 50px;
   padding-left: 15px;
+  padding-right: 15px; /* so that when a user enters a long task it doesn't go past the input bar */
+  color: black;
+}
+.task-submit {
+  font-size: 40px;
+  border-radius: 100%;
+  height: 60px;
+  width: 60px;
+  position: absolute;
+  bottom: 5px;
+  color: black;
 }
 
 .task-name {
-  width: 70%;
+  width: 300px;
 }
 .task-length {
-  width: 15%;
-}
-.task-submit {
-  width: 11%;
+  width: 215px;
 }
 
-#tasklist {
-  height: 40vh;
+.completedTask { /* class name for checked items? */
+  text-decoration: line-through; 
+}
+
+
+/* for support for small screens */
+@media screen and (max-width: 500px) {
+  #timerContainer {
+    width: 80vw;
+  }
+
+  @media screen and (max-width: 300px) {
+    #timerContainer {
+      width: 240px;
+    }
+  }
+}
+
+@media screen and (max-height: 550px) {
+  #timerContainer {
+    height: 50vh;
+  }
+
+  @media screen and (max-height: 480px) {
+    #timerContainer {
+      height: 240px;
+    }
+  }
+}
+
+@media screen and (max-width: 500px), (max-height: 550px) {
+  #distractionButton {
+    font-size: 35%;
+  }
+
+  #startTimer {
+    font-size: 75%;
+  }
+
+  #timeDisplay {
+    font-size: 240%;
+  }
+
+  #modeDisplay {
+    font-size: 70%;
+  }
 }
