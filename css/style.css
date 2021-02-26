@@ -257,13 +257,13 @@ td > input[type='checkbox']:checked { /* currently doesn't do anything */
 }
 
 .task-name {
-  width: 300px;
+  width: calc(0.5 * (100% - 60px));
 }
 .task-length {
-  width: 215px;
+  width: calc(0.4 * (100% - 60px));
 }
 
-.completedTask { /* class name for checked items? */
+.completedTask { /* class name for checked items??? */
   text-decoration: line-through; 
 }
 
