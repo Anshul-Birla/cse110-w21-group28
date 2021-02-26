@@ -172,15 +172,44 @@ th {
   position: sticky;
   top: 0px;
 }
+
+
 /* color pairs: 
 (#9CC3D5FF, #0063B2FF), (#FCF6F5FF, #89ABE3FF), (#85B3D1FF, #B3C7D6FF) */
 
 :root {
-  /* --even-color: #95DBE5FF;
+
+/* orig */
+  /* --header-color: #339E66FF;
+  --even-color: #95DBE5FF;
   --odd-color: #078282FF; */
-  --even-color: rgba(149, 218, 229, 0.603);
+
+/* medium contrast, all light font */
+  /* --even-color: rgba(149, 218, 229, 0.603);
   --odd-color: darkcyan;
-  --header-color: #339E66FF;
+  --header-color: #339E66FF; */
+
+/* toothpaste */
+  /* --even-color: rgba(149, 218, 229, 0.603);
+  --odd-color: rgb(2, 177, 177);
+  --header-color: darkcyan; */
+
+/* no alt row color */
+  /* --header-color: #339E66FF; */
+
+/* sea + lagoon */
+  /* --header-color: #339E66FF;
+  --even-color: #20948b;
+  --odd-color: #6ab187; */
+
+/* mist + reflection */
+  /* --header-color: #339E66FF;
+  --odd-color: #34675c;
+  --even-color: #7da3a1; */
+
+  --header-color: #2a3132;
+  --even-color: #336b87;
+  --odd-color: #90afc5;
 }
 
 tr:nth-child(even) td {
