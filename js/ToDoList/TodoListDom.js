@@ -70,7 +70,7 @@ class TodoListDom {
       this.button.textContent = HTMLAttributes.buttonAddTextContent;
     }
     this.form.reset();
-  } // */
+  }
 
   /**
    * Adds a task to the table of task
