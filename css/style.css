@@ -128,6 +128,7 @@ header {
   margin: 5px 0 20px 0;
   border: none;
   background: #f1f1f1;
+  color: black;
 }
 
 .distractFormButton {
@@ -155,6 +156,7 @@ table {
   border-collapse: collapse; /* gets rid of gaps between columns */
   table-layout: fixed; /* this line and */
   width: 100%;         /* this line allow word-wrap to work */
+  min-width: 630px; /* table will scroll */
 }
 th, td {
   padding: 15px;
@@ -225,7 +227,7 @@ td > input[type='checkbox']:checked { /* currently doesn't do anything */
   bottom: 0;
 } */
 
-#add-todo {
+#add-todo { /* form id */
   position: -webkit-sticky;
   position: sticky;
   bottom: 0px;
@@ -233,6 +235,7 @@ td > input[type='checkbox']:checked { /* currently doesn't do anything */
   background-color: #339E66FF; 
   padding-top: 5px;
   padding-bottom: 5px;
+  min-width: 630px;
 }
 
 .task-name, .task-length {
