@@ -1,15 +1,63 @@
+* {
+  font-family: Helvetica, sans-serif;
+  color: aliceblue;
+}
+
 body {
-  background-color: bisque;
+  background-color: cadetblue;
 }
 
 header {
-  background-color: paleturquoise;
+  overflow: auto;
 }
 
-#timer {
-  height: 30vh;
-  width: 40vw;
-  background-color: darkgoldenrod;
+.pure-button {
+  background: lightslategray;
+  border-radius: 5px;
+  color: aliceblue;
+}
+
+.section-container {
+  position: relative;
+  margin: auto;
+}
+
+/* header styling */
+.icon-container {
+  display: flex;
+  float: right;
+  font-size: 0.5em;
+  width: 100px;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.icons {
+  padding: 0;
+  margin: 5px;
+  height: 40px;
+  width: 40px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgba(245, 245, 245, 0.4);
+}
+
+.icon-container p {
+  margin: 0;
+  padding: 0;
+}
+
+.icons img {
+  position: relative;
+  top: 2px;
+}
+
+/* timer styling */
+#timerContainer {
+  height: 280px;
+  width: 400px;
+  background-color: darkcyan;
+  border-radius: 10px;
 }
 
 #countdown {
@@ -17,31 +65,156 @@ header {
   text-align: center;
 }
 
+#modeDisplay {
+  position: relative;
+  top: 10px;
+  margin: 10px;
+  font-size: 80%;
+}
+
+#timeDisplay {
+  position: relative;
+  top: 15px;
+  font-size: 275%;
+  margin: 5px;
+}
+
 #distractionButton {
   position: absolute;
-  bottom: 0;
-  right: 0;
+  bottom: 5px;
+  right: 5px;
+  font-size: 40%;
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgba(245, 245, 245, 0.4);
 }
 
-#startButton {
-  position: absolute;
-  bottom: 0;
-  left: 0;
+#startTimer {
+  border-style: solid;
+  border-width: 2px;
+  border-color: rgba(245, 245, 245, 0.4);
 }
 
+/* tasklist styling */
 #tasklist {
-  height: 60vh;
-  width: 40vw;
-  background-color: slategrey;
-}
-
-.icons {
-  float: right;
-}
-
-.section_container {
   position: relative;
   margin: auto;
+  height: 60vh;
+  width: 40vw;
+  background-color: darkcyan;
+}
+
+#distract-popup {
+  display: none;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+#distract-form-container {
+  border-radius: 25px;
+  max-width: 350px;
+  padding: 10px;
+  background-color: #f1f1f1;
+}
+
+#description {
+  width: 90%;
+  padding: 15px;
+  margin: 5px 0 20px 0;
+  border: none;
+  background: #f1f1f1;
+}
+
+.distractFormButton {
+  border-radius: 15px;
+  background-color: #056e08;
+  color: white;
+  padding: 15px 20px;
+  width: 100%;
+  margin-bottom: 10px;
+  opacity: 0.8;
+}
+
+.form-container .cancel {
+  border-radius: 15px;
+  background-color: #ad1a1a;
+}
+
+.addTaskButton {
+  position: absolute;
+  color: white;
+  border-radius: 4px;
+  border-style: none;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  background: rgb(66, 184, 221);
+  padding: 5px 5px 5px 5px;
+  height: 7vh;
+  width: 40vw;
+  font-size: 5vh;
+  bottom: 0;
+}
+
+.task-name {
+  position: absolute;
+  font-size: 20px;
+  top: 375px;
+  border-radius: 10px;
+  width: 200px;
+}
+
+.task-length {
+  position: absolute;
+  font-size: 20px;
+  width: 130px;
+  top: 375px;
+  left: 205px;
+  border-radius: 10px;
+}
+
+/* for support for small screens */
+@media screen and (max-width: 500px) {
+  #timerContainer {
+    width: 80vw;
+  }
+
+  @media screen and (max-width: 300px) {
+    #timerContainer {
+      width: 240px;
+    }
+  }
+}
+
+@media screen and (max-height: 550px) {
+  #timerContainer {
+    height: 50vh;
+  }
+
+  @media screen and (max-height: 480px) {
+    #timerContainer {
+      height: 240px;
+    }
+  }
+}
+
+@media screen and (max-width: 500px), (max-height: 550px) {
+  #distractionButton {
+    font-size: 35%;
+  }
+
+  #startTimer {
+    font-size: 75%;
+  }
+
+  #timeDisplay {
+    font-size: 240%;
+  }
+
+  #modeDisplay {
+    font-size: 70%;
+  }
 }
 
 .addTaskButton {

@@ -71,6 +71,7 @@ class Task extends HTMLTableRowElement {
     checkBox.setAttribute('id', `checkbox-${this.id}`);
     firstCol.appendChild(checkBox);
     this.appendChild(firstCol);
+
     checkBox.addEventListener('click', () => {
       this.checkOffTask();
     });
