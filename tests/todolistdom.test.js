@@ -3,7 +3,8 @@ import { TodoListDom } from '../js/ToDoList/TodoListDom.js';
 /** @Test {ToDoList} */
 var tableLocation;
 var formLocation;
-var btnLocation;
+var addBtnLocation;
+var deleteBtnLocation;
 var myDOM;
 
 beforeEach(() => {
@@ -25,11 +26,13 @@ beforeEach(() => {
         <input type="submit">
       </form>
       <button id = "add-button" type="button">Add a task</button>
+      <button id = "delete-all-button" class="deleteAllButton" type="button">Delete All</button>
     </div> `;
     tableLocation = document.getElementById('todo');
     formLocation = document.getElementById('add-todo');
-    btnLocation = document.getElementById('add-button');
-    myDOM = new TodoListDom(tableLocation, formLocation, btnLocation);
+    addBtnLocation = document.getElementById('add-button');
+    deleteBtnLocation = document.getElementById('delete-all-button')
+    myDOM = new TodoListDom(tableLocation, formLocation, addBtnLocation, deleteBtnLocation);
 });
 
 test('Valid construction of TDLDom', () => {
@@ -68,9 +71,22 @@ test('Increment session ', () => {
 });
 
 test('Show and hide form', () => {
-  btnLocation.click();
+  addBtnLocation.click();
   expect(formLocation.getAttribute('style')).toEqual('');
-  btnLocation.click();
+  addBtnLocation.click();
   expect(formLocation.getAttribute('style')).toEqual('display: none;');
   localStorage.clear();
 });
+
+test('Delete all', () => {
+  formLocation.children[0].setAttribute('value', 'Write Essay');
+  formLocation.children[1].value = 2;
+  formLocation.submit();
+  formLocation.children[0].setAttribute('value', 'Write Essay');
+  formLocation.children[1].value = 2;
+  formLocation.submit();
+  deleteBtnLocation.click();
+  expect(tableLocation.children[1]).toEqual(undefined);
+  expect(window.localData.length).toEqual(0);
+  localStorage.clear();
+})

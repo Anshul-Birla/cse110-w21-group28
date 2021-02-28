@@ -115,7 +115,7 @@ class Task extends HTMLTableRowElement {
       this.removeFromLocalStorage(this.id);
     });
     deleteBtn.textContent = 'DELETE';
-    this.appendChild(deleteBtn);
+    this.append(deleteBtn);
   }
 
   /**
@@ -124,7 +124,6 @@ class Task extends HTMLTableRowElement {
   removeFromLocalStorage(id) {
     for (let i = 0; i < window.localData.length; i += 1) {
       if (window.localData[i][TaskStorage.idIndex] == id) {
-        console.log("removing!");
         window.localData.splice(i, 1);
         break;
       }

@@ -15,7 +15,7 @@ class TodoListDom {
    * @param {HTMLFormElement} HTMLForm
    * @param {HTMLButtonElement} HTMLButton
    */
-  constructor(HTMLTable, HTMLForm, HTMLButton) {
+  constructor(HTMLTable, HTMLForm, submitBtn, deleteAllBtn) {
     /**
      * Holds the TodoList so the Dom Manager can acess it
      * @type {ToDoList}
@@ -30,7 +30,12 @@ class TodoListDom {
      * The button where users click to submit their todo's
      * @type {HTMLButtonElement}
      */
-    this.button = HTMLButton;
+    this.submitBtn = submitBtn;
+    /**
+     * The button where users click to delete their todo's
+     * @type {HTMLButtonElement}
+     */
+    this.deleteAllBtn = deleteAllBtn;
     /**
      * The table where the todolist is displayed
      * @type {HTMLTableElement}
@@ -85,9 +90,16 @@ class TodoListDom {
       this.form.reset();
     });
 
-    this.button.addEventListener('click', () => {
+    this.submitBtn.addEventListener('click', () => {
       this.toggleInputForm();
     });
+
+    this.deleteAllBtn.addEventListener('click', () => {
+      let list = this.todoList.taskList;
+      for(let i = 0; i < list.length; i++){
+        list[i].children[3].click();
+      }
+    })
   }
 
   /**
@@ -97,10 +109,10 @@ class TodoListDom {
   toggleInputForm() {
     if (this.form.style.display === 'none') {
       this.form.setAttribute('style', '');
-      this.button.textContent = HTMLAttributes.buttonDoneTextContent;
+      this.submitBtn.textContent = HTMLAttributes.buttonDoneTextContent;
     } else {
       this.form.style.display = 'none';
-      this.button.textContent = HTMLAttributes.buttonAddTextContent;
+      this.submitBtn.textContent = HTMLAttributes.buttonAddTextContent;
     }
     this.form.reset();
   }
