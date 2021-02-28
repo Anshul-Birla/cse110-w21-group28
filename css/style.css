@@ -216,34 +216,3 @@ header {
     font-size: 70%;
   }
 }
-
-.addTaskButton {
-  position: absolute;
-  color: white;
-  border-radius: 4px;
-  border-style: none;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-  background: rgb(66, 184, 221);
-  padding: 5px 5px 5px 5px;
-  height: 7vh;
-  width: 40vw;
-  font-size: 5vh;
-  bottom: 0;
-}
-
-.task-name {
-  position: absolute;
-  font-size: 20px;
-  top: 375px;
-  border-radius: 10px;
-  width: 200px;
-}
-
-.task-length {
-  position: absolute;
-  font-size: 20px;
-  width: 130px;
-  top: 375px;
-  left: 205px;
-  border-radius: 10px;
-}
