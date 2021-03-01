@@ -1,11 +1,19 @@
 * {
   font-family: Helvetica, sans-serif;
-  /* color: aliceblue; */
-  color: white;
+  color: var(--font-color);
+}
+
+/* color variables for buttons, page, and timer */
+:root {
+  --button-border-color: rgba(245, 245, 245, 0.4);
+  --button-color: lightslategray;
+  --page-bg-color: cadetblue;
+  --font-color: aliceblue;
+  --timer-bg-color: darkcyan;
 }
 
 body {
-  background-color: cadetblue;
+  background-color: var(--page-bg-color);
 }
 
 header {
@@ -13,9 +21,9 @@ header {
 }
 
 .pure-button {
-  background: lightslategray;
+  background: var(--button-color);
   border-radius: 5px;
-  color: aliceblue;
+  color: var(--font-color);
 }
 
 .section-container {
@@ -40,7 +48,7 @@ header {
   width: 40px;
   border-style: solid;
   border-width: 1px;
-  border-color: rgba(245, 245, 245, 0.4);
+  border-color: var(--button-border-color);
 }
 
 .icon-container p {
@@ -57,7 +65,7 @@ header {
 #timerContainer {
   height: 280px;
   width: 400px;
-  background-color: darkcyan;
+  background-color: var(--timer-bg-color);
   border-radius: 10px;
 }
 
@@ -87,210 +95,14 @@ header {
   font-size: 40%;
   border-style: solid;
   border-width: 1px;
-  border-color: rgba(245, 245, 245, 0.4);
+  border-color: var(--button-border-color);
 }
 
 #startTimer {
   border-style: solid;
   border-width: 2px;
-  border-color: rgba(245, 245, 245, 0.4);
+  border-color: var(--button-border-color);
 }
-
-/* tasklist styling */
-#tasklist {
-  position: relative;
-  margin: auto;
-  height: 60vh;
-  width: 40vw;
-  background-color: darkcyan;
-  overflow-y: scroll;
-  margin-top: 1%;
-}
-
-#distract-popup {
-  display: none;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-}
-
-#distract-form-container {
-  border-radius: 25px;
-  max-width: 350px;
-  padding: 10px;
-  background-color: #f1f1f1;
-}
-
-#description {
-  width: 90%;
-  padding: 15px;
-  margin: 5px 0 20px 0;
-  border: none;
-  background: #f1f1f1;
-  color: black;
-}
-
-.distractFormButton {
-  border-radius: 15px;
-  background-color: #056e08;
-  color: white;
-  padding: 15px 20px;
-  width: 100%;
-  margin-bottom: 10px;
-  opacity: 0.8;
-}
-
-.form-container .cancel {
-  border-radius: 15px;
-  background-color: #ad1a1a;
-}
-
-h1, b {
-  color: black; /* so that text shows up for distraction box against white background */
-}
-
-
-/* css styling for to-do list table */
-table {
-  width: 100%;  /* % width of container */
-  border-collapse: collapse; /* gets rid of gaps between columns */
-  table-layout: fixed; /* this line and */
-  width: 100%;         /* this line allow word-wrap to work */
-  min-width: 630px; /* table will scroll */
-}
-th, td {
-  padding: 15px;
-  word-wrap: break-word; /* so that long tasks don't extend the table */
-}
-th {
-  background-color: var(--header-color);
-  color:white;
-  text-align: left;
-  padding: 20px 10px;
-  font-size: 200%;
-  position: sticky;
-  top: 0px;
-}
-
-
-/* color pairs: 
-(#9CC3D5FF, #0063B2FF), (#FCF6F5FF, #89ABE3FF), (#85B3D1FF, #B3C7D6FF) */
-
-:root {
-
-/* orig */
-  /* --header-color: #339E66FF;
-  --even-color: #95DBE5FF;
-  --odd-color: #078282FF; */
-
-/* medium contrast, all light font */
-  /* --even-color: rgba(149, 218, 229, 0.603);
-  --odd-color: darkcyan;
-  --header-color: #339E66FF; */
-
-/* toothpaste */
-  /* --even-color: rgba(149, 218, 229, 0.603);
-  --odd-color: rgb(2, 177, 177);
-  --header-color: darkcyan; */
-
-/* no alt row color */
-  /* --header-color: #339E66FF; */
-
-/* sea + lagoon */
-  /* --header-color: #339E66FF;
-  --even-color: #20948b;
-  --odd-color: #6ab187; */
-
-/* mist + reflection */
-  /* --header-color: #339E66FF;
-  --odd-color: #34675c;
-  --even-color: #7da3a1; */
-
-  --header-color: #2a3132;
-  --even-color: #336b87;
-  --odd-color: #90afc5;
-}
-
-tr:nth-child(even) td {
-  background-color: var(--even-color);
-  /* color: var(--odd-color); */
-}
-tr:nth-child(odd) td {
-  background-color: var(--odd-color);
-  /* color: var(--even-color); */
-}
-
-tr:hover td {
-  background-color: #f2f2f279;
-}
-
-/* checkbox styling */
-input[type='checkbox'] {
-  /* -webkit-appearance: none; */
-  width: 20px;
-  height: 20px;
-  background: white;
-  border-radius: 10px; /* circular check"boxes" if uncomment webkit line */
-}
-input[type='checkbox']:checked {
-  box-shadow: 0 0 0 3px lime;
-}
-
-.col1-checkbox, .col3-pomos, .col4-delete {
-  width: 10%;
-}
-.col2-task {
-  width: 70%;
-}
-
-.delete-button {
-  color: black;
-  border-radius: 40%;
-}
-
-#add-todo { /* form id */
-  position: -webkit-sticky;
-  position: sticky;
-  bottom: 0px;
-  width: 100%;
-  background-color: var(--header-color); 
-  padding-top: 10px;
-  padding-bottom: 10px;
-  min-width: 630px;
-}
-
-.task-name, .task-length {
-  font-size: 20px;
-  border-radius: 25px;
-  height: 50px;
-  padding-left: 15px;
-  padding-right: 15px; /* so that when a user enters a long task it doesn't go past the input bar */
-  color: black;
-}
-
-.task-name {
-  width: calc(56% - 60px);
-}
-.task-length {
-  width: calc(42% - 60px);
-}
-
-.task-submit {
-  font-size: 40px;
-  border-radius: 100%;
-  height: 60px;
-  width: 60px;
-  position: absolute;
-  bottom: 10px;
-  color: black;
-}
-
-.completedTask { /* class name for checked items??? */
-  text-decoration: line-through; 
-}
-
 
 /* for support for small screens */
 @media screen and (max-width: 500px) {

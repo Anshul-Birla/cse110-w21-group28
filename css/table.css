@@ -1,0 +1,154 @@
+/* css styling for to-do list table */
+
+:root {
+    /* color pairs: 
+    (#9CC3D5FF, #0063B2FF), (#FCF6F5FF, #89ABE3FF), (#85B3D1FF, #B3C7D6FF) */
+  
+/* toothpaste */
+    --even-color: rgba(149, 218, 229, 0.603);
+    --odd-color: rgb(2, 177, 177);
+    --header-color: darkcyan;
+    
+    /* no alt row color */
+    /* --header-color: #339E66FF; */
+
+    /* --header-color: #2a3132;
+    --even-color: #336b87;
+    --odd-color: #90afc5; */
+}
+
+/* container for table */
+#tasklist {
+    position: relative;
+    margin: auto;
+    height: 60vh;
+    width: 40vw;
+    background-color: darkcyan;
+    overflow-y: scroll;
+    margin-top: 1%;
+    border-radius: 10px;
+}
+
+/* table itself + header, cells, rows, then columns styling */
+table {
+    width: 100%;  /* % width of container */
+    border-collapse: collapse; /* gets rid of gaps between columns */
+    table-layout: fixed; /* this line and */
+    width: 100%;         /* this line allow word-wrap to work */
+    /* min-width: 630px; /* table will scroll */
+}
+
+th, td {
+    padding: 15px;
+    word-wrap: break-word; /* so that long tasks don't extend the table */
+}
+
+th {
+    background-color: var(--header-color);
+    color:white;
+    text-align: left;
+    padding: 20px 10px;
+    font-size: 200%;
+    position: sticky;
+    top: 0px;
+}
+  
+td {
+    min-width: 50px;
+}
+
+tr {
+    border: 2px solid cadetblue;
+}
+  
+tr:nth-child(even) td {
+    background-color: var(--even-color);
+    color: var(--odd-color);
+}
+
+tr:nth-child(odd) td {
+    background-color: var(--odd-color);
+    color: var(--even-color);
+}
+  
+tr:hover td {
+    background-color: #f2f2f279;
+}
+
+tr td:first-child {
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
+}
+
+tr td:last-child {
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+}
+
+.col1-checkbox, .col3-pomos, .col4-delete {
+    width: 10%;
+}
+.col2-task {
+    width: 70%;
+}
+
+
+/* input form (add task) */
+
+/* form container */
+#add-todo { 
+    position: -webkit-sticky;
+    position: sticky;
+    bottom: 0px;
+    width: 100%;
+    background-color: var(--header-color); 
+    padding-top: 10px;
+    padding-bottom: 10px;
+    /* min-width: 630px; */
+}
+  
+.task-name, .task-length {
+    font-size: 20px;
+    border-radius: 25px;
+    height: 50px;
+    padding-left: 15px;
+    padding-right: 15px; /* so that when a user enters a long task it doesn't go past the input bar */
+    color: black;
+}
+  
+.task-name {
+    width: calc(56% - 60px);
+}
+.task-length {
+    width: calc(42% - 60px);
+}
+  
+.task-submit {
+    font-size: 40px;
+    border-radius: 100%;
+    height: 60px;
+    width: 60px;
+    position: absolute;
+    bottom: 10px;
+    color: black;
+}
+
+
+/* checkbox and delete button styling */
+input[type='checkbox'] {
+    /* -webkit-appearance: none; */
+    width: 20px;
+    height: 20px;
+    background: white;
+    border-radius: 10px; /* circular check"boxes" if uncomment webkit line */
+}
+
+input[type='checkbox']:checked {
+    box-shadow: 0 0 0 3px lime;
+}
+  
+.delete-button {
+    color: black;
+    border-radius: 40%;
+}
+  
