@@ -8,7 +8,7 @@ const todoTable = document.getElementById('todo');
 const addTodoForm = document.getElementById('add-todo');
 const addTodoButton = document.getElementById('add-button');
 const startTimerButton = document.getElementById('startTimer');
-const deleteAllButton = document.getElementById('delete-all-button')
+const deleteAllButton = document.getElementById('delete-all-button');
 
 const TDLDom = new TodoListDom(todoTable, addTodoForm, addTodoButton, deleteAllButton);
 const TimerObj = new Timer(startTimerButton, timeDisplay, modeDisplay);

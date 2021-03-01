@@ -1,11 +1,11 @@
 import { TodoListDom } from '../js/ToDoList/TodoListDom.js';
 
 /** @Test {ToDoList} */
-var tableLocation;
-var formLocation;
-var addBtnLocation;
-var deleteBtnLocation;
-var myDOM;
+let tableLocation;
+let formLocation;
+let addBtnLocation;
+let deleteBtnLocation;
+let myDOM;
 
 beforeEach(() => {
   document.body.innerHTML = `<section id="tasklist" class="section_container">
@@ -28,11 +28,11 @@ beforeEach(() => {
       <button id = "add-button" type="button">Add a task</button>
       <button id = "delete-all-button" class="deleteAllButton" type="button">Delete All</button>
     </div> `;
-    tableLocation = document.getElementById('todo');
-    formLocation = document.getElementById('add-todo');
-    addBtnLocation = document.getElementById('add-button');
-    deleteBtnLocation = document.getElementById('delete-all-button')
-    myDOM = new TodoListDom(tableLocation, formLocation, addBtnLocation, deleteBtnLocation);
+  tableLocation = document.getElementById('todo');
+  formLocation = document.getElementById('add-todo');
+  addBtnLocation = document.getElementById('add-button');
+  deleteBtnLocation = document.getElementById('delete-all-button');
+  myDOM = new TodoListDom(tableLocation, formLocation, addBtnLocation, deleteBtnLocation);
 });
 
 test('Valid construction of TDLDom', () => {
@@ -52,7 +52,7 @@ test('Reload the page with local storage', () => {
   expect(tableLocation.children[1].children[2].textContent).toMatch(new RegExp('\\[0/ *2\\]'));
 });
 
-//Now has a task
+// Now has a task
 test('click remove button', () => {
   tableLocation.children[1].children[3].click();
   expect(tableLocation.children[1]).toEqual(undefined);
@@ -89,4 +89,4 @@ test('Delete all', () => {
   expect(tableLocation.children[1]).toEqual(undefined);
   expect(window.localData.length).toEqual(0);
   localStorage.clear();
-})
+});

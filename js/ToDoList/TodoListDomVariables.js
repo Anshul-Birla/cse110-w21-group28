@@ -9,7 +9,7 @@ const TaskStorage = {
   nameIndex: 1,
   totalSessionIndex: 2,
   currentSessionIndex: 3,
-  checkedIndex: 4
-}
+  checkedIndex: 4,
+};
 
 export { HTMLAttributes, TaskStorage };

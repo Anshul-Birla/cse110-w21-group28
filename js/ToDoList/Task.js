@@ -108,7 +108,8 @@ class Task extends HTMLTableRowElement {
    * Only changes window.Data
    */
   setupDeleteButton() {
-    const item = document.createElement('td')
+    // const item = document.createElement('td');
+    document.createElement('td');
     const deleteBtn = document.createElement('button');
     deleteBtn.addEventListener('click', () => {
       this.remove();
@@ -123,7 +124,7 @@ class Task extends HTMLTableRowElement {
    */
   removeFromLocalStorage(id) {
     for (let i = 0; i < window.localData.length; i += 1) {
-      if (window.localData[i][TaskStorage.idIndex] == id) {
+      if (window.localData[i][TaskStorage.idIndex] === id) {
         window.localData.splice(i, 1);
         break;
       }
@@ -131,6 +132,7 @@ class Task extends HTMLTableRowElement {
     this.checked = true;
     localStorage.setItem('tasks', JSON.stringify(window.localData));
   }
+
   /**
    * Update method to edit task name
    */
@@ -170,7 +172,7 @@ class Task extends HTMLTableRowElement {
    */
   updateLocalStorage() {
     for (let i = 0; i < window.localData.length; i += 1) {
-      if (window.localData[i][TaskStorage.idIndex] == this.id) {
+      if (window.localData[i][TaskStorage.idIndex] === this.id) {
         window.localData[i][TaskStorage.currentSessionIndex] = this.currentSessionNum;
         window.localData[i][TaskStorage.checkedIndex] = this.checked;
         break;

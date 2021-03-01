@@ -1,6 +1,6 @@
 import { ToDoList } from './ToDoList.js';
-import { HTMLAttributes } from './TodoListDomVariables.js';
-import { TaskStorage } from './TodoListDomVariables.js';
+import { HTMLAttributes, TaskStorage } from './TodoListDomVariables.js';
+
 import { Task } from './Task.js';
 
 /**
@@ -46,35 +46,35 @@ class TodoListDom {
     this.renderLocalStorage();
   }
 
-/**
+  /**
  * Fetch local storage, and store them into window.localData
  * Iterate each local tasks and render them
  */
   renderLocalStorage() {
-      window.localData = [];
-      if (localStorage.getItem('tasks') !== null) {
-        window.localData = JSON.parse(localStorage.getItem('tasks'));
-        for(let i = 0; i < window.localData.length; i++) {
-          window.localData[i][0] = i;
-        }
-        console.log("local data ", window.localData);
-        localStorage.setItem('tasks', JSON.stringify(window.localData));
+    window.localData = [];
+    if (localStorage.getItem('tasks') !== null) {
+      window.localData = JSON.parse(localStorage.getItem('tasks'));
+      for (let i = 0; i < window.localData.length; i += 1) {
+        window.localData[i][0] = i;
       }
-
-      for(let i = 0; i < window.localData.length; i++){
-        let name = window.localData[i][TaskStorage.nameIndex];
-        let totalSession = window.localData[i][TaskStorage.totalSessionIndex];
-        let currentSession = window.localData[i][TaskStorage.currentSessionIndex];
-        let completed = window.localData[i][TaskStorage.checkedIndex];
-        const task = new Task(i, name, totalSession);
-        this.todoList.idCounter += 1;
-        task.currentSessionNum = currentSession;
-        task.checked = completed;
-        this.todoList.taskList.push(task);
-        task.updatePomoSessions();
-        this.displayTask(task);
-      }
+      // console.log('local data ', window.localData);
+      localStorage.setItem('tasks', JSON.stringify(window.localData));
     }
+
+    for (let i = 0; i < window.localData.length; i += 1) {
+      const name = window.localData[i][TaskStorage.nameIndex];
+      const totalSession = window.localData[i][TaskStorage.totalSessionIndex];
+      const currentSession = window.localData[i][TaskStorage.currentSessionIndex];
+      const completed = window.localData[i][TaskStorage.checkedIndex];
+      const task = new Task(i, name, totalSession);
+      this.todoList.idCounter += 1;
+      task.currentSessionNum = currentSession;
+      task.checked = completed;
+      this.todoList.taskList.push(task);
+      task.updatePomoSessions();
+      this.displayTask(task);
+    }
+  }
 
   /**
    * Sets up the form dissapearing and submit event listeners
@@ -95,11 +95,11 @@ class TodoListDom {
     });
 
     this.deleteAllBtn.addEventListener('click', () => {
-      let list = this.todoList.taskList;
-      for(let i = 0; i < list.length; i++){
+      const list = this.todoList.taskList;
+      for (let i = 0; i < list.length; i += 1) {
         list[i].children[3].click();
       }
-    })
+    });
   }
 
   /**
