@@ -55,9 +55,8 @@ class TodoListDom {
     if (localStorage.getItem('tasks') !== null) {
       window.localData = JSON.parse(localStorage.getItem('tasks'));
       for (let i = 0; i < window.localData.length; i += 1) {
-        window.localData[i][0] = i;
+        window.localData[i][0] = String(i);
       }
-      // console.log('local data ', window.localData);
       localStorage.setItem('tasks', JSON.stringify(window.localData));
     }
 
@@ -97,7 +96,7 @@ class TodoListDom {
     this.deleteAllBtn.addEventListener('click', () => {
       const list = this.todoList.taskList;
       for (let i = 0; i < list.length; i += 1) {
-        list[i].children[3].click();
+        list[i].children[3].children[0].click();
       }
     });
   }

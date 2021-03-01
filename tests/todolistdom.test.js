@@ -54,7 +54,7 @@ test('Reload the page with local storage', () => {
 
 // Now has a task
 test('click remove button', () => {
-  tableLocation.children[1].children[3].click();
+  tableLocation.children[1].children[3].children[0].click();
   expect(tableLocation.children[1]).toEqual(undefined);
   expect(window.localData.length).toEqual(0);
   localStorage.clear();

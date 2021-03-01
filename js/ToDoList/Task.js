@@ -16,7 +16,7 @@ class Task extends HTMLTableRowElement {
     super();
     /**
      * Stores the id of the task
-     * @type {Number}
+     * @type {String}
      */
     this.id = id;
     /**
@@ -108,15 +108,15 @@ class Task extends HTMLTableRowElement {
    * Only changes window.Data
    */
   setupDeleteButton() {
-    // const item = document.createElement('td');
-    document.createElement('td');
+    const item = document.createElement('td');
     const deleteBtn = document.createElement('button');
     deleteBtn.addEventListener('click', () => {
       this.remove();
       this.removeFromLocalStorage(this.id);
     });
     deleteBtn.textContent = 'DELETE';
-    this.append(deleteBtn);
+    item.append(deleteBtn);
+    this.append(item);
   }
 
   /**
