@@ -90,9 +90,14 @@ class TodoListDom {
       const data = new FormData(this.form);
       const name = data.get(HTMLAttributes.taskNameId);
       const sessions = parseInt(data.get(HTMLAttributes.taskPomoSessions), 10);
-      const task = this.todoList.addTask(name, sessions);
-      this.displayTask(task);
-      this.form.reset();
+      try {
+        const task = this.todoList.addTask(name, sessions);
+        this.displayTask(task);
+        this.form.reset();
+      } catch (error) {
+        // eslint-disable-next-line no-alert
+        alert('Invalid input. Please try again');
+      }
     });
 
     this.deleteAllBtn.addEventListener('click', () => {

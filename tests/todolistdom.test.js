@@ -75,6 +75,12 @@ test('Increment session ', () => {
   localStorage.clear();
 });
 
+test('Add an invalid task', () => {
+  global.alert = jest.fn();
+  formLocation.submit();
+  expect(global.alert).toHaveBeenCalledTimes(1);
+})
+
 test('Delete all', () => {
   formLocation.children[0].setAttribute('value', 'Write Essay');
   formLocation.children[1].value = 2;
