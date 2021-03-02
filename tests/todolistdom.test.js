@@ -55,7 +55,7 @@ test('Reload the page with local storage', () => {
 
 test('Reload the page with completed task', () => {
   expect(tableLocation.children[1].children[0].children[0].getAttribute('checked')).toEqual('true');
-})
+});
 
 // Now has a task
 test('click remove button', () => {
@@ -79,7 +79,7 @@ test('Add an invalid task', () => {
   global.alert = jest.fn();
   formLocation.submit();
   expect(global.alert).toHaveBeenCalledTimes(1);
-})
+});
 
 test('Delete all', () => {
   formLocation.children[0].setAttribute('value', 'Write Essay');

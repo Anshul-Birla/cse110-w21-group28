@@ -70,7 +70,7 @@ class TodoListDom {
       const task = new Task(i, name, totalSession);
       this.todoList.idCounter += 1;
       task.currentSessionNum = currentSession;
-      if(completed){
+      if (completed) {
         task.checked = completed;
         task.setAttribute('class', classNames.completedTaskClassName);
         task.checkBox.setAttribute('checked', 'true');
