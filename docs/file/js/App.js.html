@@ -30,23 +30,40 @@
   <ul>
     
   <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#timer">Timer</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Timer/Timer.js~Timer.html">Timer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-buttonText">buttonText</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-classNames">classNames</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-innerText">innerText</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-longBreakMode">longBreakMode</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-shortBreakMode">shortBreakMode</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-workMode">workMode</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#todolist">ToDoList</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/ToDoList/Task.js~Task.html">Task</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/ToDoList/ToDoList.js~ToDoList.html">ToDoList</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/ToDoList/TodoListDom.js~TodoListDom.html">TodoListDom</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-classNames">classNames</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-HTMLAttributes">HTMLAttributes</a></span></span></li>
 </ul>
 </div>
 </nav>
 
 <div class="content" data-ice="content"><h1 data-ice="title">js/App.js</h1>
-<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { Timer } from &apos;./Timer/Timer.js&apos;;
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { TodoListDom } from &apos;./ToDoList/TodoListDom.js&apos;;
+import { Timer } from &apos;./Timer/Timer.js&apos;;
+import { workMode } from &apos;./Timer/TimerVariables.js&apos;;
 
-const startButton = document.getElementById(&apos;startTimer&apos;);
-const displayTimer = document.getElementById(&apos;timeDisplay&apos;);
-const displayMode = document.getElementById(&apos;modeDisplay&apos;);
+const timeDisplay = document.getElementById(&apos;timeDisplay&apos;);
+const modeDisplay = document.getElementById(&apos;modeDisplay&apos;);
+const todoTable = document.getElementById(&apos;todo&apos;);
+const addTodoForm = document.getElementById(&apos;add-todo&apos;);
+const addTodoButton = document.getElementById(&apos;add-button&apos;);
+const startTimerButton = document.getElementById(&apos;startTimer&apos;);
 
-new Timer(startButton, displayTimer, displayMode);
+const TDLDom = new TodoListDom(todoTable, addTodoForm, addTodoButton);
+const TimerObj = new Timer(startTimerButton, timeDisplay, modeDisplay);
+
+TimerObj.addEventListener(&apos;timer-complete&apos;, (e) =&gt; {
+  if (e.detail.sessionName === workMode.name) {
+    TDLDom.onSessionComplete();
+  }
+});
 </code></pre>
 
 </div>

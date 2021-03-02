@@ -1,4 +1,5 @@
 // these are all variables for the Timer. Changing these will change them universally
+const sessionStartName = 'Pomo-Time!';
 
 const workMode = {
   name: 'Working Time',
@@ -25,5 +26,5 @@ const buttonText = {
 };
 
 export {
-  workMode, shortBreakMode, longBreakMode, classNames, buttonText,
+  sessionStartName, workMode, shortBreakMode, longBreakMode, classNames, buttonText,
 };
