@@ -54,8 +54,8 @@
       </th>
     </table>
     <form id = "add-todo" style = "display: none;" overflow>
-      <input type="text" name="task-name" placeholder="Add task" class="task-name">
-      <input type="number" name="task-length" placeholder="# of pomos" class="task-length">
+      <input type="text" name="task-name" placeholder="Add task" class="task-name" required>
+      <input type="number" name="task-length" placeholder="# of pomos" class="task-length" min="1" required>
       <input type="submit" style="display: none;">
     </form>
     <button id = "add-button" class="addTaskButton" type="button">Add Task</button>
