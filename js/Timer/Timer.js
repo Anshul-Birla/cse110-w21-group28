@@ -96,7 +96,7 @@ class Timer extends HTMLElement {
    */
   endTimer() {
     this.end = true;
-    this.displayStatus.textContent = "Pomo-Time!";
+    this.displayStatus.textContent = 'Pomo-Time!';
     this.stateQueue = [];
     const workOrder = [workMode, shortBreakMode, workMode,
       shortBreakMode, workMode, shortBreakMode, workMode, longBreakMode];
@@ -141,7 +141,6 @@ class Timer extends HTMLElement {
       if (this.startButton.textContent === buttonText.startTimerText) {
         this.startButton.textContent = buttonText.stopTimerText;
         this.startButton.class = classNames.stopButton;
-        //this.startTimer();
       } else {
         this.startButton.textContent = buttonText.startTimerText;
         this.startButton.class = classNames.startButton;
