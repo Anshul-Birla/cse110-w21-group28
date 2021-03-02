@@ -49,7 +49,7 @@ class Timer extends HTMLElement {
      * Checks if session has ended
      * @type {Boolean}
      */
-    this.end = true;
+    this.end = false;
 
     // this is the order for the timer. It will loop in this order.
     const workOrder = [workMode, shortBreakMode, workMode,
@@ -112,9 +112,7 @@ class Timer extends HTMLElement {
    * @param {Number} duration Amount of seconds for the timer to run
    */
   countdown(duration) {
-    if (this.end) {
-      return;
-    }
+    if (this.end) return;
     const minutes = Math.floor(duration / 60);
     const seconds = duration % 60;
     let displayString = '';
@@ -140,9 +138,11 @@ class Timer extends HTMLElement {
   addEventListeners() {
     this.startButton.addEventListener('click', () => {
       if (this.startButton.textContent === buttonText.startTimerText) {
+        this.startTimer();
         this.startButton.textContent = buttonText.stopTimerText;
         this.startButton.class = classNames.stopButton;
       } else {
+        this.endTimer();
         this.startButton.textContent = buttonText.startTimerText;
         this.startButton.class = classNames.startButton;
       }

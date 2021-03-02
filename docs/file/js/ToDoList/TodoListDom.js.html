@@ -30,6 +30,8 @@
   <ul>
     
   <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#timer">Timer</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Timer/Timer.js~Timer.html">Timer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-buttonText">buttonText</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-classNames">classNames</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-longBreakMode">longBreakMode</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-shortBreakMode">shortBreakMode</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-workMode">workMode</a></span></span></li>
@@ -47,7 +49,7 @@
 import { HTMLAttributes } from &apos;./TodoListDomVariables.js&apos;;
 
 /**
- * Class responsible for providing changes to the DOM for the TodoList 
+ * Class responsible for providing changes to the DOM for the TodoList
  * Encapsulates the TodoList class
  * Done so their is a clear abstraction from DOM Manipulation and Data Manipulation
  */
@@ -94,6 +96,7 @@ class TodoListDom {
       const sessions = parseInt(data.get(HTMLAttributes.taskPomoSessions), 10);
       const task = this.todoList.addTask(name, sessions);
       this.displayTask(task);
+      this.form.reset();
     });
 
     this.button.addEventListener(&apos;click&apos;, () =&gt; {

@@ -567,9 +567,9 @@
     "__docId__": 48,
     "kind": "file",
     "name": "js/App.js",
-    "content": "import { Timer } from './Timer/Timer.js';\n\nconst startButton = document.getElementById('startTimer');\nconst displayTimer = document.getElementById('timeDisplay');\nconst displayMode = document.getElementById('modeDisplay');\n\nnew Timer(startButton, displayTimer, displayMode);\n",
+    "content": "import { TodoListDom } from './ToDoList/TodoListDom.js';\nimport { Timer } from './Timer/Timer.js';\nimport { workMode } from './Timer/TimerVariables.js';\n\nconst timeDisplay = document.getElementById('timeDisplay');\nconst modeDisplay = document.getElementById('modeDisplay');\nconst todoTable = document.getElementById('todo');\nconst addTodoForm = document.getElementById('add-todo');\nconst addTodoButton = document.getElementById('add-button');\nconst startTimerButton = document.getElementById('startTimer');\n\nconst TDLDom = new TodoListDom(todoTable, addTodoForm, addTodoButton);\nconst TimerObj = new Timer(startTimerButton, timeDisplay, modeDisplay);\n\nTimerObj.addEventListener('timer-complete', (e) => {\n  if (e.detail.sessionName === workMode.name) {\n    TDLDom.onSessionComplete();\n  }\n});\n",
     "static": true,
-    "longname": "/home/anshul/anshul/Development/cse110-w21-group28/js/App.js",
+    "longname": "/home/anshul/Github/cse110-w21-group28/js/App.js",
     "access": "public",
     "description": null,
     "lineNumber": 1
@@ -577,52 +577,10 @@
   {
     "__docId__": 49,
     "kind": "variable",
-    "name": "startButton",
+    "name": "timeDisplay",
     "memberof": "js/App.js",
     "static": true,
-    "longname": "js/App.js~startButton",
-    "access": "public",
-    "export": false,
-    "importPath": "cse110-w21-group28/js/App.js",
-    "importStyle": null,
-    "description": null,
-    "lineNumber": 3,
-    "undocument": true,
-    "type": {
-      "types": [
-        "*"
-      ]
-    },
-    "ignore": true
-  },
-  {
-    "__docId__": 50,
-    "kind": "variable",
-    "name": "displayTimer",
-    "memberof": "js/App.js",
-    "static": true,
-    "longname": "js/App.js~displayTimer",
-    "access": "public",
-    "export": false,
-    "importPath": "cse110-w21-group28/js/App.js",
-    "importStyle": null,
-    "description": null,
-    "lineNumber": 4,
-    "undocument": true,
-    "type": {
-      "types": [
-        "*"
-      ]
-    },
-    "ignore": true
-  },
-  {
-    "__docId__": 51,
-    "kind": "variable",
-    "name": "displayMode",
-    "memberof": "js/App.js",
-    "static": true,
-    "longname": "js/App.js~displayMode",
+    "longname": "js/App.js~timeDisplay",
     "access": "public",
     "export": false,
     "importPath": "cse110-w21-group28/js/App.js",
@@ -638,18 +596,279 @@
     "ignore": true
   },
   {
-    "__docId__": 52,
-    "kind": "file",
-    "name": "js/Timer/Timer.js",
-    "content": "import {\n  workMode, shortBreakMode, longBreakMode, classNames, innerText \n} from './TimerVariables.js';\n/**\n * A class for the Timer object. Has functions to start the timer,\n * display the current mode of the timer and display the time remaining\n */\nclass Timer {\n  /**\n   * Constructor of Time Object. Takes the HTML element of where\n   * you want the time and the status of the timer to be implemented.\n   * HTML Elements must have the 'textElement' attribute.\n   * @param {HTMLElement} startButton\n   * @param {HTMLElement} displayTime\n   * @param {HTMLElement} displayStatus\n   */\n  constructor(startButton, displayTime, displayStatus) {\n    /**\n     * State of the timer (the current mode)\n     * @type {String}\n     */\n    this.state = '';\n    /**\n     * Queue that stores the Session objects. Rotates to provide\n     * rotation functionality for the timer\n     * @type {Array[Object]}\n     * @property {String} object.name\n     * @property {Number} object.duration\n     */\n    this.stateQueue = [];\n    /**\n     * HTML Tag that is reponsible for controlling the timer\n     * @type {HTMLElement}\n     */\n    this.startButton = startButton;\n    /**\n     * HTML Tag that is reponsible for displaying the time remaining\n     * @type {HTMLElement}\n     */\n    this.displayTime = displayTime;\n    /**\n     * HTML Tag that is reponsible for displaying the mode of the timer\n     * @type {HTMLElement}\n     */\n    this.displayStatus = displayStatus;\n\n    // this is the order for the timer. It will loop in this order.\n    const workOrder = [workMode, shortBreakMode, workMode,\n      shortBreakMode, workMode, shortBreakMode, workMode, longBreakMode];\n    for (let i = 0; i < workOrder.length; i += 1) {\n      this.stateQueue.push(workOrder[i]);\n    }\n\n    this.addEventListeners();\n  }\n\n  /**\n   * Function that fires when the timer runs out of time.\n   * Moves on to start the timer again at the end of the function.\n   */\n  onTimerComplete() {\n    const completedSession = this.stateQueue.shift();\n    this.stateQueue.push(completedSession);\n    this.startTimer();\n  }\n\n  /**\n   * Starts the timer for the session at the top of the queue.\n   * Updates the display for the status.\n   */\n  startTimer() {\n    const session = this.stateQueue[0];\n    this.state = session.name;\n    this.displayStatus.textContent = this.state;\n    this.countdown(session.duration * 60);\n  }\n\n  /**\n   * Counts down the timer for duration amount of minutes.\n   * Updates the DOM with current time remaining.\n   * @param {Number} duration\n   */\n  countdown(duration) {\n    const minutes = Math.floor(duration / 60);\n    const seconds = duration % 60;\n    let displayString = '';\n    if (seconds < 10) {\n      displayString = `${minutes}:0${seconds}`;\n    } else {\n      displayString = `${minutes}:${seconds}`;\n    }\n    this.displayTime.textContent = displayString;\n    duration -= 1;\n    if (duration >= 0) {\n      setTimeout(() => {\n        this.countdown(duration);\n      }, 1000);\n    } else {\n      this.onTimerComplete();\n    }\n  }\n\n  /**\n   * Adds event listener to the start button that was added\n   */\n  addEventListeners() {\n    this.startButton.addEventListener('click', () => {\n      if (this.startButton.textContent === innerText.startTimerText) {\n        this.startButton.textContent = innerText.stopTimerText;\n        this.startButton.class = classNames.stopButton;\n        this.startTimer();\n      } else {\n        this.startButton.textContent = innerText.startTimerText;\n        this.startButton.class = classNames.startButton;\n      }\n    });\n  }\n}\n\nexport { Timer };\n",
+    "__docId__": 50,
+    "kind": "variable",
+    "name": "modeDisplay",
+    "memberof": "js/App.js",
     "static": true,
-    "longname": "/home/anshul/anshul/Development/cse110-w21-group28/js/Timer/Timer.js",
+    "longname": "js/App.js~modeDisplay",
+    "access": "public",
+    "export": false,
+    "importPath": "cse110-w21-group28/js/App.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 6,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 51,
+    "kind": "variable",
+    "name": "todoTable",
+    "memberof": "js/App.js",
+    "static": true,
+    "longname": "js/App.js~todoTable",
+    "access": "public",
+    "export": false,
+    "importPath": "cse110-w21-group28/js/App.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 7,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 52,
+    "kind": "variable",
+    "name": "addTodoForm",
+    "memberof": "js/App.js",
+    "static": true,
+    "longname": "js/App.js~addTodoForm",
+    "access": "public",
+    "export": false,
+    "importPath": "cse110-w21-group28/js/App.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 8,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 53,
+    "kind": "variable",
+    "name": "addTodoButton",
+    "memberof": "js/App.js",
+    "static": true,
+    "longname": "js/App.js~addTodoButton",
+    "access": "public",
+    "export": false,
+    "importPath": "cse110-w21-group28/js/App.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 9,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 54,
+    "kind": "variable",
+    "name": "startTimerButton",
+    "memberof": "js/App.js",
+    "static": true,
+    "longname": "js/App.js~startTimerButton",
+    "access": "public",
+    "export": false,
+    "importPath": "cse110-w21-group28/js/App.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 10,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 55,
+    "kind": "variable",
+    "name": "TDLDom",
+    "memberof": "js/App.js",
+    "static": true,
+    "longname": "js/App.js~TDLDom",
+    "access": "public",
+    "export": false,
+    "importPath": "cse110-w21-group28/js/App.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 12,
+    "undocument": true,
+    "type": {
+      "types": [
+        "js/ToDoList/TodoListDom.js~TodoListDom"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 56,
+    "kind": "variable",
+    "name": "TimerObj",
+    "memberof": "js/App.js",
+    "static": true,
+    "longname": "js/App.js~TimerObj",
+    "access": "public",
+    "export": false,
+    "importPath": "cse110-w21-group28/js/App.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 13,
+    "undocument": true,
+    "type": {
+      "types": [
+        "js/Timer/Timer.js~Timer"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 57,
+    "kind": "file",
+    "name": "js/Distraction.js",
+    "content": "const distractButton = document.getElementById('distractionButton');\nconst distractPopUp = document.getElementById('distract-popup');\nconst cancelButton = document.getElementById('cancel-button');\nconst submitButton = document.getElementById('submit-button');\n\n/**\n * This function will make the pop up disappear\n * and remove any of the text in the 'description' field.\n */\nfunction resetPopUp() {\n  distractPopUp.style.display = 'none';\n  document.getElementById('description').value = '';\n}\n\ndistractButton.addEventListener('click', () => {\n  if (distractPopUp.style.display === 'block') {\n    resetPopUp();\n  } else {\n    distractPopUp.style.display = 'block';\n  }\n});\n\ncancelButton.addEventListener('click', () => {\n  resetPopUp();\n});\n\nsubmitButton.addEventListener('click', () => {\n  const description = document.getElementById('description').value;\n  const time = document.getElementById('timeDisplay').textContent;\n  if (description !== '') {\n    let distractions = JSON.parse(localStorage.getItem('distractions'));\n    if (distractions === null) {\n      distractions = [];\n    }\n    distractions.push({ description, time });\n    localStorage.setItem('distractions', JSON.stringify(distractions));\n    resetPopUp();\n  }\n});\n",
+    "static": true,
+    "longname": "/home/anshul/Github/cse110-w21-group28/js/Distraction.js",
     "access": "public",
     "description": null,
     "lineNumber": 1
   },
   {
-    "__docId__": 53,
+    "__docId__": 58,
+    "kind": "variable",
+    "name": "distractButton",
+    "memberof": "js/Distraction.js",
+    "static": true,
+    "longname": "js/Distraction.js~distractButton",
+    "access": "public",
+    "export": false,
+    "importPath": "cse110-w21-group28/js/Distraction.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 1,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 59,
+    "kind": "variable",
+    "name": "distractPopUp",
+    "memberof": "js/Distraction.js",
+    "static": true,
+    "longname": "js/Distraction.js~distractPopUp",
+    "access": "public",
+    "export": false,
+    "importPath": "cse110-w21-group28/js/Distraction.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 2,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 60,
+    "kind": "variable",
+    "name": "cancelButton",
+    "memberof": "js/Distraction.js",
+    "static": true,
+    "longname": "js/Distraction.js~cancelButton",
+    "access": "public",
+    "export": false,
+    "importPath": "cse110-w21-group28/js/Distraction.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 3,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 61,
+    "kind": "variable",
+    "name": "submitButton",
+    "memberof": "js/Distraction.js",
+    "static": true,
+    "longname": "js/Distraction.js~submitButton",
+    "access": "public",
+    "export": false,
+    "importPath": "cse110-w21-group28/js/Distraction.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 4,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 62,
+    "kind": "function",
+    "name": "resetPopUp",
+    "memberof": "js/Distraction.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "js/Distraction.js~resetPopUp",
+    "access": "public",
+    "export": false,
+    "importPath": "cse110-w21-group28/js/Distraction.js",
+    "importStyle": null,
+    "description": "This function will make the pop up disappear\nand remove any of the text in the 'description' field.",
+    "lineNumber": 10,
+    "params": [],
+    "return": null,
+    "ignore": true
+  },
+  {
+    "__docId__": 63,
+    "kind": "file",
+    "name": "js/Timer/Timer.js",
+    "content": "import {\n  workMode, shortBreakMode, longBreakMode, classNames, buttonText,\n} from './TimerVariables.js';\n/**\n * A class for the Timer object. Has functions to start the timer,\n * display the current mode of the timer and display the time remaining\n * Class throws the 'timer-complete' event\n */\nclass Timer extends HTMLElement {\n  /**\n   * Constructor of Time Object. Takes the HTML element of where\n   * you want the time and the status of the timer to be implemented.\n   * HTML Elements must have the 'textElement' attribute.\n   * @param {HTMLElement} startButton\n   * @param {HTMLElement} displayTime\n   * @param {HTMLElement} displayStatus\n   */\n  constructor(startButton, displayTime, displayStatus) {\n    super();\n    /**\n     * State of the timer (the current mode)\n     * @type {String}\n     */\n    this.state = '';\n    /**\n     * Queue that stores the Session objects. Rotates to provide\n     * rotation functionality for the timer\n     * @type {Object[]}\n     * @property {String} object.name name of the session\n     * @property {Number} object.duration duration of the session\n     */\n    this.stateQueue = [];\n    /**\n     * HTML Tag that is reponsible for controlling the timer\n     * @type {HTMLElement}\n     */\n    this.startButton = startButton;\n    /**\n     * HTML Tag that is reponsible for displaying the time remaining\n     * @type {HTMLElement}\n     */\n    this.displayTime = displayTime;\n    /**\n     * HTML Tag that is reponsible for displaying the mode of the timer\n     * @type {HTMLElement}\n     */\n    this.displayStatus = displayStatus;\n    /**\n     * Checks if session has ended\n     * @type {Boolean}\n     */\n    this.end = false;\n\n    // this is the order for the timer. It will loop in this order.\n    const workOrder = [workMode, shortBreakMode, workMode,\n      shortBreakMode, workMode, shortBreakMode, workMode, longBreakMode];\n    for (let i = 0; i < workOrder.length; i += 1) {\n      this.stateQueue.push(workOrder[i]);\n    }\n\n    this.addEventListeners();\n  }\n\n  /**\n   * Function that fires when the timer runs out of time.\n   * Moves on to start the timer again at the end of the function.\n   */\n  onTimerComplete() {\n    const completedSession = this.stateQueue.shift();\n    this.stateQueue.push(completedSession);\n    const event = new CustomEvent('timer-complete', {\n      detail: {\n        sessionName: completedSession.name,\n      },\n    });\n\n    this.dispatchEvent(event);\n    this.startTimer();\n  }\n\n  /**\n   * Starts the timer for the session at the top of the queue.\n   * Updates the display for the status.\n   */\n  startTimer() {\n    this.end = false;\n    const session = this.stateQueue[0];\n    this.state = session.name;\n    this.displayStatus.textContent = this.state;\n    this.countdown(session.duration * 60);\n  }\n\n  /**\n   * Ends the timer.\n   * Updates the display for the status.\n   */\n  endTimer() {\n    this.end = true;\n    this.displayStatus.textContent = 'Pomo-Time!';\n    this.displayTime.textContent = '25:00';\n    this.stateQueue = [];\n    const workOrder = [workMode, shortBreakMode, workMode,\n      shortBreakMode, workMode, shortBreakMode, workMode, longBreakMode];\n    for (let i = 0; i < workOrder.length; i += 1) {\n      this.stateQueue.push(workOrder[i]);\n    }\n  }\n\n  /**\n   * Counts down the timer for duration amount of minutes.\n   * Updates the DOM with current time remaining.\n   * @param {Number} duration Amount of seconds for the timer to run\n   */\n  countdown(duration) {\n    if (this.end) return;\n    const minutes = Math.floor(duration / 60);\n    const seconds = duration % 60;\n    let displayString = '';\n    if (seconds < 10) {\n      displayString = `${minutes}:0${seconds}`;\n    } else {\n      displayString = `${minutes}:${seconds}`;\n    }\n    this.displayTime.textContent = displayString;\n    duration -= 1;\n    if (duration >= 0) {\n      setTimeout(() => {\n        this.countdown(duration);\n      }, 1000);\n    } else {\n      this.onTimerComplete();\n    }\n  }\n\n  /**\n   * Adds event listener to the start button that was added\n   */\n  addEventListeners() {\n    this.startButton.addEventListener('click', () => {\n      if (this.startButton.textContent === buttonText.startTimerText) {\n        this.startTimer();\n        this.startButton.textContent = buttonText.stopTimerText;\n        this.startButton.class = classNames.stopButton;\n      } else {\n        this.endTimer();\n        this.startButton.textContent = buttonText.startTimerText;\n        this.startButton.class = classNames.startButton;\n      }\n    });\n  }\n}\n\ncustomElements.define('custom-timer', Timer);\nexport { Timer };\n",
+    "static": true,
+    "longname": "/home/anshul/Github/cse110-w21-group28/js/Timer/Timer.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 64,
     "kind": "class",
     "name": "Timer",
     "memberof": "js/Timer/Timer.js",
@@ -659,12 +878,15 @@
     "export": true,
     "importPath": "cse110-w21-group28/js/Timer/Timer.js",
     "importStyle": "{Timer}",
-    "description": "A class for the Timer object. Has functions to start the timer,\ndisplay the current mode of the timer and display the time remaining",
-    "lineNumber": 8,
-    "interface": false
+    "description": "A class for the Timer object. Has functions to start the timer,\ndisplay the current mode of the timer and display the time remaining\nClass throws the 'timer-complete' event",
+    "lineNumber": 9,
+    "interface": false,
+    "extends": [
+      "HTMLElement"
+    ]
   },
   {
-    "__docId__": 54,
+    "__docId__": 65,
     "kind": "constructor",
     "name": "constructor",
     "memberof": "js/Timer/Timer.js~Timer",
@@ -674,7 +896,7 @@
     "longname": "js/Timer/Timer.js~Timer#constructor",
     "access": "public",
     "description": "Constructor of Time Object. Takes the HTML element of where\nyou want the time and the status of the timer to be implemented.\nHTML Elements must have the 'textElement' attribute.",
-    "lineNumber": 17,
+    "lineNumber": 18,
     "params": [
       {
         "nullable": null,
@@ -709,7 +931,7 @@
     ]
   },
   {
-    "__docId__": 55,
+    "__docId__": 66,
     "kind": "member",
     "name": "state",
     "memberof": "js/Timer/Timer.js~Timer",
@@ -717,7 +939,7 @@
     "longname": "js/Timer/Timer.js~Timer#state",
     "access": "public",
     "description": "State of the timer (the current mode)",
-    "lineNumber": 22,
+    "lineNumber": 24,
     "type": {
       "nullable": null,
       "types": [
@@ -728,7 +950,7 @@
     }
   },
   {
-    "__docId__": 56,
+    "__docId__": 67,
     "kind": "member",
     "name": "stateQueue",
     "memberof": "js/Timer/Timer.js~Timer",
@@ -736,7 +958,7 @@
     "longname": "js/Timer/Timer.js~Timer#stateQueue",
     "access": "public",
     "description": "Queue that stores the Session objects. Rotates to provide\nrotation functionality for the timer",
-    "lineNumber": 30,
+    "lineNumber": 32,
     "properties": [
       {
         "nullable": null,
@@ -746,7 +968,7 @@
         "spread": false,
         "optional": false,
         "name": "object.name",
-        "description": ""
+        "description": "name of the session"
       },
       {
         "nullable": null,
@@ -756,20 +978,20 @@
         "spread": false,
         "optional": false,
         "name": "object.duration",
-        "description": ""
+        "description": "duration of the session"
       }
     ],
     "type": {
       "nullable": null,
       "types": [
-        "Array[Object]"
+        "Object[]"
       ],
       "spread": false,
       "description": null
     }
   },
   {
-    "__docId__": 57,
+    "__docId__": 68,
     "kind": "member",
     "name": "startButton",
     "memberof": "js/Timer/Timer.js~Timer",
@@ -777,7 +999,7 @@
     "longname": "js/Timer/Timer.js~Timer#startButton",
     "access": "public",
     "description": "HTML Tag that is reponsible for controlling the timer",
-    "lineNumber": 35,
+    "lineNumber": 37,
     "type": {
       "nullable": null,
       "types": [
@@ -788,7 +1010,7 @@
     }
   },
   {
-    "__docId__": 58,
+    "__docId__": 69,
     "kind": "member",
     "name": "displayTime",
     "memberof": "js/Timer/Timer.js~Timer",
@@ -796,7 +1018,7 @@
     "longname": "js/Timer/Timer.js~Timer#displayTime",
     "access": "public",
     "description": "HTML Tag that is reponsible for displaying the time remaining",
-    "lineNumber": 40,
+    "lineNumber": 42,
     "type": {
       "nullable": null,
       "types": [
@@ -807,7 +1029,7 @@
     }
   },
   {
-    "__docId__": 59,
+    "__docId__": 70,
     "kind": "member",
     "name": "displayStatus",
     "memberof": "js/Timer/Timer.js~Timer",
@@ -815,7 +1037,7 @@
     "longname": "js/Timer/Timer.js~Timer#displayStatus",
     "access": "public",
     "description": "HTML Tag that is reponsible for displaying the mode of the timer",
-    "lineNumber": 45,
+    "lineNumber": 47,
     "type": {
       "nullable": null,
       "types": [
@@ -826,7 +1048,26 @@
     }
   },
   {
-    "__docId__": 60,
+    "__docId__": 71,
+    "kind": "member",
+    "name": "end",
+    "memberof": "js/Timer/Timer.js~Timer",
+    "static": false,
+    "longname": "js/Timer/Timer.js~Timer#end",
+    "access": "public",
+    "description": "Checks if session has ended",
+    "lineNumber": 52,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Boolean"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 72,
     "kind": "method",
     "name": "onTimerComplete",
     "memberof": "js/Timer/Timer.js~Timer",
@@ -836,12 +1077,12 @@
     "longname": "js/Timer/Timer.js~Timer#onTimerComplete",
     "access": "public",
     "description": "Function that fires when the timer runs out of time.\nMoves on to start the timer again at the end of the function.",
-    "lineNumber": 61,
+    "lineNumber": 68,
     "params": [],
     "return": null
   },
   {
-    "__docId__": 61,
+    "__docId__": 73,
     "kind": "method",
     "name": "startTimer",
     "memberof": "js/Timer/Timer.js~Timer",
@@ -851,12 +1092,27 @@
     "longname": "js/Timer/Timer.js~Timer#startTimer",
     "access": "public",
     "description": "Starts the timer for the session at the top of the queue.\nUpdates the display for the status.",
-    "lineNumber": 71,
+    "lineNumber": 85,
     "params": [],
     "return": null
   },
   {
-    "__docId__": 63,
+    "__docId__": 76,
+    "kind": "method",
+    "name": "endTimer",
+    "memberof": "js/Timer/Timer.js~Timer",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "js/Timer/Timer.js~Timer#endTimer",
+    "access": "public",
+    "description": "Ends the timer.\nUpdates the display for the status.",
+    "lineNumber": 97,
+    "params": [],
+    "return": null
+  },
+  {
+    "__docId__": 79,
     "kind": "method",
     "name": "countdown",
     "memberof": "js/Timer/Timer.js~Timer",
@@ -866,7 +1122,7 @@
     "longname": "js/Timer/Timer.js~Timer#countdown",
     "access": "public",
     "description": "Counts down the timer for duration amount of minutes.\nUpdates the DOM with current time remaining.",
-    "lineNumber": 83,
+    "lineNumber": 114,
     "params": [
       {
         "nullable": null,
@@ -876,13 +1132,13 @@
         "spread": false,
         "optional": false,
         "name": "duration",
-        "description": ""
+        "description": "Amount of seconds for the timer to run"
       }
     ],
     "return": null
   },
   {
-    "__docId__": 64,
+    "__docId__": 80,
     "kind": "method",
     "name": "addEventListeners",
     "memberof": "js/Timer/Timer.js~Timer",
@@ -892,23 +1148,23 @@
     "longname": "js/Timer/Timer.js~Timer#addEventListeners",
     "access": "public",
     "description": "Adds event listener to the start button that was added",
-    "lineNumber": 106,
+    "lineNumber": 138,
     "params": [],
     "return": null
   },
   {
-    "__docId__": 65,
+    "__docId__": 81,
     "kind": "file",
     "name": "js/Timer/TimerVariables.js",
-    "content": "// these are all variables for the Timer. Changing these will change them universally\n\nconst workMode = {\n  name: 'Working Time',\n  duration: 25,\n};\nconst shortBreakMode = {\n  name: 'Short Break',\n  duration: 5,\n};\n\nconst longBreakMode = {\n  name: 'Long Break',\n  duration: 15,\n};\n\nconst classNames = {\n  stopButton: 'stopTimerButton',\n  startButton: 'startTimerButton',\n};\n\nconst innerText = {\n  stopTimerText: 'End Day',\n  startTimerText: 'Start',\n};\n\nexport { workMode, shortBreakMode, longBreakMode, classNames, innerText};\n",
+    "content": "// these are all variables for the Timer. Changing these will change them universally\n\nconst workMode = {\n  name: 'Working Time',\n  duration: 25,\n};\nconst shortBreakMode = {\n  name: 'Short Break',\n  duration: 5,\n};\n\nconst longBreakMode = {\n  name: 'Long Break',\n  duration: 15,\n};\n\nconst classNames = {\n  stopButton: 'stopTimerButton',\n  startButton: 'startTimerButton',\n};\n\nconst buttonText = {\n  stopTimerText: 'End Day',\n  startTimerText: 'Start',\n};\n\nexport {\n  workMode, shortBreakMode, longBreakMode, classNames, buttonText,\n};\n",
     "static": true,
-    "longname": "/home/anshul/anshul/Development/cse110-w21-group28/js/Timer/TimerVariables.js",
+    "longname": "/home/anshul/Github/cse110-w21-group28/js/Timer/TimerVariables.js",
     "access": "public",
     "description": null,
     "lineNumber": 1
   },
   {
-    "__docId__": 66,
+    "__docId__": 82,
     "kind": "variable",
     "name": "workMode",
     "memberof": "js/Timer/TimerVariables.js",
@@ -928,7 +1184,7 @@
     }
   },
   {
-    "__docId__": 67,
+    "__docId__": 83,
     "kind": "variable",
     "name": "shortBreakMode",
     "memberof": "js/Timer/TimerVariables.js",
@@ -948,7 +1204,7 @@
     }
   },
   {
-    "__docId__": 68,
+    "__docId__": 84,
     "kind": "variable",
     "name": "longBreakMode",
     "memberof": "js/Timer/TimerVariables.js",
@@ -968,7 +1224,7 @@
     }
   },
   {
-    "__docId__": 69,
+    "__docId__": 85,
     "kind": "variable",
     "name": "classNames",
     "memberof": "js/Timer/TimerVariables.js",
@@ -988,16 +1244,16 @@
     }
   },
   {
-    "__docId__": 70,
+    "__docId__": 86,
     "kind": "variable",
-    "name": "innerText",
+    "name": "buttonText",
     "memberof": "js/Timer/TimerVariables.js",
     "static": true,
-    "longname": "js/Timer/TimerVariables.js~innerText",
+    "longname": "js/Timer/TimerVariables.js~buttonText",
     "access": "public",
     "export": true,
     "importPath": "cse110-w21-group28/js/Timer/TimerVariables.js",
-    "importStyle": "{innerText}",
+    "importStyle": "{buttonText}",
     "description": null,
     "lineNumber": 22,
     "undocument": true,
@@ -1008,108 +1264,1322 @@
     }
   },
   {
+    "__docId__": 87,
+    "kind": "file",
+    "name": "js/ToDoList/Task.js",
+    "content": "import { classNames } from './TaskVariables.js';\n\n/**\n * Task object, stores its id, task name, total expected Pomo Sessions to complete the Task,\n * the number of the current Pomo Session, and whether the task has been completed or not.\n */\nclass Task extends HTMLTableRowElement {\n  /**\n  * Task construcutor. Initializes the task with appropriate attributes\n  * @param {String} id Id of the task\n  * @param {String} name Name of the task\n  * @param {Number} totalSessions Total sessions the task should take\n  */\n  constructor(id, name, totalSessions) {\n    super();\n    /**\n     * Stores the id of the task\n     * @type {Number}\n     */\n    this.id = id;\n    /**\n     * Stores the name of the task\n     * @type {String}\n     */\n    this.name = name;\n    /**\n     * Stores the total sessions anticipated for the task\n     * @type {Number}\n     */\n    this.totalSessions = totalSessions;\n    /**\n     * Stores the total amount of sessions spent working on the task\n     * @type {Number}\n     */\n    this.currentSessionNum = 0;\n    /**\n     * Stores if the task has been checked off or not\n     * @type {Boolean}\n     */\n    this.checked = false;\n    this.setAttribute('class', classNames.uncheckedTaskClassName);\n\n    /**\n     * The checkbox attribute for the task\n     * @type {HTMLInputElement}\n     */\n    this.checkBox = this.setupCheckBox();\n    /**\n     * Stores the view that shows the task name to the user\n     * @type {HTMLTableDataCellElement}\n     */\n    this.taskText = this.setupTaskText();\n    /**\n     * Stores the view that displayes the total pomo sessions spent\n     * and alloted for the tasl\n     * @type {HTMLTableDataCellElement}\n     */\n    this.pomoSessions = this.setupTotalPomoSessions();\n    this.setupDeleteButton();\n  }\n\n  /**\n   * This sets up the checkbox to check off tasks\n   * @returns {HTMLInputElement}\n   */\n  setupCheckBox() {\n    const firstCol = document.createElement('td');\n    const checkBox = document.createElement('input');\n    checkBox.setAttribute('type', 'checkbox');\n    checkBox.setAttribute('id', `checkbox-${this.id}`);\n    firstCol.appendChild(checkBox);\n    this.appendChild(firstCol);\n\n    checkBox.addEventListener('click', () => {\n      this.checkOffTask();\n    });\n    return checkBox;\n  }\n\n  /**\n   * This sets up the view that will display the taks name\n   * @returns {HTMLTableDataCellElement}\n   */\n  setupTaskText() {\n    const text = document.createElement('td');\n    text.setAttribute('id', `text-${this.id}`);\n    this.appendChild(text);\n    this.updateText();\n    return text;\n  }\n\n  /**\n   * This sets up the view that will display the pomo sessions\n   * @return {HTMLTableDataCellElement}\n   */\n  setupTotalPomoSessions() {\n    const pomoSessions = document.createElement('td');\n    pomoSessions.setAttribute('id', `pomoSessions-${this.id}`);\n    this.appendChild(pomoSessions);\n    this.updatePomoSessions();\n    return pomoSessions;\n  }\n\n  /**\n   *\n   * Currently a placeholder until delete functionality happens\n   */\n  setupDeleteButton() {\n    const deleteBtn = document.createElement('td');\n    deleteBtn.textContent = 'DELETE';\n    this.appendChild(deleteBtn);\n  }\n\n  /**\n   * Update method to edit task name\n   */\n  updateText() {\n    this.children[1].textContent = this.name;\n  }\n\n  /**\n   * This updates the pomo sessions when a session is complete\n   */\n  updatePomoSessions() {\n    this.children[2].textContent = `[${this.currentSessionNum}/\\\n      ${this.totalSessions}]`;\n  }\n\n  /**\n   * Increment this task's current session number. Checks off task if all sessions completed.\n   * @throws {RangeError} - Incrementing a completed tasks' session number\n   * (all sessions have been completed or user has checked off task manually)\n   */\n  incrementSession() {\n    if (this.checked) {\n      throw (new RangeError());\n    }\n\n    this.currentSessionNum += 1;\n    this.updatePomoSessions();\n\n    if (this.currentSessionNum === this.totalSessions) {\n      this.checkOffTask();\n    }\n  }\n\n  /**\n   * Marks a task as completed\n   */\n  checkOffTask() {\n    this.checked = true;\n    this.setAttribute('class', classNames.completedTaskClassName);\n  }\n}\n\nexport { Task };\ncustomElements.define('task-item', Task, { extends: 'tr' });\n",
+    "static": true,
+    "longname": "/home/anshul/Github/cse110-w21-group28/js/ToDoList/Task.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 88,
+    "kind": "class",
+    "name": "Task",
+    "memberof": "js/ToDoList/Task.js",
+    "static": true,
+    "longname": "js/ToDoList/Task.js~Task",
+    "access": "public",
+    "export": true,
+    "importPath": "cse110-w21-group28/js/ToDoList/Task.js",
+    "importStyle": "{Task}",
+    "description": "Task object, stores its id, task name, total expected Pomo Sessions to complete the Task,\nthe number of the current Pomo Session, and whether the task has been completed or not.",
+    "lineNumber": 7,
+    "interface": false,
+    "extends": [
+      "HTMLTableRowElement"
+    ]
+  },
+  {
+    "__docId__": 89,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "js/ToDoList/Task.js~Task",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "js/ToDoList/Task.js~Task#constructor",
+    "access": "public",
+    "description": "Task construcutor. Initializes the task with appropriate attributes",
+    "lineNumber": 14,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "id",
+        "description": "Id of the task"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "name",
+        "description": "Name of the task"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "totalSessions",
+        "description": "Total sessions the task should take"
+      }
+    ]
+  },
+  {
+    "__docId__": 90,
+    "kind": "member",
+    "name": "id",
+    "memberof": "js/ToDoList/Task.js~Task",
+    "static": false,
+    "longname": "js/ToDoList/Task.js~Task#id",
+    "access": "public",
+    "description": "Stores the id of the task",
+    "lineNumber": 20,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Number"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 91,
+    "kind": "member",
+    "name": "name",
+    "memberof": "js/ToDoList/Task.js~Task",
+    "static": false,
+    "longname": "js/ToDoList/Task.js~Task#name",
+    "access": "public",
+    "description": "Stores the name of the task",
+    "lineNumber": 25,
+    "type": {
+      "nullable": null,
+      "types": [
+        "String"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 92,
+    "kind": "member",
+    "name": "totalSessions",
+    "memberof": "js/ToDoList/Task.js~Task",
+    "static": false,
+    "longname": "js/ToDoList/Task.js~Task#totalSessions",
+    "access": "public",
+    "description": "Stores the total sessions anticipated for the task",
+    "lineNumber": 30,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Number"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 93,
+    "kind": "member",
+    "name": "currentSessionNum",
+    "memberof": "js/ToDoList/Task.js~Task",
+    "static": false,
+    "longname": "js/ToDoList/Task.js~Task#currentSessionNum",
+    "access": "public",
+    "description": "Stores the total amount of sessions spent working on the task",
+    "lineNumber": 35,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Number"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 94,
+    "kind": "member",
+    "name": "checked",
+    "memberof": "js/ToDoList/Task.js~Task",
+    "static": false,
+    "longname": "js/ToDoList/Task.js~Task#checked",
+    "access": "public",
+    "description": "Stores if the task has been checked off or not",
+    "lineNumber": 40,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Boolean"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 95,
+    "kind": "member",
+    "name": "checkBox",
+    "memberof": "js/ToDoList/Task.js~Task",
+    "static": false,
+    "longname": "js/ToDoList/Task.js~Task#checkBox",
+    "access": "public",
+    "description": "The checkbox attribute for the task",
+    "lineNumber": 47,
+    "type": {
+      "nullable": null,
+      "types": [
+        "HTMLInputElement"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 96,
+    "kind": "member",
+    "name": "taskText",
+    "memberof": "js/ToDoList/Task.js~Task",
+    "static": false,
+    "longname": "js/ToDoList/Task.js~Task#taskText",
+    "access": "public",
+    "description": "Stores the view that shows the task name to the user",
+    "lineNumber": 52,
+    "type": {
+      "nullable": null,
+      "types": [
+        "HTMLTableDataCellElement"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 97,
+    "kind": "member",
+    "name": "pomoSessions",
+    "memberof": "js/ToDoList/Task.js~Task",
+    "static": false,
+    "longname": "js/ToDoList/Task.js~Task#pomoSessions",
+    "access": "public",
+    "description": "Stores the view that displayes the total pomo sessions spent\nand alloted for the tasl",
+    "lineNumber": 58,
+    "type": {
+      "nullable": null,
+      "types": [
+        "HTMLTableDataCellElement"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 98,
+    "kind": "method",
+    "name": "setupCheckBox",
+    "memberof": "js/ToDoList/Task.js~Task",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "js/ToDoList/Task.js~Task#setupCheckBox",
+    "access": "public",
+    "description": "This sets up the checkbox to check off tasks",
+    "lineNumber": 66,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{HTMLInputElement}"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "HTMLInputElement"
+      ],
+      "spread": false,
+      "description": ""
+    },
+    "params": []
+  },
+  {
+    "__docId__": 99,
+    "kind": "method",
+    "name": "setupTaskText",
+    "memberof": "js/ToDoList/Task.js~Task",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "js/ToDoList/Task.js~Task#setupTaskText",
+    "access": "public",
+    "description": "This sets up the view that will display the taks name",
+    "lineNumber": 84,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{HTMLTableDataCellElement}"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "HTMLTableDataCellElement"
+      ],
+      "spread": false,
+      "description": ""
+    },
+    "params": []
+  },
+  {
+    "__docId__": 100,
+    "kind": "method",
+    "name": "setupTotalPomoSessions",
+    "memberof": "js/ToDoList/Task.js~Task",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "js/ToDoList/Task.js~Task#setupTotalPomoSessions",
+    "access": "public",
+    "description": "This sets up the view that will display the pomo sessions",
+    "lineNumber": 96,
+    "return": {
+      "nullable": null,
+      "types": [
+        "HTMLTableDataCellElement"
+      ],
+      "spread": false,
+      "description": ""
+    },
+    "params": []
+  },
+  {
+    "__docId__": 101,
+    "kind": "method",
+    "name": "setupDeleteButton",
+    "memberof": "js/ToDoList/Task.js~Task",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "js/ToDoList/Task.js~Task#setupDeleteButton",
+    "access": "public",
+    "description": "\nCurrently a placeholder until delete functionality happens",
+    "lineNumber": 108,
+    "params": [],
+    "return": null
+  },
+  {
+    "__docId__": 102,
+    "kind": "method",
+    "name": "updateText",
+    "memberof": "js/ToDoList/Task.js~Task",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "js/ToDoList/Task.js~Task#updateText",
+    "access": "public",
+    "description": "Update method to edit task name",
+    "lineNumber": 117,
+    "params": [],
+    "return": null
+  },
+  {
+    "__docId__": 103,
+    "kind": "method",
+    "name": "updatePomoSessions",
+    "memberof": "js/ToDoList/Task.js~Task",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "js/ToDoList/Task.js~Task#updatePomoSessions",
+    "access": "public",
+    "description": "This updates the pomo sessions when a session is complete",
+    "lineNumber": 124,
+    "params": [],
+    "return": null
+  },
+  {
+    "__docId__": 104,
+    "kind": "method",
+    "name": "incrementSession",
+    "memberof": "js/ToDoList/Task.js~Task",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "js/ToDoList/Task.js~Task#incrementSession",
+    "access": "public",
+    "description": "Increment this task's current session number. Checks off task if all sessions completed.",
+    "lineNumber": 134,
+    "throws": [
+      {
+        "types": [
+          "RangeError"
+        ],
+        "description": "Incrementing a completed tasks' session number\n(all sessions have been completed or user has checked off task manually)"
+      }
+    ],
+    "params": [],
+    "return": null
+  },
+  {
+    "__docId__": 106,
+    "kind": "method",
+    "name": "checkOffTask",
+    "memberof": "js/ToDoList/Task.js~Task",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "js/ToDoList/Task.js~Task#checkOffTask",
+    "access": "public",
+    "description": "Marks a task as completed",
+    "lineNumber": 150,
+    "params": [],
+    "return": null
+  },
+  {
+    "__docId__": 108,
+    "kind": "file",
+    "name": "js/ToDoList/TaskVariables.js",
+    "content": "const classNames = {\n  uncheckedTaskClassName: 'uncheckedTask',\n  completedTaskClassName: 'completedTask',\n};\n\nexport { classNames };\n",
+    "static": true,
+    "longname": "/home/anshul/Github/cse110-w21-group28/js/ToDoList/TaskVariables.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 109,
+    "kind": "variable",
+    "name": "classNames",
+    "memberof": "js/ToDoList/TaskVariables.js",
+    "static": true,
+    "longname": "js/ToDoList/TaskVariables.js~classNames",
+    "access": "public",
+    "export": true,
+    "importPath": "cse110-w21-group28/js/ToDoList/TaskVariables.js",
+    "importStyle": "{classNames}",
+    "description": null,
+    "lineNumber": 1,
+    "undocument": true,
+    "type": {
+      "types": [
+        "{\"uncheckedTaskClassName\": string, \"completedTaskClassName\": string}"
+      ]
+    }
+  },
+  {
+    "__docId__": 110,
+    "kind": "file",
+    "name": "js/ToDoList/ToDoList.js",
+    "content": "import { Task } from './Task.js';\n\n/**\n * Queue based TodoList data structure which holds Task objects.\n * API-like methods to perform operations on the underlying queue\n */\nclass ToDoList {\n  /**\n   * Initializes the todolist array and the counter for id's\n   */\n  constructor() {\n    /**\n     * Array that stores each task\n     * @type {Task[]}\n     */\n    this.taskList = [];\n    /**\n     * This is the total task count that is also a way\n     * to give each task a unique id\n     * @type {number}\n     */\n    this.idCounter = 0;\n  }\n\n  /**\n   * Verifies that incoming parameters are non-empty and defined, then creates Task\n   * @param {String} name Task subject\n   * @param {Number} totalSession Projected number of Pomo Sessions\n   *\n   * @returns {Task} Task object to be placed into DOM\n   *\n   * @throws {Undefined Name} Task name cannot be undefined\n   * @throws {Empty Name} Task name is an empty string\n   * @throws {Undefiend Length Task} Expected number of pomo sessions is undefined\n   * @throws {0 Length Task} Expected number of pomo sessions is 0\n   */\n  addTask(name, totalSession) {\n    if (name === undefined) {\n      throw new Error('Undefined Name');\n    } else if (name === '') {\n      throw new Error('Empty Name');\n    } else if (totalSession === undefined) {\n      throw new Error('Undefined Length Task');\n    } else if (totalSession === 0) {\n      throw new Error('0 Length Task');\n    } else if (Number.isNaN(totalSession)) {\n      throw new Error('Number Not Passed In');\n    }\n\n    const task = new Task(this.idCounter, name, totalSession);\n    this.idCounter += 1;\n    this.taskList.push(task);\n    return task;\n  }\n\n  /**\n   * Gets the first unchecked task\n   *\n   * @returns {Task} First unchecked task in the list\n   *\n   * @throws {'Empty ToDo List'} No tasks can be checked off if no tasks exist\n   * @throws {'No Current Task'} All tasks in the list have been checked off\n   */\n  getCurrentTask() {\n    if (this.taskList.length === 0) {\n      throw new Error('Empty ToDo List');\n    }\n    for (let i = 0; i < this.taskList.length; i += 1) {\n      if (!this.taskList[i].checked) {\n        return this.taskList[i];\n      }\n    }\n    throw new Error('No Current Task');\n  }\n\n  /**\n   * Called by the Timer function when a session is done\n   * Increments the current task\n   */\n  onSessionComplete() {\n    const currTask = this.getCurrentTask();\n    currTask.incrementSession();\n  }\n}\n\nexport { ToDoList };\n",
+    "static": true,
+    "longname": "/home/anshul/Github/cse110-w21-group28/js/ToDoList/ToDoList.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 111,
+    "kind": "class",
+    "name": "ToDoList",
+    "memberof": "js/ToDoList/ToDoList.js",
+    "static": true,
+    "longname": "js/ToDoList/ToDoList.js~ToDoList",
+    "access": "public",
+    "export": true,
+    "importPath": "cse110-w21-group28/js/ToDoList/ToDoList.js",
+    "importStyle": "{ToDoList}",
+    "description": "Queue based TodoList data structure which holds Task objects.\nAPI-like methods to perform operations on the underlying queue",
+    "lineNumber": 7,
+    "interface": false
+  },
+  {
+    "__docId__": 112,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "js/ToDoList/ToDoList.js~ToDoList",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "js/ToDoList/ToDoList.js~ToDoList#constructor",
+    "access": "public",
+    "description": "Initializes the todolist array and the counter for id's",
+    "lineNumber": 11
+  },
+  {
+    "__docId__": 113,
+    "kind": "member",
+    "name": "taskList",
+    "memberof": "js/ToDoList/ToDoList.js~ToDoList",
+    "static": false,
+    "longname": "js/ToDoList/ToDoList.js~ToDoList#taskList",
+    "access": "public",
+    "description": "Array that stores each task",
+    "lineNumber": 16,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Task[]"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 114,
+    "kind": "member",
+    "name": "idCounter",
+    "memberof": "js/ToDoList/ToDoList.js~ToDoList",
+    "static": false,
+    "longname": "js/ToDoList/ToDoList.js~ToDoList#idCounter",
+    "access": "public",
+    "description": "This is the total task count that is also a way\nto give each task a unique id",
+    "lineNumber": 22,
+    "type": {
+      "nullable": null,
+      "types": [
+        "number"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 115,
+    "kind": "method",
+    "name": "addTask",
+    "memberof": "js/ToDoList/ToDoList.js~ToDoList",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "js/ToDoList/ToDoList.js~ToDoList#addTask",
+    "access": "public",
+    "description": "Verifies that incoming parameters are non-empty and defined, then creates Task",
+    "lineNumber": 37,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{Task} Task object to be placed into DOM"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "name",
+        "description": "Task subject"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "totalSession",
+        "description": "Projected number of Pomo Sessions"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Task"
+      ],
+      "spread": false,
+      "description": "Task object to be placed into DOM"
+    },
+    "throws": [
+      {
+        "types": [
+          "Undefined Name"
+        ],
+        "description": "Task name cannot be undefined"
+      },
+      {
+        "types": [
+          "Empty Name"
+        ],
+        "description": "Task name is an empty string"
+      },
+      {
+        "types": [
+          "Undefiend Length Task"
+        ],
+        "description": "Expected number of pomo sessions is undefined"
+      },
+      {
+        "types": [
+          "0 Length Task"
+        ],
+        "description": "Expected number of pomo sessions is 0"
+      }
+    ]
+  },
+  {
+    "__docId__": 117,
+    "kind": "method",
+    "name": "getCurrentTask",
+    "memberof": "js/ToDoList/ToDoList.js~ToDoList",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "js/ToDoList/ToDoList.js~ToDoList#getCurrentTask",
+    "access": "public",
+    "description": "Gets the first unchecked task",
+    "lineNumber": 64,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{Task} First unchecked task in the list"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Task"
+      ],
+      "spread": false,
+      "description": "First unchecked task in the list"
+    },
+    "throws": [
+      {
+        "types": [
+          "'Empty ToDo List'"
+        ],
+        "description": "No tasks can be checked off if no tasks exist"
+      },
+      {
+        "types": [
+          "'No Current Task'"
+        ],
+        "description": "All tasks in the list have been checked off"
+      }
+    ],
+    "params": []
+  },
+  {
+    "__docId__": 118,
+    "kind": "method",
+    "name": "onSessionComplete",
+    "memberof": "js/ToDoList/ToDoList.js~ToDoList",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "js/ToDoList/ToDoList.js~ToDoList#onSessionComplete",
+    "access": "public",
+    "description": "Called by the Timer function when a session is done\nIncrements the current task",
+    "lineNumber": 80,
+    "params": [],
+    "return": null
+  },
+  {
+    "__docId__": 119,
+    "kind": "file",
+    "name": "js/ToDoList/TodoListDom.js",
+    "content": "import { ToDoList } from './ToDoList.js';\nimport { HTMLAttributes } from './TodoListDomVariables.js';\n\n/**\n * Class responsible for providing changes to the DOM for the TodoList\n * Encapsulates the TodoList class\n * Done so their is a clear abstraction from DOM Manipulation and Data Manipulation\n */\nclass TodoListDom {\n  /**\n   * Initializes the TodoListDom object with its correct member variables\n   * @param {HTMLTableElement} HTMLTable\n   * @param {HTMLFormElement} HTMLForm\n   * @param {HTMLButtonElement} HTMLButton\n   */\n  constructor(HTMLTable, HTMLForm, HTMLButton) {\n    /**\n     * Holds the TodoList so the Dom Manager can acess it\n     * @type {ToDoList}\n     */\n    this.todoList = new ToDoList();\n    /**\n     * The form where users input their task\n     * @type {HTMLFormElement}\n     */\n    this.form = HTMLForm;\n    /**\n     * The button where users click to submit their todo's\n     * @type {HTMLButtonElement}\n     */\n    this.button = HTMLButton;\n    /**\n     * The table where the todolist is displayed\n     * @type {HTMLTableElement}\n     */\n    this.table = HTMLTable;\n\n    this.setupEventListeners();\n  }\n\n  /**\n   * Sets up the form dissapearing and submit event listeners\n   */\n  setupEventListeners() {\n    this.form.addEventListener('submit', (e) => {\n      e.preventDefault();\n      const data = new FormData(this.form);\n      const name = data.get(HTMLAttributes.taskNameId);\n      const sessions = parseInt(data.get(HTMLAttributes.taskPomoSessions), 10);\n      const task = this.todoList.addTask(name, sessions);\n      this.displayTask(task);\n      this.form.reset();\n    });\n\n    this.button.addEventListener('click', () => {\n      this.toggleInputForm();\n    });\n  }\n\n  /**\n   * Toggles the visibility of the add task form depending\n   * on the text contained in the button\n   */\n  toggleInputForm() {\n    if (this.form.style.display === 'none') {\n      this.form.setAttribute('style', '');\n      this.button.textContent = HTMLAttributes.buttonDoneTextContent;\n    } else {\n      this.form.style.display = 'none';\n      this.button.textContent = HTMLAttributes.buttonAddTextContent;\n    }\n    this.form.reset();\n  }\n\n  /**\n   * Adds a task to the table of task\n   * @param {HTMLTableRowElement} newTask\n   */\n  displayTask(newTask) {\n    this.table.appendChild(newTask);\n  }\n\n  /**\n   * This function runs when the timer is done with its working session\n   */\n  onSessionComplete() {\n    this.todoList.onSessionComplete();\n  }\n}\n\nexport { TodoListDom };\n",
+    "static": true,
+    "longname": "/home/anshul/Github/cse110-w21-group28/js/ToDoList/TodoListDom.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 120,
+    "kind": "class",
+    "name": "TodoListDom",
+    "memberof": "js/ToDoList/TodoListDom.js",
+    "static": true,
+    "longname": "js/ToDoList/TodoListDom.js~TodoListDom",
+    "access": "public",
+    "export": true,
+    "importPath": "cse110-w21-group28/js/ToDoList/TodoListDom.js",
+    "importStyle": "{TodoListDom}",
+    "description": "Class responsible for providing changes to the DOM for the TodoList\nEncapsulates the TodoList class\nDone so their is a clear abstraction from DOM Manipulation and Data Manipulation",
+    "lineNumber": 9,
+    "interface": false
+  },
+  {
+    "__docId__": 121,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "js/ToDoList/TodoListDom.js~TodoListDom",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "js/ToDoList/TodoListDom.js~TodoListDom#constructor",
+    "access": "public",
+    "description": "Initializes the TodoListDom object with its correct member variables",
+    "lineNumber": 16,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "HTMLTableElement"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "HTMLTable",
+        "description": ""
+      },
+      {
+        "nullable": null,
+        "types": [
+          "HTMLFormElement"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "HTMLForm",
+        "description": ""
+      },
+      {
+        "nullable": null,
+        "types": [
+          "HTMLButtonElement"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "HTMLButton",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "__docId__": 122,
+    "kind": "member",
+    "name": "todoList",
+    "memberof": "js/ToDoList/TodoListDom.js~TodoListDom",
+    "static": false,
+    "longname": "js/ToDoList/TodoListDom.js~TodoListDom#todoList",
+    "access": "public",
+    "description": "Holds the TodoList so the Dom Manager can acess it",
+    "lineNumber": 21,
+    "type": {
+      "nullable": null,
+      "types": [
+        "ToDoList"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 123,
+    "kind": "member",
+    "name": "form",
+    "memberof": "js/ToDoList/TodoListDom.js~TodoListDom",
+    "static": false,
+    "longname": "js/ToDoList/TodoListDom.js~TodoListDom#form",
+    "access": "public",
+    "description": "The form where users input their task",
+    "lineNumber": 26,
+    "type": {
+      "nullable": null,
+      "types": [
+        "HTMLFormElement"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 124,
+    "kind": "member",
+    "name": "button",
+    "memberof": "js/ToDoList/TodoListDom.js~TodoListDom",
+    "static": false,
+    "longname": "js/ToDoList/TodoListDom.js~TodoListDom#button",
+    "access": "public",
+    "description": "The button where users click to submit their todo's",
+    "lineNumber": 31,
+    "type": {
+      "nullable": null,
+      "types": [
+        "HTMLButtonElement"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 125,
+    "kind": "member",
+    "name": "table",
+    "memberof": "js/ToDoList/TodoListDom.js~TodoListDom",
+    "static": false,
+    "longname": "js/ToDoList/TodoListDom.js~TodoListDom#table",
+    "access": "public",
+    "description": "The table where the todolist is displayed",
+    "lineNumber": 36,
+    "type": {
+      "nullable": null,
+      "types": [
+        "HTMLTableElement"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 126,
+    "kind": "method",
+    "name": "setupEventListeners",
+    "memberof": "js/ToDoList/TodoListDom.js~TodoListDom",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "js/ToDoList/TodoListDom.js~TodoListDom#setupEventListeners",
+    "access": "public",
+    "description": "Sets up the form dissapearing and submit event listeners",
+    "lineNumber": 44,
+    "params": [],
+    "return": null
+  },
+  {
+    "__docId__": 127,
+    "kind": "method",
+    "name": "toggleInputForm",
+    "memberof": "js/ToDoList/TodoListDom.js~TodoListDom",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "js/ToDoList/TodoListDom.js~TodoListDom#toggleInputForm",
+    "access": "public",
+    "description": "Toggles the visibility of the add task form depending\non the text contained in the button",
+    "lineNumber": 64,
+    "params": [],
+    "return": null
+  },
+  {
+    "__docId__": 128,
+    "kind": "method",
+    "name": "displayTask",
+    "memberof": "js/ToDoList/TodoListDom.js~TodoListDom",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "js/ToDoList/TodoListDom.js~TodoListDom#displayTask",
+    "access": "public",
+    "description": "Adds a task to the table of task",
+    "lineNumber": 79,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "HTMLTableRowElement"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "newTask",
+        "description": ""
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 129,
+    "kind": "method",
+    "name": "onSessionComplete",
+    "memberof": "js/ToDoList/TodoListDom.js~TodoListDom",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "js/ToDoList/TodoListDom.js~TodoListDom#onSessionComplete",
+    "access": "public",
+    "description": "This function runs when the timer is done with its working session",
+    "lineNumber": 86,
+    "params": [],
+    "return": null
+  },
+  {
+    "__docId__": 130,
+    "kind": "file",
+    "name": "js/ToDoList/TodoListDomVariables.js",
+    "content": "const HTMLAttributes = {\n  buttonDoneTextContent: 'Done',\n  buttonAddTextContent: 'Add Task',\n  taskNameId: 'task-name',\n  taskPomoSessions: 'task-length',\n};\n\nexport { HTMLAttributes };\n",
+    "static": true,
+    "longname": "/home/anshul/Github/cse110-w21-group28/js/ToDoList/TodoListDomVariables.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 131,
+    "kind": "variable",
+    "name": "HTMLAttributes",
+    "memberof": "js/ToDoList/TodoListDomVariables.js",
+    "static": true,
+    "longname": "js/ToDoList/TodoListDomVariables.js~HTMLAttributes",
+    "access": "public",
+    "export": true,
+    "importPath": "cse110-w21-group28/js/ToDoList/TodoListDomVariables.js",
+    "importStyle": "{HTMLAttributes}",
+    "description": null,
+    "lineNumber": 1,
+    "undocument": true,
+    "type": {
+      "types": [
+        "{\"buttonDoneTextContent\": string, \"buttonAddTextContent\": string, \"taskNameId\": string, \"taskPomoSessions\": string}"
+      ]
+    }
+  },
+  {
     "kind": "index",
     "content": "# -cse110-w21-group28",
-    "longname": "/home/anshul/anshul/Development/cse110-w21-group28/README.md",
+    "longname": "/home/anshul/Github/cse110-w21-group28/README.md",
     "name": "./README.md",
     "static": true,
     "access": "public"
   },
   {
     "kind": "packageJSON",
-    "content": "{\n  \"name\": \"cse110-w21-group28\",\n  \"version\": \"1.0.0\",\n  \"description\": \"Necessary Packages for Development\",\n  \"main\": \"index.js\",\n  \"scripts\": {\n    \"start\": \" npx http-server -c-1\",\n    \"test\": \"node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage\",\n    \"test-nc\": \"node --experimental-vm-modules node_modules/jest/bin/jest.js\",\n    \"lint-js\": \"eslint --fix --no-error-on-unmatched-pattern --ext .js,.jsx .\",\n    \"lint-js:test\": \"eslint --no-error-on-unmatched-pattern --ext .js,.jsx .\",\n    \"lint-css\": \"stylelint **/*.css !**/node_modules/** --allow-empty-input --fix\",\n    \"lint-css:test\": \"stylelint **/*.css !**/node_modules/** --allow-empty-input --fix\",\n    \"lint\": \"npm run lint-js && npm run lint-css\",\n    \"lint:test\": \"npm run lint-js:test && npm run lint-css:test\",\n    \"branch\": \"chmod 777 ./.github/scripts/branch.sh && ./.github/scripts/branch.sh\",\n    \"doc\":\"./node_modules/.bin/esdoc && ./node_modules/.bin/esdoc -test\"\n  },\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"git+https://github.com/Anshul-Birla/cse110-w21-group28.git\"\n  },\n  \"author\": \"\",\n  \"license\": \"ISC\",\n  \"bugs\": {\n    \"url\": \"https://github.com/Anshul-Birla/cse110-w21-group28/issues\"\n  },\n  \"homepage\": \"https://github.com/Anshul-Birla/cse110-w21-group28#readme\",\n  \"devDependencies\": {\n    \"@babel/plugin-transform-modules-commonjs\": \"^7.12.13\",\n    \"esdoc\": \"^1.1.0\",\n    \"esdoc-standard-plugin\": \"^1.0.0\",\n    \"eslint\": \"^7.19.0\",\n    \"eslint-config-airbnb-base\": \"^14.2.1\",\n    \"eslint-plugin-import\": \"^2.22.1\",\n    \"http-server\": \"^0.12.3\",\n    \"jest\": \"^26.6.3\",\n    \"jest-environment-node\": \"^26.6.2\",\n    \"stylelint\": \"^13.9.0\",\n    \"stylelint-config-standard\": \"^20.0.0\"\n  },\n  \"babel\": {\n    \"env\": {\n      \"test\": {\n        \"plugins\": [\n          \"@babel/plugin-transform-modules-commonjs\"\n        ]\n      }\n    }\n  },\n  \"jest\": {\n    \"coverageThreshold\": {\n      \"global\": {\n        \"branches\": 80,\n        \"functions\": 80,\n        \"lines\": 60,\n        \"statements\": -10\n      }\n    }\n  }\n}\n",
-    "longname": "/home/anshul/anshul/Development/cse110-w21-group28/package.json",
+    "content": "{\n  \"name\": \"cse110-w21-group28\",\n  \"version\": \"1.0.0\",\n  \"description\": \"Necessary Packages for Development\",\n  \"main\": \"index.js\",\n  \"scripts\": {\n    \"start\": \" npx http-server -c-1\",\n    \"test\": \"node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage\",\n    \"test-nc\": \"node --experimental-vm-modules node_modules/jest/bin/jest.js\",\n    \"lint-js\": \"eslint --fix --no-error-on-unmatched-pattern --ext .js,.jsx .\",\n    \"lint-js:test\": \"eslint --no-error-on-unmatched-pattern --ext .js,.jsx .\",\n    \"lint-css\": \"stylelint **/*.css !**/node_modules/** --allow-empty-input --fix\",\n    \"lint-css:test\": \"stylelint **/*.css !**/node_modules/** --allow-empty-input --fix\",\n    \"lint\": \"npm run lint-js && npm run lint-css\",\n    \"lint:test\": \"npm run lint-js:test && npm run lint-css:test\",\n    \"branch\": \"chmod 777 ./.github/scripts/branch.sh && ./.github/scripts/branch.sh\",\n    \"doc\": \"./node_modules/.bin/esdoc && ./node_modules/.bin/esdoc -test\"\n  },\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"git+https://github.com/Anshul-Birla/cse110-w21-group28.git\"\n  },\n  \"author\": \"\",\n  \"license\": \"ISC\",\n  \"bugs\": {\n    \"url\": \"https://github.com/Anshul-Birla/cse110-w21-group28/issues\"\n  },\n  \"homepage\": \"https://github.com/Anshul-Birla/cse110-w21-group28#readme\",\n  \"devDependencies\": {\n    \"@babel/plugin-transform-modules-commonjs\": \"^7.12.13\",\n    \"esdoc\": \"^1.1.0\",\n    \"esdoc-standard-plugin\": \"^1.0.0\",\n    \"eslint\": \"^7.19.0\",\n    \"eslint-config-airbnb-base\": \"^14.2.1\",\n    \"eslint-plugin-import\": \"^2.22.1\",\n    \"http-server\": \"^0.12.3\",\n    \"jest\": \"^26.6.3\",\n    \"jest-environment-node\": \"^26.6.2\",\n    \"stylelint\": \"^13.9.0\",\n    \"stylelint-config-standard\": \"^20.0.0\"\n  },\n  \"babel\": {\n    \"env\": {\n      \"test\": {\n        \"plugins\": [\n          \"@babel/plugin-transform-modules-commonjs\"\n        ]\n      }\n    }\n  },\n  \"jest\": {\n    \"coverageThreshold\": {\n      \"global\": {\n        \"branches\": 80,\n        \"functions\": 80,\n        \"lines\": 60,\n        \"statements\": -10\n      }\n    }\n  }\n}\n",
+    "longname": "/home/anshul/Github/cse110-w21-group28/package.json",
     "name": "package.json",
     "static": true,
     "access": "public"
   },
   {
-    "__docId__": 71,
+    "__docId__": 132,
     "kind": "testFile",
-    "name": "tests/timer.test.js",
-    "content": "import { Timer } from '../js/Timer/Timer';\nimport {\n  workMode, shortBreakMode, longBreakMode, classNames, innerText,\n} from '../js/Timer/TimerVariables';\n\n\nbeforeEach(() => {\n  document.body.innerHTML = '<div>'\n  + '  <p id=\"displayTime\"></p>'\n  + ' <p id=\"displayStatus\"></p>'\n  + '<button id=start>Start</button>'\n  + '</div>';\n  jest.useFakeTimers();\n  jest.clearAllTimers();\n});\n\ntest('Test Initial State is Nothing', () => {\n  const button = document.getElementById('start');\n  const TimerObj = new Timer(button, null, null);\n  expect(TimerObj.state).toBe('');\n});\n\ntest('Test First Iteration of Timer', () => {\n  const displayTime = document.getElementById('displayTime');\n  const displayStatus = document.getElementById('displayStatus');\n  const button = document.getElementById('start');\n  const TimerObj = new Timer(button, displayTime, displayStatus);\n  TimerObj.startTimer();\n  expect(TimerObj.state).toBe(workMode.name);\n});\n\ntest('Test That Queue Gets Updated During Second Iteration Of Timer', () => {\n  const displayTime = document.getElementById('displayTime');\n  const displayStatus = document.getElementById('displayStatus');\n  const button = document.getElementById('start');\n  const TimerObj = new Timer(button, displayTime, displayStatus);\n  jest.clearAllTimers();\n  TimerObj.startTimer();\n\n  jest.advanceTimersByTime(workMode.duration * 60 * 1000);\n\n  expect(TimerObj.stateQueue[0]).toBe(shortBreakMode);\n  expect(TimerObj.stateQueue[6]).toBe(longBreakMode);\n});\n\ntest('Test That HTML Gets Updated During Second ', () => {\n  const displayTime = document.getElementById('displayTime');\n  const displayStatus = document.getElementById('displayStatus');\n  const button = document.getElementById('start');\n  const TimerObj = new Timer(button, displayTime, displayStatus);\n  jest.clearAllTimers();\n  TimerObj.startTimer();\n\n  jest.advanceTimersByTime(workMode.duration * 60 * 1000);\n\n  expect(displayStatus.textContent).toBe(shortBreakMode.name);\n  expect(displayTime.textContent).toBe(`${shortBreakMode.duration}:00`);\n});\n\ntest('Test That Start Button Functions Properly ', () => {\n  const displayTime = document.getElementById('displayTime');\n  const displayStatus = document.getElementById('displayStatus');\n  const button = document.getElementById('start');\n  const TimerObj = new Timer(button, displayTime, displayStatus);\n  jest.clearAllTimers();\n  button.click();\n  expect(button.textContent).toBe(innerText.stopTimerText);\n  expect(button.class).toBe(classNames.stopButton);\n});\n\ntest('Test That Clicking Start Twice Changes HTML ', () => {\n  const displayTime = document.getElementById('displayTime');\n  const displayStatus = document.getElementById('displayStatus');\n  const button = document.getElementById('start');\n  const TimerObj = new Timer(button, displayTime, displayStatus);\n  jest.clearAllTimers();\n  button.click();\n  button.click();\n  expect(button.textContent).toBe(innerText.startTimerText);\n  expect(button.class).toBe(classNames.startButton);\n});\n",
+    "name": "tests/task.test.js",
+    "content": "/* eslint-disable eqeqeq */\nimport { Task } from '../js/ToDoList/Task.js';\nimport { classNames } from '../js/ToDoList/TaskVariables.js';\n\n/** @Test {Task} */\n\ntest('Test that task with no values is empty', () => {\n  const currTask = new Task();\n  expect(currTask.name).toBe(undefined);\n  // console.log(currTask.name);\n  expect(currTask.checked).toBe(false);\n  expect(currTask.currentSessionNum).toEqual(0);\n  expect(currTask.totalSessions).toBe(undefined);\n  expect(currTask.id == 'undefined').toBeTruthy();\n});\n\ntest('Test that task with initialized values is initialized correctly', () => {\n  const currTask = new Task(0, 'Test task', 5);\n  expect(currTask.name).toBe('Test task');\n  expect(currTask.checked).toBe(false);\n  expect(currTask.currentSessionNum).toEqual(0);\n  expect(currTask.totalSessions).toEqual(5);\n  expect(currTask.id == 0).toBe(true);\n  expect(currTask.className).toBe(classNames.uncheckedTaskClassName);\n});\n\ntest('Increment counter only changes current session number', () => {\n  const currTask = new Task(0, 'Test task', 5);\n  expect(currTask.name).toBe('Test task');\n  expect(currTask.currentSessionNum).toBe(0);\n  expect(currTask.totalSessions).toBe(5);\n  expect(currTask.id == 0).toBeTruthy();\n  expect(currTask.checked).toBe(false);\n  currTask.incrementSession();\n  expect(currTask.name).toBe('Test task');\n  expect(currTask.currentSessionNum).toBe(1);\n  expect(currTask.totalSessions).toBe(5);\n  expect(currTask.id == 0).toBeTruthy();\n  expect(currTask.checked).toBe(false);\n});\n\ntest('Increment counter works up to total sessions, task is completed at the end', () => {\n  const currTask = new Task(0, 'Test task', 5);\n  expect(currTask.name).toBe('Test task');\n  expect(currTask.currentSessionNum).toBe(0);\n  expect(currTask.totalSessions).toBe(5);\n  expect(currTask.id == 0).toBeTruthy();\n  for (let i = 0; i < 5; i += 1) {\n    currTask.incrementSession();\n  }\n  expect(currTask.name).toBe('Test task');\n  expect(currTask.currentSessionNum).toBe(5);\n  expect(currTask.totalSessions).toBe(5);\n  expect(currTask.id == 0).toBeTruthy();\n  expect(currTask.checked).toBe(true);\n});\n\ntest('Error is thrown after incrementing past totalSessions', () => {\n  const currTask = new Task(0, 'Test task', 5);\n  expect(currTask.name).toBe('Test task');\n  expect(currTask.currentSessionNum).toBe(0);\n  expect(currTask.totalSessions).toBe(5);\n  expect(currTask.id == 0).toBeTruthy();\n  for (let i = 0; i < 5; i += 1) {\n    currTask.incrementSession();\n  }\n  const taskIncSession = () => { currTask.incrementSession(); };\n  expect(taskIncSession).toThrow(RangeError);\n});\n\ntest('Test that Checkbox works properly', () => {\n  const currTask = new Task(0, 'Test task', 5);\n  currTask.checkBox.click();\n  expect(currTask.checked).toBe(true);\n  expect(currTask.className).toBe(classNames.completedTaskClassName);\n});\n",
     "static": true,
-    "longname": "/home/anshul/anshul/Development/cse110-w21-group28/tests/timer.test.js",
+    "longname": "/home/anshul/Github/cse110-w21-group28/tests/task.test.js",
     "access": null,
     "description": null,
     "lineNumber": 1
   },
   {
-    "__docId__": 72,
+    "__docId__": 133,
     "kind": "test",
     "name": "test0",
     "testId": 0,
-    "memberof": "tests/timer.test.js",
+    "memberof": "tests/task.test.js",
     "testDepth": 0,
     "static": true,
-    "longname": "tests/timer.test.js~test0",
+    "longname": "tests/task.test.js~test0",
     "access": null,
-    "description": "Test Initial State is Nothing",
-    "lineNumber": 17
+    "description": "Test that task with no values is empty",
+    "lineNumber": 7,
+    "unknown": [
+      {
+        "tagName": "@Test",
+        "tagValue": "{Task}"
+      }
+    ]
   },
   {
-    "__docId__": 73,
+    "__docId__": 134,
     "kind": "test",
     "name": "test1",
     "testId": 1,
-    "memberof": "tests/timer.test.js",
+    "memberof": "tests/task.test.js",
     "testDepth": 0,
     "static": true,
-    "longname": "tests/timer.test.js~test1",
+    "longname": "tests/task.test.js~test1",
     "access": null,
-    "description": "Test First Iteration of Timer",
-    "lineNumber": 23
+    "description": "Test that task with initialized values is initialized correctly",
+    "lineNumber": 17
   },
   {
-    "__docId__": 74,
+    "__docId__": 135,
     "kind": "test",
     "name": "test2",
     "testId": 2,
-    "memberof": "tests/timer.test.js",
+    "memberof": "tests/task.test.js",
     "testDepth": 0,
     "static": true,
-    "longname": "tests/timer.test.js~test2",
+    "longname": "tests/task.test.js~test2",
     "access": null,
-    "description": "Test That Queue Gets Updated During Second Iteration Of Timer",
-    "lineNumber": 32
+    "description": "Increment counter only changes current session number",
+    "lineNumber": 27
   },
   {
-    "__docId__": 75,
+    "__docId__": 136,
     "kind": "test",
     "name": "test3",
     "testId": 3,
-    "memberof": "tests/timer.test.js",
+    "memberof": "tests/task.test.js",
     "testDepth": 0,
     "static": true,
-    "longname": "tests/timer.test.js~test3",
+    "longname": "tests/task.test.js~test3",
     "access": null,
-    "description": "Test That HTML Gets Updated During Second ",
-    "lineNumber": 46
+    "description": "Increment counter works up to total sessions, task is completed at the end",
+    "lineNumber": 42
   },
   {
-    "__docId__": 76,
+    "__docId__": 137,
     "kind": "test",
     "name": "test4",
     "testId": 4,
-    "memberof": "tests/timer.test.js",
+    "memberof": "tests/task.test.js",
     "testDepth": 0,
     "static": true,
-    "longname": "tests/timer.test.js~test4",
+    "longname": "tests/task.test.js~test4",
     "access": null,
-    "description": "Test That Start Button Functions Properly ",
-    "lineNumber": 60
+    "description": "Error is thrown after incrementing past totalSessions",
+    "lineNumber": 58
   },
   {
-    "__docId__": 77,
+    "__docId__": 138,
     "kind": "test",
     "name": "test5",
     "testId": 5,
+    "memberof": "tests/task.test.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "tests/task.test.js~test5",
+    "access": null,
+    "description": "Test that Checkbox works properly",
+    "lineNumber": 71
+  },
+  {
+    "__docId__": 139,
+    "kind": "testFile",
+    "name": "tests/timer.test.js",
+    "content": "import { Timer } from '../js/Timer/Timer';\nimport {\n  workMode, shortBreakMode, longBreakMode, classNames, buttonText,\n} from '../js/Timer/TimerVariables';\n\nbeforeEach(() => {\n  document.body.innerHTML = '<div>'\n  + '  <p id=\"displayTime\"></p>'\n  + ' <p id=\"displayStatus\"></p>'\n  + '<button id=start>Start</button>'\n  + '</div>';\n  jest.useFakeTimers();\n  jest.clearAllTimers();\n});\n\ntest('Test Initial State is Nothing', () => {\n  const button = document.getElementById('start');\n  const TimerObj = new Timer(button, null, null);\n  expect(TimerObj.state).toBe('');\n});\n\ntest('Test First Iteration of Timer', () => {\n  const displayTime = document.getElementById('displayTime');\n  const displayStatus = document.getElementById('displayStatus');\n  const button = document.getElementById('start');\n  const TimerObj = new Timer(button, displayTime, displayStatus);\n  TimerObj.startTimer();\n  expect(TimerObj.state).toBe(workMode.name);\n});\n\ntest('Test That Queue Gets Updated During Second Iteration Of Timer', () => {\n  const displayTime = document.getElementById('displayTime');\n  const displayStatus = document.getElementById('displayStatus');\n  const button = document.getElementById('start');\n  const TimerObj = new Timer(button, displayTime, displayStatus);\n  jest.clearAllTimers();\n  TimerObj.startTimer();\n\n  jest.advanceTimersByTime(workMode.duration * 60 * 1000);\n\n  expect(TimerObj.stateQueue[0]).toBe(shortBreakMode);\n  expect(TimerObj.stateQueue[6]).toBe(longBreakMode);\n});\n\ntest('Test That HTML Gets Updated During Second ', () => {\n  const displayTime = document.getElementById('displayTime');\n  const displayStatus = document.getElementById('displayStatus');\n  const button = document.getElementById('start');\n  const TimerObj = new Timer(button, displayTime, displayStatus);\n  jest.clearAllTimers();\n  TimerObj.startTimer();\n  jest.advanceTimersByTime(workMode.duration * 60 * 1000);\n\n  expect(displayStatus.textContent).toBe(shortBreakMode.name);\n  expect(displayTime.textContent).toBe(`${shortBreakMode.duration}:00`);\n});\n\ntest('Test That Start Button Functions Properly ', () => {\n  const displayTime = document.getElementById('displayTime');\n  const displayStatus = document.getElementById('displayStatus');\n  const button = document.getElementById('start');\n  const TimerObj = new Timer(button, displayTime, displayStatus);\n  jest.clearAllTimers();\n  button.click();\n  expect(button.textContent).toBe(buttonText.stopTimerText);\n  expect(button.class).toBe(classNames.stopButton);\n});\n\ntest('Test That Clicking Start Twice Changes HTML ', () => {\n  const displayTime = document.getElementById('displayTime');\n  const displayStatus = document.getElementById('displayStatus');\n  const button = document.getElementById('start');\n  const TimerObj = new Timer(button, displayTime, displayStatus);\n  jest.clearAllTimers();\n  button.click();\n  button.click();\n  expect(button.textContent).toBe(buttonText.startTimerText);\n  expect(button.class).toBe(classNames.startButton);\n  expect(TimerObj.displayStatus.textContent).toBe('Pomo-Time!');\n});\n\ntest('Test That Timer Resets Properly When End Day is Clicked', () => {\n  const displayTime = document.getElementById('displayTime');\n  const displayStatus = document.getElementById('displayStatus');\n  const button = document.getElementById('start');\n  const TimerObj = new Timer(button, displayTime, displayStatus);\n  jest.clearAllTimers();\n  button.click();\n  jest.advanceTimersByTime(workMode.duration * 60 * 1000);\n  button.click();\n  expect(TimerObj.stateQueue[0]).toBe(workMode);\n});\n",
+    "static": true,
+    "longname": "/home/anshul/Github/cse110-w21-group28/tests/timer.test.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 140,
+    "kind": "test",
+    "name": "test6",
+    "testId": 6,
     "memberof": "tests/timer.test.js",
     "testDepth": 0,
     "static": true,
-    "longname": "tests/timer.test.js~test5",
+    "longname": "tests/timer.test.js~test6",
+    "access": null,
+    "description": "Test Initial State is Nothing",
+    "lineNumber": 16
+  },
+  {
+    "__docId__": 141,
+    "kind": "test",
+    "name": "test7",
+    "testId": 7,
+    "memberof": "tests/timer.test.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "tests/timer.test.js~test7",
+    "access": null,
+    "description": "Test First Iteration of Timer",
+    "lineNumber": 22
+  },
+  {
+    "__docId__": 142,
+    "kind": "test",
+    "name": "test8",
+    "testId": 8,
+    "memberof": "tests/timer.test.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "tests/timer.test.js~test8",
+    "access": null,
+    "description": "Test That Queue Gets Updated During Second Iteration Of Timer",
+    "lineNumber": 31
+  },
+  {
+    "__docId__": 143,
+    "kind": "test",
+    "name": "test9",
+    "testId": 9,
+    "memberof": "tests/timer.test.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "tests/timer.test.js~test9",
+    "access": null,
+    "description": "Test That HTML Gets Updated During Second ",
+    "lineNumber": 45
+  },
+  {
+    "__docId__": 144,
+    "kind": "test",
+    "name": "test10",
+    "testId": 10,
+    "memberof": "tests/timer.test.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "tests/timer.test.js~test10",
+    "access": null,
+    "description": "Test That Start Button Functions Properly ",
+    "lineNumber": 58
+  },
+  {
+    "__docId__": 145,
+    "kind": "test",
+    "name": "test11",
+    "testId": 11,
+    "memberof": "tests/timer.test.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "tests/timer.test.js~test11",
     "access": null,
     "description": "Test That Clicking Start Twice Changes HTML ",
-    "lineNumber": 71
+    "lineNumber": 69
+  },
+  {
+    "__docId__": 146,
+    "kind": "test",
+    "name": "test12",
+    "testId": 12,
+    "memberof": "tests/timer.test.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "tests/timer.test.js~test12",
+    "access": null,
+    "description": "Test That Timer Resets Properly When End Day is Clicked",
+    "lineNumber": 82
+  },
+  {
+    "__docId__": 147,
+    "kind": "testFile",
+    "name": "tests/todolist.test.js",
+    "content": "import { ToDoList } from '../js/ToDoList/ToDoList.js';\n\n/** @Test {ToDoList} */\n\nbeforeEach(() => {\n  document.body.innerHTML = '<div id=\"ToDoListDiv>'\n    + '</div>';\n});\n\ntest('Construction of empty list', () => {\n  const theList = new ToDoList();\n  expect(theList.taskList).toEqual([]);\n});\n\ntest('Valid construction of new list in HTML', () => {\n  const listLocation = document.getElementById('ToDoListDiv');\n  const aList = new ToDoList(listLocation);\n  expect(aList.taskList).toEqual([]);\n});\n\ntest('Adding Items to List', () => {\n  const listLocation = document.getElementById('ToDoListDiv');\n  const aList = new ToDoList(listLocation);\n  aList.addTask('First Task', 5);\n  expect(aList.taskList.length).toBe(1);\n  aList.addTask('Second Task', 2);\n  expect(aList.taskList.length).toBe(2);\n});\n\ntest('Adding 0 Pomo Length Task', () => {\n  const listLocation = document.getElementById('ToDoListDiv');\n  const aList = new ToDoList(listLocation);\n  const errTask = () => { aList.addTask('First Task', 0); };\n  expect(errTask).toThrow('0 Length Task');\n});\n\ntest('Adding undefined Pomo Length Task', () => {\n  const listLocation = document.getElementById('ToDoListDiv');\n  const aList = new ToDoList(listLocation);\n  const errTask = () => { aList.addTask('First Task', undefined); };\n  expect(errTask).toThrow('Undefined Length Task');\n});\n\ntest('Adding Task w/o name', () => {\n  const listLocation = document.getElementById('ToDoListDiv');\n  const aList = new ToDoList(listLocation);\n  const errTask = () => { aList.addTask(undefined, 4); };\n  expect(errTask).toThrow('Undefined Name');\n});\n\ntest('Adding Task w/ empty name', () => {\n  const listLocation = document.getElementById('ToDoListDiv');\n  const aList = new ToDoList(listLocation);\n  const errTask = () => { aList.addTask('', 4); };\n  expect(errTask).toThrow('Empty Name');\n});\n\ntest('Adding Task w/ NaN for PomoSession', () => {\n  const listLocation = document.getElementById('ToDoListDiv');\n  const aList = new ToDoList(listLocation);\n  const errTask = () => { aList.addTask('TempTask', NaN); };\n  expect(errTask).toThrow('Number Not Passed In');\n});\n\ntest('Get currentTask', () => {\n  const listLocation = document.getElementById('ToDoListDiv');\n  const aList = new ToDoList(listLocation);\n  aList.addTask('First Task', 5);\n  aList.addTask('Second Task', 2);\n  const currTask = aList.getCurrentTask();\n  expect(currTask.name).toBe('First Task');\n});\n\ntest('Get currentTask on empty list', () => {\n  const listLocation = document.getElementById('ToDoListDiv');\n  const aList = new ToDoList(listLocation);\n  const currTask = () => { aList.getCurrentTask(); };\n  expect(currTask).toThrow('Empty ToDo List');\n});\n\ntest('Get currentTask on list with all completed elements', () => {\n  const listLocation = document.getElementById('ToDoListDiv');\n  const aList = new ToDoList(listLocation);\n  aList.addTask('First Task', 5);\n  aList.getCurrentTask().checkOffTask();\n  const currTask = () => { aList.getCurrentTask(); };\n  expect(currTask).toThrow('No Current Task');\n});\n\ntest('Preserve special characters in task name', () => {\n  const listLocation = document.getElementById('ToDoListDiv');\n  const aList = new ToDoList(listLocation);\n  // eslint-disable-next-line no-template-curly-in-string\n  const strName = 'A s^ri\\ng w!t\\\\n spe`cia| \"some ver${this.id}y special\" chara%cter$';\n  aList.addTask(strName, 5);\n  aList.addTask('Second Task', 2);\n  const currTask = aList.getCurrentTask();\n  expect(currTask.name).toBe(strName);\n});\n",
+    "static": true,
+    "longname": "/home/anshul/Github/cse110-w21-group28/tests/todolist.test.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 148,
+    "kind": "test",
+    "name": "test13",
+    "testId": 13,
+    "memberof": "tests/todolist.test.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "tests/todolist.test.js~test13",
+    "access": null,
+    "description": "Construction of empty list",
+    "lineNumber": 10
+  },
+  {
+    "__docId__": 149,
+    "kind": "test",
+    "name": "test14",
+    "testId": 14,
+    "memberof": "tests/todolist.test.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "tests/todolist.test.js~test14",
+    "access": null,
+    "description": "Valid construction of new list in HTML",
+    "lineNumber": 15
+  },
+  {
+    "__docId__": 150,
+    "kind": "test",
+    "name": "test15",
+    "testId": 15,
+    "memberof": "tests/todolist.test.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "tests/todolist.test.js~test15",
+    "access": null,
+    "description": "Adding Items to List",
+    "lineNumber": 21
+  },
+  {
+    "__docId__": 151,
+    "kind": "test",
+    "name": "test16",
+    "testId": 16,
+    "memberof": "tests/todolist.test.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "tests/todolist.test.js~test16",
+    "access": null,
+    "description": "Adding 0 Pomo Length Task",
+    "lineNumber": 30
+  },
+  {
+    "__docId__": 152,
+    "kind": "test",
+    "name": "test17",
+    "testId": 17,
+    "memberof": "tests/todolist.test.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "tests/todolist.test.js~test17",
+    "access": null,
+    "description": "Adding undefined Pomo Length Task",
+    "lineNumber": 37
+  },
+  {
+    "__docId__": 153,
+    "kind": "test",
+    "name": "test18",
+    "testId": 18,
+    "memberof": "tests/todolist.test.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "tests/todolist.test.js~test18",
+    "access": null,
+    "description": "Adding Task w/o name",
+    "lineNumber": 44
+  },
+  {
+    "__docId__": 154,
+    "kind": "test",
+    "name": "test19",
+    "testId": 19,
+    "memberof": "tests/todolist.test.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "tests/todolist.test.js~test19",
+    "access": null,
+    "description": "Adding Task w/ empty name",
+    "lineNumber": 51
+  },
+  {
+    "__docId__": 155,
+    "kind": "test",
+    "name": "test20",
+    "testId": 20,
+    "memberof": "tests/todolist.test.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "tests/todolist.test.js~test20",
+    "access": null,
+    "description": "Adding Task w/ NaN for PomoSession",
+    "lineNumber": 58
+  },
+  {
+    "__docId__": 156,
+    "kind": "test",
+    "name": "test21",
+    "testId": 21,
+    "memberof": "tests/todolist.test.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "tests/todolist.test.js~test21",
+    "access": null,
+    "description": "Get currentTask",
+    "lineNumber": 65
+  },
+  {
+    "__docId__": 157,
+    "kind": "test",
+    "name": "test22",
+    "testId": 22,
+    "memberof": "tests/todolist.test.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "tests/todolist.test.js~test22",
+    "access": null,
+    "description": "Get currentTask on empty list",
+    "lineNumber": 74
+  },
+  {
+    "__docId__": 158,
+    "kind": "test",
+    "name": "test23",
+    "testId": 23,
+    "memberof": "tests/todolist.test.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "tests/todolist.test.js~test23",
+    "access": null,
+    "description": "Get currentTask on list with all completed elements",
+    "lineNumber": 81
+  },
+  {
+    "__docId__": 159,
+    "kind": "test",
+    "name": "test24",
+    "testId": 24,
+    "memberof": "tests/todolist.test.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "tests/todolist.test.js~test24",
+    "access": null,
+    "description": "Preserve special characters in task name",
+    "lineNumber": 90
+  },
+  {
+    "__docId__": 160,
+    "kind": "testFile",
+    "name": "tests/todolistdom.test.js",
+    "content": "import { TodoListDom } from '../js/ToDoList/TodoListDom.js';\n\n/** @Test {ToDoList} */\n\nbeforeEach(() => {\n  document.body.innerHTML = `<section id=\"tasklist\" class=\"section_container\">\n      <h2>To Do</h2>\n      <table id='todo'>\n        <th>\n          <td>Task</td>\n          <td>Pomos</td>\n          <td>Delete</td>\n        </th>\n      </table>\n    </section>\n\n    <div>\n      <form id = \"add-todo\" style = \"display: none;\">\n        <input type=\"text\" name=\"task-name\" placeholder=\"Write Essay\">\n        <input type=\"number\" name=\"task-length\" placeholder=\"1\">\n        <input type=\"submit\">\n      </form>\n      <button id = \"add-button\" type=\"button\">Add a task</button>\n    </div> `;\n});\n\ntest('Valid construction of TDLDom', () => {\n  const tableLocation = document.getElementById('todo');\n  const formLocation = document.getElementById('add-todo');\n  const btnLocation = document.getElementById('add-button');\n  const myDOM = new TodoListDom(tableLocation, formLocation, btnLocation);\n  expect(myDOM.todoList.taskList).toEqual([]);\n});\n\ntest('Add a task', () => {\n  const tableLocation = document.getElementById('todo');\n  const formLocation = document.getElementById('add-todo');\n  const btnLocation = document.getElementById('add-button');\n  const myDOM = new TodoListDom(tableLocation, formLocation, btnLocation);\n  formLocation.children[0].setAttribute('value', 'Write Essay');\n  formLocation.children[1].value = 2;\n  formLocation.submit();\n  expect(tableLocation.children[1].children[1].textContent).toMatch(new RegExp('Write *Essay'));\n  expect(tableLocation.children[1].children[2].textContent).toMatch(new RegExp('\\\\[0/ *2\\\\]'));\n});\n\ntest('Increment session ', () => {\n  const tableLocation = document.getElementById('todo');\n  const formLocation = document.getElementById('add-todo');\n  const btnLocation = document.getElementById('add-button');\n  const myDOM = new TodoListDom(tableLocation, formLocation, btnLocation);\n  formLocation.children[0].value = 'Write Essay';\n  formLocation.children[1].value = 2;\n  formLocation.submit();\n  myDOM.onSessionComplete();\n  expect(tableLocation.children[1].children[1].textContent).toMatch(new RegExp('Write *Essay'));\n  expect(tableLocation.children[1].children[2].textContent).toMatch(new RegExp('\\\\[1/ *2\\\\]'));\n});\n\ntest('Show and hide form', () => {\n  const tableLocation = document.getElementById('todo');\n  const formLocation = document.getElementById('add-todo');\n  const btnLocation = document.getElementById('add-button');\n  const myDOM = new TodoListDom(tableLocation, formLocation, btnLocation);\n  btnLocation.click();\n  expect(formLocation.getAttribute('style')).toEqual('');\n  btnLocation.click();\n  expect(formLocation.getAttribute('style')).toEqual('display: none;');\n});\n",
+    "static": true,
+    "longname": "/home/anshul/Github/cse110-w21-group28/tests/todolistdom.test.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 161,
+    "kind": "test",
+    "name": "test25",
+    "testId": 25,
+    "memberof": "tests/todolistdom.test.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "tests/todolistdom.test.js~test25",
+    "access": null,
+    "description": "Valid construction of TDLDom",
+    "lineNumber": 27
+  },
+  {
+    "__docId__": 162,
+    "kind": "test",
+    "name": "test26",
+    "testId": 26,
+    "memberof": "tests/todolistdom.test.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "tests/todolistdom.test.js~test26",
+    "access": null,
+    "description": "Add a task",
+    "lineNumber": 35
+  },
+  {
+    "__docId__": 163,
+    "kind": "test",
+    "name": "test27",
+    "testId": 27,
+    "memberof": "tests/todolistdom.test.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "tests/todolistdom.test.js~test27",
+    "access": null,
+    "description": "Increment session ",
+    "lineNumber": 47
+  },
+  {
+    "__docId__": 164,
+    "kind": "test",
+    "name": "test28",
+    "testId": 28,
+    "memberof": "tests/todolistdom.test.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "tests/todolistdom.test.js~test28",
+    "access": null,
+    "description": "Show and hide form",
+    "lineNumber": 60
   }
 ]
