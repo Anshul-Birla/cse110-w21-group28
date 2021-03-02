@@ -56,8 +56,7 @@ class Task extends HTMLTableRowElement {
      * @type {HTMLTableDataCellElement}
      */
     this.pomoSessions = this.setupTotalPomoSessions();
-    
-    
+
     this.deleteButton = this.setupDeleteButton();
   }
 
@@ -111,11 +110,11 @@ class Task extends HTMLTableRowElement {
   setupDeleteButton() {
     const lastCol = document.createElement('td');
     const deleteBtn = document.createElement('button');
-    deleteBtn.className = 'delete-button'
+    deleteBtn.className = 'delete-button';
     deleteBtn.textContent = 'x';
-    lastCol.appendChild(deleteBtn)
+    lastCol.appendChild(deleteBtn);
     this.appendChild(lastCol);
-    return lastCol
+    return lastCol;
   }
 
   /**
