@@ -14,7 +14,6 @@
 
 /* table itself + header, cells, rows, then columns styling */
 table {
-  width: 100%;  /* % width of container */
   border-collapse: collapse;
   table-layout: fixed; /* allows for word-wrap */
   width: 100%;         /* allows for word-wrap */
@@ -68,7 +67,6 @@ tr:hover td {
   width: 70%;
 }
 
-
 /* input form (add task) */
 
 /* form container */
@@ -109,7 +107,6 @@ tr:hover td {
   bottom: 10px;
   color: black;
 }
-
 
 /* checkbox and delete button styling */
 input[type='checkbox'] {
