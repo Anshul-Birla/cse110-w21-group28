@@ -97,7 +97,6 @@ class Timer extends HTMLElement {
   endTimer() {
     this.end = true;
     this.displayStatus.textContent = "Pomo-Time!";
-    this.displayTime.textContent = '25:00'
     const workOrder = [workMode, shortBreakMode, workMode,
       shortBreakMode, workMode, shortBreakMode, workMode, longBreakMode];
     for (let i = 0; i < workOrder.length; i += 1) {
