@@ -1,10 +1,26 @@
 * {
   font-family: Helvetica, sans-serif;
-  color: aliceblue;
+  color: var(--font-color);
+}
+
+/* color variables for buttons, page, and timer */
+:root {
+  --button-border-color: rgba(245, 245, 245, 0.4);
+  --button-color: lightslategray;
+  --page-bg-color: cadetblue;
+  --font-color: aliceblue;
+  --timer-bg-color: darkcyan;
+
+  /* toothpast table theme */
+  --even-color: rgba(149, 218, 229, 0.603);
+  --odd-color: rgb(2, 177, 177);
+  --header-color: darkcyan;
+  --tr-hover-color: #f2f2f279;
+  --td-border-radius: 30px;
 }
 
 body {
-  background-color: cadetblue;
+  background-color: var(--page-bg-color);
 }
 
 header {
@@ -12,9 +28,9 @@ header {
 }
 
 .pure-button {
-  background: lightslategray;
+  background: var(--button-color);
   border-radius: 5px;
-  color: aliceblue;
+  color: var(--font-color);
 }
 
 .section-container {
@@ -39,7 +55,7 @@ header {
   width: 40px;
   border-style: solid;
   border-width: 1px;
-  border-color: rgba(245, 245, 245, 0.4);
+  border-color: var(--button-border-color);
 }
 
 .icon-container p {
@@ -56,7 +72,7 @@ header {
 #timerContainer {
   height: 280px;
   width: 400px;
-  background-color: darkcyan;
+  background-color: var(--timer-bg-color);
   border-radius: 10px;
 }
 
@@ -86,92 +102,13 @@ header {
   font-size: 40%;
   border-style: solid;
   border-width: 1px;
-  border-color: rgba(245, 245, 245, 0.4);
+  border-color: var(--button-border-color);
 }
 
 #startTimer {
   border-style: solid;
   border-width: 2px;
-  border-color: rgba(245, 245, 245, 0.4);
-}
-
-/* tasklist styling */
-#tasklist {
-  position: relative;
-  margin: auto;
-  height: 60vh;
-  width: 40vw;
-  background-color: darkcyan;
-}
-
-#distract-popup {
-  display: none;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-}
-
-#distract-form-container {
-  border-radius: 25px;
-  max-width: 350px;
-  padding: 10px;
-  background-color: #f1f1f1;
-}
-
-#description {
-  width: 90%;
-  padding: 15px;
-  margin: 5px 0 20px 0;
-  border: none;
-  background: #f1f1f1;
-}
-
-.distractFormButton {
-  border-radius: 15px;
-  background-color: #056e08;
-  color: white;
-  padding: 15px 20px;
-  width: 100%;
-  margin-bottom: 10px;
-  opacity: 0.8;
-}
-
-.form-container .cancel {
-  border-radius: 15px;
-  background-color: #ad1a1a;
-}
-
-.addTaskButton {
-  position: absolute;
-  color: white;
-  border-radius: 4px;
-  border-style: none;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-  background: rgb(66, 184, 221);
-  padding: 5px 5px 5px 5px;
-  height: 7vh;
-  width: 40vw;
-  font-size: 5vh;
-  bottom: 0;
-}
-
-.task-name {
-  position: absolute;
-  font-size: 20px;
-  top: 375px;
-  border-radius: 10px;
-  width: 200px;
-}
-
-.task-length {
-  position: absolute;
-  font-size: 20px;
-  width: 130px;
-  top: 375px;
-  left: 205px;
-  border-radius: 10px;
+  border-color: var(--button-border-color);
 }
 
 /* for support for small screens */

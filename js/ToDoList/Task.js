@@ -57,6 +57,10 @@ class Task extends HTMLTableRowElement {
      * @type {HTMLTableDataCellElement}
      */
     this.pomoSessions = this.setupTotalPomoSessions();
+    /**
+     * The delete button for the task
+     * @type {HTMLButtonElement}
+     */
     this.setupDeleteButton();
   }
 
@@ -69,6 +73,7 @@ class Task extends HTMLTableRowElement {
     const checkBox = document.createElement('input');
     checkBox.setAttribute('type', 'checkbox');
     checkBox.setAttribute('id', `checkbox-${this.id}`);
+    checkBox.setAttribute('class', 'custom_checkbox');
     firstCol.appendChild(checkBox);
     this.appendChild(firstCol);
 
@@ -110,6 +115,7 @@ class Task extends HTMLTableRowElement {
   setupDeleteButton() {
     const item = document.createElement('td');
     const deleteBtn = document.createElement('button');
+    deleteBtn.setAttribute('class', 'delete-button');
     deleteBtn.addEventListener('click', () => {
       this.remove();
       this.removeFromLocalStorage(this.id);

@@ -6,6 +6,8 @@
   <link rel="shortcut icon" href="#" />
   <link rel="stylesheet" href="./css/buttons-min.css"/>
   <link rel="stylesheet" href="./css/style.css" />
+  <link rel="stylesheet" href="./css/distraction-box.css" />
+  <link rel="stylesheet" href="./css/table.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Pomo App</title>
 </head>
@@ -47,18 +49,20 @@
   <section id="tasklist" class="section-container">
     <h2>To Do</h2>
     <table id="todo">
-      <th>
-        <td>Task</td>
-        <td>Pomos</td>
-        <td>Delete</td>
-      </th>
+      <tr>
+        <th class='col1-checkbox'></th>
+        <th class='col2-task'>TASKS</th>
+        <th class='col3-pomos'>#</th>
+        <th class='col4-delete'></th>
+      </tr>
     </table>
-    <form id = "add-todo" style = "display: none;" overflow>
-      <input type="text" name="task-name" placeholder="Add task" class="task-name">
-      <input type="number" name="task-length" placeholder="# of pomos" class="task-length">
-      <input type="submit" style="display: none;">
+    <!-- style = 'display: none;' originally an attribute in form and button but we want it always showing -->
+    <form id ='add-todo' overflow>
+      <input type='text' name='task-name' placeholder='Enter task' class='task-name'>
+      <input type='number' name='task-length' placeholder='Estimated # of pomos' class='task-length' min='1' max='24'>
+      <input id = "add-button" type='submit' class='task-submit' value='+'>
     </form>
-    <button id = "add-button" class="addTaskButton" type="button">Add Task</button>
+    <!-- <button id = 'add-button' class='addTaskButton' type='button'>Add Task</button> --> <!-- taking this out for now -->
     <button id = "delete-all-button" class="deleteAllButton" type="button">Delete All</button>
   </section>
 
@@ -107,9 +111,9 @@
     The aim of this app is to help you focus on any task you are working on, such as studying, writing, or coding.
     This app is inspired by
     <a
-      href="https://francescocirillo.com/pages/pomodoro-technique"
-      target="_blank"
-      rel="noopener"
+      href='https://francescocirillo.com/pages/pomodoro-technique'
+      target='_blank'
+      rel='noopener'
       >Pomodoro Technique</a
     >
     which is a time management method developed by Francesco Cirillo.
@@ -126,9 +130,9 @@
       after the tomato-shaped kitchen timer that Cirillo used as a
       university student. -
       <a
-        href="https://en.wikipedia.org/wiki/Pomodoro_Technique"
-        target="_blank"
-        rel="noopener"
+        href='https://en.wikipedia.org/wiki/Pomodoro_Technique'
+        target='_blank'
+        rel='noopener'
         >Wikipedia</a
         >
     </p>
@@ -168,7 +172,7 @@
     <li><strong>Statistics </strong> feature to help monitor your progress</li>
     <li>
       <strong>Start timer</strong> and focus on the task for 25 minutes
-    </li> 
+    </li>
   </ol>
 </div>
 

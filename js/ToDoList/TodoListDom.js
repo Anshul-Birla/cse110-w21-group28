@@ -90,31 +90,12 @@ class TodoListDom {
       this.form.reset();
     });
 
-    this.submitBtn.addEventListener('click', () => {
-      this.toggleInputForm();
-    });
-
     this.deleteAllBtn.addEventListener('click', () => {
       const list = this.todoList.taskList;
       for (let i = 0; i < list.length; i += 1) {
         list[i].children[3].children[0].click();
       }
     });
-  }
-
-  /**
-   * Toggles the visibility of the add task form depending
-   * on the text contained in the button
-   */
-  toggleInputForm() {
-    if (this.form.style.display === 'none') {
-      this.form.setAttribute('style', '');
-      this.submitBtn.textContent = HTMLAttributes.buttonDoneTextContent;
-    } else {
-      this.form.style.display = 'none';
-      this.submitBtn.textContent = HTMLAttributes.buttonAddTextContent;
-    }
-    this.form.reset();
   }
 
   /**
