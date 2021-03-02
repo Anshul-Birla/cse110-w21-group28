@@ -138,7 +138,7 @@ class Timer extends HTMLElement {
   addEventListeners() {
     this.startButton.addEventListener('click', () => {
       if (this.startButton.textContent === buttonText.startTimerText) {
-        this.startTimer()
+        this.startTimer();
         this.startButton.textContent = buttonText.stopTimerText;
         this.startButton.class = classNames.stopButton;
       } else {
