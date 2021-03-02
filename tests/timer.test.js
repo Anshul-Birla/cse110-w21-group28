@@ -76,7 +76,7 @@ test('Test That Clicking Start Twice Changes HTML ', () => {
   button.click();
   expect(button.textContent).toBe(buttonText.startTimerText);
   expect(button.class).toBe(classNames.startButton);
-  expect(TimerObj.displayStatus.textContent).toBe('Day Ended!');  
+  expect(TimerObj.displayStatus.textContent).toBe('Pomo-Time!');  
 });
 
 test('Test That Timer Resets Properly When End Day is Clicked', () => {
