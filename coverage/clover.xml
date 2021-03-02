@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1614652113602" clover="3.2.0">
-  <project timestamp="1614652113602" name="All files">
-    <metrics statements="182" coveredstatements="182" conditionals="32" coveredconditionals="29" methods="32" coveredmethods="32" elements="246" coveredelements="243" complexity="0" loc="182" ncloc="182" packages="2" files="7" classes="7"/>
+<coverage generated="1614652871367" clover="3.2.0">
+  <project timestamp="1614652871367" name="All files">
+    <metrics statements="183" coveredstatements="183" conditionals="32" coveredconditionals="29" methods="32" coveredmethods="32" elements="247" coveredelements="244" complexity="0" loc="183" ncloc="183" packages="2" files="7" classes="7"/>
     <package name="Timer">
       <metrics statements="44" coveredstatements="44" conditionals="6" coveredconditionals="6" methods="7" coveredmethods="7"/>
       <file name="Timer.js" path="/Users/Kevin/Desktop/CSE_110/cse110-w21-group28/js/Timer/Timer.js">
@@ -56,9 +56,9 @@
       </file>
     </package>
     <package name="ToDoList">
-      <metrics statements="138" coveredstatements="138" conditionals="26" coveredconditionals="23" methods="25" coveredmethods="25"/>
+      <metrics statements="139" coveredstatements="139" conditionals="26" coveredconditionals="23" methods="25" coveredmethods="25"/>
       <file name="Task.js" path="/Users/Kevin/Desktop/CSE_110/cse110-w21-group28/js/ToDoList/Task.js">
-        <metrics statements="63" coveredstatements="63" conditionals="8" coveredconditionals="6" methods="13" coveredmethods="13"/>
+        <metrics statements="64" coveredstatements="64" conditionals="8" coveredconditionals="6" methods="13" coveredmethods="13"/>
         <line num="16" count="20" type="stmt"/>
         <line num="21" count="20" type="stmt"/>
         <line num="26" count="20" type="stmt"/>
@@ -90,38 +90,39 @@
         <line num="105" count="20" type="stmt"/>
         <line num="106" count="20" type="stmt"/>
         <line num="107" count="20" type="stmt"/>
-        <line num="116" count="20" type="stmt"/>
-        <line num="117" count="20" type="stmt"/>
         <line num="118" count="20" type="stmt"/>
         <line num="119" count="20" type="stmt"/>
-        <line num="120" count="3" type="stmt"/>
-        <line num="121" count="3" type="stmt"/>
-        <line num="123" count="20" type="stmt"/>
-        <line num="124" count="20" type="stmt"/>
+        <line num="120" count="20" type="stmt"/>
+        <line num="121" count="20" type="stmt"/>
+        <line num="122" count="3" type="stmt"/>
+        <line num="123" count="3" type="stmt"/>
         <line num="125" count="20" type="stmt"/>
-        <line num="132" count="3" type="stmt"/>
-        <line num="133" count="3" type="cond" truecount="1" falsecount="1"/>
-        <line num="134" count="3" type="stmt"/>
+        <line num="126" count="20" type="stmt"/>
+        <line num="127" count="20" type="stmt"/>
+        <line num="128" count="20" type="stmt"/>
+        <line num="135" count="3" type="stmt"/>
+        <line num="136" count="3" type="cond" truecount="1" falsecount="1"/>
         <line num="137" count="3" type="stmt"/>
-        <line num="138" count="3" type="stmt"/>
-        <line num="145" count="20" type="stmt"/>
-        <line num="152" count="35" type="stmt"/>
-        <line num="162" count="13" type="cond" truecount="2" falsecount="0"/>
-        <line num="163" count="1" type="stmt"/>
-        <line num="166" count="12" type="stmt"/>
-        <line num="167" count="12" type="stmt"/>
-        <line num="169" count="12" type="cond" truecount="2" falsecount="0"/>
-        <line num="170" count="2" type="stmt"/>
-        <line num="172" count="12" type="stmt"/>
-        <line num="179" count="17" type="stmt"/>
-        <line num="180" count="3" type="cond" truecount="1" falsecount="1"/>
-        <line num="181" count="3" type="stmt"/>
-        <line num="182" count="3" type="stmt"/>
-        <line num="185" count="17" type="stmt"/>
-        <line num="192" count="5" type="stmt"/>
-        <line num="193" count="5" type="stmt"/>
-        <line num="194" count="5" type="stmt"/>
-        <line num="199" count="3" type="stmt"/>
+        <line num="140" count="3" type="stmt"/>
+        <line num="141" count="3" type="stmt"/>
+        <line num="148" count="20" type="stmt"/>
+        <line num="155" count="35" type="stmt"/>
+        <line num="165" count="13" type="cond" truecount="2" falsecount="0"/>
+        <line num="166" count="1" type="stmt"/>
+        <line num="169" count="12" type="stmt"/>
+        <line num="170" count="12" type="stmt"/>
+        <line num="172" count="12" type="cond" truecount="2" falsecount="0"/>
+        <line num="173" count="2" type="stmt"/>
+        <line num="175" count="12" type="stmt"/>
+        <line num="182" count="17" type="stmt"/>
+        <line num="183" count="3" type="cond" truecount="1" falsecount="1"/>
+        <line num="184" count="3" type="stmt"/>
+        <line num="185" count="3" type="stmt"/>
+        <line num="188" count="17" type="stmt"/>
+        <line num="195" count="5" type="stmt"/>
+        <line num="196" count="5" type="stmt"/>
+        <line num="197" count="5" type="stmt"/>
+        <line num="202" count="3" type="stmt"/>
       </file>
       <file name="TaskVariables.js" path="/Users/Kevin/Desktop/CSE_110/cse110-w21-group28/js/ToDoList/TaskVariables.js">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>

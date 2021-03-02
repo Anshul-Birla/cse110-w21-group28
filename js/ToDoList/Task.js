@@ -61,7 +61,7 @@ class Task extends HTMLTableRowElement {
      * The delete button for the task
      * @type {HTMLButtonElement}
      */
-    this.setupDeleteButton();
+    this.deleteButton = this.setupDeleteButton();
   }
 
   /**
@@ -111,18 +111,21 @@ class Task extends HTMLTableRowElement {
    *
    * Unable to change tasklist in ToDoList class
    * Only changes window.Data
+   * This sets up the delete button for a tasl
+   * @return {HTMLTableDataCellElement}
    */
   setupDeleteButton() {
-    const item = document.createElement('td');
+    const lastCol = document.createElement('td');
     const deleteBtn = document.createElement('button');
     deleteBtn.setAttribute('class', 'delete-button');
     deleteBtn.addEventListener('click', () => {
       this.remove();
       this.removeFromLocalStorage(this.id);
     });
-    deleteBtn.textContent = 'DELETE';
-    item.append(deleteBtn);
-    this.append(item);
+    deleteBtn.textContent = 'x';
+    lastCol.append(deleteBtn);
+    this.append(lastCol);
+    return lastCol;
   }
 
   /**
