@@ -126,7 +126,6 @@ class Task extends HTMLTableRowElement {
     for (let i = 0; i < window.localData.length; i += 1) {
       if (window.localData[i][TaskStorage.idIndex] === id) {
         window.localData.splice(i, 1);
-        break;
       }
     }
     this.checked = true;
@@ -175,7 +174,6 @@ class Task extends HTMLTableRowElement {
       if (window.localData[i][TaskStorage.idIndex] === this.id) {
         window.localData[i][TaskStorage.currentSessionIndex] = this.currentSessionNum;
         window.localData[i][TaskStorage.checkedIndex] = this.checked;
-        break;
       }
     }
     localStorage.setItem('tasks', JSON.stringify(window.localData));

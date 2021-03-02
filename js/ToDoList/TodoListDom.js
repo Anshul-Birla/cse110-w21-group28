@@ -13,7 +13,8 @@ class TodoListDom {
    * Initializes the TodoListDom object with its correct member variables
    * @param {HTMLTableElement} HTMLTable
    * @param {HTMLFormElement} HTMLForm
-   * @param {HTMLButtonElement} HTMLButton
+   * @param {HTMLButtonElement} submitBtn
+   * @param {HTMLButtonElement} deleteAllBtn
    */
   constructor(HTMLTable, HTMLForm, submitBtn, deleteAllBtn) {
     /**
