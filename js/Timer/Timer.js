@@ -1,5 +1,5 @@
 import {
-  workMode, shortBreakMode, longBreakMode, classNames, buttonText,
+  sessionStartName, workMode, shortBreakMode, longBreakMode, classNames, buttonText,
 } from './TimerVariables.js';
 /**
  * A class for the Timer object. Has functions to start the timer,
@@ -96,7 +96,7 @@ class Timer extends HTMLElement {
    */
   endTimer() {
     this.end = true;
-    this.displayStatus.textContent = 'Pomo-Time!';
+    this.displayStatus.textContent = sessionStartName;
     this.displayTime.textContent = '25:00';
     this.stateQueue = [];
     const workOrder = [workMode, shortBreakMode, workMode,
