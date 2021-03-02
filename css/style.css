@@ -143,44 +143,6 @@ header {
   background-color: #ad1a1a;
 }
 
-#distract-popup {
-  display: none;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-}
-
-#distract-form-container {
-  border-radius: 25px;
-  max-width: 350px;
-  padding: 10px;
-  background-color: #f1f1f1;
-}
-
-#description {
-  width: 90%;
-  padding: 15px;
-  margin: 5px 0 20px 0;
-  border: none;
-  background: #f1f1f1;
-}
-
-.distractFormButton {
-  border-radius: 15px;
-  background-color: #056e08;
-  color: white;
-  padding: 15px 20px;
-  width: 100%;
-  margin-bottom:10px;
-  opacity: 0.8;
-}
-
-.form-container .cancel {
-  border-radius: 15px;
-  background-color: #ad1a1a;
-}
 .addTaskButton {
   position: absolute;
   color: white;
