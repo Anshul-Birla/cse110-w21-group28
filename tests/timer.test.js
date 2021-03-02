@@ -76,4 +76,18 @@ test('Test That Clicking Start Twice Changes HTML ', () => {
   button.click();
   expect(button.textContent).toBe(buttonText.startTimerText);
   expect(button.class).toBe(classNames.startButton);
+  expect(TimerObj.displayStatus.textContent).toBe('Day Ended!');  
 });
+
+test('Test That Timer Resets Properly When End Day is Clicked', () => {
+  const displayTime = document.getElementById('displayTime');
+  const displayStatus = document.getElementById('displayStatus');
+  const button = document.getElementById('start');
+  const TimerObj = new Timer(button, displayTime, displayStatus);
+  jest.clearAllTimers();
+  button.click();
+  jest.advanceTimersByTime(workMode.duration * 60 * 1000)
+  button.click();
+  expect(TimerObj.stateQueue[0]).toBe(workMode)
+})
+
