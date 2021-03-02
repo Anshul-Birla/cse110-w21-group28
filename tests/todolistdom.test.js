@@ -39,18 +39,23 @@ test('Valid construction of TDLDom', () => {
   expect(myDOM.todoList.taskList).toEqual([]);
 });
 
-test('Add a task', () => {
+test('Add a task and click checkoff', () => {
   formLocation.children[0].setAttribute('value', 'Write Essay');
   formLocation.children[1].value = 2;
   formLocation.submit();
   expect(tableLocation.children[1].children[1].textContent).toMatch(new RegExp('Write *Essay'));
   expect(tableLocation.children[1].children[2].textContent).toMatch(new RegExp('\\[0/ *2\\]'));
+  tableLocation.children[1].children[0].children[0].click();
 });
 
 test('Reload the page with local storage', () => {
   expect(tableLocation.children[1].children[1].textContent).toMatch(new RegExp('Write *Essay'));
   expect(tableLocation.children[1].children[2].textContent).toMatch(new RegExp('\\[0/ *2\\]'));
 });
+
+test('Reload the page with completed task', () => {
+  expect(tableLocation.children[1].children[0].children[0].getAttribute('checked')).toEqual('true');
+})
 
 // Now has a task
 test('click remove button', () => {
@@ -67,14 +72,6 @@ test('Increment session ', () => {
   myDOM.onSessionComplete();
   expect(tableLocation.children[1].children[1].textContent).toMatch(new RegExp('Write *Essay'));
   expect(tableLocation.children[1].children[2].textContent).toMatch(new RegExp('\\[1/ *2\\]'));
-  localStorage.clear();
-});
-
-test('Show and hide form', () => {
-  addBtnLocation.click();
-  expect(formLocation.getAttribute('style')).toEqual('');
-  addBtnLocation.click();
-  expect(formLocation.getAttribute('style')).toEqual('display: none;');
   localStorage.clear();
 });
 

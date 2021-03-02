@@ -1,5 +1,6 @@
 import { ToDoList } from './ToDoList.js';
 import { HTMLAttributes, TaskStorage } from './TodoListDomVariables.js';
+import { classNames } from './TaskVariables.js';
 
 import { Task } from './Task.js';
 
@@ -69,7 +70,11 @@ class TodoListDom {
       const task = new Task(i, name, totalSession);
       this.todoList.idCounter += 1;
       task.currentSessionNum = currentSession;
-      task.checked = completed;
+      if(completed){
+        task.checked = completed;
+        task.setAttribute('class', classNames.completedTaskClassName);
+        task.checkBox.setAttribute('checked', 'true');
+      }
       this.todoList.taskList.push(task);
       task.updatePomoSessions();
       this.displayTask(task);
