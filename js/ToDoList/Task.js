@@ -56,7 +56,9 @@ class Task extends HTMLTableRowElement {
      * @type {HTMLTableDataCellElement}
      */
     this.pomoSessions = this.setupTotalPomoSessions();
-    // this.setupDeleteButton();
+    
+    
+    this.deleteButton = this.setupDeleteButton();
   }
 
   /**
@@ -103,12 +105,17 @@ class Task extends HTMLTableRowElement {
 
   /**
    *
-   * Currently a placeholder until delete functionality happens
+   * This sets up the delete button for a tasl
+   * @return {HTMLTableDataCellElement}
    */
   setupDeleteButton() {
-    const deleteBtn = document.createElement('td');
-    deleteBtn.textContent = 'DELETE';
-    this.appendChild(deleteBtn);
+    const lastCol = document.createElement('td');
+    const deleteBtn = document.createElement('button');
+    deleteBtn.className = 'delete-button'
+    deleteBtn.textContent = 'x';
+    lastCol.appendChild(deleteBtn)
+    this.appendChild(lastCol);
+    return lastCol
   }
 
   /**

@@ -51,26 +51,7 @@ class TodoListDom {
       this.displayTask(task);
       this.form.reset();
     });
-
-    // this.button.addEventListener('click', () => {
-    //   this.toggleInputForm();
-    // });
   }
-
-  /**
-   * Toggles the visibility of the add task form depending
-   * on the text contained in the button
-   */
-  // toggleInputForm() {
-  //   if (this.form.style.display === 'none') {
-  //     this.form.setAttribute('style', '');
-  //     this.button.textContent = HTMLAttributes.buttonDoneTextContent;
-  //   } else {
-  //     this.form.style.display = 'none';
-  //     this.button.textContent = HTMLAttributes.buttonAddTextContent;
-  //   }
-  //   this.form.reset();
-  // }
 
   /**
    * Adds a task to the table of task
