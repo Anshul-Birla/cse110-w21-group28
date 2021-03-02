@@ -7,7 +7,7 @@
   height: 60vh;
   width: 40vw;
   background-color: var(--page-bg-color);
-  overflow-y: scroll;
+  overflow-y: auto;
   margin-top: 1%;
   padding-right: 20px;
 }
@@ -123,4 +123,9 @@ input[type='checkbox']:checked {
 .delete-button {
   color: black;
   border-radius: 40%;
+}
+
+tr.completedTask td {
+  text-decoration: line-through;
+  background-color: rgba(211, 211, 211, 0.747);
 }
