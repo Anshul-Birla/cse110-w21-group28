@@ -30,23 +30,28 @@
   <ul>
     
   <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#timer">Timer</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Timer/Timer.js~Timer.html">Timer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-buttonText">buttonText</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-classNames">classNames</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-innerText">innerText</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-longBreakMode">longBreakMode</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-shortBreakMode">shortBreakMode</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-workMode">workMode</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#todolist">ToDoList</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/ToDoList/Task.js~Task.html">Task</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/ToDoList/ToDoList.js~ToDoList.html">ToDoList</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/ToDoList/TodoListDom.js~TodoListDom.html">TodoListDom</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-classNames">classNames</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-HTMLAttributes">HTMLAttributes</a></span></span></li>
 </ul>
 </div>
 </nav>
 
 <div class="content" data-ice="content"><div class="header-notice">
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {Timer} from &apos;<span><a href="file/js/Timer/Timer.js.html#lineNumber8">cse110-w21-group28/js/Timer/Timer.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {Timer} from &apos;<span><a href="file/js/Timer/Timer.js.html#lineNumber9">cse110-w21-group28/js/Timer/Timer.js</a></span>&apos;</code></pre></div>
   <span data-ice="access">public</span>
   <span data-ice="kind">class</span>
   
   
   
-  <span data-ice="source">| <span><a href="file/js/Timer/Timer.js.html#lineNumber8">source</a></span></span>
+  <span data-ice="source">| <span><a href="file/js/Timer/Timer.js.html#lineNumber9">source</a></span></span>
 </div>
 
 <div class="self-detail detail">
@@ -56,7 +61,7 @@
 
   
   
-  
+  <div class="flat-list" data-ice="extendsChain"><h4>Extends:</h4><div><span>HTMLElement</span> &#x2192; Timer</div></div>
   
   
   
@@ -67,7 +72,8 @@
   
   
   <div class="description" data-ice="description"><p>A class for the Timer object. Has functions to start the timer,
-display the current mode of the timer and display the time remaining</p>
+display the current mode of the timer and display the time remaining
+Class throws the &apos;timer-complete&apos; event</p>
 </div>
   
 
@@ -194,6 +200,35 @@ display the current mode of the timer and display the time remaining</p>
           
           
           
+          <span class="code" data-ice="name"><span><a href="class/js/Timer/Timer.js~Timer.html#instance-member-end">end</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Checks if session has ended</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
           <span class="code" data-ice="name"><span><a href="class/js/Timer/Timer.js~Timer.html#instance-member-startButton">startButton</a></span></span><span class="code" data-ice="signature">: <span>HTMLElement</span></span>
         </p>
       </div>
@@ -252,7 +287,7 @@ display the current mode of the timer and display the time remaining</p>
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/js/Timer/Timer.js~Timer.html#instance-member-stateQueue">stateQueue</a></span></span><span class="code" data-ice="signature">: <span>Array[Object]</span></span>
+          <span class="code" data-ice="name"><span><a href="class/js/Timer/Timer.js~Timer.html#instance-member-stateQueue">stateQueue</a></span></span><span class="code" data-ice="signature">: <span><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span><span>[]</span></span></span>
         </p>
       </div>
       <div>
@@ -346,6 +381,35 @@ display the current mode of the timer and display the time remaining</p>
           
           
           
+          <span class="code" data-ice="name"><span><a href="class/js/Timer/Timer.js~Timer.html#instance-method-endTimer">endTimer</a></span></span><span class="code" data-ice="signature">()</span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Ends the timer.</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
           <span class="code" data-ice="name"><span><a href="class/js/Timer/Timer.js~Timer.html#instance-method-onTimerComplete">onTimerComplete</a></span></span><span class="code" data-ice="signature">()</span>
         </p>
       </div>
@@ -412,7 +476,7 @@ display the current mode of the timer and display the time remaining</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/js/Timer/Timer.js.html#lineNumber17">source</a></span></span>
+      <span data-ice="source"><span><a href="file/js/Timer/Timer.js.html#lineNumber18">source</a></span></span>
     </span>
   </h3>
 
@@ -489,7 +553,7 @@ HTML Elements must have the &apos;textElement&apos; attribute.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/js/Timer/Timer.js.html#lineNumber45">source</a></span></span>
+      <span data-ice="source"><span><a href="file/js/Timer/Timer.js.html#lineNumber47">source</a></span></span>
     </span>
   </h3>
 
@@ -533,7 +597,7 @@ HTML Elements must have the &apos;textElement&apos; attribute.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/js/Timer/Timer.js.html#lineNumber40">source</a></span></span>
+      <span data-ice="source"><span><a href="file/js/Timer/Timer.js.html#lineNumber42">source</a></span></span>
     </span>
   </h3>
 
@@ -541,6 +605,50 @@ HTML Elements must have the &apos;textElement&apos; attribute.</p>
   
   
   <div data-ice="description"><p>HTML Tag that is reponsible for displaying the time remaining</p>
+</div>
+
+  
+
+  <div data-ice="properties">
+</div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-member-end">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    
+    <span class="code" data-ice="name">end</span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a></span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/js/Timer/Timer.js.html#lineNumber52">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>Checks if session has ended</p>
 </div>
 
   
@@ -577,7 +685,7 @@ HTML Elements must have the &apos;textElement&apos; attribute.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/js/Timer/Timer.js.html#lineNumber35">source</a></span></span>
+      <span data-ice="source"><span><a href="file/js/Timer/Timer.js.html#lineNumber37">source</a></span></span>
     </span>
   </h3>
 
@@ -621,7 +729,7 @@ HTML Elements must have the &apos;textElement&apos; attribute.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/js/Timer/Timer.js.html#lineNumber22">source</a></span></span>
+      <span data-ice="source"><span><a href="file/js/Timer/Timer.js.html#lineNumber24">source</a></span></span>
     </span>
   </h3>
 
@@ -661,11 +769,11 @@ HTML Elements must have the &apos;textElement&apos; attribute.</p>
     
     
     
-    <span class="code" data-ice="name">stateQueue</span><span class="code" data-ice="signature">: <span>Array[Object]</span></span>
+    <span class="code" data-ice="name">stateQueue</span><span class="code" data-ice="signature">: <span><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span><span>[]</span></span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/js/Timer/Timer.js.html#lineNumber30">source</a></span></span>
+      <span data-ice="source"><span><a href="file/js/Timer/Timer.js.html#lineNumber32">source</a></span></span>
     </span>
   </h3>
 
@@ -690,13 +798,15 @@ rotation functionality for the timer</p>
       <td data-ice="name" class="code" data-depth="1">object.name</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></td>
       <td data-ice="appendix"></td>
-      <td data-ice="description"></td>
+      <td data-ice="description"><p>name of the session</p>
+</td>
     </tr>
 <tr data-ice="property" data-depth="1">
       <td data-ice="name" class="code" data-depth="1">object.duration</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a></span></td>
       <td data-ice="appendix"></td>
-      <td data-ice="description"></td>
+      <td data-ice="description"><p>duration of the session</p>
+</td>
     </tr>
 </tbody>
   </table>
@@ -735,7 +845,7 @@ rotation functionality for the timer</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/js/Timer/Timer.js.html#lineNumber106">source</a></span></span>
+      <span data-ice="source"><span><a href="file/js/Timer/Timer.js.html#lineNumber138">source</a></span></span>
     </span>
   </h3>
 
@@ -779,7 +889,7 @@ rotation functionality for the timer</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/js/Timer/Timer.js.html#lineNumber83">source</a></span></span>
+      <span data-ice="source"><span><a href="file/js/Timer/Timer.js.html#lineNumber114">source</a></span></span>
     </span>
   </h3>
 
@@ -804,11 +914,57 @@ Updates the DOM with current time remaining.</p>
       <td data-ice="name" class="code" data-depth="0">duration</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a></span></td>
       <td data-ice="appendix"></td>
-      <td data-ice="description"></td>
+      <td data-ice="description"><p>Amount of seconds for the timer to run</p>
+</td>
     </tr>
 </tbody>
   </table>
 </div>
+</div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-method-endTimer">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    
+    <span class="code" data-ice="name">endTimer</span><span class="code" data-ice="signature">()</span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/js/Timer/Timer.js.html#lineNumber97">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>Ends the timer.
+Updates the display for the status.</p>
+</div>
+
+  
+
+  <div data-ice="properties">
 </div>
 
   
@@ -840,7 +996,7 @@ Updates the DOM with current time remaining.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/js/Timer/Timer.js.html#lineNumber61">source</a></span></span>
+      <span data-ice="source"><span><a href="file/js/Timer/Timer.js.html#lineNumber68">source</a></span></span>
     </span>
   </h3>
 
@@ -885,7 +1041,7 @@ Moves on to start the timer again at the end of the function.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/js/Timer/Timer.js.html#lineNumber71">source</a></span></span>
+      <span data-ice="source"><span><a href="file/js/Timer/Timer.js.html#lineNumber85">source</a></span></span>
     </span>
   </h3>
 
