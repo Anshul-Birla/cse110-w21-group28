@@ -50,48 +50,37 @@ class ToDoList {
     const task = new Task(this.idCounter, name, totalSession);
     this.idCounter += 1;
     this.taskList.push(task);
-    const arr = [task.id, task.name, task.totalSessions, task.currentSessionNum, task.checked];
-    window.localData.push(arr);
-    this.updateLocalStorage();
+    this.updateLocalStorage(task);
     return task;
   }
 
   /**
-   * @description - Synchronize window.localData and localStorage
+   * Adds a task to local storage
+   *  @param {Task} task
    */
   // eslint-disable-next-line class-methods-use-this
-  updateLocalStorage() {
+  updateLocalStorage(task) {
+    const arr = [task.id, task.name, task.totalSessions, task.currentSessionNum, task.checked];
+    window.localData.push(arr);
     localStorage.setItem('tasks', JSON.stringify(window.localData));
   }
 
   /**
-   * Gets the first unchecked task
+   * Gets the first unchecked task in the todolist. 
+   * Returns null if no such task exists
+   * @returns {Task} First unchecked task in list
    *
-   * @returns {Task} First unchecked task in the list
-   *
-   * @throws {'Empty ToDo List'} No tasks can be checked off if no tasks exist
-   * @throws {'No Current Task'} All tasks in the list have been checked off
    */
   getCurrentTask() {
-    if (this.taskList.length === 0) {
-      throw new Error('Empty ToDo List');
-    }
     for (let i = 0; i < this.taskList.length; i += 1) {
-      if (!this.taskList[i].checked) {
+      if (!this.taskList[i].checked && !this.taskList[i].deleted) {
         return this.taskList[i];
       }
     }
-    throw new Error('No Current Task');
+
+    return null
   }
 
-  /**
-   * Called by the Timer function when a session is done
-   * Increments the current task
-   */
-  onSessionComplete() {
-    const currTask = this.getCurrentTask();
-    currTask.incrementSession();
-  }
 }
 
 export { ToDoList };

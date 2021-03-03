@@ -113,7 +113,10 @@ class TodoListDom {
    * This function runs when the timer is done with its working session
    */
   onSessionComplete() {
-    this.todoList.onSessionComplete();
+    let currTask = this.todoList.getCurrentTask();
+    if (currTask != null) {
+      currTask.incrementSession();
+    }    
   }
 }
 

@@ -6,12 +6,9 @@ beforeEach(() => {
   window.localData = [];
 });
 
-/** @Test {Task} */
-
 test('Test that task with no values is empty', () => {
   const currTask = new Task();
   expect(currTask.name).toBe(undefined);
-  // console.log(currTask.name);
   expect(currTask.checked).toBe(false);
   expect(currTask.currentSessionNum).toEqual(0);
   expect(currTask.totalSessions).toBe(undefined);
@@ -55,33 +52,18 @@ test('Increment counter only changes current session number', () => {
   expect(currTask.checked).toBe(false);
 });
 
-test('Increment counter works up to total sessions, task is completed at the end', () => {
-  const currTask = new Task(0, 'Test task', 5);
-  expect(currTask.name).toBe('Test task');
-  expect(currTask.currentSessionNum).toBe(0);
-  expect(currTask.totalSessions).toBe(5);
-  expect(currTask.id == 0).toBeTruthy();
-  for (let i = 0; i < 5; i += 1) {
-    currTask.incrementSession();
-  }
-  expect(currTask.name).toBe('Test task');
-  expect(currTask.currentSessionNum).toBe(5);
-  expect(currTask.totalSessions).toBe(5);
-  expect(currTask.id == 0).toBeTruthy();
-  expect(currTask.checked).toBe(true);
-});
 
-test('Error is thrown after incrementing past totalSessions', () => {
+test('Incrementing past totalSessions is OK', () => {
   const currTask = new Task(0, 'Test task', 5);
   expect(currTask.name).toBe('Test task');
   expect(currTask.currentSessionNum).toBe(0);
   expect(currTask.totalSessions).toBe(5);
   expect(currTask.id == 0).toBeTruthy();
-  for (let i = 0; i < 5; i += 1) {
+  for (let i = 0; i < 6; i += 1) {
     currTask.incrementSession();
   }
-  const taskIncSession = () => { currTask.incrementSession(); };
-  expect(taskIncSession).toThrow(RangeError);
+  expect(currTask.currentSessionNum).toBe(6)
+  expect(currTask.checked).toBe(false)
 });
 
 test('Test that Checkbox works properly', () => {
@@ -90,3 +72,4 @@ test('Test that Checkbox works properly', () => {
   expect(currTask.checked).toBe(true);
   expect(currTask.className).toBe(classNames.completedTaskClassName);
 });
+

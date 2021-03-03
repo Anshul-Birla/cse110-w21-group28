@@ -49,16 +49,16 @@ test('Add a task and click checkoff', () => {
 });
 
 test('Reload the page with local storage', () => {
-  expect(tableLocation.children[1].children[1].textContent).toMatch(new RegExp('Write *Essay'));
-  expect(tableLocation.children[1].children[2].textContent).toMatch(new RegExp('\\[0/ *2\\]'));
+  expect(tableLocation.children[1].taskText.textContent).toMatch(new RegExp('Write *Essay'));
+  expect(tableLocation.children[1].pomoSessions.textContent).toMatch(new RegExp('\\[0/ *2\\]'));
 });
 
 test('Reload the page with completed task', () => {
-  expect(tableLocation.children[1].children[0].children[0].getAttribute('checked')).toEqual('true');
+  expect(tableLocation.children[1].checked).toEqual(true);
 });
 
 // Now has a task
-test('click remove button', () => {
+test('Click remove button', () => {
   tableLocation.children[1].children[3].children[0].click();
   expect(tableLocation.children[1]).toEqual(undefined);
   expect(window.localData.length).toEqual(0);
