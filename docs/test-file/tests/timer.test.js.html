@@ -30,11 +30,16 @@
   <ul>
     
   <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#timer">Timer</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Timer/Timer.js~Timer.html">Timer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-buttonText">buttonText</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-classNames">classNames</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-innerText">innerText</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-longBreakMode">longBreakMode</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-shortBreakMode">shortBreakMode</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-workMode">workMode</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#todolist">ToDoList</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/ToDoList/Task.js~Task.html">Task</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/ToDoList/ToDoList.js~ToDoList.html">ToDoList</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/ToDoList/TodoListDom.js~TodoListDom.html">TodoListDom</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-classNames">classNames</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-HTMLAttributes">HTMLAttributes</a></span></span></li>
 </ul>
 </div>
 </nav>
@@ -42,9 +47,8 @@
 <div class="content" data-ice="content"><h1 data-ice="title">tests/timer.test.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { Timer } from &apos;../js/Timer/Timer&apos;;
 import {
-  workMode, shortBreakMode, longBreakMode, classNames, innerText,
+  workMode, shortBreakMode, longBreakMode, classNames, buttonText,
 } from &apos;../js/Timer/TimerVariables&apos;;
-
 
 beforeEach(() =&gt; {
   document.body.innerHTML = &apos;&lt;div&gt;&apos;
@@ -92,7 +96,6 @@ test(&apos;Test That HTML Gets Updated During Second &apos;, () =&gt; {
   const TimerObj = new Timer(button, displayTime, displayStatus);
   jest.clearAllTimers();
   TimerObj.startTimer();
-
   jest.advanceTimersByTime(workMode.duration * 60 * 1000);
 
   expect(displayStatus.textContent).toBe(shortBreakMode.name);
@@ -106,7 +109,7 @@ test(&apos;Test That Start Button Functions Properly &apos;, () =&gt; {
   const TimerObj = new Timer(button, displayTime, displayStatus);
   jest.clearAllTimers();
   button.click();
-  expect(button.textContent).toBe(innerText.stopTimerText);
+  expect(button.textContent).toBe(buttonText.stopTimerText);
   expect(button.class).toBe(classNames.stopButton);
 });
 
@@ -118,8 +121,21 @@ test(&apos;Test That Clicking Start Twice Changes HTML &apos;, () =&gt; {
   jest.clearAllTimers();
   button.click();
   button.click();
-  expect(button.textContent).toBe(innerText.startTimerText);
+  expect(button.textContent).toBe(buttonText.startTimerText);
   expect(button.class).toBe(classNames.startButton);
+  expect(TimerObj.displayStatus.textContent).toBe(&apos;Pomo-Time!&apos;);
+});
+
+test(&apos;Test That Timer Resets Properly When End Day is Clicked&apos;, () =&gt; {
+  const displayTime = document.getElementById(&apos;displayTime&apos;);
+  const displayStatus = document.getElementById(&apos;displayStatus&apos;);
+  const button = document.getElementById(&apos;start&apos;);
+  const TimerObj = new Timer(button, displayTime, displayStatus);
+  jest.clearAllTimers();
+  button.click();
+  jest.advanceTimersByTime(workMode.duration * 60 * 1000);
+  button.click();
+  expect(TimerObj.stateQueue[0]).toBe(workMode);
 });
 </code></pre>
 
