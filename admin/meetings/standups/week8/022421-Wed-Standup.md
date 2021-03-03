@@ -46,7 +46,9 @@ Review PRs
 + *Any blockers?* tired
 
 **Ravi**  
-
++ *Previous work day progress:* designing the input fields
++ *Plans for today:* video recording
++ *Any blockers?* no
 
 **Ryan**  
 + *Previous work day progress:*

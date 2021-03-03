@@ -8,6 +8,12 @@
 
 ### Manager Team  
 **Anastasia**  
++ *Previous work day progress:*
+none
++ *Plans for today:*
+FAQ button, meeting
++ *Any blockers?*
+none
  
 **Nick**  
 + *Previous work day progress:* none

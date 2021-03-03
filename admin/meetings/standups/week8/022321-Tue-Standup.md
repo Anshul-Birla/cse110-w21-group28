@@ -8,6 +8,12 @@
 
 ### Manager Team  
 **Anastasia**  
++ *Previous work day progress:*
+FAQ button PR review, meeting, some updates to communication
++ *Plans for today:*
+Fix FAQ, another meeting
++ *Any blockers?*
+none
  
 **Nick**  
 + *Previous work day progress:* Organized everyone, made plan of attack
