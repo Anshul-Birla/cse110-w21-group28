@@ -14,6 +14,7 @@ class Task extends HTMLTableRowElement {
   */
   constructor(id, name, totalSessions, currentSession = 0, completed = false) {
     super();
+    this.className = classNames.uncheckedTaskClassName;
     /**
      * Stores the id of the task
      * @type {String}
@@ -33,7 +34,7 @@ class Task extends HTMLTableRowElement {
      * Stores the total amount of sessions spent working on the task
      * @type {Number}
      */
-    this.currentSessionNum = 0;
+    this.currentSessionNum = currentSession;
     /**
      * Stores if the task has been checked off or not
      * @type {Boolean}
@@ -79,6 +80,7 @@ class Task extends HTMLTableRowElement {
 
     if (this.checked) {
       checkBox.setAttribute('checked', 'true');
+      this.checkOffTask();
     }
 
     checkBox.addEventListener('click', () => {

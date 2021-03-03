@@ -1,6 +1,5 @@
 import { ToDoList } from './ToDoList.js';
 import { HTMLAttributes, TaskStorage } from './TodoListDomVariables.js';
-import { classNames } from './TaskVariables.js';
 
 import { Task } from './Task.js';
 
