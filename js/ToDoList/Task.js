@@ -12,7 +12,7 @@ class Task extends HTMLTableRowElement {
   * @param {String} name Name of the task
   * @param {Number} totalSessions Total sessions the task should take
   */
-  constructor(id, name, totalSessions) {
+  constructor(id, name, totalSessions, currentSession = 0, completed = false) {
     super();
     /**
      * Stores the id of the task
@@ -38,14 +38,22 @@ class Task extends HTMLTableRowElement {
      * Stores if the task has been checked off or not
      * @type {Boolean}
      */
-    this.checked = false;
-    this.setAttribute('class', classNames.uncheckedTaskClassName);
+    if (completed) {
+      this.checked = true;
+      this.setAttribute('class', classNames.completedTaskClassName);
+    } else{
+      this.checked = false;
+      this.setAttribute('class', classNames.uncheckedTaskClassName);
+    }
 
     /**
      * The checkbox attribute for the task
      * @type {HTMLInputElement}
      */
     this.checkBox = this.setupCheckBox();
+    if (completed) {
+      this.checkBox.setAttribute('checked', 'true');
+    }
     /**
      * Stores the view that shows the task name to the user
      * @type {HTMLTableDataCellElement}

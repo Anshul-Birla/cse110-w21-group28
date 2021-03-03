@@ -67,14 +67,8 @@ class TodoListDom {
       const totalSession = window.localData[i][TaskStorage.totalSessionIndex];
       const currentSession = window.localData[i][TaskStorage.currentSessionIndex];
       const completed = window.localData[i][TaskStorage.checkedIndex];
-      const task = new Task(i, name, totalSession);
+      const task = new Task(i, name, totalSession, currentSession, completed);
       this.todoList.idCounter += 1;
-      task.currentSessionNum = currentSession;
-      if (completed) {
-        task.checked = completed;
-        task.setAttribute('class', classNames.completedTaskClassName);
-        task.checkBox.setAttribute('checked', 'true');
-      }
       this.todoList.taskList.push(task);
       task.updatePomoSessions();
       this.displayTask(task);
