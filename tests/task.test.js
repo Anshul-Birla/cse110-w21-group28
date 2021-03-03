@@ -2,6 +2,10 @@
 import { Task } from '../js/ToDoList/Task.js';
 import { classNames } from '../js/ToDoList/TaskVariables.js';
 
+beforeEach(() => {
+  window.localData = [];
+});
+
 /** @Test {Task} */
 
 test('Test that task with no values is empty', () => {
@@ -22,6 +26,18 @@ test('Test that task with initialized values is initialized correctly', () => {
   expect(currTask.totalSessions).toEqual(5);
   expect(currTask.id == 0).toBe(true);
   expect(currTask.className).toBe(classNames.uncheckedTaskClassName);
+  expect(currTask.checkBox.checked).toBe(false);
+});
+
+test('Test that task with optional initilized values is initialized correctly', () => {
+  const currTask = new Task(0, 'Test task', 5, 2, true);
+  expect(currTask.name).toBe('Test task');
+  expect(currTask.checked).toBe(true);
+  expect(currTask.currentSessionNum).toEqual(2);
+  expect(currTask.totalSessions).toEqual(5);
+  expect(currTask.id == 0).toBe(true);
+  expect(currTask.className).toBe(classNames.completedTaskClassName);
+  expect(currTask.checkBox.checked).toBe(true);
 });
 
 test('Increment counter only changes current session number', () => {

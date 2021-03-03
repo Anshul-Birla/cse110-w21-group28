@@ -1,10 +1,10 @@
 {
-  "coverage": "72.05%",
-  "expectCount": 68,
-  "actualCount": 49,
+  "coverage": "71.05%",
+  "expectCount": 76,
+  "actualCount": 54,
   "files": {
     "js/App.js": {
-      "expectCount": 8,
+      "expectCount": 9,
       "actualCount": 0,
       "undocumentLines": [
         5,
@@ -13,8 +13,9 @@
         8,
         9,
         10,
-        12,
-        13
+        11,
+        13,
+        14
       ]
     },
     "js/Distraction.js": {
@@ -33,19 +34,20 @@
       "undocumentLines": []
     },
     "js/Timer/TimerVariables.js": {
-      "expectCount": 5,
+      "expectCount": 6,
       "actualCount": 0,
       "undocumentLines": [
-        3,
-        7,
-        12,
-        17,
-        22
+        2,
+        4,
+        8,
+        13,
+        18,
+        23
       ]
     },
     "js/ToDoList/Task.js": {
-      "expectCount": 18,
-      "actualCount": 18,
+      "expectCount": 21,
+      "actualCount": 21,
       "undocumentLines": []
     },
     "js/ToDoList/TaskVariables.js": {
@@ -56,20 +58,21 @@
       ]
     },
     "js/ToDoList/ToDoList.js": {
-      "expectCount": 7,
-      "actualCount": 7,
+      "expectCount": 8,
+      "actualCount": 8,
       "undocumentLines": []
     },
     "js/ToDoList/TodoListDom.js": {
-      "expectCount": 10,
-      "actualCount": 10,
+      "expectCount": 11,
+      "actualCount": 11,
       "undocumentLines": []
     },
     "js/ToDoList/TodoListDomVariables.js": {
-      "expectCount": 1,
+      "expectCount": 2,
       "actualCount": 0,
       "undocumentLines": [
-        1
+        1,
+        7
       ]
     }
   }

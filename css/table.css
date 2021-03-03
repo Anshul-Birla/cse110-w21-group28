@@ -124,3 +124,8 @@ input[type='checkbox']:checked {
   color: black;
   border-radius: 40%;
 }
+
+tr.completedTask td {
+  text-decoration: line-through;
+  background-color: rgba(211, 211, 211, 0.747);
+}

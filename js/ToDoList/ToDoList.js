@@ -50,7 +50,18 @@ class ToDoList {
     const task = new Task(this.idCounter, name, totalSession);
     this.idCounter += 1;
     this.taskList.push(task);
+    const arr = [task.id, task.name, task.totalSessions, task.currentSessionNum, task.checked];
+    window.localData.push(arr);
+    this.updateLocalStorage();
     return task;
+  }
+
+  /**
+   * @description - Synchronize window.localData and localStorage
+   */
+  // eslint-disable-next-line class-methods-use-this
+  updateLocalStorage() {
+    localStorage.setItem('tasks', JSON.stringify(window.localData));
   }
 
   /**

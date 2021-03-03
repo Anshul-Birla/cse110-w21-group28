@@ -3,6 +3,7 @@ import { ToDoList } from '../js/ToDoList/ToDoList.js';
 /** @Test {ToDoList} */
 
 beforeEach(() => {
+  window.localData = [];
   document.body.innerHTML = '<div id="ToDoListDiv>'
     + '</div>';
 });
