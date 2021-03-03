@@ -9,8 +9,8 @@ class Statistics extends HTMLElement {
     this.loadFromLocalStorage();
     this.expectedPomoSessions = 0;
     this.actualPomoSessions = 0;
-    this.addHTMLChildren();
-    this.updateDom();
+    // this.addHTMLChildren();
+    // this.updateDom();
   }
 
   addHTMLChildren() {
@@ -45,9 +45,13 @@ class Statistics extends HTMLElement {
     this.tasksCompleted += 1;
   }
 
-  addDistraction(description) {
-    this.distractionList.push(description);
-    this.numDistractions += 1;
+  addDistraction(distraction) {
+    this.distractionList.push(distraction);
+  }
+
+  getNumUniqueDistractions() {
+    const uniqueDistractionId = new Set(this.distractionList.map((item) => item.pomoSessionId));
+    return uniqueDistractionId.size;
   }
 
   addTimeSpent(numMins) {
@@ -115,7 +119,8 @@ class Statistics extends HTMLElement {
     const minDistractionDate = this.getMinDistractionDate();
     this.history.push({
       date: new Date(minDistractionDate),
-      count: this.distractionList.length(),
+      distractionCount: this.distractionList.length(),
+      timeSpent: this.timeSpent,
     });
     localStorage.setItem('statsHistory', JSON.stringify(this.history));
   }
