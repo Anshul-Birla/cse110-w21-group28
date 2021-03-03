@@ -4,7 +4,6 @@ class Statistics extends HTMLElement {
     this.totalMins = 0;
     this.workMins = 0;
     this.tasksCompleted = 0;
-    this.numDistractions = 0;
     this.distractionList = [];
     this.loadFromLocalStorage();
     this.expectedPomoSessions = 0;
@@ -54,6 +53,11 @@ class Statistics extends HTMLElement {
     return uniqueDistractionId.size;
   }
 
+  getAvgDistractionsPerTask() {
+    const rawNumber = this.distractionList.length / this.tasksCompleted;
+    return Math.round(rawNumber * 10) / 10;
+  }
+
   addTimeSpent(numMins) {
     this.totalMins += numMins;
   }
@@ -87,7 +91,7 @@ class Statistics extends HTMLElement {
 
     this.timeSpent.textContent = this.totalMins;
 
-    this.brokenSessions.textContent = this.numDistractions;
+    this.brokenSessions.textContent = this.distractionList.length;
   }
 
   loadFromLocalStorage() {
@@ -113,8 +117,11 @@ class Statistics extends HTMLElement {
     return sortedDistractions[0];
   }
 
-  writeToLocalStorage() {
-    // saves data to local storage
+  compressStats() {
+    /** saves data to local storage, runs when End Day is hit and
+     *  when page loads (compresses data that is older than 3a.m. today)
+     * REMINDER: Set pomo session id to 0
+     */
     // this.loadFromLocalStorage();
     const minDistractionDate = this.getMinDistractionDate();
     this.history.push({
