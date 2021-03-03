@@ -33,6 +33,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-buttonText">buttonText</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-classNames">classNames</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-longBreakMode">longBreakMode</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-sessionStartName">sessionStartName</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-shortBreakMode">shortBreakMode</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-workMode">workMode</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#todolist">ToDoList</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/ToDoList/Task.js~Task.html">Task</a></span></span></li>
@@ -40,6 +41,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/ToDoList/TodoListDom.js~TodoListDom.html">TodoListDom</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-classNames">classNames</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-HTMLAttributes">HTMLAttributes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-TaskStorage">TaskStorage</a></span></span></li>
 </ul>
 </div>
 </nav>
@@ -64,6 +66,34 @@
           
           
           <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-HTMLAttributes">HTMLAttributes</a></span></span><span class="code" data-ice="signature">: {&quot;buttonDoneTextContent&quot;: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, &quot;buttonAddTextContent&quot;: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, &quot;taskNameId&quot;: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, &quot;taskPomoSessions&quot;: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>}</span>
+        </p>
+      </div>
+      <div>
+        
+        
+        
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-TaskStorage">TaskStorage</a></span></span><span class="code" data-ice="signature">: {&quot;idIndex&quot;: <span>*</span>, &quot;nameIndex&quot;: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></span>, &quot;totalSessionIndex&quot;: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></span>, &quot;currentSessionIndex&quot;: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></span>, &quot;checkedIndex&quot;: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></span>}</span>
         </p>
       </div>
       <div>
@@ -203,6 +233,34 @@
           
           
           
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-sessionStartName">sessionStartName</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
           <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-shortBreakMode">shortBreakMode</a></span></span><span class="code" data-ice="signature">: {&quot;name&quot;: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, &quot;duration&quot;: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></span>}</span>
         </p>
       </div>
@@ -294,6 +352,49 @@
   
 </div>
 <div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="static-variable-TaskStorage">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    
+    <span class="code" data-ice="name">TaskStorage</span><span class="code" data-ice="signature">: {&quot;idIndex&quot;: <span>*</span>, &quot;nameIndex&quot;: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></span>, &quot;totalSessionIndex&quot;: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></span>, &quot;currentSessionIndex&quot;: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></span>, &quot;checkedIndex&quot;: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></span>}</span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/js/ToDoList/TodoListDomVariables.js.html#lineNumber7">source</a></span></span>
+    </span>
+  </h3>
+
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {TaskStorage} from &apos;<span><a href="file/js/ToDoList/TodoListDomVariables.js.html#lineNumber7">cse110-w21-group28/js/ToDoList/TodoListDomVariables.js</a></span>&apos;</code></pre></div>
+  
+  
+  
+
+  
+
+  <div data-ice="properties">
+</div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
   <h3 data-ice="anchor" id="static-variable-buttonText">
     <span class="access" data-ice="access">public</span>
     
@@ -305,11 +406,11 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/js/Timer/TimerVariables.js.html#lineNumber22">source</a></span></span>
+      <span data-ice="source"><span><a href="file/js/Timer/TimerVariables.js.html#lineNumber23">source</a></span></span>
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {buttonText} from &apos;<span><a href="file/js/Timer/TimerVariables.js.html#lineNumber22">cse110-w21-group28/js/Timer/TimerVariables.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {buttonText} from &apos;<span><a href="file/js/Timer/TimerVariables.js.html#lineNumber23">cse110-w21-group28/js/Timer/TimerVariables.js</a></span>&apos;</code></pre></div>
   
   
   
@@ -348,11 +449,11 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/js/Timer/TimerVariables.js.html#lineNumber17">source</a></span></span>
+      <span data-ice="source"><span><a href="file/js/Timer/TimerVariables.js.html#lineNumber18">source</a></span></span>
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {classNames} from &apos;<span><a href="file/js/Timer/TimerVariables.js.html#lineNumber17">cse110-w21-group28/js/Timer/TimerVariables.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {classNames} from &apos;<span><a href="file/js/Timer/TimerVariables.js.html#lineNumber18">cse110-w21-group28/js/Timer/TimerVariables.js</a></span>&apos;</code></pre></div>
   
   
   
@@ -434,11 +535,54 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/js/Timer/TimerVariables.js.html#lineNumber12">source</a></span></span>
+      <span data-ice="source"><span><a href="file/js/Timer/TimerVariables.js.html#lineNumber13">source</a></span></span>
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {longBreakMode} from &apos;<span><a href="file/js/Timer/TimerVariables.js.html#lineNumber12">cse110-w21-group28/js/Timer/TimerVariables.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {longBreakMode} from &apos;<span><a href="file/js/Timer/TimerVariables.js.html#lineNumber13">cse110-w21-group28/js/Timer/TimerVariables.js</a></span>&apos;</code></pre></div>
+  
+  
+  
+
+  
+
+  <div data-ice="properties">
+</div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="static-variable-sessionStartName">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    
+    <span class="code" data-ice="name">sessionStartName</span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/js/Timer/TimerVariables.js.html#lineNumber2">source</a></span></span>
+    </span>
+  </h3>
+
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {sessionStartName} from &apos;<span><a href="file/js/Timer/TimerVariables.js.html#lineNumber2">cse110-w21-group28/js/Timer/TimerVariables.js</a></span>&apos;</code></pre></div>
   
   
   
@@ -477,11 +621,11 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/js/Timer/TimerVariables.js.html#lineNumber7">source</a></span></span>
+      <span data-ice="source"><span><a href="file/js/Timer/TimerVariables.js.html#lineNumber8">source</a></span></span>
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {shortBreakMode} from &apos;<span><a href="file/js/Timer/TimerVariables.js.html#lineNumber7">cse110-w21-group28/js/Timer/TimerVariables.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {shortBreakMode} from &apos;<span><a href="file/js/Timer/TimerVariables.js.html#lineNumber8">cse110-w21-group28/js/Timer/TimerVariables.js</a></span>&apos;</code></pre></div>
   
   
   
@@ -520,11 +664,11 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/js/Timer/TimerVariables.js.html#lineNumber3">source</a></span></span>
+      <span data-ice="source"><span><a href="file/js/Timer/TimerVariables.js.html#lineNumber4">source</a></span></span>
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {workMode} from &apos;<span><a href="file/js/Timer/TimerVariables.js.html#lineNumber3">cse110-w21-group28/js/Timer/TimerVariables.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {workMode} from &apos;<span><a href="file/js/Timer/TimerVariables.js.html#lineNumber4">cse110-w21-group28/js/Timer/TimerVariables.js</a></span>&apos;</code></pre></div>
   
   
   

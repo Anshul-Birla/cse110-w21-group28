@@ -33,6 +33,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-buttonText">buttonText</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-classNames">classNames</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-longBreakMode">longBreakMode</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-sessionStartName">sessionStartName</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-shortBreakMode">shortBreakMode</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-workMode">workMode</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#todolist">ToDoList</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/ToDoList/Task.js~Task.html">Task</a></span></span></li>
@@ -40,18 +41,19 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/ToDoList/TodoListDom.js~TodoListDom.html">TodoListDom</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-classNames">classNames</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-HTMLAttributes">HTMLAttributes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-TaskStorage">TaskStorage</a></span></span></li>
 </ul>
 </div>
 </nav>
 
 <div class="content" data-ice="content"><div class="header-notice">
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {TodoListDom} from &apos;<span><a href="file/js/ToDoList/TodoListDom.js.html#lineNumber9">cse110-w21-group28/js/ToDoList/TodoListDom.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {TodoListDom} from &apos;<span><a href="file/js/ToDoList/TodoListDom.js.html#lineNumber12">cse110-w21-group28/js/ToDoList/TodoListDom.js</a></span>&apos;</code></pre></div>
   <span data-ice="access">public</span>
   <span data-ice="kind">class</span>
   
   
   
-  <span data-ice="source">| <span><a href="file/js/ToDoList/TodoListDom.js.html#lineNumber9">source</a></span></span>
+  <span data-ice="source">| <span><a href="file/js/ToDoList/TodoListDom.js.html#lineNumber12">source</a></span></span>
 </div>
 
 <div class="self-detail detail">
@@ -106,7 +108,7 @@ Done so their is a clear abstraction from DOM Manipulation and Data Manipulation
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/js/ToDoList/TodoListDom.js~TodoListDom.html#instance-constructor-constructor">constructor</a></span></span><span class="code" data-ice="signature">(HTMLTable: <span>HTMLTableElement</span>, HTMLForm: <span>HTMLFormElement</span>, HTMLButton: <span>HTMLButtonElement</span>)</span>
+          <span class="code" data-ice="name"><span><a href="class/js/ToDoList/TodoListDom.js~TodoListDom.html#instance-constructor-constructor">constructor</a></span></span><span class="code" data-ice="signature">(HTMLTable: <span>HTMLTableElement</span>, HTMLForm: <span>HTMLFormElement</span>, submitBtn: <span>HTMLButtonElement</span>, deleteAllBtn: <span>HTMLButtonElement</span>)</span>
         </p>
       </div>
       <div>
@@ -142,13 +144,13 @@ Done so their is a clear abstraction from DOM Manipulation and Data Manipulation
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/js/ToDoList/TodoListDom.js~TodoListDom.html#instance-member-button">button</a></span></span><span class="code" data-ice="signature">: <span>HTMLButtonElement</span></span>
+          <span class="code" data-ice="name"><span><a href="class/js/ToDoList/TodoListDom.js~TodoListDom.html#instance-member-deleteAllBtn">deleteAllBtn</a></span></span><span class="code" data-ice="signature">: <span>HTMLButtonElement</span></span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p>The button where users click to submit their todo&apos;s</p>
+        <div data-ice="description"><p>The button where users click to delete their todo&apos;s</p>
 </div>
       </div>
     </td>
@@ -178,6 +180,35 @@ Done so their is a clear abstraction from DOM Manipulation and Data Manipulation
         
         
         <div data-ice="description"><p>The form where users input their task</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/js/ToDoList/TodoListDom.js~TodoListDom.html#instance-member-submitBtn">submitBtn</a></span></span><span class="code" data-ice="signature">: <span>HTMLButtonElement</span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>The button where users click to submit their todo&apos;s</p>
 </div>
       </div>
     </td>
@@ -323,13 +354,14 @@ Done so their is a clear abstraction from DOM Manipulation and Data Manipulation
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/js/ToDoList/TodoListDom.js~TodoListDom.html#instance-method-setupEventListeners">setupEventListeners</a></span></span><span class="code" data-ice="signature">()</span>
+          <span class="code" data-ice="name"><span><a href="class/js/ToDoList/TodoListDom.js~TodoListDom.html#instance-method-renderLocalStorage">renderLocalStorage</a></span></span><span class="code" data-ice="signature">()</span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p>Sets up the form dissapearing and submit event listeners</p>
+        <div data-ice="description"><p>Fetch local storage, and store them into window.localData
+Iterate each local tasks and render them</p>
 </div>
       </div>
     </td>
@@ -352,14 +384,13 @@ Done so their is a clear abstraction from DOM Manipulation and Data Manipulation
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/js/ToDoList/TodoListDom.js~TodoListDom.html#instance-method-toggleInputForm">toggleInputForm</a></span></span><span class="code" data-ice="signature">()</span>
+          <span class="code" data-ice="name"><span><a href="class/js/ToDoList/TodoListDom.js~TodoListDom.html#instance-method-setupEventListeners">setupEventListeners</a></span></span><span class="code" data-ice="signature">()</span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p>Toggles the visibility of the add task form depending
-on the text contained in the button</p>
+        <div data-ice="description"><p>Sets up the form dissapearing and submit event listeners</p>
 </div>
       </div>
     </td>
@@ -386,11 +417,11 @@ on the text contained in the button</p>
     
     
     
-    <span class="code" data-ice="name">constructor</span><span class="code" data-ice="signature">(HTMLTable: <span>HTMLTableElement</span>, HTMLForm: <span>HTMLFormElement</span>, HTMLButton: <span>HTMLButtonElement</span>)</span>
+    <span class="code" data-ice="name">constructor</span><span class="code" data-ice="signature">(HTMLTable: <span>HTMLTableElement</span>, HTMLForm: <span>HTMLFormElement</span>, submitBtn: <span>HTMLButtonElement</span>, deleteAllBtn: <span>HTMLButtonElement</span>)</span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/js/ToDoList/TodoListDom.js.html#lineNumber16">source</a></span></span>
+      <span data-ice="source"><span><a href="file/js/ToDoList/TodoListDom.js.html#lineNumber20">source</a></span></span>
     </span>
   </h3>
 
@@ -423,7 +454,13 @@ on the text contained in the button</p>
       <td data-ice="description"></td>
     </tr>
 <tr data-ice="property" data-depth="0">
-      <td data-ice="name" class="code" data-depth="0">HTMLButton</td>
+      <td data-ice="name" class="code" data-depth="0">submitBtn</td>
+      <td data-ice="type" class="code"><span>HTMLButtonElement</span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">deleteAllBtn</td>
       <td data-ice="type" class="code"><span>HTMLButtonElement</span></td>
       <td data-ice="appendix"></td>
       <td data-ice="description"></td>
@@ -454,25 +491,25 @@ on the text contained in the button</p>
 <div data-ice="memberDetails"><h2 data-ice="title">Public Members</h2>
 
 <div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-member-button">
+  <h3 data-ice="anchor" id="instance-member-deleteAllBtn">
     <span class="access" data-ice="access">public</span>
     
     
     
     
     
-    <span class="code" data-ice="name">button</span><span class="code" data-ice="signature">: <span>HTMLButtonElement</span></span>
+    <span class="code" data-ice="name">deleteAllBtn</span><span class="code" data-ice="signature">: <span>HTMLButtonElement</span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/js/ToDoList/TodoListDom.js.html#lineNumber31">source</a></span></span>
+      <span data-ice="source"><span><a href="file/js/ToDoList/TodoListDom.js.html#lineNumber40">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>The button where users click to submit their todo&apos;s</p>
+  <div data-ice="description"><p>The button where users click to delete their todo&apos;s</p>
 </div>
 
   
@@ -509,7 +546,7 @@ on the text contained in the button</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/js/ToDoList/TodoListDom.js.html#lineNumber26">source</a></span></span>
+      <span data-ice="source"><span><a href="file/js/ToDoList/TodoListDom.js.html#lineNumber30">source</a></span></span>
     </span>
   </h3>
 
@@ -517,6 +554,50 @@ on the text contained in the button</p>
   
   
   <div data-ice="description"><p>The form where users input their task</p>
+</div>
+
+  
+
+  <div data-ice="properties">
+</div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-member-submitBtn">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    
+    <span class="code" data-ice="name">submitBtn</span><span class="code" data-ice="signature">: <span>HTMLButtonElement</span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/js/ToDoList/TodoListDom.js.html#lineNumber35">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>The button where users click to submit their todo&apos;s</p>
 </div>
 
   
@@ -553,7 +634,7 @@ on the text contained in the button</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/js/ToDoList/TodoListDom.js.html#lineNumber36">source</a></span></span>
+      <span data-ice="source"><span><a href="file/js/ToDoList/TodoListDom.js.html#lineNumber45">source</a></span></span>
     </span>
   </h3>
 
@@ -597,7 +678,7 @@ on the text contained in the button</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/js/ToDoList/TodoListDom.js.html#lineNumber21">source</a></span></span>
+      <span data-ice="source"><span><a href="file/js/ToDoList/TodoListDom.js.html#lineNumber25">source</a></span></span>
     </span>
   </h3>
 
@@ -644,7 +725,7 @@ on the text contained in the button</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/js/ToDoList/TodoListDom.js.html#lineNumber79">source</a></span></span>
+      <span data-ice="source"><span><a href="file/js/ToDoList/TodoListDom.js.html#lineNumber109">source</a></span></span>
     </span>
   </h3>
 
@@ -704,7 +785,7 @@ on the text contained in the button</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/js/ToDoList/TodoListDom.js.html#lineNumber86">source</a></span></span>
+      <span data-ice="source"><span><a href="file/js/ToDoList/TodoListDom.js.html#lineNumber116">source</a></span></span>
     </span>
   </h3>
 
@@ -712,6 +793,51 @@ on the text contained in the button</p>
   
   
   <div data-ice="description"><p>This function runs when the timer is done with its working session</p>
+</div>
+
+  
+
+  <div data-ice="properties">
+</div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-method-renderLocalStorage">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    
+    <span class="code" data-ice="name">renderLocalStorage</span><span class="code" data-ice="signature">()</span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/js/ToDoList/TodoListDom.js.html#lineNumber55">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>Fetch local storage, and store them into window.localData
+Iterate each local tasks and render them</p>
 </div>
 
   
@@ -748,7 +874,7 @@ on the text contained in the button</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/js/ToDoList/TodoListDom.js.html#lineNumber44">source</a></span></span>
+      <span data-ice="source"><span><a href="file/js/ToDoList/TodoListDom.js.html#lineNumber81">source</a></span></span>
     </span>
   </h3>
 
@@ -756,51 +882,6 @@ on the text contained in the button</p>
   
   
   <div data-ice="description"><p>Sets up the form dissapearing and submit event listeners</p>
-</div>
-
-  
-
-  <div data-ice="properties">
-</div>
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-  
-</div>
-<div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-method-toggleInputForm">
-    <span class="access" data-ice="access">public</span>
-    
-    
-    
-    
-    
-    <span class="code" data-ice="name">toggleInputForm</span><span class="code" data-ice="signature">()</span>
-    <span class="right-info">
-      
-      
-      <span data-ice="source"><span><a href="file/js/ToDoList/TodoListDom.js.html#lineNumber64">source</a></span></span>
-    </span>
-  </h3>
-
-  
-  
-  
-  <div data-ice="description"><p>Toggles the visibility of the add task form depending
-on the text contained in the button</p>
 </div>
 
   

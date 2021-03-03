@@ -38,22 +38,14 @@ class Task extends HTMLTableRowElement {
      * Stores if the task has been checked off or not
      * @type {Boolean}
      */
-    if (completed) {
-      this.checked = true;
-      this.setAttribute('class', classNames.completedTaskClassName);
-    } else{
-      this.checked = false;
-      this.setAttribute('class', classNames.uncheckedTaskClassName);
-    }
+    this.checked = completed;
 
     /**
      * The checkbox attribute for the task
      * @type {HTMLInputElement}
      */
     this.checkBox = this.setupCheckBox();
-    if (completed) {
-      this.checkBox.setAttribute('checked', 'true');
-    }
+
     /**
      * Stores the view that shows the task name to the user
      * @type {HTMLTableDataCellElement}
@@ -84,6 +76,10 @@ class Task extends HTMLTableRowElement {
     checkBox.setAttribute('class', 'custom_checkbox');
     firstCol.appendChild(checkBox);
     this.appendChild(firstCol);
+
+    if (this.checked) {
+      checkBox.setAttribute('checked', 'true');
+    }
 
     checkBox.addEventListener('click', () => {
       this.checkOffTask();

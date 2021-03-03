@@ -12,6 +12,12 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "cse110-w21-group28/js/todolist/todolistdomvariables.js~taskstorage",
+    "variable/index.html#static-variable-TaskStorage",
+    "<span>TaskStorage</span> <span class=\"search-result-import-path\">cse110-w21-group28/js/ToDoList/TodoListDomVariables.js</span>",
+    "variable"
+  ],
+  [
     "cse110-w21-group28/js/timer/timer.js~timer",
     "class/js/Timer/Timer.js~Timer.html",
     "<span>Timer</span> <span class=\"search-result-import-path\">cse110-w21-group28/js/Timer/Timer.js</span>",
@@ -54,6 +60,12 @@ window.esdocSearchIndex = [
     "variable"
   ],
   [
+    "cse110-w21-group28/js/timer/timervariables.js~sessionstartname",
+    "variable/index.html#static-variable-sessionStartName",
+    "<span>sessionStartName</span> <span class=\"search-result-import-path\">cse110-w21-group28/js/Timer/TimerVariables.js</span>",
+    "variable"
+  ],
+  [
     "cse110-w21-group28/js/timer/timervariables.js~shortbreakmode",
     "variable/index.html#static-variable-shortBreakMode",
     "<span>shortBreakMode</span> <span class=\"search-result-import-path\">cse110-w21-group28/js/Timer/TimerVariables.js</span>",
@@ -67,176 +79,200 @@ window.esdocSearchIndex = [
   ],
   [
     "",
-    "test-file/tests/todolistdom.test.js.html#lineNumber35",
-    "Add a task",
+    "test-file/tests/todolistdom.test.js.html#lineNumber42",
+    "Add a task and click checkoff",
     "test"
   ],
   [
     "",
-    "test-file/tests/todolist.test.js.html#lineNumber30",
+    "test-file/tests/todolistdom.test.js.html#lineNumber78",
+    "Add an invalid task",
+    "test"
+  ],
+  [
+    "",
+    "test-file/tests/todolist.test.js.html#lineNumber31",
     "Adding 0 Pomo Length Task",
     "test"
   ],
   [
     "",
-    "test-file/tests/todolist.test.js.html#lineNumber21",
+    "test-file/tests/todolist.test.js.html#lineNumber22",
     "Adding Items to List",
     "test"
   ],
   [
     "",
-    "test-file/tests/todolist.test.js.html#lineNumber58",
+    "test-file/tests/todolist.test.js.html#lineNumber59",
     "Adding Task w/ NaN for PomoSession",
     "test"
   ],
   [
     "",
-    "test-file/tests/todolist.test.js.html#lineNumber51",
+    "test-file/tests/todolist.test.js.html#lineNumber52",
     "Adding Task w/ empty name",
     "test"
   ],
   [
     "",
-    "test-file/tests/todolist.test.js.html#lineNumber44",
+    "test-file/tests/todolist.test.js.html#lineNumber45",
     "Adding Task w/o name",
     "test"
   ],
   [
     "",
-    "test-file/tests/todolist.test.js.html#lineNumber37",
+    "test-file/tests/todolist.test.js.html#lineNumber38",
     "Adding undefined Pomo Length Task",
     "test"
   ],
   [
     "",
-    "test-file/tests/todolist.test.js.html#lineNumber10",
+    "test-file/tests/todolist.test.js.html#lineNumber11",
     "Construction of empty list",
     "test"
   ],
   [
     "",
-    "test-file/tests/task.test.js.html#lineNumber58",
+    "test-file/tests/todolistdom.test.js.html#lineNumber84",
+    "Delete all",
+    "test"
+  ],
+  [
+    "",
+    "test-file/tests/task.test.js.html#lineNumber62",
     "Error is thrown after incrementing past totalSessions",
     "test"
   ],
   [
     "",
-    "test-file/tests/todolist.test.js.html#lineNumber65",
+    "test-file/tests/todolist.test.js.html#lineNumber66",
     "Get currentTask",
     "test"
   ],
   [
     "",
-    "test-file/tests/todolist.test.js.html#lineNumber74",
+    "test-file/tests/todolist.test.js.html#lineNumber75",
     "Get currentTask on empty list",
     "test"
   ],
   [
     "",
-    "test-file/tests/todolist.test.js.html#lineNumber81",
+    "test-file/tests/todolist.test.js.html#lineNumber82",
     "Get currentTask on list with all completed elements",
     "test"
   ],
   [
     "",
-    "test-file/tests/task.test.js.html#lineNumber27",
+    "test-file/tests/task.test.js.html#lineNumber31",
     "Increment counter only changes current session number",
     "test"
   ],
   [
     "",
-    "test-file/tests/task.test.js.html#lineNumber42",
+    "test-file/tests/task.test.js.html#lineNumber46",
     "Increment counter works up to total sessions, task is completed at the end",
     "test"
   ],
   [
     "",
-    "test-file/tests/todolistdom.test.js.html#lineNumber47",
+    "test-file/tests/todolistdom.test.js.html#lineNumber68",
     "Increment session ",
     "test"
   ],
   [
     "",
-    "test-file/tests/todolist.test.js.html#lineNumber90",
+    "test-file/tests/todolist.test.js.html#lineNumber91",
     "Preserve special characters in task name",
     "test"
   ],
   [
     "",
-    "test-file/tests/todolistdom.test.js.html#lineNumber60",
-    "Show and hide form",
+    "test-file/tests/todolistdom.test.js.html#lineNumber56",
+    "Reload the page with completed task",
     "test"
   ],
   [
     "",
-    "test-file/tests/timer.test.js.html#lineNumber22",
+    "test-file/tests/todolistdom.test.js.html#lineNumber51",
+    "Reload the page with local storage",
+    "test"
+  ],
+  [
+    "",
+    "test-file/tests/timer.test.js.html#lineNumber23",
     "Test First Iteration of Timer",
     "test"
   ],
   [
     "",
-    "test-file/tests/timer.test.js.html#lineNumber16",
+    "test-file/tests/timer.test.js.html#lineNumber17",
     "Test Initial State is Nothing",
     "test"
   ],
   [
     "",
-    "test-file/tests/timer.test.js.html#lineNumber69",
+    "test-file/tests/timer.test.js.html#lineNumber70",
     "Test That Clicking Start Twice Changes HTML ",
     "test"
   ],
   [
     "",
-    "test-file/tests/timer.test.js.html#lineNumber45",
+    "test-file/tests/timer.test.js.html#lineNumber46",
     "Test That HTML Gets Updated During Second ",
     "test"
   ],
   [
     "",
-    "test-file/tests/timer.test.js.html#lineNumber31",
+    "test-file/tests/timer.test.js.html#lineNumber32",
     "Test That Queue Gets Updated During Second Iteration Of Timer",
     "test"
   ],
   [
     "",
-    "test-file/tests/timer.test.js.html#lineNumber58",
+    "test-file/tests/timer.test.js.html#lineNumber59",
     "Test That Start Button Functions Properly ",
     "test"
   ],
   [
     "",
-    "test-file/tests/timer.test.js.html#lineNumber82",
+    "test-file/tests/timer.test.js.html#lineNumber83",
     "Test That Timer Resets Properly When End Day is Clicked",
     "test"
   ],
   [
     "",
-    "test-file/tests/task.test.js.html#lineNumber71",
+    "test-file/tests/task.test.js.html#lineNumber75",
     "Test that Checkbox works properly",
     "test"
   ],
   [
     "",
-    "test-file/tests/task.test.js.html#lineNumber17",
+    "test-file/tests/task.test.js.html#lineNumber21",
     "Test that task with initialized values is initialized correctly",
     "test"
   ],
   [
     "",
-    "test-file/tests/task.test.js.html#lineNumber7",
+    "test-file/tests/task.test.js.html#lineNumber11",
     "Test that task with no values is empty",
     "test"
   ],
   [
     "",
-    "test-file/tests/todolistdom.test.js.html#lineNumber27",
+    "test-file/tests/todolistdom.test.js.html#lineNumber38",
     "Valid construction of TDLDom",
     "test"
   ],
   [
     "",
-    "test-file/tests/todolist.test.js.html#lineNumber15",
+    "test-file/tests/todolist.test.js.html#lineNumber16",
     "Valid construction of new list in HTML",
+    "test"
+  ],
+  [
+    "",
+    "test-file/tests/todolistdom.test.js.html#lineNumber61",
+    "click remove button",
     "test"
   ],
   [
@@ -654,6 +690,12 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "js/todolist/task.js~task#deletebutton",
+    "class/js/ToDoList/Task.js~Task.html#instance-member-deleteButton",
+    "js/ToDoList/Task.js~Task#deleteButton",
+    "member"
+  ],
+  [
     "js/todolist/task.js~task#id",
     "class/js/ToDoList/Task.js~Task.html#instance-member-id",
     "js/ToDoList/Task.js~Task#id",
@@ -676,6 +718,12 @@ window.esdocSearchIndex = [
     "class/js/ToDoList/Task.js~Task.html#instance-member-pomoSessions",
     "js/ToDoList/Task.js~Task#pomoSessions",
     "member"
+  ],
+  [
+    "js/todolist/task.js~task#removefromlocalstorage",
+    "class/js/ToDoList/Task.js~Task.html#instance-method-removeFromLocalStorage",
+    "js/ToDoList/Task.js~Task#removeFromLocalStorage",
+    "method"
   ],
   [
     "js/todolist/task.js~task#setupcheckbox",
@@ -712,6 +760,12 @@ window.esdocSearchIndex = [
     "class/js/ToDoList/Task.js~Task.html#instance-member-totalSessions",
     "js/ToDoList/Task.js~Task#totalSessions",
     "member"
+  ],
+  [
+    "js/todolist/task.js~task#updatelocalstorage",
+    "class/js/ToDoList/Task.js~Task.html#instance-method-updateLocalStorage",
+    "js/ToDoList/Task.js~Task#updateLocalStorage",
+    "method"
   ],
   [
     "js/todolist/task.js~task#updatepomosessions",
@@ -774,22 +828,28 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "js/todolist/todolist.js~todolist#updatelocalstorage",
+    "class/js/ToDoList/ToDoList.js~ToDoList.html#instance-method-updateLocalStorage",
+    "js/ToDoList/ToDoList.js~ToDoList#updateLocalStorage",
+    "method"
+  ],
+  [
     "js/todolist/todolistdom.js",
     "file/js/ToDoList/TodoListDom.js.html",
     "js/ToDoList/TodoListDom.js",
     "file"
   ],
   [
-    "js/todolist/todolistdom.js~todolistdom#button",
-    "class/js/ToDoList/TodoListDom.js~TodoListDom.html#instance-member-button",
-    "js/ToDoList/TodoListDom.js~TodoListDom#button",
-    "member"
-  ],
-  [
     "js/todolist/todolistdom.js~todolistdom#constructor",
     "class/js/ToDoList/TodoListDom.js~TodoListDom.html#instance-constructor-constructor",
     "js/ToDoList/TodoListDom.js~TodoListDom#constructor",
     "method"
+  ],
+  [
+    "js/todolist/todolistdom.js~todolistdom#deleteallbtn",
+    "class/js/ToDoList/TodoListDom.js~TodoListDom.html#instance-member-deleteAllBtn",
+    "js/ToDoList/TodoListDom.js~TodoListDom#deleteAllBtn",
+    "member"
   ],
   [
     "js/todolist/todolistdom.js~todolistdom#displaytask",
@@ -810,10 +870,22 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "js/todolist/todolistdom.js~todolistdom#renderlocalstorage",
+    "class/js/ToDoList/TodoListDom.js~TodoListDom.html#instance-method-renderLocalStorage",
+    "js/ToDoList/TodoListDom.js~TodoListDom#renderLocalStorage",
+    "method"
+  ],
+  [
     "js/todolist/todolistdom.js~todolistdom#setupeventlisteners",
     "class/js/ToDoList/TodoListDom.js~TodoListDom.html#instance-method-setupEventListeners",
     "js/ToDoList/TodoListDom.js~TodoListDom#setupEventListeners",
     "method"
+  ],
+  [
+    "js/todolist/todolistdom.js~todolistdom#submitbtn",
+    "class/js/ToDoList/TodoListDom.js~TodoListDom.html#instance-member-submitBtn",
+    "js/ToDoList/TodoListDom.js~TodoListDom#submitBtn",
+    "member"
   ],
   [
     "js/todolist/todolistdom.js~todolistdom#table",
@@ -826,12 +898,6 @@ window.esdocSearchIndex = [
     "class/js/ToDoList/TodoListDom.js~TodoListDom.html#instance-member-todoList",
     "js/ToDoList/TodoListDom.js~TodoListDom#todoList",
     "member"
-  ],
-  [
-    "js/todolist/todolistdom.js~todolistdom#toggleinputform",
-    "class/js/ToDoList/TodoListDom.js~TodoListDom.html#instance-method-toggleInputForm",
-    "js/ToDoList/TodoListDom.js~TodoListDom#toggleInputForm",
-    "method"
   ],
   [
     "js/todolist/todolistdomvariables.js",
