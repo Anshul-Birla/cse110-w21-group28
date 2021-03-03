@@ -6,7 +6,7 @@
 
 **Members who were not present:** None
 
-**Where/when meeting was held:** 
+**Where/when meeting was held:** zoom, 8:00 pm, Tue 3/2/21
 
 
 ## Agenda of what was discussed:
