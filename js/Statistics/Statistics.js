@@ -6,7 +6,7 @@ class Statistics extends HTMLElement {
     this.tasksCompleted = 0;
     this.numDistractions = 0;
     this.distractionList = [];
-    this.history = [];
+    this.loadFromLocalStorage();
     this.expectedPomoSessions = 0;
     this.actualPomoSessions = 0;
     this.addHTMLChildren();
@@ -69,7 +69,7 @@ class Statistics extends HTMLElement {
 
   getAverageTimePerTask() {
     if (this.tasksCompleted > 0) {
-      return (this.workMins * 60) / this.tasksCompleted;
+      return this.workMins / this.tasksCompleted;
     }
     return 0;
   }
@@ -89,10 +89,14 @@ class Statistics extends HTMLElement {
   loadFromLocalStorage() {
     // loads history of pomo sessions
     this.history = JSON.parse(localStorage.getItem('statsHistory'));
+    if (this.history === null) {
+      this.history = [];
+    }
   }
 
   flushLocalStorage() {
     // deletes all objects from local storage that are older than a year
+    // this.loadFromLocalStorage();
     for (let i = 0; i < this.history.length(); i += 1) {
       if ((new Date(this.history[i].date) - new Date()) / (1000 * 3600 * 24 * 365) > 1) {
         this.history.splice(i, 1);
@@ -100,9 +104,20 @@ class Statistics extends HTMLElement {
     }
   }
 
+  getMinDistractionDate() {
+    const sortedDistractions = this.distractionList.slice().sort((a, b) => b.date - a.date);
+    return sortedDistractions[0];
+  }
+
   writeToLocalStorage() {
     // saves data to local storage
-    this.temp = 5;
+    // this.loadFromLocalStorage();
+    const minDistractionDate = this.getMinDistractionDate();
+    this.history.push({
+      date: new Date(minDistractionDate),
+      count: this.distractionList.length(),
+    });
+    localStorage.setItem('statsHistory', JSON.stringify(this.history));
   }
 }
 
