@@ -6,6 +6,7 @@ class Statistics extends HTMLElement {
     this.tasksCompleted = 0;
     this.numDistractions = 0;
     this.distractionList = [];
+    this.history = [];
     this.expectedPomoSessions = 0;
     this.actualPomoSessions = 0;
     this.addHTMLChildren();
@@ -75,7 +76,6 @@ class Statistics extends HTMLElement {
 
   updateDom() {
     this.timePerTask.textContent = this.getAverageTimePerTask();
-    console.log(this.getAverageTimePerTask());
 
     this.tasksCompletedP.textContent = this.tasksCompleted;
 
@@ -88,12 +88,16 @@ class Statistics extends HTMLElement {
 
   loadFromLocalStorage() {
     // loads history of pomo sessions
-    this.temp = 5;
+    this.history = JSON.parse(localStorage.getItem('statsHistory'));
   }
 
   flushLocalStorage() {
     // deletes all objects from local storage that are older than a year
-    this.temp = 5;
+    for (let i = 0; i < this.history.length(); i += 1) {
+      if ((new Date(this.history[i].date) - new Date()) / (1000 * 3600 * 24 * 365) > 1) {
+        this.history.splice(i, 1);
+      }
+    }
   }
 
   writeToLocalStorage() {
