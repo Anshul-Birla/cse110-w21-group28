@@ -18,7 +18,6 @@ describe('Variables function correctly', () => {
     expect(Stats.totalMins).toBe(0);
     expect(Stats.workMins).toBe(0);
     expect(Stats.tasksCompleted).toBe(0);
-    expect(Stats.numDistractions).toBe(0);
     expect(Stats.distractionList.length).toBe(0);
     expect(Stats.expectedPomoSessions).toBe(0);
     expect(Stats.actualPomoSessions).toBe(0);
@@ -169,6 +168,49 @@ describe('Variables function correctly', () => {
     });
 
     expect(Stats.getNumUniqueDistractions()).toBe(2);
+  });
+
+  test('Distractions per task calculated correctly', () => {
+    expect(Stats.getAvgDistractionsPerTask()).toBe(0);
+
+    Stats.addDistraction({
+      name: 'first distraction',
+      date: new Date(2021, 3, 3, 10, 30),
+      pomoSessionId: 0,
+    });
+
+    expect(Stats.getAvgDistractionsPerTask()).toBe(0);
+    Stats.incrementTasksCompleted();
+    expect(Stats.getAvgDistractionsPerTask()).toBe(1);
+
+    Stats.addDistraction({
+      name: 'second distraction',
+      date: new Date(2021, 3, 3, 10, 35),
+      pomoSessionId: 1,
+    });
+
+    expect(Stats.getAvgDistractionsPerTask()).toEqual(2);
+    Stats.incrementTasksCompleted();
+    expect(Stats.getAvgDistractionsPerTask()).toBe(1);
+
+    Stats.addDistraction({
+      name: 'third distraction',
+      date: new Date(2021, 3, 3, 10, 40),
+      pomoSessionId: 1,
+    });
+
+    Stats.addDistraction({
+      name: 'fourth distraction',
+      date: new Date(2021, 3, 3, 10, 45),
+      pomoSessionId: 1,
+    });
+    expect(Stats.getAvgDistractionsPerTask()).toBe(2);
+
+    for (let i = 0; i < 4; i += 1) {
+      Stats.incrementTasksCompleted();
+    }
+
+    expect(Stats.getAvgDistractionsPerTask()).toEqual(0.7); // ROUNDED FROM 0.67
   });
 });
 
