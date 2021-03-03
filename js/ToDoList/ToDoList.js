@@ -4,11 +4,12 @@ import { Task } from './Task.js';
  * Queue based TodoList data structure which holds Task objects.
  * API-like methods to perform operations on the underlying queue
  */
-class ToDoList {
+class ToDoList extends HTMLElement {
   /**
    * Initializes the todolist array and the counter for id's
    */
   constructor() {
+    super();
     /**
      * Array that stores each task
      * @type {Task[]}
@@ -48,6 +49,18 @@ class ToDoList {
     }
 
     const task = new Task(this.idCounter, name, totalSession);
+    task.addEventListener('task-checked-off', () => {
+      const event = new CustomEvent('task-checked-off', {
+      });
+      this.dispatchEvent(event);
+    });
+    const event = new CustomEvent('task-added', {
+      detail: {
+        taskName: name,
+        duration: totalSession,
+      },
+    });
+    this.dispatchEvent(event);
     this.idCounter += 1;
     this.taskList.push(task);
     return task;
@@ -83,4 +96,5 @@ class ToDoList {
   }
 }
 
+customElements.define('custom-todolist', ToDoList);
 export { ToDoList };

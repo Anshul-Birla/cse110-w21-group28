@@ -71,6 +71,8 @@ class Timer extends HTMLElement {
     const event = new CustomEvent('timer-complete', {
       detail: {
         sessionName: completedSession.name,
+        duration: completedSession.duration,
+        sessionIsWork: completedSession.isWork,
       },
     });
 

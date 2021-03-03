@@ -156,6 +156,10 @@ class Task extends HTMLTableRowElement {
   checkOffTask() {
     this.checked = true;
     this.setAttribute('class', classNames.completedTaskClassName);
+    const event = new CustomEvent('task-checked-off', {
+    });
+
+    this.dispatchEvent(event);
   }
 }
 
