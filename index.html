@@ -1,10 +1,14 @@
 <!doctype html>
 
-<html lang='en'>
+<html lang="en">
 <head>
-  <meta charset='utf-8'>
-  <link rel='shortcut icon' href='#' />
-  <link rel='stylesheet' href='./css/style.css' />
+  <meta charset="utf-8">
+  <link rel="shortcut icon" href="#" />
+  <link rel="stylesheet" href="./css/buttons-min.css"/>
+  <link rel="stylesheet" href="./css/style.css" />
+  <link rel="stylesheet" href="./css/distraction-box.css" />
+  <link rel="stylesheet" href="./css/table.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Pomo App</title>
 </head>
 
@@ -13,62 +17,73 @@
   <!-- Header bar at the top of the page for title text & navigation -->
   <header>
     <h1>
-      Version 0 of our Pomo App
+      Pomodoro Timer
+      <div class="icon-container">
+        <p>Stats</p>
+        <p>FAQ</p>
+        <button id="statsButton" class="pure-button icons">
+          <img src="./assets/img/barchart.png" width="35" height="35">
+          <a href="#Stats"></a>
+        </button>
+        <button id="faqButton" class="pure-button icons">
+          <img src="./assets/img/question.png" width="35" height="35">
+          <a href="#FAQ"></a>
+        </button>
+      </div>
     </h1>
-    <button id='faqButton' class='icons'><a href='#FAQ'>FAQ</a></button>
-    <button id='statsButton' class='icons'><a href='#Stats'>Stats</a></button>
+
   </header>
 
   <!-- Container for timer, timer buttons, and distraction button + prompt -->
-  <section id='timer' class='section_container'>
-    <div id='countdown'>
-      <p id='modeDisplay'> Pomo-Time!</p>
-      <p id='timeDisplay'> 25:00 </p>
+  <section id="timerContainer" class="section-container">
+    <div id="countdown">
+      <p id="modeDisplay"> Pomo-Time!</p>
+      <p id="timeDisplay"> 25:00 </p>
       <br>
-      <button id='startTimer' class='button'>Start</button>
-      <button id='distractionButton'>Distraction</button>
+      <button id="startTimer" class="pure-button">Start</button>
+      <button id="distractionButton" class = "pure-button">Distraction</button>
     </div>
   </section>
-  
+
   <!-- Container for task list -->
-  <section id='tasklist' class='section_container'> 
-    <h2>To Do</h2>
+  <section id='tasklist' class='section_container'>
+    <!-- <h2>To Do</h2> -->
     <table id='todo'>
-      <th>
-        <td>Task</td>
-        <td>Pomos</td>
-        <td>Delete</td>
-      </th>
       <tr>
-        <td><input type='checkbox' checked></td>
-        <td><s>Pevious task</s></td>
-        <td>(3/3)</td>
-        <td><button>x</button></td>
-      </tr>
-      <tr>
-        <td><input type='checkbox'></td>
-        <td>Current task</td>
-        <td>(2/3)</td>
-        <td><button>x</button></td>
-      </tr>
-      <tr>
-        <td><input type='checkbox'></td>
-        <td>Upcoming task</td>
-        <td>(0/3)</td>
-        <td><button>x</button></td>
-      </tr>
+        <th class='col1-checkbox'></th>
+        <th class='col2-task'>TASKS</th>
+        <th class='col3-pomos'>#</th>
+        <th class='col4-delete'><button id = "delete-all-button" class="delete-button" type="button">Delete All</button></th></tr>
     </table>
+    <!-- style = 'display: none;' originally an attribute in form and button but we want it always showing -->
+    <form id ='add-todo' overflow>
+      <input type='text' name='task-name' placeholder='Enter task' class='task-name'>
+      <input type='number' name='task-length' placeholder='Estimated # of pomos' class='task-length' min='1' max='24' required>
+      <input id = "add-button" type='submit' class='task-submit' value='+'>
+    </form>
+    <!-- <button id = 'add-button' class='addTaskButton' type='button'>Add Task</button> --> <!-- taking this out for now -->
   </section>
 
+  <!----
+  <div>
+    <form id = "add-todo" style = "display: none;">
+      <input type="text" name="task-name" placeholder="Add task">
+      <input type="number" name="task-length" placeholder="1">
+      <input type="submit" class="addTaskButton">
+    </form>
+    <button id = "add-button" class="addTaskButton" type="button">Add a task</button>
+  </div>
+-->
   <!-- Linked section on page under task list for summary & statistics of work sessions -->
-  <section id='stats' class='linked_section'>
+  <section id="stats" class="linked-section">
     <h2>Stats</h2>
   </section>
-  
+
   <!-- Linked section at bottom of page under stats for FAQ and instructions on using timer -->
-  <section id='faq' class='linked_section'>
+  <section id="faq" class="linked-section">
     <h2>FAQ</h2>
   </section>
+<<<<<<< HEAD
   <script type='module' src='./js/App.js'></script>
   
   <div id='faq'>
@@ -149,6 +164,100 @@
 
 </div>
 
+=======
+>>>>>>> main
 
+  <!-- Distraction Box-->
+  <section class="form-popup" id="distract-popup">
+    <form class="form-container" id="distract-form-container">
+      <h1>Report Distraction</h1>
+
+      <label><b>Distraction Description</b></label>
+      <input type="text" placeholder="Enter a short description of the distraction" id="description">
+
+      <button type="button" class="distractFormButton" id="submit-button">Submit</button>
+      <button type="button" class="distractFormButton cancel" id="cancel-button">Cancel</button>
+    </form>
+  </section>
+  <script type="module" src="./js/App.js"></script>
+  <script type="module" src="./js/Distraction.js"></script>
+
+  <div id="faq">
+
+      <h2>A Pomodoro Ranger Timer is a Pomodoro Timer that would help with productivity</h2>
+
+      <h2>What is Pomoranger Timer?</h2>
+  		<p>
+    Pomoranger is a Pomodoro Technique timer that works on your computer and mobile devices with an aim to increase your productivity, and reduce stress and anxiety of planning your time.
+    The aim of this app is to help you focus on any task you are working on, such as studying, writing, or coding.
+    This app is inspired by
+    <a
+      href='https://francescocirillo.com/pages/pomodoro-technique'
+      target='_blank'
+      rel='noopener'
+      >Pomodoro Technique</a
+    >
+    which is a time management method developed by Francesco Cirillo.
+  </p>
+
+    <div>
+  <h2>What is Pomodoro Technique?</h2>
+    <p>
+      The Pomodoro Technique is created by Francesco Cirillo for a
+      more productive way to work and study. The technique uses a
+      timer to break down work into intervals, traditionally 25
+      minutes in length, separated by short breaks. Each interval
+      is known as a pomodoro, from the Italian word for 'tomato',
+      after the tomato-shaped kitchen timer that Cirillo used as a
+      university student. -
+      <a
+        href='https://en.wikipedia.org/wiki/Pomodoro_Technique'
+        target='_blank'
+        rel='noopener'
+        >Wikipedia</a
+        >
+    </p>
+</div>
+
+<div>
+  <h2>
+    How to use the Pomodoro Timer?
+  </h2>
+  <ol>
+    <li><strong>Add tasks</strong> to work on today</li>
+    <li>
+      <strong>Set estimated number of pomodoros</strong> (1 pomodoro = 25 minutes) for each task
+    </li>
+    <li><strong>Write out and select a task</strong> to work on in the Todo list</li>
+    <li>
+      <strong>Start timer</strong> and focus on the task for 25 minutes per each task
+    </li>
+    <li>
+       <strong>Take a break</strong> for 5 minutes when the alarm changes color
+    </li>
+    <li>
+       <strong>Iterate</strong> pomodoros until you finish the tasks
+    </li>
+  </ol>
+</div>
+
+<div>
+  <h2>
+    Features of the Pomoranger Timer
+  </h2>
+  <ol>
+    <li><strong>Simple use</strong> of the timer and functionality of the Pomodoro Technique</li>
+    <li>
+      <strong>Todo List </strong> functionality to organize your tasks
+    </li>
+    <li><strong>Statistics </strong> feature to help monitor your progress</li>
+    <li>
+      <strong>Start timer</strong> and focus on the task for 25 minutes
+    </li>
+  </ol>
+</div>
+
+
+</div>
 </body>
 </html>

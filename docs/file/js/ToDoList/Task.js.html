@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">js/ToDoList/Task.js | cse110-w21-group28</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="Necessary Packages for Development"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="cse110-w21-group28"><meta property="twitter:description" content="Necessary Packages for Development"></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  <a href="test.html" data-ice="testLink">Test</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+<a style="position:relative; top:3px;" href="https://github.com/Anshul-Birla/cse110-w21-group28"><img width="20px" src="./image/github.png"></a></header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#timer">Timer</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Timer/Timer.js~Timer.html">Timer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-buttonText">buttonText</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-classNames">classNames</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-longBreakMode">longBreakMode</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-sessionStartName">sessionStartName</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-shortBreakMode">shortBreakMode</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-workMode">workMode</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#todolist">ToDoList</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/ToDoList/Task.js~Task.html">Task</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/ToDoList/ToDoList.js~ToDoList.html">ToDoList</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/ToDoList/TodoListDom.js~TodoListDom.html">TodoListDom</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-classNames">classNames</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-HTMLAttributes">HTMLAttributes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-TaskStorage">TaskStorage</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">js/ToDoList/Task.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { classNames } from &apos;./TaskVariables.js&apos;;
+import { TaskStorage } from &apos;./TodoListDomVariables.js&apos;;
+
+/**
+ * Task object, stores its id, task name, total expected Pomo Sessions to complete the Task,
+ * the number of the current Pomo Session, and whether the task has been completed or not.
+ */
+class Task extends HTMLTableRowElement {
+  /**
+  * Task construcutor. Initializes the task with appropriate attributes
+  * @param {String} id Id of the task
+  * @param {String} name Name of the task
+  * @param {Number} totalSessions Total sessions the task should take
+  */
+  constructor(id, name, totalSessions, currentSession = 0, completed = false) {
+    super();
+    /**
+     * Stores the id of the task
+     * @type {String}
+     */
+    this.id = id;
+    /**
+     * Stores the name of the task
+     * @type {String}
+     */
+    this.name = name;
+    /**
+     * Stores the total sessions anticipated for the task
+     * @type {Number}
+     */
+    this.totalSessions = totalSessions;
+    /**
+     * Stores the total amount of sessions spent working on the task
+     * @type {Number}
+     */
+    this.currentSessionNum = 0;
+    /**
+     * Stores if the task has been checked off or not
+     * @type {Boolean}
+     */
+    this.checked = completed;
+
+    /**
+     * The checkbox attribute for the task
+     * @type {HTMLInputElement}
+     */
+    this.checkBox = this.setupCheckBox();
+
+    /**
+     * Stores the view that shows the task name to the user
+     * @type {HTMLTableDataCellElement}
+     */
+    this.taskText = this.setupTaskText();
+    /**
+     * Stores the view that displayes the total pomo sessions spent
+     * and alloted for the tasl
+     * @type {HTMLTableDataCellElement}
+     */
+    this.pomoSessions = this.setupTotalPomoSessions();
+    /**
+     * The delete button for the task
+     * @type {HTMLButtonElement}
+     */
+    this.deleteButton = this.setupDeleteButton();
+  }
+
+  /**
+   * This sets up the checkbox to check off tasks
+   * @returns {HTMLInputElement}
+   */
+  setupCheckBox() {
+    const firstCol = document.createElement(&apos;td&apos;);
+    const checkBox = document.createElement(&apos;input&apos;);
+    checkBox.setAttribute(&apos;type&apos;, &apos;checkbox&apos;);
+    checkBox.setAttribute(&apos;id&apos;, `checkbox-${this.id}`);
+    checkBox.setAttribute(&apos;class&apos;, &apos;custom_checkbox&apos;);
+    firstCol.appendChild(checkBox);
+    this.appendChild(firstCol);
+
+    if (this.checked) {
+      checkBox.setAttribute(&apos;checked&apos;, &apos;true&apos;);
+    }
+
+    checkBox.addEventListener(&apos;click&apos;, () =&gt; {
+      this.checkOffTask();
+    });
+    return checkBox;
+  }
+
+  /**
+   * This sets up the view that will display the taks name
+   * @returns {HTMLTableDataCellElement}
+   */
+  setupTaskText() {
+    const text = document.createElement(&apos;td&apos;);
+    text.setAttribute(&apos;id&apos;, `text-${this.id}`);
+    this.appendChild(text);
+    this.updateText();
+    return text;
+  }
+
+  /**
+   * This sets up the view that will display the pomo sessions
+   * @return {HTMLTableDataCellElement}
+   */
+  setupTotalPomoSessions() {
+    const pomoSessions = document.createElement(&apos;td&apos;);
+    pomoSessions.setAttribute(&apos;id&apos;, `pomoSessions-${this.id}`);
+    this.appendChild(pomoSessions);
+    this.updatePomoSessions();
+    return pomoSessions;
+  }
+
+  /**
+   *
+   * Unable to change tasklist in ToDoList class
+   * Only changes window.Data
+   * This sets up the delete button for a tasl
+   * @return {HTMLTableDataCellElement}
+   */
+  setupDeleteButton() {
+    const lastCol = document.createElement(&apos;td&apos;);
+    const deleteBtn = document.createElement(&apos;button&apos;);
+    deleteBtn.setAttribute(&apos;class&apos;, &apos;delete-button&apos;);
+    deleteBtn.addEventListener(&apos;click&apos;, () =&gt; {
+      this.remove();
+      this.removeFromLocalStorage(this.id);
+    });
+    deleteBtn.textContent = &apos;x&apos;;
+    lastCol.append(deleteBtn);
+    this.append(lastCol);
+    return lastCol;
+  }
+
+  /**
+   * When delete button is clicked, also remove from local data
+   */
+  removeFromLocalStorage(id) {
+    for (let i = 0; i &lt; window.localData.length; i += 1) {
+      if (window.localData[i][TaskStorage.idIndex] === id) {
+        window.localData.splice(i, 1);
+      }
+    }
+    this.checked = true;
+    localStorage.setItem(&apos;tasks&apos;, JSON.stringify(window.localData));
+  }
+
+  /**
+   * Update method to edit task name
+   */
+  updateText() {
+    this.children[1].textContent = this.name;
+  }
+
+  /**
+   * This updates the pomo sessions when a session is complete
+   */
+  updatePomoSessions() {
+    this.children[2].textContent = `[${this.currentSessionNum}/\
+      ${this.totalSessions}]`;
+  }
+
+  /**
+   * Increment this task&apos;s current session number. Checks off task if all sessions completed.
+   * @throws {RangeError} - Incrementing a completed tasks&apos; session number
+   * (all sessions have been completed or user has checked off task manually)
+   */
+  incrementSession() {
+    if (this.checked) {
+      throw (new RangeError());
+    }
+
+    this.currentSessionNum += 1;
+    this.updatePomoSessions();
+
+    if (this.currentSessionNum === this.totalSessions) {
+      this.checkOffTask();
+    }
+    this.updateLocalStorage();
+  }
+
+  /**
+   * This updates the localStorage whenever session increases or checked off
+   */
+  updateLocalStorage() {
+    for (let i = 0; i &lt; window.localData.length; i += 1) {
+      if (window.localData[i][TaskStorage.idIndex] === this.id) {
+        window.localData[i][TaskStorage.currentSessionIndex] = this.currentSessionNum;
+        window.localData[i][TaskStorage.checkedIndex] = this.checked;
+      }
+    }
+    localStorage.setItem(&apos;tasks&apos;, JSON.stringify(window.localData));
+  }
+
+  /**
+   * Marks a task as completed
+   */
+  checkOffTask() {
+    this.checked = true;
+    this.setAttribute(&apos;class&apos;, classNames.completedTaskClassName);
+    this.updateLocalStorage();
+  }
+}
+
+export { Task };
+customElements.define(&apos;task-item&apos;, Task, { extends: &apos;tr&apos; });
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

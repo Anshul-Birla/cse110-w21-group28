@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../">
+  <title data-ice="title">tests/todolist.test.js | cse110-w21-group28</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="Necessary Packages for Development"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="cse110-w21-group28"><meta property="twitter:description" content="Necessary Packages for Development"></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  <a href="test.html" data-ice="testLink">Test</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+<a style="position:relative; top:3px;" href="https://github.com/Anshul-Birla/cse110-w21-group28"><img width="20px" src="./image/github.png"></a></header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#timer">Timer</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Timer/Timer.js~Timer.html">Timer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-buttonText">buttonText</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-classNames">classNames</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-longBreakMode">longBreakMode</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-sessionStartName">sessionStartName</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-shortBreakMode">shortBreakMode</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-workMode">workMode</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#todolist">ToDoList</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/ToDoList/Task.js~Task.html">Task</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/ToDoList/ToDoList.js~ToDoList.html">ToDoList</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/ToDoList/TodoListDom.js~TodoListDom.html">TodoListDom</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-classNames">classNames</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-HTMLAttributes">HTMLAttributes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-TaskStorage">TaskStorage</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">tests/todolist.test.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { ToDoList } from &apos;../js/ToDoList/ToDoList.js&apos;;
+
+/** @Test {ToDoList} */
+
+beforeEach(() =&gt; {
+  window.localData = [];
+  document.body.innerHTML = &apos;&lt;div id=&quot;ToDoListDiv&gt;&apos;
+    + &apos;&lt;/div&gt;&apos;;
+});
+
+test(&apos;Construction of empty list&apos;, () =&gt; {
+  const theList = new ToDoList();
+  expect(theList.taskList).toEqual([]);
+});
+
+test(&apos;Valid construction of new list in HTML&apos;, () =&gt; {
+  const listLocation = document.getElementById(&apos;ToDoListDiv&apos;);
+  const aList = new ToDoList(listLocation);
+  expect(aList.taskList).toEqual([]);
+});
+
+test(&apos;Adding Items to List&apos;, () =&gt; {
+  const listLocation = document.getElementById(&apos;ToDoListDiv&apos;);
+  const aList = new ToDoList(listLocation);
+  aList.addTask(&apos;First Task&apos;, 5);
+  expect(aList.taskList.length).toBe(1);
+  aList.addTask(&apos;Second Task&apos;, 2);
+  expect(aList.taskList.length).toBe(2);
+});
+
+test(&apos;Adding 0 Pomo Length Task&apos;, () =&gt; {
+  const listLocation = document.getElementById(&apos;ToDoListDiv&apos;);
+  const aList = new ToDoList(listLocation);
+  const errTask = () =&gt; { aList.addTask(&apos;First Task&apos;, 0); };
+  expect(errTask).toThrow(&apos;0 Length Task&apos;);
+});
+
+test(&apos;Adding undefined Pomo Length Task&apos;, () =&gt; {
+  const listLocation = document.getElementById(&apos;ToDoListDiv&apos;);
+  const aList = new ToDoList(listLocation);
+  const errTask = () =&gt; { aList.addTask(&apos;First Task&apos;, undefined); };
+  expect(errTask).toThrow(&apos;Undefined Length Task&apos;);
+});
+
+test(&apos;Adding Task w/o name&apos;, () =&gt; {
+  const listLocation = document.getElementById(&apos;ToDoListDiv&apos;);
+  const aList = new ToDoList(listLocation);
+  const errTask = () =&gt; { aList.addTask(undefined, 4); };
+  expect(errTask).toThrow(&apos;Undefined Name&apos;);
+});
+
+test(&apos;Adding Task w/ empty name&apos;, () =&gt; {
+  const listLocation = document.getElementById(&apos;ToDoListDiv&apos;);
+  const aList = new ToDoList(listLocation);
+  const errTask = () =&gt; { aList.addTask(&apos;&apos;, 4); };
+  expect(errTask).toThrow(&apos;Empty Name&apos;);
+});
+
+test(&apos;Adding Task w/ NaN for PomoSession&apos;, () =&gt; {
+  const listLocation = document.getElementById(&apos;ToDoListDiv&apos;);
+  const aList = new ToDoList(listLocation);
+  const errTask = () =&gt; { aList.addTask(&apos;TempTask&apos;, NaN); };
+  expect(errTask).toThrow(&apos;Number Not Passed In&apos;);
+});
+
+test(&apos;Get currentTask&apos;, () =&gt; {
+  const listLocation = document.getElementById(&apos;ToDoListDiv&apos;);
+  const aList = new ToDoList(listLocation);
+  aList.addTask(&apos;First Task&apos;, 5);
+  aList.addTask(&apos;Second Task&apos;, 2);
+  const currTask = aList.getCurrentTask();
+  expect(currTask.name).toBe(&apos;First Task&apos;);
+});
+
+test(&apos;Get currentTask on empty list&apos;, () =&gt; {
+  const listLocation = document.getElementById(&apos;ToDoListDiv&apos;);
+  const aList = new ToDoList(listLocation);
+  const currTask = () =&gt; { aList.getCurrentTask(); };
+  expect(currTask).toThrow(&apos;Empty ToDo List&apos;);
+});
+
+test(&apos;Get currentTask on list with all completed elements&apos;, () =&gt; {
+  const listLocation = document.getElementById(&apos;ToDoListDiv&apos;);
+  const aList = new ToDoList(listLocation);
+  aList.addTask(&apos;First Task&apos;, 5);
+  aList.getCurrentTask().checkOffTask();
+  const currTask = () =&gt; { aList.getCurrentTask(); };
+  expect(currTask).toThrow(&apos;No Current Task&apos;);
+});
+
+test(&apos;Preserve special characters in task name&apos;, () =&gt; {
+  const listLocation = document.getElementById(&apos;ToDoListDiv&apos;);
+  const aList = new ToDoList(listLocation);
+  // eslint-disable-next-line no-template-curly-in-string
+  const strName = &apos;A s^ri\ng w!t\\n spe`cia| &quot;some ver${this.id}y special&quot; chara%cter$&apos;;
+  aList.addTask(strName, 5);
+  aList.addTask(&apos;Second Task&apos;, 2);
+  const currTask = aList.getCurrentTask();
+  expect(currTask.name).toBe(strName);
+});
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

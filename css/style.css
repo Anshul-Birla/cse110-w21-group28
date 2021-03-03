@@ -1,15 +1,79 @@
+* {
+  font-family: Helvetica, sans-serif;
+  color: var(--font-color);
+}
+
+/* color variables for buttons, page, and timer */
+:root {
+  --button-border-color: rgba(245, 245, 245, 0.4);
+  --button-color: lightslategray;
+  --page-bg-color: cadetblue;
+  --font-color: aliceblue;
+  --timer-bg-color: darkcyan;
+
+  /* toothpast table theme */
+  --even-color: rgba(149, 218, 229, 0.603);
+  --odd-color: rgb(2, 177, 177);
+  --header-color: darkcyan;
+  --tr-hover-color: #f2f2f279;
+  --td-border-radius: 30px;
+}
+
 body {
-  background-color: bisque;
+  background-color: var(--page-bg-color);
 }
 
 header {
-  background-color: paleturquoise;
+  overflow: auto;
 }
 
-#timer {
-  height: 30vh;
-  width: 40vw;
-  background-color: darkgoldenrod;
+.pure-button {
+  background: var(--button-color);
+  border-radius: 5px;
+  color: var(--font-color);
+}
+
+.section-container {
+  position: relative;
+  margin: auto;
+}
+
+/* header styling */
+.icon-container {
+  display: flex;
+  float: right;
+  font-size: 0.5em;
+  width: 100px;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.icons {
+  padding: 0;
+  margin: 5px;
+  height: 40px;
+  width: 40px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: var(--button-border-color);
+}
+
+.icon-container p {
+  margin: 0;
+  padding: 0;
+}
+
+.icons img {
+  position: relative;
+  top: 2px;
+}
+
+/* timer styling */
+#timerContainer {
+  height: 280px;
+  width: 400px;
+  background-color: var(--timer-bg-color);
+  border-radius: 10px;
 }
 
 #countdown {
@@ -17,29 +81,75 @@ header {
   text-align: center;
 }
 
+#modeDisplay {
+  position: relative;
+  top: 10px;
+  margin: 10px;
+  font-size: 80%;
+}
+
+#timeDisplay {
+  position: relative;
+  top: 15px;
+  font-size: 275%;
+  margin: 5px;
+}
+
 #distractionButton {
   position: absolute;
-  bottom: 0;
-  right: 0;
+  bottom: 5px;
+  right: 5px;
+  font-size: 40%;
+  border-style: solid;
+  border-width: 1px;
+  border-color: var(--button-border-color);
 }
 
-#startButton {
-  position: absolute;
-  bottom: 0;
-  left: 0;
+#startTimer {
+  border-style: solid;
+  border-width: 2px;
+  border-color: var(--button-border-color);
 }
 
-#tasklist {
-  height: 60vh;
-  width: 40vw;
-  background-color: slategrey;
+/* for support for small screens */
+@media screen and (max-width: 500px) {
+  #timerContainer {
+    width: 80vw;
+  }
+
+  @media screen and (max-width: 300px) {
+    #timerContainer {
+      width: 240px;
+    }
+  }
 }
 
-.icons {
-  float: right;
+@media screen and (max-height: 550px) {
+  #timerContainer {
+    height: 50vh;
+  }
+
+  @media screen and (max-height: 480px) {
+    #timerContainer {
+      height: 240px;
+    }
+  }
 }
 
-.section_container {
-  position: relative;
-  margin: auto;
+@media screen and (max-width: 500px), (max-height: 550px) {
+  #distractionButton {
+    font-size: 35%;
+  }
+
+  #startTimer {
+    font-size: 75%;
+  }
+
+  #timeDisplay {
+    font-size: 240%;
+  }
+
+  #modeDisplay {
+    font-size: 70%;
+  }
 }

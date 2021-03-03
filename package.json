@@ -14,7 +14,7 @@
     "lint": "npm run lint-js && npm run lint-css",
     "lint:test": "npm run lint-js:test && npm run lint-css:test",
     "branch": "chmod 777 ./.github/scripts/branch.sh && ./.github/scripts/branch.sh",
-    "doc":"./node_modules/.bin/esdoc && ./node_modules/.bin/esdoc -test"
+    "doc": "./node_modules/.bin/esdoc && ./node_modules/.bin/esdoc -test"
   },
   "repository": {
     "type": "git",

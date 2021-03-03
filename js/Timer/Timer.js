@@ -1,11 +1,12 @@
 import {
-  workMode, shortBreakMode, longBreakMode, classNames, buttonText,
+  sessionStartName, workMode, shortBreakMode, longBreakMode, classNames, buttonText,
 } from './TimerVariables.js';
 /**
  * A class for the Timer object. Has functions to start the timer,
  * display the current mode of the timer and display the time remaining
+ * Class throws the 'timer-complete' event
  */
-class Timer {
+class Timer extends HTMLElement {
   /**
    * Constructor of Time Object. Takes the HTML element of where
    * you want the time and the status of the timer to be implemented.
@@ -15,6 +16,7 @@ class Timer {
    * @param {HTMLElement} displayStatus
    */
   constructor(startButton, displayTime, displayStatus) {
+    super();
     /**
      * State of the timer (the current mode)
      * @type {String}
@@ -23,9 +25,9 @@ class Timer {
     /**
      * Queue that stores the Session objects. Rotates to provide
      * rotation functionality for the timer
-     * @type {Array[Object]}
-     * @property {String} object.name
-     * @property {Number} object.duration
+     * @type {Object[]}
+     * @property {String} object.name name of the session
+     * @property {Number} object.duration duration of the session
      */
     this.stateQueue = [];
     /**
@@ -43,6 +45,11 @@ class Timer {
      * @type {HTMLElement}
      */
     this.displayStatus = displayStatus;
+    /**
+     * Checks if session has ended
+     * @type {Boolean}
+     */
+    this.end = false;
 
     // this is the order for the timer. It will loop in this order.
     const workOrder = [workMode, shortBreakMode, workMode,
@@ -61,6 +68,13 @@ class Timer {
   onTimerComplete() {
     const completedSession = this.stateQueue.shift();
     this.stateQueue.push(completedSession);
+    const event = new CustomEvent('timer-complete', {
+      detail: {
+        sessionName: completedSession.name,
+      },
+    });
+
+    this.dispatchEvent(event);
     this.startTimer();
   }
 
@@ -69,6 +83,7 @@ class Timer {
    * Updates the display for the status.
    */
   startTimer() {
+    this.end = false;
     const session = this.stateQueue[0];
     this.state = session.name;
     this.displayStatus.textContent = this.state;
@@ -76,11 +91,28 @@ class Timer {
   }
 
   /**
+   * Ends the timer.
+   * Updates the display for the status.
+   */
+  endTimer() {
+    this.end = true;
+    this.displayStatus.textContent = sessionStartName;
+    this.displayTime.textContent = '25:00';
+    this.stateQueue = [];
+    const workOrder = [workMode, shortBreakMode, workMode,
+      shortBreakMode, workMode, shortBreakMode, workMode, longBreakMode];
+    for (let i = 0; i < workOrder.length; i += 1) {
+      this.stateQueue.push(workOrder[i]);
+    }
+  }
+
+  /**
    * Counts down the timer for duration amount of minutes.
    * Updates the DOM with current time remaining.
-   * @param {Number} duration
+   * @param {Number} duration Amount of seconds for the timer to run
    */
   countdown(duration) {
+    if (this.end) return;
     const minutes = Math.floor(duration / 60);
     const seconds = duration % 60;
     let displayString = '';
@@ -106,10 +138,11 @@ class Timer {
   addEventListeners() {
     this.startButton.addEventListener('click', () => {
       if (this.startButton.textContent === buttonText.startTimerText) {
+        this.startTimer();
         this.startButton.textContent = buttonText.stopTimerText;
         this.startButton.class = classNames.stopButton;
-        this.startTimer();
       } else {
+        this.endTimer();
         this.startButton.textContent = buttonText.startTimerText;
         this.startButton.class = classNames.startButton;
       }
@@ -117,4 +150,5 @@ class Timer {
   }
 }
 
+customElements.define('custom-timer', Timer);
 export { Timer };
