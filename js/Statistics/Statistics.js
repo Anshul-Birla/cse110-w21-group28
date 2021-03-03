@@ -54,6 +54,9 @@ class Statistics extends HTMLElement {
   }
 
   getAvgDistractionsPerTask() {
+    if (this.tasksCompleted === 0) {
+      return 0;
+    }
     const rawNumber = this.distractionList.length / this.tasksCompleted;
     return Math.round(rawNumber * 10) / 10;
   }
