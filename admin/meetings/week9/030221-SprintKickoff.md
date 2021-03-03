@@ -11,19 +11,44 @@
 
 ## Agenda of what was discussed:
 
-**Old business:** None
+**Old business:**  
+- Anastasiia - continue on faq styling
+- Michael - not much
+- Dan - backbone of stats, need to refactor distraction info
+- Ryan - close issues
+  - additional styling: scroll, delete, 
+- Ravi/Nick - input fields, got rid of highlighted bar
+- Kyeling - input/border fix but already in style-input branch
+  - request from Dan: alternating gray rows
+- Kewen - refactored code, successfully merged PR
+- Anshul - working with Kewen, discussing stats with Dan
+  - minor fixes - overflow counting
+  - allow user to use timer without entering tasks
+  - create dynamic example task for users first task
 
 **New business:** 
 version 2 features?
-- delete button styling
-- scrollbar styling - rounded corners for table?
-- tooltip
-- stats
-- make stats/faq a popup instead of link
-- handle minimized window + zoom
-- audio
-- background color animation
-- manually close some issues
+- delete button styling - Ryan
+- scrollbar styling - Kyeling
+  - rounded corners for table? - Kyeling
+- ~~tooltip~~
+- stats - Dan + Michael + Ravi
+  - distraction box refactoring - Michael
+- make stats/faq a popup instead of link - Anastasiia
+- handle minimized window + zoom - Nick
+- audio - Anshul (next week)
+- background color animation - Ryan
+- manually close some issues - everyone
+- distraction box styling to fit theme - Kyeling
+  - animation/background goes dark - Ryan
+- emphasize current task? 
+  - assign class name to it - Dan
+  - styling class - 
+- responsive tab header - Nick
+
+handling rollover behavior?
+- popup asking user
+- use red to indicate not good
 
 
 
@@ -34,4 +59,4 @@ version 2 features?
 
 **Decisions made:** 
 
-**When the meeting finished:**
+**When the meeting finished:** 8:40
