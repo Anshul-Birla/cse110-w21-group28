@@ -1,10 +1,28 @@
-/* animations */
-@keyframes background-animation {
-    from {background-color: var(--page-bg-color);}
-    to {background-color: var(--page-bg-color-short);}
+/* short break color modes */
+.short-break {
+    background-color: var(--page-bg-color-short);
 }
-  
-@keyframes timer-animation {
-    from {background-color: var(--timer-bg-color);}
-    to {background-color: var(--timer-bg-color-short);}
+
+.short-break #timerContainer {
+    background-color: var(--timer-bg-color-short);
+}
+
+.short-break th {
+    background-color: var(--header-color-short);
+}
+
+.short-break tr:nth-child(even):not(.completedTask) td {
+    background-color: var(--even-color-short);
+}
+
+.short-break tr:nth-child(odd):not(.completedTask) td {
+    background-color: var(--odd-color-short);
+}
+
+.short-break tr:hover:not(.completedTask) td {
+    background-color: var(--tr-hover-color-short);
+}
+
+.short-break #add-todo {
+    background-color: var(--header-color-short);
 }

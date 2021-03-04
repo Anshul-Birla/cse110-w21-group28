@@ -1,7 +1,7 @@
 import { TodoListDom } from './ToDoList/TodoListDom.js';
 import { Timer } from './Timer/Timer.js';
-import { workMode } from './Timer/TimerVariables.js';
-import {changeColor} from './ChangeColors.js';
+import { workMode, shortBreakMode } from './Timer/TimerVariables.js';
+import { shortBreakColors, workModeColors } from './ChangeColors.js';
 const timeDisplay = document.getElementById('timeDisplay');
 const modeDisplay = document.getElementById('modeDisplay');
 const todoTable = document.getElementById('todo');
@@ -16,6 +16,9 @@ const TimerObj = new Timer(startTimerButton, timeDisplay, modeDisplay);
 TimerObj.addEventListener('timer-complete', (e) => {
   if (e.detail.sessionName === workMode.name) {
     TDLDom.onSessionComplete();
-    changeColor(document);
+    shortBreakColors(document);
+  }
+  else if (e.detail.sessionName === shortBreakMode.name) {
+    workModeColors(document);
   }
 });
