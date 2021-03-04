@@ -51,7 +51,8 @@ tr:nth-child(odd) td {
 }
 
 tr:hover td {
-  background-color: var(--tr-hover-color);
+  background-image: linear-gradient(transparent, var(--tr-hover-color));
+  transition-duration: 0;
 }
 
 .col1-checkbox,

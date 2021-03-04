@@ -20,7 +20,8 @@
 }
 
 .short-break tr:hover:not(.completedTask) td {
-    background-color: var(--tr-hover-color-short);
+    background-image: linear-gradient(transparent, var(--tr-hover-color-short));
+    transition-duration: 0;
 }
 
 .short-break #add-todo {
