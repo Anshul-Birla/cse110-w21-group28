@@ -72,6 +72,15 @@ test('Test that Checkbox works properly', () => {
   expect(currTask.className).toBe(classNames.completedTaskClassName);
 });
 
+test('Test that toggling checkbox works properly', () => {
+  const currTask = new Task(0, 'Test task', 5);
+  currTask.checkBox.click();
+  currTask.checkBox.click();
+  expect(currTask.checked).toBe(false);
+  expect(currTask.checkBox.checked).toBe(false);
+  expect(currTask.className).toBe(classNames.uncheckedTaskClassName);
+});
+
 test('Incrementing session of checked task should throw range error', () => {
   const currTask = new Task(0, 'Test task', 5, 3, true);
   const errIncrement = () => { currTask.incrementSession(); };

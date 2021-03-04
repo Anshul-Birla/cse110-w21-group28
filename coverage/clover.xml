@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1614853002285" clover="3.2.0">
-  <project timestamp="1614853002286" name="All files">
-    <metrics statements="193" coveredstatements="193" conditionals="36" coveredconditionals="33" methods="32" coveredmethods="32" elements="261" coveredelements="258" complexity="0" loc="193" ncloc="193" packages="2" files="7" classes="7"/>
+<coverage generated="1614898387561" clover="3.2.0">
+  <project timestamp="1614898387562" name="All files">
+    <metrics statements="196" coveredstatements="196" conditionals="38" coveredconditionals="35" methods="33" coveredmethods="33" elements="267" coveredelements="264" complexity="0" loc="196" ncloc="196" packages="2" files="7" classes="7"/>
     <package name="Timer">
       <metrics statements="56" coveredstatements="56" conditionals="8" coveredconditionals="7" methods="8" coveredmethods="8"/>
       <file name="Timer.js" path="/home/anshul/anshul/Development/cse110-w21-group28/js/Timer/Timer.js">
@@ -68,78 +68,81 @@
       </file>
     </package>
     <package name="ToDoList">
-      <metrics statements="137" coveredstatements="137" conditionals="28" coveredconditionals="26" methods="24" coveredmethods="24"/>
+      <metrics statements="140" coveredstatements="140" conditionals="30" coveredconditionals="28" methods="25" coveredmethods="25"/>
       <file name="Task.js" path="/home/anshul/anshul/Development/cse110-w21-group28/js/ToDoList/Task.js">
-        <metrics statements="69" coveredstatements="69" conditionals="10" coveredconditionals="9" methods="13" coveredmethods="13"/>
-        <line num="16" count="25" type="stmt"/>
-        <line num="17" count="25" type="stmt"/>
-        <line num="22" count="25" type="stmt"/>
-        <line num="27" count="25" type="stmt"/>
-        <line num="32" count="25" type="stmt"/>
-        <line num="37" count="25" type="stmt"/>
-        <line num="42" count="25" type="stmt"/>
-        <line num="48" count="25" type="stmt"/>
-        <line num="54" count="25" type="stmt"/>
-        <line num="60" count="25" type="stmt"/>
-        <line num="65" count="25" type="stmt"/>
-        <line num="70" count="25" type="stmt"/>
-        <line num="78" count="25" type="stmt"/>
-        <line num="79" count="25" type="stmt"/>
-        <line num="80" count="25" type="stmt"/>
-        <line num="81" count="25" type="stmt"/>
-        <line num="82" count="25" type="stmt"/>
-        <line num="83" count="25" type="stmt"/>
-        <line num="84" count="25" type="stmt"/>
-        <line num="86" count="25" type="cond" truecount="2" falsecount="0"/>
+        <metrics statements="72" coveredstatements="72" conditionals="12" coveredconditionals="11" methods="14" coveredmethods="14"/>
+        <line num="16" count="26" type="stmt"/>
+        <line num="17" count="26" type="stmt"/>
+        <line num="22" count="26" type="stmt"/>
+        <line num="27" count="26" type="stmt"/>
+        <line num="32" count="26" type="stmt"/>
+        <line num="37" count="26" type="stmt"/>
+        <line num="42" count="26" type="stmt"/>
+        <line num="48" count="26" type="stmt"/>
+        <line num="54" count="26" type="stmt"/>
+        <line num="60" count="26" type="stmt"/>
+        <line num="65" count="26" type="stmt"/>
+        <line num="70" count="26" type="stmt"/>
+        <line num="78" count="26" type="stmt"/>
+        <line num="79" count="26" type="stmt"/>
+        <line num="80" count="26" type="stmt"/>
+        <line num="81" count="26" type="stmt"/>
+        <line num="82" count="26" type="stmt"/>
+        <line num="83" count="26" type="stmt"/>
+        <line num="84" count="26" type="stmt"/>
+        <line num="86" count="26" type="cond" truecount="2" falsecount="0"/>
         <line num="87" count="6" type="stmt"/>
         <line num="88" count="6" type="stmt"/>
-        <line num="89" count="6" type="stmt"/>
-        <line num="92" count="25" type="stmt"/>
-        <line num="93" count="2" type="stmt"/>
-        <line num="95" count="25" type="stmt"/>
-        <line num="103" count="25" type="stmt"/>
-        <line num="104" count="25" type="stmt"/>
-        <line num="105" count="25" type="stmt"/>
-        <line num="106" count="25" type="stmt"/>
-        <line num="107" count="25" type="stmt"/>
-        <line num="115" count="25" type="stmt"/>
-        <line num="116" count="25" type="stmt"/>
-        <line num="117" count="25" type="stmt"/>
-        <line num="118" count="25" type="stmt"/>
-        <line num="119" count="25" type="stmt"/>
-        <line num="130" count="25" type="stmt"/>
-        <line num="131" count="25" type="stmt"/>
-        <line num="132" count="25" type="stmt"/>
-        <line num="134" count="25" type="stmt"/>
-        <line num="135" count="4" type="stmt"/>
+        <line num="91" count="26" type="stmt"/>
+        <line num="92" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="93" count="3" type="stmt"/>
+        <line num="94" count="1" type="stmt"/>
+        <line num="96" count="26" type="stmt"/>
+        <line num="104" count="26" type="stmt"/>
+        <line num="105" count="26" type="stmt"/>
+        <line num="106" count="26" type="stmt"/>
+        <line num="107" count="26" type="stmt"/>
+        <line num="108" count="26" type="stmt"/>
+        <line num="116" count="26" type="stmt"/>
+        <line num="117" count="26" type="stmt"/>
+        <line num="118" count="26" type="stmt"/>
+        <line num="119" count="26" type="stmt"/>
+        <line num="120" count="26" type="stmt"/>
+        <line num="131" count="26" type="stmt"/>
+        <line num="132" count="26" type="stmt"/>
+        <line num="133" count="26" type="stmt"/>
+        <line num="135" count="26" type="stmt"/>
         <line num="136" count="4" type="stmt"/>
         <line num="137" count="4" type="stmt"/>
-        <line num="140" count="25" type="stmt"/>
-        <line num="141" count="25" type="stmt"/>
-        <line num="142" count="25" type="stmt"/>
-        <line num="143" count="25" type="stmt"/>
-        <line num="150" count="5" type="stmt"/>
-        <line num="151" count="5" type="cond" truecount="2" falsecount="0"/>
-        <line num="152" count="4" type="stmt"/>
-        <line num="155" count="5" type="stmt"/>
+        <line num="138" count="4" type="stmt"/>
+        <line num="141" count="26" type="stmt"/>
+        <line num="142" count="26" type="stmt"/>
+        <line num="143" count="26" type="stmt"/>
+        <line num="144" count="26" type="stmt"/>
+        <line num="151" count="5" type="stmt"/>
+        <line num="152" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="153" count="4" type="stmt"/>
         <line num="156" count="5" type="stmt"/>
-        <line num="163" count="25" type="stmt"/>
-        <line num="170" count="36" type="stmt"/>
-        <line num="180" count="9" type="cond" truecount="2" falsecount="0"/>
-        <line num="181" count="1" type="stmt"/>
-        <line num="184" count="8" type="stmt"/>
+        <line num="157" count="5" type="stmt"/>
+        <line num="164" count="26" type="stmt"/>
+        <line num="171" count="37" type="stmt"/>
+        <line num="181" count="9" type="cond" truecount="2" falsecount="0"/>
+        <line num="182" count="1" type="stmt"/>
         <line num="185" count="8" type="stmt"/>
-        <line num="187" count="8" type="stmt"/>
-        <line num="194" count="11" type="stmt"/>
-        <line num="195" count="3" type="cond" truecount="1" falsecount="1"/>
-        <line num="196" count="3" type="stmt"/>
+        <line num="186" count="8" type="stmt"/>
+        <line num="188" count="8" type="stmt"/>
+        <line num="195" count="13" type="stmt"/>
+        <line num="196" count="3" type="cond" truecount="1" falsecount="1"/>
         <line num="197" count="3" type="stmt"/>
-        <line num="200" count="11" type="stmt"/>
-        <line num="207" count="3" type="stmt"/>
-        <line num="208" count="3" type="stmt"/>
-        <line num="209" count="3" type="stmt"/>
-        <line num="210" count="3" type="stmt"/>
-        <line num="215" count="3" type="stmt"/>
+        <line num="198" count="3" type="stmt"/>
+        <line num="201" count="13" type="stmt"/>
+        <line num="208" count="4" type="stmt"/>
+        <line num="209" count="4" type="stmt"/>
+        <line num="210" count="4" type="stmt"/>
+        <line num="214" count="1" type="stmt"/>
+        <line num="215" count="1" type="stmt"/>
+        <line num="216" count="1" type="stmt"/>
+        <line num="221" count="3" type="stmt"/>
       </file>
       <file name="TaskVariables.js" path="/home/anshul/anshul/Development/cse110-w21-group28/js/ToDoList/TaskVariables.js">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
