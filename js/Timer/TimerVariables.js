@@ -3,16 +3,16 @@ const sessionStartName = 'Pomo-Time!';
 
 const workMode = {
   name: 'Working Time',
-  duration: 10/60,
+  duration: 25,
 };
 const shortBreakMode = {
   name: 'Short Break',
-  duration: 10/60,
+  duration: 5,
 };
 
 const longBreakMode = {
   name: 'Long Break',
-  duration: 5/60,
+  duration: 15,
 };
 
 const classNames = {

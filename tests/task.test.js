@@ -73,3 +73,17 @@ test('Test that Checkbox works properly', () => {
   expect(currTask.className).toBe(classNames.completedTaskClassName);
 });
 
+test('Incrementing session of checked task should throw range error', () => {
+  const currTask = new Task(0, 'Test task', 5,3, true);
+  const errIncrement = () => { currTask.incrementSession(); };
+  expect(errIncrement).toThrow('Increment checked Task');
+});
+
+test('Task Removed from Local Storage after delete is called', () => {
+  const task = new Task(0, 'Test task', 5, 3, true);
+  const task2 = new Task(1, 'Test task2', 5, 3, false);
+  window.localData = [['0']];
+  window.localData = [['1']];
+  task.removeFromLocalStorage();
+  expect(window.localData.length).toBe(1);
+});

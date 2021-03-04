@@ -50,7 +50,7 @@ class ToDoList {
     const task = new Task(this.idCounter, name, totalSession);
     this.idCounter += 1;
     this.taskList.push(task);
-    this.updateLocalStorage(task);
+    this.addTaskToLocalStorage(task);
     return task;
   }
 
@@ -59,14 +59,14 @@ class ToDoList {
    *  @param {Task} task
    */
   // eslint-disable-next-line class-methods-use-this
-  updateLocalStorage(task) {
+  addTaskToLocalStorage(task) {
     const arr = [task.id, task.name, task.totalSessions, task.currentSessionNum, task.checked];
     window.localData.push(arr);
     localStorage.setItem('tasks', JSON.stringify(window.localData));
   }
 
   /**
-   * Gets the first unchecked task in the todolist. 
+   * Gets the first unchecked task in the todolist.
    * Returns null if no such task exists
    * @returns {Task} First unchecked task in list
    *
@@ -77,8 +77,7 @@ class ToDoList {
         return this.taskList[i];
       }
     }
-
-    return null
+    return null;
   }
 
 }

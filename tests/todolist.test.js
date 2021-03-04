@@ -67,7 +67,7 @@ test('Get currentTask', () => {
 
 test('Get currentTask on empty list should be null', () => {
   const aList = new ToDoList();
-  expect(aList.getCurrentTask()).toBe(null)
+  expect(aList.getCurrentTask()).toBe(null);
 });
 
 test('Get currentTask on list with all completed elements should be null', () => {
@@ -91,10 +91,10 @@ test('Deleted Task do not come up as current task', () => {
   const aList = new ToDoList();
   aList.addTask("task1", 1);
   aList.addTask("task2", 2);
-  let task1 = aList.getCurrentTask();
+  const task1 = aList.getCurrentTask();
   task1.deleteButton.click()
-  let currTask = aList.getCurrentTask();
+  const currTask = aList.getCurrentTask();
   expect(currTask.name).toBe("task2");
   expect(currTask.totalSessions).toBe(2);
-
 });
+

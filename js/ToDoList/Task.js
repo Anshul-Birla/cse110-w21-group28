@@ -41,8 +41,6 @@ class Task extends HTMLTableRowElement {
      */
     this.checked = completed;
 
-
-
     /**
      * The checkbox attribute for the task
      * @type {HTMLInputElement}
@@ -87,8 +85,8 @@ class Task extends HTMLTableRowElement {
 
     if (this.checked) {
       this.setAttribute('class', classNames.completedTaskClassName);
-      checkBox.checked = true
-      checkBox.disabled = true
+      checkBox.checked = true;
+      checkBox.disabled = true;
     }
 
     checkBox.addEventListener('click', () => {
@@ -134,23 +132,23 @@ class Task extends HTMLTableRowElement {
     deleteBtn.setAttribute('class', 'delete-button');
 
     deleteBtn.addEventListener('click', () => {
-      this.deleted = true
+      this.deleted = true;
       this.remove();
-      this.removeFromLocalStorage(this.id);
+      this.removeFromLocalStorage();
     });
 
     deleteBtn.textContent = 'x';
     lastCol.append(deleteBtn);
     this.append(lastCol);
-    return deleteBtn
+    return deleteBtn;
   }
 
   /**
    * Removes a task from local storage given the id
    */
-  removeFromLocalStorage(id) {
+  removeFromLocalStorage() {
     for (let i = 0; i < window.localData.length; i += 1) {
-      if (window.localData[i][TaskStorage.idIndex] === id) {
+      if (window.localData[i][TaskStorage.idIndex] === this.id) {
         window.localData.splice(i, 1);
       }
     }
@@ -180,7 +178,7 @@ class Task extends HTMLTableRowElement {
    */
   incrementSession() {
     if (this.checked) {
-      throw (new RangeError());
+      throw (new RangeError('Increment checked Task'));
     }
 
     this.currentSessionNum += 1;
