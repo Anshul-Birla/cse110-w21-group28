@@ -1,5 +1,5 @@
 import { ToDoList } from '../js/ToDoList/ToDoList.js';
-import { Task } from '../js/ToDoList/Task'
+import { Task } from '../js/ToDoList/Task';
 
 /** @Test {ToDoList} */
 
@@ -89,12 +89,11 @@ test('Preserve special characters in task name', () => {
 
 test('Deleted Task do not come up as current task', () => {
   const aList = new ToDoList();
-  aList.addTask("task1", 1);
-  aList.addTask("task2", 2);
+  aList.addTask('task1', 1);
+  aList.addTask('task2', 2);
   const task1 = aList.getCurrentTask();
-  task1.deleteButton.click()
+  task1.deleteButton.click();
   const currTask = aList.getCurrentTask();
-  expect(currTask.name).toBe("task2");
+  expect(currTask.name).toBe('task2');
   expect(currTask.totalSessions).toBe(2);
 });
-

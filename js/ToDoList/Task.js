@@ -67,7 +67,7 @@ class Task extends HTMLTableRowElement {
     /**
      * Keeps track if the task was deleted or not (used with the Todolist )
      */
-    this.deleted  = false
+    this.deleted = false;
   }
 
   /**
@@ -122,7 +122,7 @@ class Task extends HTMLTableRowElement {
   /**
    *
    * This sets up the delete button for a task
-   * Delete only works visually, doesn't remove it from the TodoList 
+   * Delete only works visually, doesn't remove it from the TodoList
    * Data Structure
    * @return {HTMLButtonElement}
    */
@@ -206,7 +206,7 @@ class Task extends HTMLTableRowElement {
   checkOffTask() {
     this.checked = true;
     this.setAttribute('class', classNames.completedTaskClassName);
-    this.checkBox.disabled = true
+    this.checkBox.disabled = true;
     this.updateLocalStorage();
   }
 }
