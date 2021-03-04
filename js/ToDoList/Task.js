@@ -86,11 +86,12 @@ class Task extends HTMLTableRowElement {
     if (this.checked) {
       this.setAttribute('class', classNames.completedTaskClassName);
       checkBox.checked = true;
-      checkBox.disabled = true;
     }
 
     checkBox.addEventListener('click', () => {
-      this.checkOffTask();
+      if (!this.checked) {
+        this.checkOffTask();
+      } else { this.uncheckTask(); }
     });
     return checkBox;
   }
@@ -206,7 +207,12 @@ class Task extends HTMLTableRowElement {
   checkOffTask() {
     this.checked = true;
     this.setAttribute('class', classNames.completedTaskClassName);
-    this.checkBox.disabled = true;
+    this.updateLocalStorage();
+  }
+
+  uncheckTask() {
+    this.checked = false;
+    this.setAttribute('class', classNames.uncheckedTaskClassName);
     this.updateLocalStorage();
   }
 }
