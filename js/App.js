@@ -1,7 +1,7 @@
 import { TodoListDom } from './ToDoList/TodoListDom.js';
 import { Timer } from './Timer/Timer.js';
 import { workMode } from './Timer/TimerVariables.js';
-
+import {changeColor} from './ChangeColors.js';
 const timeDisplay = document.getElementById('timeDisplay');
 const modeDisplay = document.getElementById('modeDisplay');
 const todoTable = document.getElementById('todo');
@@ -16,5 +16,6 @@ const TimerObj = new Timer(startTimerButton, timeDisplay, modeDisplay);
 TimerObj.addEventListener('timer-complete', (e) => {
   if (e.detail.sessionName === workMode.name) {
     TDLDom.onSessionComplete();
+    changeColor(document);
   }
 });

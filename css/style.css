@@ -5,13 +5,16 @@
 
 /* color variables for buttons, page, and timer */
 :root {
+  /* default button colors */
   --button-border-color: rgba(245, 245, 245, 0.4);
   --button-color: lightslategray;
+  
+  /* default page colors */
   --page-bg-color: cadetblue;
   --font-color: aliceblue;
   --timer-bg-color: darkcyan;
 
-  /* toothpast table theme */
+  /* toothpaste table theme */
   --even-color: rgba(149, 218, 229, 0.603);
   --odd-color: rgb(2, 177, 177);
   --header-color: darkcyan;

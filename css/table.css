@@ -2,8 +2,6 @@
 
 /* container for table */
 #tasklist {
-  position: relative;
-  margin: auto;
   height: 60vh;
   width: 40vw;
   background-color: var(--page-bg-color);

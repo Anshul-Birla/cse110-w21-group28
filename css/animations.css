@@ -1,0 +1,10 @@
+/* animations */
+@keyframes background-animation {
+    from {background-color: var(--page-bg-color);}
+    to {background-color: var(--page-bg-color-short);}
+}
+  
+@keyframes timer-animation {
+    from {background-color: var(--timer-bg-color);}
+    to {background-color: var(--timer-bg-color-short);}
+}
