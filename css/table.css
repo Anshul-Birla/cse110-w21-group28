@@ -121,14 +121,38 @@ input[type='checkbox']:checked {
 }
 
 .delete-button {
-  background-color:rgba(13, 12, 14, 0.603);
+  background-color: rgba(85, 80, 80, 0.11);
+  color: rgb(60, 100, 91)* 110%;
   border-radius: 35%;
-  width: 2vw;
-  height: 3.5vh;
+  width: 2.5vw;
+  height: 5vh;
+  font-size: 1.4em;
   border: none;
+  align-items: center;
+}
+
+.delete-button:hover{
+  background-color:var(--tr-hover-color);
+}
+
+.delete-all-button{
+  position: relative;
+  background-color: rgba(85, 80, 80, 0.226);
+  color: rgb(60, 100, 91)* 110%;
+  border-radius: 10%;
+  width: 4vw;
+  height: 5vh;
+  font-size: 0.48em;
+  left: -1vw;
+  border: none;
+  align-items: center;
+}
+
+.delete-all-button:hover{
+  background-color: var(--tr-hover-color);
 }
 
 tr.completedTask td {
   text-decoration: line-through;
-  background-color: rgba(211, 211, 211, 0.747);
+  background-color: rgba(81, 238, 230, 0.274);
 }
