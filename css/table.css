@@ -121,8 +121,11 @@ input[type='checkbox']:checked {
 }
 
 .delete-button {
-  color: black;
-  border-radius: 40%;
+  background-color:rgba(13, 12, 14, 0.603);
+  border-radius: 35%;
+  width: 2vw;
+  height: 3.5vh;
+  border: none;
 }
 
 tr.completedTask td {
