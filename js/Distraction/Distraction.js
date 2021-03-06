@@ -12,7 +12,6 @@ class Distraction extends HTMLElement {
     this.cancelButton = cancelButton;
     this.submitButton = submitButton;
     this.description = description;
-    this.id = 0;
     this.distractions = [];
     this.setupEventListeners();
   }
