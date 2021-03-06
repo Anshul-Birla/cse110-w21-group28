@@ -44,6 +44,12 @@ class Statistics extends HTMLElement {
     this.tasksCompleted += 1;
   }
 
+  decrementTasksCompleted() {
+    if (this.tasksCompleted > 0) {
+      this.tasksCompleted -= 1;
+    } // else I'm interested to see how you got there
+  }
+
   addDistraction(distraction) {
     this.distractionList.push(distraction);
   }
@@ -72,6 +78,12 @@ class Statistics extends HTMLElement {
 
   addExpectedPomoSessions(numSessions) {
     this.expectedPomoSessions += numSessions;
+  }
+
+  deleteExpectedPomoSessions(numSessions) {
+    if (this.expectedPomoSessions >= numSessions) {
+      this.expectedPomoSessions -= numSessions;
+    } // else I'm interested how you got here
   }
 
   incrementActualPomoSessions() {
