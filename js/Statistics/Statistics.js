@@ -5,9 +5,10 @@ class Statistics extends HTMLElement {
     this.workMins = 0;
     this.tasksCompleted = 0;
     this.distractionList = [];
-    this.loadFromLocalStorage();
     this.expectedPomoSessions = 0;
     this.actualPomoSessions = 0;
+    this.loadFromLocalStorage();
+    this.flushLocalStorage();
     // this.addHTMLChildren();
     // this.updateDom();
   }
@@ -129,7 +130,23 @@ class Statistics extends HTMLElement {
 
   getMinDistractionDate() {
     const sortedDistractions = this.distractionList.slice().sort((a, b) => b.date - a.date);
-    return sortedDistractions[0];
+    return sortedDistractions[0].date;
+  }
+
+  // distractions exist from last year/month/day/before 3am
+  oldDistractionsExist() {
+    const minDistractionDate = this.getMinDistractionDate().prototype;
+    const currDate = Date().prototype;
+    if (minDistractionDate.prototype.getFullYear() < currDate.getFullYear()) {
+      return true;
+    } if (minDistractionDate.getMonth() < currDate.getMonth()) {
+      return true;
+    } if (minDistractionDate.getDate() < currDate.getDate()) {
+      return true;
+    } if (minDistractionDate.getHours() <= 2) {
+      return true;
+    }
+    return false;
   }
 
   compressStats() {
@@ -138,13 +155,18 @@ class Statistics extends HTMLElement {
      * REMINDER: Set pomo session id to 0
      */
     // this.loadFromLocalStorage();
-    const minDistractionDate = this.getMinDistractionDate();
-    this.history.push({
-      date: new Date(minDistractionDate),
-      distractionCount: this.distractionList.length(),
-      timeSpent: this.timeSpent,
+    if (this.timeSpent > 0) {
+      this.history.push({
+        date: this.getMinDistractionDate(),
+        distractionCount: this.distractionList.length(),
+        timeSpent: this.timeSpent,
+      });
+      localStorage.setItem('statsHistory', JSON.stringify(this.history));
+    }
+
+    const event = new CustomEvent('reset-timer', {
     });
-    localStorage.setItem('statsHistory', JSON.stringify(this.history));
+    this.dispatchEvent(event);
   }
 }
 
