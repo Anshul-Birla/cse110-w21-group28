@@ -121,7 +121,7 @@ class Statistics extends HTMLElement {
   flushLocalStorage() {
     // deletes all objects from local storage that are older than a year
     // this.loadFromLocalStorage();
-    for (let i = 0; i < this.history.length(); i += 1) {
+    for (let i = 0; i < this.history.length; i += 1) {
       if ((new Date(this.history[i].date) - new Date()) / (1000 * 3600 * 24 * 365) > 1) {
         this.history.splice(i, 1);
       }
