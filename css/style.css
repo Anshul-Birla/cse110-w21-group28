@@ -8,7 +8,7 @@
   /* default button colors */
   --button-border-color: rgba(245, 245, 245, 0.4);
   --button-color: lightslategray;
-  
+
   /* short break button colors */
   --button-color-short: #763626;
 
@@ -18,8 +18,8 @@
   --timer-bg-color: darkcyan;
 
   /* short break page colors */
-  --page-bg-color-short: #336B87;
-  --timer-bg-color-short: #90AFC5;
+  --page-bg-color-short: #336b87;
+  --timer-bg-color-short: #90afc5;
 
   /* toothpaste table theme */
   --even-color: rgba(149, 218, 229, 0.603);
@@ -29,9 +29,9 @@
   --td-border-radius: 30px;
 
   /* shortbreak table theme */
-  --even-color-short: #54A6CF;
-  --odd-color-short: #79C4EA;
-  --header-color-short: #90AFC5;
+  --even-color-short: #54a6cf;
+  --odd-color-short: #79c4ea;
+  --header-color-short: #90afc5;
   --tr-hover-color-short: #763626;
 }
 
@@ -90,7 +90,8 @@ header {
 #timerContainer {
   height: 280px;
   width: 400px;
-  /*background-color: var(--timer-bg-color);*/
+
+  /* background-color: var(--timer-bg-color); */
   border-radius: 10px;
 }
 

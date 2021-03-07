@@ -46,14 +46,14 @@ submitButton.addEventListener('click', () => {
  * the popup animations and sets hides them when done.
  */
 distractPopUp.addEventListener('animationend', (e) => {
-  if (e.animationName === 'distraction-animation-out'){
+  if (e.animationName === 'distraction-animation-out') {
     distractPopUp.style.animationName = '';
     distractPopUp.style.display = 'none';
   }
 });
 
 overlay.addEventListener('animationend', (e) => {
-  if (e.animationName === 'overlay-animation-out'){
+  if (e.animationName === 'overlay-animation-out') {
     overlay.style.animationName = '';
     overlay.style.display = 'none';
   }
