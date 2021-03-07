@@ -86,102 +86,114 @@ window.esdocSearchIndex = [
   [
     "",
     "test-file/tests/todolistdom.test.js.html#lineNumber78",
-    "Add an invalid task",
+    "Addding an invalid task causes an alert",
     "test"
   ],
   [
     "",
-    "test-file/tests/todolist.test.js.html#lineNumber31",
+    "test-file/tests/todolist.test.js.html#lineNumber30",
     "Adding 0 Pomo Length Task",
     "test"
   ],
   [
     "",
-    "test-file/tests/todolist.test.js.html#lineNumber22",
+    "test-file/tests/todolist.test.js.html#lineNumber21",
     "Adding Items to List",
     "test"
   ],
   [
     "",
-    "test-file/tests/todolist.test.js.html#lineNumber59",
+    "test-file/tests/todolist.test.js.html#lineNumber54",
     "Adding Task w/ NaN for PomoSession",
     "test"
   ],
   [
     "",
-    "test-file/tests/todolist.test.js.html#lineNumber52",
+    "test-file/tests/todolist.test.js.html#lineNumber48",
     "Adding Task w/ empty name",
     "test"
   ],
   [
     "",
-    "test-file/tests/todolist.test.js.html#lineNumber45",
+    "test-file/tests/todolist.test.js.html#lineNumber42",
     "Adding Task w/o name",
     "test"
   ],
   [
     "",
-    "test-file/tests/todolist.test.js.html#lineNumber38",
+    "test-file/tests/todolist.test.js.html#lineNumber36",
     "Adding undefined Pomo Length Task",
     "test"
   ],
   [
     "",
-    "test-file/tests/todolist.test.js.html#lineNumber11",
+    "test-file/tests/todolistdom.test.js.html#lineNumber61",
+    "Clicking remove button should remove task from table and local storage",
+    "test"
+  ],
+  [
+    "",
+    "test-file/tests/todolist.test.js.html#lineNumber10",
     "Construction of empty list",
     "test"
   ],
   [
     "",
     "test-file/tests/todolistdom.test.js.html#lineNumber84",
-    "Delete all",
+    "Delete all should remove from table and local storage",
     "test"
   ],
   [
     "",
-    "test-file/tests/task.test.js.html#lineNumber62",
-    "Error is thrown after incrementing past totalSessions",
+    "test-file/tests/todolist.test.js.html#lineNumber90",
+    "Deleted Task do not come up as current task",
     "test"
   ],
   [
     "",
-    "test-file/tests/todolist.test.js.html#lineNumber66",
+    "test-file/tests/todolist.test.js.html#lineNumber60",
     "Get currentTask",
     "test"
   ],
   [
     "",
-    "test-file/tests/todolist.test.js.html#lineNumber75",
-    "Get currentTask on empty list",
+    "test-file/tests/todolist.test.js.html#lineNumber68",
+    "Get currentTask on empty list should be null",
     "test"
   ],
   [
     "",
-    "test-file/tests/todolist.test.js.html#lineNumber82",
-    "Get currentTask on list with all completed elements",
+    "test-file/tests/todolist.test.js.html#lineNumber73",
+    "Get currentTask on list with all completed elements should be null",
     "test"
   ],
   [
     "",
-    "test-file/tests/task.test.js.html#lineNumber31",
+    "test-file/tests/task.test.js.html#lineNumber40",
     "Increment counter only changes current session number",
     "test"
   ],
   [
     "",
-    "test-file/tests/task.test.js.html#lineNumber46",
-    "Increment counter works up to total sessions, task is completed at the end",
+    "test-file/tests/task.test.js.html#lineNumber56",
+    "Incrementing past totalSessions is OK",
+    "test"
+  ],
+  [
+    "",
+    "test-file/tests/task.test.js.html#lineNumber76",
+    "Incrementing session of checked task should throw range error",
     "test"
   ],
   [
     "",
     "test-file/tests/todolistdom.test.js.html#lineNumber68",
-    "Increment session ",
+    "Incrementing session updates value accordingly",
     "test"
   ],
   [
     "",
-    "test-file/tests/todolist.test.js.html#lineNumber91",
+    "test-file/tests/todolist.test.js.html#lineNumber80",
     "Preserve special characters in task name",
     "test"
   ],
@@ -195,6 +207,12 @@ window.esdocSearchIndex = [
     "",
     "test-file/tests/todolistdom.test.js.html#lineNumber51",
     "Reload the page with local storage",
+    "test"
+  ],
+  [
+    "",
+    "test-file/tests/task.test.js.html#lineNumber82",
+    "Task Removed from Local Storage after delete is called",
     "test"
   ],
   [
@@ -241,20 +259,26 @@ window.esdocSearchIndex = [
   ],
   [
     "",
-    "test-file/tests/task.test.js.html#lineNumber75",
+    "test-file/tests/task.test.js.html#lineNumber69",
     "Test that Checkbox works properly",
     "test"
   ],
   [
     "",
-    "test-file/tests/task.test.js.html#lineNumber21",
+    "test-file/tests/task.test.js.html#lineNumber18",
     "Test that task with initialized values is initialized correctly",
     "test"
   ],
   [
     "",
-    "test-file/tests/task.test.js.html#lineNumber11",
+    "test-file/tests/task.test.js.html#lineNumber9",
     "Test that task with no values is empty",
+    "test"
+  ],
+  [
+    "",
+    "test-file/tests/task.test.js.html#lineNumber29",
+    "Test that task with optional initilized values is initialized correctly",
     "test"
   ],
   [
@@ -265,14 +289,8 @@ window.esdocSearchIndex = [
   ],
   [
     "",
-    "test-file/tests/todolist.test.js.html#lineNumber16",
+    "test-file/tests/todolist.test.js.html#lineNumber15",
     "Valid construction of new list in HTML",
-    "test"
-  ],
-  [
-    "",
-    "test-file/tests/todolistdom.test.js.html#lineNumber61",
-    "click remove button",
     "test"
   ],
   [
@@ -678,6 +696,12 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "js/todolist/task.js~task#classname",
+    "class/js/ToDoList/Task.js~Task.html#instance-member-className",
+    "js/ToDoList/Task.js~Task#className",
+    "member"
+  ],
+  [
     "js/todolist/task.js~task#constructor",
     "class/js/ToDoList/Task.js~Task.html#instance-constructor-constructor",
     "js/ToDoList/Task.js~Task#constructor",
@@ -693,6 +717,12 @@ window.esdocSearchIndex = [
     "js/todolist/task.js~task#deletebutton",
     "class/js/ToDoList/Task.js~Task.html#instance-member-deleteButton",
     "js/ToDoList/Task.js~Task#deleteButton",
+    "member"
+  ],
+  [
+    "js/todolist/task.js~task#deleted",
+    "class/js/ToDoList/Task.js~Task.html#instance-member-deleted",
+    "js/ToDoList/Task.js~Task#deleted",
     "member"
   ],
   [
@@ -798,6 +828,12 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "js/todolist/todolist.js~todolist#addtasktolocalstorage",
+    "class/js/ToDoList/ToDoList.js~ToDoList.html#instance-method-addTaskToLocalStorage",
+    "js/ToDoList/ToDoList.js~ToDoList#addTaskToLocalStorage",
+    "method"
+  ],
+  [
     "js/todolist/todolist.js~todolist#constructor",
     "class/js/ToDoList/ToDoList.js~ToDoList.html#instance-constructor-constructor",
     "js/ToDoList/ToDoList.js~ToDoList#constructor",
@@ -816,22 +852,10 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
-    "js/todolist/todolist.js~todolist#onsessioncomplete",
-    "class/js/ToDoList/ToDoList.js~ToDoList.html#instance-method-onSessionComplete",
-    "js/ToDoList/ToDoList.js~ToDoList#onSessionComplete",
-    "method"
-  ],
-  [
     "js/todolist/todolist.js~todolist#tasklist",
     "class/js/ToDoList/ToDoList.js~ToDoList.html#instance-member-taskList",
     "js/ToDoList/ToDoList.js~ToDoList#taskList",
     "member"
-  ],
-  [
-    "js/todolist/todolist.js~todolist#updatelocalstorage",
-    "class/js/ToDoList/ToDoList.js~ToDoList.html#instance-method-updateLocalStorage",
-    "js/ToDoList/ToDoList.js~ToDoList#updateLocalStorage",
-    "method"
   ],
   [
     "js/todolist/todolistdom.js",

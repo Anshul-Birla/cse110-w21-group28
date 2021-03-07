@@ -63,6 +63,11 @@ class Task extends HTMLTableRowElement {
      * @type {HTMLButtonElement}
      */
     this.deleteButton = this.setupDeleteButton();
+
+    /**
+     * Keeps track if the task was deleted or not (used with the Todolist )
+     */
+    this.deleted = false;
   }
 
   /**
@@ -79,18 +84,20 @@ class Task extends HTMLTableRowElement {
     this.appendChild(firstCol);
 
     if (this.checked) {
-      checkBox.setAttribute('checked', 'true');
-      this.checkOffTask();
+      this.setAttribute('class', classNames.completedTaskClassName);
+      checkBox.checked = true;
     }
 
     checkBox.addEventListener('click', () => {
-      this.checkOffTask();
+      if (!this.checked) {
+        this.checkOffTask();
+      } else { this.uncheckTask(); }
     });
     return checkBox;
   }
 
   /**
-   * This sets up the view that will display the taks name
+   * This sets up the view that will display the task name
    * @returns {HTMLTableDataCellElement}
    */
   setupTaskText() {
@@ -115,35 +122,38 @@ class Task extends HTMLTableRowElement {
 
   /**
    *
-   * Unable to change tasklist in ToDoList class
-   * Only changes window.Data
-   * This sets up the delete button for a tasl
-   * @return {HTMLTableDataCellElement}
+   * This sets up the delete button for a task
+   * Delete only works visually, doesn't remove it from the TodoList
+   * Data Structure
+   * @return {HTMLButtonElement}
    */
   setupDeleteButton() {
     const lastCol = document.createElement('td');
     const deleteBtn = document.createElement('button');
     deleteBtn.setAttribute('class', 'delete-button');
+
     deleteBtn.addEventListener('click', () => {
+      this.deleted = true;
       this.remove();
-      this.removeFromLocalStorage(this.id);
+      this.removeFromLocalStorage();
     });
+
     deleteBtn.textContent = 'x';
     lastCol.append(deleteBtn);
     this.append(lastCol);
-    return lastCol;
+    return deleteBtn;
   }
 
   /**
-   * When delete button is clicked, also remove from local data
+   * Removes a task from local storage given the id
    */
-  removeFromLocalStorage(id) {
+  removeFromLocalStorage() {
     for (let i = 0; i < window.localData.length; i += 1) {
-      if (window.localData[i][TaskStorage.idIndex] === id) {
+      if (window.localData[i][TaskStorage.idIndex] === this.id) {
         window.localData.splice(i, 1);
       }
     }
-    this.checked = true;
+    this.deleted = true;
     localStorage.setItem('tasks', JSON.stringify(window.localData));
   }
 
@@ -169,15 +179,12 @@ class Task extends HTMLTableRowElement {
    */
   incrementSession() {
     if (this.checked) {
-      throw (new RangeError());
+      throw (new RangeError('Increment checked Task'));
     }
 
     this.currentSessionNum += 1;
     this.updatePomoSessions();
 
-    if (this.currentSessionNum === this.totalSessions) {
-      this.checkOffTask();
-    }
     this.updateLocalStorage();
   }
 
@@ -200,6 +207,12 @@ class Task extends HTMLTableRowElement {
   checkOffTask() {
     this.checked = true;
     this.setAttribute('class', classNames.completedTaskClassName);
+    this.updateLocalStorage();
+  }
+
+  uncheckTask() {
+    this.checked = false;
+    this.setAttribute('class', classNames.uncheckedTaskClassName);
     this.updateLocalStorage();
   }
 }
