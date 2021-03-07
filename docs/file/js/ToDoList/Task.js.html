@@ -63,6 +63,7 @@ class Task extends HTMLTableRowElement {
   */
   constructor(id, name, totalSessions, currentSession = 0, completed = false) {
     super();
+    this.className = classNames.uncheckedTaskClassName;
     /**
      * Stores the id of the task
      * @type {String}
@@ -82,7 +83,7 @@ class Task extends HTMLTableRowElement {
      * Stores the total amount of sessions spent working on the task
      * @type {Number}
      */
-    this.currentSessionNum = 0;
+    this.currentSessionNum = currentSession;
     /**
      * Stores if the task has been checked off or not
      * @type {Boolean}
@@ -111,6 +112,11 @@ class Task extends HTMLTableRowElement {
      * @type {HTMLButtonElement}
      */
     this.deleteButton = this.setupDeleteButton();
+
+    /**
+     * Keeps track if the task was deleted or not (used with the Todolist )
+     */
+    this.deleted  = false
   }
 
   /**
@@ -127,7 +133,9 @@ class Task extends HTMLTableRowElement {
     this.appendChild(firstCol);
 
     if (this.checked) {
-      checkBox.setAttribute(&apos;checked&apos;, &apos;true&apos;);
+      this.setAttribute(&apos;class&apos;, classNames.completedTaskClassName);
+      checkBox.checked = true;
+      checkBox.disabled = true;
     }
 
     checkBox.addEventListener(&apos;click&apos;, () =&gt; {
@@ -137,7 +145,7 @@ class Task extends HTMLTableRowElement {
   }
 
   /**
-   * This sets up the view that will display the taks name
+   * This sets up the view that will display the task name
    * @returns {HTMLTableDataCellElement}
    */
   setupTaskText() {
@@ -162,35 +170,38 @@ class Task extends HTMLTableRowElement {
 
   /**
    *
-   * Unable to change tasklist in ToDoList class
-   * Only changes window.Data
-   * This sets up the delete button for a tasl
-   * @return {HTMLTableDataCellElement}
+   * This sets up the delete button for a task
+   * Delete only works visually, doesn&apos;t remove it from the TodoList 
+   * Data Structure
+   * @return {HTMLButtonElement}
    */
   setupDeleteButton() {
     const lastCol = document.createElement(&apos;td&apos;);
     const deleteBtn = document.createElement(&apos;button&apos;);
     deleteBtn.setAttribute(&apos;class&apos;, &apos;delete-button&apos;);
+
     deleteBtn.addEventListener(&apos;click&apos;, () =&gt; {
+      this.deleted = true;
       this.remove();
-      this.removeFromLocalStorage(this.id);
+      this.removeFromLocalStorage();
     });
+
     deleteBtn.textContent = &apos;x&apos;;
     lastCol.append(deleteBtn);
     this.append(lastCol);
-    return lastCol;
+    return deleteBtn;
   }
 
   /**
-   * When delete button is clicked, also remove from local data
+   * Removes a task from local storage given the id
    */
-  removeFromLocalStorage(id) {
+  removeFromLocalStorage() {
     for (let i = 0; i &lt; window.localData.length; i += 1) {
-      if (window.localData[i][TaskStorage.idIndex] === id) {
+      if (window.localData[i][TaskStorage.idIndex] === this.id) {
         window.localData.splice(i, 1);
       }
     }
-    this.checked = true;
+    this.deleted = true;
     localStorage.setItem(&apos;tasks&apos;, JSON.stringify(window.localData));
   }
 
@@ -216,15 +227,12 @@ class Task extends HTMLTableRowElement {
    */
   incrementSession() {
     if (this.checked) {
-      throw (new RangeError());
+      throw (new RangeError(&apos;Increment checked Task&apos;));
     }
 
     this.currentSessionNum += 1;
     this.updatePomoSessions();
 
-    if (this.currentSessionNum === this.totalSessions) {
-      this.checkOffTask();
-    }
     this.updateLocalStorage();
   }
 
@@ -247,6 +255,7 @@ class Task extends HTMLTableRowElement {
   checkOffTask() {
     this.checked = true;
     this.setAttribute(&apos;class&apos;, classNames.completedTaskClassName);
+    this.checkBox.disabled = true
     this.updateLocalStorage();
   }
 }

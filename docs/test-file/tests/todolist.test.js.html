@@ -48,13 +48,12 @@
 
 <div class="content" data-ice="content"><h1 data-ice="title">tests/todolist.test.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { ToDoList } from &apos;../js/ToDoList/ToDoList.js&apos;;
+import { Task } from &apos;../js/ToDoList/Task&apos;
 
 /** @Test {ToDoList} */
 
 beforeEach(() =&gt; {
   window.localData = [];
-  document.body.innerHTML = &apos;&lt;div id=&quot;ToDoListDiv&gt;&apos;
-    + &apos;&lt;/div&gt;&apos;;
 });
 
 test(&apos;Construction of empty list&apos;, () =&gt; {
@@ -64,13 +63,13 @@ test(&apos;Construction of empty list&apos;, () =&gt; {
 
 test(&apos;Valid construction of new list in HTML&apos;, () =&gt; {
   const listLocation = document.getElementById(&apos;ToDoListDiv&apos;);
-  const aList = new ToDoList(listLocation);
+  const aList = new ToDoList();
   expect(aList.taskList).toEqual([]);
 });
 
 test(&apos;Adding Items to List&apos;, () =&gt; {
   const listLocation = document.getElementById(&apos;ToDoListDiv&apos;);
-  const aList = new ToDoList(listLocation);
+  const aList = new ToDoList();
   aList.addTask(&apos;First Task&apos;, 5);
   expect(aList.taskList.length).toBe(1);
   aList.addTask(&apos;Second Task&apos;, 2);
@@ -78,68 +77,57 @@ test(&apos;Adding Items to List&apos;, () =&gt; {
 });
 
 test(&apos;Adding 0 Pomo Length Task&apos;, () =&gt; {
-  const listLocation = document.getElementById(&apos;ToDoListDiv&apos;);
-  const aList = new ToDoList(listLocation);
+  const aList = new ToDoList();
   const errTask = () =&gt; { aList.addTask(&apos;First Task&apos;, 0); };
   expect(errTask).toThrow(&apos;0 Length Task&apos;);
 });
 
 test(&apos;Adding undefined Pomo Length Task&apos;, () =&gt; {
-  const listLocation = document.getElementById(&apos;ToDoListDiv&apos;);
-  const aList = new ToDoList(listLocation);
+  const aList = new ToDoList();
   const errTask = () =&gt; { aList.addTask(&apos;First Task&apos;, undefined); };
   expect(errTask).toThrow(&apos;Undefined Length Task&apos;);
 });
 
 test(&apos;Adding Task w/o name&apos;, () =&gt; {
-  const listLocation = document.getElementById(&apos;ToDoListDiv&apos;);
-  const aList = new ToDoList(listLocation);
+  const aList = new ToDoList();
   const errTask = () =&gt; { aList.addTask(undefined, 4); };
   expect(errTask).toThrow(&apos;Undefined Name&apos;);
 });
 
 test(&apos;Adding Task w/ empty name&apos;, () =&gt; {
-  const listLocation = document.getElementById(&apos;ToDoListDiv&apos;);
-  const aList = new ToDoList(listLocation);
+  const aList = new ToDoList();
   const errTask = () =&gt; { aList.addTask(&apos;&apos;, 4); };
   expect(errTask).toThrow(&apos;Empty Name&apos;);
 });
 
 test(&apos;Adding Task w/ NaN for PomoSession&apos;, () =&gt; {
-  const listLocation = document.getElementById(&apos;ToDoListDiv&apos;);
-  const aList = new ToDoList(listLocation);
+  const aList = new ToDoList();
   const errTask = () =&gt; { aList.addTask(&apos;TempTask&apos;, NaN); };
   expect(errTask).toThrow(&apos;Number Not Passed In&apos;);
 });
 
 test(&apos;Get currentTask&apos;, () =&gt; {
-  const listLocation = document.getElementById(&apos;ToDoListDiv&apos;);
-  const aList = new ToDoList(listLocation);
+  const aList = new ToDoList();
   aList.addTask(&apos;First Task&apos;, 5);
   aList.addTask(&apos;Second Task&apos;, 2);
   const currTask = aList.getCurrentTask();
   expect(currTask.name).toBe(&apos;First Task&apos;);
 });
 
-test(&apos;Get currentTask on empty list&apos;, () =&gt; {
-  const listLocation = document.getElementById(&apos;ToDoListDiv&apos;);
-  const aList = new ToDoList(listLocation);
-  const currTask = () =&gt; { aList.getCurrentTask(); };
-  expect(currTask).toThrow(&apos;Empty ToDo List&apos;);
+test(&apos;Get currentTask on empty list should be null&apos;, () =&gt; {
+  const aList = new ToDoList();
+  expect(aList.getCurrentTask()).toBe(null);
 });
 
-test(&apos;Get currentTask on list with all completed elements&apos;, () =&gt; {
-  const listLocation = document.getElementById(&apos;ToDoListDiv&apos;);
-  const aList = new ToDoList(listLocation);
+test(&apos;Get currentTask on list with all completed elements should be null&apos;, () =&gt; {
+  const aList = new ToDoList();
   aList.addTask(&apos;First Task&apos;, 5);
   aList.getCurrentTask().checkOffTask();
-  const currTask = () =&gt; { aList.getCurrentTask(); };
-  expect(currTask).toThrow(&apos;No Current Task&apos;);
+  expect(aList.getCurrentTask()).toBe(null);
 });
 
 test(&apos;Preserve special characters in task name&apos;, () =&gt; {
-  const listLocation = document.getElementById(&apos;ToDoListDiv&apos;);
-  const aList = new ToDoList(listLocation);
+  const aList = new ToDoList();
   // eslint-disable-next-line no-template-curly-in-string
   const strName = &apos;A s^ri\ng w!t\\n spe`cia| &quot;some ver${this.id}y special&quot; chara%cter$&apos;;
   aList.addTask(strName, 5);
@@ -147,6 +135,18 @@ test(&apos;Preserve special characters in task name&apos;, () =&gt; {
   const currTask = aList.getCurrentTask();
   expect(currTask.name).toBe(strName);
 });
+
+test(&apos;Deleted Task do not come up as current task&apos;, () =&gt; {
+  const aList = new ToDoList();
+  aList.addTask(&quot;task1&quot;, 1);
+  aList.addTask(&quot;task2&quot;, 2);
+  const task1 = aList.getCurrentTask();
+  task1.deleteButton.click()
+  const currTask = aList.getCurrentTask();
+  expect(currTask.name).toBe(&quot;task2&quot;);
+  expect(currTask.totalSessions).toBe(2);
+});
+
 </code></pre>
 
 </div>
