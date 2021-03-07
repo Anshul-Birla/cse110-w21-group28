@@ -122,7 +122,7 @@ input[type='checkbox']:checked {
 
 .delete-button {
   background-color: rgba(85, 80, 80, 0.11);
-  color: rgb(60, 100, 91)* 110%;
+  color: rgb(60, 100, 91);
   border-radius: 35%;
   width: 2.5vw;
   height: 5vh;
