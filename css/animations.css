@@ -1,6 +1,7 @@
 /* short break color modes */
 .short-break {
     background-color: var(--page-bg-color-short);
+    transition-duration: 2s;
 }
 
 .short-break #timerContainer {
@@ -19,11 +20,46 @@
     background-color: var(--odd-color-short);
 }
 
-.short-break tr:hover:not(.completedTask) td {
+.short-break tr:hover td {
     background-image: linear-gradient(transparent, var(--tr-hover-color-short));
     transition-duration: 0;
 }
 
 .short-break #add-todo {
     background-color: var(--header-color-short);
+}
+
+/* distraction popup animations */
+#overlay {
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: black;
+    display: none;
+    height: 100vh;
+    width: 100vw;
+    animation-fill-mode: forwards;
+    animation-duration: 0.5s;
+    margin: 0;
+    z-index: 50;
+}
+
+@keyframes distraction-animation-in {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@keyframes overlay-animation-in {
+    from {opacity: 0;}
+    to {opacity: 0.6;}
+}
+
+@keyframes distraction-animation-out {
+    from {opacity: 1;}
+    to {opacity: 0;}
+}
+
+@keyframes overlay-animation-out {
+    from {opacity: 0.6;}
+    to {opacity: 0;}
 }

@@ -1,7 +1,6 @@
 * {
   font-family: Helvetica, sans-serif;
   color: var(--font-color);
-  transition-duration: 2s;
 }
 
 /* color variables for buttons, page, and timer */
@@ -38,6 +37,7 @@
 
 body {
   background-color: var(--page-bg-color);
+  transition-duration: 2s;
 }
 
 header {
@@ -53,6 +53,7 @@ header {
 .section-container {
   position: relative;
   margin: auto;
+  transition-duration: 2s;
 }
 
 /* header styling */
@@ -89,7 +90,7 @@ header {
 #timerContainer {
   height: 280px;
   width: 400px;
-  background-color: var(--timer-bg-color);
+  /*background-color: var(--timer-bg-color);*/
   border-radius: 10px;
 }
 

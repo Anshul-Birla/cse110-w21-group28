@@ -16,9 +16,9 @@ const TimerObj = new Timer(startTimerButton, timeDisplay, modeDisplay);
 TimerObj.addEventListener('timer-complete', (e) => {
   if (e.detail.sessionName === workMode.name) {
     TDLDom.onSessionComplete();
-    shortBreakColors(document);
+    shortBreakColors();
   }
-  else if (e.detail.sessionName === shortBreakMode.name) {
-    workModeColors(document);
+  else {
+    workModeColors();
   }
 });

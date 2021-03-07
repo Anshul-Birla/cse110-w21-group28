@@ -6,6 +6,9 @@
   top: 50%;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+  z-index: 51;
 }
 
 #distract-form-container {
