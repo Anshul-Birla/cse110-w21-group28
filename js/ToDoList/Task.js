@@ -144,6 +144,8 @@ class Task extends HTMLTableRowElement {
     return deleteBtn;
   }
 
+  setupThreeDots
+
   /**
    * Removes a task from local storage given the id
    */

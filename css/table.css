@@ -3,7 +3,7 @@
 /* container for table */
 #tasklist {
   height: 60vh;
-  width: 40vw;
+  width: 50vw;
   overflow-y: auto;
   margin-top: 1%;
   padding-right: 20px;
@@ -57,14 +57,19 @@ tr:hover td {
   transition-duration: 0;
 }
 
-.col1-checkbox,
-.col3-pomos,
+.col1-checkbox{
+  width:10%
+}
+.col3-pomos {
+  width:20%
+}
 .col4-delete {
-  width: 10%;
+  width: 15%;
+  text-align: center;
 }
 
 .col2-task {
-  width: 70%;
+  width: 55%;
 }
 
 /* input form (add task) */
@@ -141,4 +146,41 @@ input[type='checkbox']:checked {
 tr.completedTask td {
   text-decoration: line-through;
   background-color: rgba(211, 211, 211, 0.747);
+}
+
+.three-dots:after {
+  cursor: pointer;
+  color: #FCC;
+  content: '\2807';
+  font-size: 20px;
+  align-items: center;
+}
+
+.table-buttons button {
+  width: 100%
+}
+.table-buttons{
+  flex: content;
+  align-items: center;
+}
+
+
+
+
+@media screen and (min-width: 1300px) {
+  #tasklist {
+    height: 60vh;
+    width: 40vw;
+    overflow-y: auto;
+    margin-top: 1%;
+    padding-right: 20px;
+  }
+}
+
+td button {
+  outline: none;
+  text-align: center;
+}
+td button div {
+  text-align: center;
 }
