@@ -1308,7 +1308,7 @@
     "__docId__": 89,
     "kind": "file",
     "name": "js/ToDoList/Task.js",
-    "content": "import { classNames } from './TaskVariables.js';\nimport { TaskStorage } from './TodoListDomVariables.js';\n\n/**\n * Task object, stores its id, task name, total expected Pomo Sessions to complete the Task,\n * the number of the current Pomo Session, and whether the task has been completed or not.\n */\nclass Task extends HTMLTableRowElement {\n  /**\n  * Task construcutor. Initializes the task with appropriate attributes\n  * @param {String} id Id of the task\n  * @param {String} name Name of the task\n  * @param {Number} totalSessions Total sessions the task should take\n  */\n  constructor(id, name, totalSessions, currentSession = 0, completed = false) {\n    super();\n    /**\n     * Stores the id of the task\n     * @type {String}\n     */\n    this.id = id;\n    /**\n     * Stores the name of the task\n     * @type {String}\n     */\n    this.name = name;\n    /**\n     * Stores the total sessions anticipated for the task\n     * @type {Number}\n     */\n    this.totalSessions = totalSessions;\n    /**\n     * Stores the total amount of sessions spent working on the task\n     * @type {Number}\n     */\n    this.currentSessionNum = 0;\n    /**\n     * Stores if the task has been checked off or not\n     * @type {Boolean}\n     */\n    this.checked = completed;\n\n    /**\n     * The checkbox attribute for the task\n     * @type {HTMLInputElement}\n     */\n    this.checkBox = this.setupCheckBox();\n\n    /**\n     * Stores the view that shows the task name to the user\n     * @type {HTMLTableDataCellElement}\n     */\n    this.taskText = this.setupTaskText();\n    /**\n     * Stores the view that displayes the total pomo sessions spent\n     * and alloted for the tasl\n     * @type {HTMLTableDataCellElement}\n     */\n    this.pomoSessions = this.setupTotalPomoSessions();\n    /**\n     * The delete button for the task\n     * @type {HTMLButtonElement}\n     */\n    this.deleteButton = this.setupDeleteButton();\n  }\n\n  /**\n   * This sets up the checkbox to check off tasks\n   * @returns {HTMLInputElement}\n   */\n  setupCheckBox() {\n    const firstCol = document.createElement('td');\n    const checkBox = document.createElement('input');\n    checkBox.setAttribute('type', 'checkbox');\n    checkBox.setAttribute('id', `checkbox-${this.id}`);\n    checkBox.setAttribute('class', 'custom_checkbox');\n    firstCol.appendChild(checkBox);\n    this.appendChild(firstCol);\n\n    if (this.checked) {\n      checkBox.setAttribute('checked', 'true');\n    }\n\n    checkBox.addEventListener('click', () => {\n      this.checkOffTask();\n    });\n    return checkBox;\n  }\n\n  /**\n   * This sets up the view that will display the taks name\n   * @returns {HTMLTableDataCellElement}\n   */\n  setupTaskText() {\n    const text = document.createElement('td');\n    text.setAttribute('id', `text-${this.id}`);\n    this.appendChild(text);\n    this.updateText();\n    return text;\n  }\n\n  /**\n   * This sets up the view that will display the pomo sessions\n   * @return {HTMLTableDataCellElement}\n   */\n  setupTotalPomoSessions() {\n    const pomoSessions = document.createElement('td');\n    pomoSessions.setAttribute('id', `pomoSessions-${this.id}`);\n    this.appendChild(pomoSessions);\n    this.updatePomoSessions();\n    return pomoSessions;\n  }\n\n  /**\n   *\n   * Unable to change tasklist in ToDoList class\n   * Only changes window.Data\n   * This sets up the delete button for a tasl\n   * @return {HTMLTableDataCellElement}\n   */\n  setupDeleteButton() {\n    const lastCol = document.createElement('td');\n    const deleteBtn = document.createElement('button');\n    deleteBtn.setAttribute('class', 'delete-button');\n    deleteBtn.addEventListener('click', () => {\n      this.remove();\n      this.removeFromLocalStorage(this.id);\n    });\n    deleteBtn.textContent = 'x';\n    lastCol.append(deleteBtn);\n    this.append(lastCol);\n    return lastCol;\n  }\n\n  /**\n   * When delete button is clicked, also remove from local data\n   */\n  removeFromLocalStorage(id) {\n    for (let i = 0; i < window.localData.length; i += 1) {\n      if (window.localData[i][TaskStorage.idIndex] === id) {\n        window.localData.splice(i, 1);\n      }\n    }\n    this.checked = true;\n    localStorage.setItem('tasks', JSON.stringify(window.localData));\n  }\n\n  /**\n   * Update method to edit task name\n   */\n  updateText() {\n    this.children[1].textContent = this.name;\n  }\n\n  /**\n   * This updates the pomo sessions when a session is complete\n   */\n  updatePomoSessions() {\n    this.children[2].textContent = `[${this.currentSessionNum}/\\\n      ${this.totalSessions}]`;\n  }\n\n  /**\n   * Increment this task's current session number. Checks off task if all sessions completed.\n   * @throws {RangeError} - Incrementing a completed tasks' session number\n   * (all sessions have been completed or user has checked off task manually)\n   */\n  incrementSession() {\n    if (this.checked) {\n      throw (new RangeError());\n    }\n\n    this.currentSessionNum += 1;\n    this.updatePomoSessions();\n\n    if (this.currentSessionNum === this.totalSessions) {\n      this.checkOffTask();\n    }\n    this.updateLocalStorage();\n  }\n\n  /**\n   * This updates the localStorage whenever session increases or checked off\n   */\n  updateLocalStorage() {\n    for (let i = 0; i < window.localData.length; i += 1) {\n      if (window.localData[i][TaskStorage.idIndex] === this.id) {\n        window.localData[i][TaskStorage.currentSessionIndex] = this.currentSessionNum;\n        window.localData[i][TaskStorage.checkedIndex] = this.checked;\n      }\n    }\n    localStorage.setItem('tasks', JSON.stringify(window.localData));\n  }\n\n  /**\n   * Marks a task as completed\n   */\n  checkOffTask() {\n    this.checked = true;\n    this.setAttribute('class', classNames.completedTaskClassName);\n    this.updateLocalStorage();\n  }\n}\n\nexport { Task };\ncustomElements.define('task-item', Task, { extends: 'tr' });\n",
+    "content": "import { classNames } from './TaskVariables.js';\nimport { TaskStorage } from './TodoListDomVariables.js';\n\n/**\n * Task object, stores its id, task name, total expected Pomo Sessions to complete the Task,\n * the number of the current Pomo Session, and whether the task has been completed or not.\n */\nclass Task extends HTMLTableRowElement {\n  /**\n  * Task construcutor. Initializes the task with appropriate attributes\n  * @param {String} id Id of the task\n  * @param {String} name Name of the task\n  * @param {Number} totalSessions Total sessions the task should take\n  */\n  constructor(id, name, totalSessions, currentSession = 0, completed = false) {\n    super();\n    this.className = classNames.uncheckedTaskClassName;\n    /**\n     * Stores the id of the task\n     * @type {String}\n     */\n    this.id = id;\n    /**\n     * Stores the name of the task\n     * @type {String}\n     */\n    this.name = name;\n    /**\n     * Stores the total sessions anticipated for the task\n     * @type {Number}\n     */\n    this.totalSessions = totalSessions;\n    /**\n     * Stores the total amount of sessions spent working on the task\n     * @type {Number}\n     */\n    this.currentSessionNum = currentSession;\n    /**\n     * Stores if the task has been checked off or not\n     * @type {Boolean}\n     */\n    this.checked = completed;\n\n    /**\n     * The checkbox attribute for the task\n     * @type {HTMLInputElement}\n     */\n    this.checkBox = this.setupCheckBox();\n\n    /**\n     * Stores the view that shows the task name to the user\n     * @type {HTMLTableDataCellElement}\n     */\n    this.taskText = this.setupTaskText();\n    /**\n     * Stores the view that displayes the total pomo sessions spent\n     * and alloted for the tasl\n     * @type {HTMLTableDataCellElement}\n     */\n    this.pomoSessions = this.setupTotalPomoSessions();\n    /**\n     * The delete button for the task\n     * @type {HTMLButtonElement}\n     */\n    this.deleteButton = this.setupDeleteButton();\n\n    /**\n     * Keeps track if the task was deleted or not (used with the Todolist )\n     */\n    this.deleted  = false\n  }\n\n  /**\n   * This sets up the checkbox to check off tasks\n   * @returns {HTMLInputElement}\n   */\n  setupCheckBox() {\n    const firstCol = document.createElement('td');\n    const checkBox = document.createElement('input');\n    checkBox.setAttribute('type', 'checkbox');\n    checkBox.setAttribute('id', `checkbox-${this.id}`);\n    checkBox.setAttribute('class', 'custom_checkbox');\n    firstCol.appendChild(checkBox);\n    this.appendChild(firstCol);\n\n    if (this.checked) {\n      this.setAttribute('class', classNames.completedTaskClassName);\n      checkBox.checked = true;\n      checkBox.disabled = true;\n    }\n\n    checkBox.addEventListener('click', () => {\n      this.checkOffTask();\n    });\n    return checkBox;\n  }\n\n  /**\n   * This sets up the view that will display the task name\n   * @returns {HTMLTableDataCellElement}\n   */\n  setupTaskText() {\n    const text = document.createElement('td');\n    text.setAttribute('id', `text-${this.id}`);\n    this.appendChild(text);\n    this.updateText();\n    return text;\n  }\n\n  /**\n   * This sets up the view that will display the pomo sessions\n   * @return {HTMLTableDataCellElement}\n   */\n  setupTotalPomoSessions() {\n    const pomoSessions = document.createElement('td');\n    pomoSessions.setAttribute('id', `pomoSessions-${this.id}`);\n    this.appendChild(pomoSessions);\n    this.updatePomoSessions();\n    return pomoSessions;\n  }\n\n  /**\n   *\n   * This sets up the delete button for a task\n   * Delete only works visually, doesn't remove it from the TodoList \n   * Data Structure\n   * @return {HTMLButtonElement}\n   */\n  setupDeleteButton() {\n    const lastCol = document.createElement('td');\n    const deleteBtn = document.createElement('button');\n    deleteBtn.setAttribute('class', 'delete-button');\n\n    deleteBtn.addEventListener('click', () => {\n      this.deleted = true;\n      this.remove();\n      this.removeFromLocalStorage();\n    });\n\n    deleteBtn.textContent = 'x';\n    lastCol.append(deleteBtn);\n    this.append(lastCol);\n    return deleteBtn;\n  }\n\n  /**\n   * Removes a task from local storage given the id\n   */\n  removeFromLocalStorage() {\n    for (let i = 0; i < window.localData.length; i += 1) {\n      if (window.localData[i][TaskStorage.idIndex] === this.id) {\n        window.localData.splice(i, 1);\n      }\n    }\n    this.deleted = true;\n    localStorage.setItem('tasks', JSON.stringify(window.localData));\n  }\n\n  /**\n   * Update method to edit task name\n   */\n  updateText() {\n    this.children[1].textContent = this.name;\n  }\n\n  /**\n   * This updates the pomo sessions when a session is complete\n   */\n  updatePomoSessions() {\n    this.children[2].textContent = `[${this.currentSessionNum}/\\\n      ${this.totalSessions}]`;\n  }\n\n  /**\n   * Increment this task's current session number. Checks off task if all sessions completed.\n   * @throws {RangeError} - Incrementing a completed tasks' session number\n   * (all sessions have been completed or user has checked off task manually)\n   */\n  incrementSession() {\n    if (this.checked) {\n      throw (new RangeError('Increment checked Task'));\n    }\n\n    this.currentSessionNum += 1;\n    this.updatePomoSessions();\n\n    this.updateLocalStorage();\n  }\n\n  /**\n   * This updates the localStorage whenever session increases or checked off\n   */\n  updateLocalStorage() {\n    for (let i = 0; i < window.localData.length; i += 1) {\n      if (window.localData[i][TaskStorage.idIndex] === this.id) {\n        window.localData[i][TaskStorage.currentSessionIndex] = this.currentSessionNum;\n        window.localData[i][TaskStorage.checkedIndex] = this.checked;\n      }\n    }\n    localStorage.setItem('tasks', JSON.stringify(window.localData));\n  }\n\n  /**\n   * Marks a task as completed\n   */\n  checkOffTask() {\n    this.checked = true;\n    this.setAttribute('class', classNames.completedTaskClassName);\n    this.checkBox.disabled = true\n    this.updateLocalStorage();\n  }\n}\n\nexport { Task };\ncustomElements.define('task-item', Task, { extends: 'tr' });\n",
     "static": true,
     "longname": "/home/anshul/anshul/Development/cse110-w21-group28/js/ToDoList/Task.js",
     "access": "public",
@@ -1381,32 +1381,30 @@
   {
     "__docId__": 92,
     "kind": "member",
+    "name": "className",
+    "memberof": "js/ToDoList/Task.js~Task",
+    "static": false,
+    "longname": "js/ToDoList/Task.js~Task#className",
+    "access": "public",
+    "description": null,
+    "lineNumber": 17,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 93,
+    "kind": "member",
     "name": "id",
     "memberof": "js/ToDoList/Task.js~Task",
     "static": false,
     "longname": "js/ToDoList/Task.js~Task#id",
     "access": "public",
     "description": "Stores the id of the task",
-    "lineNumber": 21,
-    "type": {
-      "nullable": null,
-      "types": [
-        "String"
-      ],
-      "spread": false,
-      "description": null
-    }
-  },
-  {
-    "__docId__": 93,
-    "kind": "member",
-    "name": "name",
-    "memberof": "js/ToDoList/Task.js~Task",
-    "static": false,
-    "longname": "js/ToDoList/Task.js~Task#name",
-    "access": "public",
-    "description": "Stores the name of the task",
-    "lineNumber": 26,
+    "lineNumber": 22,
     "type": {
       "nullable": null,
       "types": [
@@ -1419,17 +1417,17 @@
   {
     "__docId__": 94,
     "kind": "member",
-    "name": "totalSessions",
+    "name": "name",
     "memberof": "js/ToDoList/Task.js~Task",
     "static": false,
-    "longname": "js/ToDoList/Task.js~Task#totalSessions",
+    "longname": "js/ToDoList/Task.js~Task#name",
     "access": "public",
-    "description": "Stores the total sessions anticipated for the task",
-    "lineNumber": 31,
+    "description": "Stores the name of the task",
+    "lineNumber": 27,
     "type": {
       "nullable": null,
       "types": [
-        "Number"
+        "String"
       ],
       "spread": false,
       "description": null
@@ -1438,13 +1436,13 @@
   {
     "__docId__": 95,
     "kind": "member",
-    "name": "currentSessionNum",
+    "name": "totalSessions",
     "memberof": "js/ToDoList/Task.js~Task",
     "static": false,
-    "longname": "js/ToDoList/Task.js~Task#currentSessionNum",
+    "longname": "js/ToDoList/Task.js~Task#totalSessions",
     "access": "public",
-    "description": "Stores the total amount of sessions spent working on the task",
-    "lineNumber": 36,
+    "description": "Stores the total sessions anticipated for the task",
+    "lineNumber": 32,
     "type": {
       "nullable": null,
       "types": [
@@ -1457,13 +1455,32 @@
   {
     "__docId__": 96,
     "kind": "member",
+    "name": "currentSessionNum",
+    "memberof": "js/ToDoList/Task.js~Task",
+    "static": false,
+    "longname": "js/ToDoList/Task.js~Task#currentSessionNum",
+    "access": "public",
+    "description": "Stores the total amount of sessions spent working on the task",
+    "lineNumber": 37,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Number"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 97,
+    "kind": "member",
     "name": "checked",
     "memberof": "js/ToDoList/Task.js~Task",
     "static": false,
     "longname": "js/ToDoList/Task.js~Task#checked",
     "access": "public",
     "description": "Stores if the task has been checked off or not",
-    "lineNumber": 41,
+    "lineNumber": 42,
     "type": {
       "nullable": null,
       "types": [
@@ -1474,7 +1491,7 @@
     }
   },
   {
-    "__docId__": 97,
+    "__docId__": 98,
     "kind": "member",
     "name": "checkBox",
     "memberof": "js/ToDoList/Task.js~Task",
@@ -1482,7 +1499,7 @@
     "longname": "js/ToDoList/Task.js~Task#checkBox",
     "access": "public",
     "description": "The checkbox attribute for the task",
-    "lineNumber": 47,
+    "lineNumber": 48,
     "type": {
       "nullable": null,
       "types": [
@@ -1493,7 +1510,7 @@
     }
   },
   {
-    "__docId__": 98,
+    "__docId__": 99,
     "kind": "member",
     "name": "taskText",
     "memberof": "js/ToDoList/Task.js~Task",
@@ -1501,26 +1518,7 @@
     "longname": "js/ToDoList/Task.js~Task#taskText",
     "access": "public",
     "description": "Stores the view that shows the task name to the user",
-    "lineNumber": 53,
-    "type": {
-      "nullable": null,
-      "types": [
-        "HTMLTableDataCellElement"
-      ],
-      "spread": false,
-      "description": null
-    }
-  },
-  {
-    "__docId__": 99,
-    "kind": "member",
-    "name": "pomoSessions",
-    "memberof": "js/ToDoList/Task.js~Task",
-    "static": false,
-    "longname": "js/ToDoList/Task.js~Task#pomoSessions",
-    "access": "public",
-    "description": "Stores the view that displayes the total pomo sessions spent\nand alloted for the tasl",
-    "lineNumber": 59,
+    "lineNumber": 54,
     "type": {
       "nullable": null,
       "types": [
@@ -1533,13 +1531,32 @@
   {
     "__docId__": 100,
     "kind": "member",
+    "name": "pomoSessions",
+    "memberof": "js/ToDoList/Task.js~Task",
+    "static": false,
+    "longname": "js/ToDoList/Task.js~Task#pomoSessions",
+    "access": "public",
+    "description": "Stores the view that displayes the total pomo sessions spent\nand alloted for the tasl",
+    "lineNumber": 60,
+    "type": {
+      "nullable": null,
+      "types": [
+        "HTMLTableDataCellElement"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 101,
+    "kind": "member",
     "name": "deleteButton",
     "memberof": "js/ToDoList/Task.js~Task",
     "static": false,
     "longname": "js/ToDoList/Task.js~Task#deleteButton",
     "access": "public",
     "description": "The delete button for the task",
-    "lineNumber": 64,
+    "lineNumber": 65,
     "type": {
       "nullable": null,
       "types": [
@@ -1550,7 +1567,23 @@
     }
   },
   {
-    "__docId__": 101,
+    "__docId__": 102,
+    "kind": "member",
+    "name": "deleted",
+    "memberof": "js/ToDoList/Task.js~Task",
+    "static": false,
+    "longname": "js/ToDoList/Task.js~Task#deleted",
+    "access": "public",
+    "description": "Keeps track if the task was deleted or not (used with the Todolist )",
+    "lineNumber": 70,
+    "type": {
+      "types": [
+        "boolean"
+      ]
+    }
+  },
+  {
+    "__docId__": 103,
     "kind": "method",
     "name": "setupCheckBox",
     "memberof": "js/ToDoList/Task.js~Task",
@@ -1560,7 +1593,7 @@
     "longname": "js/ToDoList/Task.js~Task#setupCheckBox",
     "access": "public",
     "description": "This sets up the checkbox to check off tasks",
-    "lineNumber": 71,
+    "lineNumber": 77,
     "unknown": [
       {
         "tagName": "@returns",
@@ -1578,7 +1611,7 @@
     "params": []
   },
   {
-    "__docId__": 102,
+    "__docId__": 104,
     "kind": "method",
     "name": "setupTaskText",
     "memberof": "js/ToDoList/Task.js~Task",
@@ -1587,8 +1620,8 @@
     "static": false,
     "longname": "js/ToDoList/Task.js~Task#setupTaskText",
     "access": "public",
-    "description": "This sets up the view that will display the taks name",
-    "lineNumber": 94,
+    "description": "This sets up the view that will display the task name",
+    "lineNumber": 102,
     "unknown": [
       {
         "tagName": "@returns",
@@ -1606,7 +1639,7 @@
     "params": []
   },
   {
-    "__docId__": 103,
+    "__docId__": 105,
     "kind": "method",
     "name": "setupTotalPomoSessions",
     "memberof": "js/ToDoList/Task.js~Task",
@@ -1616,7 +1649,7 @@
     "longname": "js/ToDoList/Task.js~Task#setupTotalPomoSessions",
     "access": "public",
     "description": "This sets up the view that will display the pomo sessions",
-    "lineNumber": 106,
+    "lineNumber": 114,
     "return": {
       "nullable": null,
       "types": [
@@ -1628,7 +1661,7 @@
     "params": []
   },
   {
-    "__docId__": 104,
+    "__docId__": 106,
     "kind": "method",
     "name": "setupDeleteButton",
     "memberof": "js/ToDoList/Task.js~Task",
@@ -1637,12 +1670,12 @@
     "static": false,
     "longname": "js/ToDoList/Task.js~Task#setupDeleteButton",
     "access": "public",
-    "description": "\nUnable to change tasklist in ToDoList class\nOnly changes window.Data\nThis sets up the delete button for a tasl",
-    "lineNumber": 121,
+    "description": "\nThis sets up the delete button for a task\nDelete only works visually, doesn't remove it from the TodoList \nData Structure",
+    "lineNumber": 129,
     "return": {
       "nullable": null,
       "types": [
-        "HTMLTableDataCellElement"
+        "HTMLButtonElement"
       ],
       "spread": false,
       "description": ""
@@ -1650,7 +1683,7 @@
     "params": []
   },
   {
-    "__docId__": 105,
+    "__docId__": 108,
     "kind": "method",
     "name": "removeFromLocalStorage",
     "memberof": "js/ToDoList/Task.js~Task",
@@ -1659,20 +1692,13 @@
     "static": false,
     "longname": "js/ToDoList/Task.js~Task#removeFromLocalStorage",
     "access": "public",
-    "description": "When delete button is clicked, also remove from local data",
-    "lineNumber": 138,
-    "params": [
-      {
-        "name": "id",
-        "types": [
-          "*"
-        ]
-      }
-    ],
+    "description": "Removes a task from local storage given the id",
+    "lineNumber": 149,
+    "params": [],
     "return": null
   },
   {
-    "__docId__": 107,
+    "__docId__": 110,
     "kind": "method",
     "name": "updateText",
     "memberof": "js/ToDoList/Task.js~Task",
@@ -1682,12 +1708,12 @@
     "longname": "js/ToDoList/Task.js~Task#updateText",
     "access": "public",
     "description": "Update method to edit task name",
-    "lineNumber": 151,
+    "lineNumber": 162,
     "params": [],
     "return": null
   },
   {
-    "__docId__": 108,
+    "__docId__": 111,
     "kind": "method",
     "name": "updatePomoSessions",
     "memberof": "js/ToDoList/Task.js~Task",
@@ -1697,12 +1723,12 @@
     "longname": "js/ToDoList/Task.js~Task#updatePomoSessions",
     "access": "public",
     "description": "This updates the pomo sessions when a session is complete",
-    "lineNumber": 158,
+    "lineNumber": 169,
     "params": [],
     "return": null
   },
   {
-    "__docId__": 109,
+    "__docId__": 112,
     "kind": "method",
     "name": "incrementSession",
     "memberof": "js/ToDoList/Task.js~Task",
@@ -1712,7 +1738,7 @@
     "longname": "js/ToDoList/Task.js~Task#incrementSession",
     "access": "public",
     "description": "Increment this task's current session number. Checks off task if all sessions completed.",
-    "lineNumber": 168,
+    "lineNumber": 179,
     "throws": [
       {
         "types": [
@@ -1725,7 +1751,7 @@
     "return": null
   },
   {
-    "__docId__": 111,
+    "__docId__": 114,
     "kind": "method",
     "name": "updateLocalStorage",
     "memberof": "js/ToDoList/Task.js~Task",
@@ -1735,12 +1761,12 @@
     "longname": "js/ToDoList/Task.js~Task#updateLocalStorage",
     "access": "public",
     "description": "This updates the localStorage whenever session increases or checked off",
-    "lineNumber": 185,
+    "lineNumber": 193,
     "params": [],
     "return": null
   },
   {
-    "__docId__": 112,
+    "__docId__": 115,
     "kind": "method",
     "name": "checkOffTask",
     "memberof": "js/ToDoList/Task.js~Task",
@@ -1750,12 +1776,12 @@
     "longname": "js/ToDoList/Task.js~Task#checkOffTask",
     "access": "public",
     "description": "Marks a task as completed",
-    "lineNumber": 198,
+    "lineNumber": 206,
     "params": [],
     "return": null
   },
   {
-    "__docId__": 114,
+    "__docId__": 117,
     "kind": "file",
     "name": "js/ToDoList/TaskVariables.js",
     "content": "const classNames = {\n  uncheckedTaskClassName: 'uncheckedTask',\n  completedTaskClassName: 'completedTask',\n};\n\nexport { classNames };\n",
@@ -1766,7 +1792,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 115,
+    "__docId__": 118,
     "kind": "variable",
     "name": "classNames",
     "memberof": "js/ToDoList/TaskVariables.js",
@@ -1786,10 +1812,10 @@
     }
   },
   {
-    "__docId__": 116,
+    "__docId__": 119,
     "kind": "file",
     "name": "js/ToDoList/ToDoList.js",
-    "content": "import { Task } from './Task.js';\n\n/**\n * Queue based TodoList data structure which holds Task objects.\n * API-like methods to perform operations on the underlying queue\n */\nclass ToDoList {\n  /**\n   * Initializes the todolist array and the counter for id's\n   */\n  constructor() {\n    /**\n     * Array that stores each task\n     * @type {Task[]}\n     */\n    this.taskList = [];\n    /**\n     * This is the total task count that is also a way\n     * to give each task a unique id\n     * @type {number}\n     */\n    this.idCounter = 0;\n  }\n\n  /**\n   * Verifies that incoming parameters are non-empty and defined, then creates Task\n   * @param {String} name Task subject\n   * @param {Number} totalSession Projected number of Pomo Sessions\n   *\n   * @returns {Task} Task object to be placed into DOM\n   *\n   * @throws {Undefined Name} Task name cannot be undefined\n   * @throws {Empty Name} Task name is an empty string\n   * @throws {Undefiend Length Task} Expected number of pomo sessions is undefined\n   * @throws {0 Length Task} Expected number of pomo sessions is 0\n   */\n  addTask(name, totalSession) {\n    if (name === undefined) {\n      throw new Error('Undefined Name');\n    } else if (name === '') {\n      throw new Error('Empty Name');\n    } else if (totalSession === undefined) {\n      throw new Error('Undefined Length Task');\n    } else if (totalSession === 0) {\n      throw new Error('0 Length Task');\n    } else if (Number.isNaN(totalSession)) {\n      throw new Error('Number Not Passed In');\n    }\n\n    const task = new Task(this.idCounter, name, totalSession);\n    this.idCounter += 1;\n    this.taskList.push(task);\n    const arr = [task.id, task.name, task.totalSessions, task.currentSessionNum, task.checked];\n    window.localData.push(arr);\n    this.updateLocalStorage();\n    return task;\n  }\n\n  /**\n   * @description - Synchronize window.localData and localStorage\n   */\n  // eslint-disable-next-line class-methods-use-this\n  updateLocalStorage() {\n    localStorage.setItem('tasks', JSON.stringify(window.localData));\n  }\n\n  /**\n   * Gets the first unchecked task\n   *\n   * @returns {Task} First unchecked task in the list\n   *\n   * @throws {'Empty ToDo List'} No tasks can be checked off if no tasks exist\n   * @throws {'No Current Task'} All tasks in the list have been checked off\n   */\n  getCurrentTask() {\n    if (this.taskList.length === 0) {\n      throw new Error('Empty ToDo List');\n    }\n    for (let i = 0; i < this.taskList.length; i += 1) {\n      if (!this.taskList[i].checked) {\n        return this.taskList[i];\n      }\n    }\n    throw new Error('No Current Task');\n  }\n\n  /**\n   * Called by the Timer function when a session is done\n   * Increments the current task\n   */\n  onSessionComplete() {\n    const currTask = this.getCurrentTask();\n    currTask.incrementSession();\n  }\n}\n\nexport { ToDoList };\n",
+    "content": "import { Task } from './Task.js';\n\n/**\n * Queue based TodoList data structure which holds Task objects.\n * API-like methods to perform operations on the underlying queue\n */\nclass ToDoList {\n  /**\n   * Initializes the todolist array and the counter for id's\n   */\n  constructor() {\n    /**\n     * Array that stores each task\n     * @type {Task[]}\n     */\n    this.taskList = [];\n    /**\n     * This is the total task count that is also a way\n     * to give each task a unique id\n     * @type {number}\n     */\n    this.idCounter = 0;\n  }\n\n  /**\n   * Verifies that incoming parameters are non-empty and defined, then creates Task\n   * @param {String} name Task subject\n   * @param {Number} totalSession Projected number of Pomo Sessions\n   *\n   * @returns {Task} Task object to be placed into DOM\n   *\n   * @throws {Undefined Name} Task name cannot be undefined\n   * @throws {Empty Name} Task name is an empty string\n   * @throws {Undefiend Length Task} Expected number of pomo sessions is undefined\n   * @throws {0 Length Task} Expected number of pomo sessions is 0\n   */\n  addTask(name, totalSession) {\n    if (name === undefined) {\n      throw new Error('Undefined Name');\n    } else if (name === '') {\n      throw new Error('Empty Name');\n    } else if (totalSession === undefined) {\n      throw new Error('Undefined Length Task');\n    } else if (totalSession === 0) {\n      throw new Error('0 Length Task');\n    } else if (Number.isNaN(totalSession)) {\n      throw new Error('Number Not Passed In');\n    }\n\n    const task = new Task(this.idCounter, name, totalSession);\n    this.idCounter += 1;\n    this.taskList.push(task);\n    this.addTaskToLocalStorage(task);\n    return task;\n  }\n\n  /**\n   * Adds a task to local storage\n   *  @param {Task} task\n   */\n  // eslint-disable-next-line class-methods-use-this\n  addTaskToLocalStorage(task) {\n    const arr = [task.id, task.name, task.totalSessions, task.currentSessionNum, task.checked];\n    window.localData.push(arr);\n    localStorage.setItem('tasks', JSON.stringify(window.localData));\n  }\n\n  /**\n   * Gets the first unchecked task in the todolist.\n   * Returns null if no such task exists\n   * @returns {Task} First unchecked task in list\n   *\n   */\n  getCurrentTask() {\n    for (let i = 0; i < this.taskList.length; i += 1) {\n      if (!this.taskList[i].checked && !this.taskList[i].deleted) {\n        return this.taskList[i];\n      }\n    }\n    return null;\n  }\n\n}\n\nexport { ToDoList };\n",
     "static": true,
     "longname": "/home/anshul/anshul/Development/cse110-w21-group28/js/ToDoList/ToDoList.js",
     "access": "public",
@@ -1797,7 +1823,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 117,
+    "__docId__": 120,
     "kind": "class",
     "name": "ToDoList",
     "memberof": "js/ToDoList/ToDoList.js",
@@ -1812,7 +1838,7 @@
     "interface": false
   },
   {
-    "__docId__": 118,
+    "__docId__": 121,
     "kind": "constructor",
     "name": "constructor",
     "memberof": "js/ToDoList/ToDoList.js~ToDoList",
@@ -1825,7 +1851,7 @@
     "lineNumber": 11
   },
   {
-    "__docId__": 119,
+    "__docId__": 122,
     "kind": "member",
     "name": "taskList",
     "memberof": "js/ToDoList/ToDoList.js~ToDoList",
@@ -1844,7 +1870,7 @@
     }
   },
   {
-    "__docId__": 120,
+    "__docId__": 123,
     "kind": "member",
     "name": "idCounter",
     "memberof": "js/ToDoList/ToDoList.js~ToDoList",
@@ -1863,7 +1889,7 @@
     }
   },
   {
-    "__docId__": 121,
+    "__docId__": 124,
     "kind": "method",
     "name": "addTask",
     "memberof": "js/ToDoList/ToDoList.js~ToDoList",
@@ -1938,28 +1964,33 @@
     ]
   },
   {
-    "__docId__": 123,
+    "__docId__": 126,
     "kind": "method",
-    "name": "updateLocalStorage",
+    "name": "addTaskToLocalStorage",
     "memberof": "js/ToDoList/ToDoList.js~ToDoList",
     "generator": false,
     "async": false,
     "static": false,
-    "longname": "js/ToDoList/ToDoList.js~ToDoList#updateLocalStorage",
+    "longname": "js/ToDoList/ToDoList.js~ToDoList#addTaskToLocalStorage",
     "access": "public",
-    "description": "",
-    "lineNumber": 63,
-    "unknown": [
+    "description": "Adds a task to local storage",
+    "lineNumber": 62,
+    "params": [
       {
-        "tagName": "@description",
-        "tagValue": "- Synchronize window.localData and localStorage"
+        "nullable": null,
+        "types": [
+          "Task"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "task",
+        "description": ""
       }
     ],
-    "params": [],
     "return": null
   },
   {
-    "__docId__": 124,
+    "__docId__": 127,
     "kind": "method",
     "name": "getCurrentTask",
     "memberof": "js/ToDoList/ToDoList.js~ToDoList",
@@ -1968,12 +1999,12 @@
     "static": false,
     "longname": "js/ToDoList/ToDoList.js~ToDoList#getCurrentTask",
     "access": "public",
-    "description": "Gets the first unchecked task",
-    "lineNumber": 75,
+    "description": "Gets the first unchecked task in the todolist.\nReturns null if no such task exists",
+    "lineNumber": 74,
     "unknown": [
       {
         "tagName": "@returns",
-        "tagValue": "{Task} First unchecked task in the list"
+        "tagValue": "{Task} First unchecked task in list"
       }
     ],
     "return": {
@@ -1982,44 +2013,15 @@
         "Task"
       ],
       "spread": false,
-      "description": "First unchecked task in the list"
+      "description": "First unchecked task in list"
     },
-    "throws": [
-      {
-        "types": [
-          "'Empty ToDo List'"
-        ],
-        "description": "No tasks can be checked off if no tasks exist"
-      },
-      {
-        "types": [
-          "'No Current Task'"
-        ],
-        "description": "All tasks in the list have been checked off"
-      }
-    ],
     "params": []
   },
   {
-    "__docId__": 125,
-    "kind": "method",
-    "name": "onSessionComplete",
-    "memberof": "js/ToDoList/ToDoList.js~ToDoList",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "js/ToDoList/ToDoList.js~ToDoList#onSessionComplete",
-    "access": "public",
-    "description": "Called by the Timer function when a session is done\nIncrements the current task",
-    "lineNumber": 91,
-    "params": [],
-    "return": null
-  },
-  {
-    "__docId__": 126,
+    "__docId__": 128,
     "kind": "file",
     "name": "js/ToDoList/TodoListDom.js",
-    "content": "import { ToDoList } from './ToDoList.js';\nimport { HTMLAttributes, TaskStorage } from './TodoListDomVariables.js';\nimport { classNames } from './TaskVariables.js';\n\nimport { Task } from './Task.js';\n\n/**\n * Class responsible for providing changes to the DOM for the TodoList\n * Encapsulates the TodoList class\n * Done so their is a clear abstraction from DOM Manipulation and Data Manipulation\n */\nclass TodoListDom {\n  /**\n   * Initializes the TodoListDom object with its correct member variables\n   * @param {HTMLTableElement} HTMLTable\n   * @param {HTMLFormElement} HTMLForm\n   * @param {HTMLButtonElement} submitBtn\n   * @param {HTMLButtonElement} deleteAllBtn\n   */\n  constructor(HTMLTable, HTMLForm, submitBtn, deleteAllBtn) {\n    /**\n     * Holds the TodoList so the Dom Manager can acess it\n     * @type {ToDoList}\n     */\n    this.todoList = new ToDoList();\n    /**\n     * The form where users input their task\n     * @type {HTMLFormElement}\n     */\n    this.form = HTMLForm;\n    /**\n     * The button where users click to submit their todo's\n     * @type {HTMLButtonElement}\n     */\n    this.submitBtn = submitBtn;\n    /**\n     * The button where users click to delete their todo's\n     * @type {HTMLButtonElement}\n     */\n    this.deleteAllBtn = deleteAllBtn;\n    /**\n     * The table where the todolist is displayed\n     * @type {HTMLTableElement}\n     */\n    this.table = HTMLTable;\n\n    this.setupEventListeners();\n    this.renderLocalStorage();\n  }\n\n  /**\n * Fetch local storage, and store them into window.localData\n * Iterate each local tasks and render them\n */\n  renderLocalStorage() {\n    window.localData = [];\n    if (localStorage.getItem('tasks') !== null) {\n      window.localData = JSON.parse(localStorage.getItem('tasks'));\n      for (let i = 0; i < window.localData.length; i += 1) {\n        window.localData[i][0] = String(i);\n      }\n      localStorage.setItem('tasks', JSON.stringify(window.localData));\n    }\n\n    for (let i = 0; i < window.localData.length; i += 1) {\n      const name = window.localData[i][TaskStorage.nameIndex];\n      const totalSession = window.localData[i][TaskStorage.totalSessionIndex];\n      const currentSession = window.localData[i][TaskStorage.currentSessionIndex];\n      const completed = window.localData[i][TaskStorage.checkedIndex];\n      const task = new Task(i, name, totalSession, currentSession, completed);\n      this.todoList.idCounter += 1;\n      this.todoList.taskList.push(task);\n      task.updatePomoSessions();\n      this.displayTask(task);\n    }\n  }\n\n  /**\n   * Sets up the form dissapearing and submit event listeners\n   */\n  setupEventListeners() {\n    this.form.addEventListener('submit', (e) => {\n      e.preventDefault();\n      const data = new FormData(this.form);\n      const name = data.get(HTMLAttributes.taskNameId);\n      const sessions = parseInt(data.get(HTMLAttributes.taskPomoSessions), 10);\n      try {\n        const task = this.todoList.addTask(name, sessions);\n        this.displayTask(task);\n        this.form.reset();\n      } catch (error) {\n        // eslint-disable-next-line no-alert\n        alert('Invalid input. Please try again');\n      }\n    });\n\n    this.deleteAllBtn.addEventListener('click', () => {\n      const list = this.todoList.taskList;\n      for (let i = 0; i < list.length; i += 1) {\n        list[i].children[3].children[0].click();\n      }\n    });\n  }\n\n  /**\n   * Adds a task to the table of task\n   * @param {HTMLTableRowElement} newTask\n   */\n  displayTask(newTask) {\n    this.table.appendChild(newTask);\n  }\n\n  /**\n   * This function runs when the timer is done with its working session\n   */\n  onSessionComplete() {\n    this.todoList.onSessionComplete();\n  }\n}\n\nexport { TodoListDom };\n",
+    "content": "import { ToDoList } from './ToDoList.js';\nimport { HTMLAttributes, TaskStorage } from './TodoListDomVariables.js';\n\nimport { Task } from './Task.js';\n\n/**\n * Class responsible for providing changes to the DOM for the TodoList\n * Encapsulates the TodoList class\n * Done so their is a clear abstraction from DOM Manipulation and Data Manipulation\n */\nclass TodoListDom {\n  /**\n   * Initializes the TodoListDom object with its correct member variables\n   * @param {HTMLTableElement} HTMLTable\n   * @param {HTMLFormElement} HTMLForm\n   * @param {HTMLButtonElement} submitBtn\n   * @param {HTMLButtonElement} deleteAllBtn\n   */\n  constructor(HTMLTable, HTMLForm, submitBtn, deleteAllBtn) {\n    /**\n     * Holds the TodoList so the Dom Manager can acess it\n     * @type {ToDoList}\n     */\n    this.todoList = new ToDoList();\n    /**\n     * The form where users input their task\n     * @type {HTMLFormElement}\n     */\n    this.form = HTMLForm;\n    /**\n     * The button where users click to submit their todo's\n     * @type {HTMLButtonElement}\n     */\n    this.submitBtn = submitBtn;\n    /**\n     * The button where users click to delete their todo's\n     * @type {HTMLButtonElement}\n     */\n    this.deleteAllBtn = deleteAllBtn;\n    /**\n     * The table where the todolist is displayed\n     * @type {HTMLTableElement}\n     */\n    this.table = HTMLTable;\n\n    this.setupEventListeners();\n    this.renderLocalStorage();\n  }\n\n  /**\n * Fetch local storage, and store them into window.localData\n * Iterate each local tasks and render them\n */\n  renderLocalStorage() {\n    window.localData = [];\n    if (localStorage.getItem('tasks') !== null) {\n      window.localData = JSON.parse(localStorage.getItem('tasks'));\n      for (let i = 0; i < window.localData.length; i += 1) {\n        window.localData[i][0] = String(i);\n      }\n      localStorage.setItem('tasks', JSON.stringify(window.localData));\n    }\n\n    for (let i = 0; i < window.localData.length; i += 1) {\n      const name = window.localData[i][TaskStorage.nameIndex];\n      const totalSession = window.localData[i][TaskStorage.totalSessionIndex];\n      const currentSession = window.localData[i][TaskStorage.currentSessionIndex];\n      const completed = window.localData[i][TaskStorage.checkedIndex];\n      const task = new Task(i, name, totalSession, currentSession, completed);\n      this.todoList.idCounter += 1;\n      this.todoList.taskList.push(task);\n      task.updatePomoSessions();\n      this.displayTask(task);\n    }\n  }\n\n  /**\n   * Sets up the form dissapearing and submit event listeners\n   */\n  setupEventListeners() {\n    this.form.addEventListener('submit', (e) => {\n      e.preventDefault();\n      const data = new FormData(this.form);\n      const name = data.get(HTMLAttributes.taskNameId);\n      const sessions = parseInt(data.get(HTMLAttributes.taskPomoSessions), 10);\n      try {\n        const task = this.todoList.addTask(name, sessions);\n        this.displayTask(task);\n        this.form.reset();\n      } catch (error) {\n        // eslint-disable-next-line no-alert\n        alert('Invalid input. Please try again');\n      }\n    });\n\n    this.deleteAllBtn.addEventListener('click', () => {\n      const list = this.todoList.taskList;\n      for (let i = 0; i < list.length; i += 1) {\n        list[i].children[3].children[0].click();\n      }\n    });\n  }\n\n  /**\n   * Adds a task to the table of task\n   * @param {HTMLTableRowElement} newTask\n   */\n  displayTask(newTask) {\n    this.table.appendChild(newTask);\n  }\n\n  /**\n   * This function runs when the timer is done with its working session\n   */\n  onSessionComplete() {\n    const currTask = this.todoList.getCurrentTask();\n    if (currTask != null) {\n      currTask.incrementSession();\n    }\n  }\n}\n\nexport { TodoListDom };\n",
     "static": true,
     "longname": "/home/anshul/anshul/Development/cse110-w21-group28/js/ToDoList/TodoListDom.js",
     "access": "public",
@@ -2027,7 +2029,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 127,
+    "__docId__": 129,
     "kind": "class",
     "name": "TodoListDom",
     "memberof": "js/ToDoList/TodoListDom.js",
@@ -2038,11 +2040,11 @@
     "importPath": "cse110-w21-group28/js/ToDoList/TodoListDom.js",
     "importStyle": "{TodoListDom}",
     "description": "Class responsible for providing changes to the DOM for the TodoList\nEncapsulates the TodoList class\nDone so their is a clear abstraction from DOM Manipulation and Data Manipulation",
-    "lineNumber": 12,
+    "lineNumber": 11,
     "interface": false
   },
   {
-    "__docId__": 128,
+    "__docId__": 130,
     "kind": "constructor",
     "name": "constructor",
     "memberof": "js/ToDoList/TodoListDom.js~TodoListDom",
@@ -2052,7 +2054,7 @@
     "longname": "js/ToDoList/TodoListDom.js~TodoListDom#constructor",
     "access": "public",
     "description": "Initializes the TodoListDom object with its correct member variables",
-    "lineNumber": 20,
+    "lineNumber": 19,
     "params": [
       {
         "nullable": null,
@@ -2097,7 +2099,7 @@
     ]
   },
   {
-    "__docId__": 129,
+    "__docId__": 131,
     "kind": "member",
     "name": "todoList",
     "memberof": "js/ToDoList/TodoListDom.js~TodoListDom",
@@ -2105,7 +2107,7 @@
     "longname": "js/ToDoList/TodoListDom.js~TodoListDom#todoList",
     "access": "public",
     "description": "Holds the TodoList so the Dom Manager can acess it",
-    "lineNumber": 25,
+    "lineNumber": 24,
     "type": {
       "nullable": null,
       "types": [
@@ -2116,7 +2118,7 @@
     }
   },
   {
-    "__docId__": 130,
+    "__docId__": 132,
     "kind": "member",
     "name": "form",
     "memberof": "js/ToDoList/TodoListDom.js~TodoListDom",
@@ -2124,7 +2126,7 @@
     "longname": "js/ToDoList/TodoListDom.js~TodoListDom#form",
     "access": "public",
     "description": "The form where users input their task",
-    "lineNumber": 30,
+    "lineNumber": 29,
     "type": {
       "nullable": null,
       "types": [
@@ -2135,7 +2137,7 @@
     }
   },
   {
-    "__docId__": 131,
+    "__docId__": 133,
     "kind": "member",
     "name": "submitBtn",
     "memberof": "js/ToDoList/TodoListDom.js~TodoListDom",
@@ -2143,7 +2145,7 @@
     "longname": "js/ToDoList/TodoListDom.js~TodoListDom#submitBtn",
     "access": "public",
     "description": "The button where users click to submit their todo's",
-    "lineNumber": 35,
+    "lineNumber": 34,
     "type": {
       "nullable": null,
       "types": [
@@ -2154,7 +2156,7 @@
     }
   },
   {
-    "__docId__": 132,
+    "__docId__": 134,
     "kind": "member",
     "name": "deleteAllBtn",
     "memberof": "js/ToDoList/TodoListDom.js~TodoListDom",
@@ -2162,7 +2164,7 @@
     "longname": "js/ToDoList/TodoListDom.js~TodoListDom#deleteAllBtn",
     "access": "public",
     "description": "The button where users click to delete their todo's",
-    "lineNumber": 40,
+    "lineNumber": 39,
     "type": {
       "nullable": null,
       "types": [
@@ -2173,7 +2175,7 @@
     }
   },
   {
-    "__docId__": 133,
+    "__docId__": 135,
     "kind": "member",
     "name": "table",
     "memberof": "js/ToDoList/TodoListDom.js~TodoListDom",
@@ -2181,7 +2183,7 @@
     "longname": "js/ToDoList/TodoListDom.js~TodoListDom#table",
     "access": "public",
     "description": "The table where the todolist is displayed",
-    "lineNumber": 45,
+    "lineNumber": 44,
     "type": {
       "nullable": null,
       "types": [
@@ -2192,7 +2194,7 @@
     }
   },
   {
-    "__docId__": 134,
+    "__docId__": 136,
     "kind": "method",
     "name": "renderLocalStorage",
     "memberof": "js/ToDoList/TodoListDom.js~TodoListDom",
@@ -2202,12 +2204,12 @@
     "longname": "js/ToDoList/TodoListDom.js~TodoListDom#renderLocalStorage",
     "access": "public",
     "description": "Fetch local storage, and store them into window.localData\nIterate each local tasks and render them",
-    "lineNumber": 55,
+    "lineNumber": 54,
     "params": [],
     "return": null
   },
   {
-    "__docId__": 135,
+    "__docId__": 137,
     "kind": "method",
     "name": "setupEventListeners",
     "memberof": "js/ToDoList/TodoListDom.js~TodoListDom",
@@ -2217,12 +2219,12 @@
     "longname": "js/ToDoList/TodoListDom.js~TodoListDom#setupEventListeners",
     "access": "public",
     "description": "Sets up the form dissapearing and submit event listeners",
-    "lineNumber": 81,
+    "lineNumber": 80,
     "params": [],
     "return": null
   },
   {
-    "__docId__": 136,
+    "__docId__": 138,
     "kind": "method",
     "name": "displayTask",
     "memberof": "js/ToDoList/TodoListDom.js~TodoListDom",
@@ -2232,7 +2234,7 @@
     "longname": "js/ToDoList/TodoListDom.js~TodoListDom#displayTask",
     "access": "public",
     "description": "Adds a task to the table of task",
-    "lineNumber": 109,
+    "lineNumber": 108,
     "params": [
       {
         "nullable": null,
@@ -2248,7 +2250,7 @@
     "return": null
   },
   {
-    "__docId__": 137,
+    "__docId__": 139,
     "kind": "method",
     "name": "onSessionComplete",
     "memberof": "js/ToDoList/TodoListDom.js~TodoListDom",
@@ -2258,12 +2260,12 @@
     "longname": "js/ToDoList/TodoListDom.js~TodoListDom#onSessionComplete",
     "access": "public",
     "description": "This function runs when the timer is done with its working session",
-    "lineNumber": 116,
+    "lineNumber": 115,
     "params": [],
     "return": null
   },
   {
-    "__docId__": 138,
+    "__docId__": 140,
     "kind": "file",
     "name": "js/ToDoList/TodoListDomVariables.js",
     "content": "const HTMLAttributes = {\n  buttonDoneTextContent: 'Done',\n  buttonAddTextContent: 'Add Task',\n  taskNameId: 'task-name',\n  taskPomoSessions: 'task-length',\n};\nconst TaskStorage = {\n  idIndex: 0,\n  nameIndex: 1,\n  totalSessionIndex: 2,\n  currentSessionIndex: 3,\n  checkedIndex: 4,\n};\n\nexport { HTMLAttributes, TaskStorage };\n",
@@ -2274,7 +2276,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 139,
+    "__docId__": 141,
     "kind": "variable",
     "name": "HTMLAttributes",
     "memberof": "js/ToDoList/TodoListDomVariables.js",
@@ -2294,7 +2296,7 @@
     }
   },
   {
-    "__docId__": 140,
+    "__docId__": 142,
     "kind": "variable",
     "name": "TaskStorage",
     "memberof": "js/ToDoList/TodoListDomVariables.js",
@@ -2330,10 +2332,10 @@
     "access": "public"
   },
   {
-    "__docId__": 141,
+    "__docId__": 143,
     "kind": "testFile",
     "name": "tests/task.test.js",
-    "content": "/* eslint-disable eqeqeq */\nimport { Task } from '../js/ToDoList/Task.js';\nimport { classNames } from '../js/ToDoList/TaskVariables.js';\n\nbeforeEach(() => {\n  window.localData = [];\n});\n\n/** @Test {Task} */\n\ntest('Test that task with no values is empty', () => {\n  const currTask = new Task();\n  expect(currTask.name).toBe(undefined);\n  // console.log(currTask.name);\n  expect(currTask.checked).toBe(false);\n  expect(currTask.currentSessionNum).toEqual(0);\n  expect(currTask.totalSessions).toBe(undefined);\n  expect(currTask.id == 'undefined').toBeTruthy();\n});\n\ntest('Test that task with initialized values is initialized correctly', () => {\n  const currTask = new Task(0, 'Test task', 5);\n  expect(currTask.name).toBe('Test task');\n  expect(currTask.checked).toBe(false);\n  expect(currTask.currentSessionNum).toEqual(0);\n  expect(currTask.totalSessions).toEqual(5);\n  expect(currTask.id == 0).toBe(true);\n  expect(currTask.className).toBe(classNames.uncheckedTaskClassName);\n});\n\ntest('Increment counter only changes current session number', () => {\n  const currTask = new Task(0, 'Test task', 5);\n  expect(currTask.name).toBe('Test task');\n  expect(currTask.currentSessionNum).toBe(0);\n  expect(currTask.totalSessions).toBe(5);\n  expect(currTask.id == 0).toBeTruthy();\n  expect(currTask.checked).toBe(false);\n  currTask.incrementSession();\n  expect(currTask.name).toBe('Test task');\n  expect(currTask.currentSessionNum).toBe(1);\n  expect(currTask.totalSessions).toBe(5);\n  expect(currTask.id == 0).toBeTruthy();\n  expect(currTask.checked).toBe(false);\n});\n\ntest('Increment counter works up to total sessions, task is completed at the end', () => {\n  const currTask = new Task(0, 'Test task', 5);\n  expect(currTask.name).toBe('Test task');\n  expect(currTask.currentSessionNum).toBe(0);\n  expect(currTask.totalSessions).toBe(5);\n  expect(currTask.id == 0).toBeTruthy();\n  for (let i = 0; i < 5; i += 1) {\n    currTask.incrementSession();\n  }\n  expect(currTask.name).toBe('Test task');\n  expect(currTask.currentSessionNum).toBe(5);\n  expect(currTask.totalSessions).toBe(5);\n  expect(currTask.id == 0).toBeTruthy();\n  expect(currTask.checked).toBe(true);\n});\n\ntest('Error is thrown after incrementing past totalSessions', () => {\n  const currTask = new Task(0, 'Test task', 5);\n  expect(currTask.name).toBe('Test task');\n  expect(currTask.currentSessionNum).toBe(0);\n  expect(currTask.totalSessions).toBe(5);\n  expect(currTask.id == 0).toBeTruthy();\n  for (let i = 0; i < 5; i += 1) {\n    currTask.incrementSession();\n  }\n  const taskIncSession = () => { currTask.incrementSession(); };\n  expect(taskIncSession).toThrow(RangeError);\n});\n\ntest('Test that Checkbox works properly', () => {\n  const currTask = new Task(0, 'Test task', 5);\n  currTask.checkBox.click();\n  expect(currTask.checked).toBe(true);\n  expect(currTask.className).toBe(classNames.completedTaskClassName);\n});\n",
+    "content": "/* eslint-disable eqeqeq */\nimport { Task } from '../js/ToDoList/Task.js';\nimport { classNames } from '../js/ToDoList/TaskVariables.js';\n\nbeforeEach(() => {\n  window.localData = [];\n});\n\ntest('Test that task with no values is empty', () => {\n  const currTask = new Task();\n  expect(currTask.name).toBe(undefined);\n  expect(currTask.checked).toBe(false);\n  expect(currTask.currentSessionNum).toEqual(0);\n  expect(currTask.totalSessions).toBe(undefined);\n  expect(currTask.id == 'undefined').toBeTruthy();\n});\n\ntest('Test that task with initialized values is initialized correctly', () => {\n  const currTask = new Task(0, 'Test task', 5);\n  expect(currTask.name).toBe('Test task');\n  expect(currTask.checked).toBe(false);\n  expect(currTask.currentSessionNum).toEqual(0);\n  expect(currTask.totalSessions).toEqual(5);\n  expect(currTask.id == 0).toBe(true);\n  expect(currTask.className).toBe(classNames.uncheckedTaskClassName);\n  expect(currTask.checkBox.checked).toBe(false);\n});\n\ntest('Test that task with optional initilized values is initialized correctly', () => {\n  const currTask = new Task(0, 'Test task', 5, 2, true);\n  expect(currTask.name).toBe('Test task');\n  expect(currTask.checked).toBe(true);\n  expect(currTask.currentSessionNum).toEqual(2);\n  expect(currTask.totalSessions).toEqual(5);\n  expect(currTask.id == 0).toBe(true);\n  expect(currTask.className).toBe(classNames.completedTaskClassName);\n  expect(currTask.checkBox.checked).toBe(true);\n});\n\ntest('Increment counter only changes current session number', () => {\n  const currTask = new Task(0, 'Test task', 5);\n  expect(currTask.name).toBe('Test task');\n  expect(currTask.currentSessionNum).toBe(0);\n  expect(currTask.totalSessions).toBe(5);\n  expect(currTask.id == 0).toBeTruthy();\n  expect(currTask.checked).toBe(false);\n  currTask.incrementSession();\n  expect(currTask.name).toBe('Test task');\n  expect(currTask.currentSessionNum).toBe(1);\n  expect(currTask.totalSessions).toBe(5);\n  expect(currTask.id == 0).toBeTruthy();\n  expect(currTask.checked).toBe(false);\n});\n\n\ntest('Incrementing past totalSessions is OK', () => {\n  const currTask = new Task(0, 'Test task', 5);\n  expect(currTask.name).toBe('Test task');\n  expect(currTask.currentSessionNum).toBe(0);\n  expect(currTask.totalSessions).toBe(5);\n  expect(currTask.id == 0).toBeTruthy();\n  for (let i = 0; i < 6; i += 1) {\n    currTask.incrementSession();\n  }\n  expect(currTask.currentSessionNum).toBe(6)\n  expect(currTask.checked).toBe(false)\n});\n\ntest('Test that Checkbox works properly', () => {\n  const currTask = new Task(0, 'Test task', 5);\n  currTask.checkBox.click();\n  expect(currTask.checked).toBe(true);\n  expect(currTask.className).toBe(classNames.completedTaskClassName);\n});\n\ntest('Incrementing session of checked task should throw range error', () => {\n  const currTask = new Task(0, 'Test task', 5,3, true);\n  const errIncrement = () => { currTask.incrementSession(); };\n  expect(errIncrement).toThrow('Increment checked Task');\n});\n\ntest('Task Removed from Local Storage after delete is called', () => {\n  const task = new Task(0, 'Test task', 5, 3, true);\n  const task2 = new Task(1, 'Test task2', 5, 3, false);\n  window.localData = [['0']];\n  window.localData = [['1']];\n  task.removeFromLocalStorage();\n  expect(window.localData.length).toBe(1);\n});\n",
     "static": true,
     "longname": "/home/anshul/anshul/Development/cse110-w21-group28/tests/task.test.js",
     "access": null,
@@ -2341,7 +2343,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 142,
+    "__docId__": 144,
     "kind": "test",
     "name": "test0",
     "testId": 0,
@@ -2351,16 +2353,10 @@
     "longname": "tests/task.test.js~test0",
     "access": null,
     "description": "Test that task with no values is empty",
-    "lineNumber": 11,
-    "unknown": [
-      {
-        "tagName": "@Test",
-        "tagValue": "{Task}"
-      }
-    ]
+    "lineNumber": 9
   },
   {
-    "__docId__": 143,
+    "__docId__": 145,
     "kind": "test",
     "name": "test1",
     "testId": 1,
@@ -2370,10 +2366,10 @@
     "longname": "tests/task.test.js~test1",
     "access": null,
     "description": "Test that task with initialized values is initialized correctly",
-    "lineNumber": 21
+    "lineNumber": 18
   },
   {
-    "__docId__": 144,
+    "__docId__": 146,
     "kind": "test",
     "name": "test2",
     "testId": 2,
@@ -2382,11 +2378,11 @@
     "static": true,
     "longname": "tests/task.test.js~test2",
     "access": null,
-    "description": "Increment counter only changes current session number",
-    "lineNumber": 31
+    "description": "Test that task with optional initilized values is initialized correctly",
+    "lineNumber": 29
   },
   {
-    "__docId__": 145,
+    "__docId__": 147,
     "kind": "test",
     "name": "test3",
     "testId": 3,
@@ -2395,11 +2391,11 @@
     "static": true,
     "longname": "tests/task.test.js~test3",
     "access": null,
-    "description": "Increment counter works up to total sessions, task is completed at the end",
-    "lineNumber": 46
+    "description": "Increment counter only changes current session number",
+    "lineNumber": 40
   },
   {
-    "__docId__": 146,
+    "__docId__": 148,
     "kind": "test",
     "name": "test4",
     "testId": 4,
@@ -2408,11 +2404,11 @@
     "static": true,
     "longname": "tests/task.test.js~test4",
     "access": null,
-    "description": "Error is thrown after incrementing past totalSessions",
-    "lineNumber": 62
+    "description": "Incrementing past totalSessions is OK",
+    "lineNumber": 56
   },
   {
-    "__docId__": 147,
+    "__docId__": 149,
     "kind": "test",
     "name": "test5",
     "testId": 5,
@@ -2422,10 +2418,36 @@
     "longname": "tests/task.test.js~test5",
     "access": null,
     "description": "Test that Checkbox works properly",
-    "lineNumber": 75
+    "lineNumber": 69
   },
   {
-    "__docId__": 148,
+    "__docId__": 150,
+    "kind": "test",
+    "name": "test6",
+    "testId": 6,
+    "memberof": "tests/task.test.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "tests/task.test.js~test6",
+    "access": null,
+    "description": "Incrementing session of checked task should throw range error",
+    "lineNumber": 76
+  },
+  {
+    "__docId__": 151,
+    "kind": "test",
+    "name": "test7",
+    "testId": 7,
+    "memberof": "tests/task.test.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "tests/task.test.js~test7",
+    "access": null,
+    "description": "Task Removed from Local Storage after delete is called",
+    "lineNumber": 82
+  },
+  {
+    "__docId__": 152,
     "kind": "testFile",
     "name": "tests/timer.test.js",
     "content": "import { Timer } from '../js/Timer/Timer';\nimport {\n  workMode, shortBreakMode, longBreakMode, classNames, buttonText,\n} from '../js/Timer/TimerVariables';\n\nbeforeEach(() => {\n  window.localData = [];\n  document.body.innerHTML = '<div>'\n  + '  <p id=\"displayTime\"></p>'\n  + ' <p id=\"displayStatus\"></p>'\n  + '<button id=start>Start</button>'\n  + '</div>';\n  jest.useFakeTimers();\n  jest.clearAllTimers();\n});\n\ntest('Test Initial State is Nothing', () => {\n  const button = document.getElementById('start');\n  const TimerObj = new Timer(button, null, null);\n  expect(TimerObj.state).toBe('');\n});\n\ntest('Test First Iteration of Timer', () => {\n  const displayTime = document.getElementById('displayTime');\n  const displayStatus = document.getElementById('displayStatus');\n  const button = document.getElementById('start');\n  const TimerObj = new Timer(button, displayTime, displayStatus);\n  TimerObj.startTimer();\n  expect(TimerObj.state).toBe(workMode.name);\n});\n\ntest('Test That Queue Gets Updated During Second Iteration Of Timer', () => {\n  const displayTime = document.getElementById('displayTime');\n  const displayStatus = document.getElementById('displayStatus');\n  const button = document.getElementById('start');\n  const TimerObj = new Timer(button, displayTime, displayStatus);\n  jest.clearAllTimers();\n  TimerObj.startTimer();\n\n  jest.advanceTimersByTime(workMode.duration * 60 * 1000);\n\n  expect(TimerObj.stateQueue[0]).toBe(shortBreakMode);\n  expect(TimerObj.stateQueue[6]).toBe(longBreakMode);\n});\n\ntest('Test That HTML Gets Updated During Second ', () => {\n  const displayTime = document.getElementById('displayTime');\n  const displayStatus = document.getElementById('displayStatus');\n  const button = document.getElementById('start');\n  const TimerObj = new Timer(button, displayTime, displayStatus);\n  jest.clearAllTimers();\n  TimerObj.startTimer();\n  jest.advanceTimersByTime(workMode.duration * 60 * 1000);\n\n  expect(displayStatus.textContent).toBe(shortBreakMode.name);\n  expect(displayTime.textContent).toBe(`${shortBreakMode.duration}:00`);\n});\n\ntest('Test That Start Button Functions Properly ', () => {\n  const displayTime = document.getElementById('displayTime');\n  const displayStatus = document.getElementById('displayStatus');\n  const button = document.getElementById('start');\n  const TimerObj = new Timer(button, displayTime, displayStatus);\n  jest.clearAllTimers();\n  button.click();\n  expect(button.textContent).toBe(buttonText.stopTimerText);\n  expect(button.class).toBe(classNames.stopButton);\n});\n\ntest('Test That Clicking Start Twice Changes HTML ', () => {\n  const displayTime = document.getElementById('displayTime');\n  const displayStatus = document.getElementById('displayStatus');\n  const button = document.getElementById('start');\n  const TimerObj = new Timer(button, displayTime, displayStatus);\n  jest.clearAllTimers();\n  button.click();\n  button.click();\n  expect(button.textContent).toBe(buttonText.startTimerText);\n  expect(button.class).toBe(classNames.startButton);\n  expect(TimerObj.displayStatus.textContent).toBe('Pomo-Time!');\n});\n\ntest('Test That Timer Resets Properly When End Day is Clicked', () => {\n  const displayTime = document.getElementById('displayTime');\n  const displayStatus = document.getElementById('displayStatus');\n  const button = document.getElementById('start');\n  const TimerObj = new Timer(button, displayTime, displayStatus);\n  jest.clearAllTimers();\n  button.click();\n  jest.advanceTimersByTime(workMode.duration * 60 * 1000);\n  button.click();\n  expect(TimerObj.stateQueue[0]).toBe(workMode);\n});\n",
@@ -2436,33 +2458,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 149,
-    "kind": "test",
-    "name": "test6",
-    "testId": 6,
-    "memberof": "tests/timer.test.js",
-    "testDepth": 0,
-    "static": true,
-    "longname": "tests/timer.test.js~test6",
-    "access": null,
-    "description": "Test Initial State is Nothing",
-    "lineNumber": 17
-  },
-  {
-    "__docId__": 150,
-    "kind": "test",
-    "name": "test7",
-    "testId": 7,
-    "memberof": "tests/timer.test.js",
-    "testDepth": 0,
-    "static": true,
-    "longname": "tests/timer.test.js~test7",
-    "access": null,
-    "description": "Test First Iteration of Timer",
-    "lineNumber": 23
-  },
-  {
-    "__docId__": 151,
+    "__docId__": 153,
     "kind": "test",
     "name": "test8",
     "testId": 8,
@@ -2471,11 +2467,11 @@
     "static": true,
     "longname": "tests/timer.test.js~test8",
     "access": null,
-    "description": "Test That Queue Gets Updated During Second Iteration Of Timer",
-    "lineNumber": 32
+    "description": "Test Initial State is Nothing",
+    "lineNumber": 17
   },
   {
-    "__docId__": 152,
+    "__docId__": 154,
     "kind": "test",
     "name": "test9",
     "testId": 9,
@@ -2484,11 +2480,11 @@
     "static": true,
     "longname": "tests/timer.test.js~test9",
     "access": null,
-    "description": "Test That HTML Gets Updated During Second ",
-    "lineNumber": 46
+    "description": "Test First Iteration of Timer",
+    "lineNumber": 23
   },
   {
-    "__docId__": 153,
+    "__docId__": 155,
     "kind": "test",
     "name": "test10",
     "testId": 10,
@@ -2497,11 +2493,11 @@
     "static": true,
     "longname": "tests/timer.test.js~test10",
     "access": null,
-    "description": "Test That Start Button Functions Properly ",
-    "lineNumber": 59
+    "description": "Test That Queue Gets Updated During Second Iteration Of Timer",
+    "lineNumber": 32
   },
   {
-    "__docId__": 154,
+    "__docId__": 156,
     "kind": "test",
     "name": "test11",
     "testId": 11,
@@ -2510,11 +2506,11 @@
     "static": true,
     "longname": "tests/timer.test.js~test11",
     "access": null,
-    "description": "Test That Clicking Start Twice Changes HTML ",
-    "lineNumber": 70
+    "description": "Test That HTML Gets Updated During Second ",
+    "lineNumber": 46
   },
   {
-    "__docId__": 155,
+    "__docId__": 157,
     "kind": "test",
     "name": "test12",
     "testId": 12,
@@ -2523,14 +2519,40 @@
     "static": true,
     "longname": "tests/timer.test.js~test12",
     "access": null,
+    "description": "Test That Start Button Functions Properly ",
+    "lineNumber": 59
+  },
+  {
+    "__docId__": 158,
+    "kind": "test",
+    "name": "test13",
+    "testId": 13,
+    "memberof": "tests/timer.test.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "tests/timer.test.js~test13",
+    "access": null,
+    "description": "Test That Clicking Start Twice Changes HTML ",
+    "lineNumber": 70
+  },
+  {
+    "__docId__": 159,
+    "kind": "test",
+    "name": "test14",
+    "testId": 14,
+    "memberof": "tests/timer.test.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "tests/timer.test.js~test14",
+    "access": null,
     "description": "Test That Timer Resets Properly When End Day is Clicked",
     "lineNumber": 83
   },
   {
-    "__docId__": 156,
+    "__docId__": 160,
     "kind": "testFile",
     "name": "tests/todolist.test.js",
-    "content": "import { ToDoList } from '../js/ToDoList/ToDoList.js';\n\n/** @Test {ToDoList} */\n\nbeforeEach(() => {\n  window.localData = [];\n  document.body.innerHTML = '<div id=\"ToDoListDiv>'\n    + '</div>';\n});\n\ntest('Construction of empty list', () => {\n  const theList = new ToDoList();\n  expect(theList.taskList).toEqual([]);\n});\n\ntest('Valid construction of new list in HTML', () => {\n  const listLocation = document.getElementById('ToDoListDiv');\n  const aList = new ToDoList(listLocation);\n  expect(aList.taskList).toEqual([]);\n});\n\ntest('Adding Items to List', () => {\n  const listLocation = document.getElementById('ToDoListDiv');\n  const aList = new ToDoList(listLocation);\n  aList.addTask('First Task', 5);\n  expect(aList.taskList.length).toBe(1);\n  aList.addTask('Second Task', 2);\n  expect(aList.taskList.length).toBe(2);\n});\n\ntest('Adding 0 Pomo Length Task', () => {\n  const listLocation = document.getElementById('ToDoListDiv');\n  const aList = new ToDoList(listLocation);\n  const errTask = () => { aList.addTask('First Task', 0); };\n  expect(errTask).toThrow('0 Length Task');\n});\n\ntest('Adding undefined Pomo Length Task', () => {\n  const listLocation = document.getElementById('ToDoListDiv');\n  const aList = new ToDoList(listLocation);\n  const errTask = () => { aList.addTask('First Task', undefined); };\n  expect(errTask).toThrow('Undefined Length Task');\n});\n\ntest('Adding Task w/o name', () => {\n  const listLocation = document.getElementById('ToDoListDiv');\n  const aList = new ToDoList(listLocation);\n  const errTask = () => { aList.addTask(undefined, 4); };\n  expect(errTask).toThrow('Undefined Name');\n});\n\ntest('Adding Task w/ empty name', () => {\n  const listLocation = document.getElementById('ToDoListDiv');\n  const aList = new ToDoList(listLocation);\n  const errTask = () => { aList.addTask('', 4); };\n  expect(errTask).toThrow('Empty Name');\n});\n\ntest('Adding Task w/ NaN for PomoSession', () => {\n  const listLocation = document.getElementById('ToDoListDiv');\n  const aList = new ToDoList(listLocation);\n  const errTask = () => { aList.addTask('TempTask', NaN); };\n  expect(errTask).toThrow('Number Not Passed In');\n});\n\ntest('Get currentTask', () => {\n  const listLocation = document.getElementById('ToDoListDiv');\n  const aList = new ToDoList(listLocation);\n  aList.addTask('First Task', 5);\n  aList.addTask('Second Task', 2);\n  const currTask = aList.getCurrentTask();\n  expect(currTask.name).toBe('First Task');\n});\n\ntest('Get currentTask on empty list', () => {\n  const listLocation = document.getElementById('ToDoListDiv');\n  const aList = new ToDoList(listLocation);\n  const currTask = () => { aList.getCurrentTask(); };\n  expect(currTask).toThrow('Empty ToDo List');\n});\n\ntest('Get currentTask on list with all completed elements', () => {\n  const listLocation = document.getElementById('ToDoListDiv');\n  const aList = new ToDoList(listLocation);\n  aList.addTask('First Task', 5);\n  aList.getCurrentTask().checkOffTask();\n  const currTask = () => { aList.getCurrentTask(); };\n  expect(currTask).toThrow('No Current Task');\n});\n\ntest('Preserve special characters in task name', () => {\n  const listLocation = document.getElementById('ToDoListDiv');\n  const aList = new ToDoList(listLocation);\n  // eslint-disable-next-line no-template-curly-in-string\n  const strName = 'A s^ri\\ng w!t\\\\n spe`cia| \"some ver${this.id}y special\" chara%cter$';\n  aList.addTask(strName, 5);\n  aList.addTask('Second Task', 2);\n  const currTask = aList.getCurrentTask();\n  expect(currTask.name).toBe(strName);\n});\n",
+    "content": "import { ToDoList } from '../js/ToDoList/ToDoList.js';\nimport { Task } from '../js/ToDoList/Task'\n\n/** @Test {ToDoList} */\n\nbeforeEach(() => {\n  window.localData = [];\n});\n\ntest('Construction of empty list', () => {\n  const theList = new ToDoList();\n  expect(theList.taskList).toEqual([]);\n});\n\ntest('Valid construction of new list in HTML', () => {\n  const listLocation = document.getElementById('ToDoListDiv');\n  const aList = new ToDoList();\n  expect(aList.taskList).toEqual([]);\n});\n\ntest('Adding Items to List', () => {\n  const listLocation = document.getElementById('ToDoListDiv');\n  const aList = new ToDoList();\n  aList.addTask('First Task', 5);\n  expect(aList.taskList.length).toBe(1);\n  aList.addTask('Second Task', 2);\n  expect(aList.taskList.length).toBe(2);\n});\n\ntest('Adding 0 Pomo Length Task', () => {\n  const aList = new ToDoList();\n  const errTask = () => { aList.addTask('First Task', 0); };\n  expect(errTask).toThrow('0 Length Task');\n});\n\ntest('Adding undefined Pomo Length Task', () => {\n  const aList = new ToDoList();\n  const errTask = () => { aList.addTask('First Task', undefined); };\n  expect(errTask).toThrow('Undefined Length Task');\n});\n\ntest('Adding Task w/o name', () => {\n  const aList = new ToDoList();\n  const errTask = () => { aList.addTask(undefined, 4); };\n  expect(errTask).toThrow('Undefined Name');\n});\n\ntest('Adding Task w/ empty name', () => {\n  const aList = new ToDoList();\n  const errTask = () => { aList.addTask('', 4); };\n  expect(errTask).toThrow('Empty Name');\n});\n\ntest('Adding Task w/ NaN for PomoSession', () => {\n  const aList = new ToDoList();\n  const errTask = () => { aList.addTask('TempTask', NaN); };\n  expect(errTask).toThrow('Number Not Passed In');\n});\n\ntest('Get currentTask', () => {\n  const aList = new ToDoList();\n  aList.addTask('First Task', 5);\n  aList.addTask('Second Task', 2);\n  const currTask = aList.getCurrentTask();\n  expect(currTask.name).toBe('First Task');\n});\n\ntest('Get currentTask on empty list should be null', () => {\n  const aList = new ToDoList();\n  expect(aList.getCurrentTask()).toBe(null);\n});\n\ntest('Get currentTask on list with all completed elements should be null', () => {\n  const aList = new ToDoList();\n  aList.addTask('First Task', 5);\n  aList.getCurrentTask().checkOffTask();\n  expect(aList.getCurrentTask()).toBe(null);\n});\n\ntest('Preserve special characters in task name', () => {\n  const aList = new ToDoList();\n  // eslint-disable-next-line no-template-curly-in-string\n  const strName = 'A s^ri\\ng w!t\\\\n spe`cia| \"some ver${this.id}y special\" chara%cter$';\n  aList.addTask(strName, 5);\n  aList.addTask('Second Task', 2);\n  const currTask = aList.getCurrentTask();\n  expect(currTask.name).toBe(strName);\n});\n\ntest('Deleted Task do not come up as current task', () => {\n  const aList = new ToDoList();\n  aList.addTask(\"task1\", 1);\n  aList.addTask(\"task2\", 2);\n  const task1 = aList.getCurrentTask();\n  task1.deleteButton.click()\n  const currTask = aList.getCurrentTask();\n  expect(currTask.name).toBe(\"task2\");\n  expect(currTask.totalSessions).toBe(2);\n});\n\n",
     "static": true,
     "longname": "/home/anshul/anshul/Development/cse110-w21-group28/tests/todolist.test.js",
     "access": null,
@@ -2538,33 +2560,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 157,
-    "kind": "test",
-    "name": "test13",
-    "testId": 13,
-    "memberof": "tests/todolist.test.js",
-    "testDepth": 0,
-    "static": true,
-    "longname": "tests/todolist.test.js~test13",
-    "access": null,
-    "description": "Construction of empty list",
-    "lineNumber": 11
-  },
-  {
-    "__docId__": 158,
-    "kind": "test",
-    "name": "test14",
-    "testId": 14,
-    "memberof": "tests/todolist.test.js",
-    "testDepth": 0,
-    "static": true,
-    "longname": "tests/todolist.test.js~test14",
-    "access": null,
-    "description": "Valid construction of new list in HTML",
-    "lineNumber": 16
-  },
-  {
-    "__docId__": 159,
+    "__docId__": 161,
     "kind": "test",
     "name": "test15",
     "testId": 15,
@@ -2573,11 +2569,11 @@
     "static": true,
     "longname": "tests/todolist.test.js~test15",
     "access": null,
-    "description": "Adding Items to List",
-    "lineNumber": 22
+    "description": "Construction of empty list",
+    "lineNumber": 10
   },
   {
-    "__docId__": 160,
+    "__docId__": 162,
     "kind": "test",
     "name": "test16",
     "testId": 16,
@@ -2586,11 +2582,11 @@
     "static": true,
     "longname": "tests/todolist.test.js~test16",
     "access": null,
-    "description": "Adding 0 Pomo Length Task",
-    "lineNumber": 31
+    "description": "Valid construction of new list in HTML",
+    "lineNumber": 15
   },
   {
-    "__docId__": 161,
+    "__docId__": 163,
     "kind": "test",
     "name": "test17",
     "testId": 17,
@@ -2599,11 +2595,11 @@
     "static": true,
     "longname": "tests/todolist.test.js~test17",
     "access": null,
-    "description": "Adding undefined Pomo Length Task",
-    "lineNumber": 38
+    "description": "Adding Items to List",
+    "lineNumber": 21
   },
   {
-    "__docId__": 162,
+    "__docId__": 164,
     "kind": "test",
     "name": "test18",
     "testId": 18,
@@ -2612,11 +2608,11 @@
     "static": true,
     "longname": "tests/todolist.test.js~test18",
     "access": null,
-    "description": "Adding Task w/o name",
-    "lineNumber": 45
+    "description": "Adding 0 Pomo Length Task",
+    "lineNumber": 30
   },
   {
-    "__docId__": 163,
+    "__docId__": 165,
     "kind": "test",
     "name": "test19",
     "testId": 19,
@@ -2625,11 +2621,11 @@
     "static": true,
     "longname": "tests/todolist.test.js~test19",
     "access": null,
-    "description": "Adding Task w/ empty name",
-    "lineNumber": 52
+    "description": "Adding undefined Pomo Length Task",
+    "lineNumber": 36
   },
   {
-    "__docId__": 164,
+    "__docId__": 166,
     "kind": "test",
     "name": "test20",
     "testId": 20,
@@ -2638,11 +2634,11 @@
     "static": true,
     "longname": "tests/todolist.test.js~test20",
     "access": null,
-    "description": "Adding Task w/ NaN for PomoSession",
-    "lineNumber": 59
+    "description": "Adding Task w/o name",
+    "lineNumber": 42
   },
   {
-    "__docId__": 165,
+    "__docId__": 167,
     "kind": "test",
     "name": "test21",
     "testId": 21,
@@ -2651,11 +2647,11 @@
     "static": true,
     "longname": "tests/todolist.test.js~test21",
     "access": null,
-    "description": "Get currentTask",
-    "lineNumber": 66
+    "description": "Adding Task w/ empty name",
+    "lineNumber": 48
   },
   {
-    "__docId__": 166,
+    "__docId__": 168,
     "kind": "test",
     "name": "test22",
     "testId": 22,
@@ -2664,11 +2660,11 @@
     "static": true,
     "longname": "tests/todolist.test.js~test22",
     "access": null,
-    "description": "Get currentTask on empty list",
-    "lineNumber": 75
+    "description": "Adding Task w/ NaN for PomoSession",
+    "lineNumber": 54
   },
   {
-    "__docId__": 167,
+    "__docId__": 169,
     "kind": "test",
     "name": "test23",
     "testId": 23,
@@ -2677,11 +2673,11 @@
     "static": true,
     "longname": "tests/todolist.test.js~test23",
     "access": null,
-    "description": "Get currentTask on list with all completed elements",
-    "lineNumber": 82
+    "description": "Get currentTask",
+    "lineNumber": 60
   },
   {
-    "__docId__": 168,
+    "__docId__": 170,
     "kind": "test",
     "name": "test24",
     "testId": 24,
@@ -2690,14 +2686,53 @@
     "static": true,
     "longname": "tests/todolist.test.js~test24",
     "access": null,
-    "description": "Preserve special characters in task name",
-    "lineNumber": 91
+    "description": "Get currentTask on empty list should be null",
+    "lineNumber": 68
   },
   {
-    "__docId__": 169,
+    "__docId__": 171,
+    "kind": "test",
+    "name": "test25",
+    "testId": 25,
+    "memberof": "tests/todolist.test.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "tests/todolist.test.js~test25",
+    "access": null,
+    "description": "Get currentTask on list with all completed elements should be null",
+    "lineNumber": 73
+  },
+  {
+    "__docId__": 172,
+    "kind": "test",
+    "name": "test26",
+    "testId": 26,
+    "memberof": "tests/todolist.test.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "tests/todolist.test.js~test26",
+    "access": null,
+    "description": "Preserve special characters in task name",
+    "lineNumber": 80
+  },
+  {
+    "__docId__": 173,
+    "kind": "test",
+    "name": "test27",
+    "testId": 27,
+    "memberof": "tests/todolist.test.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "tests/todolist.test.js~test27",
+    "access": null,
+    "description": "Deleted Task do not come up as current task",
+    "lineNumber": 90
+  },
+  {
+    "__docId__": 174,
     "kind": "testFile",
     "name": "tests/todolistdom.test.js",
-    "content": "import { TodoListDom } from '../js/ToDoList/TodoListDom.js';\n\n/** @Test {ToDoList} */\nlet tableLocation;\nlet formLocation;\nlet addBtnLocation;\nlet deleteBtnLocation;\nlet myDOM;\n\nbeforeEach(() => {\n  document.body.innerHTML = `<section id=\"tasklist\" class=\"section_container\">\n      <h2>To Do</h2>\n      <table id='todo'>\n        <th>\n          <td>Task</td>\n          <td>Pomos</td>\n          <td>Delete</td>\n        </th>\n      </table>\n    </section>\n\n    <div>\n      <form id = \"add-todo\" style = \"display: none;\">\n        <input type=\"text\" name=\"task-name\" placeholder=\"Write Essay\">\n        <input type=\"number\" name=\"task-length\" placeholder=\"1\">\n        <input type=\"submit\">\n      </form>\n      <button id = \"add-button\" type=\"button\">Add a task</button>\n      <button id = \"delete-all-button\" class=\"deleteAllButton\" type=\"button\">Delete All</button>\n    </div> `;\n  tableLocation = document.getElementById('todo');\n  formLocation = document.getElementById('add-todo');\n  addBtnLocation = document.getElementById('add-button');\n  deleteBtnLocation = document.getElementById('delete-all-button');\n  myDOM = new TodoListDom(tableLocation, formLocation, addBtnLocation, deleteBtnLocation);\n});\n\ntest('Valid construction of TDLDom', () => {\n  expect(myDOM.todoList.taskList).toEqual([]);\n});\n\ntest('Add a task and click checkoff', () => {\n  formLocation.children[0].setAttribute('value', 'Write Essay');\n  formLocation.children[1].value = 2;\n  formLocation.submit();\n  expect(tableLocation.children[1].children[1].textContent).toMatch(new RegExp('Write *Essay'));\n  expect(tableLocation.children[1].children[2].textContent).toMatch(new RegExp('\\\\[0/ *2\\\\]'));\n  tableLocation.children[1].children[0].children[0].click();\n});\n\ntest('Reload the page with local storage', () => {\n  expect(tableLocation.children[1].children[1].textContent).toMatch(new RegExp('Write *Essay'));\n  expect(tableLocation.children[1].children[2].textContent).toMatch(new RegExp('\\\\[0/ *2\\\\]'));\n});\n\ntest('Reload the page with completed task', () => {\n  expect(tableLocation.children[1].children[0].children[0].getAttribute('checked')).toEqual('true');\n});\n\n// Now has a task\ntest('click remove button', () => {\n  tableLocation.children[1].children[3].children[0].click();\n  expect(tableLocation.children[1]).toEqual(undefined);\n  expect(window.localData.length).toEqual(0);\n  localStorage.clear();\n});\n\ntest('Increment session ', () => {\n  formLocation.children[0].value = 'Write Essay';\n  formLocation.children[1].value = 2;\n  formLocation.submit();\n  myDOM.onSessionComplete();\n  expect(tableLocation.children[1].children[1].textContent).toMatch(new RegExp('Write *Essay'));\n  expect(tableLocation.children[1].children[2].textContent).toMatch(new RegExp('\\\\[1/ *2\\\\]'));\n  localStorage.clear();\n});\n\ntest('Add an invalid task', () => {\n  global.alert = jest.fn();\n  formLocation.submit();\n  expect(global.alert).toHaveBeenCalledTimes(1);\n});\n\ntest('Delete all', () => {\n  formLocation.children[0].setAttribute('value', 'Write Essay');\n  formLocation.children[1].value = 2;\n  formLocation.submit();\n  formLocation.children[0].setAttribute('value', 'Write Essay');\n  formLocation.children[1].value = 2;\n  formLocation.submit();\n  deleteBtnLocation.click();\n  expect(tableLocation.children[1]).toEqual(undefined);\n  expect(window.localData.length).toEqual(0);\n  localStorage.clear();\n});\n",
+    "content": "import { TodoListDom } from '../js/ToDoList/TodoListDom.js';\n\n/** @Test {ToDoList} */\nlet tableLocation;\nlet formLocation;\nlet addBtnLocation;\nlet deleteBtnLocation;\nlet myDOM;\n\nbeforeEach(() => {\n  document.body.innerHTML = `<section id=\"tasklist\" class=\"section_container\">\n      <h2>To Do</h2>\n      <table id='todo'>\n        <th>\n          <td>Task</td>\n          <td>Pomos</td>\n          <td>Delete</td>\n        </th>\n      </table>\n    </section>\n\n    <div>\n      <form id = \"add-todo\" style = \"display: none;\">\n        <input type=\"text\" name=\"task-name\" placeholder=\"Write Essay\">\n        <input type=\"number\" name=\"task-length\" placeholder=\"1\">\n        <input type=\"submit\">\n      </form>\n      <button id = \"add-button\" type=\"button\">Add a task</button>\n      <button id = \"delete-all-button\" class=\"deleteAllButton\" type=\"button\">Delete All</button>\n    </div> `;\n  tableLocation = document.getElementById('todo');\n  formLocation = document.getElementById('add-todo');\n  addBtnLocation = document.getElementById('add-button');\n  deleteBtnLocation = document.getElementById('delete-all-button');\n  myDOM = new TodoListDom(tableLocation, formLocation, addBtnLocation, deleteBtnLocation);\n});\n\ntest('Valid construction of TDLDom', () => {\n  expect(myDOM.todoList.taskList).toEqual([]);\n});\n\ntest('Add a task and click checkoff', () => {\n  formLocation.children[0].setAttribute('value', 'Write Essay');\n  formLocation.children[1].value = 2;\n  formLocation.submit();\n  expect(tableLocation.children[1].children[1].textContent).toMatch(new RegExp('Write *Essay'));\n  expect(tableLocation.children[1].children[2].textContent).toMatch(new RegExp('\\\\[0/ *2\\\\]'));\n  tableLocation.children[1].children[0].children[0].click();\n});\n\ntest('Reload the page with local storage', () => {\n  expect(tableLocation.children[1].taskText.textContent).toMatch(new RegExp('Write *Essay'));\n  expect(tableLocation.children[1].pomoSessions.textContent).toMatch(new RegExp('\\\\[0/ *2\\\\]'));\n});\n\ntest('Reload the page with completed task', () => {\n  expect(tableLocation.children[1].checked).toEqual(true);\n});\n\n// Now has a task\ntest('Clicking remove button should remove task from table and local storage', () => {\n  tableLocation.children[1].children[3].children[0].click();\n  expect(tableLocation.children[1]).toEqual(undefined);\n  expect(window.localData.length).toEqual(0);\n  localStorage.clear();\n});\n\ntest('Incrementing session updates value accordingly', () => {\n  formLocation.children[0].value = 'Write Essay';\n  formLocation.children[1].value = 2;\n  formLocation.submit();\n  myDOM.onSessionComplete();\n  expect(tableLocation.children[1].children[1].textContent).toMatch(new RegExp('Write *Essay'));\n  expect(tableLocation.children[1].children[2].textContent).toMatch(new RegExp('\\\\[1/ *2\\\\]'));\n  localStorage.clear();\n});\n\ntest('Addding an invalid task causes an alert', () => {\n  global.alert = jest.fn();\n  formLocation.submit();\n  expect(global.alert).toHaveBeenCalledTimes(1);\n});\n\ntest('Delete all should remove from table and local storage', () => {\n  formLocation.children[0].setAttribute('value', 'Write Essay');\n  formLocation.children[1].value = 2;\n  formLocation.submit();\n  formLocation.children[0].setAttribute('value', 'Write Essay');\n  formLocation.children[1].value = 2;\n  formLocation.submit();\n  deleteBtnLocation.click();\n  expect(tableLocation.children[1]).toEqual(undefined);\n  expect(window.localData.length).toEqual(0);\n  localStorage.clear();\n});\n",
     "static": true,
     "longname": "/home/anshul/anshul/Development/cse110-w21-group28/tests/todolistdom.test.js",
     "access": null,
@@ -2705,46 +2740,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 170,
-    "kind": "test",
-    "name": "test25",
-    "testId": 25,
-    "memberof": "tests/todolistdom.test.js",
-    "testDepth": 0,
-    "static": true,
-    "longname": "tests/todolistdom.test.js~test25",
-    "access": null,
-    "description": "Valid construction of TDLDom",
-    "lineNumber": 38
-  },
-  {
-    "__docId__": 171,
-    "kind": "test",
-    "name": "test26",
-    "testId": 26,
-    "memberof": "tests/todolistdom.test.js",
-    "testDepth": 0,
-    "static": true,
-    "longname": "tests/todolistdom.test.js~test26",
-    "access": null,
-    "description": "Add a task and click checkoff",
-    "lineNumber": 42
-  },
-  {
-    "__docId__": 172,
-    "kind": "test",
-    "name": "test27",
-    "testId": 27,
-    "memberof": "tests/todolistdom.test.js",
-    "testDepth": 0,
-    "static": true,
-    "longname": "tests/todolistdom.test.js~test27",
-    "access": null,
-    "description": "Reload the page with local storage",
-    "lineNumber": 51
-  },
-  {
-    "__docId__": 173,
+    "__docId__": 175,
     "kind": "test",
     "name": "test28",
     "testId": 28,
@@ -2753,11 +2749,11 @@
     "static": true,
     "longname": "tests/todolistdom.test.js~test28",
     "access": null,
-    "description": "Reload the page with completed task",
-    "lineNumber": 56
+    "description": "Valid construction of TDLDom",
+    "lineNumber": 38
   },
   {
-    "__docId__": 174,
+    "__docId__": 176,
     "kind": "test",
     "name": "test29",
     "testId": 29,
@@ -2766,11 +2762,11 @@
     "static": true,
     "longname": "tests/todolistdom.test.js~test29",
     "access": null,
-    "description": "click remove button",
-    "lineNumber": 61
+    "description": "Add a task and click checkoff",
+    "lineNumber": 42
   },
   {
-    "__docId__": 175,
+    "__docId__": 177,
     "kind": "test",
     "name": "test30",
     "testId": 30,
@@ -2779,11 +2775,11 @@
     "static": true,
     "longname": "tests/todolistdom.test.js~test30",
     "access": null,
-    "description": "Increment session ",
-    "lineNumber": 68
+    "description": "Reload the page with local storage",
+    "lineNumber": 51
   },
   {
-    "__docId__": 176,
+    "__docId__": 178,
     "kind": "test",
     "name": "test31",
     "testId": 31,
@@ -2792,11 +2788,11 @@
     "static": true,
     "longname": "tests/todolistdom.test.js~test31",
     "access": null,
-    "description": "Add an invalid task",
-    "lineNumber": 78
+    "description": "Reload the page with completed task",
+    "lineNumber": 56
   },
   {
-    "__docId__": 177,
+    "__docId__": 179,
     "kind": "test",
     "name": "test32",
     "testId": 32,
@@ -2805,7 +2801,46 @@
     "static": true,
     "longname": "tests/todolistdom.test.js~test32",
     "access": null,
-    "description": "Delete all",
+    "description": "Clicking remove button should remove task from table and local storage",
+    "lineNumber": 61
+  },
+  {
+    "__docId__": 180,
+    "kind": "test",
+    "name": "test33",
+    "testId": 33,
+    "memberof": "tests/todolistdom.test.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "tests/todolistdom.test.js~test33",
+    "access": null,
+    "description": "Incrementing session updates value accordingly",
+    "lineNumber": 68
+  },
+  {
+    "__docId__": 181,
+    "kind": "test",
+    "name": "test34",
+    "testId": 34,
+    "memberof": "tests/todolistdom.test.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "tests/todolistdom.test.js~test34",
+    "access": null,
+    "description": "Addding an invalid task causes an alert",
+    "lineNumber": 78
+  },
+  {
+    "__docId__": 182,
+    "kind": "test",
+    "name": "test35",
+    "testId": 35,
+    "memberof": "tests/todolistdom.test.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "tests/todolistdom.test.js~test35",
+    "access": null,
+    "description": "Delete all should remove from table and local storage",
     "lineNumber": 84
   }
 ]

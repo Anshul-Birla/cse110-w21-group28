@@ -98,23 +98,23 @@ test(&apos;Add a task and click checkoff&apos;, () =&gt; {
 });
 
 test(&apos;Reload the page with local storage&apos;, () =&gt; {
-  expect(tableLocation.children[1].children[1].textContent).toMatch(new RegExp(&apos;Write *Essay&apos;));
-  expect(tableLocation.children[1].children[2].textContent).toMatch(new RegExp(&apos;\\[0/ *2\\]&apos;));
+  expect(tableLocation.children[1].taskText.textContent).toMatch(new RegExp(&apos;Write *Essay&apos;));
+  expect(tableLocation.children[1].pomoSessions.textContent).toMatch(new RegExp(&apos;\\[0/ *2\\]&apos;));
 });
 
 test(&apos;Reload the page with completed task&apos;, () =&gt; {
-  expect(tableLocation.children[1].children[0].children[0].getAttribute(&apos;checked&apos;)).toEqual(&apos;true&apos;);
+  expect(tableLocation.children[1].checked).toEqual(true);
 });
 
 // Now has a task
-test(&apos;click remove button&apos;, () =&gt; {
+test(&apos;Clicking remove button should remove task from table and local storage&apos;, () =&gt; {
   tableLocation.children[1].children[3].children[0].click();
   expect(tableLocation.children[1]).toEqual(undefined);
   expect(window.localData.length).toEqual(0);
   localStorage.clear();
 });
 
-test(&apos;Increment session &apos;, () =&gt; {
+test(&apos;Incrementing session updates value accordingly&apos;, () =&gt; {
   formLocation.children[0].value = &apos;Write Essay&apos;;
   formLocation.children[1].value = 2;
   formLocation.submit();
@@ -124,13 +124,13 @@ test(&apos;Increment session &apos;, () =&gt; {
   localStorage.clear();
 });
 
-test(&apos;Add an invalid task&apos;, () =&gt; {
+test(&apos;Addding an invalid task causes an alert&apos;, () =&gt; {
   global.alert = jest.fn();
   formLocation.submit();
   expect(global.alert).toHaveBeenCalledTimes(1);
 });
 
-test(&apos;Delete all&apos;, () =&gt; {
+test(&apos;Delete all should remove from table and local storage&apos;, () =&gt; {
   formLocation.children[0].setAttribute(&apos;value&apos;, &apos;Write Essay&apos;);
   formLocation.children[1].value = 2;
   formLocation.submit();
