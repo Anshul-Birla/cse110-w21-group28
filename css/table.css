@@ -40,6 +40,7 @@ td {
 
 tr {
   margin-top: 20px;
+  min-height: 160px;
 }
 
 tr:nth-child(even) td {
@@ -156,12 +157,21 @@ tr.completedTask td {
   align-items: center;
 }
 
-.table-buttons button {
-  width: 100%
+/* .double-buttons button {
+  width: 100%;
+  max-height: 100%;
 }
-.table-buttons{
+.double-buttons{
   flex: content;
   align-items: center;
+} */
+
+.double-buttons button {
+  min-width: 100%;
+}
+
+.last-col-div{
+  max-height: 100%;
 }
 
 
@@ -175,12 +185,4 @@ tr.completedTask td {
     margin-top: 1%;
     padding-right: 20px;
   }
-}
-
-td button {
-  outline: none;
-  text-align: center;
-}
-td button div {
-  text-align: center;
 }

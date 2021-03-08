@@ -1,6 +1,5 @@
 import { ToDoList } from './ToDoList.js';
 import { HTMLAttributes, TaskStorage } from './TodoListDomVariables.js';
-
 import { Task } from './Task.js';
 
 /**
@@ -105,8 +104,13 @@ class TodoListDom {
    * Adds a task to the table of task
    * @param {HTMLTableRowElement} newTask
    */
-  displayTask(newTask) {
-    this.table.appendChild(newTask);
+  displayTask(newTask, index = 0) {
+    if (index === 0){
+      this.table.appendChild(newTask);
+    }
+    else {
+      this.table.insertBefore(newTask, this.table.childNodes[index]);
+    }
   }
 
   /**
@@ -117,6 +121,38 @@ class TodoListDom {
     if (currTask != null) {
       currTask.incrementSession();
     }
+  }
+
+  moveTaskToTop(id) {
+      const rows = this.table.childNodes;
+      let currentTaskIndex = -1;
+      for (let i = 2; i < rows.length; i += 1) {
+        if (rows[i].checked === false && currentTaskIndex === -1) {
+          currentTaskIndex = i;
+        }
+      }
+
+      clickedTask = this.todoList.getTaskById(id);
+      
+
+
+
+
+
+      const taskName = this.table.childNodes[clickedTaskIndex].name;
+      const totalSession = this.table.childNodes[clickedTaskIndex].
+      console.log(taskName);
+
+
+      // console.log(this.table.childNodes[clickedTaskIndex]);
+      // console.log(this.table.childNodes[currentTaskIndex]);
+
+      const task = new Task("temporary", "TEMP", 5, 0, false);
+      this.displayTask(task, currentTaskIndex);
+      
+      // this.table.deleteRow(clickedTaskIndex);
+      
+      // this.table.insertBefore
   }
 }
 

@@ -63,6 +63,9 @@ class Task extends HTMLTableRowElement {
      * @type {HTMLButtonElement}
      */
     this.deleteButton = this.setupDeleteButton();
+    this.threeDotsButton = this.setupThreeDotsButton();
+    this.focusButton = this.setupFocusButton();
+    this.setupLastColumnToggle(this.threeDotsButton, this.deleteButton, this.focusButton);
 
     /**
      * Keeps track if the task was deleted or not (used with the Todolist )
@@ -128,9 +131,7 @@ class Task extends HTMLTableRowElement {
    * @return {HTMLButtonElement}
    */
   setupDeleteButton() {
-    const lastCol = document.createElement('td');
     const deleteBtn = document.createElement('button');
-    deleteBtn.setAttribute('class', 'delete-button');
 
     deleteBtn.addEventListener('click', () => {
       this.deleted = true;
@@ -138,13 +139,59 @@ class Task extends HTMLTableRowElement {
       this.removeFromLocalStorage();
     });
 
-    deleteBtn.textContent = 'x';
-    lastCol.append(deleteBtn);
-    this.append(lastCol);
+    deleteBtn.textContent = 'Delete';
     return deleteBtn;
   }
 
-  setupThreeDots
+  setupFocusButton() {
+    const focusBtn = document.createElement('button');
+    focusBtn.addEventListener('click', () => {
+      this.threeDotsButton.parentElement.style.display = 'block';
+      focusBtn.parentElement.style.display = 'none';
+      const event = new CustomEvent('focus-task', {
+        bubbles: true,
+        composed: true,
+        detail: {
+          taskID: this.id,
+        },
+      });
+      document.body.dispatchEvent(event);
+    });
+    focusBtn.textContent = 'Focus';
+    return focusBtn;
+  }
+
+  setupThreeDotsButton() {
+    const button = document.createElement('button');
+    const threeDots = document.createElement('div');
+    threeDots.className = 'three-dots';
+    button.appendChild(threeDots);
+    button.addEventListener('click', () => {
+      button.parentElement.style.display = 'none';
+      this.deleteButton.parentElement.style.display = 'block';
+    });
+
+    return button;
+  }
+
+  setupLastColumnToggle(threeDotsButton, deleteButton,
+    focusButton) {
+    const lastCol = document.createElement('td');
+    const threeDotsDiv = document.createElement('div');
+    const deleteFocusDiv = document.createElement('div');
+    const mainDiv = document.createElement('div');
+    mainDiv.className = 'last-col-div';
+    deleteFocusDiv.className = 'double-buttons';
+    threeDotsDiv.appendChild(threeDotsButton);
+    deleteFocusDiv.appendChild(deleteButton);
+    deleteFocusDiv.appendChild(focusButton);
+    deleteFocusDiv.style.display = 'none';
+    mainDiv.appendChild(threeDotsDiv);
+    mainDiv.appendChild(deleteFocusDiv);
+    lastCol.appendChild(mainDiv);
+    this.appendChild(lastCol);
+  }
+
 
   /**
    * Removes a task from local storage given the id
