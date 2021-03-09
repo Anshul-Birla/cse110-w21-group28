@@ -39,5 +39,7 @@
 
 **Decisions made:** 
 + FAQ as a popup for consistency
++ collapsible for to hide/show table
+  + check off current task in div and table at the same time
 
 **When the meeting finished:** 8:30 pm
