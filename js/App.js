@@ -5,7 +5,8 @@ import { Statistics } from './Statistics/Statistics.js';
 import { Distraction } from './Distraction/Distraction.js';
 
 function after3amToday() {
-  return Date.prototype.getHours() >= 3;
+  const currDate = new Date();
+  return currDate.getHours() >= 3;
 }
 
 const timeDisplay = document.getElementById('timeDisplay');
@@ -61,8 +62,8 @@ TDLDom.todoList.addEventListener('task-deleted', (e) => {
 });
 
 DistractionPage.addEventListener('distraction-created', (e) => {
-  e.pomoSessionId = TimerObj.sessionId;
-  StatsPage.addDistraction(e.distraction);
+  e.detail.pomoSessionId = TimerObj.sessionId;
+  StatsPage.addDistraction(e.detail);
 });
 
 StatsPage.addEventListener('reset-timer', () => {

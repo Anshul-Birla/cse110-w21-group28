@@ -30,15 +30,15 @@ class Distraction extends HTMLElement {
     });
 
     this.submitButton.addEventListener('click', () => {
-      this.resetPopUp();
       const event = new CustomEvent('distraction-created', {
-        distraction: {
+        detail: {
           date: new Date(),
           description: this.description.value,
           pomoSessionId: null,
         },
       });
       this.dispatchEvent(event);
+      this.resetPopUp();
     });
   }
 
