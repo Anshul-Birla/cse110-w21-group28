@@ -128,7 +128,6 @@ class Statistics extends HTMLElement {
   }
 
   updateDom() {
-
     this.timePerTask.textContent = this.getAverageTimePerTask();
 
     this.tasksCompletedP.textContent = this.tasksCompleted;

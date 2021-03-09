@@ -75,16 +75,15 @@ statsButton.addEventListener('click', () => {
   StatsPage.updateDom();
   statsPopUp.style.display = 'block';
   parentDiv.style.display = 'block';
-    var isOpen = parentDiv.classList.contains('slide-out');
-    parentDiv.setAttribute('class', isOpen ? 'slide-in' : 'slide-out');
+  const isOpen = parentDiv.classList.contains('slide-out');
+  parentDiv.setAttribute('class', isOpen ? 'slide-in' : 'slide-out');
 });
 
 closeStatsButton.addEventListener('click', () => {
-  var isOpen = parentDiv.classList.contains('slide-out');
-    parentDiv.setAttribute('class', isOpen ? 'slide-in' : 'slide-out');
-    statsPopUp.style.display = "none";
+  const isOpen = parentDiv.classList.contains('slide-out');
+  parentDiv.setAttribute('class', isOpen ? 'slide-in' : 'slide-out');
+  statsPopUp.style.display = 'none';
 });
-
 
 if (after3amToday() && StatsPage.oldDistractionsExist()) {
   StatsPage.compressStats();

@@ -29,7 +29,7 @@ class Distraction extends HTMLElement {
       this.resetPopUp();
     });
 
-    this.submitButton.addEventListener('click', (e) => {
+    this.submitButton.addEventListener('click', () => {
       this.resetPopUp();
       const event = new CustomEvent('distraction-created', {
         distraction: {
@@ -48,7 +48,7 @@ class Distraction extends HTMLElement {
    */
   resetPopUp() {
     this.distractPopUp.style.display = 'none';
-    //document.getElementById('description').value = '';
+    // document.getElementById('description').value = '';
     this.description.value = '';
   }
 
