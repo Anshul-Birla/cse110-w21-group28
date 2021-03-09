@@ -3,10 +3,12 @@ import { Statistics } from '../js/Statistics/Statistics.js';
 /** @Test {ToDoList} */
 
 let Stats = new Statistics();
+document.body.innerHTML = '<div id="stats-info">'
++ '</div>';
 beforeEach(() => {
+  document.body.innerHTML = '<div id="stats-info">'
+  + '</div>';
   Stats = new Statistics();
-  document.body.innerHTML = '<div id="parentDiv">'
-    + '</div>';
 });
 
 afterEach(() => {
@@ -14,15 +16,6 @@ afterEach(() => {
 });
 
 describe('Variables function correctly', () => {
-  test('Everything is initialized to zeroes', () => {
-    expect(Stats.totalMins).toBe(0);
-    expect(Stats.workMins).toBe(0);
-    expect(Stats.tasksCompleted).toBe(0);
-    expect(Stats.distractionList.length).toBe(0);
-    expect(Stats.expectedPomoSessions).toBe(0);
-    expect(Stats.actualPomoSessions).toBe(0);
-  });
-
   test('Task completion increments count correctly', () => {
     Stats.incrementTasksCompleted();
     expect(Stats.tasksCompleted).toBe(1);
@@ -30,6 +23,22 @@ describe('Variables function correctly', () => {
       Stats.incrementTasksCompleted();
     }
     expect(Stats.tasksCompleted).toBe(5);
+  });
+
+  test('Task un-completion decrements count correctly', () => {
+    for (let i = 0; i <= 4; i += 1) {
+      Stats.incrementTasksCompleted();
+    }
+    Stats.decrementTasksCompleted();
+    expect(Stats.tasksCompleted).toBe(4);
+    for (let i = 0; i < 3; i += 1) {
+      Stats.decrementTasksCompleted();
+    }
+    expect(Stats.tasksCompleted).toBe(1);
+    Stats.decrementTasksCompleted();
+    expect(Stats.tasksCompleted).toBe(0);
+    Stats.decrementTasksCompleted();
+    expect(Stats.tasksCompleted).toBe(0);
   });
 
   test('Actual Pomo Session increments count correctly', () => {
@@ -48,6 +57,21 @@ describe('Variables function correctly', () => {
       Stats.addExpectedPomoSessions(2);
     }
     expect(Stats.expectedPomoSessions).toBe(13);
+  });
+
+  test('Estimated Pomo Session decrements count correctly', () => {
+    for (let i = 0; i <= 4; i += 1) {
+      Stats.addExpectedPomoSessions(2);
+    }
+    expect(Stats.expectedPomoSessions).toBe(10);
+    for (let i = 0; i < 4; i += 1) {
+      Stats.deleteExpectedPomoSessions(2);
+    }
+    expect(Stats.expectedPomoSessions).toBe(2);
+    Stats.deleteExpectedPomoSessions(2);
+    expect(Stats.expectedPomoSessions).toBe(0);
+    Stats.deleteExpectedPomoSessions(5);
+    expect(Stats.expectedPomoSessions).toBe(0);
   });
 
   test('Time Spent increments count correctly', () => {
@@ -212,11 +236,92 @@ describe('Variables function correctly', () => {
 
     expect(Stats.getAvgDistractionsPerTask()).toEqual(0.7); // ROUNDED FROM 0.67
   });
+
+  test('getMinDistractionDate returns correct date', () => {
+    Stats.addDistraction({
+      name: 'second distraction',
+      date: new Date(2021, 3, 3, 10, 35),
+      pomoSessionId: 1,
+    });
+    Stats.addDistraction({
+      name: 'third distraction',
+      date: new Date(2020, 9, 9, 12, 50),
+      pomoSessionId: 1,
+    });
+    Stats.addDistraction({
+      name: 'first distraction',
+      date: new Date(2021, 3, 3, 10, 30),
+      pomoSessionId: 0,
+    });
+    Stats.addDistraction({
+      name: 'fourth distraction',
+      date: new Date(2021, 3, 3, 10, 45),
+      pomoSessionId: 1,
+    });
+    expect(Stats.getMinDistractionDate().getMinutes()).toBe(50);
+  });
+
+  test('flushLocalStorage deletes all data older than a year', () => {
+    Stats.history.push({ // a few days ago
+      date: new Date(2021, 2, 3, 10, 35),
+      distractionCount: 1,
+      timeSpent: 1,
+    });
+    Stats.history.push({ // a few months ago (same year)
+      date: new Date(2021, 0, 1, 10, 35),
+      distractionCount: 1,
+      timeSpent: 1,
+    });
+    Stats.history.push({ // a few months ago (previous year)
+      date: new Date(2020, 2, 3, 10, 35),
+      distractionCount: 1,
+      timeSpent: 1,
+    });
+    Stats.history.push({ // more than a year ago (barely)
+      date: new Date(2020, 2, 1, 10, 35),
+      distractionCount: 1,
+      timeSpent: 1,
+    });
+    Stats.flushHistory();
+    expect(Stats.history.length).toBe(3);
+  });
 });
 
 describe('local storage tests', () => {
-  test('empty local storage initialized correctly', () => {
-    // TODO
+  beforeEach(() => {
+    document.body.innerHTML = '<div id="stats-info">'
+  + '</div>';
+    Stats = new Statistics();
+    localStorage.clear();
+  });
+
+  test('Everything is initialized to zeroes', () => {
+    expect(Stats.totalMins).toBe(0);
+    expect(Stats.workMins).toBe(0);
+    expect(Stats.tasksCompleted).toBe(0);
+    expect(Stats.distractionList.length).toBe(0);
+    expect(Stats.expectedPomoSessions).toBe(0);
+    expect(Stats.actualPomoSessions).toBe(0);
+  });
+
+  test('non-empty local storage initialized correctly', () => {
+    localStorage.setItem('totalMins', 1);
+    localStorage.setItem('workMins', 2);
+    localStorage.setItem('tasksCompleted', 3);
+    localStorage.setItem('expectedPomoSessions', 4);
+    localStorage.setItem('actualPomoSessions', 5);
+    localStorage.setItem('currDistractionList', JSON.stringify([{
+      name: 'fourth distraction',
+      date: new Date(2021, 3, 3, 10, 45),
+      pomoSessionId: 1,
+    }]));
+    Stats = new Statistics();
+    expect(Stats.totalMins).toBe(1);
+    expect(Stats.workMins).toBe(2);
+    expect(Stats.tasksCompleted).toBe(3);
+    expect(Stats.distractionList.length).toBe(1);
+    expect(Stats.expectedPomoSessions).toBe(4);
+    expect(Stats.actualPomoSessions).toBe(5);
   });
 
   test('Distraction compression commits earliest distraction date', () => {
