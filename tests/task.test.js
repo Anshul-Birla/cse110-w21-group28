@@ -6,12 +6,9 @@ beforeEach(() => {
   window.localData = [];
 });
 
-/** @Test {Task} */
-
 test('Test that task with no values is empty', () => {
   const currTask = new Task();
   expect(currTask.name).toBe(undefined);
-  // console.log(currTask.name);
   expect(currTask.checked).toBe(false);
   expect(currTask.currentSessionNum).toEqual(0);
   expect(currTask.totalSessions).toBe(undefined);
@@ -55,33 +52,17 @@ test('Increment counter only changes current session number', () => {
   expect(currTask.checked).toBe(false);
 });
 
-test('Increment counter works up to total sessions, task is completed at the end', () => {
+test('Incrementing past totalSessions is OK', () => {
   const currTask = new Task(0, 'Test task', 5);
   expect(currTask.name).toBe('Test task');
   expect(currTask.currentSessionNum).toBe(0);
   expect(currTask.totalSessions).toBe(5);
   expect(currTask.id == 0).toBeTruthy();
-  for (let i = 0; i < 5; i += 1) {
+  for (let i = 0; i < 6; i += 1) {
     currTask.incrementSession();
   }
-  expect(currTask.name).toBe('Test task');
-  expect(currTask.currentSessionNum).toBe(5);
-  expect(currTask.totalSessions).toBe(5);
-  expect(currTask.id == 0).toBeTruthy();
-  expect(currTask.checked).toBe(true);
-});
-
-test('Error is thrown after incrementing past totalSessions', () => {
-  const currTask = new Task(0, 'Test task', 5);
-  expect(currTask.name).toBe('Test task');
-  expect(currTask.currentSessionNum).toBe(0);
-  expect(currTask.totalSessions).toBe(5);
-  expect(currTask.id == 0).toBeTruthy();
-  for (let i = 0; i < 5; i += 1) {
-    currTask.incrementSession();
-  }
-  const taskIncSession = () => { currTask.incrementSession(); };
-  expect(taskIncSession).toThrow(RangeError);
+  expect(currTask.currentSessionNum).toBe(6);
+  expect(currTask.checked).toBe(false);
 });
 
 test('Test that Checkbox works properly', () => {
@@ -89,4 +70,28 @@ test('Test that Checkbox works properly', () => {
   currTask.checkBox.click();
   expect(currTask.checked).toBe(true);
   expect(currTask.className).toBe(classNames.completedTaskClassName);
+});
+
+test('Test that toggling checkbox works properly', () => {
+  const currTask = new Task(0, 'Test task', 5);
+  currTask.checkBox.click();
+  currTask.checkBox.click();
+  expect(currTask.checked).toBe(false);
+  expect(currTask.checkBox.checked).toBe(false);
+  expect(currTask.className).toBe(classNames.uncheckedTaskClassName);
+});
+
+test('Incrementing session of checked task should throw range error', () => {
+  const currTask = new Task(0, 'Test task', 5, 3, true);
+  const errIncrement = () => { currTask.incrementSession(); };
+  expect(errIncrement).toThrow('Increment checked Task');
+});
+
+test('Task Removed from Local Storage after delete is called', () => {
+  const task = new Task(0, 'Test task', 5, 3, true);
+  const task2 = new Task(1, 'Test task2', 5, 3, false);
+  window.localData = [['0']];
+  window.localData = [['1']];
+  task.removeFromLocalStorage();
+  expect(window.localData.length).toBe(1);
 });

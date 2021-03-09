@@ -1,6 +1,6 @@
 {
-  "coverage": "71.05%",
-  "expectCount": 76,
+  "coverage": "70.12%",
+  "expectCount": 77,
   "actualCount": 54,
   "files": {
     "js/App.js": {
@@ -46,9 +46,11 @@
       ]
     },
     "js/ToDoList/Task.js": {
-      "expectCount": 21,
-      "actualCount": 21,
-      "undocumentLines": []
+      "expectCount": 23,
+      "actualCount": 22,
+      "undocumentLines": [
+        17
+      ]
     },
     "js/ToDoList/TaskVariables.js": {
       "expectCount": 1,
@@ -58,8 +60,8 @@
       ]
     },
     "js/ToDoList/ToDoList.js": {
-      "expectCount": 8,
-      "actualCount": 8,
+      "expectCount": 7,
+      "actualCount": 7,
       "undocumentLines": []
     },
     "js/ToDoList/TodoListDom.js": {

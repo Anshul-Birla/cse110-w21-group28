@@ -49,23 +49,23 @@ test('Add a task and click checkoff', () => {
 });
 
 test('Reload the page with local storage', () => {
-  expect(tableLocation.children[1].children[1].textContent).toMatch(new RegExp('Write *Essay'));
-  expect(tableLocation.children[1].children[2].textContent).toMatch(new RegExp('\\[0/ *2\\]'));
+  expect(tableLocation.children[1].taskText.textContent).toMatch(new RegExp('Write *Essay'));
+  expect(tableLocation.children[1].pomoSessions.textContent).toMatch(new RegExp('\\[0/ *2\\]'));
 });
 
 test('Reload the page with completed task', () => {
-  expect(tableLocation.children[1].children[0].children[0].getAttribute('checked')).toEqual('true');
+  expect(tableLocation.children[1].checked).toEqual(true);
 });
 
 // Now has a task
-test('click remove button', () => {
+test('Clicking remove button should remove task from table and local storage', () => {
   tableLocation.children[1].children[3].children[0].click();
   expect(tableLocation.children[1]).toEqual(undefined);
   expect(window.localData.length).toEqual(0);
   localStorage.clear();
 });
 
-test('Increment session ', () => {
+test('Incrementing session updates value accordingly', () => {
   formLocation.children[0].value = 'Write Essay';
   formLocation.children[1].value = 2;
   formLocation.submit();
@@ -75,13 +75,13 @@ test('Increment session ', () => {
   localStorage.clear();
 });
 
-test('Add an invalid task', () => {
+test('Addding an invalid task causes an alert', () => {
   global.alert = jest.fn();
   formLocation.submit();
   expect(global.alert).toHaveBeenCalledTimes(1);
 });
 
-test('Delete all', () => {
+test('Delete all should remove from table and local storage', () => {
   formLocation.children[0].setAttribute('value', 'Write Essay');
   formLocation.children[1].value = 2;
   formLocation.submit();
