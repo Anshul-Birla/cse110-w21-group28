@@ -95,7 +95,7 @@ class TodoListDom {
     this.deleteAllBtn.addEventListener('click', () => {
       const list = this.todoList.taskList;
       for (let i = 0; i < list.length; i += 1) {
-        list[i].children[3].children[0].click();
+        list[i].deleteButton.click();
       }
     });
   }
@@ -105,7 +105,7 @@ class TodoListDom {
    * @param {HTMLTableRowElement} newTask
    */
   displayTask(newTask, index = 0) {
-    if (index === 0){
+    if (index === 0) {
       this.table.appendChild(newTask);
     }
     else {
@@ -132,27 +132,11 @@ class TodoListDom {
         }
       }
 
-      clickedTask = this.todoList.getTaskById(id);
-      
+      let clickedTask = this.todoList.getTaskById(id);
+      this.displayTask(clickedTask, currentTaskIndex);
 
-
-
-
-
-      const taskName = this.table.childNodes[clickedTaskIndex].name;
-      const totalSession = this.table.childNodes[clickedTaskIndex].
-      console.log(taskName);
-
-
-      // console.log(this.table.childNodes[clickedTaskIndex]);
-      // console.log(this.table.childNodes[currentTaskIndex]);
-
-      const task = new Task("temporary", "TEMP", 5, 0, false);
-      this.displayTask(task, currentTaskIndex);
-      
-      // this.table.deleteRow(clickedTaskIndex);
-      
-      // this.table.insertBefore
+      this.todoList.removeTask(id);
+      this.todoList.addTaskToTop(clickedTask);
   }
 }
 

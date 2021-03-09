@@ -86,6 +86,27 @@ class ToDoList {
     }
     return null;
   }
+
+  removeTask(id) {
+    let index = -1;
+    for (let i = 0; i < this.taskList.length; i+=1) {
+      if (this.taskList[i].id == id) index = i;
+    }
+
+    if(index != -1) {
+      this.taskList.splice(index, 1);
+      return true;
+    }
+    else {
+      return false; 
+    }
+  }
+
+  addTaskToTop(task) {
+    this.taskList.unshift(task);
+  };
+
+
 }
 
 export { ToDoList };
