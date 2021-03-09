@@ -33,6 +33,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-buttonText">buttonText</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-classNames">classNames</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-longBreakMode">longBreakMode</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-sessionStartName">sessionStartName</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-shortBreakMode">shortBreakMode</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-workMode">workMode</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#todolist">ToDoList</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/ToDoList/Task.js~Task.html">Task</a></span></span></li>
@@ -40,6 +41,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/ToDoList/TodoListDom.js~TodoListDom.html">TodoListDom</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-classNames">classNames</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-HTMLAttributes">HTMLAttributes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-TaskStorage">TaskStorage</a></span></span></li>
 </ul>
 </div>
 </nav>
@@ -54,79 +56,91 @@
   </thead>
 
   <tbody data-ice="tests"><tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="0">
-  <td data-ice="testDescription" style="padding-left: 10px"><span><a href="test-file/tests/task.test.js.html#lineNumber7"><p>Test that task with no values is empty</p>
+  <td data-ice="testDescription" style="padding-left: 10px"><span><a href="test-file/tests/task.test.js.html#lineNumber9"><p>Test that task with no values is empty</p>
 </a></span></td>
   <td data-ice="testTarget" class="test-target">-</td>
 </tr>
 
 <tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="0">
-  <td data-ice="testDescription" style="padding-left: 10px"><span><a href="test-file/tests/task.test.js.html#lineNumber17"><p>Test that task with initialized values is initialized correctly</p>
+  <td data-ice="testDescription" style="padding-left: 10px"><span><a href="test-file/tests/task.test.js.html#lineNumber18"><p>Test that task with initialized values is initialized correctly</p>
 </a></span></td>
   <td data-ice="testTarget" class="test-target">-</td>
 </tr>
 
 <tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="0">
-  <td data-ice="testDescription" style="padding-left: 10px"><span><a href="test-file/tests/task.test.js.html#lineNumber27"><p>Increment counter only changes current session number</p>
+  <td data-ice="testDescription" style="padding-left: 10px"><span><a href="test-file/tests/task.test.js.html#lineNumber29"><p>Test that task with optional initilized values is initialized correctly</p>
 </a></span></td>
   <td data-ice="testTarget" class="test-target">-</td>
 </tr>
 
 <tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="0">
-  <td data-ice="testDescription" style="padding-left: 10px"><span><a href="test-file/tests/task.test.js.html#lineNumber42"><p>Increment counter works up to total sessions, task is completed at the end</p>
+  <td data-ice="testDescription" style="padding-left: 10px"><span><a href="test-file/tests/task.test.js.html#lineNumber40"><p>Increment counter only changes current session number</p>
 </a></span></td>
   <td data-ice="testTarget" class="test-target">-</td>
 </tr>
 
 <tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="0">
-  <td data-ice="testDescription" style="padding-left: 10px"><span><a href="test-file/tests/task.test.js.html#lineNumber58"><p>Error is thrown after incrementing past totalSessions</p>
+  <td data-ice="testDescription" style="padding-left: 10px"><span><a href="test-file/tests/task.test.js.html#lineNumber56"><p>Incrementing past totalSessions is OK</p>
 </a></span></td>
   <td data-ice="testTarget" class="test-target">-</td>
 </tr>
 
 <tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="0">
-  <td data-ice="testDescription" style="padding-left: 10px"><span><a href="test-file/tests/task.test.js.html#lineNumber71"><p>Test that Checkbox works properly</p>
+  <td data-ice="testDescription" style="padding-left: 10px"><span><a href="test-file/tests/task.test.js.html#lineNumber69"><p>Test that Checkbox works properly</p>
 </a></span></td>
   <td data-ice="testTarget" class="test-target">-</td>
 </tr>
 
 <tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="0">
-  <td data-ice="testDescription" style="padding-left: 10px"><span><a href="test-file/tests/timer.test.js.html#lineNumber16"><p>Test Initial State is Nothing</p>
+  <td data-ice="testDescription" style="padding-left: 10px"><span><a href="test-file/tests/task.test.js.html#lineNumber76"><p>Incrementing session of checked task should throw range error</p>
 </a></span></td>
   <td data-ice="testTarget" class="test-target">-</td>
 </tr>
 
 <tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="0">
-  <td data-ice="testDescription" style="padding-left: 10px"><span><a href="test-file/tests/timer.test.js.html#lineNumber22"><p>Test First Iteration of Timer</p>
+  <td data-ice="testDescription" style="padding-left: 10px"><span><a href="test-file/tests/task.test.js.html#lineNumber82"><p>Task Removed from Local Storage after delete is called</p>
 </a></span></td>
   <td data-ice="testTarget" class="test-target">-</td>
 </tr>
 
 <tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="0">
-  <td data-ice="testDescription" style="padding-left: 10px"><span><a href="test-file/tests/timer.test.js.html#lineNumber31"><p>Test That Queue Gets Updated During Second Iteration Of Timer</p>
+  <td data-ice="testDescription" style="padding-left: 10px"><span><a href="test-file/tests/timer.test.js.html#lineNumber17"><p>Test Initial State is Nothing</p>
 </a></span></td>
   <td data-ice="testTarget" class="test-target">-</td>
 </tr>
 
 <tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="0">
-  <td data-ice="testDescription" style="padding-left: 10px"><span><a href="test-file/tests/timer.test.js.html#lineNumber45"><p>Test That HTML Gets Updated During Second </p>
+  <td data-ice="testDescription" style="padding-left: 10px"><span><a href="test-file/tests/timer.test.js.html#lineNumber23"><p>Test First Iteration of Timer</p>
 </a></span></td>
   <td data-ice="testTarget" class="test-target">-</td>
 </tr>
 
 <tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="0">
-  <td data-ice="testDescription" style="padding-left: 10px"><span><a href="test-file/tests/timer.test.js.html#lineNumber58"><p>Test That Start Button Functions Properly </p>
+  <td data-ice="testDescription" style="padding-left: 10px"><span><a href="test-file/tests/timer.test.js.html#lineNumber32"><p>Test That Queue Gets Updated During Second Iteration Of Timer</p>
 </a></span></td>
   <td data-ice="testTarget" class="test-target">-</td>
 </tr>
 
 <tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="0">
-  <td data-ice="testDescription" style="padding-left: 10px"><span><a href="test-file/tests/timer.test.js.html#lineNumber69"><p>Test That Clicking Start Twice Changes HTML </p>
+  <td data-ice="testDescription" style="padding-left: 10px"><span><a href="test-file/tests/timer.test.js.html#lineNumber46"><p>Test That HTML Gets Updated During Second </p>
 </a></span></td>
   <td data-ice="testTarget" class="test-target">-</td>
 </tr>
 
 <tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="0">
-  <td data-ice="testDescription" style="padding-left: 10px"><span><a href="test-file/tests/timer.test.js.html#lineNumber82"><p>Test That Timer Resets Properly When End Day is Clicked</p>
+  <td data-ice="testDescription" style="padding-left: 10px"><span><a href="test-file/tests/timer.test.js.html#lineNumber59"><p>Test That Start Button Functions Properly </p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+</tr>
+
+<tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="0">
+  <td data-ice="testDescription" style="padding-left: 10px"><span><a href="test-file/tests/timer.test.js.html#lineNumber70"><p>Test That Clicking Start Twice Changes HTML </p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+</tr>
+
+<tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="0">
+  <td data-ice="testDescription" style="padding-left: 10px"><span><a href="test-file/tests/timer.test.js.html#lineNumber83"><p>Test That Timer Resets Properly When End Day is Clicked</p>
 </a></span></td>
   <td data-ice="testTarget" class="test-target">-</td>
 </tr>
@@ -156,73 +170,103 @@
 </tr>
 
 <tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="0">
-  <td data-ice="testDescription" style="padding-left: 10px"><span><a href="test-file/tests/todolist.test.js.html#lineNumber37"><p>Adding undefined Pomo Length Task</p>
+  <td data-ice="testDescription" style="padding-left: 10px"><span><a href="test-file/tests/todolist.test.js.html#lineNumber36"><p>Adding undefined Pomo Length Task</p>
 </a></span></td>
   <td data-ice="testTarget" class="test-target">-</td>
 </tr>
 
 <tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="0">
-  <td data-ice="testDescription" style="padding-left: 10px"><span><a href="test-file/tests/todolist.test.js.html#lineNumber44"><p>Adding Task w/o name</p>
+  <td data-ice="testDescription" style="padding-left: 10px"><span><a href="test-file/tests/todolist.test.js.html#lineNumber42"><p>Adding Task w/o name</p>
 </a></span></td>
   <td data-ice="testTarget" class="test-target">-</td>
 </tr>
 
 <tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="0">
-  <td data-ice="testDescription" style="padding-left: 10px"><span><a href="test-file/tests/todolist.test.js.html#lineNumber51"><p>Adding Task w/ empty name</p>
+  <td data-ice="testDescription" style="padding-left: 10px"><span><a href="test-file/tests/todolist.test.js.html#lineNumber48"><p>Adding Task w/ empty name</p>
 </a></span></td>
   <td data-ice="testTarget" class="test-target">-</td>
 </tr>
 
 <tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="0">
-  <td data-ice="testDescription" style="padding-left: 10px"><span><a href="test-file/tests/todolist.test.js.html#lineNumber58"><p>Adding Task w/ NaN for PomoSession</p>
+  <td data-ice="testDescription" style="padding-left: 10px"><span><a href="test-file/tests/todolist.test.js.html#lineNumber54"><p>Adding Task w/ NaN for PomoSession</p>
 </a></span></td>
   <td data-ice="testTarget" class="test-target">-</td>
 </tr>
 
 <tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="0">
-  <td data-ice="testDescription" style="padding-left: 10px"><span><a href="test-file/tests/todolist.test.js.html#lineNumber65"><p>Get currentTask</p>
+  <td data-ice="testDescription" style="padding-left: 10px"><span><a href="test-file/tests/todolist.test.js.html#lineNumber60"><p>Get currentTask</p>
 </a></span></td>
   <td data-ice="testTarget" class="test-target">-</td>
 </tr>
 
 <tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="0">
-  <td data-ice="testDescription" style="padding-left: 10px"><span><a href="test-file/tests/todolist.test.js.html#lineNumber74"><p>Get currentTask on empty list</p>
+  <td data-ice="testDescription" style="padding-left: 10px"><span><a href="test-file/tests/todolist.test.js.html#lineNumber68"><p>Get currentTask on empty list should be null</p>
 </a></span></td>
   <td data-ice="testTarget" class="test-target">-</td>
 </tr>
 
 <tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="0">
-  <td data-ice="testDescription" style="padding-left: 10px"><span><a href="test-file/tests/todolist.test.js.html#lineNumber81"><p>Get currentTask on list with all completed elements</p>
+  <td data-ice="testDescription" style="padding-left: 10px"><span><a href="test-file/tests/todolist.test.js.html#lineNumber73"><p>Get currentTask on list with all completed elements should be null</p>
 </a></span></td>
   <td data-ice="testTarget" class="test-target">-</td>
 </tr>
 
 <tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="0">
-  <td data-ice="testDescription" style="padding-left: 10px"><span><a href="test-file/tests/todolist.test.js.html#lineNumber90"><p>Preserve special characters in task name</p>
+  <td data-ice="testDescription" style="padding-left: 10px"><span><a href="test-file/tests/todolist.test.js.html#lineNumber80"><p>Preserve special characters in task name</p>
 </a></span></td>
   <td data-ice="testTarget" class="test-target">-</td>
 </tr>
 
 <tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="0">
-  <td data-ice="testDescription" style="padding-left: 10px"><span><a href="test-file/tests/todolistdom.test.js.html#lineNumber27"><p>Valid construction of TDLDom</p>
+  <td data-ice="testDescription" style="padding-left: 10px"><span><a href="test-file/tests/todolist.test.js.html#lineNumber90"><p>Deleted Task do not come up as current task</p>
 </a></span></td>
   <td data-ice="testTarget" class="test-target">-</td>
 </tr>
 
 <tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="0">
-  <td data-ice="testDescription" style="padding-left: 10px"><span><a href="test-file/tests/todolistdom.test.js.html#lineNumber35"><p>Add a task</p>
+  <td data-ice="testDescription" style="padding-left: 10px"><span><a href="test-file/tests/todolistdom.test.js.html#lineNumber38"><p>Valid construction of TDLDom</p>
 </a></span></td>
   <td data-ice="testTarget" class="test-target">-</td>
 </tr>
 
 <tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="0">
-  <td data-ice="testDescription" style="padding-left: 10px"><span><a href="test-file/tests/todolistdom.test.js.html#lineNumber47"><p>Increment session </p>
+  <td data-ice="testDescription" style="padding-left: 10px"><span><a href="test-file/tests/todolistdom.test.js.html#lineNumber42"><p>Add a task and click checkoff</p>
 </a></span></td>
   <td data-ice="testTarget" class="test-target">-</td>
 </tr>
 
 <tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="0">
-  <td data-ice="testDescription" style="padding-left: 10px"><span><a href="test-file/tests/todolistdom.test.js.html#lineNumber60"><p>Show and hide form</p>
+  <td data-ice="testDescription" style="padding-left: 10px"><span><a href="test-file/tests/todolistdom.test.js.html#lineNumber51"><p>Reload the page with local storage</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+</tr>
+
+<tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="0">
+  <td data-ice="testDescription" style="padding-left: 10px"><span><a href="test-file/tests/todolistdom.test.js.html#lineNumber56"><p>Reload the page with completed task</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+</tr>
+
+<tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="0">
+  <td data-ice="testDescription" style="padding-left: 10px"><span><a href="test-file/tests/todolistdom.test.js.html#lineNumber61"><p>Clicking remove button should remove task from table and local storage</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+</tr>
+
+<tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="0">
+  <td data-ice="testDescription" style="padding-left: 10px"><span><a href="test-file/tests/todolistdom.test.js.html#lineNumber68"><p>Incrementing session updates value accordingly</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+</tr>
+
+<tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="0">
+  <td data-ice="testDescription" style="padding-left: 10px"><span><a href="test-file/tests/todolistdom.test.js.html#lineNumber78"><p>Addding an invalid task causes an alert</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+</tr>
+
+<tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="0">
+  <td data-ice="testDescription" style="padding-left: 10px"><span><a href="test-file/tests/todolistdom.test.js.html#lineNumber84"><p>Delete all should remove from table and local storage</p>
 </a></span></td>
   <td data-ice="testTarget" class="test-target">-</td>
 </tr>

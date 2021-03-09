@@ -4,6 +4,7 @@ import {
 } from '../js/Timer/TimerVariables';
 
 beforeEach(() => {
+  window.localData = [];
   document.body.innerHTML = '<div>'
   + '  <p id="displayTime"></p>'
   + ' <p id="displayStatus"></p>'

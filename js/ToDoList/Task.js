@@ -1,4 +1,5 @@
 import { classNames } from './TaskVariables.js';
+import { TaskStorage } from './TodoListDomVariables.js';
 
 /**
  * Task object, stores its id, task name, total expected Pomo Sessions to complete the Task,
@@ -11,11 +12,12 @@ class Task extends HTMLTableRowElement {
   * @param {String} name Name of the task
   * @param {Number} totalSessions Total sessions the task should take
   */
-  constructor(id, name, totalSessions) {
+  constructor(id, name, totalSessions, currentSession = 0, completed = false) {
     super();
+    this.className = classNames.uncheckedTaskClassName;
     /**
      * Stores the id of the task
-     * @type {Number}
+     * @type {String}
      */
     this.id = id;
     /**
@@ -32,19 +34,19 @@ class Task extends HTMLTableRowElement {
      * Stores the total amount of sessions spent working on the task
      * @type {Number}
      */
-    this.currentSessionNum = 0;
+    this.currentSessionNum = currentSession;
     /**
      * Stores if the task has been checked off or not
      * @type {Boolean}
      */
-    this.checked = false;
-    this.setAttribute('class', classNames.uncheckedTaskClassName);
+    this.checked = completed;
 
     /**
      * The checkbox attribute for the task
      * @type {HTMLInputElement}
      */
     this.checkBox = this.setupCheckBox();
+
     /**
      * Stores the view that shows the task name to the user
      * @type {HTMLTableDataCellElement}
@@ -56,8 +58,16 @@ class Task extends HTMLTableRowElement {
      * @type {HTMLTableDataCellElement}
      */
     this.pomoSessions = this.setupTotalPomoSessions();
-
+    /**
+     * The delete button for the task
+     * @type {HTMLButtonElement}
+     */
     this.deleteButton = this.setupDeleteButton();
+
+    /**
+     * Keeps track if the task was deleted or not (used with the Todolist )
+     */
+    this.deleted = false;
   }
 
   /**
@@ -69,17 +79,25 @@ class Task extends HTMLTableRowElement {
     const checkBox = document.createElement('input');
     checkBox.setAttribute('type', 'checkbox');
     checkBox.setAttribute('id', `checkbox-${this.id}`);
+    checkBox.setAttribute('class', 'custom_checkbox');
     firstCol.appendChild(checkBox);
     this.appendChild(firstCol);
 
+    if (this.checked) {
+      this.setAttribute('class', classNames.completedTaskClassName);
+      checkBox.checked = true;
+    }
+
     checkBox.addEventListener('click', () => {
-      this.checkOffTask();
+      if (!this.checked) {
+        this.checkOffTask();
+      } else { this.uncheckTask(); }
     });
     return checkBox;
   }
 
   /**
-   * This sets up the view that will display the taks name
+   * This sets up the view that will display the task name
    * @returns {HTMLTableDataCellElement}
    */
   setupTaskText() {
@@ -104,17 +122,39 @@ class Task extends HTMLTableRowElement {
 
   /**
    *
-   * This sets up the delete button for a tasl
-   * @return {HTMLTableDataCellElement}
+   * This sets up the delete button for a task
+   * Delete only works visually, doesn't remove it from the TodoList
+   * Data Structure
+   * @return {HTMLButtonElement}
    */
   setupDeleteButton() {
     const lastCol = document.createElement('td');
     const deleteBtn = document.createElement('button');
-    deleteBtn.className = 'delete-button';
+    deleteBtn.setAttribute('class', 'delete-button');
+
+    deleteBtn.addEventListener('click', () => {
+      this.deleted = true;
+      this.remove();
+      this.removeFromLocalStorage();
+    });
+
     deleteBtn.textContent = 'x';
-    lastCol.appendChild(deleteBtn);
-    this.appendChild(lastCol);
-    return lastCol;
+    lastCol.append(deleteBtn);
+    this.append(lastCol);
+    return deleteBtn;
+  }
+
+  /**
+   * Removes a task from local storage given the id
+   */
+  removeFromLocalStorage() {
+    for (let i = 0; i < window.localData.length; i += 1) {
+      if (window.localData[i][TaskStorage.idIndex] === this.id) {
+        window.localData.splice(i, 1);
+      }
+    }
+    this.deleted = true;
+    localStorage.setItem('tasks', JSON.stringify(window.localData));
   }
 
   /**
@@ -139,15 +179,26 @@ class Task extends HTMLTableRowElement {
    */
   incrementSession() {
     if (this.checked) {
-      throw (new RangeError());
+      throw (new RangeError('Increment checked Task'));
     }
 
     this.currentSessionNum += 1;
     this.updatePomoSessions();
 
-    if (this.currentSessionNum === this.totalSessions) {
-      this.checkOffTask();
+    this.updateLocalStorage();
+  }
+
+  /**
+   * This updates the localStorage whenever session increases or checked off
+   */
+  updateLocalStorage() {
+    for (let i = 0; i < window.localData.length; i += 1) {
+      if (window.localData[i][TaskStorage.idIndex] === this.id) {
+        window.localData[i][TaskStorage.currentSessionIndex] = this.currentSessionNum;
+        window.localData[i][TaskStorage.checkedIndex] = this.checked;
+      }
     }
+    localStorage.setItem('tasks', JSON.stringify(window.localData));
   }
 
   /**
@@ -160,6 +211,13 @@ class Task extends HTMLTableRowElement {
     });
 
     this.dispatchEvent(event);
+    this.updateLocalStorage();
+  }
+
+  uncheckTask() {
+    this.checked = false;
+    this.setAttribute('class', classNames.uncheckedTaskClassName);
+    this.updateLocalStorage();
   }
 }
 

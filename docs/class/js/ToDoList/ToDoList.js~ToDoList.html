@@ -33,6 +33,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-buttonText">buttonText</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-classNames">classNames</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-longBreakMode">longBreakMode</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-sessionStartName">sessionStartName</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-shortBreakMode">shortBreakMode</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-workMode">workMode</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#todolist">ToDoList</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/ToDoList/Task.js~Task.html">Task</a></span></span></li>
@@ -40,6 +41,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/ToDoList/TodoListDom.js~TodoListDom.html">TodoListDom</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-classNames">classNames</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-HTMLAttributes">HTMLAttributes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-TaskStorage">TaskStorage</a></span></span></li>
 </ul>
 </div>
 </nav>
@@ -236,13 +238,13 @@ to give each task a unique id</p>
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/js/ToDoList/ToDoList.js~ToDoList.html#instance-method-getCurrentTask">getCurrentTask</a></span></span><span class="code" data-ice="signature">(): <span><a href="class/js/ToDoList/Task.js~Task.html">Task</a></span></span>
+          <span class="code" data-ice="name"><span><a href="class/js/ToDoList/ToDoList.js~ToDoList.html#instance-method-addTaskToLocalStorage">addTaskToLocalStorage</a></span></span><span class="code" data-ice="signature">(task: <span><a href="class/js/ToDoList/Task.js~Task.html">Task</a></span>)</span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p>Gets the first unchecked task</p>
+        <div data-ice="description"><p>Adds a task to local storage</p>
 </div>
       </div>
     </td>
@@ -265,14 +267,13 @@ to give each task a unique id</p>
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/js/ToDoList/ToDoList.js~ToDoList.html#instance-method-onSessionComplete">onSessionComplete</a></span></span><span class="code" data-ice="signature">()</span>
+          <span class="code" data-ice="name"><span><a href="class/js/ToDoList/ToDoList.js~ToDoList.html#instance-method-getCurrentTask">getCurrentTask</a></span></span><span class="code" data-ice="signature">(): <span><a href="class/js/ToDoList/Task.js~Task.html">Task</a></span></span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p>Called by the Timer function when a session is done
-Increments the current task</p>
+        <div data-ice="description"><p>Gets the first unchecked task in the todolist.</p>
 </div>
       </div>
     </td>
@@ -539,6 +540,66 @@ to give each task a unique id</p>
   
 </div>
 <div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-method-addTaskToLocalStorage">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    
+    <span class="code" data-ice="name">addTaskToLocalStorage</span><span class="code" data-ice="signature">(task: <span><a href="class/js/ToDoList/Task.js~Task.html">Task</a></span>)</span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/js/ToDoList/ToDoList.js.html#lineNumber62">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>Adds a task to local storage</p>
+</div>
+
+  
+
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">task</td>
+      <td data-ice="type" class="code"><span><a href="class/js/ToDoList/Task.js~Task.html">Task</a></span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+</tbody>
+  </table>
+</div>
+</div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
   <h3 data-ice="anchor" id="instance-method-getCurrentTask">
     <span class="access" data-ice="access">public</span>
     
@@ -550,14 +611,15 @@ to give each task a unique id</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/js/ToDoList/ToDoList.js.html#lineNumber64">source</a></span></span>
+      <span data-ice="source"><span><a href="file/js/ToDoList/ToDoList.js.html#lineNumber74">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>Gets the first unchecked task</p>
+  <div data-ice="description"><p>Gets the first unchecked task in the todolist.
+Returns null if no such task exists</p>
 </div>
 
   
@@ -571,7 +633,7 @@ to give each task a unique id</p>
       <tbody>
         <tr>
           <td class="return-type code" data-ice="returnType"><span><a href="class/js/ToDoList/Task.js~Task.html">Task</a></span></td>
-          <td class="return-desc" data-ice="returnDescription"><p>First unchecked task in the list</p>
+          <td class="return-desc" data-ice="returnDescription"><p>First unchecked task in list</p>
 </td>
         </tr>
       </tbody>
@@ -579,68 +641,6 @@ to give each task a unique id</p>
     <div data-ice="returnProperties">
 </div>
   </div>
-
-  
-
-  
-
-  <div data-ice="throwWrap">
-    <h4>Throw:</h4>
-    <table>
-      <tbody>
-      
-      <tr class="throw" data-ice="throw">
-        <td><p data-ice="throwName"><span>&apos;Empty ToDo List&apos;</span></p></td>
-        <td data-ice="throwDesc"><p>No tasks can be checked off if no tasks exist</p>
-</td>
-      </tr>
-<tr class="throw" data-ice="throw">
-        <td><p data-ice="throwName"><span>&apos;No Current Task&apos;</span></p></td>
-        <td data-ice="throwDesc"><p>All tasks in the list have been checked off</p>
-</td>
-      </tr>
-</tbody>
-    </table>
-  </div>
-
-  
-
-  
-
-  
-
-  
-  
-</div>
-<div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-method-onSessionComplete">
-    <span class="access" data-ice="access">public</span>
-    
-    
-    
-    
-    
-    <span class="code" data-ice="name">onSessionComplete</span><span class="code" data-ice="signature">()</span>
-    <span class="right-info">
-      
-      
-      <span data-ice="source"><span><a href="file/js/ToDoList/ToDoList.js.html#lineNumber80">source</a></span></span>
-    </span>
-  </h3>
-
-  
-  
-  
-  <div data-ice="description"><p>Called by the Timer function when a session is done
-Increments the current task</p>
-</div>
-
-  
-
-  <div data-ice="properties">
-</div>
-
-  
 
   
 

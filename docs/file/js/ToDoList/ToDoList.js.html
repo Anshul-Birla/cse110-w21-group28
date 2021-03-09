@@ -33,6 +33,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-buttonText">buttonText</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-classNames">classNames</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-longBreakMode">longBreakMode</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-sessionStartName">sessionStartName</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-shortBreakMode">shortBreakMode</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-workMode">workMode</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#todolist">ToDoList</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/ToDoList/Task.js~Task.html">Task</a></span></span></li>
@@ -40,6 +41,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/ToDoList/TodoListDom.js~TodoListDom.html">TodoListDom</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-classNames">classNames</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-HTMLAttributes">HTMLAttributes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-TaskStorage">TaskStorage</a></span></span></li>
 </ul>
 </div>
 </nav>
@@ -97,37 +99,36 @@ class ToDoList {
     const task = new Task(this.idCounter, name, totalSession);
     this.idCounter += 1;
     this.taskList.push(task);
+    this.addTaskToLocalStorage(task);
     return task;
   }
 
   /**
-   * Gets the first unchecked task
-   *
-   * @returns {Task} First unchecked task in the list
-   *
-   * @throws {&apos;Empty ToDo List&apos;} No tasks can be checked off if no tasks exist
-   * @throws {&apos;No Current Task&apos;} All tasks in the list have been checked off
+   * Adds a task to local storage
+   *  @param {Task} task
    */
-  getCurrentTask() {
-    if (this.taskList.length === 0) {
-      throw new Error(&apos;Empty ToDo List&apos;);
-    }
-    for (let i = 0; i &lt; this.taskList.length; i += 1) {
-      if (!this.taskList[i].checked) {
-        return this.taskList[i];
-      }
-    }
-    throw new Error(&apos;No Current Task&apos;);
+  // eslint-disable-next-line class-methods-use-this
+  addTaskToLocalStorage(task) {
+    const arr = [task.id, task.name, task.totalSessions, task.currentSessionNum, task.checked];
+    window.localData.push(arr);
+    localStorage.setItem(&apos;tasks&apos;, JSON.stringify(window.localData));
   }
 
   /**
-   * Called by the Timer function when a session is done
-   * Increments the current task
+   * Gets the first unchecked task in the todolist.
+   * Returns null if no such task exists
+   * @returns {Task} First unchecked task in list
+   *
    */
-  onSessionComplete() {
-    const currTask = this.getCurrentTask();
-    currTask.incrementSession();
+  getCurrentTask() {
+    for (let i = 0; i &lt; this.taskList.length; i += 1) {
+      if (!this.taskList[i].checked &amp;&amp; !this.taskList[i].deleted) {
+        return this.taskList[i];
+      }
+    }
+    return null;
   }
+
 }
 
 export { ToDoList };

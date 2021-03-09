@@ -63,36 +63,34 @@ class ToDoList extends HTMLElement {
     this.dispatchEvent(event);
     this.idCounter += 1;
     this.taskList.push(task);
+    this.addTaskToLocalStorage(task);
     return task;
   }
 
   /**
-   * Gets the first unchecked task
-   *
-   * @returns {Task} First unchecked task in the list
-   *
-   * @throws {'Empty ToDo List'} No tasks can be checked off if no tasks exist
-   * @throws {'No Current Task'} All tasks in the list have been checked off
+   * Adds a task to local storage
+   *  @param {Task} task
    */
-  getCurrentTask() {
-    if (this.taskList.length === 0) {
-      throw new Error('Empty ToDo List');
-    }
-    for (let i = 0; i < this.taskList.length; i += 1) {
-      if (!this.taskList[i].checked) {
-        return this.taskList[i];
-      }
-    }
-    throw new Error('No Current Task');
+  // eslint-disable-next-line class-methods-use-this
+  addTaskToLocalStorage(task) {
+    const arr = [task.id, task.name, task.totalSessions, task.currentSessionNum, task.checked];
+    window.localData.push(arr);
+    localStorage.setItem('tasks', JSON.stringify(window.localData));
   }
 
   /**
-   * Called by the Timer function when a session is done
-   * Increments the current task
+   * Gets the first unchecked task in the todolist.
+   * Returns null if no such task exists
+   * @returns {Task} First unchecked task in list
+   *
    */
-  onSessionComplete() {
-    const currTask = this.getCurrentTask();
-    currTask.incrementSession();
+  getCurrentTask() {
+    for (let i = 0; i < this.taskList.length; i += 1) {
+      if (!this.taskList[i].checked && !this.taskList[i].deleted) {
+        return this.taskList[i];
+      }
+    }
+    return null;
   }
 }
 

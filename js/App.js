@@ -23,9 +23,10 @@ const description = document.getElementById('description');
 const statsPopUp = document.getElementById('stats-section');
 const parentDiv = document.getElementById('parentDiv');
 const closeStatsButton = document.getElementById('close-stats-button');
+const deleteAllButton = document.getElementById('delete-all-button');
 
 const StatsPage = new Statistics();
-const TDLDom = new TodoListDom(todoTable, addTodoForm, addTodoButton);
+const TDLDom = new TodoListDom(todoTable, addTodoForm, addTodoButton, deleteAllButton);
 const TimerObj = new Timer(startTimerButton, timeDisplay, modeDisplay);
 // eslint-disable-next-line max-len
 const DistractionPage = new Distraction(distractButton, distractPopUp, cancelButton, submitButton, description);

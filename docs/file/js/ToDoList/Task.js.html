@@ -33,6 +33,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-buttonText">buttonText</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-classNames">classNames</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-longBreakMode">longBreakMode</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-sessionStartName">sessionStartName</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-shortBreakMode">shortBreakMode</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-workMode">workMode</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#todolist">ToDoList</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/ToDoList/Task.js~Task.html">Task</a></span></span></li>
@@ -40,12 +41,14 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/ToDoList/TodoListDom.js~TodoListDom.html">TodoListDom</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-classNames">classNames</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-HTMLAttributes">HTMLAttributes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-TaskStorage">TaskStorage</a></span></span></li>
 </ul>
 </div>
 </nav>
 
 <div class="content" data-ice="content"><h1 data-ice="title">js/ToDoList/Task.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { classNames } from &apos;./TaskVariables.js&apos;;
+import { TaskStorage } from &apos;./TodoListDomVariables.js&apos;;
 
 /**
  * Task object, stores its id, task name, total expected Pomo Sessions to complete the Task,
@@ -58,11 +61,12 @@ class Task extends HTMLTableRowElement {
   * @param {String} name Name of the task
   * @param {Number} totalSessions Total sessions the task should take
   */
-  constructor(id, name, totalSessions) {
+  constructor(id, name, totalSessions, currentSession = 0, completed = false) {
     super();
+    this.className = classNames.uncheckedTaskClassName;
     /**
      * Stores the id of the task
-     * @type {Number}
+     * @type {String}
      */
     this.id = id;
     /**
@@ -79,19 +83,19 @@ class Task extends HTMLTableRowElement {
      * Stores the total amount of sessions spent working on the task
      * @type {Number}
      */
-    this.currentSessionNum = 0;
+    this.currentSessionNum = currentSession;
     /**
      * Stores if the task has been checked off or not
      * @type {Boolean}
      */
-    this.checked = false;
-    this.setAttribute(&apos;class&apos;, classNames.uncheckedTaskClassName);
+    this.checked = completed;
 
     /**
      * The checkbox attribute for the task
      * @type {HTMLInputElement}
      */
     this.checkBox = this.setupCheckBox();
+
     /**
      * Stores the view that shows the task name to the user
      * @type {HTMLTableDataCellElement}
@@ -103,7 +107,16 @@ class Task extends HTMLTableRowElement {
      * @type {HTMLTableDataCellElement}
      */
     this.pomoSessions = this.setupTotalPomoSessions();
-    this.setupDeleteButton();
+    /**
+     * The delete button for the task
+     * @type {HTMLButtonElement}
+     */
+    this.deleteButton = this.setupDeleteButton();
+
+    /**
+     * Keeps track if the task was deleted or not (used with the Todolist )
+     */
+    this.deleted  = false
   }
 
   /**
@@ -115,8 +128,15 @@ class Task extends HTMLTableRowElement {
     const checkBox = document.createElement(&apos;input&apos;);
     checkBox.setAttribute(&apos;type&apos;, &apos;checkbox&apos;);
     checkBox.setAttribute(&apos;id&apos;, `checkbox-${this.id}`);
+    checkBox.setAttribute(&apos;class&apos;, &apos;custom_checkbox&apos;);
     firstCol.appendChild(checkBox);
     this.appendChild(firstCol);
+
+    if (this.checked) {
+      this.setAttribute(&apos;class&apos;, classNames.completedTaskClassName);
+      checkBox.checked = true;
+      checkBox.disabled = true;
+    }
 
     checkBox.addEventListener(&apos;click&apos;, () =&gt; {
       this.checkOffTask();
@@ -125,7 +145,7 @@ class Task extends HTMLTableRowElement {
   }
 
   /**
-   * This sets up the view that will display the taks name
+   * This sets up the view that will display the task name
    * @returns {HTMLTableDataCellElement}
    */
   setupTaskText() {
@@ -150,12 +170,39 @@ class Task extends HTMLTableRowElement {
 
   /**
    *
-   * Currently a placeholder until delete functionality happens
+   * This sets up the delete button for a task
+   * Delete only works visually, doesn&apos;t remove it from the TodoList 
+   * Data Structure
+   * @return {HTMLButtonElement}
    */
   setupDeleteButton() {
-    const deleteBtn = document.createElement(&apos;td&apos;);
-    deleteBtn.textContent = &apos;DELETE&apos;;
-    this.appendChild(deleteBtn);
+    const lastCol = document.createElement(&apos;td&apos;);
+    const deleteBtn = document.createElement(&apos;button&apos;);
+    deleteBtn.setAttribute(&apos;class&apos;, &apos;delete-button&apos;);
+
+    deleteBtn.addEventListener(&apos;click&apos;, () =&gt; {
+      this.deleted = true;
+      this.remove();
+      this.removeFromLocalStorage();
+    });
+
+    deleteBtn.textContent = &apos;x&apos;;
+    lastCol.append(deleteBtn);
+    this.append(lastCol);
+    return deleteBtn;
+  }
+
+  /**
+   * Removes a task from local storage given the id
+   */
+  removeFromLocalStorage() {
+    for (let i = 0; i &lt; window.localData.length; i += 1) {
+      if (window.localData[i][TaskStorage.idIndex] === this.id) {
+        window.localData.splice(i, 1);
+      }
+    }
+    this.deleted = true;
+    localStorage.setItem(&apos;tasks&apos;, JSON.stringify(window.localData));
   }
 
   /**
@@ -180,15 +227,26 @@ class Task extends HTMLTableRowElement {
    */
   incrementSession() {
     if (this.checked) {
-      throw (new RangeError());
+      throw (new RangeError(&apos;Increment checked Task&apos;));
     }
 
     this.currentSessionNum += 1;
     this.updatePomoSessions();
 
-    if (this.currentSessionNum === this.totalSessions) {
-      this.checkOffTask();
+    this.updateLocalStorage();
+  }
+
+  /**
+   * This updates the localStorage whenever session increases or checked off
+   */
+  updateLocalStorage() {
+    for (let i = 0; i &lt; window.localData.length; i += 1) {
+      if (window.localData[i][TaskStorage.idIndex] === this.id) {
+        window.localData[i][TaskStorage.currentSessionIndex] = this.currentSessionNum;
+        window.localData[i][TaskStorage.checkedIndex] = this.checked;
+      }
     }
+    localStorage.setItem(&apos;tasks&apos;, JSON.stringify(window.localData));
   }
 
   /**
@@ -197,6 +255,8 @@ class Task extends HTMLTableRowElement {
   checkOffTask() {
     this.checked = true;
     this.setAttribute(&apos;class&apos;, classNames.completedTaskClassName);
+    this.checkBox.disabled = true
+    this.updateLocalStorage();
   }
 }
 

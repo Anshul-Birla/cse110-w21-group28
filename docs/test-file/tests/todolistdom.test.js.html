@@ -33,6 +33,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-buttonText">buttonText</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-classNames">classNames</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-longBreakMode">longBreakMode</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-sessionStartName">sessionStartName</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-shortBreakMode">shortBreakMode</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-workMode">workMode</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#todolist">ToDoList</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/ToDoList/Task.js~Task.html">Task</a></span></span></li>
@@ -40,6 +41,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/ToDoList/TodoListDom.js~TodoListDom.html">TodoListDom</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-classNames">classNames</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-HTMLAttributes">HTMLAttributes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-TaskStorage">TaskStorage</a></span></span></li>
 </ul>
 </div>
 </nav>
@@ -48,6 +50,11 @@
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { TodoListDom } from &apos;../js/ToDoList/TodoListDom.js&apos;;
 
 /** @Test {ToDoList} */
+let tableLocation;
+let formLocation;
+let addBtnLocation;
+let deleteBtnLocation;
+let myDOM;
 
 beforeEach(() =&gt; {
   document.body.innerHTML = `&lt;section id=&quot;tasklist&quot; class=&quot;section_container&quot;&gt;
@@ -68,51 +75,72 @@ beforeEach(() =&gt; {
         &lt;input type=&quot;submit&quot;&gt;
       &lt;/form&gt;
       &lt;button id = &quot;add-button&quot; type=&quot;button&quot;&gt;Add a task&lt;/button&gt;
+      &lt;button id = &quot;delete-all-button&quot; class=&quot;deleteAllButton&quot; type=&quot;button&quot;&gt;Delete All&lt;/button&gt;
     &lt;/div&gt; `;
+  tableLocation = document.getElementById(&apos;todo&apos;);
+  formLocation = document.getElementById(&apos;add-todo&apos;);
+  addBtnLocation = document.getElementById(&apos;add-button&apos;);
+  deleteBtnLocation = document.getElementById(&apos;delete-all-button&apos;);
+  myDOM = new TodoListDom(tableLocation, formLocation, addBtnLocation, deleteBtnLocation);
 });
 
 test(&apos;Valid construction of TDLDom&apos;, () =&gt; {
-  const tableLocation = document.getElementById(&apos;todo&apos;);
-  const formLocation = document.getElementById(&apos;add-todo&apos;);
-  const btnLocation = document.getElementById(&apos;add-button&apos;);
-  const myDOM = new TodoListDom(tableLocation, formLocation, btnLocation);
   expect(myDOM.todoList.taskList).toEqual([]);
 });
 
-test(&apos;Add a task&apos;, () =&gt; {
-  const tableLocation = document.getElementById(&apos;todo&apos;);
-  const formLocation = document.getElementById(&apos;add-todo&apos;);
-  const btnLocation = document.getElementById(&apos;add-button&apos;);
-  const myDOM = new TodoListDom(tableLocation, formLocation, btnLocation);
+test(&apos;Add a task and click checkoff&apos;, () =&gt; {
   formLocation.children[0].setAttribute(&apos;value&apos;, &apos;Write Essay&apos;);
   formLocation.children[1].value = 2;
   formLocation.submit();
   expect(tableLocation.children[1].children[1].textContent).toMatch(new RegExp(&apos;Write *Essay&apos;));
   expect(tableLocation.children[1].children[2].textContent).toMatch(new RegExp(&apos;\\[0/ *2\\]&apos;));
+  tableLocation.children[1].children[0].children[0].click();
 });
 
-test(&apos;Increment session &apos;, () =&gt; {
-  const tableLocation = document.getElementById(&apos;todo&apos;);
-  const formLocation = document.getElementById(&apos;add-todo&apos;);
-  const btnLocation = document.getElementById(&apos;add-button&apos;);
-  const myDOM = new TodoListDom(tableLocation, formLocation, btnLocation);
+test(&apos;Reload the page with local storage&apos;, () =&gt; {
+  expect(tableLocation.children[1].taskText.textContent).toMatch(new RegExp(&apos;Write *Essay&apos;));
+  expect(tableLocation.children[1].pomoSessions.textContent).toMatch(new RegExp(&apos;\\[0/ *2\\]&apos;));
+});
+
+test(&apos;Reload the page with completed task&apos;, () =&gt; {
+  expect(tableLocation.children[1].checked).toEqual(true);
+});
+
+// Now has a task
+test(&apos;Clicking remove button should remove task from table and local storage&apos;, () =&gt; {
+  tableLocation.children[1].children[3].children[0].click();
+  expect(tableLocation.children[1]).toEqual(undefined);
+  expect(window.localData.length).toEqual(0);
+  localStorage.clear();
+});
+
+test(&apos;Incrementing session updates value accordingly&apos;, () =&gt; {
   formLocation.children[0].value = &apos;Write Essay&apos;;
   formLocation.children[1].value = 2;
   formLocation.submit();
   myDOM.onSessionComplete();
   expect(tableLocation.children[1].children[1].textContent).toMatch(new RegExp(&apos;Write *Essay&apos;));
   expect(tableLocation.children[1].children[2].textContent).toMatch(new RegExp(&apos;\\[1/ *2\\]&apos;));
+  localStorage.clear();
 });
 
-test(&apos;Show and hide form&apos;, () =&gt; {
-  const tableLocation = document.getElementById(&apos;todo&apos;);
-  const formLocation = document.getElementById(&apos;add-todo&apos;);
-  const btnLocation = document.getElementById(&apos;add-button&apos;);
-  const myDOM = new TodoListDom(tableLocation, formLocation, btnLocation);
-  btnLocation.click();
-  expect(formLocation.getAttribute(&apos;style&apos;)).toEqual(&apos;&apos;);
-  btnLocation.click();
-  expect(formLocation.getAttribute(&apos;style&apos;)).toEqual(&apos;display: none;&apos;);
+test(&apos;Addding an invalid task causes an alert&apos;, () =&gt; {
+  global.alert = jest.fn();
+  formLocation.submit();
+  expect(global.alert).toHaveBeenCalledTimes(1);
+});
+
+test(&apos;Delete all should remove from table and local storage&apos;, () =&gt; {
+  formLocation.children[0].setAttribute(&apos;value&apos;, &apos;Write Essay&apos;);
+  formLocation.children[1].value = 2;
+  formLocation.submit();
+  formLocation.children[0].setAttribute(&apos;value&apos;, &apos;Write Essay&apos;);
+  formLocation.children[1].value = 2;
+  formLocation.submit();
+  deleteBtnLocation.click();
+  expect(tableLocation.children[1]).toEqual(undefined);
+  expect(window.localData.length).toEqual(0);
+  localStorage.clear();
 });
 </code></pre>
 

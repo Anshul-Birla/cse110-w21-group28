@@ -33,6 +33,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-buttonText">buttonText</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-classNames">classNames</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-longBreakMode">longBreakMode</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-sessionStartName">sessionStartName</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-shortBreakMode">shortBreakMode</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-workMode">workMode</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#todolist">ToDoList</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/ToDoList/Task.js~Task.html">Task</a></span></span></li>
@@ -40,13 +41,16 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/ToDoList/TodoListDom.js~TodoListDom.html">TodoListDom</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-classNames">classNames</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-HTMLAttributes">HTMLAttributes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-TaskStorage">TaskStorage</a></span></span></li>
 </ul>
 </div>
 </nav>
 
 <div class="content" data-ice="content"><h1 data-ice="title">js/ToDoList/TodoListDom.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { ToDoList } from &apos;./ToDoList.js&apos;;
-import { HTMLAttributes } from &apos;./TodoListDomVariables.js&apos;;
+import { HTMLAttributes, TaskStorage } from &apos;./TodoListDomVariables.js&apos;;
+
+import { Task } from &apos;./Task.js&apos;;
 
 /**
  * Class responsible for providing changes to the DOM for the TodoList
@@ -58,9 +62,10 @@ class TodoListDom {
    * Initializes the TodoListDom object with its correct member variables
    * @param {HTMLTableElement} HTMLTable
    * @param {HTMLFormElement} HTMLForm
-   * @param {HTMLButtonElement} HTMLButton
+   * @param {HTMLButtonElement} submitBtn
+   * @param {HTMLButtonElement} deleteAllBtn
    */
-  constructor(HTMLTable, HTMLForm, HTMLButton) {
+  constructor(HTMLTable, HTMLForm, submitBtn, deleteAllBtn) {
     /**
      * Holds the TodoList so the Dom Manager can acess it
      * @type {ToDoList}
@@ -75,7 +80,12 @@ class TodoListDom {
      * The button where users click to submit their todo&apos;s
      * @type {HTMLButtonElement}
      */
-    this.button = HTMLButton;
+    this.submitBtn = submitBtn;
+    /**
+     * The button where users click to delete their todo&apos;s
+     * @type {HTMLButtonElement}
+     */
+    this.deleteAllBtn = deleteAllBtn;
     /**
      * The table where the todolist is displayed
      * @type {HTMLTableElement}
@@ -83,6 +93,34 @@ class TodoListDom {
     this.table = HTMLTable;
 
     this.setupEventListeners();
+    this.renderLocalStorage();
+  }
+
+  /**
+ * Fetch local storage, and store them into window.localData
+ * Iterate each local tasks and render them
+ */
+  renderLocalStorage() {
+    window.localData = [];
+    if (localStorage.getItem(&apos;tasks&apos;) !== null) {
+      window.localData = JSON.parse(localStorage.getItem(&apos;tasks&apos;));
+      for (let i = 0; i &lt; window.localData.length; i += 1) {
+        window.localData[i][0] = String(i);
+      }
+      localStorage.setItem(&apos;tasks&apos;, JSON.stringify(window.localData));
+    }
+
+    for (let i = 0; i &lt; window.localData.length; i += 1) {
+      const name = window.localData[i][TaskStorage.nameIndex];
+      const totalSession = window.localData[i][TaskStorage.totalSessionIndex];
+      const currentSession = window.localData[i][TaskStorage.currentSessionIndex];
+      const completed = window.localData[i][TaskStorage.checkedIndex];
+      const task = new Task(i, name, totalSession, currentSession, completed);
+      this.todoList.idCounter += 1;
+      this.todoList.taskList.push(task);
+      task.updatePomoSessions();
+      this.displayTask(task);
+    }
   }
 
   /**
@@ -94,29 +132,22 @@ class TodoListDom {
       const data = new FormData(this.form);
       const name = data.get(HTMLAttributes.taskNameId);
       const sessions = parseInt(data.get(HTMLAttributes.taskPomoSessions), 10);
-      const task = this.todoList.addTask(name, sessions);
-      this.displayTask(task);
-      this.form.reset();
+      try {
+        const task = this.todoList.addTask(name, sessions);
+        this.displayTask(task);
+        this.form.reset();
+      } catch (error) {
+        // eslint-disable-next-line no-alert
+        alert(&apos;Invalid input. Please try again&apos;);
+      }
     });
 
-    this.button.addEventListener(&apos;click&apos;, () =&gt; {
-      this.toggleInputForm();
+    this.deleteAllBtn.addEventListener(&apos;click&apos;, () =&gt; {
+      const list = this.todoList.taskList;
+      for (let i = 0; i &lt; list.length; i += 1) {
+        list[i].children[3].children[0].click();
+      }
     });
-  }
-
-  /**
-   * Toggles the visibility of the add task form depending
-   * on the text contained in the button
-   */
-  toggleInputForm() {
-    if (this.form.style.display === &apos;none&apos;) {
-      this.form.setAttribute(&apos;style&apos;, &apos;&apos;);
-      this.button.textContent = HTMLAttributes.buttonDoneTextContent;
-    } else {
-      this.form.style.display = &apos;none&apos;;
-      this.button.textContent = HTMLAttributes.buttonAddTextContent;
-    }
-    this.form.reset();
   }
 
   /**
@@ -131,7 +162,10 @@ class TodoListDom {
    * This function runs when the timer is done with its working session
    */
   onSessionComplete() {
-    this.todoList.onSessionComplete();
+    const currTask = this.todoList.getCurrentTask();
+    if (currTask != null) {
+      currTask.incrementSession();
+    }
   }
 }
 
