@@ -8,28 +8,52 @@ class Statistics extends HTMLElement {
     this.loadFromLocalStorage();
     this.expectedPomoSessions = 0;
     this.actualPomoSessions = 0;
-    // this.addHTMLChildren();
-    // this.updateDom();
+    this.addHTMLChildren();
+    //this.updateDom();
   }
 
   addHTMLChildren() {
-    this.parentDiv = document.getElementById('parentDiv');
-
-    this.timePerTask = document.createElement('p');
-    this.timePerTask.setAttribute('id', 'stats_timePerTask');
-    this.parentDiv.appendChild(this.timePerTask);
+    this.parentDiv = document.getElementById('stats-info');
 
     this.tasksCompletedP = document.createElement('p');
     this.tasksCompletedP.setAttribute('id', 'stats_tasksCompleted');
+    this.tasksCompletedP.setAttribute('class', 'stats-info');
+    this.tasksCompletedPLabel = document.createElement('p');
+    this.tasksCompletedPLabel.setAttribute('id', 'stats_tasksCompletedLabel');
+    this.tasksCompletedPLabel.setAttribute('class', 'stats-info-label');
+    this.tasksCompletedPLabel.textContent = 'Tasks Completed';
     this.parentDiv.appendChild(this.tasksCompletedP);
-
-    this.timeWorking = document.createElement('p');
-    this.timeWorking.setAttribute('id', 'stats_workTime');
-    this.parentDiv.appendChild(this.timeWorking);
+    this.parentDiv.appendChild(this.tasksCompletedPLabel);
 
     this.timeSpent = document.createElement('p');
     this.timeSpent.setAttribute('id', 'stats_totalTime');
+    this.timeSpent.setAttribute('class', 'stats-info');
+    this.timeSpentLabel = document.createElement('p');
+    this.timeSpentLabel.setAttribute('id', 'stats_timeSpentLabel');
+    this.timeSpentLabel.setAttribute('class', 'stats-info-label');
+    this.timeSpentLabel.textContent = 'Total Minutes';
     this.parentDiv.appendChild(this.timeSpent);
+    this.parentDiv.appendChild(this.timeSpentLabel);
+
+    this.timeWorking = document.createElement('p');
+    this.timeWorking.setAttribute('id', 'stats_workTime');
+    this.timeWorking.setAttribute('class', 'stats-info');
+    this.timeWorkingLabel = document.createElement('p');
+    this.timeWorkingLabel.setAttribute('id', 'stats_timeWorkingLabel');
+    this.timeWorkingLabel.setAttribute('class', 'stats-info-label');
+    this.timeWorkingLabel.textContent = 'Working Minutes';
+    this.parentDiv.appendChild(this.timeWorking);
+    this.parentDiv.appendChild(this.timeWorkingLabel);
+
+    this.timePerTask = document.createElement('p');
+    this.timePerTask.setAttribute('id', 'stats_timePerTask');
+    this.timePerTask.setAttribute('class', 'stats-info');
+    this.timePerTaskLabel = document.createElement('p');
+    this.timePerTaskLabel.setAttribute('id', 'stats_timePerTaskLabel');
+    this.timePerTaskLabel.setAttribute('class', 'stats-info-label');
+    this.timePerTaskLabel.textContent = 'Minutes per Task';
+    this.parentDiv.appendChild(this.timePerTask);
+    this.parentDiv.appendChild(this.timePerTaskLabel);
 
     // this.distractionList = document.createElement('ul');
     // this.distractionList.setAttribute('id', 'stats_distractionList');
@@ -37,7 +61,13 @@ class Statistics extends HTMLElement {
 
     this.brokenSessions = document.createElement('p');
     this.brokenSessions.setAttribute('id', 'stats_numBrokenSessions');
+    this.brokenSessions.setAttribute('class', 'stats-info');
+    this.brokenSessionsLabel = document.createElement('p');
+    this.brokenSessionsLabel.setAttribute('id', 'stats_brokenSessionsLabel');
+    this.brokenSessionsLabel.setAttribute('class', 'stats-info-label');
+    this.brokenSessionsLabel.textContent = 'Broken Sessions';
     this.parentDiv.appendChild(this.brokenSessions);
+    this.parentDiv.appendChild(this.brokenSessionsLabel);
   }
 
   incrementTasksCompleted() {
@@ -86,6 +116,7 @@ class Statistics extends HTMLElement {
   }
 
   updateDom() {
+
     this.timePerTask.textContent = this.getAverageTimePerTask();
 
     this.tasksCompletedP.textContent = this.tasksCompleted;

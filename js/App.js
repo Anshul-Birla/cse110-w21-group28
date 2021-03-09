@@ -16,6 +16,9 @@ const distractPopUp = document.getElementById('distract-popup');
 const cancelButton = document.getElementById('cancel-button');
 const submitButton = document.getElementById('submit-button');
 const description = document.getElementById('description');
+const statsPopUp = document.getElementById('stats-section');
+const parentDiv = document.getElementById('parentDiv');
+const closeStatsButton = document.getElementById('close-stats-button');
 
 const StatsPage = new Statistics();
 const TDLDom = new TodoListDom(todoTable, addTodoForm, addTodoButton);
@@ -42,6 +45,16 @@ TDLDom.todoList.addEventListener('task-checked-off', () => {
   StatsPage.incrementTasksCompleted();
 });
 
-statsButton.addEventListener('click', () => {
+statsButton.addEventListener('click', function() {
   StatsPage.updateDom();
+  statsPopUp.style.display = 'block';
+  parentDiv.style.display = 'block';
+    var isOpen = parentDiv.classList.contains('slide-out');
+    parentDiv.setAttribute('class', isOpen ? 'slide-in' : 'slide-out');
+});
+
+closeStatsButton.addEventListener('click', () => {
+  var isOpen = parentDiv.classList.contains('slide-out');
+    parentDiv.setAttribute('class', isOpen ? 'slide-in' : 'slide-out');
+    statsPopUp.style.display = "none";
 });

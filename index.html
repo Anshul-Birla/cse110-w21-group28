@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="./css/style.css" />
   <link rel="stylesheet" href="./css/distraction-box.css" />
   <link rel="stylesheet" href="./css/table.css" />
+  <link rel="stylesheet" href="./css/stats.css"/>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Pomo App</title>
 </head>
@@ -96,6 +97,17 @@
       <button type="button" class="distractFormButton cancel" id="cancel-button">Cancel</button>
     </form>
   </section>
+
+  <!-- Stats-->
+  <section class="stats-popup" id='stats-section'>
+  </section>
+  <div id='parentDiv' class='slide-out'>
+    <span class="close-stats-button" id='close-stats-button'>&times;</span>
+      <h2 class='statslabel'>Your Stats</h2>
+      <div id='stats-info' class='stats-info-container'>
+      </div>
+  </div>
+
   <script type="module" src="./js/App.js"></script>
   
   <div id="faq">
