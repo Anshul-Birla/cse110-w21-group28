@@ -1,15 +1,11 @@
+/* eslint-disable max-len */
 class Statistics extends HTMLElement {
   constructor() {
     super();
-    this.totalMins = 0;
-    this.workMins = 0;
-    this.tasksCompleted = 0;
     this.distractionList = [];
-    this.expectedPomoSessions = 0;
-    this.actualPomoSessions = 0;
     this.addHTMLChildren();
     this.loadFromLocalStorage();
-    this.flushLocalStorage();
+    this.flushHistory();
   }
 
   addHTMLChildren() {
@@ -70,18 +66,33 @@ class Statistics extends HTMLElement {
     this.parentDiv.appendChild(this.brokenSessionsLabel);
   }
 
+  updateDom() {
+    this.timePerTask.textContent = this.getAverageTimePerTask();
+
+    this.tasksCompletedP.textContent = this.tasksCompleted;
+
+    this.timeWorking.textContent = this.workMins;
+
+    this.timeSpent.textContent = this.totalMins;
+
+    this.brokenSessions.textContent = this.distractionList.length;
+  }
+
   incrementTasksCompleted() {
     this.tasksCompleted += 1;
+    this.updateMinorLocalStorage();
   }
 
   decrementTasksCompleted() {
     if (this.tasksCompleted > 0) {
       this.tasksCompleted -= 1;
+      this.updateMinorLocalStorage();
     } // else I'm interested to see how you got there
   }
 
   addDistraction(distraction) {
     this.distractionList.push(distraction);
+    this.updateMinorLocalStorage();
   }
 
   getNumUniqueDistractions() {
@@ -98,26 +109,30 @@ class Statistics extends HTMLElement {
   }
 
   addTimeSpent(numMins) {
-    this.totalMins += numMins;
+    this.totalMins += (numMins * 60);
+    this.updateMinorLocalStorage();
   }
 
   addWorkTime(numMins) {
-    this.workMins += numMins;
+    this.workMins += (numMins * 60);
     this.addTimeSpent(numMins);
   }
 
   addExpectedPomoSessions(numSessions) {
     this.expectedPomoSessions += numSessions;
+    this.updateMinorLocalStorage();
   }
 
   deleteExpectedPomoSessions(numSessions) {
     if (this.expectedPomoSessions >= numSessions) {
       this.expectedPomoSessions -= numSessions;
+      this.updateMinorLocalStorage();
     } // else I'm interested how you got here
   }
 
   incrementActualPomoSessions() {
     this.actualPomoSessions += 1;
+    this.updateMinorLocalStorage();
   }
 
   getAverageTimePerTask() {
@@ -127,27 +142,46 @@ class Statistics extends HTMLElement {
     return 0;
   }
 
-  updateDom() {
-    this.timePerTask.textContent = this.getAverageTimePerTask();
-
-    this.tasksCompletedP.textContent = this.tasksCompleted;
-
-    this.timeWorking.textContent = this.workMins;
-
-    this.timeSpent.textContent = this.totalMins;
-
-    this.brokenSessions.textContent = this.distractionList.length;
-  }
-
   loadFromLocalStorage() {
     // loads history of pomo sessions
     this.history = JSON.parse(localStorage.getItem('statsHistory'));
     if (this.history === null) {
       this.history = [];
     }
+    this.totalMins = localStorage.getItem('totalMins');
+    this.workMins = localStorage.getItem('workMins');
+    this.tasksCompleted = localStorage.getItem('tasksCompleted');
+    this.expectedPomoSessions = localStorage.getItem('expectedPomoSessions');
+    this.actualPomoSessions = localStorage.getItem('actualPomoSessions');
+    this.distractionList = localStorage.getItem('currDistractionList');
+    this.totalMins = ((this.totalMins !== null) ? parseInt(this.totalMins, 10) : 0);
+    this.workMins = ((this.workMins !== null) ? parseInt(this.workMins, 10) : 0);
+    this.tasksCompleted = ((this.tasksCompleted !== null) ? parseInt(this.tasksCompleted, 10) : 0);
+    this.expectedPomoSessions = ((this.expectedPomoSessions !== null) ? parseInt(this.expectedPomoSessions, 10) : 0);
+    this.actualPomoSessions = ((this.actualPomoSessions !== null) ? parseInt(this.actualPomoSessions, 10) : 0);
+    this.tasksCompleted = ((this.tasksCompleted !== null) ? parseInt(this.tasksCompleted, 10) : 0);
+    if (this.distractionList !== null) {
+      this.distractionList = JSON.parse(this.distractionList);
+      // eslint-disable-next-line no-restricted-syntax, guard-for-in
+      for (let i = 0; i < this.distractionList.length; i += 1) {
+        // let temp = this.distractionList[i];
+        this.distractionList[i].date = new Date(this.distractionList[i].date);
+      }
+    } else {
+      this.distractionList = [];
+    }
   }
 
-  flushLocalStorage() {
+  updateMinorLocalStorage() {
+    localStorage.setItem('totalMins', this.totalMins);
+    localStorage.setItem('workMins', this.workMins);
+    localStorage.setItem('tasksCompleted', this.tasksCompleted);
+    localStorage.setItem('expectedPomoSessions', this.expectedPomoSessions);
+    localStorage.setItem('actualPomoSessions', this.actualPomoSessions);
+    localStorage.setItem('currDistractionList', JSON.stringify(this.distractionList));
+  }
+
+  flushHistory() {
     // deletes all objects from local storage that are older than a year
     // this.loadFromLocalStorage();
     for (let i = 0; i < this.history.length; i += 1) {
@@ -158,15 +192,21 @@ class Statistics extends HTMLElement {
   }
 
   getMinDistractionDate() {
+    if(this.distractionList.length === 0) {
+      return null;
+    }
     const sortedDistractions = this.distractionList.slice().sort((a, b) => b.date - a.date);
     return sortedDistractions[0].date;
   }
 
   // distractions exist from last year/month/day/before 3am
   oldDistractionsExist() {
-    const minDistractionDate = this.getMinDistractionDate().prototype;
-    const currDate = Date().prototype;
-    if (minDistractionDate.prototype.getFullYear() < currDate.getFullYear()) {
+    const minDistractionDate = this.getMinDistractionDate();
+    if (minDistractionDate === null) {
+      return false;
+    }
+    const currDate = new Date();
+    if (minDistractionDate.getFullYear() < currDate.getFullYear()) {
       return true;
     } if (minDistractionDate.getMonth() < currDate.getMonth()) {
       return true;

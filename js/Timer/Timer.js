@@ -58,13 +58,15 @@ class Timer extends HTMLElement {
       this.stateQueue.push(workOrder[i]);
     }
 
-    this.sessionId = 0;
+    this.sessionId = localStorage.getItem('pomoSessionId');
+    this.sessionId = ((this.sessionId === null) ? 0 : parseInt(this.sessionId, 10));
 
     this.addEventListeners();
   }
 
   resetPomoSessionId() {
     this.sessionId = 0;
+    localStorage.setItem('pomoSessionId', this.sessionId);
   }
 
   /**
@@ -85,6 +87,7 @@ class Timer extends HTMLElement {
 
     this.dispatchEvent(event);
     this.sessionId += 1;
+    localStorage.setItem('pomoSessionId', this.sessionId);
     this.startTimer();
   }
 
