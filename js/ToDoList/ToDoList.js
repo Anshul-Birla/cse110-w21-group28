@@ -54,6 +54,11 @@ class ToDoList extends HTMLElement {
       });
       this.dispatchEvent(event);
     });
+    task.addEventListener('task-unchecked', () => {
+      const event = new CustomEvent('task-unchecked', {
+      });
+      this.dispatchEvent(event);
+    });
     const event = new CustomEvent('task-added', {
       detail: {
         taskName: name,

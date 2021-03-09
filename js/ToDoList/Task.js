@@ -217,6 +217,9 @@ class Task extends HTMLTableRowElement {
   uncheckTask() {
     this.checked = false;
     this.setAttribute('class', classNames.uncheckedTaskClassName);
+    const event = new CustomEvent('task-unchecked', {
+    });
+    this.dispatchEvent(event);
     this.updateLocalStorage();
   }
 }
