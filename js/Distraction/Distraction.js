@@ -1,50 +1,46 @@
-class Distraction{
-
+class Distraction extends HTMLElement {
   /**
    * @param {HTMLButton} distractButton
    * @param {HTMLSection} distractPopUp
    * @param {HTMLButton} cancelButton
    * @param {HTMLButton} submitButton
    */
-   constructor(distractButton, distractPopUp, cancelButton, submitButton, description){
-     this.distractButton = distractButton;
-     this.distractPopUp = distractPopUp;
-     this.cancelButton = cancelButton;
-     this.submitButton = submitButton;
-     this.description = description;
-     this.id = 0;
-     this.distractions = [];
-     this.setupEventListeners();
-   }
+  constructor(distractButton, distractPopUp, cancelButton, submitButton, description) {
+    super();
+    this.distractButton = distractButton;
+    this.distractPopUp = distractPopUp;
+    this.cancelButton = cancelButton;
+    this.submitButton = submitButton;
+    this.description = description;
+    this.distractions = [];
+    this.setupEventListeners();
+  }
 
-   setupEventListeners(){
-     this.distractButton.addEventListener('click', () => {
-       if (this.distractPopUp.style.display === 'block') {
-         this.resetPopUp();
-       } else {
-         this.distractPopUp.style.display = 'block';
-       }
-     });
+  setupEventListeners() {
+    this.distractButton.addEventListener('click', () => {
+      if (this.distractPopUp.style.display === 'block') {
+        this.resetPopUp();
+      } else {
+        this.distractPopUp.style.display = 'block';
+      }
+    });
 
-     this.cancelButton.addEventListener('click', () => {
-       this.resetPopUp();
-     });
+    this.cancelButton.addEventListener('click', () => {
+      this.resetPopUp();
+    });
 
-     this.submitButton.addEventListener('click', () => {
-       const description = this.description.value;
-       const id = this.id;
-       const time = new Date();
-       if (description !== '') {
-           this.distractions = JSON.parse(localStorage.getItem('distractions'));
-         if (this.distractions === null) {
-           this.distractions = [];
-         }
-         this.distractions.push({ id, description, time });
-         localStorage.setItem('distractions', JSON.stringify(this.distractions));
-         this.resetPopUp();
-       }
-     });
-   }
+    this.submitButton.addEventListener('click', (e) => {
+      this.resetPopUp();
+      const event = new CustomEvent('distraction-created', {
+        distraction: {
+          date: new Date(),
+          description: this.description.value,
+          pomoSessionId: null,
+        },
+      });
+      this.dispatchEvent(event);
+    });
+  }
 
   /**
    * This function will make the pop up disappear
@@ -52,15 +48,18 @@ class Distraction{
    */
   resetPopUp() {
     this.distractPopUp.style.display = 'none';
-    document.getElementById('description').value = '';
+    //document.getElementById('description').value = '';
+    this.description.value = '';
   }
 
-  hideButton(){
+  hideButton() {
     this.distractButton.style.display = 'none';
   }
 
-  showButton(){
+  showButton() {
     this.distractButton.style.display = 'block';
   }
 }
+
+customElements.define('distraction-page', Distraction);
 export { Distraction };

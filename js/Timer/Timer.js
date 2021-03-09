@@ -58,7 +58,13 @@ class Timer extends HTMLElement {
       this.stateQueue.push(workOrder[i]);
     }
 
+    this.sessionId = 0;
+
     this.addEventListeners();
+  }
+
+  resetPomoSessionId() {
+    this.sessionId = 0;
   }
 
   /**
@@ -73,10 +79,12 @@ class Timer extends HTMLElement {
         sessionName: completedSession.name,
         duration: completedSession.duration,
         sessionIsWork: completedSession.isWork,
+        sessionId: this.sessionId,
       },
     });
 
     this.dispatchEvent(event);
+    this.sessionId += 1;
     this.startTimer();
   }
 

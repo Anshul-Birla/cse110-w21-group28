@@ -5,11 +5,11 @@ class Statistics extends HTMLElement {
     this.workMins = 0;
     this.tasksCompleted = 0;
     this.distractionList = [];
-    this.loadFromLocalStorage();
     this.expectedPomoSessions = 0;
     this.actualPomoSessions = 0;
     this.addHTMLChildren();
-    //this.updateDom();
+    this.loadFromLocalStorage();
+    this.flushLocalStorage();
   }
 
   addHTMLChildren() {
@@ -74,6 +74,12 @@ class Statistics extends HTMLElement {
     this.tasksCompleted += 1;
   }
 
+  decrementTasksCompleted() {
+    if (this.tasksCompleted > 0) {
+      this.tasksCompleted -= 1;
+    } // else I'm interested to see how you got there
+  }
+
   addDistraction(distraction) {
     this.distractionList.push(distraction);
   }
@@ -102,6 +108,12 @@ class Statistics extends HTMLElement {
 
   addExpectedPomoSessions(numSessions) {
     this.expectedPomoSessions += numSessions;
+  }
+
+  deleteExpectedPomoSessions(numSessions) {
+    if (this.expectedPomoSessions >= numSessions) {
+      this.expectedPomoSessions -= numSessions;
+    } // else I'm interested how you got here
   }
 
   incrementActualPomoSessions() {
@@ -139,7 +151,7 @@ class Statistics extends HTMLElement {
   flushLocalStorage() {
     // deletes all objects from local storage that are older than a year
     // this.loadFromLocalStorage();
-    for (let i = 0; i < this.history.length(); i += 1) {
+    for (let i = 0; i < this.history.length; i += 1) {
       if ((new Date(this.history[i].date) - new Date()) / (1000 * 3600 * 24 * 365) > 1) {
         this.history.splice(i, 1);
       }
@@ -148,7 +160,23 @@ class Statistics extends HTMLElement {
 
   getMinDistractionDate() {
     const sortedDistractions = this.distractionList.slice().sort((a, b) => b.date - a.date);
-    return sortedDistractions[0];
+    return sortedDistractions[0].date;
+  }
+
+  // distractions exist from last year/month/day/before 3am
+  oldDistractionsExist() {
+    const minDistractionDate = this.getMinDistractionDate().prototype;
+    const currDate = Date().prototype;
+    if (minDistractionDate.prototype.getFullYear() < currDate.getFullYear()) {
+      return true;
+    } if (minDistractionDate.getMonth() < currDate.getMonth()) {
+      return true;
+    } if (minDistractionDate.getDate() < currDate.getDate()) {
+      return true;
+    } if (minDistractionDate.getHours() <= 2) {
+      return true;
+    }
+    return false;
   }
 
   compressStats() {
@@ -157,13 +185,18 @@ class Statistics extends HTMLElement {
      * REMINDER: Set pomo session id to 0
      */
     // this.loadFromLocalStorage();
-    const minDistractionDate = this.getMinDistractionDate();
-    this.history.push({
-      date: new Date(minDistractionDate),
-      distractionCount: this.distractionList.length(),
-      timeSpent: this.timeSpent,
+    if (this.timeSpent > 0) {
+      this.history.push({
+        date: this.getMinDistractionDate(),
+        distractionCount: this.distractionList.length(),
+        timeSpent: this.timeSpent,
+      });
+      localStorage.setItem('statsHistory', JSON.stringify(this.history));
+    }
+
+    const event = new CustomEvent('reset-timer', {
     });
-    localStorage.setItem('statsHistory', JSON.stringify(this.history));
+    this.dispatchEvent(event);
   }
 }
 

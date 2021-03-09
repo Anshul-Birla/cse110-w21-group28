@@ -4,6 +4,10 @@ import { Timer } from './Timer/Timer.js';
 import { Statistics } from './Statistics/Statistics.js';
 import { Distraction } from './Distraction/Distraction.js';
 
+function after3amToday() {
+  return Date.prototype.getHours() >= 3;
+}
+
 const timeDisplay = document.getElementById('timeDisplay');
 const modeDisplay = document.getElementById('modeDisplay');
 const todoTable = document.getElementById('todo');
@@ -23,6 +27,7 @@ const closeStatsButton = document.getElementById('close-stats-button');
 const StatsPage = new Statistics();
 const TDLDom = new TodoListDom(todoTable, addTodoForm, addTodoButton);
 const TimerObj = new Timer(startTimerButton, timeDisplay, modeDisplay);
+// eslint-disable-next-line max-len
 const DistractionPage = new Distraction(distractButton, distractPopUp, cancelButton, submitButton, description);
 
 TimerObj.addEventListener('timer-complete', (e) => {
@@ -45,7 +50,27 @@ TDLDom.todoList.addEventListener('task-checked-off', () => {
   StatsPage.incrementTasksCompleted();
 });
 
-statsButton.addEventListener('click', function() {
+TDLDom.todoList.addEventListener('task-unchecked', () => {
+  StatsPage.decrementTasksCompleted();
+});
+
+// IS THIS EVEN DONE??
+TDLDom.todoList.addEventListener('task-deleted', (e) => {
+  StatsPage.deleteExpectedPomoSessions(e.detail.pomoSessions);
+});
+
+DistractionPage.addEventListener('distraction-created', (e) => {
+  e.pomoSessionId = TimerObj.sessionId;
+  StatsPage.addDistraction(e.distraction);
+});
+
+StatsPage.addEventListener('reset-timer', () => {
+  TimerObj.resetPomoSessionId();
+});
+
+// ADD END DAY CALLS STATSPAGE.COMPRESSSTATS()
+
+statsButton.addEventListener('click', () => {
   StatsPage.updateDom();
   statsPopUp.style.display = 'block';
   parentDiv.style.display = 'block';
@@ -58,3 +83,8 @@ closeStatsButton.addEventListener('click', () => {
     parentDiv.setAttribute('class', isOpen ? 'slide-in' : 'slide-out');
     statsPopUp.style.display = "none";
 });
+
+
+if (after3amToday() && StatsPage.oldDistractionsExist()) {
+  StatsPage.compressStats();
+}
