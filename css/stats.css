@@ -1,8 +1,8 @@
   .stats-popup {
     display: none;
-    position: fixed; 
+    position: relative; 
     z-index: 1; 
-    padding-top: 10%; 
+    padding-top: 0%; 
     left: 0;
     top: 0;
     width: 100%; 
@@ -28,7 +28,7 @@
 
   #parentDiv {
     display: none;
-    top: -50%;
+    top: 0%;
     position: fixed;
     z-index: 1;
     left: 0;
