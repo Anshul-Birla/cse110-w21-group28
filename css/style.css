@@ -90,7 +90,6 @@ header {
 #timerContainer {
   height: 280px;
   width: 400px;
-
   background-color: var(--timer-bg-color);
   border-radius: 10px;
 }
