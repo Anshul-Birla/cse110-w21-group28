@@ -47,7 +47,8 @@ TimerObj.addEventListener('timer-complete', (e) => {
 startTimerButton.addEventListener('click', () => {
   if (startTimerButton.textContent === 'Start') { // Button text updates before this
     StatsPage.compressStats();
-  } else {
+    localStorage.setItem('startDateTime', new Date(2000, 0, 1));
+  } else if (StatsPage.dataToCompressExists()) {
     StatsPage.clearData();
   }
 });
@@ -93,7 +94,7 @@ closeStatsButton.addEventListener('click', () => {
   statsPopUp.style.display = 'none';
 });
 
-if (after3amToday() && StatsPage.oldDistractionsExist()) {
+if (after3amToday() && StatsPage.dataToCompressExists()) {
   StatsPage.compressStats();
   StatsPage.clearData();
 }

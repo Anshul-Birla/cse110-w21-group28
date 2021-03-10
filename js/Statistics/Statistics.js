@@ -154,12 +154,14 @@ class Statistics extends HTMLElement {
     this.expectedPomoSessions = localStorage.getItem('expectedPomoSessions');
     this.actualPomoSessions = localStorage.getItem('actualPomoSessions');
     this.distractionList = localStorage.getItem('currDistractionList');
+    this.sessionStartDateTime = localStorage.getItem('startDateTime');
     this.totalMins = ((this.totalMins !== null) ? parseInt(this.totalMins, 10) : 0);
     this.workMins = ((this.workMins !== null) ? parseInt(this.workMins, 10) : 0);
     this.tasksCompleted = ((this.tasksCompleted !== null) ? parseInt(this.tasksCompleted, 10) : 0);
     this.expectedPomoSessions = ((this.expectedPomoSessions !== null) ? parseInt(this.expectedPomoSessions, 10) : 0);
     this.actualPomoSessions = ((this.actualPomoSessions !== null) ? parseInt(this.actualPomoSessions, 10) : 0);
     this.tasksCompleted = ((this.tasksCompleted !== null) ? parseInt(this.tasksCompleted, 10) : 0);
+    this.sessionStartDateTime = ((this.sessionStartDateTime !== null) ? new Date(this.sessionStartDateTime) : new Date());
     if (this.distractionList !== null) {
       this.distractionList = JSON.parse(this.distractionList);
       // eslint-disable-next-line no-restricted-syntax, guard-for-in
@@ -179,6 +181,7 @@ class Statistics extends HTMLElement {
     localStorage.setItem('expectedPomoSessions', this.expectedPomoSessions);
     localStorage.setItem('actualPomoSessions', this.actualPomoSessions);
     localStorage.setItem('currDistractionList', JSON.stringify(this.distractionList));
+    localStorage.setItem('startDateTime', this.sessionStartDateTime);
   }
 
   flushHistory() {
@@ -198,7 +201,7 @@ class Statistics extends HTMLElement {
     const sortedDistractions = this.distractionList.slice().sort((a, b) => a.date - b.date);
     return sortedDistractions[0].date;
   }
-
+  /*
   // distractions exist from last year/month/day/before 3am
   oldDistractionsExist() {
     const minDistractionDate = this.getMinDistractionDate();
@@ -217,6 +220,21 @@ class Statistics extends HTMLElement {
     }
     return false;
   }
+  */
+
+  dataToCompressExists() {
+    const currDate = new Date();
+    if (this.sessionStartDateTime.getFullYear() < currDate.getFullYear()) {
+      return true;
+    } if (this.sessionStartDateTime.getMonth() < currDate.getMonth()) {
+      return true;
+    } if (this.sessionStartDateTime.getDate() < currDate.getDate()) {
+      return true;
+    } if (this.sessionStartDateTime.getHours() <= 2) {
+      return true;
+    }
+    return false;
+  }
 
   compressStats() {
     /** saves data to local storage, runs when End Day is hit and
@@ -226,7 +244,7 @@ class Statistics extends HTMLElement {
     // this.loadFromLocalStorage();
     if (this.totalMins > 0) {
       this.history.push({
-        date: this.getMinDistractionDate(),
+        date: this.sessionStartDateTime,
         distractionCount: this.distractionList.length,
         timeSpent: this.totalMins,
       });
@@ -246,6 +264,7 @@ class Statistics extends HTMLElement {
     this.actualPomoSessions = 0;
     this.distractionList = [];
     this.updateMinorLocalStorage();
+    this.sessionStartDateTime = new Date();
   }
 }
 
