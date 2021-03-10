@@ -285,6 +285,45 @@ describe('Variables function correctly', () => {
     Stats.flushHistory();
     expect(Stats.history.length).toBe(3);
   });
+
+  test('Existing Distractions Test', () => {
+    expect(Stats.getMinDistractionDate()).toBe(null);
+    expect(Stats.oldDistractionsExist()).toBeFalsy();
+    Stats.addDistraction({
+      name: 'first distraction',
+      date: new Date(2021, 2, 9, 10, 35),
+      pomoSessionId: 1,
+    });
+    expect(Stats.oldDistractionsExist()).toBeFalsy();
+    Stats.addDistraction({
+      name: 'first distraction',
+      date: new Date(2021, 2, 9, 2, 35),
+      pomoSessionId: 1,
+    });
+    expect(Stats.oldDistractionsExist()).toBeTruthy();
+    Stats.distractionList = [];
+    expect(Stats.oldDistractionsExist()).toBeFalsy();
+    Stats.addDistraction({
+      name: 'first distraction',
+      date: new Date(2021, 2, 8, 10, 35),
+      pomoSessionId: 1,
+    });
+    expect(Stats.oldDistractionsExist()).toBeTruthy();
+    Stats.distractionList = [];
+    Stats.addDistraction({
+      name: 'first distraction',
+      date: new Date(2021, 1, 9, 10, 35),
+      pomoSessionId: 1,
+    });
+    expect(Stats.oldDistractionsExist()).toBeTruthy();
+    Stats.distractionList = [];
+    Stats.addDistraction({
+      name: 'first distraction',
+      date: new Date(2020, 2, 9, 10, 35),
+      pomoSessionId: 1,
+    });
+    expect(Stats.oldDistractionsExist()).toBeTruthy();
+  });
 });
 
 describe('local storage tests', () => {
@@ -325,10 +364,6 @@ describe('local storage tests', () => {
   });
 
   test('Distraction compression commits earliest distraction date', () => {
-    // TODO
-  });
-
-  test('Flush local storage deletes tasks stricly older than one year', () => {
-    // TODO
+    expect(Stats.history.length).toBe(0);
   });
 });
