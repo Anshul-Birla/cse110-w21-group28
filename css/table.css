@@ -124,14 +124,12 @@ input[type='checkbox']:checked {
   background-color: rgba(85, 80, 80, 0.11);
   color: rgb(60, 100, 91) * 110%;
   border-radius: 35%;
-  width: 2.5vw;
-  height: 5vh;
-  font-size: 1.4em;
+  width: 2em;
+  height: 2em;
+  font-size: 1em;
   border: none;
   outline: none;
   align-items: center;
-  min-width: 20px;
-  min-height: 20px
 }
 
 .delete-button:hover {
@@ -144,9 +142,9 @@ input[type='checkbox']:checked {
   color: rgb(60, 100, 91) * 110%;
   border-radius: 10%;
   width: 4vw;
-  height: 5vh;
+  height: 2em;
   font-size: 0.40em;
-  left: -1vw;
+  left: -1.5vw;
   border: none;
   outline:none;
   align-items: center;
