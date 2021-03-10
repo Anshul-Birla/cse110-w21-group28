@@ -55,15 +55,18 @@ class Statistics extends HTMLElement {
     // this.distractionList.setAttribute('id', 'stats_distractionList');
     // this.appendChild(this.distractionList);
 
+    /* Adding things to Distraction Tab*/
+
     this.brokenSessions = document.createElement('p');
     this.brokenSessions.setAttribute('id', 'stats_numBrokenSessions');
-    this.brokenSessions.setAttribute('class', 'stats-info');
+    this.brokenSessions.setAttribute('class', 'dist-info');
     this.brokenSessionsLabel = document.createElement('p');
     this.brokenSessionsLabel.setAttribute('id', 'stats_brokenSessionsLabel');
-    this.brokenSessionsLabel.setAttribute('class', 'stats-info-label');
+    this.brokenSessionsLabel.setAttribute('class', 'dist-info-label');
     this.brokenSessionsLabel.textContent = 'Broken Sessions';
     this.parentDiv.appendChild(this.brokenSessions);
     this.parentDiv.appendChild(this.brokenSessionsLabel);
+    
   }
 
   updateDom() {

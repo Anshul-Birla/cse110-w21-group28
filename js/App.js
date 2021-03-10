@@ -25,6 +25,8 @@ const statsPopUp = document.getElementById('stats-section');
 const parentDiv = document.getElementById('parentDiv');
 const closeStatsButton = document.getElementById('close-stats-button');
 const deleteAllButton = document.getElementById('delete-all-button');
+const statsBtn = document.getElementById('data');
+const statsDistractBtn = document.getElementById('distraction');
 
 const StatsPage = new Statistics();
 const TDLDom = new TodoListDom(todoTable, addTodoForm, addTodoButton, deleteAllButton);
@@ -89,3 +91,37 @@ closeStatsButton.addEventListener('click', () => {
 if (after3amToday() && StatsPage.oldDistractionsExist()) {
   StatsPage.compressStats();
 }
+/* Stats Pop Up Buttons */
+statsDistractBtn.addEventListener('click', () => {
+  statsBtn.className = "tab-btn";
+  let content = document.getElementsByClassName('stats-info');
+  let contentlabel = document.getElementsByClassName('stats-info-label');
+    for(let i = 0; i < content.length; i++){
+      content[i].style.display = "none";
+      contentlabel[i].style.display = "none";
+    }
+    content = document.getElementsByClassName('dist-info');
+    contentlabel = document.getElementsByClassName('dist-info-label');
+      for(let i = 0; i < content.length; i++){
+        content[i].style.display = "block";
+        contentlabel[i].style.display = "block";
+      }
+  statsDistractBtn.className = "tab-btn-active";
+});
+
+statsBtn.addEventListener('click', () => {
+  statsDistractBtn.className = "tab-btn";
+  let content = document.getElementsByClassName('dist-info');
+  let contentlabel = document.getElementsByClassName('dist-info-label');
+    for(let i = 0; i < content.length; i++){
+      content[i].style.display = "none";
+      contentlabel[i].style.display = "none";
+    }
+  content = document.getElementsByClassName('stats-info');
+  contentlabel = document.getElementsByClassName('stats-info-label');
+    for(let i = 0; i < content.length; i++){
+      content[i].style.display = "block";
+      contentlabel[i].style.display = "block";
+    }
+  statsBtn.className = "tab-btn-active";
+});
