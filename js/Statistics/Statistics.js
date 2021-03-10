@@ -185,17 +185,17 @@ class Statistics extends HTMLElement {
     // deletes all objects from local storage that are older than a year
     // this.loadFromLocalStorage();
     for (let i = 0; i < this.history.length; i += 1) {
-      if ((new Date(this.history[i].date) - new Date()) / (1000 * 3600 * 24 * 365) > 1) {
+      if ((new Date() - new Date(this.history[i].date)) / (1000 * 3600 * 24 * 365) > 1) {
         this.history.splice(i, 1);
       }
     }
   }
 
   getMinDistractionDate() {
-    if(this.distractionList.length === 0) {
+    if (this.distractionList.length === 0) {
       return null;
     }
-    const sortedDistractions = this.distractionList.slice().sort((a, b) => b.date - a.date);
+    const sortedDistractions = this.distractionList.slice().sort((a, b) => a.date - b.date);
     return sortedDistractions[0].date;
   }
 
@@ -224,11 +224,11 @@ class Statistics extends HTMLElement {
      * REMINDER: Set pomo session id to 0
      */
     // this.loadFromLocalStorage();
-    if (this.timeSpent > 0) {
+    if (this.totalMins > 0) {
       this.history.push({
         date: this.getMinDistractionDate(),
-        distractionCount: this.distractionList.length(),
-        timeSpent: this.timeSpent,
+        distractionCount: this.distractionList.length,
+        timeSpent: this.totalMins,
       });
       localStorage.setItem('statsHistory', JSON.stringify(this.history));
     }
@@ -236,6 +236,16 @@ class Statistics extends HTMLElement {
     const event = new CustomEvent('reset-timer', {
     });
     this.dispatchEvent(event);
+  }
+
+  clearData() {
+    this.totalMins = 0;
+    this.workMins = 0;
+    this.tasksCompleted = 0;
+    this.expectedPomoSessions = 0;
+    this.actualPomoSessions = 0;
+    this.distractionList = [];
+    this.updateMinorLocalStorage();
   }
 }
 

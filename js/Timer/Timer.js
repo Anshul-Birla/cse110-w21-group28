@@ -59,7 +59,7 @@ class Timer extends HTMLElement {
     }
 
     this.sessionId = localStorage.getItem('pomoSessionId');
-    this.sessionId = ((this.sessionId === null) ? 0 : parseInt(this.sessionId, 10));
+    this.sessionId = ((this.sessionId === null) ? 0 : parseInt(this.sessionId, 10) + 1);
 
     this.addEventListeners();
   }
@@ -86,8 +86,10 @@ class Timer extends HTMLElement {
     });
 
     this.dispatchEvent(event);
-    this.sessionId += 1;
-    localStorage.setItem('pomoSessionId', this.sessionId);
+    if (!completedSession.isWork) {
+      this.sessionId += 1;
+      localStorage.setItem('pomoSessionId', this.sessionId);
+    }
     this.startTimer();
   }
 

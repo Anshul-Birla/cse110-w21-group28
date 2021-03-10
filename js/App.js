@@ -44,6 +44,14 @@ TimerObj.addEventListener('timer-complete', (e) => {
   }
 });
 
+startTimerButton.addEventListener('click', () => {
+  if (startTimerButton.textContent === 'Start') { // Button text updates before this
+    StatsPage.compressStats();
+  } else {
+    StatsPage.clearData();
+  }
+});
+
 TDLDom.todoList.addEventListener('task-added', (e) => {
   StatsPage.addExpectedPomoSessions(e.detail.duration);
 });
@@ -56,7 +64,6 @@ TDLDom.todoList.addEventListener('task-unchecked', () => {
   StatsPage.decrementTasksCompleted();
 });
 
-// IS THIS EVEN DONE??
 TDLDom.todoList.addEventListener('task-deleted', (e) => {
   StatsPage.deleteExpectedPomoSessions(e.detail.pomoSessions);
 });
@@ -88,4 +95,5 @@ closeStatsButton.addEventListener('click', () => {
 
 if (after3amToday() && StatsPage.oldDistractionsExist()) {
   StatsPage.compressStats();
+  StatsPage.clearData();
 }
