@@ -187,11 +187,14 @@ class Statistics extends HTMLElement {
   flushHistory() {
     // deletes all objects from local storage that are older than a year
     // this.loadFromLocalStorage();
+    const currDate = new Date();
     for (let i = 0; i < this.history.length; i += 1) {
-      if ((new Date() - new Date(this.history[i].date)) / (1000 * 3600 * 24 * 365) > 1) {
+      const diff = (currDate - new Date(this.history[i].date));
+      if (diff / (1000 * 3600 * 24 * 365) > 1) {
         this.history.splice(i, 1);
       }
     }
+    localStorage.setItem('statsHistory', JSON.stringify(this.history));
   }
 
   getMinDistractionDate() {
