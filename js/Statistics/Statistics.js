@@ -263,8 +263,8 @@ class Statistics extends HTMLElement {
     this.expectedPomoSessions = 0;
     this.actualPomoSessions = 0;
     this.distractionList = [];
-    this.updateMinorLocalStorage();
     this.sessionStartDateTime = new Date();
+    this.updateMinorLocalStorage();
   }
 }
 
