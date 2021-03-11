@@ -75,7 +75,7 @@ class Statistics extends HTMLElement {
 
     this.timeSpent.textContent = this.totalMins;
 
-    this.brokenSessions.textContent = this.distractionList.length;
+    this.brokenSessions.textContent = this.getNumUniqueDistractions();
   }
 
   incrementTasksCompleted() {
