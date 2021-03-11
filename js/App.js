@@ -91,6 +91,7 @@ closeStatsButton.addEventListener('click', () => {
 if (after3amToday() && StatsPage.oldDistractionsExist()) {
   StatsPage.compressStats();
 }
+
 /* Stats Pop Up Buttons */
 statsDistractBtn.addEventListener('click', () => {
   statsBtn.className = "tab-btn";
@@ -104,7 +105,7 @@ statsDistractBtn.addEventListener('click', () => {
     contentlabel = document.getElementsByClassName('dist-info-label');
       for(let i = 0; i < content.length; i++){
         content[i].style.display = "block";
-        contentlabel[i].style.display = "block";
+        contentlabel[i].style.display ="block";
       }
   statsDistractBtn.className = "tab-btn-active";
 });
@@ -112,7 +113,7 @@ statsDistractBtn.addEventListener('click', () => {
 statsBtn.addEventListener('click', () => {
   statsDistractBtn.className = "tab-btn";
   let content = document.getElementsByClassName('dist-info');
-  let contentlabel = document.getElementsByClassName('dist-info-label');
+  let contentlabel = document.getElementsByClassName("dist-info-label");
     for(let i = 0; i < content.length; i++){
       content[i].style.display = "none";
       contentlabel[i].style.display = "none";
@@ -125,3 +126,5 @@ statsBtn.addEventListener('click', () => {
     }
   statsBtn.className = "tab-btn-active";
 });
+
+statsBtn.click();

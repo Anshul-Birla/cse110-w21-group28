@@ -66,7 +66,39 @@ class Statistics extends HTMLElement {
     this.brokenSessionsLabel.textContent = 'Broken Sessions';
     this.parentDiv.appendChild(this.brokenSessions);
     this.parentDiv.appendChild(this.brokenSessionsLabel);
-    
+
+    this.uniqueDistractions = document.createElement('p');
+    this.uniqueDistractions.setAttribute('id', 'dist_numUniqueDistractions');
+    this.uniqueDistractions.setAttribute('class','dist-info');
+    this.uniqueDistractionsLabel = document.createElement('p');
+    this.uniqueDistractionsLabel.setAttribute('id', 'dist_numUniqueDistractionsLabel');
+    this.uniqueDistractionsLabel.setAttribute('class', 'dist-info-label');
+    this.uniqueDistractionsLabel.textContent = "Unqiue Distractions";
+    this.parentDiv.appendChild(this.uniqueDistractions);
+    this.parentDiv.appendChild(this.uniqueDistractionsLabel);
+
+    this.avgDistractions = document.createElement('p');
+    this.avgDistractions.setAttribute('id','dist_avgDistractions');
+    this.avgDistractions.setAttribute('class','dist-info');
+    this.avgDistractionsLabel = document.createElement('p');
+    this.avgDistractionsLabel.setAttribute('id', 'dist_avgDistractionLabel');
+    this.avgDistractionsLabel.setAttribute('class','dist-info-label');
+    this.avgDistractionsLabel.textContent = "Average Distractions Per Task";
+    this.parentDiv.appendChild(this.avgDistractions);
+    this.parentDiv.appendChild(this.avgDistractionsLabel);
+  }
+
+  getNumUniqueDistractions() {
+    const uniqueDistractionId = new Set(this.distractionList.map((item) => item.pomoSessionId));
+    return uniqueDistractionId.size;
+  }
+
+  getAvgDistractionsPerTask() {
+    if (this.tasksCompleted === 0) {
+      return 0;
+    }
+    const rawNumber = this.distractionList.length / this.tasksCompleted;
+    return Math.round(rawNumber * 10) / 10;
   }
 
   updateDom() {
@@ -79,6 +111,10 @@ class Statistics extends HTMLElement {
     this.timeSpent.textContent = this.totalMins;
 
     this.brokenSessions.textContent = this.distractionList.length;
+
+    this.uniqueDistractions.textContent = this.getNumUniqueDistractions();
+    
+    this.avgDistractions.textContent = this.getAvgDistractionsPerTask();
   }
 
   incrementTasksCompleted() {
@@ -96,19 +132,6 @@ class Statistics extends HTMLElement {
   addDistraction(distraction) {
     this.distractionList.push(distraction);
     this.updateMinorLocalStorage();
-  }
-
-  getNumUniqueDistractions() {
-    const uniqueDistractionId = new Set(this.distractionList.map((item) => item.pomoSessionId));
-    return uniqueDistractionId.size;
-  }
-
-  getAvgDistractionsPerTask() {
-    if (this.tasksCompleted === 0) {
-      return 0;
-    }
-    const rawNumber = this.distractionList.length / this.tasksCompleted;
-    return Math.round(rawNumber * 10) / 10;
   }
 
   addTimeSpent(numMins) {
