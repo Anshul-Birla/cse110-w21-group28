@@ -49,7 +49,6 @@
 <div class="content" data-ice="content"><h1 data-ice="title">js/ToDoList/TodoListDom.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { ToDoList } from &apos;./ToDoList.js&apos;;
 import { HTMLAttributes, TaskStorage } from &apos;./TodoListDomVariables.js&apos;;
-import { classNames } from &apos;./TaskVariables.js&apos;;
 
 import { Task } from &apos;./Task.js&apos;;
 
@@ -163,7 +162,10 @@ class TodoListDom {
    * This function runs when the timer is done with its working session
    */
   onSessionComplete() {
-    this.todoList.onSessionComplete();
+    const currTask = this.todoList.getCurrentTask();
+    if (currTask != null) {
+      currTask.incrementSession();
+    }
   }
 }
 
