@@ -48,7 +48,7 @@
 
 <div class="content" data-ice="content"><h1 data-ice="title">tests/todolist.test.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { ToDoList } from &apos;../js/ToDoList/ToDoList.js&apos;;
-import { Task } from &apos;../js/ToDoList/Task&apos;
+import { Task } from &apos;../js/ToDoList/Task&apos;;
 
 /** @Test {ToDoList} */
 
@@ -138,15 +138,14 @@ test(&apos;Preserve special characters in task name&apos;, () =&gt; {
 
 test(&apos;Deleted Task do not come up as current task&apos;, () =&gt; {
   const aList = new ToDoList();
-  aList.addTask(&quot;task1&quot;, 1);
-  aList.addTask(&quot;task2&quot;, 2);
+  aList.addTask(&apos;task1&apos;, 1);
+  aList.addTask(&apos;task2&apos;, 2);
   const task1 = aList.getCurrentTask();
-  task1.deleteButton.click()
+  task1.deleteButton.click();
   const currTask = aList.getCurrentTask();
-  expect(currTask.name).toBe(&quot;task2&quot;);
+  expect(currTask.name).toBe(&apos;task2&apos;);
   expect(currTask.totalSessions).toBe(2);
 });
-
 </code></pre>
 
 </div>

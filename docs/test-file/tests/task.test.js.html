@@ -101,7 +101,6 @@ test(&apos;Increment counter only changes current session number&apos;, () =&gt;
   expect(currTask.checked).toBe(false);
 });
 
-
 test(&apos;Incrementing past totalSessions is OK&apos;, () =&gt; {
   const currTask = new Task(0, &apos;Test task&apos;, 5);
   expect(currTask.name).toBe(&apos;Test task&apos;);
@@ -111,8 +110,8 @@ test(&apos;Incrementing past totalSessions is OK&apos;, () =&gt; {
   for (let i = 0; i &lt; 6; i += 1) {
     currTask.incrementSession();
   }
-  expect(currTask.currentSessionNum).toBe(6)
-  expect(currTask.checked).toBe(false)
+  expect(currTask.currentSessionNum).toBe(6);
+  expect(currTask.checked).toBe(false);
 });
 
 test(&apos;Test that Checkbox works properly&apos;, () =&gt; {
@@ -122,8 +121,17 @@ test(&apos;Test that Checkbox works properly&apos;, () =&gt; {
   expect(currTask.className).toBe(classNames.completedTaskClassName);
 });
 
+test(&apos;Test that toggling checkbox works properly&apos;, () =&gt; {
+  const currTask = new Task(0, &apos;Test task&apos;, 5);
+  currTask.checkBox.click();
+  currTask.checkBox.click();
+  expect(currTask.checked).toBe(false);
+  expect(currTask.checkBox.checked).toBe(false);
+  expect(currTask.className).toBe(classNames.uncheckedTaskClassName);
+});
+
 test(&apos;Incrementing session of checked task should throw range error&apos;, () =&gt; {
-  const currTask = new Task(0, &apos;Test task&apos;, 5,3, true);
+  const currTask = new Task(0, &apos;Test task&apos;, 5, 3, true);
   const errIncrement = () =&gt; { currTask.incrementSession(); };
   expect(errIncrement).toThrow(&apos;Increment checked Task&apos;);
 });

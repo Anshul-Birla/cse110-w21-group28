@@ -175,13 +175,13 @@ window.esdocSearchIndex = [
   ],
   [
     "",
-    "test-file/tests/task.test.js.html#lineNumber56",
+    "test-file/tests/task.test.js.html#lineNumber55",
     "Incrementing past totalSessions is OK",
     "test"
   ],
   [
     "",
-    "test-file/tests/task.test.js.html#lineNumber76",
+    "test-file/tests/task.test.js.html#lineNumber84",
     "Incrementing session of checked task should throw range error",
     "test"
   ],
@@ -211,7 +211,7 @@ window.esdocSearchIndex = [
   ],
   [
     "",
-    "test-file/tests/task.test.js.html#lineNumber82",
+    "test-file/tests/task.test.js.html#lineNumber90",
     "Task Removed from Local Storage after delete is called",
     "test"
   ],
@@ -259,7 +259,7 @@ window.esdocSearchIndex = [
   ],
   [
     "",
-    "test-file/tests/task.test.js.html#lineNumber69",
+    "test-file/tests/task.test.js.html#lineNumber68",
     "Test that Checkbox works properly",
     "test"
   ],
@@ -279,6 +279,12 @@ window.esdocSearchIndex = [
     "",
     "test-file/tests/task.test.js.html#lineNumber29",
     "Test that task with optional initilized values is initialized correctly",
+    "test"
+  ],
+  [
+    "",
+    "test-file/tests/task.test.js.html#lineNumber75",
+    "Test that toggling checkbox works properly",
     "test"
   ],
   [
@@ -790,6 +796,12 @@ window.esdocSearchIndex = [
     "class/js/ToDoList/Task.js~Task.html#instance-member-totalSessions",
     "js/ToDoList/Task.js~Task#totalSessions",
     "member"
+  ],
+  [
+    "js/todolist/task.js~task#unchecktask",
+    "class/js/ToDoList/Task.js~Task.html#instance-method-uncheckTask",
+    "js/ToDoList/Task.js~Task#uncheckTask",
+    "method"
   ],
   [
     "js/todolist/task.js~task#updatelocalstorage",
