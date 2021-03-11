@@ -11,12 +11,14 @@
   --font-color: aliceblue;
   --timer-bg-color: darkcyan;
 
-  /* toothpast table theme */
-  --even-color: rgba(149, 218, 229, 0.603);
-  --odd-color: rgb(2, 177, 177);
+  /* toothpaste table theme */
   --header-color: darkcyan;
+  --even-color: rgba(149, 218, 229, 0.603);
+  --odd-color: var(--even-color); /* replaces rgb(2, 177, 177); */
   --tr-hover-color: #f2f2f279;
-  --td-border-radius: 30px;
+  --completed-task-color: rgb(131, 156, 170);
+
+  --td-border-radius: 25px;
 }
 
 body {
