@@ -92,13 +92,6 @@ class Statistics extends HTMLElement {
     //Distraction List
     this.distList = document.createElement('ul');
     this.distList.setAttribute('class', 'dist-list');
-    for(let i = 0; i < this.distractionList.length; i++){
-      this.listElement = document.createElement('li');
-      this.listElement.setAttribute('class', 'distItem');
-      this.listElement.textContent = this.distractionList[i].description;
-      this.distList.appendChild(this.listElement);
-    }
-
     this.parentDiv.appendChild(this.distList);
     this.distListLabel = document.createElement('p');
     this.distListLabel.setAttribute('id', 'dist_listLabel');
@@ -107,6 +100,25 @@ class Statistics extends HTMLElement {
     this.parentDiv.appendChild(this.distListLabel);
 
   }
+
+
+  updateDistractionList(){
+    let content = document.getElementsByClassName('distItem');
+    let i;
+    if(content.length == 0 ){
+      i = 0
+    }else {
+      i = content.length;
+    }
+    while( i < this.distractionList.length ){
+      this.listElement = document.createElement('li');
+      this.listElement.setAttribute('class','distItem');
+      this.listElement.textContent = this.distractionList[i].description;
+      this.distList.appendChild(this.listElement);
+      i++;
+    }
+  }
+
 
   getNumUniqueDistractions() {
     const uniqueDistractionId = new Set(this.distractionList.map((item) => item.pomoSessionId));
@@ -135,6 +147,10 @@ class Statistics extends HTMLElement {
     this.uniqueDistractions.textContent = this.getNumUniqueDistractions();
     
     this.avgDistractions.textContent = this.getAvgDistractionsPerTask();
+
+    this.updateDistractionList();
+
+
   }
 
   incrementTasksCompleted() {
@@ -155,12 +171,12 @@ class Statistics extends HTMLElement {
   }
 
   addTimeSpent(numMins) {
-    this.totalMins += (numMins * 60);
+    this.totalMins += (numMins);
     this.updateMinorLocalStorage();
   }
 
   addWorkTime(numMins) {
-    this.workMins += (numMins * 60);
+    this.workMins += (numMins);
     this.addTimeSpent(numMins);
   }
 
