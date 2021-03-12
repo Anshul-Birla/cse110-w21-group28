@@ -2,7 +2,6 @@ import { TodoListDom } from './ToDoList/TodoListDom.js';
 import { Timer } from './Timer/Timer.js';
 import { workMode } from './Timer/TimerVariables.js';
 import { shortBreakColors, workModeColors } from './ChangeColors.js';
-import { Task } from './ToDoList/Task.js';
 
 const timeDisplay = document.getElementById('timeDisplay');
 const modeDisplay = document.getElementById('modeDisplay');
@@ -25,5 +24,6 @@ TimerObj.addEventListener('timer-complete', (e) => {
 });
 
 document.body.addEventListener('focus-task', (e) => {
-  TDLDom.moveTaskToTop(e.detail.taskID); 
-})
+  TDLDom.onFocusTask(e.detail.taskID); 
+});
+

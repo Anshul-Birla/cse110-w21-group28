@@ -59,7 +59,7 @@ test('Reload the page with completed task', () => {
 
 // Now has a task
 test('Clicking remove button should remove task from table and local storage', () => {
-  tableLocation.children[1].children[3].children[0].click();
+  tableLocation.children[1].deleteButton.click();
   expect(tableLocation.children[1]).toEqual(undefined);
   expect(window.localData.length).toEqual(0);
   localStorage.clear();
@@ -92,4 +92,37 @@ test('Delete all should remove from table and local storage', () => {
   expect(tableLocation.children[1]).toEqual(undefined);
   expect(window.localData.length).toEqual(0);
   localStorage.clear();
+});
+
+test('Focus Button should reorder the tasks when no tasks are checked off', () => {
+  formLocation.children[0].setAttribute('value', 'Task1');
+  formLocation.children[1].value = 2;
+  formLocation.submit();
+  formLocation.children[0].setAttribute('value', 'Task2');
+  formLocation.children[1].value = 2;
+  formLocation.submit();
+  console.log(myDOM.todoList);
+  myDOM.onFocusTask('1');
+
+  expect(myDOM.todoList.getCurrentTask().name).toBe('Task2');
+  expect(myDOM.todoList.taskList[1].name).toBe('Task1');
+});
+
+test('Focus Button should reorder the tasks tasks are checked off', () => {
+  formLocation.children[0].setAttribute('value', 'Task1');
+  formLocation.children[1].value = 2;
+  formLocation.submit();
+  formLocation.children[0].setAttribute('value', 'Task2');
+  formLocation.children[1].value = 2;
+  formLocation.submit();
+  formLocation.children[0].setAttribute('value', 'Task3');
+  formLocation.children[1].value = 2;
+  formLocation.submit();
+
+  tableLocation.children[2].checkBox.click();
+  
+  myDOM.onFocusTask('1');
+
+  expect(myDOM.todoList.getCurrentTask().name).toBe('Task2');
+  expect(myDOM.todoList.taskList[1].name).toBe('Task1');
 });

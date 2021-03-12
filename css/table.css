@@ -157,14 +157,14 @@ tr.completedTask td {
   align-items: center;
 }
 
-/* .double-buttons button {
+.double-buttons button {
   width: 100%;
   max-height: 100%;
 }
 .double-buttons{
   flex: content;
   align-items: center;
-} */
+}
 
 .double-buttons button {
   min-width: 100%;
@@ -172,6 +172,12 @@ tr.completedTask td {
 
 .last-col-div{
   max-height: 100%;
+}
+
+.more {
+  background: transparent;
+  outline: none;
+  border: none;
 }
 
 
@@ -186,3 +192,4 @@ tr.completedTask td {
     padding-right: 20px;
   }
 }
+

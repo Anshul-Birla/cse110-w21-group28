@@ -123,7 +123,7 @@ class TodoListDom {
     }
   }
 
-  moveTaskToTop(id) {
+ onFocusTask (id) {
       const rows = this.table.childNodes;
       let currentTaskIndex = -1;
       for (let i = 2; i < rows.length; i += 1) {

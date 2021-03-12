@@ -34,7 +34,7 @@ class ToDoList {
    * @throws {Undefiend Length Task} Expected number of pomo sessions is undefined
    * @throws {0 Length Task} Expected number of pomo sessions is 0
    */
-  addTask(name, totalSession) {
+  addTask(name, totalSession, currentSession=0, completed=false ) {
     if (name === undefined) {
       throw new Error('Undefined Name');
     } else if (name === '') {
@@ -47,7 +47,7 @@ class ToDoList {
       throw new Error('Number Not Passed In');
     }
 
-    const task = new Task(this.idCounter, name, totalSession);
+    const task = new Task(this.idCounter, name, totalSession, currentSession, completed);
     this.idCounter += 1;
     this.taskList.push(task);
     this.addTaskToLocalStorage(task);
@@ -82,7 +82,7 @@ class ToDoList {
 
   getTaskById(id) {
     for (let i = 0; i < this.taskList.length; i += 1) {
-      if (this.taskList[i].id == id) return this.taskList[i];
+      if (this.taskList[i].id === id) return this.taskList[i];
     }
     return null;
   }
@@ -90,22 +90,23 @@ class ToDoList {
   removeTask(id) {
     let index = -1;
     for (let i = 0; i < this.taskList.length; i+=1) {
-      if (this.taskList[i].id == id) index = i;
+      if (this.taskList[i].id == id) {
+        console.log(this.taskList[i].id)
+        index = i;
+      }
     }
 
     if(index != -1) {
       this.taskList.splice(index, 1);
       return true;
     }
-    else {
-      return false; 
-    }
+    return false; 
   }
+
 
   addTaskToTop(task) {
     this.taskList.unshift(task);
   };
-
 
 }
 
