@@ -18,6 +18,9 @@
 + [retrium](https://app.retrium.com/team-room/c23da7b5-53f5-4420-9230-e677e9fd9869/retro)
 + action plan: finalize design
 
+![pros cons](Picture6.png)
+![top votes](Picture5.png)
+
 **Anything on the agenda that was not discussed:** 
 + assign tasks tomorrow
 
