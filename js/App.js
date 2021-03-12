@@ -103,10 +103,13 @@ statsDistractBtn.addEventListener('click', () => {
     }
     content = document.getElementsByClassName('dist-info');
     contentlabel = document.getElementsByClassName('dist-info-label');
-      for(let i = 0; i < content.length; i++){
-        content[i].style.display = "block";
-        contentlabel[i].style.display ="block";
-      }
+    document.getElementsByClassName('dist-list')[0].style.display = 'block';
+    for(let i = 0; i < content.length; i++){
+      content[i].style.display = "block";
+    }
+    for(let i = 0; i < contentlabel.length; i++){
+      contentlabel[i].style.display = "block";
+    }
   statsDistractBtn.className = "tab-btn-active";
 });
 
@@ -116,8 +119,11 @@ statsBtn.addEventListener('click', () => {
   let contentlabel = document.getElementsByClassName("dist-info-label");
     for(let i = 0; i < content.length; i++){
       content[i].style.display = "none";
+    }
+    for(let i = 0; i < contentlabel.length; i++){
       contentlabel[i].style.display = "none";
     }
+  document.getElementsByClassName('dist-list')[0].style.display = 'none';
   content = document.getElementsByClassName('stats-info');
   contentlabel = document.getElementsByClassName('stats-info-label');
     for(let i = 0; i < content.length; i++){

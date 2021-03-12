@@ -331,4 +331,9 @@ describe('local storage tests', () => {
   test('Flush local storage deletes tasks stricly older than one year', () => {
     // TODO
   });
+
+  test('When Data btn pushed, all distraction data is hidden'), () => {
+    //TODO
+  }
+  test(' When distraction data btn is pushed, all other data is hidden ')
 });

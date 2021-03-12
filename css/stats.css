@@ -39,7 +39,7 @@
     padding: 20px;
     width: 25%;
     min-width: 350px;
-    max-height: 60%;
+    max-height: 70%;
     text-align: center;
   }
   .stats-info {
@@ -133,27 +133,46 @@
     font-size: 2.5rem
   }
 
+  .dist-list{
+    max-height: 7vh;
+    width: 22vw;
+    overflow-y: scroll;
+    color:black;
+    list-style-type: decimal;
+    animation: fadeEffect 2s;
+    
+  }
+
+  .distItem{
+    color: darkcyan;
+    left: 10vw;
+    align-self: center;
+    animation: fadeEffect 1.5s;
+    font-size: 16px;
+
+  }
+
   @keyframes fadeEffect {
     from {opacity: 0;}
     to {opacity: 1;}
   }
 
   @keyframes slide-in {
-    0% {-webkit-transform: translateY(-60vh); }
-    100% { -webkit-transform: translateY(30vh); }
+    0% {-webkit-transform: translateY(-100vh); }
+    100% { -webkit-transform: translateY(10vh); }
   }
   
   @-webkit-keyframes slide-in {
-    0% {-webkit-transform: translateY(-60vh); }
-    100% { -webkit-transform: translateY(30vh); }
+    0% {-webkit-transform: translateY(-100vh); }
+    100% { -webkit-transform: translateY(10vh); }
   }
     
   @keyframes slide-out {
-    0% { transform: translateY(30vh) ; }
-    100% { transform: translateY(-60vh); }
+    0% { transform: translateY(10vh) ; }
+    100% { transform: translateY(-100vh); }
   }
   
   @-webkit-keyframes slide-out {
-    0% { -webkit-transform: translate(30vh); }
-    100% { -webkit-transform: translateY(-50vh); }
+    0% { -webkit-transform: translate(10vh); }
+    100% { -webkit-transform: translateY(-100vh); }
   }

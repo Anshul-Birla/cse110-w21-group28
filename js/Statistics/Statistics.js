@@ -57,6 +57,8 @@ class Statistics extends HTMLElement {
 
     /* Adding things to Distraction Tab*/
 
+
+    // Number of Broken Session
     this.brokenSessions = document.createElement('p');
     this.brokenSessions.setAttribute('id', 'stats_numBrokenSessions');
     this.brokenSessions.setAttribute('class', 'dist-info');
@@ -66,7 +68,7 @@ class Statistics extends HTMLElement {
     this.brokenSessionsLabel.textContent = 'Broken Sessions';
     this.parentDiv.appendChild(this.brokenSessions);
     this.parentDiv.appendChild(this.brokenSessionsLabel);
-
+    //Number of Unique Distractions
     this.uniqueDistractions = document.createElement('p');
     this.uniqueDistractions.setAttribute('id', 'dist_numUniqueDistractions');
     this.uniqueDistractions.setAttribute('class','dist-info');
@@ -76,7 +78,7 @@ class Statistics extends HTMLElement {
     this.uniqueDistractionsLabel.textContent = "Unqiue Distractions";
     this.parentDiv.appendChild(this.uniqueDistractions);
     this.parentDiv.appendChild(this.uniqueDistractionsLabel);
-
+    // Average Number of Distractions Per Task
     this.avgDistractions = document.createElement('p');
     this.avgDistractions.setAttribute('id','dist_avgDistractions');
     this.avgDistractions.setAttribute('class','dist-info');
@@ -86,6 +88,24 @@ class Statistics extends HTMLElement {
     this.avgDistractionsLabel.textContent = "Average Distractions Per Task";
     this.parentDiv.appendChild(this.avgDistractions);
     this.parentDiv.appendChild(this.avgDistractionsLabel);
+
+    //Distraction List
+    this.distList = document.createElement('ul');
+    this.distList.setAttribute('class', 'dist-list');
+    for(let i = 0; i < this.distractionList.length; i++){
+      this.listElement = document.createElement('li');
+      this.listElement.setAttribute('class', 'distItem');
+      this.listElement.textContent = this.distractionList[i].description;
+      this.distList.appendChild(this.listElement);
+    }
+
+    this.parentDiv.appendChild(this.distList);
+    this.distListLabel = document.createElement('p');
+    this.distListLabel.setAttribute('id', 'dist_listLabel');
+    this.distListLabel.setAttribute('class','dist-info-label');
+    this.distListLabel.textContent = "Distraction List";
+    this.parentDiv.appendChild(this.distListLabel);
+
   }
 
   getNumUniqueDistractions() {
