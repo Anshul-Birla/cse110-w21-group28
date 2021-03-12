@@ -42,4 +42,4 @@
 
 **Decisions made:** 
 
-**When the meeting finished:**
+**When the meeting finished:** 7:00 pm
