@@ -104,8 +104,8 @@ tr:hover td {
 }
 .task-length {
  /* width: calc(42% - 60px);*/
- width: 14vw;
- margin-left: 1vw;
+ width: 2.5vw;
+ margin-left: 14vw;
 }
 .task-submit {
   margin-left: 1vw;
