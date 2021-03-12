@@ -18,11 +18,15 @@
   + Dan - stats
     + currently displaying completed tasks, total minutes, working minutes, minutes per task, 
     + adding different tabs/pages for current session, day, year, distractions list
+    + ![stats](Picture1.png)
   + Anshul - holding off on delete button
   + Kyeling - working on scrollbar this Wednesday
   + Kewen - distraction box refactoring done
   + Ryan - animations
     + distraction box appears more slowly, background darkens, can't enter tasks
+    + ![background when distraction box open](Picture2.png)
+    + ![working time color theme](Picture3.png)
+    + ![break time color theme](Picture4.png)
   + Anshul - current task
     + 3 dots, click to show trash can/delete button and star/emphasize buttons
     + when timer rolls over, current task moves to top
