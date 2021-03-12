@@ -27,7 +27,7 @@ jobs:
         uses: devatherock/minify-js@v1.0.2
         with:
           directory: 'js'
-          add_sffix: false
+          add_suffix: false
       - name: Push changes 
         uses: actions-js/push@v1.2
         with:
