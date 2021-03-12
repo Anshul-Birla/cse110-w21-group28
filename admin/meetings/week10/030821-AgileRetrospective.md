@@ -31,7 +31,7 @@ Design decisions:
   -  disable distraction button before start/during break
 -  current task and task list/table separate
 -  table rows - either closer in color or spaced apart
--  # of pomos input - without brackets
+-  \# of pomos input - without brackets
 -  **collapsible table + dyanmically sized timer feature**
   -  during work session, timer is large, table is collapsed
   -  on transition to break, resize timer font/div/corners to make room for the table
