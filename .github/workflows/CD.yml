@@ -7,17 +7,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-        with: 
+        with:
           token: ${{secrets.API_TOKEN_GITHUB }}
-
       - name: Minify JS
         uses: devatherock/minify-js@v1.0.2
         with:
           directory: 'js'
           add_suffix: false
       - name: Delete Uneccessary Files 
-        run: rm -rf coverage/ && rm -rf docs/ && rm -rf tests/ 
-      - name: Push changes 
+        run: rm -rf coverage/ && rm -rf docs/ && rm -rf tests/
+      - name: Push changes
         uses: actions-js/push@v1.2
         with:
           github_token: ${{secrets.API_TOKEN_GITHUB }}
@@ -29,7 +28,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Install Dependencies
         run: npm ci
-      - name: Build Docs 
+      - name: Build Docs
         run: npm run doc
       - name: Push directory to another repository
         uses: cpina/github-action-push-to-another-repository@v1.2
@@ -40,8 +39,7 @@ jobs:
          destination-github-username: 'Anshul-Birla'
          destination-repository-name: 'PomoDoc'
          user-email: anbirla@ucsd.edu
-  
-  release: 
+  release:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
