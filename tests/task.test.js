@@ -117,7 +117,3 @@ test('Clicking three dots button hides button', () => {
   expect(task.deleteButton.parentNode.style.display).toBe('block');
   expect(task.threeDotsButton.parentNode.style.display).toBe('none');
 });
-
-
-
-

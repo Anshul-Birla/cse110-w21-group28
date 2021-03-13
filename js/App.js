@@ -24,6 +24,5 @@ TimerObj.addEventListener('timer-complete', (e) => {
 });
 
 document.body.addEventListener('focus-task', (e) => {
-  TDLDom.onFocusTask(e.detail.taskID); 
+  TDLDom.onFocusTask(e.detail.taskID);
 });
-

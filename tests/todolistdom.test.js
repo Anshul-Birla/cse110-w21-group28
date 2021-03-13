@@ -91,7 +91,6 @@ test('Delete all should remove from table and local storage', () => {
   deleteBtnLocation.click();
   expect(tableLocation.children[1]).toEqual(undefined);
   expect(window.localData.length).toEqual(0);
-  localStorage.clear();
 });
 
 test('Focus Button should reorder the tasks when no tasks are checked off', () => {
@@ -101,11 +100,10 @@ test('Focus Button should reorder the tasks when no tasks are checked off', () =
   formLocation.children[0].setAttribute('value', 'Task2');
   formLocation.children[1].value = 2;
   formLocation.submit();
-  console.log(myDOM.todoList);
   myDOM.onFocusTask('1');
-
   expect(myDOM.todoList.getCurrentTask().name).toBe('Task2');
   expect(myDOM.todoList.taskList[1].name).toBe('Task1');
+  localStorage.clear();
 });
 
 test('Focus Button should reorder the tasks tasks are checked off', () => {
@@ -118,11 +116,8 @@ test('Focus Button should reorder the tasks tasks are checked off', () => {
   formLocation.children[0].setAttribute('value', 'Task3');
   formLocation.children[1].value = 2;
   formLocation.submit();
-
   tableLocation.children[2].checkBox.click();
-  
-  myDOM.onFocusTask('1');
-
-  expect(myDOM.todoList.getCurrentTask().name).toBe('Task2');
+  myDOM.onFocusTask('2');
+  expect(myDOM.todoList.getCurrentTask().name).toBe('Task3');
   expect(myDOM.todoList.taskList[1].name).toBe('Task1');
 });

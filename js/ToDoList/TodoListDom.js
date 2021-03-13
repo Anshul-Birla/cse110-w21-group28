@@ -107,8 +107,7 @@ class TodoListDom {
   displayTask(newTask, index = 0) {
     if (index === 0) {
       this.table.appendChild(newTask);
-    }
-    else {
+    } else {
       this.table.insertBefore(newTask, this.table.childNodes[index]);
     }
   }
@@ -123,20 +122,20 @@ class TodoListDom {
     }
   }
 
- onFocusTask (id) {
-      const rows = this.table.childNodes;
-      let currentTaskIndex = -1;
-      for (let i = 2; i < rows.length; i += 1) {
-        if (rows[i].checked === false && currentTaskIndex === -1) {
-          currentTaskIndex = i;
-        }
+  onFocusTask(id) {
+    const rows = this.table.childNodes;
+    let currentTaskIndex = -1;
+    for (let i = 2; i < rows.length; i += 1) {
+      if (rows[i].checked === false && currentTaskIndex === -1) {
+        currentTaskIndex = i;
       }
+    }
 
-      let clickedTask = this.todoList.getTaskById(id);
-      this.displayTask(clickedTask, currentTaskIndex);
+    const clickedTask = this.todoList.getTaskById(id);
+    this.displayTask(clickedTask, currentTaskIndex);
 
-      this.todoList.removeTask(id);
-      this.todoList.addTaskToTop(clickedTask);
+    this.todoList.removeTask(id);
+    this.todoList.addTaskToTop(clickedTask);
   }
 }
 

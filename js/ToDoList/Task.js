@@ -192,7 +192,6 @@ class Task extends HTMLTableRowElement {
     this.appendChild(lastCol);
   }
 
-
   /**
    * Removes a task from local storage given the id
    */

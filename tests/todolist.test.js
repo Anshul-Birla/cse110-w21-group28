@@ -106,12 +106,11 @@ test('Getting task by ID returns task if present', () => {
   expect(returnedTask.name).toBe('name');
   returnedTask = aList.getTaskById('1');
   expect(returnedTask.name).toBe('name2');
-
 });
 
 test('Getting task by ID returns null if task not present', () => {
   const aList = new ToDoList();
-  aList.addTask( 'name', 2);
+  aList.addTask('name', 2);
   aList.addTask('name2', 2);
   const returnedTask = aList.getTaskById('not present');
   expect(returnedTask).toBe(null);
@@ -127,19 +126,19 @@ test('Deleting task by ID returns deletes task when present', () => {
   expect(returnedTask).toBe(null);
 });
 
-test('Deleting task by ID returns false if task not present' ,() => {
+test('Deleting task by ID returns false if task not present', () => {
   const aList = new ToDoList();
   aList.addTask('name', 1);
   aList.addTask('name2', 1);
   const ret = aList.removeTask('nonexistant');
-  expect(ret).toBe(false)
+  expect(ret).toBe(false);
 });
 
 test('Move task to top of todolist', () => {
   const aList = new ToDoList();
   aList.addTask('name', 1);
   aList.addTask('name2', 1);
-  const task = new Task("new", "newtask", 2);
+  const task = new Task('new', 'newtask', 2);
   aList.addTaskToTop(task);
-  expect(aList.taskList[0]).toBe(task)
-})
+  expect(aList.taskList[0]).toBe(task);
+});
