@@ -55,6 +55,25 @@ jobs:
          destination-github-username: 'Anshul-Birla'
          destination-repository-name: 'PomoDoc'
          user-email: anbirla@ucsd.edu
+  
+  release: 
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - name: Install depndencies
+        run: npm ci
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx semantic-release
         
 
 
