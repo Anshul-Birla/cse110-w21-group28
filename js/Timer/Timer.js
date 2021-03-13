@@ -4,7 +4,7 @@ import {
 /**
  * A class for the Timer object. Has functions to start the timer,
  * display the current mode of the timer and display the time remaining
- * Class throws the 'timer-complete' event
+ * Class throws the 'timer-complete' event, which is why it is an HTML element
  */
 class Timer extends HTMLElement {
   /**
