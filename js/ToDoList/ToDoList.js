@@ -34,7 +34,7 @@ class ToDoList {
    * @throws {Undefiend Length Task} Expected number of pomo sessions is undefined
    * @throws {0 Length Task} Expected number of pomo sessions is 0
    */
-  addTask(name, totalSession, currentSession = 0, completed = false) {
+  addTask(name, totalSession, currentSession = 0, completed = false, fromLocalStorage = false) {
     if (name === undefined) {
       throw new Error('Undefined Name');
     } else if (name === '') {
@@ -50,7 +50,8 @@ class ToDoList {
     const task = new Task(this.idCounter, name, totalSession, currentSession, completed);
     this.idCounter += 1;
     this.taskList.push(task);
-    this.addTaskToLocalStorage(task);
+    if (!fromLocalStorage){
+      this.addTaskToLocalStorage(task); }
     return task;
   }
 

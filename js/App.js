@@ -25,4 +25,10 @@ TimerObj.addEventListener('timer-complete', (e) => {
 
 document.body.addEventListener('focus-task', (e) => {
   TDLDom.onFocusTask(e.detail.taskID);
+  TDLDom.updateCurrentTask();
 });
+
+document.body.addEventListener('checkbox-updated', () => {
+  TDLDom.updateCurrentTask();
+})
+

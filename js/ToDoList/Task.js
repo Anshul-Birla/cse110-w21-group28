@@ -95,6 +95,16 @@ class Task extends HTMLTableRowElement {
       if (!this.checked) {
         this.checkOffTask();
       } else { this.uncheckTask(); }
+      const event = new CustomEvent('checkbox-updated', {
+        bubbles: true,
+        composed: true,
+        detail: {
+          taskID: this.id,
+          checkBoxState: this.checked,
+        },
+      });
+      document.body.dispatchEvent(event)
+      
     });
     return checkBox;
   }

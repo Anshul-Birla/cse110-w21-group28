@@ -42,6 +42,11 @@ class TodoListDom {
      */
     this.table = HTMLTable;
 
+    /**
+     * @type {Task}
+     */
+    this.currentTask = null
+
     this.setupEventListeners();
     this.renderLocalStorage();
   }
@@ -65,12 +70,11 @@ class TodoListDom {
       const totalSession = window.localData[i][TaskStorage.totalSessionIndex];
       const currentSession = window.localData[i][TaskStorage.currentSessionIndex];
       const completed = window.localData[i][TaskStorage.checkedIndex];
-      const task = new Task(i, name, totalSession, currentSession, completed);
-      this.todoList.idCounter += 1;
-      this.todoList.taskList.push(task);
-      task.updatePomoSessions();
+      const task = this.todoList.addTask(name, totalSession, currentSession, completed, true)
       this.displayTask(task);
     }
+
+    this.updateCurrentTask();
   }
 
   /**
@@ -120,6 +124,10 @@ class TodoListDom {
     if (currTask != null) {
       currTask.incrementSession();
     }
+  }
+
+  updateCurrentTask() {
+    this.currentTask = this.todoList.getCurrentTask();
   }
 
   onFocusTask(id) {

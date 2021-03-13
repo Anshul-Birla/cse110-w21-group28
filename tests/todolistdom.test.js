@@ -106,7 +106,7 @@ test('Focus Button should reorder the tasks when no tasks are checked off', () =
   localStorage.clear();
 });
 
-test('Focus Button should reorder the tasks tasks are checked off', () => {
+test('Focus Button should reorder the tasks even if tasks are checked off', () => {
   formLocation.children[0].setAttribute('value', 'Task1');
   formLocation.children[1].value = 2;
   formLocation.submit();
@@ -120,4 +120,39 @@ test('Focus Button should reorder the tasks tasks are checked off', () => {
   myDOM.onFocusTask('2');
   expect(myDOM.todoList.getCurrentTask().name).toBe('Task3');
   expect(myDOM.todoList.taskList[1].name).toBe('Task1');
+  localStorage.clear();
 });
+
+test('Focus Button should reorder the tasks even if tasks are deleted', () => {
+  formLocation.children[0].setAttribute('value', 'Task1');
+  formLocation.children[1].value = 2;
+  formLocation.submit();
+  formLocation.children[0].setAttribute('value', 'Task2');
+  formLocation.children[1].value = 2;
+  formLocation.submit();
+  formLocation.children[0].setAttribute('value', 'Task3');
+  formLocation.children[1].value = 2;
+  formLocation.submit();
+  tableLocation.children[2].deleteButton.click();
+  myDOM.onFocusTask('2');
+  expect(myDOM.todoList.getCurrentTask().name).toBe('Task3');
+  expect(myDOM.todoList.taskList[1].name).toBe('Task1');
+  localStorage.clear();
+});
+
+test('Current Task gets updated when focus button is clicked', () => {
+  
+  formLocation.children[0].setAttribute('value', 'Task1');
+  formLocation.children[1].value = 2;
+  formLocation.submit();
+  formLocation.children[0].setAttribute('value', 'Task2');
+  formLocation.children[1].value = 2;
+  formLocation.submit();
+  formLocation.children[0].setAttribute('value', 'Task3');
+  formLocation.children[1].value = 2;
+  formLocation.submit();
+
+  myDOM.onFocusTask('1');
+  myDOM.updateCurrentTask();
+  expect(myDOM.currentTask.name).toBe('Task2');
+})
