@@ -1,6 +1,5 @@
 import { ToDoList } from './ToDoList.js';
 import { HTMLAttributes, TaskStorage } from './TodoListDomVariables.js';
-import { Task } from './Task.js';
 
 /**
  * Class responsible for providing changes to the DOM for the TodoList
@@ -43,9 +42,10 @@ class TodoListDom {
     this.table = HTMLTable;
 
     /**
+     * The current task the user should be working on
      * @type {Task}
      */
-    this.currentTask = null
+    this.currentTask = null;
 
     this.setupEventListeners();
     this.renderLocalStorage();
@@ -70,7 +70,7 @@ class TodoListDom {
       const totalSession = window.localData[i][TaskStorage.totalSessionIndex];
       const currentSession = window.localData[i][TaskStorage.currentSessionIndex];
       const completed = window.localData[i][TaskStorage.checkedIndex];
-      const task = this.todoList.addTask(name, totalSession, currentSession, completed, true)
+      const task = this.todoList.addTask(name, totalSession, currentSession, completed, true);
       this.displayTask(task);
     }
 
@@ -88,6 +88,7 @@ class TodoListDom {
       const sessions = parseInt(data.get(HTMLAttributes.taskPomoSessions), 10);
       try {
         const task = this.todoList.addTask(name, sessions);
+        this.updateCurrentTask();
         this.displayTask(task);
         this.form.reset();
       } catch (error) {
@@ -128,6 +129,7 @@ class TodoListDom {
 
   updateCurrentTask() {
     this.currentTask = this.todoList.getCurrentTask();
+    if (this.currentTask != null) this.currentTask.checkBox.disabled = false;
   }
 
   onFocusTask(id) {
@@ -140,6 +142,7 @@ class TodoListDom {
     }
 
     const clickedTask = this.todoList.getTaskById(id);
+    this.currentTask.checkBox.disabled = true;
     this.displayTask(clickedTask, currentTaskIndex);
 
     this.todoList.removeTask(id);

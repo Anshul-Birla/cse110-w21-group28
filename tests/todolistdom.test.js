@@ -39,13 +39,22 @@ test('Valid construction of TDLDom', () => {
   expect(myDOM.todoList.taskList).toEqual([]);
 });
 
+test('TodoList can function without any tasks', () => {
+  const currentTaskFunction = () => { myDOM.updateCurrentTask(); };
+  expect(currentTaskFunction).not.toThrow(Error);
+  const sessionCompleteFunction = () => { myDOM.onSessionComplete(); };
+  expect(sessionCompleteFunction).not.toThrow(Error);
+});
+
 test('Add a task and click checkoff', () => {
   formLocation.children[0].setAttribute('value', 'Write Essay');
   formLocation.children[1].value = 2;
   formLocation.submit();
-  expect(tableLocation.children[1].children[1].textContent).toMatch(new RegExp('Write *Essay'));
-  expect(tableLocation.children[1].children[2].textContent).toMatch(new RegExp('\\[0/ *2\\]'));
-  tableLocation.children[1].children[0].children[0].click();
+  expect(tableLocation.children[1].taskText.textContent).toMatch(new RegExp('Write *Essay'));
+  expect(tableLocation.children[1].pomoSessions.textContent).toMatch(new RegExp('\\[0/ *2\\]'));
+  tableLocation.children[1].checkBox.click();
+  expect(tableLocation.children[1].checkBox.checked).toBe(true);
+  expect(tableLocation.children[1].checkBox.disabled).toBe(false);
 });
 
 test('Reload the page with local storage', () => {
@@ -141,7 +150,6 @@ test('Focus Button should reorder the tasks even if tasks are deleted', () => {
 });
 
 test('Current Task gets updated when focus button is clicked', () => {
-  
   formLocation.children[0].setAttribute('value', 'Task1');
   formLocation.children[1].value = 2;
   formLocation.submit();
@@ -155,4 +163,41 @@ test('Current Task gets updated when focus button is clicked', () => {
   myDOM.onFocusTask('1');
   myDOM.updateCurrentTask();
   expect(myDOM.currentTask.name).toBe('Task2');
-})
+});
+
+test('Adding first task should not disable the checkbox', () => {
+  formLocation.children[0].setAttribute('value', 'Task1');
+  formLocation.children[1].value = 2;
+  formLocation.submit();
+  expect(tableLocation.children[1].checkBox.disabled).toBe(false);
+});
+
+test('Adding two tasks should disable the checkbox for second task', () => {
+  localStorage.clear();
+  formLocation.children[0].setAttribute('value', 'Task1');
+  formLocation.children[1].value = 2;
+  formLocation.submit();
+  formLocation.children[0].setAttribute('value', 'Task2');
+  formLocation.children[1].value = 2;
+  formLocation.submit();
+
+  expect(tableLocation.children[1].checkBox.disabled).toBe(false);
+  expect(tableLocation.children[2].checkBox.disabled).toBe(true);
+});
+
+test('Focusing on a task updates checkboxes accordingly', () => {
+  localStorage.clear();
+  formLocation.children[0].setAttribute('value', 'Task1');
+  formLocation.children[1].value = 2;
+  formLocation.submit();
+  formLocation.children[0].setAttribute('value', 'Task2');
+  formLocation.children[1].value = 2;
+  formLocation.submit();
+
+  myDOM.onFocusTask('1');
+  myDOM.updateCurrentTask();
+
+  expect(tableLocation.children[1].checkBox.disabled).toBe(false);
+  expect(tableLocation.children[1].taskText.textContent).toBe('Task2');
+  expect(tableLocation.children[2].checkBox.disabled).toBe(true);
+});

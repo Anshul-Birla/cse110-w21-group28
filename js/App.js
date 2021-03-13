@@ -30,5 +30,4 @@ document.body.addEventListener('focus-task', (e) => {
 
 document.body.addEventListener('checkbox-updated', () => {
   TDLDom.updateCurrentTask();
-})
-
+});

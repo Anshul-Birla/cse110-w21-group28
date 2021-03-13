@@ -50,8 +50,9 @@ class ToDoList {
     const task = new Task(this.idCounter, name, totalSession, currentSession, completed);
     this.idCounter += 1;
     this.taskList.push(task);
-    if (!fromLocalStorage){
-      this.addTaskToLocalStorage(task); }
+    if (!fromLocalStorage) {
+      this.addTaskToLocalStorage(task);
+    }
     return task;
   }
 
@@ -83,7 +84,7 @@ class ToDoList {
 
   getTaskById(id) {
     for (let i = 0; i < this.taskList.length; i += 1) {
-      if (this.taskList[i].id === id) return this.taskList[i];
+      if (Number(this.taskList[i].id) === Number(id)) return this.taskList[i];
     }
     return null;
   }
@@ -91,13 +92,12 @@ class ToDoList {
   removeTask(id) {
     let index = -1;
     for (let i = 0; i < this.taskList.length; i += 1) {
-      if (this.taskList[i].id == id) {
-        console.log(this.taskList[i].id);
+      if (Number(this.taskList[i].id) === Number(id)) {
         index = i;
       }
     }
 
-    if (index != -1) {
+    if (index !== -1) {
       this.taskList.splice(index, 1);
       return true;
     }

@@ -85,10 +85,12 @@ class Task extends HTMLTableRowElement {
     checkBox.setAttribute('class', 'custom_checkbox');
     firstCol.appendChild(checkBox);
     this.appendChild(firstCol);
+    checkBox.disabled = true;
 
     if (this.checked) {
       this.setAttribute('class', classNames.completedTaskClassName);
       checkBox.checked = true;
+      checkBox.disabled = false;
     }
 
     checkBox.addEventListener('click', () => {
@@ -103,8 +105,7 @@ class Task extends HTMLTableRowElement {
           checkBoxState: this.checked,
         },
       });
-      document.body.dispatchEvent(event)
-      
+      document.body.dispatchEvent(event);
     });
     return checkBox;
   }
