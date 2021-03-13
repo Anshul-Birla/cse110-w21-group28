@@ -33,7 +33,7 @@ jobs:
       - name: Push changes 
         uses: actions-js/push@v1.2
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{secrets.API_TOKEN_GITHUB }}
           branch: 'production'
           force: true
   docs:
