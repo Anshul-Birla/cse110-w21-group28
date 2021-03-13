@@ -34,7 +34,23 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: 'production'
           force: true
-          
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build Docs 
+        run: npm run doc
+      - name: Push directory to another repository
+        uses: cpina/github-action-push-to-another-repository@v1.2
+        env:
+         API_TOKEN_GITHUB: ${{secrets.API_TOKEN_GITHUB }}
+        with:
+         source-directory: 'docs'
+         destination-github-username: 'Anshul-Birla'
+         destination-repository-name: 'PomoDoc'
+         user-email: anbirla@ucsd.edu
+        
+
 
       
       
