@@ -28,6 +28,9 @@
   "homepage": "https://github.com/Anshul-Birla/cse110-w21-group28#readme",
   "devDependencies": {
     "@babel/plugin-transform-modules-commonjs": "^7.12.13",
+    "@semantic-release/commit-analyzer": "^8.0.1",
+    "@semantic-release/github": "^7.2.0",
+    "@semantic-release/release-notes-generator": "^9.0.2",
     "esdoc": "^1.1.0",
     "esdoc-standard-plugin": "^1.0.0",
     "eslint": "^7.19.0",
@@ -60,7 +63,23 @@
     }
   },
   "release": {
-    "branches": ["main"]
+    "branches": [
+      "main"
+    ],
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      [
+        "@semantic-release/github",
+        {
+          "assets": [
+            {
+              "path": "js/*.js",
+              "label": "JS distribution"
+            }
+          ]
+        }
+      ]
+    ]
   }
-
 }
