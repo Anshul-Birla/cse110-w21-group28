@@ -11,7 +11,6 @@ What changes did you make?
 - TODO 
   
 ### Checklist for Review
-- [ ] PR has the correct version numbering
 - [ ] PR has 100% code coverage for comments 
 - [ ] PR has correct capitlization style? (classes capitlized, variables first word lowercase)
 - [ ] PR's tests are not brittle (will not break if implementation slightly changes)

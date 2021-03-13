@@ -1,10 +1,9 @@
-name: Pomo-App
-
+name: Continous Integration
 on:
   pull_request:
     branches: [ main ]
 jobs:
-  Check_Styles:
+  Style:
     runs-on: ubuntu-latest
     steps:
       - name: Clone
@@ -13,14 +12,14 @@ jobs:
         run: npm ci
       - name: Lint
         run : npm run lint:test
-      - name: Branch_Name
+      - name: Check Branch Name
         run: npm run branch $GITHUB_HEAD_REF
-  Tests:
+  Unit_Tests:
     runs-on: ubuntu-latest
     steps:
       - name: Clone
         uses: actions/checkout@v2
       - name: Install Dependencies
         run: npm ci
-      - name: Unit_Tests
+      - name: Check Unit Tests
         run: npm test
