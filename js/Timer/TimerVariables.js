@@ -7,7 +7,7 @@ const workMode = {
 };
 const shortBreakMode = {
   name: 'Short Break',
-  duration: 15,
+  duration: 5,
 };
 
 const longBreakMode = {
