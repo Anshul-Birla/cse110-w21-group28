@@ -22,7 +22,8 @@
     width:100vw;
     display: none;
     background-color: black;
-    background-color:rgba(0,0,0,.75)
+    background-color:rgba(0,0,0,.75);
+    animation: fadeEffect 2s;
   }
   .close-stats-button {
     color: #f0b9b9;
