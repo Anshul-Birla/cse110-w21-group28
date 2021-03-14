@@ -40,7 +40,6 @@ td {
 
 tr {
   margin-top: 20px;
-  min-height: 160px;
 }
 
 tr:nth-child(even) td {
@@ -63,7 +62,7 @@ tr:hover td {
 }
 
 .col3-pomos {
-  width: 20%;
+  width: 10%;
 }
 
 .col4-delete {
@@ -72,7 +71,7 @@ tr:hover td {
 }
 
 .col2-task {
-  width: 55%;
+  width: 65%;
 }
 
 /* input form (add task) */
@@ -159,22 +158,27 @@ tr.completedTask td {
   align-items: center;
 }
 
-.double-buttons button {
-  width: 100%;
-  max-height: 100%;
-}
-
 .double-buttons {
-  flex: content;
-  align-items: center;
+  max-height: 100%;
+  display: inline-block;
 }
 
 .double-buttons button {
-  min-width: 100%;
+  width: 50%;
+  max-height: 100%;
+  background-color: transparent;
+  border: none;
+  display: inline block;
 }
 
-.last-col-div {
-  max-height: 100%;
+svg {
+  width: 24px;
+  height: 24px;
+}
+
+.double-buttons button svg:hover {
+  fill: red;
+  cursor: pointer;
 }
 
 .more {
@@ -182,6 +186,15 @@ tr.completedTask td {
   outline: none;
   border: none;
 }
+
+.inline {
+  display: inline-block;
+  max-width: 45%;
+}
+ td button {
+   display: block;
+   margin: auto;
+ }
 
 @media screen and (min-width: 1300px) {
   #tasklist {

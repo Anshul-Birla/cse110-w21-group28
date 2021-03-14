@@ -1,4 +1,4 @@
-import { classNames } from './TaskVariables.js';
+import { classNames, svg } from './TaskVariables.js';
 import { TaskStorage } from './TodoListDomVariables.js';
 
 /**
@@ -157,14 +157,20 @@ class Task extends HTMLTableRowElement {
    */
   setupDeleteButton() {
     const deleteBtn = document.createElement('button');
-
+    const path = document.createElement('path');
+    path.setAttribute('d', svg.trashcan);
+    const svgTag = document.createElement('svg');
+    svgTag.appendChild(path);
+    deleteBtn.appendChild(svgTag);
     deleteBtn.addEventListener('click', () => {
       this.deleted = true;
       this.remove();
       this.removeFromLocalStorage();
     });
+    const inlineDiv = document.createElement('div');
+    inlineDiv.className = 'inline';
+    inlineDiv.appendChild(deleteBtn);
 
-    deleteBtn.textContent = 'Delete';
     return deleteBtn;
   }
 

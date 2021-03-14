@@ -84,9 +84,10 @@ class ToDoList {
     }
     return null;
   }
+
   /**
    * Gets the task corresponding to the id given
-   * @param {String} id - ID of task 
+   * @param {String} id - ID of task
    * @returns {Task} - Task with ID, null if none found
    */
   getTaskById(id) {
@@ -98,7 +99,7 @@ class ToDoList {
 
   /**
    * Removes a task with the given id from the todolist
-   * @param {String} id 
+   * @param {String} id
    * @returns {Boolean} true if succesful, false if no task found
    */
   removeTask(id) {
@@ -115,7 +116,6 @@ class ToDoList {
     }
     return false;
   }
-
 
   /**
    * Adds a task to the top of the todolist

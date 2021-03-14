@@ -51,7 +51,7 @@ class TodoListDom {
     this.renderLocalStorage();
   }
 
-/**
+  /**
  * Fetch local storage, and store them into window.localData
  * Iterate each local tasks and render them
  */
@@ -111,7 +111,7 @@ class TodoListDom {
   /**
    * Adds a task to the bottom of the table OR adds it before the specified index
    * @param {HTMLTableRowElement} newTask - task you want added
-   * @param {HTMLTableRowElement} [index = undefined] - index you want to insert the task before 
+   * @param {HTMLTableRowElement} [index = undefined] - index you want to insert the task before
    */
   displayTask(newTask, index = undefined) {
     if (index === undefined) {
@@ -130,6 +130,7 @@ class TodoListDom {
       currTask.incrementSession();
     }
   }
+
   /**
    * Updates the current task and changes its checkbox property accordingly
    */
