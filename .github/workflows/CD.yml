@@ -1,0 +1,64 @@
+name: CD
+on:
+  push:
+    branches: [ main ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          token: ${{secrets.API_TOKEN_GITHUB }}
+      - name: Minify JS
+        uses: devatherock/minify-js@v1.0.2
+        with:
+          directory: 'js'
+          add_suffix: false
+      - name: Minify CSS
+        uses: devatherock/minify-js@v1.0.2
+        with:
+          directory: 'css'
+          add_suffix: false
+      - name: Delete Uneccessary Files
+        run: rm -rf coverage/ && rm -rf docs/ && rm -rf tests/
+      - name: Push changes
+        uses: actions-js/push@v1.2
+        with:
+          github_token: ${{secrets.API_TOKEN_GITHUB }}
+          branch: 'production'
+          force: true
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Dependencies
+        run: npm ci
+      - name: Build Docs
+        run: npm run doc
+      - name: Push directory to another repository
+        uses: cpina/github-action-push-to-another-repository@v1.2
+        env:
+         API_TOKEN_GITHUB: ${{secrets.API_TOKEN_GITHUB }}
+        with:
+         source-directory: 'docs'
+         destination-github-username: 'Anshul-Birla'
+         destination-repository-name: 'PomoDoc'
+         user-email: anbirla@ucsd.edu
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          token: ${{secrets.API_TOKEN_GITHUB }}
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - name: Install depndencies
+        run: npm ci
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{secrets.API_TOKEN_GITHUB }}
+        run: npx semantic-release
