@@ -57,12 +57,25 @@ tr:hover td {
   transition-duration: 0;
 }
 
+td button {
+  display: block;
+  margin: auto;
+  background-color: transparent;
+  outline: none;
+  border: none;
+}
+
+svg {
+  width: 24px;
+  height: 24px;
+}
+
 .col1-checkbox {
   width: 10%;
 }
 
 .col3-pomos {
-  width: 10%;
+  width: 12%;
 }
 
 .col4-delete {
@@ -71,7 +84,7 @@ tr:hover td {
 }
 
 .col2-task {
-  width: 65%;
+  width: 63%;
 }
 
 /* input form (add task) */
@@ -149,15 +162,17 @@ tr.completedTask td {
   text-decoration: line-through;
   background-color: rgba(211, 211, 211, 0.747);
 }
-
+/* Makes the 3 dots for the table */
 .three-dots::after {
   cursor: pointer;
   color: #fcc;
   content: '\2807';
   font-size: 20px;
   align-items: center;
+  text-decoration: none !important;
 }
 
+/* Styling for the div that holds both the focus and delete button */
 .double-buttons {
   max-height: 100%;
   display: inline-block;
@@ -171,30 +186,22 @@ tr.completedTask td {
   display: inline block;
 }
 
-svg {
-  width: 24px;
-  height: 24px;
-}
-
-.double-buttons button svg:hover {
+.delete-svg:hover {
   fill: red;
   cursor: pointer;
 }
 
-.more {
-  background: transparent;
-  outline: none;
-  border: none;
+.focus-svg:hover {
+  fill: yellow;
+  cursor: pointer;
 }
 
-.inline {
-  display: inline-block;
-  max-width: 45%;
+button:disabled .focus-svg {
+  fill: black;
+  cursor: pointer;
 }
- td button {
-   display: block;
-   margin: auto;
- }
+
+
 
 @media screen and (min-width: 1300px) {
   #tasklist {

@@ -1,6 +1,10 @@
 const classNames = {
   uncheckedTaskClassName: 'uncheckedTask',
   completedTaskClassName: 'completedTask',
+  inlineDiv: 'inline',
+  focusSvg: 'focus-svg',
+  deleteSvg: 'delete-svg',
+  threeDots: 'three-dots',
 };
 
 const svg = {

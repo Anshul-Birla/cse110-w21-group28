@@ -99,21 +99,21 @@ test('Task Removed from Local Storage after delete is called', () => {
 test('Clicking focus hides focus button', () => {
   const task = new Task(0, 'Test task', 5, 3, true);
   task.focusButton.click();
-  expect(task.focusButton.parentNode.style.display).toBe('none');
+  expect(task.focusButton.parentNode.parentNode.style.display).toBe('none');
   expect(task.threeDotsButton.parentNode.style.display).toBe('block');
 });
 
 test('Clicking delete hides delete button', () => {
   const task = new Task(0, 'Test task', 5, 3, true);
   task.deleteButton.click();
-  expect(task.deleteButton.parentNode.style.display).toBe('none');
+  expect(task.deleteButton.parentNode.parentNode.style.display).toBe('none');
   expect(task.threeDotsButton.parentNode.style.display).toBe('');
 });
 
 test('Clicking three dots button hides button', () => {
   const task = new Task(0, 'Test task', 5, 3, true);
   task.threeDotsButton.click();
-  expect(task.focusButton.parentNode.style.display).toBe('block');
-  expect(task.deleteButton.parentNode.style.display).toBe('block');
+  expect(task.focusButton.parentNode.parentNode.style.display).toBe('inline-block');
+  expect(task.deleteButton.parentNode.parentNode.style.display).toBe('inline-block');
   expect(task.threeDotsButton.parentNode.style.display).toBe('none');
 });

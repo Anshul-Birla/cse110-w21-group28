@@ -86,6 +86,11 @@ header {
   top: 2px;
 }
 
+.inline {
+  display: inline-block;
+  max-width: 45%;
+}
+
 /* timer styling */
 #timerContainer {
   height: 280px;

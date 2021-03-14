@@ -51,7 +51,7 @@ test('Add a task and click checkoff', () => {
   formLocation.children[1].value = 2;
   formLocation.submit();
   expect(tableLocation.children[1].taskText.textContent).toMatch(new RegExp('Write *Essay'));
-  expect(tableLocation.children[1].pomoSessions.textContent).toMatch(new RegExp('\\[0/ *2\\]'));
+  expect(tableLocation.children[1].pomoSessions.textContent).toMatch(new RegExp('0/ *2'));
   tableLocation.children[1].checkBox.click();
   expect(tableLocation.children[1].checkBox.checked).toBe(true);
   expect(tableLocation.children[1].checkBox.disabled).toBe(false);
@@ -59,7 +59,7 @@ test('Add a task and click checkoff', () => {
 
 test('Reload the page with local storage', () => {
   expect(tableLocation.children[1].taskText.textContent).toMatch(new RegExp('Write *Essay'));
-  expect(tableLocation.children[1].pomoSessions.textContent).toMatch(new RegExp('\\[0/ *2\\]'));
+  expect(tableLocation.children[1].pomoSessions.textContent).toMatch(new RegExp('0/ *2'));
 });
 
 test('Reload the page with completed task', () => {
@@ -80,7 +80,7 @@ test('Incrementing session updates value accordingly', () => {
   formLocation.submit();
   myDOM.onSessionComplete();
   expect(tableLocation.children[1].children[1].textContent).toMatch(new RegExp('Write *Essay'));
-  expect(tableLocation.children[1].children[2].textContent).toMatch(new RegExp('\\[1/ *2\\]'));
+  expect(tableLocation.children[1].children[2].textContent).toMatch(new RegExp('1/ *2'));
   localStorage.clear();
 });
 

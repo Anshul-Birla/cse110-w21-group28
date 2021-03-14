@@ -82,7 +82,8 @@ class Task extends HTMLTableRowElement {
      * @type {HTMLButtonElement}
      */
     this.focusButton = this.setupFocusButton();
-    this.setupLastColumnToggle(this.threeDotsButton, this.deleteButton, this.focusButton);
+    this.setupLastColumnToggle(this.threeDotsButton,
+      this.deleteButton.parentElement, this.focusButton.parentElement);
   }
 
   /**
@@ -157,19 +158,20 @@ class Task extends HTMLTableRowElement {
    */
   setupDeleteButton() {
     const deleteBtn = document.createElement('button');
-    const path = document.createElement('path');
-    path.setAttribute('d', svg.trashcan);
-    const svgTag = document.createElement('svg');
+    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path.setAttributeNS(null, 'd', svg.trashcan);
+    const svgTag = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     svgTag.appendChild(path);
+    svgTag.setAttribute('class', classNames.deleteSvg);
     deleteBtn.appendChild(svgTag);
+    const inlineDiv = document.createElement('div');
+    inlineDiv.className = classNames.inlineDiv;
+    inlineDiv.appendChild(deleteBtn);
     deleteBtn.addEventListener('click', () => {
       this.deleted = true;
       this.remove();
       this.removeFromLocalStorage();
     });
-    const inlineDiv = document.createElement('div');
-    inlineDiv.className = 'inline';
-    inlineDiv.appendChild(deleteBtn);
 
     return deleteBtn;
   }
@@ -181,10 +183,24 @@ class Task extends HTMLTableRowElement {
    */
   setupFocusButton() {
     const focusBtn = document.createElement('button');
+    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path.setAttributeNS(null, 'd', svg.star);
+    const svgTag = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svgTag.setAttribute('class', classNames.focusSvg);
+    svgTag.appendChild(path);
+    focusBtn.appendChild(svgTag);
+    const inlineDiv = document.createElement('div');
+    inlineDiv.className = classNames.inlineDiv;
+    inlineDiv.appendChild(focusBtn);
+
+    // hide the button if the task came from local storage and was checked
+    if (this.checked) {
+      focusBtn.parentElement.style.display = 'none';
+    }
 
     focusBtn.addEventListener('click', () => {
       this.threeDotsButton.parentElement.style.display = 'block';
-      focusBtn.parentElement.style.display = 'none';
+      focusBtn.parentElement.parentElement.style.display = 'none';
       const event = new CustomEvent('focus-task', {
         bubbles: true,
         composed: true,
@@ -195,7 +211,6 @@ class Task extends HTMLTableRowElement {
       document.body.dispatchEvent(event);
     });
 
-    focusBtn.textContent = 'Focus';
     return focusBtn;
   }
 
@@ -207,12 +222,12 @@ class Task extends HTMLTableRowElement {
   setupThreeDotsButton() {
     const button = document.createElement('button');
     const threeDots = document.createElement('div');
-    threeDots.className = 'three-dots';
+    threeDots.className = classNames.threeDots;
     button.appendChild(threeDots);
 
     button.addEventListener('click', () => {
       button.parentElement.style.display = 'none';
-      this.deleteButton.parentElement.style.display = 'block';
+      this.deleteButton.parentElement.parentElement.style.display = 'inline-block';
     });
 
     return button;
@@ -221,16 +236,14 @@ class Task extends HTMLTableRowElement {
   /**
    * Sets up the last column of the todolist.
    * @param {HTMLButtonElement} threeDotsButton
-   * @param {HTMLButtonElement} deleteButton
-   * @param {HTMLButtonElement} focusButton
+   * @param {HTMLDivElement} deleteButton
+   * @param {HTMLDivElement} focusButton
    */
   setupLastColumnToggle(threeDotsButton, deleteButton,
     focusButton) {
     const lastCol = document.createElement('td');
     const threeDotsDiv = document.createElement('div');
     const deleteFocusDiv = document.createElement('div');
-    const mainDiv = document.createElement('div');
-    mainDiv.className = 'last-col-div';
 
     // wrap the delete and focus buttons in a div
     deleteFocusDiv.className = 'double-buttons';
@@ -241,11 +254,8 @@ class Task extends HTMLTableRowElement {
 
     // make sure the delete and focus buttons are hidden
     deleteFocusDiv.style.display = 'none';
-
-    // wrap everything in its own div
-    mainDiv.appendChild(threeDotsDiv);
-    mainDiv.appendChild(deleteFocusDiv);
-    lastCol.appendChild(mainDiv);
+    lastCol.appendChild(threeDotsDiv);
+    lastCol.appendChild(deleteFocusDiv);
     this.appendChild(lastCol);
   }
 
@@ -273,8 +283,8 @@ class Task extends HTMLTableRowElement {
    * This updates the pomo sessions when a session is complete
    */
   updatePomoSessions() {
-    this.children[2].textContent = `[${this.currentSessionNum}/\
-      ${this.totalSessions}]`;
+    this.children[2].textContent = `${this.currentSessionNum}/\
+      ${this.totalSessions}`;
   }
 
   /**
@@ -312,6 +322,7 @@ class Task extends HTMLTableRowElement {
   checkOffTask() {
     this.checked = true;
     this.setAttribute('class', classNames.completedTaskClassName);
+    this.focusButton.parentElement.style.display = 'none';
     this.updateLocalStorage();
   }
 
@@ -321,6 +332,7 @@ class Task extends HTMLTableRowElement {
   uncheckTask() {
     this.checked = false;
     this.setAttribute('class', classNames.uncheckedTaskClassName);
+    this.focusButton.parentElement.style.display = 'inline-block';
     this.updateLocalStorage();
   }
 }
