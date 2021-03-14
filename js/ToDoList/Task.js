@@ -42,6 +42,11 @@ class Task extends HTMLTableRowElement {
     this.checked = completed;
 
     /**
+     * Keeps track if the task was deleted or not (used with the Todolist )
+     */
+    this.deleted = false;
+
+    /**
      * The checkbox attribute for the task
      * @type {HTMLInputElement}
      */
@@ -63,14 +68,17 @@ class Task extends HTMLTableRowElement {
      * @type {HTMLButtonElement}
      */
     this.deleteButton = this.setupDeleteButton();
+    /**
+     * The button that hides the delete and focus buttons
+     * @type {HTMLButtonElement}
+     */
     this.threeDotsButton = this.setupThreeDotsButton();
+    /**
+     * The focus button for the task
+     * @type {HTMLButtonElement}
+     */
     this.focusButton = this.setupFocusButton();
     this.setupLastColumnToggle(this.threeDotsButton, this.deleteButton, this.focusButton);
-
-    /**
-     * Keeps track if the task was deleted or not (used with the Todolist )
-     */
-    this.deleted = false;
   }
 
   /**
@@ -85,6 +93,7 @@ class Task extends HTMLTableRowElement {
     checkBox.setAttribute('class', 'custom_checkbox');
     firstCol.appendChild(checkBox);
     this.appendChild(firstCol);
+    // disable the checkbox by default (updated by the todolistdom class)
     checkBox.disabled = true;
 
     if (this.checked) {
@@ -162,6 +171,7 @@ class Task extends HTMLTableRowElement {
    */
   setupFocusButton() {
     const focusBtn = document.createElement('button');
+
     focusBtn.addEventListener('click', () => {
       this.threeDotsButton.parentElement.style.display = 'block';
       focusBtn.parentElement.style.display = 'none';
@@ -174,6 +184,7 @@ class Task extends HTMLTableRowElement {
       });
       document.body.dispatchEvent(event);
     });
+
     focusBtn.textContent = 'Focus';
     return focusBtn;
   }
@@ -188,6 +199,7 @@ class Task extends HTMLTableRowElement {
     const threeDots = document.createElement('div');
     threeDots.className = 'three-dots';
     button.appendChild(threeDots);
+
     button.addEventListener('click', () => {
       button.parentElement.style.display = 'none';
       this.deleteButton.parentElement.style.display = 'block';
