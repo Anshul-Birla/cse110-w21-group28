@@ -80,12 +80,16 @@ statsButton.addEventListener('click', () => {
   parentDiv.style.display = 'block';
   const isOpen = parentDiv.classList.contains('slide-out');
   parentDiv.setAttribute('class', isOpen ? 'slide-in' : 'slide-out');
+  document.getElementById('overlay').style.display="block";
+
 });
 
 closeStatsButton.addEventListener('click', () => {
   const isOpen = parentDiv.classList.contains('slide-out');
   parentDiv.setAttribute('class', isOpen ? 'slide-in' : 'slide-out');
   statsPopUp.style.display = 'none';
+  document.getElementById('overlay').style.display="none";
+
 });
 
 if (after3amToday() && StatsPage.oldDistractionsExist()) {
