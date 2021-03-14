@@ -96,7 +96,9 @@ class Task extends HTMLTableRowElement {
     checkBox.addEventListener('click', () => {
       if (!this.checked) {
         this.checkOffTask();
-      } else { this.uncheckTask(); }
+      } else {
+        this.uncheckTask();
+      }
       const event = new CustomEvent('checkbox-updated', {
         bubbles: true,
         composed: true,
@@ -135,7 +137,6 @@ class Task extends HTMLTableRowElement {
   }
 
   /**
-   *
    * This sets up the delete button for a task
    * Delete only works visually, doesn't remove it from the TodoList
    * Data Structure
@@ -154,6 +155,11 @@ class Task extends HTMLTableRowElement {
     return deleteBtn;
   }
 
+  /**
+   * This setsup the focus button for a task. The button fires and event that
+   * indicates the task has been focused on, and hides the button
+   * @returns {HTMLButtonElement}
+   */
   setupFocusButton() {
     const focusBtn = document.createElement('button');
     focusBtn.addEventListener('click', () => {
@@ -172,6 +178,11 @@ class Task extends HTMLTableRowElement {
     return focusBtn;
   }
 
+  /**
+   * Setups up the three dots "show more" button. Wrapped inside a div so it
+   * can easily dissapear and appear on clicks
+   * @returns {HTMLButtonElement}
+   */
   setupThreeDotsButton() {
     const button = document.createElement('button');
     const threeDots = document.createElement('div');
@@ -185,6 +196,12 @@ class Task extends HTMLTableRowElement {
     return button;
   }
 
+  /**
+   * Sets up the last column of the todolist.
+   * @param {HTMLButtonElement} threeDotsButton
+   * @param {HTMLButtonElement} deleteButton
+   * @param {HTMLButtonElement} focusButton
+   */
   setupLastColumnToggle(threeDotsButton, deleteButton,
     focusButton) {
     const lastCol = document.createElement('td');
@@ -192,11 +209,18 @@ class Task extends HTMLTableRowElement {
     const deleteFocusDiv = document.createElement('div');
     const mainDiv = document.createElement('div');
     mainDiv.className = 'last-col-div';
+
+    // wrap the delete and focus buttons in a div
     deleteFocusDiv.className = 'double-buttons';
-    threeDotsDiv.appendChild(threeDotsButton);
     deleteFocusDiv.appendChild(deleteButton);
     deleteFocusDiv.appendChild(focusButton);
+    // wrap the three dots button in a div
+    threeDotsDiv.appendChild(threeDotsButton);
+
+    // make sure the delete and focus buttons are hidden
     deleteFocusDiv.style.display = 'none';
+
+    // wrap everything in its own div
     mainDiv.appendChild(threeDotsDiv);
     mainDiv.appendChild(deleteFocusDiv);
     lastCol.appendChild(mainDiv);
@@ -269,6 +293,9 @@ class Task extends HTMLTableRowElement {
     this.updateLocalStorage();
   }
 
+  /**
+   * Marks a task as not completed
+   */
   uncheckTask() {
     this.checked = false;
     this.setAttribute('class', classNames.uncheckedTaskClassName);
