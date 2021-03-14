@@ -4,6 +4,7 @@ class Statistics extends HTMLElement {
     super();
     this.distractionList = [];
     this.addHTMLChildren();
+    this.addEventListeners()
     this.loadFromLocalStorage();
     this.flushHistory();
   }
@@ -118,6 +119,50 @@ class Statistics extends HTMLElement {
       i++;
     }
   }
+
+  addEventListeners(){
+    let statsDistractBtn = document.getElementById('distraction');
+    let statsTabBtn = document.getElementById('data');
+    statsDistractBtn.addEventListener('click', () => {
+      statsTabBtn.className = "tab-btn";
+      let content = document.getElementsByClassName('stats-info');
+      let contentlabel = document.getElementsByClassName('stats-info-label');
+        for(let i = 0; i < content.length; i++){
+          content[i].style.display = "none";
+          contentlabel[i].style.display = "none";
+        }
+        content = document.getElementsByClassName('dist-info');
+        contentlabel = document.getElementsByClassName('dist-info-label');
+        document.getElementsByClassName('dist-list')[0].style.display = 'block';
+        for(let i = 0; i < content.length; i++){
+          content[i].style.display = "block";
+        }
+        for(let i = 0; i < contentlabel.length; i++){
+          contentlabel[i].style.display = "block";
+        }
+      statsDistractBtn.className = "tab-btn-active";
+    });
+    statsTabBtn.addEventListener('click', () => {
+      statsDistractBtn.className = "tab-btn";
+      let content = document.getElementsByClassName('dist-info');
+      let contentlabel = document.getElementsByClassName("dist-info-label");
+        for(let i = 0; i < content.length; i++){
+          content[i].style.display = "none";
+        }
+        for(let i = 0; i < contentlabel.length; i++){
+          contentlabel[i].style.display = "none";
+        }
+      document.getElementsByClassName('dist-list')[0].style.display = 'none';
+      content = document.getElementsByClassName('stats-info');
+      contentlabel = document.getElementsByClassName('stats-info-label');
+        for(let i = 0; i < content.length; i++){
+          content[i].style.display = "block";
+          contentlabel[i].style.display = "block";
+        }
+      statsTabBtn.className = "tab-btn-active";
+  });
+  }
+  
 
 
   getNumUniqueDistractions() {

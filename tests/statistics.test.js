@@ -2,12 +2,20 @@ import { Statistics } from '../js/Statistics/Statistics.js';
 
 /** @Test {ToDoList} */
 
+document.body.innerHTML += "<div class ='tab'>"
++ "<button class='tab-btn' id='data' > Data </button>"
++ "<button class='tab-btn' id='distraction'> Distraction </button>"
++ "</div>"
++ "<div id='stats-info' class='stats-info-container'>"
++ "</div>"
 let Stats = new Statistics();
-document.body.innerHTML = '<div id="stats-info">'
-+ '</div>';
 beforeEach(() => {
-  document.body.innerHTML = '<div id="stats-info">'
-  + '</div>';
+  document.body.innerHTML += "<div class ='tab'>"
+  + "<button class='tab-btn' id='data' > Data </button>"
+  + "<button class='tab-btn' id='distraction'> Distraction </button>"
+  + "</div>"
+  + "<div id='stats-info' class='stats-info-container'>"
+  + "</div>"
   Stats = new Statistics();
 });
 
@@ -289,8 +297,12 @@ describe('Variables function correctly', () => {
 
 describe('local storage tests', () => {
   beforeEach(() => {
-    document.body.innerHTML = '<div id="stats-info">'
-  + '</div>';
+  document.body.innerHTML += "<div class ='tab'>"
+  + "<button class='tab-btn' id='data' > Data </button>"
+  + "<button class='tab-btn' id='distraction'> Distraction </button>"
+  + "</div>"
+  + "<div id='stats-info' class='stats-info-container'>"
+  + "</div>"
     Stats = new Statistics();
     localStorage.clear();
   });
@@ -331,9 +343,17 @@ describe('local storage tests', () => {
   test('Flush local storage deletes tasks stricly older than one year', () => {
     // TODO
   });
+});
 
-  test('When Data btn pushed, all distraction data is hidden'), () => {
-    //TODO
+test('Distraction Tab Button Pressed, all Data tab items hidden', () =>{
+  let Stats = new Statistics();
+
+  let content = document.getElementsByClassName('stats-info');
+  let contentlabel = document.getElementsByClassName('stats-info-label');
+  let btn = document.getElementById('distraction');
+  btn.click();
+  for(let i = 0; i < content.length; i++){
+    expect(content[i].style.display).toBe('none');
+    expect(contentlabel[i].style.display).toBe('none');
   }
-  test(' When distraction data btn is pushed, all other data is hidden ')
 });
