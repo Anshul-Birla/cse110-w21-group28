@@ -51,7 +51,7 @@ class TodoListDom {
     this.renderLocalStorage();
   }
 
-  /**
+/**
  * Fetch local storage, and store them into window.localData
  * Iterate each local tasks and render them
  */
@@ -66,10 +66,12 @@ class TodoListDom {
     }
 
     for (let i = 0; i < window.localData.length; i += 1) {
+      // get local storage data
       const name = window.localData[i][TaskStorage.nameIndex];
       const totalSession = window.localData[i][TaskStorage.totalSessionIndex];
       const currentSession = window.localData[i][TaskStorage.currentSessionIndex];
       const completed = window.localData[i][TaskStorage.checkedIndex];
+
       const task = this.todoList.addTask(name, totalSession, currentSession, completed, true);
       this.displayTask(task);
     }
@@ -81,6 +83,7 @@ class TodoListDom {
    * Sets up the form dissapearing and submit event listeners
    */
   setupEventListeners() {
+    // event listener for form submit
     this.form.addEventListener('submit', (e) => {
       e.preventDefault();
       const data = new FormData(this.form);
@@ -106,11 +109,12 @@ class TodoListDom {
   }
 
   /**
-   * Adds a task to the table of task
-   * @param {HTMLTableRowElement} newTask
+   * Adds a task to the bottom of the table OR adds it before the specified index
+   * @param {HTMLTableRowElement} newTask - task you want added
+   * @param {HTMLTableRowElement} [index = undefined] - index you want to insert the task before 
    */
-  displayTask(newTask, index = 0) {
-    if (index === 0) {
+  displayTask(newTask, index = undefined) {
+    if (index === undefined) {
       this.table.appendChild(newTask);
     } else {
       this.table.insertBefore(newTask, this.table.childNodes[index]);
@@ -126,15 +130,23 @@ class TodoListDom {
       currTask.incrementSession();
     }
   }
-
+  /**
+   * Updates the current task and changes its checkbox property accordingly
+   */
   updateCurrentTask() {
     this.currentTask = this.todoList.getCurrentTask();
     if (this.currentTask != null) this.currentTask.checkBox.disabled = false;
   }
 
+  /**
+   * Function that puts the task with the given id to the top
+   * of the table
+   * @param {String} id - id of task to focus on
+   */
   onFocusTask(id) {
     const rows = this.table.childNodes;
     let currentTaskIndex = -1;
+    // find index of the current task
     for (let i = 2; i < rows.length; i += 1) {
       if (rows[i].checked === false && currentTaskIndex === -1) {
         currentTaskIndex = i;
@@ -142,9 +154,11 @@ class TodoListDom {
     }
 
     const clickedTask = this.todoList.getTaskById(id);
+    // disable the old tasks checkbox because it has not been clicked yet
     this.currentTask.checkBox.disabled = true;
     this.displayTask(clickedTask, currentTaskIndex);
 
+    // remove the task and add it back to the top
     this.todoList.removeTask(id);
     this.todoList.addTaskToTop(clickedTask);
   }

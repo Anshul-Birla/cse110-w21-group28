@@ -24,10 +24,13 @@ class ToDoList {
 
   /**
    * Verifies that incoming parameters are non-empty and defined, then creates Task
-   * @param {String} name Task subject
-   * @param {Number} totalSession Projected number of Pomo Sessions
+   * @param {String} name - Task subject
+   * @param {Number} totalSession - Projected number of Pomo Sessions
+   * @param {Number} [currentSession = 0] - Total amount of sessions completed already
+   * @param {Boolean} [completed = false] - Task checked off or not
+   * @param {Boolean} [fromLocalStorage = false] - If a task is being added from local storage
    *
-   * @returns {Task} Task object to be placed into DOM
+   * @returns {Task} - Task object to be placed into DOM
    *
    * @throws {Undefined Name} Task name cannot be undefined
    * @throws {Empty Name} Task name is an empty string
@@ -58,7 +61,7 @@ class ToDoList {
 
   /**
    * Adds a task to local storage
-   *  @param {Task} task
+   *  @param {Task} task - Task to be added
    */
   // eslint-disable-next-line class-methods-use-this
   addTaskToLocalStorage(task) {
@@ -70,7 +73,7 @@ class ToDoList {
   /**
    * Gets the first unchecked task in the todolist.
    * Returns null if no such task exists
-   * @returns {Task} First unchecked task in list
+   * @returns {Task} - First unchecked task in list
    *
    */
   getCurrentTask() {
@@ -81,7 +84,11 @@ class ToDoList {
     }
     return null;
   }
-
+  /**
+   * Gets the task corresponding to the id given
+   * @param {String} id - ID of task 
+   * @returns {Task} - Task with ID, null if none found
+   */
   getTaskById(id) {
     for (let i = 0; i < this.taskList.length; i += 1) {
       if (Number(this.taskList[i].id) === Number(id)) return this.taskList[i];
@@ -89,6 +96,11 @@ class ToDoList {
     return null;
   }
 
+  /**
+   * Removes a task with the given id from the todolist
+   * @param {String} id 
+   * @returns {Boolean} true if succesful, false if no task found
+   */
   removeTask(id) {
     let index = -1;
     for (let i = 0; i < this.taskList.length; i += 1) {
@@ -104,6 +116,11 @@ class ToDoList {
     return false;
   }
 
+
+  /**
+   * Adds a task to the top of the todolist
+   * @param {Task} task - task to be added to the top
+   */
   addTaskToTop(task) {
     this.taskList.unshift(task);
   }

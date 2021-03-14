@@ -14,6 +14,10 @@ class Task extends HTMLTableRowElement {
   */
   constructor(id, name, totalSessions, currentSession = 0, completed = false) {
     super();
+    /**
+     * Holds the current classname of the task object
+     * @type {String}
+     */
     this.className = classNames.uncheckedTaskClassName;
     /**
      * Stores the id of the task
