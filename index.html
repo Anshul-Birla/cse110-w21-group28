@@ -45,25 +45,23 @@
   </section>
 
   <!-- Container for task list -->
-  <section id='tasklist' class='section_container'>
-    <!-- <h2>To Do</h2> -->
-    <table id='todo'>
-      <!-- <thead> -->
-      <tr>
-        <th class='col1-checkbox'></th>
-        <th class='col2-task'>TASKS</th>
-        <th class='col3-pomos'>#</th>
-        <th class='col4-delete'><button id = "delete-all-button" class="delete-button" type="button">Delete All</button></th>
-      </tr>
-      <!-- </thead> -->
-
-    </table>
-    <!-- style = 'display: none;' originally an attribute in form and button but we want it always showing -->
-    <form id ='add-todo' overflow>
-      <input type='text' name='task-name' placeholder='Enter task' class='task-name'>
-      <input type='number' name='task-length' placeholder='Estimated # of pomos' class='task-length' min='1' max='24' required>
-      <input id = "add-button" type='submit' class='task-submit' value='+'>
-    </form>
+  <section id='tasklist' class='section_container collapsible'>
+    <!-- <div id='tasklist-inner-container'> -->
+      <table id='todo'>
+        <tr id='table-header'>            
+          <th class='col1-checkbox'></th>
+          <th class='col2-task'>TASKS</th>
+          <th class='col3-pomos'>#</th>
+          <th class='col4-delete'><button id = "delete-all-button" class="delete-button" type="button">Delete All</button></th>
+        </tr>
+      </table>
+      <!-- style = 'display: none;' originally an attribute in form and button but we want it always showing -->
+      <form id ='add-todo' overflow>
+        <input type='text' name='task-name' placeholder='Enter task' class='task-name'>
+        <input type='number' name='task-length' placeholder='Estimated # of pomos' class='task-length' min='1' max='24' required>
+        <input id = "add-button" type='submit' class='task-submit' value='+'>
+      </form>
+    <!-- </div> -->
   </section>
 
   <!-- Linked section on page under task list for summary & statistics of work sessions -->
@@ -171,5 +169,6 @@
 </div>
 <script type="module" src="./js/App.js"></script>
 <script type="module" src="./js/Distraction.js"></script>
+<script type='module' src='./js/Collapsible.js'></script>
 </body>
 </html>

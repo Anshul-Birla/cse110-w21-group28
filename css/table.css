@@ -4,14 +4,15 @@
 #tasklist {
   position: relative;
   margin: auto;
+  margin-top: 1%;
   max-height: 60vh;
   width: 40vw;
   background-color: var(--page-bg-color);
   overflow-y: auto;
-  margin-top: 1%;
-  padding-right: 20px;
-  padding-top: 0px;
+  /* padding-right: 20px;   */
   border-radius: var(--td-border-radius);
+  padding-right: 10px;
+  /* background-color: white; */
 }
 
 #tasklist::-webkit-scrollbar-thumb {
@@ -25,6 +26,12 @@
   width: 16px;
 }
 
+/* #tasklist-inner-container {
+  border-radius: var(--td-border-radius);
+  background-color: white;
+  overflow: hidden;
+} */
+
 /* table itself + header, cells, rows, then columns styling */
 table {
   display: block;
@@ -34,6 +41,7 @@ table {
   table-layout: fixed; /* allows for word-wrap */
   width: 100%;         /* allows for word-wrap */
   margin-top: -20px;
+  border-radius: var(--td-border-radius);
 }
 
 th,
@@ -52,6 +60,8 @@ th {
   position: -webkit-sticky;
   position: sticky;
   top: 0;
+
+
 }
 
 td {
