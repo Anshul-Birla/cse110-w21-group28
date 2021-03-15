@@ -21,7 +21,9 @@ no
 ### Coding Team  
 
 **Anshul**  
-
++ *Previous work day progress:* Sqaushed bugs in todolist
++ *Plans for today:* None
++ *Any blockers?* Quiz tomorrow 
 
 **Dan**  
 

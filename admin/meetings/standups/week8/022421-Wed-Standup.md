@@ -21,7 +21,9 @@ none
 ### Coding Team  
 
 **Anshul**  
-
++ *Previous work day progress:* Merged everything together
++ *Plans for today:* Squashed some bugs in todolist
++ *Any blockers?* PR Reviews
 
 **Dan**  
 

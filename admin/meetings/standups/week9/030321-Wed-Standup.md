@@ -40,3 +40,10 @@ FAQ and meeting slides
 + *Plans for today:*
 finish FAQ and discussion slides
 + *Any blockers?*
+
+Anshul Birla
++ *Previous work day progress:*
+Looking over PR
++ *Plans for today:*
+None
++ *Any blockers?* no

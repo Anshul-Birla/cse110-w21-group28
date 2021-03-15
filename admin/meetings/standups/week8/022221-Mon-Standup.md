@@ -23,6 +23,9 @@ none
 ### Coding Team  
 
 **Anshul**  
++ *Previous work day progress:* none
++ *Plans for today:* Work on lookig over PR's
++ *Any blockers?* None
 
 **Dan**  
 

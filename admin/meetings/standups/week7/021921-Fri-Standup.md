@@ -23,7 +23,12 @@ no
 ### Coding Team  
 
 **Anshul**  
-
++ *Previous work day progress:*
+Reviewed PR's, todolist done
++ *Plans for today:*
+None
++ *Any blockers?*
+Quiz today
 **Dan**  
 
 **Kewen**  

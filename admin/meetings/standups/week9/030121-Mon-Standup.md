@@ -21,7 +21,11 @@ move and a lot of class work
 ### Coding Team  
 
 **Anshul**  
-
++ *Previous work day progress:*
+Work for other classes
++ *Plans for today:*
+Work on looking over PR's
++ *Any blockers?* no
 
 **Dan**  
 

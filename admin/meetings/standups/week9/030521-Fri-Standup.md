@@ -32,3 +32,8 @@ Ravindran Tapia
 + *Previous work day progress:* meeting
 + *Plans for today:* finish styling delete buttons
 + *Any blockers?* essay for other class
+
+Anshul Birla
++ *Previous work day progress:* meeting
++ *Plans for today:* Quiz, maybe start focus task on todolist
++ *Any blockers?* None

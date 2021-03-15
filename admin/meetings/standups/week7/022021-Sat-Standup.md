@@ -23,6 +23,9 @@ Moving out of my apartment this week so packing
 ### Coding Team  
 
 **Anshul**  
++ *Previous work day progress:* None
++ *Plans for today:* Other school work
++ *Any blockers?* no
 
 **Dan**  
 

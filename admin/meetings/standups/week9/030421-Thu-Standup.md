@@ -18,6 +18,11 @@ started refactor but then Dan did it
 + *Plans for today:*
 start stats design and meeting
 + *Any blockers?* exams
+  
+Anshul Birla
++ *Previous work day progress:* Looked over PR's and merged 
++ *Plans for today:* meeting with Sim
++ *Any blockers?* no
 
 Anastasiia  
 + *Previous work day progress:*

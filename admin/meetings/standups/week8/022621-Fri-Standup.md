@@ -19,7 +19,9 @@ moving
 ### Coding Team  
 
 **Anshul**  
-
++ *Previous work day progress:* None
++ *Plans for today:* Quiz today, other school work
++ *Any blockers?* 
 
 **Dan**  
 

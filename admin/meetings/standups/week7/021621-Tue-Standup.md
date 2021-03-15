@@ -19,7 +19,10 @@
 
 ### Coding Team  
 
-**Anshul**  
+**Anshul**
++ *Previous work day progress:* Made timer more functional
++ *Plans for today:* Integrate timer with todolist
++ *Any blockers?* No  
 
 **Dan**  
 + *Previous work day progress:* Met with dev to decide on next step

@@ -44,4 +44,9 @@ Michael Vu
 Ravindran Tapia  
 + *Previous work day progress:* meeting
 + *Plans for today:*  meeting, go over styling for inputs
-+ *Any blockers?* no
++ *Any blockers?* 
+
+Anshul  
++ *Previous work day progress:* Worked on commenting
++ *Plans for today:* Looked over PR's
++ *Any blockers?* 
