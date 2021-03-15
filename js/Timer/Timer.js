@@ -35,6 +35,8 @@ class Timer extends HTMLElement {
      * @type {HTMLElement}
      */
     this.startButton = startButton;
+    console.log(startButton.childNodes[0]);
+    console.log(this.startButton.textContent.indexOf(buttonText.startTimerText));
     /**
      * HTML Tag that is reponsible for displaying the time remaining
      * @type {HTMLElement}
@@ -50,6 +52,7 @@ class Timer extends HTMLElement {
      * @type {Boolean}
      */
     this.end = false;
+
 
     // this is the order for the timer. It will loop in this order.
     const workOrder = [workMode, shortBreakMode, workMode,
@@ -137,11 +140,12 @@ class Timer extends HTMLElement {
    */
   addEventListeners() {
     this.startButton.addEventListener('click', () => {
-      if (this.startButton.textContent === buttonText.startTimerText) {
+      if (this.startButton.textContent.indexOf(buttonText.startTimerText) > -1) {
         this.startTimer();
-        this.startButton.textContent = buttonText.stopTimerText;
-        this.startButton.class = classNames.stopButton;
+        this.startButton.childNodes[0].nodeValue = buttonText.stopTimerText;
+        // this.startButton.class = classNames.stopButton;
       } else {
+        console.log("ON CLICK RAN")
         this.endTimer();
         this.startButton.textContent = buttonText.startTimerText;
         this.startButton.class = classNames.startButton;

@@ -4,8 +4,11 @@
 <head>
   <meta charset="utf-8">
   <link rel="shortcut icon" href="#" />
-  <link rel="stylesheet" href="./css/buttons-min.css"/>
+  <link rel="stylesheet" href="./materialize.css" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="./css/buttons-min.css"/> -->
   <link rel="stylesheet" href="./css/style.css" />
+  <link rel="stylesheet" href="./css/button.css" />
   <link rel="stylesheet" href="./css/distraction-box.css" />
   <link rel="stylesheet" href="./css/table.css" />
   <link rel="stylesheet" href="./css/animations.css" />
@@ -18,7 +21,7 @@
 
   <!-- Header bar at the top of the page for title text & navigation -->
   <header>
-    <h1>
+    <!-- <h1>
       Pomodoro Timer
       <div class="icon-container">
         <p>Stats</p>
@@ -31,7 +34,16 @@
           <a href="#FAQ"> <img src="./assets/img/question.png" width="35" height="35"> </a>
         </button>
       </div>
-    </h1>
+    </h1> -->
+    <nav>
+      <div class="nav-wrapper>">
+        <a href="#!" class="brand-logo">Pomodoro Timer</a>
+        <ul class="right hide-on-med-and-down">
+          <li><a class="waves-effect waves-light btn">FAQ<i class="material-icons right">help_outline</i></a></li>
+          <li><a class="waves-effect waves-light btn">Statistics <i class="material-icons right">insert_chart</i></a></li>
+        </ul>
+      </div>
+    </nav>
 
   </header>
 
@@ -41,7 +53,11 @@
       <p id="modeDisplay"> Pomo-Time!</p>
       <p id="timeDisplay"> 25:00 </p>
       <br>
-      <button id="startTimer" class="pure-button">Start</button>
+      <button class="btn-large waves-effect waves-light" id="startTimer">Start &nbsp;&nbsp;&nbsp;<i class="material-icons right">timer</i></button>
+      <!-- <button class="button type1">
+        Effect one
+      </button> -->
+      <!-- <button id="startTimer" class="pure-button">Start</button> -->
       <button id="distractionButton" class = "pure-button">Distraction</button>
     </div>
   </section>
