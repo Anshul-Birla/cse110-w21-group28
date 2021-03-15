@@ -27,8 +27,8 @@ Ravindran Tapia
 + *Any blockers?* essay for other class
 
 Anshul Birla
-+ *Previous work day progress:* meeting
-+ *Plans for today:* Quiz, maybe start focus task on todolist
++ *Previous work day progress:* Added focus task functionality
++ *Plans for today:* Style buttons
 + *Any blockers?* None
 
 Kewen Zhao
