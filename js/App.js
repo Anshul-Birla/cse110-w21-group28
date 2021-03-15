@@ -31,3 +31,23 @@ document.body.addEventListener('focus-task', (e) => {
 document.body.addEventListener('checkbox-updated', () => {
   TDLDom.updateCurrentTask();
 });
+
+window.addEventListener('click', (e) => {
+  let lastColumnElements = document.getElementsByClassName('touch-target'); 
+  let touched_button = false;
+
+  for (let i = 0; i < lastColumnElements.length && !touched_button; i++) {
+    if (lastColumnElements[i].contains(e.target))
+      touched_button = true;
+  }
+
+  if(!touched_button) {
+    let buttonPairList = document.getElementsByClassName('double-buttons');
+    let threeDotButtonList = document.getElementsByClassName('triple-dots-touch');
+    for (let i = 0; i < buttonPairList.length; i++) {
+      buttonPairList[i].style.display = 'none';
+      threeDotButtonList[i].style.display = 'block';
+    }
+  }
+
+});

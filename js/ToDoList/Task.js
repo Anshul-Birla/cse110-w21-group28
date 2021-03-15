@@ -177,7 +177,7 @@ class Task extends HTMLTableRowElement {
   }
 
   /**
-   * This setsup the focus button for a task. The button fires and event that
+   * This sets up the focus button for a task. The button fires and event that
    * indicates the task has been focused on, and hides the button
    * @returns {HTMLButtonElement}
    */
@@ -242,6 +242,7 @@ class Task extends HTMLTableRowElement {
   setupLastColumnToggle(threeDotsButton, deleteButton,
     focusButton) {
     const lastCol = document.createElement('td');
+    const lastColDiv  = document.createElement('div');
     const threeDotsDiv = document.createElement('div');
     const deleteFocusDiv = document.createElement('div');
 
@@ -251,11 +252,14 @@ class Task extends HTMLTableRowElement {
     deleteFocusDiv.appendChild(focusButton);
     // wrap the three dots button in a div
     threeDotsDiv.appendChild(threeDotsButton);
+    threeDotsDiv.className = 'triple-dots-touch';
 
     // make sure the delete and focus buttons are hidden
     deleteFocusDiv.style.display = 'none';
-    lastCol.appendChild(threeDotsDiv);
-    lastCol.appendChild(deleteFocusDiv);
+    lastColDiv.appendChild(threeDotsDiv);
+    lastColDiv.className = 'touch-target';
+    lastColDiv.appendChild(deleteFocusDiv);
+    lastCol.appendChild(lastColDiv)
     this.appendChild(lastCol);
   }
 
