@@ -33,18 +33,17 @@ document.body.addEventListener('checkbox-updated', () => {
 });
 
 window.addEventListener('click', (e) => {
-  let lastColumnElements = document.getElementsByClassName('touch-target'); 
-  let touched_button = false;
+  const lastColumnElements = document.getElementsByClassName('touch-target'); 
+  let touchedButton = false;
 
-  for (let i = 0; i < lastColumnElements.length && !touched_button; i++) {
-    if (lastColumnElements[i].contains(e.target))
-      touched_button = true;
+  for (let i = 0; i < lastColumnElements.length && !touchedButton; i += 1) {
+    if (lastColumnElements[i].contains(e.target)) touchedButton = true;
   }
 
-  if(!touched_button) {
-    let buttonPairList = document.getElementsByClassName('double-buttons');
-    let threeDotButtonList = document.getElementsByClassName('triple-dots-touch');
-    for (let i = 0; i < buttonPairList.length; i++) {
+  if (!touchedButton) {
+    const buttonPairList = document.getElementsByClassName('double-buttons');
+    const threeDotButtonList = document.getElementsByClassName('triple-dots-touch');
+    for (let i = 0; i < buttonPairList.length; i += 1) {
       buttonPairList[i].style.display = 'none';
       threeDotButtonList[i].style.display = 'block';
     }

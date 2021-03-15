@@ -337,6 +337,7 @@ class Task extends HTMLTableRowElement {
     this.checked = false;
     this.setAttribute('class', classNames.uncheckedTaskClassName);
     this.focusButton.parentElement.style.display = 'inline-block';
+    this.checkBox.disabled = true;
     this.updateLocalStorage();
   }
 }
