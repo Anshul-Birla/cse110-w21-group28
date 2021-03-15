@@ -8,9 +8,11 @@ import { TaskStorage } from './TodoListDomVariables.js';
 class Task extends HTMLTableRowElement {
   /**
   * Task construcutor. Initializes the task with appropriate attributes
-  * @param {String} id Id of the task
-  * @param {String} name Name of the task
-  * @param {Number} totalSessions Total sessions the task should take
+  * @param {String} id - Id of the task
+  * @param {String} name - Name of the task
+  * @param {Number} totalSessions - Total sessions the task should take
+  * @param {Number} [currentSession = 0] - Total sessions the task has taken
+  * @param {Number} [completed = false] - Is the task completed or not
   */
   constructor(id, name, totalSessions, currentSession = 0, completed = false) {
     super();
