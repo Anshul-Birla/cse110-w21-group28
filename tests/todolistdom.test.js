@@ -33,6 +33,9 @@ beforeEach(() => {
   addBtnLocation = document.getElementById('add-button');
   deleteBtnLocation = document.getElementById('delete-all-button');
   myDOM = new TodoListDom(tableLocation, formLocation, addBtnLocation, deleteBtnLocation);
+  document.body.addEventListener('task-deleted', (e) => {
+    myDOM.todoList.removeTask(e.detail.taskID);
+  });
 });
 
 test('Valid construction of TDLDom', () => {
@@ -245,9 +248,7 @@ test('Checking a task brings it to the bottom with completed tasks already there
 });
 
 test('Unchecking a task brings it to the bottom of the unchecked tasks', () => {
-  document.body.addEventListener('task-deleted', (e) => {
-    myDOM.todoList.removeTask(e.detail.taskID);
-  });
+
   formLocation.children[0].setAttribute('value', 'Task1');
   formLocation.children[1].value = 2;
   formLocation.submit();
