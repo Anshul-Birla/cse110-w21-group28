@@ -69,16 +69,29 @@ class Statistics extends HTMLElement {
     this.brokenSessionsLabel.textContent = 'Broken Sessions';
     this.parentDiv.appendChild(this.brokenSessions);
     this.parentDiv.appendChild(this.brokenSessionsLabel);
-    //Number of Unique Distractions
-    this.uniqueDistractions = document.createElement('p');
-    this.uniqueDistractions.setAttribute('id', 'dist_numUniqueDistractions');
-    this.uniqueDistractions.setAttribute('class','dist-info');
-    this.uniqueDistractionsLabel = document.createElement('p');
-    this.uniqueDistractionsLabel.setAttribute('id', 'dist_numUniqueDistractionsLabel');
-    this.uniqueDistractionsLabel.setAttribute('class', 'dist-info-label');
-    this.uniqueDistractionsLabel.textContent = "Unqiue Distractions";
-    this.parentDiv.appendChild(this.uniqueDistractions);
-    this.parentDiv.appendChild(this.uniqueDistractionsLabel);
+    //Number of Expected Pomo Sessions;
+    this.expectedPomoSessionsData = document.createElement('p');
+    this.expectedPomoSessionsData.setAttribute('id','stats_expectedPomoSesh');
+    this.expectedPomoSessionsData.setAttribute('class','stats-info');
+    this.expectedPomoSessionsLabel = document.createElement('p');
+    this.expectedPomoSessionsLabel.setAttribute('id','stats_expectedPomoSesLabel');
+    this.expectedPomoSessionsLabel.setAttribute('class','stats-info-label');
+    this.expectedPomoSessionsLabel.textContent = 'Expected Pomo Sessions';
+    this.parentDiv.appendChild(this.expectedPomoSessionsData);
+    this.parentDiv.appendChild(this.expectedPomoSessionsLabel);
+
+    //Number of Actual Pomo Sessions
+
+    this.actualPomoSessionsData = document.createElement('p');
+    this.actualPomoSessionsData.setAttribute('id', 'stats_actualPomo');
+    this.actualPomoSessionsData.setAttribute('class','stats-info');
+    this.actualPomoSessionsLabel = document.createElement('p');
+    this.actualPomoSessionsLabel.setAttribute('id','stats_actualPomoSesLabel');
+    this.actualPomoSessionsLabel.setAttribute('class','stats-info-label');
+    this.actualPomoSessionsLabel.textContent = 'Actual Pomo Sessions';
+    this.parentDiv.appendChild(this.actualPomoSessionsData);
+    this.parentDiv.appendChild(this.actualPomoSessionsLabel);
+
     // Average Number of Distractions Per Task
     this.avgDistractions = document.createElement('p');
     this.avgDistractions.setAttribute('id','dist_avgDistractions');
@@ -161,6 +174,10 @@ class Statistics extends HTMLElement {
         }
       statsTabBtn.className = "tab-btn-active";
   });
+
+    document.getElementById('overlay').addEventListener('click',() =>{
+      document.getElementById('close-stats-button').click();
+    });
   }
   
 
@@ -188,11 +205,13 @@ class Statistics extends HTMLElement {
     this.timeSpent.textContent = this.totalMins;
 
     this.brokenSessions.textContent = this.distractionList.length;
-
-    this.uniqueDistractions.textContent = this.getNumUniqueDistractions();
     
     this.avgDistractions.textContent = this.getAvgDistractionsPerTask();
 
+    this.expectedPomoSessionsData.textContent = this.expectedPomoSessions;
+
+    this.actualPomoSessionsData.textContent = this.actualPomoSessions;
+    
     this.updateDistractionList();
 
 
