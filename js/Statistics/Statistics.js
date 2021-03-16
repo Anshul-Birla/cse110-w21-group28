@@ -2,6 +2,9 @@
 class Statistics extends HTMLElement {
   constructor() {
     super();
+    /**
+     * @type {Object[]} Array that stores the distraction & which pomo session it happened during
+     */
     this.distractionList = [];
     this.addHTMLChildren();
     this.loadFromLocalStorage();
@@ -78,11 +81,17 @@ class Statistics extends HTMLElement {
     this.brokenSessions.textContent = this.getNumUniqueDistractions();
   }
 
+  /**
+   * @description Increments by one every time a task is marked as completed
+   */
   incrementTasksCompleted() {
     this.tasksCompleted += 1;
     this.updateMinorLocalStorage();
   }
 
+  /**
+   * @description Decrements by one every time a task is marked as not-completed given that there are tasks that can be uncompleted. Updates local storage when called.
+   */
   decrementTasksCompleted() {
     if (this.tasksCompleted > 0) {
       this.tasksCompleted -= 1;
@@ -90,16 +99,28 @@ class Statistics extends HTMLElement {
     } // else I'm interested to see how you got there
   }
 
+  /**
+   * @description Adds a distraction (represented by a JSON object) to the list of distractions. Updates local storage when called.
+   * @param {JSON Object} distraction Distraction to be added
+   */
   addDistraction(distraction) {
     this.distractionList.push(distraction);
     this.updateMinorLocalStorage();
   }
 
+  /**
+   * @description Gets the number of broken work sessions. If multiple distractions during one work session occurred, only counts as one unique broken pomo session.
+   * @returns {Number} Number of disrupted work sessions
+   */
   getNumUniqueDistractions() {
     const uniqueDistractionId = new Set(this.distractionList.map((item) => item.pomoSessionId));
     return uniqueDistractionId.size;
   }
 
+  /**
+   * @description Counts average number of distractions per task
+   * @returns {Number} Average number of distractions per task rounded to the nearest tenth
+   */
   getAvgDistractionsPerTask() {
     if (this.tasksCompleted === 0) {
       return 0;
@@ -108,21 +129,37 @@ class Statistics extends HTMLElement {
     return Math.round(rawNumber * 10) / 10;
   }
 
+  /**
+   * @description Increments the total time spent. Updates local storage when called.
+   * @param {Number} numMins Number of minutes to increment count by
+   */
   addTimeSpent(numMins) {
     this.totalMins += (numMins * 1);
     this.updateMinorLocalStorage();
   }
 
+  /**
+   * @description Increments the work time spent. When work time incremented, so is total time spent (runs as separate method call to addTimeSpent())
+   * @param {Number} numMins Number of minutes to increment work count by
+   */
   addWorkTime(numMins) {
     this.workMins += (numMins * 1);
     this.addTimeSpent(numMins);
   }
 
+  /**
+   * @description Increments the planned number of pomo sessions for the work day. Should be called each time a task is added.
+   * @param {Number} numSessions Number of sessions to increment count by
+   */
   addExpectedPomoSessions(numSessions) {
     this.expectedPomoSessions += numSessions;
     this.updateMinorLocalStorage();
   }
 
+  /**
+   * @description Decrements the planned number of pomo sessions for the work day. Should be called each time a task is deleted. Only decrements if new tasks were added during the current work day.
+   * @param {Number} numSessions Number of sessions to decrement count by
+   */
   deleteExpectedPomoSessions(numSessions) {
     if (this.expectedPomoSessions >= numSessions) {
       this.expectedPomoSessions -= numSessions;
@@ -196,34 +233,6 @@ class Statistics extends HTMLElement {
     }
     localStorage.setItem('statsHistory', JSON.stringify(this.history));
   }
-  /*
-  getMinDistractionDate() {
-    if (this.distractionList.length === 0) {
-      return null;
-    }
-    const sortedDistractions = this.distractionList.slice().sort((a, b) => a.date - b.date);
-    return sortedDistractions[0].date;
-  }
-
-  // distractions exist from last year/month/day/before 3am
-  oldDistractionsExist() {
-    const minDistractionDate = this.getMinDistractionDate();
-    if (minDistractionDate === null) {
-      return false;
-    }
-    const currDate = new Date();
-    if (minDistractionDate.getFullYear() < currDate.getFullYear()) {
-      return true;
-    } if (minDistractionDate.getMonth() < currDate.getMonth()) {
-      return true;
-    } if (minDistractionDate.getDate() < currDate.getDate()) {
-      return true;
-    } if (minDistractionDate.getHours() <= 2) {
-      return true;
-    }
-    return false;
-  }
-  */
 
   dataToCompressExists() {
     const currDate = new Date();
@@ -259,6 +268,9 @@ class Statistics extends HTMLElement {
     this.dispatchEvent(event);
   }
 
+  /**
+   * @description Resets all variables back to zeroed/empty values
+   */
   clearData() {
     this.totalMins = 0;
     this.workMins = 0;
