@@ -245,6 +245,9 @@ test('Checking a task brings it to the bottom with completed tasks already there
 });
 
 test('Unchecking a task brings it to the bottom of the unchecked tasks', () => {
+  document.body.addEventListener('task-deleted', (e) => {
+    myDOM.todoList.removeTask(e.detail.taskID);
+  });
   formLocation.children[0].setAttribute('value', 'Task1');
   formLocation.children[1].value = 2;
   formLocation.submit();
@@ -264,7 +267,6 @@ test('Unchecking a task brings it to the bottom of the unchecked tasks', () => {
   tableLocation.children[3].checked = false;
   myDOM.onUncheckedTask(tableLocation.children[3].id);
   myDOM.updateCurrentTask();
-  for(let i = 0; i <myDOM.todoList.taskList.length; i++) console.log(i, myDOM.todoList.taskList[i].taskText.textContent)
 
   expect(tableLocation.children[1].taskText.textContent).toBe('Task3');
   expect(tableLocation.children[2].taskText.textContent).toBe('Task2');

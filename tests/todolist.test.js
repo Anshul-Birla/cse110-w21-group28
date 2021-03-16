@@ -88,6 +88,9 @@ test('Preserve special characters in task name', () => {
 });
 
 test('Deleted Task do not come up as current task', () => {
+  document.body.addEventListener('task-deleted', (e) => {
+    aList.removeTask(e.detail.taskID);
+  });
   const aList = new ToDoList();
   aList.addTask('task1', 1);
   aList.addTask('task2', 2);

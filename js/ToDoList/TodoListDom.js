@@ -58,6 +58,7 @@ class TodoListDom {
   renderLocalStorage() {
     window.localData = [];
     const completedTaskIndex = [];
+    // re-indexing all tasks as 0,1,2,3...
     if (localStorage.getItem('tasks') !== null) {
       window.localData = JSON.parse(localStorage.getItem('tasks'));
       for (let i = 0; i < window.localData.length; i += 1) {
