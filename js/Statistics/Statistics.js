@@ -109,12 +109,12 @@ class Statistics extends HTMLElement {
   }
 
   addTimeSpent(numMins) {
-    this.totalMins += (numMins * 60);
+    this.totalMins += (numMins * 1);
     this.updateMinorLocalStorage();
   }
 
   addWorkTime(numMins) {
-    this.workMins += (numMins * 60);
+    this.workMins += (numMins * 1);
     this.addTimeSpent(numMins);
   }
 
@@ -196,7 +196,7 @@ class Statistics extends HTMLElement {
     }
     localStorage.setItem('statsHistory', JSON.stringify(this.history));
   }
-
+  /*
   getMinDistractionDate() {
     if (this.distractionList.length === 0) {
       return null;
@@ -204,7 +204,7 @@ class Statistics extends HTMLElement {
     const sortedDistractions = this.distractionList.slice().sort((a, b) => a.date - b.date);
     return sortedDistractions[0].date;
   }
-  /*
+
   // distractions exist from last year/month/day/before 3am
   oldDistractionsExist() {
     const minDistractionDate = this.getMinDistractionDate();
