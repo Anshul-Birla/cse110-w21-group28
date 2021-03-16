@@ -138,15 +138,14 @@ class ToDoList {
    * @param {Task} task - task object that needs to be added
    */
   addTaskToEnd(task) {
-    if (task.checked) {
-      this.taskList.push(task);
-      this.addTaskToLocalStorage(task);
-    } else {
-      let firstUncheckedTask = -1;
-      for (let i = 0; i < this.taskList.length && firstUncheckedTask === -1; i += 1) {
-        if (this.taskList[i].checked === true) firstUncheckedTask = i;
-    }
-
+      if (task.checked) {
+        this.taskList.push(task);
+        this.addTaskToLocalStorage(task);
+      } else {
+        let firstUncheckedTask = -1;
+        for (let i = 0; i < this.taskList.length && firstUncheckedTask === -1; i += 1) {
+          if (this.taskList[i].checked === true) firstUncheckedTask = i;
+      }
       if (firstUncheckedTask === -1) {
         this.taskList.push(task);
         this.addTaskToLocalStorage(task);
