@@ -1,4 +1,5 @@
 import { ToDoList } from './ToDoList.js';
+import { Task } from './Task.js';
 import { HTMLAttributes, TaskStorage } from './TodoListDomVariables.js';
 
 /**
@@ -130,6 +131,26 @@ class TodoListDom {
     if (currTask != null) {
       currTask.incrementSession();
     }
+    this.currentTask = currTask;
+  }
+
+  onCompletedTask() {
+    this.currentTask.remove();
+    this.displayTask(this.currentTask);
+    this.todoList.removeTask(this.currentTask.id);
+    this.todoList.taskList.push(this.currentTask);
+  }
+
+  onUncheckedTask(id) {
+    const uncheckedTask = this.todoList.getTaskById(id);
+    this.todoList.removeTask(id);
+    let firstCompletedTaskIndex = -1;
+    for (let i = 1; i < this.table.childNodes.length && firstCompletedTaskIndex == -1; i++) {
+      if (this.table.childNodes[i].checked == true) firstCompletedTaskIndex = i;
+    }
+    uncheckedTask.remove();
+    this.todoList.addTaskToEnd(uncheckedTask);
+    this.displayTask(uncheckedTask, firstCompletedTaskIndex);
   }
 
   /**

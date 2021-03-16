@@ -28,12 +28,17 @@ document.body.addEventListener('focus-task', (e) => {
   TDLDom.updateCurrentTask();
 });
 
-document.body.addEventListener('checkbox-updated', () => {
+document.body.addEventListener('checkbox-updated', (e) => {
+  if (e.detail.checkBoxState == true) {
+    TDLDom.onCompletedTask();
+  } else {
+    TDLDom.onUncheckedTask(e.detail.taskID);
+  }
   TDLDom.updateCurrentTask();
 });
 
 window.addEventListener('click', (e) => {
-  const lastColumnElements = document.getElementsByClassName('touch-target'); 
+  const lastColumnElements = document.getElementsByClassName('touch-target');
   let touchedButton = false;
 
   for (let i = 0; i < lastColumnElements.length && !touchedButton; i += 1) {
@@ -48,5 +53,4 @@ window.addEventListener('click', (e) => {
       threeDotButtonList[i].style.display = 'block';
     }
   }
-
 });

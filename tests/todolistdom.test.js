@@ -163,6 +163,7 @@ test('Current Task gets updated when focus button is clicked', () => {
   myDOM.onFocusTask('1');
   myDOM.updateCurrentTask();
   expect(myDOM.currentTask.name).toBe('Task2');
+  localStorage.clear();
 });
 
 test('Adding first task should not disable the checkbox', () => {
@@ -170,10 +171,10 @@ test('Adding first task should not disable the checkbox', () => {
   formLocation.children[1].value = 2;
   formLocation.submit();
   expect(tableLocation.children[1].checkBox.disabled).toBe(false);
+  localStorage.clear();
 });
 
 test('Adding two tasks should disable the checkbox for second task', () => {
-  localStorage.clear();
   formLocation.children[0].setAttribute('value', 'Task1');
   formLocation.children[1].value = 2;
   formLocation.submit();
@@ -183,10 +184,10 @@ test('Adding two tasks should disable the checkbox for second task', () => {
 
   expect(tableLocation.children[1].checkBox.disabled).toBe(false);
   expect(tableLocation.children[2].checkBox.disabled).toBe(true);
+  localStorage.clear();
 });
 
 test('Focusing on a task updates checkboxes accordingly', () => {
-  localStorage.clear();
   formLocation.children[0].setAttribute('value', 'Task1');
   formLocation.children[1].value = 2;
   formLocation.submit();
@@ -200,4 +201,73 @@ test('Focusing on a task updates checkboxes accordingly', () => {
   expect(tableLocation.children[1].checkBox.disabled).toBe(false);
   expect(tableLocation.children[1].taskText.textContent).toBe('Task2');
   expect(tableLocation.children[2].checkBox.disabled).toBe(true);
+  localStorage.clear();
+});
+
+test('Checking a task brings it to the bottom', () => {
+  formLocation.children[0].setAttribute('value', 'Task1');
+  formLocation.children[1].value = 2;
+  formLocation.submit();
+  formLocation.children[0].setAttribute('value', 'Task2');
+  formLocation.children[1].value = 2;
+  formLocation.submit();
+  myDOM.onCompletedTask();
+
+  expect(tableLocation.children[2].taskText.textContent).toBe('Task1');
+  localStorage.clear();
+});
+
+test('Checking a task brings it to the bottom with completed tasks already there', () => {
+  formLocation.children[0].setAttribute('value', 'Task1');
+  formLocation.children[1].value = 2;
+  formLocation.submit();
+  formLocation.children[0].setAttribute('value', 'Task2');
+  formLocation.children[1].value = 2;
+  formLocation.submit();
+  formLocation.children[0].setAttribute('value', 'Task3');
+  formLocation.children[1].value = 2;
+  formLocation.submit();
+  formLocation.children[0].setAttribute('value', 'Task4');
+  formLocation.children[1].value = 2;
+  formLocation.submit();
+
+  tableLocation.children[1].checked = true;
+  myDOM.onCompletedTask();
+  myDOM.updateCurrentTask();
+  myDOM.onCompletedTask();
+
+  expect(tableLocation.children[4].taskText.textContent).toBe('Task2');
+  expect(tableLocation.children[3].taskText.textContent).toBe('Task1');
+  expect(tableLocation.children[2].taskText.textContent).toBe('Task4');
+  expect(tableLocation.children[1].taskText.textContent).toBe('Task3');
+
+  localStorage.clear();
+});
+
+test('Unchecking a task brings it to the bottom of the unchecked tasks', () => {
+  formLocation.children[0].setAttribute('value', 'Task1');
+  formLocation.children[1].value = 2;
+  formLocation.submit();
+  formLocation.children[0].setAttribute('value', 'Task2');
+  formLocation.children[1].value = 2;
+  formLocation.submit();
+  formLocation.children[0].setAttribute('value', 'Task3');
+  formLocation.children[1].value = 2;
+  formLocation.submit();
+
+  tableLocation.children[1].checked = true;
+  myDOM.onCompletedTask();
+  myDOM.updateCurrentTask();
+  tableLocation.children[1].checked = true;
+  myDOM.onCompletedTask();
+  myDOM.updateCurrentTask();
+  tableLocation.children[3].checked = false;
+  myDOM.onUncheckedTask(tableLocation.children[3].id);
+
+  expect(tableLocation.children[1].taskText.textContent).toBe('Task3');
+  expect(tableLocation.children[2].taskText.textContent).toBe('Task2');
+  expect(tableLocation.children[3].taskText.textContent).toBe('Task1');
+  expect(myDOM.todoList.taskList[0].taskText.textContent).toBe('Task3');
+  expect(myDOM.todoList.taskList[1].taskText.textContent).toBe('Task2');
+  expect(myDOM.todoList.taskList[2].taskText.textContent).toBe('Task1');
 });

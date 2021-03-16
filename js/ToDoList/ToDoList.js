@@ -124,6 +124,22 @@ class ToDoList {
   addTaskToTop(task) {
     this.taskList.unshift(task);
   }
+
+  addTaskToEnd(task) {
+    if (task.checked) this.taskList.push(task);
+    else {
+      let firstUncheckedTask = -1;
+      for (let i = 0; i < this.taskList.length && firstUncheckedTask == -1; i++) {
+        if (this.taskList[i].checked == true) firstUncheckedTask = i;
+      }
+
+      if (firstUncheckedTask == -1) {
+        this.taskList.push(task);
+      } else {
+        this.taskList.splice(firstUncheckedTask, 0, task);
+      }
+    }
+  }
 }
 
 export { ToDoList };

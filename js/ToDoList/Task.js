@@ -84,6 +84,7 @@ class Task extends HTMLTableRowElement {
      * @type {HTMLButtonElement}
      */
     this.focusButton = this.setupFocusButton();
+
     this.setupLastColumnToggle(this.threeDotsButton,
       this.deleteButton.parentElement, this.focusButton.parentElement);
   }
@@ -170,9 +171,7 @@ class Task extends HTMLTableRowElement {
     inlineDiv.className = classNames.inlineDiv;
     inlineDiv.appendChild(deleteBtn);
     deleteBtn.addEventListener('click', () => {
-      this.deleted = true;
-      this.remove();
-      this.removeFromLocalStorage();
+      this.onDelete();
     });
 
     return deleteBtn;
@@ -244,7 +243,7 @@ class Task extends HTMLTableRowElement {
   setupLastColumnToggle(threeDotsButton, deleteButton,
     focusButton) {
     const lastCol = document.createElement('td');
-    const lastColDiv  = document.createElement('div');
+    const lastColDiv = document.createElement('div');
     const threeDotsDiv = document.createElement('div');
     const deleteFocusDiv = document.createElement('div');
 
@@ -261,7 +260,7 @@ class Task extends HTMLTableRowElement {
     lastColDiv.appendChild(threeDotsDiv);
     lastColDiv.className = 'touch-target';
     lastColDiv.appendChild(deleteFocusDiv);
-    lastCol.appendChild(lastColDiv)
+    lastCol.appendChild(lastColDiv);
     this.appendChild(lastCol);
   }
 
@@ -341,6 +340,12 @@ class Task extends HTMLTableRowElement {
     this.focusButton.parentElement.style.display = 'inline-block';
     this.checkBox.disabled = true;
     this.updateLocalStorage();
+  }
+
+  onDelete() {
+    this.deleted = true;
+    this.remove();
+    this.removeFromLocalStorage();
   }
 }
 

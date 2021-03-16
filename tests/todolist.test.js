@@ -142,3 +142,36 @@ test('Move task to top of todolist', () => {
   aList.addTaskToTop(task);
   expect(aList.taskList[0]).toBe(task);
 });
+
+test('Adding completed task to end of todolist', () => {
+  const aList = new ToDoList();
+  aList.addTask('name', 1);
+  aList.addTask('name2', 1);
+  const checkedTask = new Task('2', 'unchecked', 4, 0, true);
+  aList.addTaskToEnd(checkedTask);
+  expect(aList.taskList[2]).toBe(checkedTask);
+});
+
+test('Adding unchecked task to end of todolist', () => {
+  const aList = new ToDoList();
+  aList.addTask('name', 1);
+  aList.addTask('name2', 1);
+  aList.addTask('name3', 1);
+  aList.addTask('name4', 1);
+  aList.addTask('name5', 2, 1, true, true);
+  aList.addTask('name6', 2, 1, true, true);
+  const uncheckedTask = new Task('10', 'checked', 4, 0, false);
+  aList.addTaskToEnd(uncheckedTask);
+  expect(aList.taskList[4]).toBe(uncheckedTask);
+});
+
+test('Adding unchecked task to end of todolist when no checked tasks exist', () => {
+  const aList = new ToDoList();
+  aList.addTask('name', 1);
+  aList.addTask('name2', 1);
+  aList.addTask('name3', 1);
+  aList.addTask('name4', 1);
+  const uncheckedTask = new Task('10', 'checked', 4, 0, false);
+  aList.addTaskToEnd(uncheckedTask);
+  expect(aList.taskList[4]).toBe(uncheckedTask);
+});
