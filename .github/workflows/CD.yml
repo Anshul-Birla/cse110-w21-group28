@@ -14,6 +14,11 @@ jobs:
         with:
           directory: 'js'
           add_suffix: false
+      - name: Minify CSS
+        uses: devatherock/minify-js@v1.0.2
+        with:
+          directory: 'css'
+          add_suffix: false
       - name: Delete Uneccessary Files
         run: rm -rf coverage/ && rm -rf docs/ && rm -rf tests/
       - name: Push changes

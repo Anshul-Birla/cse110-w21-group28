@@ -86,11 +86,17 @@ header {
   top: 2px;
 }
 
+.inline {
+  display: inline-block;
+  max-width: 45%;
+}
+
 /* timer styling */
 #timerContainer {
   height: 280px;
   width: 400px;
-  background-color: var(--timer-bg-color);
+
+  /* background-color: var(--timer-bg-color); */
   border-radius: 10px;
 }
 
