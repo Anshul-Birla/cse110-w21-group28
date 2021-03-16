@@ -40,22 +40,22 @@
       <p id="timeDisplay"> 25:00 </p>
       <br>
       <button id="startTimer" class="pure-button">Start</button>
-      <button id="distractionButton" class = "pure-button">Distraction</button>
+      <button id="distractionButton" class="pure-button">Distraction</button>
     </div>
   </section>
 
   <!-- Container for task list -->
   <section id='tasklist' class='section_container collapsible'>
-    <!-- <div id='tasklist-inner-container'> -->
       <table id='todo'>
         <tr id='table-header'>            
           <th class='col1-checkbox'></th>
           <th class='col2-task'>TASKS</th>
           <th class='col3-pomos'>#</th>
-          <th class='col4-delete'><button id = "delete-all-button" class="delete-button" type="button">Delete All</button></th>
-        </tr>
+          <th class='col4-delete'>
+            <button id = "delete-all-button" class="delete-button" type="button">Delete All</button>
+          </th>
+        </tr> 
       </table>
-      <!-- style = 'display: none;' originally an attribute in form and button but we want it always showing -->
       <form id ='add-todo' overflow>
         <input type='text' name='task-name' placeholder='Enter task' class='task-name'>
         <input type='number' name='task-length' placeholder='Estimated # of pomos' class='task-length' min='1' max='24' required>
