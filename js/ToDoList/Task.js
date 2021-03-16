@@ -47,10 +47,10 @@ class Task extends HTMLTableRowElement {
      */
     this.checked = completed;
 
-    /**
-     * Keeps track if the task was deleted or not (used with the Todolist )
-     */
-    this.deleted = false;
+    // /**
+    //  * Keeps track if the task was deleted or not (used with the Todolist )
+    //  */
+    // this.deleted = false;
 
     /**
      * The checkbox attribute for the task
@@ -273,7 +273,6 @@ class Task extends HTMLTableRowElement {
         window.localData.splice(i, 1);
       }
     }
-    this.deleted = true;
     localStorage.setItem('tasks', JSON.stringify(window.localData));
   }
 
@@ -343,9 +342,16 @@ class Task extends HTMLTableRowElement {
   }
 
   onDelete() {
-    this.deleted = true;
     this.remove();
     this.removeFromLocalStorage();
+    const event = new CustomEvent('task-deleted', {
+      bubbles: true,
+      composed: true,
+      detail: {
+        taskID: this.id,
+      },
+    });
+    document.body.dispatchEvent(event);
   }
 }
 
