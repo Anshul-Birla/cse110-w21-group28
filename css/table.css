@@ -2,11 +2,8 @@
 
 /* container for table */
 #tasklist {
-  position: relative;
-  margin: auto;
   height: 60vh;
-  width: 40vw;
-  background-color: var(--page-bg-color);
+  width: 50vw;
   overflow-y: auto;
   margin-top: 1%;
   padding-right: 20px;
@@ -27,16 +24,18 @@ td {
 
 th {
   background-color: var(--header-color);
-  color: white;
+  color: var(--font-color);
   text-align: left;
   padding: 20px 10px;
   font-size: 200%;
   position: sticky;
   top: 0;
+  transition-duration: 2s;
 }
 
 td {
   min-width: 50px;
+  transition-duration: 2s;
 }
 
 tr {
@@ -54,17 +53,38 @@ tr:nth-child(odd) td {
 }
 
 tr:hover td {
-  background-color: var(--tr-hover-color);
+  background-image: linear-gradient(transparent, var(--tr-hover-color));
+  transition-duration: 0;
 }
 
-.col1-checkbox,
-.col3-pomos,
-.col4-delete {
+td button {
+  display: block;
+  margin: auto;
+  background-color: transparent;
+  outline: none;
+  border: none;
+}
+
+svg {
+  width: 24px;
+  height: 24px;
+}
+
+.col1-checkbox {
   width: 10%;
 }
 
+.col3-pomos {
+  width: 12%;
+}
+
+.col4-delete {
+  width: 15%;
+  text-align: center;
+}
+
 .col2-task {
-  width: 70%;
+  width: 63%;
 }
 
 /* input form (add task) */
@@ -78,6 +98,7 @@ tr:hover td {
   background-color: var(--header-color);
   padding-top: 10px;
   padding-bottom: 10px;
+  transition-duration: 2s;
 }
 
 .task-name,
@@ -106,6 +127,7 @@ tr:hover td {
   position: absolute;
   bottom: 10px;
   color: black;
+  cursor: pointer;
 }
 
 /* checkbox and delete button styling */
@@ -114,10 +136,21 @@ input[type='checkbox'] {
   height: 20px;
   background: white;
   border-radius: 10px;
+  cursor: pointer;
 }
 
 input[type='checkbox']:checked {
   box-shadow: 0 0 0 3px lime;
+}
+
+#delete-all-button {
+  font-size: 12px;
+  white-space: normal;
+  border-radius: 35%;
+  border-style: solid;
+  border-width: 2px;
+  border-color: var(--button-border-color);
+  right: 10px;
 }
 
 .delete-button {
@@ -128,4 +161,53 @@ input[type='checkbox']:checked {
 tr.completedTask td {
   text-decoration: line-through;
   background-color: rgba(211, 211, 211, 0.747);
+}
+
+/* Makes the 3 dots for the table */
+.three-dots::after {
+  cursor: pointer;
+  color: #fcc;
+  content: '\2807';
+  font-size: 20px;
+  align-items: center;
+  text-decoration: none !important;
+}
+
+/* Styling for the div that holds both the focus and delete button */
+.double-buttons {
+  max-height: 100%;
+  display: inline-block;
+}
+
+.double-buttons button {
+  width: 50%;
+  max-height: 100%;
+  background-color: transparent;
+  border: none;
+  display: inline block;
+}
+
+.delete-svg:hover {
+  fill: red;
+  cursor: pointer;
+}
+
+.focus-svg:hover {
+  fill: yellow;
+  cursor: pointer;
+}
+
+button:disabled .focus-svg {
+  fill: black;
+  cursor: pointer;
+}
+
+@media screen and (min-width: 1300px) {
+  #tasklist {
+    height: 60vh;
+    width: 40vw;
+    overflow-y: auto;
+    margin-top: 1%;
+    padding-right: 20px;
+  }
 }

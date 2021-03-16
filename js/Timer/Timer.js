@@ -160,6 +160,7 @@ class Timer extends HTMLElement {
         this.endTimer();
         this.startButton.textContent = buttonText.startTimerText;
         this.startButton.class = classNames.startButton;
+        document.getElementsByTagName('body')[0].classList.remove('short-break');
       }
     });
   }

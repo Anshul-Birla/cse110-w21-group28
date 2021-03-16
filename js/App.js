@@ -3,6 +3,7 @@ import { Timer } from './Timer/Timer.js';
 // import { workMode } from './Timer/TimerVariables.js';
 import { Statistics } from './Statistics/Statistics.js';
 import { Distraction } from './Distraction/Distraction.js';
+import { shortBreakColors, workModeColors } from './ChangeColors.js';
 
 function after3amToday() {
   const currDate = new Date();
@@ -25,12 +26,13 @@ const statsPopUp = document.getElementById('stats-section');
 const parentDiv = document.getElementById('parentDiv');
 const closeStatsButton = document.getElementById('close-stats-button');
 const deleteAllButton = document.getElementById('delete-all-button');
+const overlay = document.getElementById('overlay');
 
 const StatsPage = new Statistics();
 const TDLDom = new TodoListDom(todoTable, addTodoForm, addTodoButton, deleteAllButton);
 const TimerObj = new Timer(startTimerButton, timeDisplay, modeDisplay);
 // eslint-disable-next-line max-len
-const DistractionPage = new Distraction(distractButton, distractPopUp, cancelButton, submitButton, description);
+const DistractionPage = new Distraction(distractButton, distractPopUp, cancelButton, submitButton, description, overlay);
 
 TimerObj.addEventListener('timer-complete', (e) => {
   if (e.detail.sessionIsWork) { // if it was a work mode
@@ -53,6 +55,41 @@ startTimerButton.addEventListener('click', () => {
     const newDate = new Date(2000, 0, 1);
     localStorage.setItem('startDateTime', newDate);
     StatsPage.sessionStartDateTime = newDate;
+    shortBreakColors();
+  } else {
+    workModeColors();
+  }
+});
+
+document.body.addEventListener('focus-task', (e) => {
+  TDLDom.onFocusTask(e.detail.taskID);
+  TDLDom.updateCurrentTask();
+});
+
+document.body.addEventListener('checkbox-updated', (e) => {
+  if (e.detail.checkBoxState === true) {
+    TDLDom.onCompletedTask();
+  } else {
+    TDLDom.onUncheckedTask(e.detail.taskID);
+  }
+  TDLDom.updateCurrentTask();
+});
+
+window.addEventListener('click', (e) => {
+  const lastColumnElements = document.getElementsByClassName('touch-target');
+  let touchedButton = false;
+
+  for (let i = 0; i < lastColumnElements.length && !touchedButton; i += 1) {
+    if (lastColumnElements[i].contains(e.target)) touchedButton = true;
+  }
+
+  if (!touchedButton) {
+    const buttonPairList = document.getElementsByClassName('double-buttons');
+    const threeDotButtonList = document.getElementsByClassName('triple-dots-touch');
+    for (let i = 0; i < buttonPairList.length; i += 1) {
+      buttonPairList[i].style.display = 'none';
+      threeDotButtonList[i].style.display = 'block';
+    }
   }
 });
 
@@ -70,7 +107,7 @@ TDLDom.todoList.addEventListener('task-unchecked', () => {
 
 TDLDom.todoList.addEventListener('task-deleted', (e) => {
   StatsPage.deleteExpectedPomoSessions(e.detail.pomoSessions);
-});
+}, true);
 
 DistractionPage.addEventListener('distraction-created', (e) => {
   e.detail.pomoSessionId = TimerObj.sessionId;

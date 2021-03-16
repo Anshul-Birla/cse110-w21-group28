@@ -67,15 +67,15 @@ test('Incrementing past totalSessions is OK', () => {
 
 test('Test that Checkbox works properly', () => {
   const currTask = new Task(0, 'Test task', 5);
-  currTask.checkBox.click();
+  currTask.checkOffTask();
   expect(currTask.checked).toBe(true);
   expect(currTask.className).toBe(classNames.completedTaskClassName);
 });
 
 test('Test that toggling checkbox works properly', () => {
   const currTask = new Task(0, 'Test task', 5);
-  currTask.checkBox.click();
-  currTask.checkBox.click();
+  currTask.checkOffTask();
+  currTask.uncheckTask();
   expect(currTask.checked).toBe(false);
   expect(currTask.checkBox.checked).toBe(false);
   expect(currTask.className).toBe(classNames.uncheckedTaskClassName);
@@ -94,4 +94,26 @@ test('Task Removed from Local Storage after delete is called', () => {
   window.localData = [['1']];
   task.removeFromLocalStorage();
   expect(window.localData.length).toBe(1);
+});
+
+test('Clicking focus hides focus button', () => {
+  const task = new Task(0, 'Test task', 5, 3, true);
+  task.focusButton.click();
+  expect(task.focusButton.parentNode.parentNode.style.display).toBe('none');
+  expect(task.threeDotsButton.parentNode.style.display).toBe('block');
+});
+
+test('Clicking delete hides delete button', () => {
+  const task = new Task(0, 'Test task', 5, 3, true);
+  task.deleteButton.click();
+  expect(task.deleteButton.parentNode.parentNode.style.display).toBe('none');
+  expect(task.threeDotsButton.parentNode.style.display).toBe('');
+});
+
+test('Clicking three dots button hides button', () => {
+  const task = new Task(0, 'Test task', 5, 3, true);
+  task.threeDotsButton.click();
+  expect(task.focusButton.parentNode.parentNode.style.display).toBe('inline-block');
+  expect(task.deleteButton.parentNode.parentNode.style.display).toBe('inline-block');
+  expect(task.threeDotsButton.parentNode.style.display).toBe('none');
 });
