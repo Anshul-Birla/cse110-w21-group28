@@ -66,7 +66,7 @@ class ToDoList {
   // eslint-disable-next-line class-methods-use-this
   addTaskToLocalStorage(task, index = undefined) {
     const arr = [task.id, task.name, task.totalSessions, task.currentSessionNum, task.checked];
-    if(index === undefined){
+    if (index === undefined) {
       window.localData.push(arr);
     } else {
       window.localData.splice(index, 0, arr);
@@ -141,12 +141,11 @@ class ToDoList {
     if (task.checked) {
       this.taskList.push(task);
       this.addTaskToLocalStorage(task);
-    }
-    else {
+    } else {
       let firstUncheckedTask = -1;
       for (let i = 0; i < this.taskList.length && firstUncheckedTask === -1; i += 1) {
         if (this.taskList[i].checked === true) firstUncheckedTask = i;
-      }
+    }
 
       if (firstUncheckedTask === -1) {
         this.taskList.push(task);

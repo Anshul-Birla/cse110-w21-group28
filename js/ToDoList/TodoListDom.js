@@ -166,7 +166,7 @@ class TodoListDom {
     checked off, not the new current task. Only works if the user
     can only check off the current task
     */
-    this.currentTask.onDelete()
+    this.currentTask.onDelete();
     this.displayTask(this.currentTask);
     this.todoList.addTaskToEnd(this.currentTask);
   }
