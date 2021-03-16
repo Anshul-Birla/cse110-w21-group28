@@ -192,7 +192,6 @@ html {
   }
 }
 
-
 #top-left-border {
   position: relative;
   text-align: left;
@@ -200,7 +199,7 @@ html {
   font-size: 150%;
 }
 
-#top-left-border span{
+#top-left-border span {
   position: absolute;
   top: 30px;
   left: 30px;
@@ -214,7 +213,7 @@ html {
   font-size: 150%;
 }
 
-#bottom-right-border span{
+#bottom-right-border span {
   position: absolute;
   bottom: 50px;
   right: 30px;
