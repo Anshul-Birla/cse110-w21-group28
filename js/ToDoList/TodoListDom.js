@@ -1,5 +1,4 @@
 import { ToDoList } from './ToDoList.js';
-import { Task } from './Task.js';
 import { HTMLAttributes, TaskStorage } from './TodoListDomVariables.js';
 
 /**
@@ -134,19 +133,36 @@ class TodoListDom {
     this.currentTask = currTask;
   }
 
+  /**
+   * This function runs when someone checks off a task. Removes the task from the
+   * table and appends it to the bottom. Removes the task from the todolist
+   * data structure and appends it to the bottom there
+   */
   onCompletedTask() {
+    /*
+    When this function is called, currentTask has NOT been updated to
+    reflect the checking off. Thus, this is the task that was just
+    checked off, not the new current task. Only works if the user
+    can only check off the current task
+    */
     this.currentTask.remove();
     this.displayTask(this.currentTask);
     this.todoList.removeTask(this.currentTask.id);
     this.todoList.taskList.push(this.currentTask);
   }
 
+  /**
+   * Called when someone unchecks a task. Removes the task from the table
+   * and appends it become the last unchecked task in the table. Does the same
+   * within the todolist data structure
+   * @param {Number} id - id of the task you would like to uncheck
+   */
   onUncheckedTask(id) {
     const uncheckedTask = this.todoList.getTaskById(id);
     this.todoList.removeTask(id);
     let firstCompletedTaskIndex = -1;
-    for (let i = 1; i < this.table.childNodes.length && firstCompletedTaskIndex == -1; i++) {
-      if (this.table.childNodes[i].checked == true) firstCompletedTaskIndex = i;
+    for (let i = 1; i < this.table.childNodes.length && firstCompletedTaskIndex === -1; i += 1) {
+      if (this.table.childNodes[i].checked === true) firstCompletedTaskIndex = i;
     }
     uncheckedTask.remove();
     this.todoList.addTaskToEnd(uncheckedTask);

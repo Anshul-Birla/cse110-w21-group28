@@ -29,7 +29,7 @@ document.body.addEventListener('focus-task', (e) => {
 });
 
 document.body.addEventListener('checkbox-updated', (e) => {
-  if (e.detail.checkBoxState == true) {
+  if (e.detail.checkBoxState === true) {
     TDLDom.onCompletedTask();
   } else {
     TDLDom.onUncheckedTask(e.detail.taskID);

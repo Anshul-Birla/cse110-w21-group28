@@ -125,15 +125,21 @@ class ToDoList {
     this.taskList.unshift(task);
   }
 
+  /**
+   * Adds task to the end of the todolist depending on if it is checked or not.
+   * If checked, adds to the end. If not checked, adds right before the first
+   * checked task (i.e. makes the task being added the last unchecked task)
+   * @param {Task} task - task object that needs to be added
+   */
   addTaskToEnd(task) {
     if (task.checked) this.taskList.push(task);
     else {
       let firstUncheckedTask = -1;
-      for (let i = 0; i < this.taskList.length && firstUncheckedTask == -1; i++) {
-        if (this.taskList[i].checked == true) firstUncheckedTask = i;
+      for (let i = 0; i < this.taskList.length && firstUncheckedTask === -1; i += 1) {
+        if (this.taskList[i].checked === true) firstUncheckedTask = i;
       }
 
-      if (firstUncheckedTask == -1) {
+      if (firstUncheckedTask === -1) {
         this.taskList.push(task);
       } else {
         this.taskList.splice(firstUncheckedTask, 0, task);
