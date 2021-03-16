@@ -21,6 +21,11 @@ Anshul Birla
 + *Plans for today:* Checkbox disable on everythihg except current task
 + *Any blockers?* None
 
+Dan Magaril
++ *Previous work day progress:* Started work on deleting old history records
++ *Plans for today:* Continue working on Stats history flushing
++ *Any blockers?* None
+
 Anastasiia
 + *Previous work day progress:*
 held the meeting, made plans for final week, tasks

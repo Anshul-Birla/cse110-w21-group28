@@ -26,6 +26,11 @@ Ravindran Tapia
 + *Plans for today:* meeting with Dan and Michael
 + *Any blockers?* no
 
+Dan Magaril
++ *Previous work day progress:* None
++ *Plans for today:* Write testing suite for stats, get styling finalized w/ Ravi and Michael
++ *Any blockers?* None
+
 Anshul Birla
 + *Previous work day progress:* meeting
 + *Plans for today:* Quiz, maybe start focus task on todolist

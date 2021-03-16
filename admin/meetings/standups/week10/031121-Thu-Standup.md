@@ -25,6 +25,11 @@ Ravindran Tapia
 + *Previous work day progress:* started formating stats
 + *Plans for today:* meeting, fix delete-style based on feedback
 + *Any blockers?* essay
+
+Dan Magaril
++ *Previous work day progress:* Stats compression for a work day
++ *Plans for today:* Continue working on Stats compression
++ *Any blockers?* None
   
 Anshul Birla
 + *Previous work day progress:* Added some hover functionality

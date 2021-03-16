@@ -27,6 +27,11 @@ meeting
 + *Plans for today:* started adding things to stats pop up
 + *Any blockers?* essay for other class
 
+Dan Magaril
++ *Previous work day progress:* Started work on deleting old history records
++ *Plans for today:* Continue working on Stats history flushing
++ *Any blockers?* None
+
 Anshul Birla
 + *Previous work day progress:* Styled buttons
 + *Plans for today:* Add hover functionality on buttons

@@ -21,6 +21,11 @@ Michael Vu
 + *Plans for today:* fix scaling and change popup animation to match Ryan's
 + *Any blockers?* other classes
   
+Dan Magaril
++ *Previous work day progress:* Test suite for Stats
++ *Plans for today:* Continue writing test suite, history flushing
++ *Any blockers?* Midterms
+  
 Ravindran Tapia  
 + *Previous work day progress:* nothing
 + *Plans for today:* meeting
