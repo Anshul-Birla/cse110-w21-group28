@@ -74,6 +74,8 @@ test('Clicking remove button should remove task from table and local storage', (
   localStorage.clear();
 });
 
+
+
 test('Incrementing session updates value accordingly', () => {
   formLocation.children[0].value = 'Write Essay';
   formLocation.children[1].value = 2;

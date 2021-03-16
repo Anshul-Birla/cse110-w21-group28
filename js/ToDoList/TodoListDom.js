@@ -51,12 +51,13 @@ class TodoListDom {
     this.renderLocalStorage();
   }
 
-  /**
+/**
  * Fetch local storage, and store them into window.localData
  * Iterate each local tasks and render them
  */
   renderLocalStorage() {
     window.localData = [];
+    const completedTaskIndex = [];
     if (localStorage.getItem('tasks') !== null) {
       window.localData = JSON.parse(localStorage.getItem('tasks'));
       for (let i = 0; i < window.localData.length; i += 1) {
@@ -67,11 +68,30 @@ class TodoListDom {
 
     for (let i = 0; i < window.localData.length; i += 1) {
       // get local storage data
+      const completed = window.localData[i][TaskStorage.checkedIndex];
+
+      if (!completed) {
+        const name = window.localData[i][TaskStorage.nameIndex];
+        const totalSession = window.localData[i][TaskStorage.totalSessionIndex];
+        const currentSession = window.localData[i][TaskStorage.currentSessionIndex];
+        const task = this.todoList.addTask(name, totalSession, currentSession, completed, true);
+        this.displayTask(task);
+      } else {
+        /*
+           push index because addTask takes in each indiv. param instead of a task.
+           Need to use addTask() because that is the only way to increment the counter
+           in the todolist class (used for id's)
+        */
+        completedTaskIndex.push(i);
+      }
+    }
+    // this is so that the completed tasks go to the end of the todolist during rendering
+    for (let x = 0; x < completedTaskIndex.length; x += 1) {
+      const i = completedTaskIndex[x];
       const name = window.localData[i][TaskStorage.nameIndex];
       const totalSession = window.localData[i][TaskStorage.totalSessionIndex];
       const currentSession = window.localData[i][TaskStorage.currentSessionIndex];
       const completed = window.localData[i][TaskStorage.checkedIndex];
-
       const task = this.todoList.addTask(name, totalSession, currentSession, completed, true);
       this.displayTask(task);
     }
@@ -161,10 +181,10 @@ class TodoListDom {
     const uncheckedTask = this.todoList.getTaskById(id);
     this.todoList.removeTask(id);
     let firstCompletedTaskIndex = -1;
-    for (let i = 1; i < this.table.childNodes.length && firstCompletedTaskIndex === -1; i += 1) {
+    uncheckedTask.remove();
+    for (let i = 2; i < this.table.childNodes.length && firstCompletedTaskIndex === -1; i += 1) {
       if (this.table.childNodes[i].checked === true) firstCompletedTaskIndex = i;
     }
-    uncheckedTask.remove();
     this.todoList.addTaskToEnd(uncheckedTask);
     this.displayTask(uncheckedTask, firstCompletedTaskIndex);
   }
