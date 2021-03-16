@@ -5,13 +5,14 @@ class Distraction extends HTMLElement {
    * @param {HTMLButton} cancelButton
    * @param {HTMLButton} submitButton
    */
-  constructor(distractButton, distractPopUp, cancelButton, submitButton, description) {
+  constructor(distractButton, distractPopUp, cancelButton, submitButton, description, overlay) {
     super();
     this.distractButton = distractButton;
     this.distractPopUp = distractPopUp;
     this.cancelButton = cancelButton;
     this.submitButton = submitButton;
     this.description = description;
+    this.overlay = overlay;
     this.distractions = [];
     this.setupEventListeners();
   }
@@ -22,6 +23,9 @@ class Distraction extends HTMLElement {
         this.resetPopUp();
       } else {
         this.distractPopUp.style.display = 'block';
+        this.distractPopUp.style.animationName = 'distraction-animation-in';
+        this.overlay.style.display = 'block';
+        this.overlay.style.animationName = 'overlay-animation-in';
       }
     });
 
@@ -40,6 +44,24 @@ class Distraction extends HTMLElement {
       this.dispatchEvent(event);
       this.resetPopUp();
     });
+
+    /**
+ * These event listeners trigger when the animation is finished. It resets
+ * the popup animations and sets hides them when done.
+ */
+    this.distractPopUp.addEventListener('animationend', (e) => {
+      if (e.animationName === 'distraction-animation-out') {
+        this.distractPopUp.style.animationName = '';
+        this.distractPopUp.style.display = 'none';
+      }
+    });
+
+    this.overlay.addEventListener('animationend', (e) => {
+      if (e.animationName === 'overlay-animation-out') {
+        this.overlay.style.animationName = '';
+        this.overlay.style.display = 'none';
+      }
+    });
   }
 
   /**
@@ -47,9 +69,9 @@ class Distraction extends HTMLElement {
    * and remove any of the text in the 'description' field.
    */
   resetPopUp() {
-    this.distractPopUp.style.display = 'none';
-    // document.getElementById('description').value = '';
-    this.description.value = '';
+    this.distractPopUp.style.animationName = 'distraction-animation-out';
+    this.overlay.style.animationName = 'overlay-animation-out';
+    document.getElementById('description').value = '';
   }
 
   hideButton() {
