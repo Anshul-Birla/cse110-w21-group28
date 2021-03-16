@@ -101,13 +101,13 @@ svg {
   transition-duration: 2s;
 }
 
-.task-name,
+/*.task-name,
 .task-length {
   font-size: 20px;
   border-radius: 25px;
   height: 50px;
   padding-left: 15px;
-  padding-right: 15px; /* so that when a user enters a long task it doesn't go past the input bar */
+  padding-right: 15px; /* so that when a user enters a long task it doesn't go past the input bar 
   color: black;
 }
 
@@ -128,9 +128,51 @@ svg {
   bottom: 10px;
   color: black;
   cursor: pointer;
+}*/
+/* checkbox and delete button styling */
+.task-name, .task-length {
+  font-size: 1em;
+  background: clear;
+  border-style: solid;
+  border-radius: 60vh;
+  border-color: var(--header-color);
+  height: 2em;
+  padding-left: 0.5vw;
+  padding-right: 0.1vw; /* so that when a user enters a long task it doesn't go past the input bar */
+  color: black;
+  top: 49vh; 
+  outline: none;
+  font-size: 100;
+  
 }
 
-/* checkbox and delete button styling */
+.task-name {
+  /* width: calc(40% - 60px); */
+  width: 15vw;
+  margin-left: 1.2vw;
+
+}
+.task-length {
+ width: calc(12% - 40px); 
+
+ 
+ margin-left: 11.5vw;
+}
+.task-submit {
+  margin-left: 1vw;
+  width: 1.7em;
+  font-size: 1.4em;
+  background: clear;
+  border-style: solid;
+  border-radius: 100vh;
+  border-color: var(--header-color);
+  padding-left: 0.1vw;
+  padding-right: 0.1vw; /* so that when a user enters a long task it doesn't go past the input bar */
+  color: black;
+  top: 49vh; 
+  outline: none;
+  min-width: 1vw;
+}
 input[type='checkbox'] {
   width: 20px;
   height: 20px;
