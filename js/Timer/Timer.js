@@ -123,7 +123,7 @@ class Timer extends HTMLElement {
       displayString = `${minutes}:${seconds}`;
     }
     this.displayTime.textContent = displayString;
-    document.title =  this.state + " " + displayString;
+    document.title = this.state + ' ' + displayString;
     duration -= 1;
     if (duration >= 0) {
       setTimeout(() => {
