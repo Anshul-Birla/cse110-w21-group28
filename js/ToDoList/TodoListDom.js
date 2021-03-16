@@ -124,8 +124,8 @@ class TodoListDom {
 
     this.deleteAllBtn.addEventListener('click', () => {
       const list = this.todoList.taskList;
-      for (let i = 0; i < list.length; i += 1) {
-        list[i].deleteButton.click();
+      while (list[0] !== undefined) {
+        list[0].deleteButton.click();
       }
     });
   }

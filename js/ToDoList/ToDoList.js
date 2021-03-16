@@ -64,13 +64,9 @@ class ToDoList {
    *  @param {Task} task - Task to be added
    */
   // eslint-disable-next-line class-methods-use-this
-  addTaskToLocalStorage(task, index = undefined) {
+  addTaskToLocalStorage(task) {
     const arr = [task.id, task.name, task.totalSessions, task.currentSessionNum, task.checked];
-    if (index === undefined) {
-      window.localData.push(arr);
-    } else {
-      window.localData.splice(index, 0, arr);
-    }
+    window.localData.push(arr);
     localStorage.setItem('tasks', JSON.stringify(window.localData));
   }
 
@@ -82,7 +78,7 @@ class ToDoList {
    */
   getCurrentTask() {
     for (let i = 0; i < this.taskList.length; i += 1) {
-      if (!this.taskList[i].checked) {
+      if (!this.taskList[i].checked && !this.taskList[i].deleted) {
         return this.taskList[i];
       }
     }
@@ -118,7 +114,6 @@ class ToDoList {
       this.taskList.splice(index, 1);
       return true;
     }
-
     return false;
   }
 
@@ -128,7 +123,6 @@ class ToDoList {
    */
   addTaskToTop(task) {
     this.taskList.unshift(task);
-    this.addTaskToLocalStorage(task, 0);
   }
 
   /**
@@ -137,7 +131,7 @@ class ToDoList {
    * checked task (i.e. makes the task being added the last unchecked task)
    * @param {Task} task - task object that needs to be added
    */
-  addTaskToEnd(task) {
+    addTaskToEnd(task) {
       if (task.checked) {
         this.taskList.push(task);
         this.addTaskToLocalStorage(task);
@@ -145,16 +139,16 @@ class ToDoList {
         let firstUncheckedTask = -1;
         for (let i = 0; i < this.taskList.length && firstUncheckedTask === -1; i += 1) {
           if (this.taskList[i].checked === true) firstUncheckedTask = i;
-      }
-      if (firstUncheckedTask === -1) {
-        this.taskList.push(task);
-        this.addTaskToLocalStorage(task);
-      } else {
-        this.taskList.splice(firstUncheckedTask, 0, task);
-        this.addTaskToLocalStorage(task, firstUncheckedTask);
+        }
+        if (firstUncheckedTask === -1) {
+          this.taskList.push(task);
+          this.addTaskToLocalStorage(task);
+        } else {
+          this.taskList.splice(firstUncheckedTask, 0, task);
+          this.addTaskToLocalStorage(task, firstUncheckedTask);
+        }
       }
     }
-  }
 }
 
 export { ToDoList };
