@@ -45,11 +45,14 @@ TimerObj.addEventListener('timer-complete', (e) => {
 });
 
 startTimerButton.addEventListener('click', () => {
+  if (StatsPage.dataToCompressExists()) {
+    StatsPage.clearData();
+  }
   if (startTimerButton.textContent === 'Start') { // Button text updates before this
     StatsPage.compressStats();
-    localStorage.setItem('startDateTime', new Date(2000, 0, 1));
-  } else if (StatsPage.dataToCompressExists()) {
-    StatsPage.clearData();
+    const newDate = new Date(2000, 0, 1);
+    localStorage.setItem('startDateTime', newDate);
+    StatsPage.sessionStartDateTime = newDate;
   }
 });
 
@@ -77,8 +80,6 @@ DistractionPage.addEventListener('distraction-created', (e) => {
 StatsPage.addEventListener('reset-timer', () => {
   TimerObj.resetPomoSessionId();
 });
-
-// ADD END DAY CALLS STATSPAGE.COMPRESSSTATS()
 
 statsButton.addEventListener('click', () => {
   StatsPage.updateDom();
