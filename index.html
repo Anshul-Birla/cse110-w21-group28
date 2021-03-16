@@ -1,6 +1,6 @@
 <!doctype html>
 
-<html lang="en"> 
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <link rel="shortcut icon" href="#" />
@@ -39,7 +39,15 @@
   <section id="timerContainer" class="section-container">
     <div id="countdown">
       <p id="modeDisplay"> Pomo-Time!</p>
-      <p id="timeDisplay"> 25:00 </p>
+      <p id="top-left-border">
+        <span>┌</span>
+      </p>
+      <p id="timeDisplay">
+         25:00
+      </p>
+      <p id="bottom-right-border">
+        <span>┘</span>
+      </p>
       <br>
       <button id="startTimer" class="pure-button">Start</button>
       <button id="distractionButton" class="pure-button">Distraction</button>
@@ -53,7 +61,8 @@
         <th class='col1-checkbox'></th>
         <th class='col2-task'>TASKS</th>
         <th class='col3-pomos'>#</th>
-        <th class='col4-delete'><button id = "delete-all-button" class="delete-button" type="button">Delete All</button></th></tr>
+        <th class='col4-delete'><button id = "delete-all-button" class="delete-button" type="button">Delete All</button></th>
+      </tr>
     </table>
     
     <form id ='add-todo' overflow>
