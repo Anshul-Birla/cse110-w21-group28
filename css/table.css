@@ -86,7 +86,7 @@ tr:hover td {
   border-style: solid;
   border-radius: 60vh;
   border-color: var(--header-color);
-  height: 1.5em;
+  height: 2em;
   padding-left: 0.5vw;
   padding-right: 0.1vw; /* so that when a user enters a long task it doesn't go past the input bar */
   color: black;
@@ -97,19 +97,20 @@ tr:hover td {
 }
 
 .task-name {
-  /* width: calc(56% - 60px); */
+  /* width: calc(40% - 60px); */
   width: 15vw;
   margin-left: 1.2vw;
 
 }
 .task-length {
- /* width: calc(42% - 60px);*/
+/*width: calc(5% - 60px); 
+ min-width:  4vw; */
  width: 2.5vw;
  margin-left: 14vw;
 }
 .task-submit {
   margin-left: 1vw;
-  width: 2em;
+  width: 1.7em;
   font-size: 1.4em;
   background: clear;
   border-style: solid;
@@ -120,7 +121,7 @@ tr:hover td {
   color: black;
   top: 49vh; 
   outline: none;
-  min-width: 15px;
+  min-width: 1vw;
 }
 
 /* checkbox and delete button styling */
