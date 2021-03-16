@@ -113,7 +113,7 @@ header {
 
 #timeDisplay {
   position: relative;
-  top: 0px;
+  top: 0;
   bottom: 100px;
   font-size: 240%;
   margin: 50px;
@@ -195,7 +195,7 @@ html {
 #top-left-border {
   position: relative;
   text-align: left;
-  margin: 0px;
+  margin: 0;
   font-size: 150%;
 }
 
@@ -209,7 +209,7 @@ html {
 #bottom-right-border {
   position: relative;
   text-align: right;
-  margin: 0px;
+  margin: 0;
   font-size: 150%;
 }
 
