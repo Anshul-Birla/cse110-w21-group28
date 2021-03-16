@@ -5,13 +5,25 @@
 
 /* color variables for buttons, page, and timer */
 :root {
+  /* default button colors */
   --button-border-color: rgba(245, 245, 245, 0.4);
   --button-color: lightslategray;
+
+  /* short break button colors */
+  --button-color-short: #763626;
+
+  /* default page colors */
   --page-bg-color: cadetblue;
-  --font-color: aliceblue;
+  --font-color: white;
   --timer-bg-color: darkcyan;
 
+  /* short break page colors */
+  --page-bg-color-short: #336b87;
+  --timer-bg-color-short: #90afc5;
+
   /* toothpaste table theme */
+  --even-color: rgba(149, 218, 229, 0.603);
+  --odd-color: rgb(2, 177, 177);
   --header-color: darkcyan;
   --even-color: rgba(149, 218, 229, 0.603);
   --odd-color: var(--even-color); /* replaces rgb(2, 177, 177); */
@@ -19,11 +31,18 @@
   --completed-task-color: rgb(131, 156, 170);
   --scroll-color: var(--even-color);
 
-  --td-border-radius: 20px;
+  --td-border-radius: 0px;
+
+  /* shortbreak table theme */
+  --even-color-short: #54a6cf;
+  --odd-color-short: #79c4ea;
+  --header-color-short: #90afc5;
+  --tr-hover-color-short: #763626;
 }
 
 body {
   background-color: var(--page-bg-color);
+  transition-duration: 2s;
 }
 
 header {
@@ -39,6 +58,7 @@ header {
 .section-container {
   position: relative;
   margin: auto;
+  transition-duration: 2s;
 }
 
 /* header styling */

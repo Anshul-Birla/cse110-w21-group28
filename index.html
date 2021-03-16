@@ -1,6 +1,6 @@
 <!doctype html>
 
-<html lang="en">
+<html lang="en"> 
 <head>
   <meta charset="utf-8">
   <link rel="shortcut icon" href="#" />
@@ -8,11 +8,13 @@
   <link rel="stylesheet" href="./css/style.css" />
   <link rel="stylesheet" href="./css/distraction-box.css" />
   <link rel="stylesheet" href="./css/table.css" />
+  <link rel="stylesheet" href="./css/animations.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Pomo App</title>
 </head>
 
 <body>
+  <div id='overlay'></div>
 
   <!-- Header bar at the top of the page for title text & navigation -->
   <header>
@@ -45,23 +47,20 @@
   </section>
 
   <!-- Container for task list -->
-  <section id='tasklist' class='section_container collapsible'>
-      <table id='todo'>
-        <tr id='table-header'>            
-          <th class='col1-checkbox'></th>
-          <th class='col2-task'>TASKS</th>
-          <th class='col3-pomos'>#</th>
-          <th class='col4-delete'>
-            <button id = "delete-all-button" class="delete-button" type="button">Delete All</button>
-          </th>
-        </tr> 
-      </table>
-      <form id ='add-todo' overflow>
-        <input type='text' name='task-name' placeholder='Enter task' class='task-name'>
-        <input type='number' name='task-length' placeholder='Estimated # of pomos' class='task-length' min='1' max='24' required>
-        <input id = "add-button" type='submit' class='task-submit' value='+'>
-      </form>
-    <!-- </div> -->
+  <section id='tasklist' class='section-container'>
+    <table id='todo'>
+      <tr>
+        <th class='col1-checkbox'></th>
+        <th class='col2-task'>TASKS</th>
+        <th class='col3-pomos'>#</th>
+        <th class='col4-delete'><button id = "delete-all-button" class="delete-button" type="button">Delete All</button></th></tr>
+    </table>
+    
+    <form id ='add-todo' overflow>
+      <input type='text' name='task-name' placeholder='Enter task' class='task-name'>
+      <input type='number' name='task-length' placeholder='Estimated # of pomos' class='task-length' min='1' max='24' required>
+      <input id = "add-button" type='submit' class='task-submit' value='+'>
+    </form>
   </section>
 
   <!-- Linked section on page under task list for summary & statistics of work sessions -->
