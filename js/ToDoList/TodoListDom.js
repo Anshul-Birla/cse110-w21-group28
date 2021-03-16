@@ -51,7 +51,7 @@ class TodoListDom {
     this.renderLocalStorage();
   }
 
-/**
+  /**
  * Fetch local storage, and store them into window.localData
  * Iterate each local tasks and render them
  */
