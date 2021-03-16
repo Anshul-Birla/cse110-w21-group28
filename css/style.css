@@ -93,7 +93,6 @@ header {
 
 /* timer styling */
 #timerContainer {
-  height: 280px;
   width: 400px;
 
   /* background-color: var(--timer-bg-color); */
@@ -114,9 +113,11 @@ header {
 
 #timeDisplay {
   position: relative;
-  top: 15px;
-  font-size: 275%;
-  margin: 5px;
+  top: 0px;
+  bottom: 100px;
+  font-size: 240%;
+  margin: 50px;
+  height: 100px;
 }
 
 #distractionButton {
@@ -189,4 +190,33 @@ html {
   #modeDisplay {
     font-size: 70%;
   }
+}
+
+
+#top-left-border {
+  position: relative;
+  text-align: left;
+  margin: 0px;
+  font-size: 150%;
+}
+
+#top-left-border span{
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  line-height: 0.3;
+}
+
+#bottom-right-border {
+  position: relative;
+  text-align: right;
+  margin: 0px;
+  font-size: 150%;
+}
+
+#bottom-right-border span{
+  position: absolute;
+  bottom: 50px;
+  right: 30px;
+  line-height: 0.3;
 }
