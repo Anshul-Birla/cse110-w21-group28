@@ -7,6 +7,7 @@ class Statistics extends HTMLElement {
      */
     this.distractionList = [];
     this.addHTMLChildren();
+    this.addEventListeners();
     this.loadFromLocalStorage();
     this.flushHistory();
   }
@@ -58,15 +59,108 @@ class Statistics extends HTMLElement {
     // this.distractionList.setAttribute('id', 'stats_distractionList');
     // this.appendChild(this.distractionList);
 
+    /* Adding things to Distraction Tab */
+
+    // Number of Broken Session
     this.brokenSessions = document.createElement('p');
     this.brokenSessions.setAttribute('id', 'stats_numBrokenSessions');
-    this.brokenSessions.setAttribute('class', 'stats-info');
+    this.brokenSessions.setAttribute('class', 'dist-info');
     this.brokenSessionsLabel = document.createElement('p');
     this.brokenSessionsLabel.setAttribute('id', 'stats_brokenSessionsLabel');
-    this.brokenSessionsLabel.setAttribute('class', 'stats-info-label');
+    this.brokenSessionsLabel.setAttribute('class', 'dist-info-label');
     this.brokenSessionsLabel.textContent = 'Broken Sessions';
     this.parentDiv.appendChild(this.brokenSessions);
     this.parentDiv.appendChild(this.brokenSessionsLabel);
+    // Number of Unique Distractions
+    this.uniqueDistractions = document.createElement('p');
+    this.uniqueDistractions.setAttribute('id', 'dist_numUniqueDistractions');
+    this.uniqueDistractions.setAttribute('class', 'dist-info');
+    this.uniqueDistractionsLabel = document.createElement('p');
+    this.uniqueDistractionsLabel.setAttribute('id', 'dist_numUniqueDistractionsLabel');
+    this.uniqueDistractionsLabel.setAttribute('class', 'dist-info-label');
+    this.uniqueDistractionsLabel.textContent = 'Unqiue Distractions';
+    this.parentDiv.appendChild(this.uniqueDistractions);
+    this.parentDiv.appendChild(this.uniqueDistractionsLabel);
+    // Average Number of Distractions Per Task
+    this.avgDistractions = document.createElement('p');
+    this.avgDistractions.setAttribute('id', 'dist_avgDistractions');
+    this.avgDistractions.setAttribute('class', 'dist-info');
+    this.avgDistractionsLabel = document.createElement('p');
+    this.avgDistractionsLabel.setAttribute('id', 'dist_avgDistractionLabel');
+    this.avgDistractionsLabel.setAttribute('class', 'dist-info-label');
+    this.avgDistractionsLabel.textContent = 'Average Distractions Per Task';
+    this.parentDiv.appendChild(this.avgDistractions);
+    this.parentDiv.appendChild(this.avgDistractionsLabel);
+
+    // Distraction List
+    this.distList = document.createElement('ul');
+    this.distList.setAttribute('class', 'dist-list');
+    this.parentDiv.appendChild(this.distList);
+    this.distListLabel = document.createElement('p');
+    this.distListLabel.setAttribute('id', 'dist_listLabel');
+    this.distListLabel.setAttribute('class', 'dist-info-label');
+    this.distListLabel.textContent = 'Distraction List';
+    this.parentDiv.appendChild(this.distListLabel);
+  }
+
+  updateDistractionList() {
+    const content = document.getElementsByClassName('distItem');
+    let i;
+    if (content.length === 0) {
+      i = 0;
+    } else {
+      i = content.length;
+    }
+    while (i < this.distractionList.length) {
+      this.listElement = document.createElement('li');
+      this.listElement.setAttribute('class', 'distItem');
+      this.listElement.textContent = this.distractionList[i].description;
+      this.distList.appendChild(this.listElement);
+      i += 1;
+    }
+  }
+
+  addEventListeners() {
+    const statsDistractBtn = document.getElementById('distraction');
+    const statsTabBtn = document.getElementById('data');
+    statsDistractBtn.addEventListener('click', () => {
+      statsTabBtn.className = 'tab-btn';
+      let content = document.getElementsByClassName('stats-info');
+      let contentlabel = document.getElementsByClassName('stats-info-label');
+      for (let i = 0; i < content.length; i += 1) {
+        content[i].style.display = 'none';
+        contentlabel[i].style.display = 'none';
+      }
+      content = document.getElementsByClassName('dist-info');
+      contentlabel = document.getElementsByClassName('dist-info-label');
+      document.getElementsByClassName('dist-list')[0].style.display = 'block';
+      for (let i = 0; i < content.length; i += 1) {
+        content[i].style.display = 'block';
+      }
+      for (let i = 0; i < contentlabel.length; i += 1) {
+        contentlabel[i].style.display = 'block';
+      }
+      statsDistractBtn.className = 'tab-btn-active';
+    });
+    statsTabBtn.addEventListener('click', () => {
+      statsDistractBtn.className = 'tab-btn';
+      let content = document.getElementsByClassName('dist-info');
+      let contentlabel = document.getElementsByClassName('dist-info-label');
+      for (let i = 0; i < content.length; i += 1) {
+        content[i].style.display = 'none';
+      }
+      for (let i = 0; i < contentlabel.length; i += 1) {
+        contentlabel[i].style.display = 'none';
+      }
+      document.getElementsByClassName('dist-list')[0].style.display = 'none';
+      content = document.getElementsByClassName('stats-info');
+      contentlabel = document.getElementsByClassName('stats-info-label');
+      for (let i = 0; i < content.length; i += 1) {
+        content[i].style.display = 'block';
+        contentlabel[i].style.display = 'block';
+      }
+      statsTabBtn.className = 'tab-btn-active';
+    });
   }
 
   updateDom() {
@@ -79,6 +173,12 @@ class Statistics extends HTMLElement {
     this.timeSpent.textContent = this.totalMins;
 
     this.brokenSessions.textContent = this.getNumUniqueDistractions();
+
+    this.uniqueDistractions.textContent = this.getNumUniqueDistractions();
+
+    this.avgDistractions.textContent = this.getAvgDistractionsPerTask();
+
+    this.updateDistractionList();
   }
 
   /**

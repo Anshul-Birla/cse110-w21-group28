@@ -27,6 +27,8 @@ const parentDiv = document.getElementById('parentDiv');
 const closeStatsButton = document.getElementById('close-stats-button');
 const deleteAllButton = document.getElementById('delete-all-button');
 const overlay = document.getElementById('overlay');
+const statsTabBtn = document.getElementById('data');
+const statsDistractBtn = document.getElementById('distraction');
 
 const StatsPage = new Statistics();
 const TDLDom = new TodoListDom(todoTable, addTodoForm, addTodoButton, deleteAllButton);
@@ -124,15 +126,20 @@ statsButton.addEventListener('click', () => {
   parentDiv.style.display = 'block';
   const isOpen = parentDiv.classList.contains('slide-out');
   parentDiv.setAttribute('class', isOpen ? 'slide-in' : 'slide-out');
+  document.getElementById('overlay').style.display = 'block';
 });
 
 closeStatsButton.addEventListener('click', () => {
   const isOpen = parentDiv.classList.contains('slide-out');
   parentDiv.setAttribute('class', isOpen ? 'slide-in' : 'slide-out');
   statsPopUp.style.display = 'none';
+  document.getElementById('overlay').style.display = 'none';
 });
 
 if (after3amToday() && StatsPage.dataToCompressExists()) {
   StatsPage.compressStats();
   StatsPage.clearData();
 }
+
+/* Stats Pop Up Buttons */
+statsTabBtn.click(); // stats btn is default tab
