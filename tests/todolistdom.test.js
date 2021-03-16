@@ -248,7 +248,6 @@ test('Checking a task brings it to the bottom with completed tasks already there
 });
 
 test('Unchecking a task brings it to the bottom of the unchecked tasks', () => {
-
   formLocation.children[0].setAttribute('value', 'Task1');
   formLocation.children[1].value = 2;
   formLocation.submit();
