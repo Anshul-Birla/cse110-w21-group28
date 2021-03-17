@@ -12,9 +12,13 @@ class Statistics extends HTMLElement {
     this.flushHistory();
   }
 
+  /**
+   * @description Adds all child HTML elements to the statistics popup
+   */
   addHTMLChildren() {
     this.parentDiv = document.getElementById('stats-info');
 
+    // Tasks Completed
     this.tasksCompletedP = document.createElement('p');
     this.tasksCompletedP.setAttribute('id', 'stats_tasksCompleted');
     this.tasksCompletedP.setAttribute('class', 'stats-info');
@@ -25,6 +29,7 @@ class Statistics extends HTMLElement {
     this.parentDiv.appendChild(this.tasksCompletedP);
     this.parentDiv.appendChild(this.tasksCompletedPLabel);
 
+    // Total Time Spent
     this.timeSpent = document.createElement('p');
     this.timeSpent.setAttribute('id', 'stats_totalTime');
     this.timeSpent.setAttribute('class', 'stats-info');
@@ -35,6 +40,7 @@ class Statistics extends HTMLElement {
     this.parentDiv.appendChild(this.timeSpent);
     this.parentDiv.appendChild(this.timeSpentLabel);
 
+    // Time spent working
     this.timeWorking = document.createElement('p');
     this.timeWorking.setAttribute('id', 'stats_workTime');
     this.timeWorking.setAttribute('class', 'stats-info');
@@ -45,6 +51,7 @@ class Statistics extends HTMLElement {
     this.parentDiv.appendChild(this.timeWorking);
     this.parentDiv.appendChild(this.timeWorkingLabel);
 
+    // Average time per task
     this.timePerTask = document.createElement('p');
     this.timePerTask.setAttribute('id', 'stats_timePerTask');
     this.timePerTask.setAttribute('class', 'stats-info');
@@ -54,10 +61,6 @@ class Statistics extends HTMLElement {
     this.timePerTaskLabel.textContent = 'Minutes per Task';
     this.parentDiv.appendChild(this.timePerTask);
     this.parentDiv.appendChild(this.timePerTaskLabel);
-
-    // this.distractionList = document.createElement('ul');
-    // this.distractionList.setAttribute('id', 'stats_distractionList');
-    // this.appendChild(this.distractionList);
 
     /* Adding things to Distraction Tab */
 
@@ -71,6 +74,7 @@ class Statistics extends HTMLElement {
     this.brokenSessionsLabel.textContent = 'Broken Sessions';
     this.parentDiv.appendChild(this.brokenSessions);
     this.parentDiv.appendChild(this.brokenSessionsLabel);
+
     // Number of Expected Pomo Sessions;
     this.expectedPomoSessionsData = document.createElement('p');
     this.expectedPomoSessionsData.setAttribute('id', 'stats_expectedPomoSesh');
@@ -83,7 +87,6 @@ class Statistics extends HTMLElement {
     this.parentDiv.appendChild(this.expectedPomoSessionsLabel);
 
     // Number of Actual Pomo Sessions
-
     this.actualPomoSessionsData = document.createElement('p');
     this.actualPomoSessionsData.setAttribute('id', 'stats_actualPomo');
     this.actualPomoSessionsData.setAttribute('class', 'stats-info');
@@ -116,6 +119,9 @@ class Statistics extends HTMLElement {
     this.parentDiv.appendChild(this.distListLabel);
   }
 
+  /**
+   * @description Creates a list item for each logged distraction
+   */
   updateDistractionList() {
     const content = document.getElementsByClassName('distItem');
     let i;
@@ -133,6 +139,9 @@ class Statistics extends HTMLElement {
     }
   }
 
+  /**
+   * @description Creates event listeners for toggling tabs within the stats popup
+   */
   addEventListeners() {
     const statsDistractBtn = document.getElementById('distraction');
     const statsTabBtn = document.getElementById('data');
@@ -179,23 +188,18 @@ class Statistics extends HTMLElement {
     });
   }
 
+  /**
+   * @description Updates the HTML elements to display values of local variables. Called when stats button is called.
+   */
   updateDom() {
     this.timePerTask.textContent = this.getAverageTimePerTask();
-
     this.tasksCompletedP.textContent = this.tasksCompleted;
-
     this.timeWorking.textContent = this.workMins;
-
     this.timeSpent.textContent = this.totalMins;
-
     this.brokenSessions.textContent = this.getNumUniqueDistractions();
-
     this.avgDistractions.textContent = this.getAvgDistractionsPerTask();
-
     this.expectedPomoSessionsData.textContent = this.expectedPomoSessions;
-
     this.actualPomoSessionsData.textContent = this.actualPomoSessions;
-
     this.updateDistractionList();
   }
 
@@ -285,11 +289,17 @@ class Statistics extends HTMLElement {
     } // else I'm interested how you got here
   }
 
+  /**
+   * @description Increments the number of completed pomo sessions for the work day. Should be called each time the timer finishes a work session. Updates local storage when called
+   */
   incrementActualPomoSessions() {
     this.actualPomoSessions += 1;
     this.updateMinorLocalStorage();
   }
 
+  /**
+   * @returns {Number} Average work minutes per completed task
+   */
   getAverageTimePerTask() {
     if (this.tasksCompleted > 0) {
       return this.workMins / this.tasksCompleted;
@@ -297,8 +307,11 @@ class Statistics extends HTMLElement {
     return 0;
   }
 
+  /**
+   * @description Loads all variables from local storage or sets them to zero if not found
+   */
   loadFromLocalStorage() {
-    // loads history of pomo sessions
+    // Loading variables as strings from local storage
     this.history = JSON.parse(localStorage.getItem('statsHistory'));
     if (this.history === null) {
       this.history = [];
@@ -310,6 +323,8 @@ class Statistics extends HTMLElement {
     this.actualPomoSessions = localStorage.getItem('actualPomoSessions');
     this.distractionList = localStorage.getItem('currDistractionList');
     this.sessionStartDateTime = localStorage.getItem('startDateTime');
+
+    // If string was not found, set to zero/empty value. If string was found, parse the string for it's value
     this.totalMins = ((this.totalMins !== null) ? parseInt(this.totalMins, 10) : 0);
     this.workMins = ((this.workMins !== null) ? parseInt(this.workMins, 10) : 0);
     this.tasksCompleted = ((this.tasksCompleted !== null) ? parseInt(this.tasksCompleted, 10) : 0);
@@ -317,6 +332,8 @@ class Statistics extends HTMLElement {
     this.actualPomoSessions = ((this.actualPomoSessions !== null) ? parseInt(this.actualPomoSessions, 10) : 0);
     this.tasksCompleted = ((this.tasksCompleted !== null) ? parseInt(this.tasksCompleted, 10) : 0);
     this.sessionStartDateTime = ((this.sessionStartDateTime !== null) ? new Date(this.sessionStartDateTime) : new Date());
+
+    // Split the list of distractions from the string into individual distractions and turn date strings into date objects
     if (this.distractionList !== null) {
       this.distractionList = JSON.parse(this.distractionList);
       // eslint-disable-next-line no-restricted-syntax, guard-for-in
@@ -329,6 +346,9 @@ class Statistics extends HTMLElement {
     }
   }
 
+  /**
+   * @description Writes all class variables to local storage
+   */
   updateMinorLocalStorage() {
     localStorage.setItem('totalMins', this.totalMins);
     localStorage.setItem('workMins', this.workMins);
@@ -339,9 +359,10 @@ class Statistics extends HTMLElement {
     localStorage.setItem('startDateTime', this.sessionStartDateTime);
   }
 
+  /**
+   * @description Deletes all history records that are older than one year. To be used with year-to-date information. Updates local storage only for history record when called.
+   */
   flushHistory() {
-    // deletes all objects from local storage that are older than a year
-    // this.loadFromLocalStorage();
     const currDate = new Date();
     for (let i = 0; i < this.history.length; i += 1) {
       const diff = (currDate - new Date(this.history[i].date));
@@ -352,6 +373,11 @@ class Statistics extends HTMLElement {
     localStorage.setItem('statsHistory', JSON.stringify(this.history));
   }
 
+  /**
+   * @description Sees if the last time that a day was started was earlier than 3 a.m. today. If the work day was started at 3 a.m. or later, do not clear data, treat everything as a single work day. Otherwise, would compress data into history and clear variables.
+   * @returns {Boolean} False if session started on or after 3 a.m. today. Else True.
+   * @todo Rewrite logic to match above description (one long if statement for false rather than four individual if statements for true)
+   */
   dataToCompressExists() {
     const currDate = new Date();
     if (this.sessionStartDateTime.getFullYear() < currDate.getFullYear()) {
@@ -366,12 +392,10 @@ class Statistics extends HTMLElement {
     return false;
   }
 
+  /**
+   * @description Compresses necessary local variables to a history record and pushes the record to local storage. Should run when the End Day button is hit or when page loads and dataToCompressExists() === true. Dispatches reset-timer event to reset timer PomoSessionId to 0.
+   */
   compressStats() {
-    /** saves data to local storage, runs when End Day is hit and
-     *  when page loads (compresses data that is older than 3a.m. today)
-     * REMINDER: Set pomo session id to 0
-     */
-    // this.loadFromLocalStorage();
     if (this.totalMins > 0) {
       this.history.push({
         date: this.sessionStartDateTime,
@@ -390,12 +414,30 @@ class Statistics extends HTMLElement {
    * @description Resets all variables back to zeroed/empty values
    */
   clearData() {
+    /**
+     * @type {Number} Total number of minutes spent
+     */
     this.totalMins = 0;
+    /**
+     * @type {Number} Total number of minutes spent working
+     */
     this.workMins = 0;
+    /**
+     * @type {Number} Total number of tasks completed
+     */
     this.tasksCompleted = 0;
+    /**
+     * @type {Number} Sum of projected number of pomo sessions expected over all Tasks
+     */
     this.expectedPomoSessions = 0;
+    /**
+     * @type {Number} Sum of actual number of pomo sessions spent on all Tasks
+     */
     this.actualPomoSessions = 0;
     this.distractionList = [];
+    /**
+     * @type {Date} Start date/time stamp of current work day
+     */
     this.sessionStartDateTime = new Date();
     this.updateMinorLocalStorage();
   }
