@@ -198,7 +198,7 @@ class TodoListDom {
    */
   updateCurrentTask() {
     const nextTask = this.todoList.getCurrentTask();
-    if (this.currentTask === null && nextTask === null) { 
+    if (this.currentTask === null && nextTask === null) {
       // no currentTask, nothing in table
       this.currentTaskDiv.textContent = 'No current task';
     } else if (this.currentTask === null && nextTask !== null) {

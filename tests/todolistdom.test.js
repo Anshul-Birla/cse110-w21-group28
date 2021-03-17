@@ -36,7 +36,7 @@ beforeEach(() => {
   addBtnLocation = document.getElementById('add-button');
   deleteBtnLocation = document.getElementById('delete-all-button');
   currentTaskLocation = document.getElementById('currentTask');
-  myDOM = new TodoListDom(tableLocation, formLocation, addBtnLocation, 
+  myDOM = new TodoListDom(tableLocation, formLocation, addBtnLocation,
     deleteBtnLocation, currentTaskLocation);
   document.body.addEventListener('task-deleted', (e) => {
     myDOM.todoList.removeTask(e.detail.taskID);

@@ -48,7 +48,7 @@ header {
   background: var(--button-color);
   border-radius: 5px;
   color: var(--font-color);
-  padding: 0px;
+  padding: 0;
   font-size: 70%;
 }
 
@@ -95,11 +95,12 @@ header {
 
 .buttons-div {
   width: 300px;
-  height: 50px;;
+  height: 50px;
   display: inline-flex;
   flex-direction: row;
   justify-content: space-between;
 }
+
 /* timer styling */
 #timerContainer {
   width: 400px;
@@ -137,7 +138,7 @@ header {
   border-color: var(--button-border-color);
 }
 
-#currentTask{
+#currentTask {
   font-size: larger;
   display: flex;
   justify-content: space-around;
