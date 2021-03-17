@@ -32,6 +32,12 @@ test('statsTab Button calls event listener', () => {
   expect(btn.className).toBe('tab-btn-active');
 });
 
+test('Call to update dom updates text content correctly', () => {
+  Stats.totalMins = 15;
+  Stats.updateDom();
+  expect(Stats.timeSpent.textContent).toBe('15');
+});
+
 describe('Variables function correctly', () => {
   test('Task completion increments count correctly', () => {
     Stats.incrementTasksCompleted();
@@ -173,15 +179,16 @@ describe('Variables function correctly', () => {
       date: new Date(2021, 3, 3, 10, 35),
       pomoSessionId: 1,
     });
+    Stats.updateDistractionList();
 
     Stats.addDistraction({
       name: 'third distraction',
       date: new Date(2021, 3, 3, 10, 40),
       pomoSessionId: 1,
     });
+    Stats.updateDistractionList();
 
     expect(Stats.distractionList[0].name).toEqual('first distraction');
-    Stats.updateDistractionList();
   });
 
   test('Unique distractions calculated correctly', () => {
@@ -291,6 +298,10 @@ describe('Variables function correctly', () => {
     Stats = new Statistics();
     expect(Stats.dataToCompressExists()).toBeTruthy();
     localStorage.setItem('startDateTime', new Date(2021, 1, 11));
+    Stats = new Statistics();
+    expect(Stats.dataToCompressExists()).toBeTruthy();
+    const today = new Date();
+    localStorage.setItem('startDateTime', new Date(today.getFullYear(), today.getMonth(), today.getDate(), 1, 0, 0));
     Stats = new Statistics();
     expect(Stats.dataToCompressExists()).toBeTruthy();
     localStorage.setItem('startDateTime', new Date());
