@@ -196,6 +196,7 @@ class TodoListDom {
   onUncheckedTask(id) {
     const uncheckedTask = this.todoList.getTaskById(id);
     let firstCompletedTaskIndex = this.getFirstCompletedTaskIndex();
+    uncheckedTask.onDelete();
     this.todoList.addTaskToEnd(uncheckedTask);
     this.displayTask(uncheckedTask, firstCompletedTaskIndex);
   }
