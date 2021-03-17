@@ -19,15 +19,8 @@ table {
   border-spacing: 0 var(--table-border);
   table-layout: fixed; /* allows for word-wrap */
   width: 100%;         /* allows for word-wrap */
+  /* min-height: 60vh; */
   margin-top: -20px;
-}
-
-thead th {
-  /* background-color: white; */
-  /* position: -webkit-sticky;
-  position: sticky;
-  top: 0;
-  border-radius: 0; */
 }
 
 th,
@@ -73,21 +66,13 @@ tr:hover td {
   transition-duration: 0;
 }
 
-tr td:first-child {
-  border-top-left-radius: var(--td-border-radius);
-  /* border-bottom-left-radius: var(--td-border-radius); */
-}
-
+tr td:first-child,
 tr th:first-child {
   border-top-left-radius: var(--td-border-radius);
   /* border-bottom-left-radius: var(--td-border-radius); */
 }
 
-tr td:last-child {
-  /* border-top-right-radius: var(--td-border-radius); */
-  border-bottom-right-radius: var(--td-border-radius);
-}
-
+tr td:last-child,
 tr th:last-child {
   /* border-top-right-radius: var(--td-border-radius); */
   border-bottom-right-radius: var(--td-border-radius);
@@ -124,11 +109,11 @@ svg {
 }
 
 /* input form (add task) */
-
 #form-container {
   position: -webkit-sticky;
   position: sticky;
   bottom: 0;
+  width: 100%;
   background-color: var(--page-bg-color);
   border-top-left-radius: var(--td-border-radius);
   border-top-right-radius: var(--td-border-radius);
@@ -143,7 +128,7 @@ svg {
   padding-top: 10px;
   padding-bottom: 10px;
   border-top-left-radius: var(--td-border-radius);
-  /* border-bottom-left-radius: var(--td-border-radius); */
+  border-bottom-left-radius: var(--td-border-radius);
   border-top-right-radius: var(--td-border-radius);
   border-bottom-right-radius: var(--td-border-radius);
   transition-duration: 2s;

@@ -32,8 +32,8 @@
   --scroll-color: var(--even-color);
 
   /* table row spacing */
-  --td-border-radius: 20px;
-  --table-border: 20px;
+  --td-border-radius: 22px;
+  --table-border: 12px;
   --table-row-margin: 20px;
 
   /* shortbreak table theme */
