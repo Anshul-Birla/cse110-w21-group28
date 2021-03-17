@@ -195,11 +195,7 @@ class TodoListDom {
    */
   onUncheckedTask(id) {
     const uncheckedTask = this.todoList.getTaskById(id);
-    let firstCompletedTaskIndex = -1;
-    uncheckedTask.onDelete();
-    for (let i = 2; i < this.table.childNodes.length && firstCompletedTaskIndex === -1; i += 1) {
-      if (this.table.childNodes[i].checked === true) firstCompletedTaskIndex = i;
-    }
+    let firstCompletedTaskIndex = this.getFirstCompletedTaskIndex();
     this.todoList.addTaskToEnd(uncheckedTask);
     this.displayTask(uncheckedTask, firstCompletedTaskIndex);
   }
@@ -241,8 +237,8 @@ class TodoListDom {
 
     const clickedTask = this.todoList.getTaskById(id);
     // disable the old tasks checkbox because it has not been clicked yet
-    this.currentTask.checkBox.disabled = true;
     clickedTask.onDelete();
+    this.currentTask.checkBox.disabled = true;
     this.displayTask(clickedTask, currentTaskIndex);
 
     // remove the task and add it back to the top
