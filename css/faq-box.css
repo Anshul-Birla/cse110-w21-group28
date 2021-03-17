@@ -9,7 +9,7 @@
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
-  background-color: lightslategray; /* Black w/ opacity */
+  background-color: rgb(119, 136, 153, 0.6); 
 }
 
 /* Modal Content */
