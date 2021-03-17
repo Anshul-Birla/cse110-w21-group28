@@ -148,15 +148,15 @@ svg {
 
 .task-name {
   /* width: calc(40% - 60px); */
-  width: 15vw;
-  margin-left: 1.2vw;
+  width: 60%;
+  margin-left: 10%;
 
 }
 .task-length {
- width: calc(12% - 40px); 
-
+ width: 2.5em; 
+ /* margin-left: 1.2vw; */
  
- margin-left: 11.5vw;
+ /* margin-left: 11.5vw; */
 }
 .task-submit {
   margin-left: 1vw;
