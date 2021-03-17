@@ -14,7 +14,8 @@
         "no-param-reassign":"off",
         "import/extensions":"off",
         "ignoreComments": "off", 
-        "no-new":"warn"
+        "no-new":"warn",
+        "class-methods-use-this":"off"
     },
     "overrides":[
         {
