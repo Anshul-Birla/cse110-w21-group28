@@ -71,12 +71,11 @@ test('input nothing', () => {
 });
 */
 
-test('animation end event listener', ()=> {
-  let event = new Event('animationend');
+test('animation end event listener', () => {
+  const event = new Event('animationend');
   DistractionPage.distractPopUp.dispatchEvent(event);
   expect(DistractionPage.distractPopUp.style.animationName).toBe('');
 
   DistractionPage.overlay.dispatchEvent(event);
   expect(DistractionPage.overlay.style.animationName).toBe('');
-
 });
