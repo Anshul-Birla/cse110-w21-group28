@@ -12,6 +12,11 @@ const muteSwitch = document.getElementById('muteSwitch');
 
 let workModeSoundPath = airHorn;
 let breakModeSoundPath = celebration;
+
+/**
+ * Function that handles the logic for playing the sound
+ * upon switching to work mode.
+ */
 export function workModeSound() {
   if (muteSwitch.checked === true) {
     return;
@@ -20,6 +25,10 @@ export function workModeSound() {
   horn.play();
 }
 
+/**
+ * Function that handles the logic for playing the sound
+ * upon switching to break mode.
+ */
 export function breakModeSound() {
   if (muteSwitch.checked === true) {
     return;
@@ -28,6 +37,10 @@ export function breakModeSound() {
   horn.play();
 }
 
+/**
+ * Handles the changing of the sounds in settings.
+ * @param {Event} e 
+ */
 function changeSound(e) {
   let path;
   switch (e.target.value) {
@@ -64,5 +77,8 @@ function changeSound(e) {
   }
 }
 
+/**
+ * add event listeners to the select menus
+ */
 workSoundSelector.addEventListener('change', changeSound);
 breakSoundSelector.addEventListener('change', changeSound);

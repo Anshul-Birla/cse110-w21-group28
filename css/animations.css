@@ -4,10 +4,6 @@
   transition-duration: 2s;
 }
 
-.short-break #timerContainer {
-  background-color: var(--timer-bg-color-short);
-}
-
 .short-break th {
   background-color: var(--header-color-short);
 }
