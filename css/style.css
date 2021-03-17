@@ -98,6 +98,7 @@ header {
   height: 50px;;
   display: inline-flex;
   flex-direction: row;
+  justify-content: space-between;
 }
 /* timer styling */
 #timerContainer {
@@ -128,15 +129,9 @@ header {
   height: 100px;
 }
 
-#distractionButton {
-  width: 50%;
-  border-style: solid;
-  border-width: 2px;
-  border-color: var(--button-border-color);
-}
-
+#distractionButton,
 #startTimer {
-  width: 50%;
+  width: 48%;
   border-style: solid;
   border-width: 2px;
   border-color: var(--button-border-color);
