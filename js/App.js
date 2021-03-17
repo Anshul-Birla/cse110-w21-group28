@@ -28,7 +28,7 @@ const closeStatsButton = document.getElementById('close-stats-button');
 const deleteAllButton = document.getElementById('delete-all-button');
 const overlay = document.getElementById('overlay');
 const statsTabBtn = document.getElementById('data');
-const statsDistractBtn = document.getElementById('distraction');
+// const statsDistractBtn = document.getElementById('distraction');
 
 const StatsPage = new Statistics();
 const TDLDom = new TodoListDom(todoTable, addTodoForm, addTodoButton, deleteAllButton);
@@ -66,6 +66,10 @@ startTimerButton.addEventListener('click', () => {
 document.body.addEventListener('focus-task', (e) => {
   TDLDom.onFocusTask(e.detail.taskID);
   TDLDom.updateCurrentTask();
+});
+
+document.body.addEventListener('task-deleted', (e) => {
+  TDLDom.todoList.removeTask(e.detail.taskID);
 });
 
 document.body.addEventListener('checkbox-updated', (e) => {

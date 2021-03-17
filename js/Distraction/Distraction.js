@@ -17,7 +17,11 @@ class Distraction extends HTMLElement {
     this.setupEventListeners();
   }
 
+  /**
+  * Sets up event listeners to make distraction appear, submit, etc.
+  */
   setupEventListeners() {
+    // Distraction button makes distraction popup appear
     this.distractButton.addEventListener('click', () => {
       if (this.distractPopUp.style.display === 'block') {
         this.resetPopUp();
@@ -29,10 +33,12 @@ class Distraction extends HTMLElement {
       }
     });
 
+    // Cancel makes popup go away
     this.cancelButton.addEventListener('click', () => {
       this.resetPopUp();
     });
 
+    // Submit button fires event that App.js will catch and log
     this.submitButton.addEventListener('click', () => {
       const event = new CustomEvent('distraction-created', {
         detail: {
@@ -46,9 +52,9 @@ class Distraction extends HTMLElement {
     });
 
     /**
- * These event listeners trigger when the animation is finished. It resets
- * the popup animations and sets hides them when done.
- */
+    * These event listeners trigger when the animation is finished. It resets
+    * the popup animations and sets hides them when done.
+    */
     this.distractPopUp.addEventListener('animationend', (e) => {
       if (e.animationName === 'distraction-animation-out') {
         this.distractPopUp.style.animationName = '';
@@ -65,8 +71,7 @@ class Distraction extends HTMLElement {
   }
 
   /**
-   * This function will make the pop up disappear
-   * and remove any of the text in the 'description' field.
+   * Makes popup disappear and clears input field
    */
   resetPopUp() {
     this.distractPopUp.style.animationName = 'distraction-animation-out';
@@ -74,10 +79,16 @@ class Distraction extends HTMLElement {
     document.getElementById('description').value = '';
   }
 
+  /**
+   * Makes distraction button disappear (during breaks)
+   */
   hideButton() {
     this.distractButton.style.display = 'none';
   }
 
+  /**
+   * Makes distraction button appear (during work sessions)
+   */
   showButton() {
     this.distractButton.style.display = 'block';
   }

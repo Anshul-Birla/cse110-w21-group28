@@ -1,6 +1,6 @@
 import { ToDoList } from './ToDoList.js';
 import { HTMLAttributes, TaskStorage } from './TodoListDomVariables.js';
-import { Task } from './Task.js';
+// import { Task } from './Task.js';
 
 /**
  * Class responsible for providing changes to the DOM for the TodoList
@@ -59,6 +59,7 @@ class TodoListDom {
   renderLocalStorage() {
     window.localData = [];
     const completedTaskIndex = [];
+    // re-indexing all tasks as 0,1,2,3...
     if (localStorage.getItem('tasks') !== null) {
       window.localData = JSON.parse(localStorage.getItem('tasks'));
       for (let i = 0; i < window.localData.length; i += 1) {
@@ -131,14 +132,14 @@ class TodoListDom {
       } catch (error) {
         // eslint-disable-next-line no-alert
         alert('Invalid input. Please try again');
-        console.log(error);
+        // console.log(error);
       }
     });
 
     this.deleteAllBtn.addEventListener('click', () => {
       const list = this.todoList.taskList;
-      for (let i = 0; i < list.length; i += 1) {
-        list[i].deleteButton.click();
+      while (list[0] !== undefined) {
+        list[0].deleteButton.click();
       }
     });
   }
@@ -179,10 +180,9 @@ class TodoListDom {
     checked off, not the new current task. Only works if the user
     can only check off the current task
     */
-    this.currentTask.remove();
+    this.currentTask.onDelete();
     this.displayTask(this.currentTask);
-    this.todoList.removeTask(this.currentTask.id);
-    this.todoList.taskList.push(this.currentTask);
+    this.todoList.addTaskToEnd(this.currentTask);
   }
 
   /**
@@ -193,9 +193,8 @@ class TodoListDom {
    */
   onUncheckedTask(id) {
     const uncheckedTask = this.todoList.getTaskById(id);
-    this.todoList.removeTask(id);
     let firstCompletedTaskIndex = -1;
-    uncheckedTask.remove();
+    uncheckedTask.onDelete();
     for (let i = 2; i < this.table.childNodes.length && firstCompletedTaskIndex === -1; i += 1) {
       if (this.table.childNodes[i].checked === true) firstCompletedTaskIndex = i;
     }
@@ -229,10 +228,10 @@ class TodoListDom {
     const clickedTask = this.todoList.getTaskById(id);
     // disable the old tasks checkbox because it has not been clicked yet
     this.currentTask.checkBox.disabled = true;
+    clickedTask.onDelete();
     this.displayTask(clickedTask, currentTaskIndex);
 
     // remove the task and add it back to the top
-    this.todoList.removeTask(id);
     this.todoList.addTaskToTop(clickedTask);
   }
 }
