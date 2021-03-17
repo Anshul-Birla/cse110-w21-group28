@@ -198,14 +198,16 @@ class TodoListDom {
    */
   updateCurrentTask() {
     const nextTask = this.todoList.getCurrentTask();
-    if(this.currentTask === null && nextTask === null){ //no currentTask, nothing in table
+    if (this.currentTask === null && nextTask === null) { 
+      // no currentTask, nothing in table
       this.currentTaskDiv.textContent = 'No current task';
-    } else if(this.currentTask === null && nextTask !== null){//no currentTask, something in table
-      this.currentTaskDiv.textContent = 'Working on: ' + nextTask.name;
-    } else if(this.currentTask !== null && nextTask === null){//last task completed
+    } else if (this.currentTask === null && nextTask !== null) {
+      // no currentTask, something in table
+      this.currentTaskDiv.textContent = `Working on: ${nextTask.name}`;
+    } else if (this.currentTask !== null && nextTask === null) { // last task completed
       this.currentTaskDiv.textContent = 'No current task';
-    } else if (this.currentTask != nextTask){
-      this.currentTaskDiv.textContent = 'Working on: ' + nextTask.name;
+    } else if (this.currentTask !== nextTask) {
+      this.currentTaskDiv.textContent = `Working on: ${nextTask.name}`;
     }
     this.currentTask = nextTask;
     if (this.currentTask != null) this.currentTask.checkBox.disabled = false;

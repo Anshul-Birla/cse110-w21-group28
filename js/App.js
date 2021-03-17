@@ -12,7 +12,8 @@ const startTimerButton = document.getElementById('startTimer');
 const deleteAllButton = document.getElementById('delete-all-button');
 const currentTaskDiv = document.getElementById('currentTask');
 
-const TDLDom = new TodoListDom(todoTable, addTodoForm, addTodoButton, deleteAllButton, currentTaskDiv);
+const TDLDom = new TodoListDom(todoTable, addTodoForm, addTodoButton, 
+  deleteAllButton, currentTaskDiv);
 const TimerObj = new Timer(startTimerButton, timeDisplay, modeDisplay);
 
 TimerObj.addEventListener('timer-complete', (e) => {
