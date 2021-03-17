@@ -20,9 +20,8 @@
   height: 100vh;
   width: 100vw;
   display: none;
-  background-color: black;
   background-color: rgba(0, 0, 0, 0.75);
-  animation: fadeEffect 2s;
+  animation: fadeEffect-overlay 2s;
 }
 
 .close-stats-button {
@@ -62,7 +61,6 @@
   padding: 0;
   margin: 0;
   font-weight: bolder;
-  animation: fadeEffect 2s;
 }
 
 .dist-info {
@@ -72,7 +70,6 @@
   margin: 0;
   display: none;
   font-weight: bolder;
-  animation: fadeEffect 2s;
 }
 
 .stats-info-label {
@@ -82,7 +79,6 @@
   margin: 0;
   padding-bottom: 1vw;
   font-weight: bold;
-  animation: fadeEffect 2s;
 }
 
 .dist-info-label {
@@ -93,7 +89,6 @@
   display: none;
   padding-bottom: 1vw;
   font-weight: bold;
-  animation: fadeEffect 2s;
 }
 
 .statslabel {
@@ -119,7 +114,6 @@
   overflow: hidden;
   border: 1px solid #ccc;
   background-color: #f1f1f1;
-  animation: fadeEffect 1s;
 }
 
 .tab-btn {
@@ -156,18 +150,21 @@
   overflow-y: scroll;
   color: black;
   list-style-type: decimal;
-  animation: fadeEffect 2s;
 }
 
 .distItem {
   color: rgb(139, 0, 0);
   left: 10vw;
   align-self: center;
-  animation: fadeEffect 1.5s;
   font-size: 16px;
 }
 
-@keyframes fadeEffect {
+@keyframes fadeEffect-popup {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeEffect-overlay{
   from { opacity: 0; }
   to { opacity: 1; }
 }

@@ -191,6 +191,7 @@ class Statistics extends HTMLElement {
     // Clicking outside of the popup closes the popup
     document.getElementById('overlay').addEventListener('click', () => {
       document.getElementById('close-stats-button').click();
+      document.getElementById('overlay').style.animation ='';
     });
   }
 
