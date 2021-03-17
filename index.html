@@ -57,19 +57,24 @@
   <!-- Container for task list -->
   <section id='tasklist' class='section-container'>
     <table id='todo'>
+    <div id='table-head'>
       <tr>
         <th class='col1-checkbox'></th>
         <th class='col2-task'>TASKS</th>
         <th class='col3-pomos'>#</th>
         <th class='col4-delete'><button id = "delete-all-button" class="delete-button" type="button">Delete All</button></th>
       </tr>
+    </div>
+      
     </table>
-    
-    <form id ='add-todo' overflow>
-      <input type='text' name='task-name' placeholder='Enter task' class='task-name'>
-      <input type='number' name='task-length' placeholder='Estimated # of pomos' class='task-length' min='1' max='24' required>
-      <input id = "add-button" type='submit' class='task-submit' value='+'>
-    </form>
+
+    <div id='form-container'>
+      <form id='add-todo' overflow>
+        <input type='text' name='task-name' placeholder='Enter task' class='task-name'>
+        <input type='number' name='task-length' placeholder='Estimated # of pomos' class='task-length' min='1' max='24' required>
+        <input id = "add-button" type='submit' class='task-submit' value='+'>
+      </form>
+    </div>
   </section>
 
   <!-- Linked section on page under task list for summary & statistics of work sessions -->

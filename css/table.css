@@ -16,11 +16,21 @@
 table {
   display: block;
   border-collapse: separate;
-  border-spacing: 0 20px;
+  border-spacing: 0 var(--table-border);
   table-layout: fixed; /* allows for word-wrap */
   width: 100%;         /* allows for word-wrap */
   margin-top: -20px;
   border-radius: var(--td-border-radius);
+}
+
+
+#table-header {
+  width: 100%;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  border-radius: 0;
+  background-color: white;
 }
 
 th,
@@ -48,6 +58,7 @@ td {
 
 tr {
   margin-top: 20px;
+  width: 100%;
 }
 
 tr:nth-child(even) td {
@@ -109,7 +120,15 @@ svg {
 
 /* input form (add task) */
 
-/* form container */
+#form-container {
+  position: -webkit-sticky;
+  position: sticky;
+  bottom: 0;
+  background-color: var(--page-bg-color);
+  border-top-left-radius: var(--td-border-radius);
+  border-top-right-radius: var(--td-border-radius);
+}
+
 #add-todo {
   position: -webkit-sticky;
   position: sticky;

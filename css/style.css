@@ -30,7 +30,11 @@
   --tr-hover-color: #f2f2f279;
   --completed-task-color: rgb(131, 156, 170);
   --scroll-color: var(--even-color);
-  --td-border-radius: 0;
+
+  /* table row spacing */
+  --td-border-radius: 20px;
+  --table-border: 20px;
+  --table-row-margin: 20px;
 
   /* shortbreak table theme */
   --even-color-short: #54a6cf;
