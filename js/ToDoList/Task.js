@@ -1,4 +1,4 @@
-import { classNames } from './TaskVariables.js';
+import { classNames, svg } from './TaskVariables.js';
 import { TaskStorage } from './TodoListDomVariables.js';
 
 /**
@@ -8,12 +8,18 @@ import { TaskStorage } from './TodoListDomVariables.js';
 class Task extends HTMLTableRowElement {
   /**
   * Task construcutor. Initializes the task with appropriate attributes
-  * @param {String} id Id of the task
-  * @param {String} name Name of the task
-  * @param {Number} totalSessions Total sessions the task should take
+  * @param {String} id - Id of the task
+  * @param {String} name - Name of the task
+  * @param {Number} totalSessions - Total sessions the task should take
+  * @param {Number} [currentSession = 0] - Total sessions the task has taken
+  * @param {Number} [completed = false] - Is the task completed or not
   */
   constructor(id, name, totalSessions, currentSession = 0, completed = false) {
     super();
+    /**
+     * Holds the current classname of the task object
+     * @type {String}
+     */
     this.className = classNames.uncheckedTaskClassName;
     /**
      * Stores the id of the task
@@ -41,6 +47,11 @@ class Task extends HTMLTableRowElement {
      */
     this.checked = completed;
 
+    // /**
+    //  * Keeps track if the task was deleted or not (used with the Todolist )
+    //  */
+    // this.deleted = false;
+
     /**
      * The checkbox attribute for the task
      * @type {HTMLInputElement}
@@ -63,11 +74,19 @@ class Task extends HTMLTableRowElement {
      * @type {HTMLButtonElement}
      */
     this.deleteButton = this.setupDeleteButton();
-
     /**
-     * Keeps track if the task was deleted or not (used with the Todolist )
+     * The button that hides the delete and focus buttons
+     * @type {HTMLButtonElement}
      */
-    this.deleted = false;
+    this.threeDotsButton = this.setupThreeDotsButton();
+    /**
+     * The focus button for the task
+     * @type {HTMLButtonElement}
+     */
+    this.focusButton = this.setupFocusButton();
+
+    this.setupLastColumnToggle(this.threeDotsButton,
+      this.deleteButton.parentElement, this.focusButton.parentElement);
   }
 
   /**
@@ -82,16 +101,30 @@ class Task extends HTMLTableRowElement {
     checkBox.setAttribute('class', 'custom_checkbox');
     firstCol.appendChild(checkBox);
     this.appendChild(firstCol);
+    // disable the checkbox by default (updated by the todolistdom class)
+    checkBox.disabled = true;
 
     if (this.checked) {
       this.setAttribute('class', classNames.completedTaskClassName);
       checkBox.checked = true;
+      checkBox.disabled = false;
     }
 
     checkBox.addEventListener('click', () => {
       if (!this.checked) {
         this.checkOffTask();
-      } else { this.uncheckTask(); }
+      } else {
+        this.uncheckTask();
+      }
+      const event = new CustomEvent('checkbox-updated', {
+        bubbles: true,
+        composed: true,
+        detail: {
+          taskID: this.id,
+          checkBoxState: this.checked,
+        },
+      });
+      document.body.dispatchEvent(event);
     });
     return checkBox;
   }
@@ -121,27 +154,114 @@ class Task extends HTMLTableRowElement {
   }
 
   /**
-   *
    * This sets up the delete button for a task
    * Delete only works visually, doesn't remove it from the TodoList
    * Data Structure
    * @return {HTMLButtonElement}
    */
   setupDeleteButton() {
-    const lastCol = document.createElement('td');
     const deleteBtn = document.createElement('button');
-    deleteBtn.setAttribute('class', 'delete-button');
-
+    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path.setAttributeNS(null, 'd', svg.trashcan);
+    const svgTag = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svgTag.appendChild(path);
+    svgTag.setAttribute('class', classNames.deleteSvg);
+    deleteBtn.appendChild(svgTag);
+    const inlineDiv = document.createElement('div');
+    inlineDiv.className = classNames.inlineDiv;
+    inlineDiv.appendChild(deleteBtn);
     deleteBtn.addEventListener('click', () => {
-      this.deleted = true;
-      this.remove();
-      this.removeFromLocalStorage();
+      this.onDelete();
     });
 
-    deleteBtn.textContent = 'x';
-    lastCol.append(deleteBtn);
-    this.append(lastCol);
     return deleteBtn;
+  }
+
+  /**
+   * This sets up the focus button for a task. The button fires and event that
+   * indicates the task has been focused on, and hides the button
+   * @returns {HTMLButtonElement}
+   */
+  setupFocusButton() {
+    const focusBtn = document.createElement('button');
+    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path.setAttributeNS(null, 'd', svg.star);
+    const svgTag = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svgTag.setAttribute('class', classNames.focusSvg);
+    svgTag.appendChild(path);
+    focusBtn.appendChild(svgTag);
+    const inlineDiv = document.createElement('div');
+    inlineDiv.className = classNames.inlineDiv;
+    inlineDiv.appendChild(focusBtn);
+
+    // hide the button if the task came from local storage and was checked
+    if (this.checked) {
+      focusBtn.parentElement.style.display = 'none';
+    }
+
+    focusBtn.addEventListener('click', () => {
+      this.threeDotsButton.parentElement.style.display = 'block';
+      focusBtn.parentElement.parentElement.style.display = 'none';
+      const event = new CustomEvent('focus-task', {
+        bubbles: true,
+        composed: true,
+        detail: {
+          taskID: this.id,
+        },
+      });
+      document.body.dispatchEvent(event);
+    });
+
+    return focusBtn;
+  }
+
+  /**
+   * Setups up the three dots "show more" button. Wrapped inside a div so it
+   * can easily dissapear and appear on clicks
+   * @returns {HTMLButtonElement}
+   */
+  setupThreeDotsButton() {
+    const button = document.createElement('button');
+    const threeDots = document.createElement('div');
+    threeDots.className = classNames.threeDots;
+    button.appendChild(threeDots);
+
+    button.addEventListener('click', () => {
+      button.parentElement.style.display = 'none';
+      this.deleteButton.parentElement.parentElement.style.display = 'inline-block';
+    });
+
+    return button;
+  }
+
+  /**
+   * Sets up the last column of the todolist.
+   * @param {HTMLButtonElement} threeDotsButton
+   * @param {HTMLDivElement} deleteButton
+   * @param {HTMLDivElement} focusButton
+   */
+  setupLastColumnToggle(threeDotsButton, deleteButton,
+    focusButton) {
+    const lastCol = document.createElement('td');
+    const lastColDiv = document.createElement('div');
+    const threeDotsDiv = document.createElement('div');
+    const deleteFocusDiv = document.createElement('div');
+
+    // wrap the delete and focus buttons in a div
+    deleteFocusDiv.className = 'double-buttons';
+    deleteFocusDiv.appendChild(deleteButton);
+    deleteFocusDiv.appendChild(focusButton);
+    // wrap the three dots button in a div
+    threeDotsDiv.appendChild(threeDotsButton);
+    threeDotsDiv.className = 'triple-dots-touch';
+
+    // make sure the delete and focus buttons are hidden
+    deleteFocusDiv.style.display = 'none';
+    lastColDiv.appendChild(threeDotsDiv);
+    lastColDiv.className = 'touch-target';
+    lastColDiv.appendChild(deleteFocusDiv);
+    lastCol.appendChild(lastColDiv);
+    this.appendChild(lastCol);
   }
 
   /**
@@ -153,7 +273,6 @@ class Task extends HTMLTableRowElement {
         window.localData.splice(i, 1);
       }
     }
-    this.deleted = true;
     localStorage.setItem('tasks', JSON.stringify(window.localData));
   }
 
@@ -168,8 +287,8 @@ class Task extends HTMLTableRowElement {
    * This updates the pomo sessions when a session is complete
    */
   updatePomoSessions() {
-    this.children[2].textContent = `[${this.currentSessionNum}/\
-      ${this.totalSessions}]`;
+    this.children[2].textContent = `${this.currentSessionNum}/\
+      ${this.totalSessions}`;
   }
 
   /**
@@ -207,13 +326,32 @@ class Task extends HTMLTableRowElement {
   checkOffTask() {
     this.checked = true;
     this.setAttribute('class', classNames.completedTaskClassName);
+    this.focusButton.parentElement.style.display = 'none';
     this.updateLocalStorage();
   }
 
+  /**
+   * Marks a task as not completed
+   */
   uncheckTask() {
     this.checked = false;
     this.setAttribute('class', classNames.uncheckedTaskClassName);
+    this.focusButton.parentElement.style.display = 'inline-block';
+    this.checkBox.disabled = true;
     this.updateLocalStorage();
+  }
+
+  onDelete() {
+    this.remove();
+    this.removeFromLocalStorage();
+    const event = new CustomEvent('task-deleted', {
+      bubbles: true,
+      composed: true,
+      detail: {
+        taskID: this.id,
+      },
+    });
+    document.body.dispatchEvent(event);
   }
 }
 

@@ -11,11 +11,8 @@ What changes did you make?
 - TODO 
   
 ### Checklist for Review
-- [ ] PR has 100% code coverage for comments 
-- [ ] PR has correct capitlization style? (classes capitlized, variables first word lowercase)
 - [ ] PR's tests are not brittle (will not break if implementation slightly changes)
 - [ ] Test cases have a description as to what they test
-- [ ] In classes, public methods are first, then private methods 
 
 ### Lint Changes 
 If there are any rules your turned off on the linter, write them below 

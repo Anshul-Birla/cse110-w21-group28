@@ -22,3 +22,39 @@ TimerObj.addEventListener('timer-complete', (e) => {
     workModeColors();
   }
 });
+
+document.body.addEventListener('focus-task', (e) => {
+  TDLDom.onFocusTask(e.detail.taskID);
+  TDLDom.updateCurrentTask();
+});
+
+document.body.addEventListener('task-deleted', (e) => {
+  TDLDom.todoList.removeTask(e.detail.taskID);
+});
+
+document.body.addEventListener('checkbox-updated', (e) => {
+  if (e.detail.checkBoxState === true) {
+    TDLDom.onCompletedTask();
+  } else {
+    TDLDom.onUncheckedTask(e.detail.taskID);
+  }
+  TDLDom.updateCurrentTask();
+});
+
+window.addEventListener('click', (e) => {
+  const lastColumnElements = document.getElementsByClassName('touch-target');
+  let touchedButton = false;
+
+  for (let i = 0; i < lastColumnElements.length && !touchedButton; i += 1) {
+    if (lastColumnElements[i].contains(e.target)) touchedButton = true;
+  }
+
+  if (!touchedButton) {
+    const buttonPairList = document.getElementsByClassName('double-buttons');
+    const threeDotButtonList = document.getElementsByClassName('triple-dots-touch');
+    for (let i = 0; i < buttonPairList.length; i += 1) {
+      buttonPairList[i].style.display = 'none';
+      threeDotButtonList[i].style.display = 'block';
+    }
+  }
+});
