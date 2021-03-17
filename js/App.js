@@ -70,6 +70,7 @@ document.body.addEventListener('focus-task', (e) => {
 
 document.body.addEventListener('task-deleted', (e) => {
   TDLDom.todoList.removeTask(e.detail.taskID);
+  TDLDom.updateCurrentTask();
 });
 
 document.body.addEventListener('checkbox-updated', (e) => {
