@@ -10,9 +10,9 @@ const addTodoForm = document.getElementById('add-todo');
 const addTodoButton = document.getElementById('add-button');
 const startTimerButton = document.getElementById('startTimer');
 const deleteAllButton = document.getElementById('delete-all-button');
-const currentTaskDiv = document.getTaskById('currentTask');
+const currentTaskDiv = document.getElementById('currentTask');
 
-const TDLDom = new TodoListDom(todoTable, addTodoForm, addTodoButton, deleteAllButton);
+const TDLDom = new TodoListDom(todoTable, addTodoForm, addTodoButton, deleteAllButton, currentTaskDiv);
 const TimerObj = new Timer(startTimerButton, timeDisplay, modeDisplay);
 
 TimerObj.addEventListener('timer-complete', (e) => {
@@ -31,6 +31,7 @@ document.body.addEventListener('focus-task', (e) => {
 
 document.body.addEventListener('task-deleted', (e) => {
   TDLDom.todoList.removeTask(e.detail.taskID);
+  TDLDom.updateCurrentTask();
 });
 
 document.body.addEventListener('checkbox-updated', (e) => {

@@ -136,6 +136,15 @@ header {
   border-color: var(--button-border-color);
 }
 
+#currentTask{
+  font-size: larger;
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  width: 400px;
+  padding: 10px;
+}
+
 #FAQ {
   background: #008b8b;
   display: inline-block;

@@ -51,7 +51,7 @@ class TodoListDom {
      * The current task to be displayed
      * @type {HTMLDiv}
      */
-     this.currentTaskDiv = currentTaskDiv;
+    this.currentTaskDiv = currentTaskDiv;
     this.setupEventListeners();
     this.renderLocalStorage();
   }
@@ -197,7 +197,17 @@ class TodoListDom {
    * Updates the current task and changes its checkbox property accordingly
    */
   updateCurrentTask() {
-    this.currentTask = this.todoList.getCurrentTask();
+    const nextTask = this.todoList.getCurrentTask();
+    if(this.currentTask === null && nextTask === null){ //no currentTask, nothing in table
+      this.currentTaskDiv.textContent = 'No current task';
+    } else if(this.currentTask === null && nextTask !== null){//no currentTask, something in table
+      this.currentTaskDiv.textContent = 'Working on: ' + nextTask.name;
+    } else if(this.currentTask !== null && nextTask === null){//last task completed
+      this.currentTaskDiv.textContent = 'No current task';
+    } else if (this.currentTask != nextTask){
+      this.currentTaskDiv.textContent = 'Working on: ' + nextTask.name;
+    }
+    this.currentTask = nextTask;
     if (this.currentTask != null) this.currentTask.checkBox.disabled = false;
   }
 

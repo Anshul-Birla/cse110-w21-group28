@@ -5,6 +5,7 @@ let tableLocation;
 let formLocation;
 let addBtnLocation;
 let deleteBtnLocation;
+let currentTaskLocation;
 let myDOM;
 
 beforeEach(() => {
@@ -18,7 +19,9 @@ beforeEach(() => {
         </th>
       </table>
     </section>
+    <section id="currentTask" class="section-container">
 
+    </section>
     <div>
       <form id = "add-todo" style = "display: none;">
         <input type="text" name="task-name" placeholder="Write Essay">
@@ -32,7 +35,8 @@ beforeEach(() => {
   formLocation = document.getElementById('add-todo');
   addBtnLocation = document.getElementById('add-button');
   deleteBtnLocation = document.getElementById('delete-all-button');
-  myDOM = new TodoListDom(tableLocation, formLocation, addBtnLocation, deleteBtnLocation);
+  currentTaskLocation = document.getElementById('currentTask');
+  myDOM = new TodoListDom(tableLocation, formLocation, addBtnLocation, deleteBtnLocation, currentTaskLocation);
   document.body.addEventListener('task-deleted', (e) => {
     myDOM.todoList.removeTask(e.detail.taskID);
   });
@@ -274,4 +278,53 @@ test('Unchecking a task brings it to the bottom of the unchecked tasks', () => {
   expect(myDOM.todoList.taskList[0].taskText.textContent).toBe('Task3');
   expect(myDOM.todoList.taskList[1].taskText.textContent).toBe('Task2');
   expect(myDOM.todoList.taskList[2].taskText.textContent).toBe('Task1');
+  localStorage.clear();
+});
+
+test('Current Task shows No current task when no input', () => {
+  expect(currentTaskLocation.textContent).toBe('No current task');
+  localStorage.clear();
+});
+
+test('Current Task after one input', () => {
+  formLocation.children[0].setAttribute('value', 'Task1');
+  formLocation.children[1].value = 2;
+  formLocation.submit();
+  myDOM.updateCurrentTask();
+
+  expect(currentTaskLocation.textContent).toBe('Working on: Task1');
+  localStorage.clear();
+});
+
+test('Current Task after input deleted', () => {
+  formLocation.children[0].setAttribute('value', 'Task1');
+  formLocation.children[1].value = 2;
+  formLocation.submit();
+  tableLocation.children[1].deleteButton.click();
+  myDOM.updateCurrentTask();
+
+  expect(currentTaskLocation.textContent).toBe('No current task');
+  localStorage.clear();
+});
+
+test('Current Task after input checked off', () => {
+  formLocation.children[0].setAttribute('value', 'Task1');
+  formLocation.children[1].value = 2;
+  formLocation.submit();
+  tableLocation.children[1].checkBox.click();
+  myDOM.updateCurrentTask();
+
+  expect(currentTaskLocation.textContent).toBe('No current task');
+  localStorage.clear();
+});
+
+test('Current Task after a session', () => {
+  formLocation.children[0].setAttribute('value', 'Task1');
+  formLocation.children[1].value = 2;
+  formLocation.submit();
+  myDOM.onSessionComplete();
+  myDOM.updateCurrentTask();
+
+  expect(currentTaskLocation.textContent).toBe('Working on: Task1');
+  localStorage.clear();
 });
