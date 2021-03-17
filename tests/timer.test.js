@@ -18,6 +18,7 @@ test('Test Initial State is Nothing', () => {
   const button = document.getElementById('start');
   const TimerObj = new Timer(button, null, null);
   expect(TimerObj.state).toBe('');
+  expect(TimerObj.sessionId).toBe(0);
 });
 
 test('Test First Iteration of Timer', () => {
@@ -41,6 +42,18 @@ test('Test That Queue Gets Updated During Second Iteration Of Timer', () => {
 
   expect(TimerObj.stateQueue[0]).toBe(shortBreakMode);
   expect(TimerObj.stateQueue[6]).toBe(longBreakMode);
+});
+
+test('Test That Multiple Iterations of the Timer Work', () => {
+  const displayTime = document.getElementById('displayTime');
+  const displayStatus = document.getElementById('displayStatus');
+  const button = document.getElementById('start');
+  const TimerObj = new Timer(button, displayTime, displayStatus);
+  jest.clearAllTimers();
+  TimerObj.startTimer();
+
+  jest.advanceTimersByTime(workMode.duration * 120 * 1000);
+  expect(TimerObj.sessionId).toBe(1);
 });
 
 test('Test That HTML Gets Updated During Second ', () => {
@@ -89,5 +102,7 @@ test('Test That Timer Resets Properly When End Day is Clicked', () => {
   button.click();
   jest.advanceTimersByTime(workMode.duration * 60 * 1000);
   button.click();
+  TimerObj.resetPomoSessionId();
   expect(TimerObj.stateQueue[0]).toBe(workMode);
+  expect(TimerObj.sessionId).toBe(0);
 });
