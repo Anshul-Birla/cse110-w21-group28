@@ -22,6 +22,7 @@ beforeEach(() => {
   const cancelButton = document.getElementById('cancel-button');
   const submitButton = document.getElementById('submit-button');
   const description = document.getElementById('description');
+  // eslint-disable-next-line max-len
   DistractionPage = new Distraction(distractButton, distractPopUp, cancelButton, submitButton, description);
 });
 
@@ -68,12 +69,12 @@ test('local Storage again', () => {
 test('hide button', () => {
   DistractionPage.hideButton();
   expect(DistractionPage.distractButton.style.display).toBe('none');
-})
+});
 
 test('show button', () => {
   DistractionPage.showButton();
   expect(DistractionPage.distractButton.style.display).toBe('block');
-})
+});
 /*
 test('input nothing', () => {
   DistractionPage.distractButton.click();

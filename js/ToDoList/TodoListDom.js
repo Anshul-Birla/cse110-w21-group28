@@ -1,6 +1,6 @@
 import { ToDoList } from './ToDoList.js';
 import { HTMLAttributes, TaskStorage } from './TodoListDomVariables.js';
-import { Task } from './Task.js';
+// import { Task } from './Task.js';
 
 /**
  * Class responsible for providing changes to the DOM for the TodoList
@@ -132,7 +132,7 @@ class TodoListDom {
       } catch (error) {
         // eslint-disable-next-line no-alert
         alert('Invalid input. Please try again');
-        console.log(error);
+        // console.log(error);
       }
     });
 

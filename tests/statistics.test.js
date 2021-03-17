@@ -5,17 +5,17 @@ import { Statistics } from '../js/Statistics/Statistics.js';
 document.body.innerHTML += "<div class ='tab'>"
 + "<button class='tab-btn' id='data' > Data </button>"
 + "<button class='tab-btn' id='distraction'> Distraction </button>"
-+ "</div>"
++ '</div>'
 + "<div id='stats-info' class='stats-info-container'>"
-+ "</div>"
++ '</div>';
 let Stats = new Statistics();
 beforeEach(() => {
   document.body.innerHTML += "<div class ='tab'>"
   + "<button class='tab-btn' id='data' > Data </button>"
   + "<button class='tab-btn' id='distraction'> Distraction </button>"
-  + "</div>"
+  + '</div>'
   + "<div id='stats-info' class='stats-info-container'>"
-  + "</div>"
+  + '</div>';
   Stats = new Statistics();
 });
 
@@ -305,12 +305,12 @@ describe('Variables function correctly', () => {
 
 describe('local storage tests', () => {
   beforeEach(() => {
-  document.body.innerHTML += "<div class ='tab'>"
+    document.body.innerHTML += "<div class ='tab'>"
   + "<button class='tab-btn' id='data' > Data </button>"
   + "<button class='tab-btn' id='distraction'> Distraction </button>"
-  + "</div>"
+  + '</div>'
   + "<div id='stats-info' class='stats-info-container'>"
-  + "</div>"
+  + '</div>';
     Stats = new Statistics();
     localStorage.clear();
   });
@@ -372,14 +372,14 @@ describe('local storage tests', () => {
   });
 });
 
-test('Distraction Tab Button Pressed, all Data tab items hidden', () =>{
-  let Stats = new Statistics();
+test('Distraction Tab Button Pressed, all Data tab items hidden', () => {
+  Stats = new Statistics();
 
-  let content = document.getElementsByClassName('stats-info');
-  let contentlabel = document.getElementsByClassName('stats-info-label');
-  let btn = document.getElementById('distraction');
+  const content = document.getElementsByClassName('stats-info');
+  const contentlabel = document.getElementsByClassName('stats-info-label');
+  const btn = document.getElementById('distraction');
   btn.click();
-  for(let i = 0; i < content.length; i++){
+  for (let i = 0; i < content.length; i += 1) {
     expect(content[i].style.display).toBe('none');
     expect(contentlabel[i].style.display).toBe('none');
   }
