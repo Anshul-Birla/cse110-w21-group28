@@ -88,9 +88,13 @@ class ToDoList extends HTMLElement {
    *  @param {Task} task - Task to be added
    */
   // eslint-disable-next-line class-methods-use-this
-  addTaskToLocalStorage(task) {
+  addTaskToLocalStorage(task, index = undefined) {
     const arr = [task.id, task.name, task.totalSessions, task.currentSessionNum, task.checked];
-    window.localData.push(arr);
+    if (index === undefined) {
+      window.localData.push(arr);
+    } else {
+      window.localData.splice(index, 0, arr);
+    }
     localStorage.setItem('tasks', JSON.stringify(window.localData));
   }
 
@@ -102,7 +106,7 @@ class ToDoList extends HTMLElement {
    */
   getCurrentTask() {
     for (let i = 0; i < this.taskList.length; i += 1) {
-      if (!this.taskList[i].checked && !this.taskList[i].deleted) {
+      if (!this.taskList[i].checked) {
         return this.taskList[i];
       }
     }
@@ -138,6 +142,7 @@ class ToDoList extends HTMLElement {
       this.taskList.splice(index, 1);
       return true;
     }
+
     return false;
   }
 
@@ -147,6 +152,7 @@ class ToDoList extends HTMLElement {
    */
   addTaskToTop(task) {
     this.taskList.unshift(task);
+    this.addTaskToLocalStorage(task, 0);
   }
 
   /**
@@ -156,17 +162,20 @@ class ToDoList extends HTMLElement {
    * @param {Task} task - task object that needs to be added
    */
   addTaskToEnd(task) {
-    if (task.checked) this.taskList.push(task);
-    else {
+    if (task.checked) {
+      this.taskList.push(task);
+      this.addTaskToLocalStorage(task);
+    } else {
       let firstUncheckedTask = -1;
       for (let i = 0; i < this.taskList.length && firstUncheckedTask === -1; i += 1) {
         if (this.taskList[i].checked === true) firstUncheckedTask = i;
       }
-
       if (firstUncheckedTask === -1) {
         this.taskList.push(task);
+        this.addTaskToLocalStorage(task);
       } else {
         this.taskList.splice(firstUncheckedTask, 0, task);
+        this.addTaskToLocalStorage(task, firstUncheckedTask);
       }
     }
   }

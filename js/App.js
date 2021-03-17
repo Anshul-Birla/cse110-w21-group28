@@ -68,6 +68,10 @@ document.body.addEventListener('focus-task', (e) => {
   TDLDom.updateCurrentTask();
 });
 
+document.body.addEventListener('task-deleted', (e) => {
+  TDLDom.todoList.removeTask(e.detail.taskID);
+});
+
 document.body.addEventListener('checkbox-updated', (e) => {
   if (e.detail.checkBoxState === true) {
     TDLDom.onCompletedTask();
