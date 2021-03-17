@@ -40,7 +40,6 @@ submitButton.addEventListener('click', () => {
     localStorage.setItem('distractions', JSON.stringify(distractions));
     resetPopUp();
   }
-  console.log(description);
 });
 /**
  * These event listeners trigger when the animation is finished. It resets
