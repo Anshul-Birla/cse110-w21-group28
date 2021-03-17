@@ -68,12 +68,19 @@ test('Reload the page with local storage', () => {
   expect(tableLocation.children[1].pomoSessions.textContent).toMatch(new RegExp('0/ *2'));
 });
 
+test('Add another task', () => {
+  formLocation.children[0].setAttribute('value', 'Write Essay');
+  formLocation.children[1].value = 2;
+  formLocation.submit();
+});
+
 test('Reload the page with completed task', () => {
-  expect(tableLocation.children[1].checked).toEqual(true);
+  expect(tableLocation.children[1].checked).toEqual(false);
 });
 
 // Now has a task
 test('Clicking remove button should remove task from table and local storage', () => {
+  tableLocation.children[1].deleteButton.click();
   tableLocation.children[1].deleteButton.click();
   expect(tableLocation.children[1]).toEqual(undefined);
   expect(window.localData.length).toEqual(0);
