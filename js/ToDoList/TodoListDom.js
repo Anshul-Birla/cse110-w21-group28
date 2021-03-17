@@ -95,8 +95,6 @@ class TodoListDom {
       const currentSession = window.localData[i][TaskStorage.currentSessionIndex];
       const completed = window.localData[i][TaskStorage.checkedIndex];
       const task = this.todoList.addTask(name, totalSession, currentSession, completed, true);
-      this.todoList.idCounter += 1;
-      this.todoList.taskList.push(task);
       task.addEventListener('task-checked-off', () => {
         const event = new CustomEvent('task-checked-off', {
         });
@@ -107,7 +105,7 @@ class TodoListDom {
         });
         this.todoList.dispatchEvent(event);
       });
-      task.updatePomoSessions();
+      // task.updatePomoSessions();
       this.displayTask(task);
     }
 

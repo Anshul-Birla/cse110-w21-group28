@@ -1,4 +1,5 @@
 import { Statistics } from '../js/Statistics/Statistics.js';
+import { buttonText } from '../js/Timer/TimerVariables.js';
 
 /** @Test {ToDoList} */
 
@@ -23,6 +24,12 @@ beforeEach(() => {
 
 afterEach(() => {
   localStorage.clear();
+});
+
+test('statsTab Button calls event listener', () => {
+  const btn = document.getElementById('data');
+  btn.click();
+  expect(btn.className).toBe('tab-btn-active');
 });
 
 describe('Variables function correctly', () => {
@@ -174,6 +181,7 @@ describe('Variables function correctly', () => {
     });
 
     expect(Stats.distractionList[0].name).toEqual('first distraction');
+    Stats.updateDistractionList();
   });
 
   test('Unique distractions calculated correctly', () => {

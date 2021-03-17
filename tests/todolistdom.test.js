@@ -18,7 +18,6 @@ beforeEach(() => {
         </th>
       </table>
     </section>
-
     <div>
       <form id = "add-todo" style = "display: none;">
         <input type="text" name="task-name" placeholder="Write Essay">
@@ -36,6 +35,10 @@ beforeEach(() => {
   document.body.addEventListener('task-deleted', (e) => {
     myDOM.todoList.removeTask(e.detail.taskID);
   });
+});
+
+test('true', () => {
+  expect(true).toBeTruthy();
 });
 
 test('Valid construction of TDLDom', () => {

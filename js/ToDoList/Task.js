@@ -173,7 +173,6 @@ class Task extends HTMLTableRowElement {
     deleteBtn.addEventListener('click', () => {
       this.onDelete();
     });
-
     return deleteBtn;
   }
 
@@ -353,7 +352,7 @@ class Task extends HTMLTableRowElement {
       bubbles: true,
       composed: true,
       detail: {
-        taskId: this.id,
+        taskID: this.id,
       },
     });
     document.body.dispatchEvent(event);
