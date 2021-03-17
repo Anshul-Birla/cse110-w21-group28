@@ -43,6 +43,10 @@ header {
   overflow: auto;
 }
 
+.main-page {
+  color: var(--font-color);
+}
+
 .pure-button {
   background: var(--button-color);
   border-radius: 5px;

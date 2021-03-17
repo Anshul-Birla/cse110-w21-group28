@@ -14,7 +14,7 @@ const deleteAllButton = document.getElementById('delete-all-button');
 const TDLDom = new TodoListDom(todoTable, addTodoForm, addTodoButton, deleteAllButton);
 const TimerObj = new Timer(startTimerButton, timeDisplay, modeDisplay);
 
-introJs().start();
+introJs().start(); // eslint-disable-line 
 
 TimerObj.addEventListener('timer-complete', (e) => {
   if (e.detail.sessionName === workMode.name) {
@@ -60,5 +60,3 @@ window.addEventListener('click', (e) => {
     }
   }
 });
-
-

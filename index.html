@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <link rel="shortcut icon" href="#" />
   <link rel="stylesheet" href="./css/buttons-min.css"/>
-  <link rel="stylesheet" href="./introjs.css" />
+  <link rel="stylesheet" href="./css/ThirdParty/introjs.css" />
   <link rel="stylesheet" href="./css/style.css" />
   <link rel="stylesheet" href="./css/distraction-box.css" />
   <link rel="stylesheet" href="./css/table.css" />
@@ -36,17 +36,17 @@
   <div id='overlay'></div>
   <div class='main-page'>
   <!-- Header bar at the top of the page for title text & navigation -->
-  <header data-title="Welcome!" data-intro="Hello step one!">
+  <header data-title="Welcome!" data-intro="Welcome to our pomodoro app!" data-step='1'>
     <h1>
       Pomodoro Timer
       <div class="icon-container" >
         <p>Stats</p>
         <p>FAQ</p>
-        <button id="statsButton" class="pure-button icons">
+        <button data-title="Statistics" data-intro="Your statisitics for the current day as well as the past year can be acccessed here" data-step='8' id="statsButton" class="pure-button icons">
           <img src="./assets/img/barchart.png" width="35" height="35">
           <a href="#Stats"></a>
         </button>
-        <button id="faqButton" class="pure-button icons">
+        <button id="faqButton" class="pure-button icons" data-title="FAQ" data-intro="To learn more about the pomodoro technique, click here" data-step='9'>
           <a href="#FAQ"> <img src="./assets/img/question.png" width="35" height="35"> </a>
         </button>
       </div>
@@ -55,7 +55,7 @@
   </header>
 
   <!-- Container for timer, timer buttons, and distraction button + prompt -->
-  <section id="timerContainer" class="section-container" data-intro='Hello step one!' data-title="Welcome!">
+  <section id="timerContainer" class="section-container">
     <div id="countdown">
       <p id="modeDisplay"> Pomo-Time!</p>
       <p id="top-left-border">
@@ -68,27 +68,27 @@
         <span>┘</span>
       </p>
       <br>
-      <button id="startTimer" class="pure-button">Start</button>
-      <button id="distractionButton" class = "pure-button">Distraction</button>
+      <button data-title="Timer" data-intro="Here is how to start the timer! Be careful: once started, the timer cannot be stopped until your day is over." data-step='2'id="startTimer" class="pure-button">Start</button>
+      <button data-title="Timer" data-intro="Here is how to log the distractions you may have had during your working sessions" data-step='3'id="distractionButton" class = "pure-button">Distraction</button>
     </div>
   </section>
 
   <!-- Container for task list -->
   <section id='tasklist' class='section-container'>
     <!-- <h2>To Do</h2> -->
-    <table id='todo'>
+    <table  data-title="Todo List" data-intro="Here is where your task's live" data-step='4' id='todo'>
       <tr>
         <th class='col1-checkbox'></th>
         <th class='col2-task'>TASKS</th>
         <th class='col3-pomos'>#</th>
-        <th class='col4-delete'><button id = "delete-all-button" class="delete-button" type="button">Delete All</button></th>
+        <th class='col4-delete'><button data-title="Todo List" data-intro="If you want to start fresh at any point, simply click this button" data-step='7' id = "delete-all-button" class="delete-button" type="button">Delete All</button></th>
       </tr>
     </table>
 
     <!-- style = 'display: none;' originally an attribute in form and button but we want it always showing -->
-    <form id ='add-todo' overflow>
-      <input type='text' name='task-name' placeholder='Enter task' class='task-name'>
-      <input type='number' name='task-length' placeholder='Estimated # of pomos' class='task-length' min='1' max='24' required>
+    <form id ='add-todo'  overflow>
+      <input data-title="Todo List" data-intro="Enter the name of your task" data-step='5' type='text' name='task-name' placeholder='Enter task' class='task-name'>
+      <input data-title="Todo List" data-intro="Enter the amount of working sessions you expect the task to take" data-step='6'  type='number' name='task-length' placeholder='Estimated # of pomos' class='task-length' min='1' max='24' required>
       <input id = "add-button" type='submit' class='task-submit' value='+'>
     </form>
   </section>
@@ -198,7 +198,7 @@
 </div>
 <script type="module" src="./js/App.js"></script>
 <script type="module" src="./js/Distraction.js"></script>
-<script src="intro.js"></script>
+<script src="./js/ThirdParty/intro.js"></script>
 </body>
 
 </html>
