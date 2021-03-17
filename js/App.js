@@ -14,6 +14,7 @@ const deleteAllButton = document.getElementById('delete-all-button');
 const TDLDom = new TodoListDom(todoTable, addTodoForm, addTodoButton, deleteAllButton);
 const TimerObj = new Timer(startTimerButton, timeDisplay, modeDisplay);
 
+
 TimerObj.addEventListener('timer-complete', (e) => {
   if (e.detail.sessionName === workMode.name) {
     TDLDom.onSessionComplete();
@@ -58,3 +59,5 @@ window.addEventListener('click', (e) => {
     }
   }
 });
+
+
