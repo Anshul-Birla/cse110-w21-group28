@@ -118,7 +118,8 @@ class TodoListDom {
       try {
         const task = this.todoList.addTask(name, sessions);
         this.updateCurrentTask();
-        this.displayTask(task);
+        const insertAtIndex = this.getFirstCompletedTaskIndex();
+        this.displayTask(task, insertAtIndex);
         this.form.reset();
       } catch (error) {
         // eslint-disable-next-line no-alert
@@ -138,10 +139,10 @@ class TodoListDom {
   /**
    * Adds a task to the bottom of the table OR adds it before the specified index
    * @param {HTMLTableRowElement} newTask - task you want added
-   * @param {HTMLTableRowElement} [index = undefined] - index you want to insert the task before
+   * @param {HTMLTableRowElement} [index = -1] - index you want to insert the task before
    */
-  displayTask(newTask, index = undefined) {
-    if (index === undefined) {
+  displayTask(newTask, index = -1) {
+    if (index === -1) {
       this.table.appendChild(newTask);
     } else {
       this.table.insertBefore(newTask, this.table.childNodes[index]);
@@ -175,6 +176,15 @@ class TodoListDom {
     temp.onDelete();
     this.displayTask(temp);
     this.todoList.addTaskToEnd(temp);
+  }
+
+  getFirstCompletedTaskIndex() {
+    let firstCompletedTaskIndex = -1;
+    for (let i = 2; i < this.table.childNodes.length && firstCompletedTaskIndex === -1; i += 1) {
+      if (this.table.childNodes[i].checked === true) firstCompletedTaskIndex = i;
+    }
+
+    return firstCompletedTaskIndex;
   }
 
   /**
