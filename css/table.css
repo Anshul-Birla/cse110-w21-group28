@@ -20,17 +20,14 @@ table {
   table-layout: fixed; /* allows for word-wrap */
   width: 100%;         /* allows for word-wrap */
   margin-top: -20px;
-  border-radius: var(--td-border-radius);
 }
 
-
-#table-header {
-  width: 100%;
+thead th {
+  /* background-color: white; */
   position: -webkit-sticky;
   position: sticky;
   top: 0;
   border-radius: 0;
-  background-color: white;
 }
 
 th,
