@@ -40,3 +40,8 @@ pushed to main
 + *Plans for today:*
 reading article.
 + *Any blockers?*no
+
+Michael Vu
++ *Previous work day progress:* meeting and animation for slide
++ *Plans for today:* Finish article assignment.
++ *Any blockers?*no
