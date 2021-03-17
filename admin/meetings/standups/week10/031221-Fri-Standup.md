@@ -44,4 +44,4 @@ reading article.
 Michael Vu
 + *Previous work day progress:* meeting and animation for slide
 + *Plans for today:* Finish article assignment.
-+ *Any blockers?*no
++ *Any blockers?:* no
