@@ -68,6 +68,7 @@
   cursor: pointer;
   opacity: 1;
 }
+
 .cancel:hover,
 .cancel:focus {
   background-color: #b32626;
