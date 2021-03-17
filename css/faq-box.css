@@ -21,22 +21,22 @@
   padding: 0;
   border: 3px solid darkcyan;
   width: 80%;
-  box-shadow: 0 4px 8px 0 #008b8b,0 6px 20px 0 #008b8b;
+  box-shadow: 0 4px 8px 0 #008b8b, 0 6px 20px 0 #008b8b;
   -webkit-animation-name: animatetop;
   -webkit-animation-duration: 0.4s;
   animation-name: animatetop;
-  animation-duration: 0.4s
+  animation-duration: 0.4s;
 }
 
 /* Add Animation */
 @-webkit-keyframes animatetop {
-  from {top:-300px; opacity:0} 
-  to {top:0; opacity:1}
+  from { top: -300px; opacity: 0; }
+  to { top: 0; opacity: 1; }
 }
 
 @keyframes animatetop {
-  from {top:-300px; opacity:0}
-  to {top:0; opacity:1}
+  from { top: -300px; opacity: 0; }
+  to { top: 0; opacity: 1; }
 }
 
 /* The Close Button */
@@ -60,7 +60,7 @@
   color: white;
 }
 
-.modal-body {padding: 2px 16px;}
+.modal-body { padding: 2px 16px; }
 
 .modal-footer {
   padding: 2px 16px;
