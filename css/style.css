@@ -131,21 +131,7 @@ li {
   height: 100px;
 }
 
-#distractionButton {
-  position: absolute;
-  bottom: 5px;
-  right: 5px;
-  font-size: 40%;
-  border-style: solid;
-  border-width: 1px;
-  border-color: var(--button-border-color);
-}
 
-#startTimer {
-  border-style: solid;
-  border-width: 2px;
-  border-color: var(--button-border-color);
-}
 
 #FAQ {
   background: #008b8b;
