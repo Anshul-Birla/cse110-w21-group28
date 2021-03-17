@@ -1,7 +1,7 @@
 .stats-popup {
   display: none;
   position: relative;
-  z-index: 1;
+  z-index: 51;
   padding-top: 0%;
   left: 0;
   top: 0;

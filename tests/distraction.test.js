@@ -34,10 +34,8 @@ test('Test show and hide', () => {
   DistractionPage.cancelButton.click();
   expect(DistractionPage.distractPopUp.style.display).toBe('none');
   DistractionPage.distractButton.click();
-  waitTime();
   expect(DistractionPage.distractPopUp.style.display).toBe('block');
   DistractionPage.distractButton.click();
-  waitTime();
   expect(DistractionPage.distractPopUp.style.display).toBe('none');
 });
 

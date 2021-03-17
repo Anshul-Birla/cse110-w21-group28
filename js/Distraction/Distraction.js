@@ -69,9 +69,9 @@ class Distraction extends HTMLElement {
       }
     });
 
-    this.overlay.addEventListener('click',()=>{
+    this.overlay.addEventListener('click', () => {
       this.resetPopUp();
-    })
+    });
   }
 
   /**
