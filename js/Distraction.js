@@ -59,3 +59,7 @@ overlay.addEventListener('animationend', (e) => {
     overlay.style.display = 'none';
   }
 });
+
+overlay.addEventListener('click', () => {
+  resetPopUp();
+});
