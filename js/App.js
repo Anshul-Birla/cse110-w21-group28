@@ -131,14 +131,12 @@ statsButton.addEventListener('click', () => {
   parentDiv.style.display = 'block';
   statsPopUp.style.animation = 'fadeEffect-popup 2s';
   overlay.style.animation = 'fadeEffect-overlay 2s';
-  const isOpen = parentDiv.classList.contains('slide-out');
-  parentDiv.setAttribute('class','slide-in');
+  parentDiv.setAttribute('class', 'slide-in');
   document.getElementById('overlay').style.display = 'block';
 });
 
 closeStatsButton.addEventListener('click', () => {
-  const isOpen = parentDiv.classList.contains('slide-out');
-  parentDiv.setAttribute('class','slide-out');
+  parentDiv.setAttribute('class', 'slide-out');
   statsPopUp.style.display = 'none';
   document.getElementById('overlay').style.display = 'none';
 });
