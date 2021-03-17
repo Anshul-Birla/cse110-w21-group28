@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="./css/distraction-box.css" />
   <link rel="stylesheet" href="./css/table.css" />
   <link rel="stylesheet" href="./css/animations.css" />
+  <link rel="stylesheet" href="./css/settings.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Pomo App</title>
 </head>
@@ -21,8 +22,12 @@
     <h1>
       Pomodoro Timer
       <div class="icon-container">
+        <p>Settings</p>
         <p>Stats</p>
-        <p>FAQ</p>
+        <p>FAQ</p>        
+        <button id="settingsButton" class="pure-button icons">
+          <img src="./assets/img/settings.svg" width="35" height="35">
+        </button>
         <button id="statsButton" class="pure-button icons">
           <img src="./assets/img/barchart.png" width="35" height="35">
           <a href="#Stats"></a>
@@ -30,10 +35,55 @@
         <button id="faqButton" class="pure-button icons">
           <a href="#FAQ"> <img src="./assets/img/question.png" width="35" height="35"> </a>
         </button>
+
       </div>
     </h1>
 
   </header>
+
+  <!-- Settings popup -->
+  <section id="settingsPopup">
+    <p id="settingsHeader">Settings</p>
+    <div id="settingsContent">
+      <div id="workSoundGroup">
+        <label for="work sound">Work time sound:</label><br>
+        <select name="work sound" id="workSoundSelector">
+          <option value="horn" selected>air horn</option>
+          <option value="celebration">celebration</option>
+          <option value="error">error</option>
+          <option value="noot">noot</option>
+          <option value="ping">ping</option>
+          <option value="siren">siren</option>
+        </select>
+      </div>
+      <div id="breakSoundGroup">
+        <label for="break sound">Break time sound:</label><br>
+        <select name="break sound" id="breakSoundSelector">
+          <option value="horn">air horn</option>
+          <option value="celebration" selected>celebration</option>
+          <option value="error">error</option>
+          <option value="noot">noot</option>
+          <option value="ping">ping</option>
+          <option value="siren">siren</option>        
+        </select>
+      </div>
+      <div id="darkModeGroup">
+        <label for="dark mode">Dark mode:</label><br>
+        <label name="dark mode" class="switch">
+          <input type="checkbox" id="darkModeSwitch">
+          <span class="slider round"></span>
+        </label>
+      </div>
+      <div id="muteGroup">
+        <label for="mute">Mute:</label><br>
+        <label name="mute" class="switch">
+        <input type="checkbox" id="muteSwitch">
+        <span class="slider round"></span>
+        </label>
+      </div>
+      
+    </div>
+  </section>
 
   <!-- Container for timer, timer buttons, and distraction button + prompt -->
   <section id="timerContainer" class="section-container">
@@ -53,6 +103,8 @@
       <button id="distractionButton" class = "pure-button">Distraction</button>
     </div>
   </section>
+  <!-- The audio cue -->
+  <audio id="alert-sound" src="./assets/audio/air-horn.mp3"></audio>
 
   <!-- Container for task list -->
   <section id='tasklist' class='section-container'>
@@ -179,5 +231,6 @@
 </div>
 <script type="module" src="./js/App.js"></script>
 <script type="module" src="./js/Distraction.js"></script>
+<script type="module" src="./js/Settings.js"></script>
 </body>
 </html>

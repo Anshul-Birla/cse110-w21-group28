@@ -2,6 +2,7 @@ import { TodoListDom } from './ToDoList/TodoListDom.js';
 import { Timer } from './Timer/Timer.js';
 import { workMode } from './Timer/TimerVariables.js';
 import { shortBreakColors, workModeColors } from './ChangeColors.js';
+import { breakModeSound, workModeSound } from './Sounds.js';
 
 const timeDisplay = document.getElementById('timeDisplay');
 const modeDisplay = document.getElementById('modeDisplay');
@@ -18,8 +19,10 @@ TimerObj.addEventListener('timer-complete', (e) => {
   if (e.detail.sessionName === workMode.name) {
     TDLDom.onSessionComplete();
     shortBreakColors();
+    breakModeSound();
   } else {
     workModeColors();
+    workModeSound();
   }
 });
 

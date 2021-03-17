@@ -10,57 +10,58 @@ const ping = './assets/audio/ping.mp3';
 const siren = './assets/audio/siren.mp3';
 const muteSwitch = document.getElementById('muteSwitch');
 
-
-var workModeSoundPath = airHorn;
-var breakModeSoundPath = celebration;
-export function workModeSound(){
-    if (muteSwitch.checked == true){
-        return;
-    }
-    horn.setAttribute('src', workModeSoundPath);
-    horn.play();
+let workModeSoundPath = airHorn;
+let breakModeSoundPath = celebration;
+export function workModeSound() {
+  if (muteSwitch.checked === true) {
+    return;
+  }
+  horn.setAttribute('src', workModeSoundPath);
+  horn.play();
 }
 
-export function breakModeSound(){
-    if(muteSwitch.checked ==true){
-        return;
-    }
-    horn.setAttribute('src', breakModeSoundPath);
-    horn.play();
+export function breakModeSound() {
+  if (muteSwitch.checked === true) {
+    return;
+  }
+  horn.setAttribute('src', breakModeSoundPath);
+  horn.play();
 }
 
-function changeSound(e){
-    let path;
-    switch(e.target.value){
-        case 'horn':
-            path = airHorn;
-            break;
-        case 'celebration':
-            path = celebration;
-            break;
-        case 'error':
-            path = error;
-            break;
-        case 'noot':
-            path = noot;
-            break;
-        case 'ping':
-            path = ping;
-            break;
-        case 'siren':
-            path = siren;
-            break;
-    }
-    if (muteSwitch.checked == false){
-        horn.setAttribute('src', path);
-        horn.play();
-    }
-    if(e.target.id === 'workSoundSelector'){
-        workModeSoundPath = path;
-    }
-    else {
-        breakModeSoundPath = path;
-    }
+function changeSound(e) {
+  let path;
+  switch (e.target.value) {
+    case 'horn':
+      path = airHorn;
+      break;
+    case 'celebration':
+      path = celebration;
+      break;
+    case 'error':
+      path = error;
+      break;
+    case 'noot':
+      path = noot;
+      break;
+    case 'ping':
+      path = ping;
+      break;
+    case 'siren':
+      path = siren;
+      break;
+    default:
+      path = airHorn;
+      break;
+  }
+  if (muteSwitch.checked === false) {
+    horn.setAttribute('src', path);
+    horn.play();
+  }
+  if (e.target.id === 'workSoundSelector') {
+    workModeSoundPath = path;
+  } else {
+    breakModeSoundPath = path;
+  }
 }
 
 workSoundSelector.addEventListener('change', changeSound);

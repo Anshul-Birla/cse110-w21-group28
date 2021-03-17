@@ -61,7 +61,7 @@ header {
   display: flex;
   float: right;
   font-size: 0.5em;
-  width: 100px;
+  width: 150px;
   flex-wrap: wrap;
   justify-content: space-around;
 }
