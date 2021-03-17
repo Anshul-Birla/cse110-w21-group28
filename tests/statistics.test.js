@@ -2,7 +2,8 @@ import { Statistics } from '../js/Statistics/Statistics.js';
 
 /** @Test {ToDoList} */
 
-document.body.innerHTML += "<div class ='tab'>"
+document.body.innerHTML += "<div id='overlay'></div>"
++ "<div class ='tab'>"
 + "<button class='tab-btn' id='data' > Data </button>"
 + "<button class='tab-btn' id='distraction'> Distraction </button>"
 + '</div>'
@@ -10,7 +11,8 @@ document.body.innerHTML += "<div class ='tab'>"
 + '</div>';
 let Stats = new Statistics();
 beforeEach(() => {
-  document.body.innerHTML += "<div class ='tab'>"
+  document.body.innerHTML += "<div id='overlay'></div>"
+  + "<div class ='tab'>"
   + "<button class='tab-btn' id='data' > Data </button>"
   + "<button class='tab-btn' id='distraction'> Distraction </button>"
   + '</div>'
@@ -305,12 +307,13 @@ describe('Variables function correctly', () => {
 
 describe('local storage tests', () => {
   beforeEach(() => {
-    document.body.innerHTML += "<div class ='tab'>"
-  + "<button class='tab-btn' id='data' > Data </button>"
-  + "<button class='tab-btn' id='distraction'> Distraction </button>"
-  + '</div>'
-  + "<div id='stats-info' class='stats-info-container'>"
-  + '</div>';
+    document.body.innerHTML += "<div id='overlay'></div>"
+    + "<div class ='tab'>"
+    + "<button class='tab-btn' id='data' > Data </button>"
+    + "<button class='tab-btn' id='distraction'> Distraction </button>"
+    + '</div>'
+    + "<div id='stats-info' class='stats-info-container'>"
+    + '</div>';
     Stats = new Statistics();
     localStorage.clear();
   });

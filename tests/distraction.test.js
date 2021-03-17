@@ -5,6 +5,7 @@ let DistractionPage;
 
 beforeEach(() => {
   document.body.innerHTML = `
+  <div id='overlay'></div>
   <button id="distractionButton" class = "pure-button">Distraction</button>
   <section class="form-popup" id="distract-popup">
     <form class="form-container" id="distract-form-container">
@@ -22,8 +23,9 @@ beforeEach(() => {
   const cancelButton = document.getElementById('cancel-button');
   const submitButton = document.getElementById('submit-button');
   const description = document.getElementById('description');
+  const overlay = document.getElementById('overlay');
   // eslint-disable-next-line max-len
-  DistractionPage = new Distraction(distractButton, distractPopUp, cancelButton, submitButton, description);
+  DistractionPage = new Distraction(distractButton, distractPopUp, cancelButton, submitButton, description, overlay);
 });
 
 test('Test show and hide', () => {
@@ -32,8 +34,10 @@ test('Test show and hide', () => {
   DistractionPage.cancelButton.click();
   expect(DistractionPage.distractPopUp.style.display).toBe('none');
   DistractionPage.distractButton.click();
+  waitTime();
   expect(DistractionPage.distractPopUp.style.display).toBe('block');
   DistractionPage.distractButton.click();
+  waitTime();
   expect(DistractionPage.distractPopUp.style.display).toBe('none');
 });
 
