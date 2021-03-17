@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="./css/buttons-min.css"/>
   <link rel="stylesheet" href="./css/style.css" />
   <link rel="stylesheet" href="./css/distraction-box.css" />
+  <link rel="stylesheet" href="./css/faq-box.css" />
   <link rel="stylesheet" href="./css/table.css" />
   <link rel="stylesheet" href="./css/animations.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -78,15 +79,6 @@
     </form>
   </section>
 
-  <!-- Linked section on page under task list for summary & statistics of work sessions -->
-  <section id="stats" class="linked-section">
-    <h2>Stats</h2>
-  </section>
-
-  <!-- Linked section at bottom of page under stats for FAQ and instructions on using timer -->
-  <section id="faq" class="linked-section">
-    <h2>FAQ</h2>
-  </section>
 
   <!-- Distraction Box-->
   <section class="form-popup" id="distract-popup">
@@ -104,24 +96,27 @@
   <!-- FAQ-->
   <section class="faq">
   <div id="FAQ">
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <span class="close">&times;</span>
+          <h2>A Pomodoro Ranger is a Pomodoro Timer that would help with productivity</h2>
+        </div>
 
-      <h2>A Pomodoro Ranger is a Pomodoro Timer that would help with productivity</h2>
-
-      <h2>What is the Pomoranger Timer?</h2>
-  		<p>
-    Pomoranger is a Pomodoro Technique timer that works on your computer and mobile devices with an aim to increase your productivity, and reduce stress and anxiety of planning your time.
-    The aim of this app is to help you focus on any task you are working on, such as studying, writing, or coding.
-    This app is inspired by
+    <div class="modal-body">
+    <h2>What is the Pomoranger Timer?</h2>
+  	  <p>
+          Pomoranger is a Pomodoro Technique timer that works on your computer and mobile devices with an aim to increase your productivity, and reduce stress and anxiety of planning your time.
+          The aim of this app is to help you focus on any task you are working on, such as studying, writing, or coding.
+          This app is inspired by
     <a
       href='https://francescocirillo.com/pages/pomodoro-technique'
       target='_blank'
       rel='noopener'
-      >Pomodoro Technique</a
-    >
+      >Pomodoro Technique</a>
     which is a time management method developed by Francesco Cirillo.
   </p>
 
-    <div>
   <h2>What is the Pomodoro Technique?</h2>
     <p>
       The Pomodoro Technique is created by Francesco Cirillo for a
@@ -138,9 +133,7 @@
         >Wikipedia</a
         >
     </p>
-</div>
 
-<div>
   <h2>
     How to use the Pomodoro Timer?
   </h2>
@@ -160,7 +153,6 @@
        <strong>Iterate</strong> pomodoros until you finish the tasks
     </li>
   </ol>
-</div>
 
 <div>
   <h2>
@@ -177,11 +169,20 @@
     </li>
   </ol>
 </div>
-</section>
+</div>
 
+<div class="modal-footer">
+  <h2>Stay the most Productive Ranger!</h2>
+</div>
 
 </div>
+</div>
+</div>
+</div>
+
+</section>
 <script type="module" src="./js/App.js"></script>
 <script type="module" src="./js/Distraction.js"></script>
+<script type="module" src="./js/FAQ/FAQ.js"></script>
 </body>
 </html>
