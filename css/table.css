@@ -24,10 +24,10 @@ table {
 
 thead th {
   /* background-color: white; */
-  position: -webkit-sticky;
+  /* position: -webkit-sticky;
   position: sticky;
   top: 0;
-  border-radius: 0;
+  border-radius: 0; */
 }
 
 th,
@@ -73,15 +73,23 @@ tr:hover td {
   transition-duration: 0;
 }
 
-tr td:first-child,
-tr th:first-child {
+tr td:first-child {
   border-top-left-radius: var(--td-border-radius);
-  border-bottom-left-radius: var(--td-border-radius);
+  /* border-bottom-left-radius: var(--td-border-radius); */
 }
 
-tr td:last-child,
+tr th:first-child {
+  border-top-left-radius: var(--td-border-radius);
+  /* border-bottom-left-radius: var(--td-border-radius); */
+}
+
+tr td:last-child {
+  /* border-top-right-radius: var(--td-border-radius); */
+  border-bottom-right-radius: var(--td-border-radius);
+}
+
 tr th:last-child {
-  border-top-right-radius: var(--td-border-radius);
+  /* border-top-right-radius: var(--td-border-radius); */
   border-bottom-right-radius: var(--td-border-radius);
 }
 
@@ -135,7 +143,7 @@ svg {
   padding-top: 10px;
   padding-bottom: 10px;
   border-top-left-radius: var(--td-border-radius);
-  border-bottom-left-radius: var(--td-border-radius);
+  /* border-bottom-left-radius: var(--td-border-radius); */
   border-top-right-radius: var(--td-border-radius);
   border-bottom-right-radius: var(--td-border-radius);
   transition-duration: 2s;
