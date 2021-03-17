@@ -14,7 +14,7 @@ class TodoListDom {
    * @param {HTMLButtonElement} submitBtn
    * @param {HTMLButtonElement} deleteAllBtn
    */
-  constructor(HTMLTable, HTMLForm, submitBtn, deleteAllBtn) {
+  constructor(HTMLTable, HTMLForm, submitBtn, deleteAllBtn, currentTaskDiv) {
     /**
      * Holds the TodoList so the Dom Manager can acess it
      * @type {ToDoList}
@@ -47,6 +47,11 @@ class TodoListDom {
      */
     this.currentTask = null;
 
+    /**
+     * The current task to be displayed
+     * @type {HTMLDiv}
+     */
+     this.currentTaskDiv = currentTaskDiv;
     this.setupEventListeners();
     this.renderLocalStorage();
   }
