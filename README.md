@@ -5,6 +5,7 @@ This is a web application dedicated to making the Pomodoro Technique as easy as 
 ## Setup 
 Requires:
 - NodeJS + NPM
+
 First, clone and cd into the repo
 ```bash
 $ git clone <url>
