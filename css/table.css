@@ -19,6 +19,7 @@ table {
   border-spacing: 0 var(--table-border);
   table-layout: fixed; /* allows for word-wrap */
   width: 100%;         /* allows for word-wrap */
+
   /* min-height: 60vh; */
   margin-top: -20px;
 }
@@ -69,6 +70,7 @@ tr:hover td {
 tr td:first-child,
 tr th:first-child {
   border-top-left-radius: var(--td-border-radius);
+
   /* border-bottom-left-radius: var(--td-border-radius); */
 }
 
