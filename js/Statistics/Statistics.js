@@ -145,6 +145,8 @@ class Statistics extends HTMLElement {
   addEventListeners() {
     const statsDistractBtn = document.getElementById('distraction');
     const statsTabBtn = document.getElementById('data');
+
+    // Clicking the Distraction button on the Statistics popup generates the distraction views and hides the data information
     statsDistractBtn.addEventListener('click', () => {
       statsTabBtn.className = 'tab-btn';
       let content = document.getElementsByClassName('stats-info');
@@ -164,6 +166,8 @@ class Statistics extends HTMLElement {
       }
       statsDistractBtn.className = 'tab-btn-active';
     });
+
+    // Clicking on Data button within the Statistics popup generates the data views and hides distraction data
     statsTabBtn.addEventListener('click', () => {
       statsDistractBtn.className = 'tab-btn';
       let content = document.getElementsByClassName('dist-info');
@@ -183,6 +187,8 @@ class Statistics extends HTMLElement {
       }
       statsTabBtn.className = 'tab-btn-active';
     });
+
+    // Clicking outside of the popup closes the popup
     document.getElementById('overlay').addEventListener('click', () => {
       document.getElementById('close-stats-button').click();
     });
