@@ -137,7 +137,7 @@ svg {
 .task-length {
   font-size: 1em;
   background: clear;
-  border-style: solid;
+  border-style: none;
   border-radius: 60vh;
   border-color: var(--header-color);
   height: 2.5em;
@@ -163,7 +163,7 @@ svg {
   width: 1.7em;
   font-size: 1.4em;
   background: clear;
-  border-style: solid;
+  border-style: none;
   border-radius: 100vh;
   border-color: var(--header-color);
   padding-left: 0.1vw;
