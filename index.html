@@ -38,10 +38,9 @@
 	<header data-title="Welcome!" data-intro="Welcome to our pomodoro app!" data-step='1'>
 		<nav>
 			<div class="nav-wrapper">
-				<a href="#!" class="brand-logo"><img src="./assets/img/logo2.png" height='60px'>
+				<a href="#!" class="brand-logo" disable><img src="./assets/img/logo2.png" height='60px'>
 					<li> Go Go Pomo! </li>
 				</a>
-				<div>
 				<ul class="right hide-on-med-and-down">
 					<li><a class="waves-effect waves-light btn" id="faqButton"  data-title="Misc" data-intro="Click this FAQ Button for more information on the Pomodoro Technique" data-step='10'>FAQ<i class="material-icons right">help_outline</i></a></li>
 					<li><a class="waves-effect waves-light btn" id="statsButton" data-title="Misc" data-intro="You can see your statistics for the current day as well as the past year" data-step='11'>Statistics<i class="material-icons right">insert_chart</i></a></li>
@@ -54,7 +53,7 @@
 	<!-- Container for timer, timer buttons, and distraction button + prompt -->
 	<section id="timerContainer" class="section-container">
 		<div id="countdown">
-			<p id="modeDisplay" data-title="Timer" data-intro="This displays whether you should be working or be break" data-step='3' > Pomo-Time!</p>
+			<p id="modeDisplay" data-title="Timer" data-intro="This displays whether you should be working or be on break" data-step='3' > Pomo-Time!</p>
 			<p id="top-left-border"> <span>┌</span> </p>
 			<p id="timeDisplay"> 25:00 </p>
 			<p id="bottom-right-border"> <span>┘</span> </p>
@@ -78,9 +77,9 @@
 			</tr>
 		</table>
 		<div id='form-container'>
-			<form id='add-todo' overflow>
-				<input type='text' name='task-name' placeholder='Enter task' class='task-name' data-title="Tasks" data-title="Tasks" data-intro="Enter the name of the task you would like to work on" data-step='6' required>
-				<input type='number' name='task-length' placeholder='#' class='task-length' min='1' max='24' data-title="Tasks" data-intro="Enter the number of 25 minute sessions you think the task will take" data-step='7' required>
+			<form id='add-todo' overflow data-title="Tasks" data-intro="Here you can enter the name as well as the amount of 25 minute pomo-sessions your task will take" data-step='7'>
+				<input type='text' name='task-name' placeholder='Enter task' class='task-name' required>
+				<input type='number' name='task-length' placeholder='#' class='task-length' min='1' max='24' required>
 				<button id="add-button" type='submit' class="btn-floating btn-small"><i class="material-icons">add</i></button>
 			</form>
 		</div>

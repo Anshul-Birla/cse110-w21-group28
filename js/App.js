@@ -28,6 +28,7 @@ const deleteAllButton = document.getElementById('delete-all-button');
 const overlay = document.getElementById('overlay');
 const statsTabBtn = document.getElementById('data');
 const currentTaskDiv = document.getElementById('currentTask');
+const tourButton = document.getElementById('onboardingButton');
 
 const StatsPage = new Statistics();
 const TDLDom = new TodoListDom(todoTable, addTodoForm, addTodoButton,
@@ -36,8 +37,16 @@ const TimerObj = new Timer(startTimerButton, timeDisplay, modeDisplay);
 const DistractionPage = new Distraction(distractButton, distractPopUp,
   cancelButton, distractForm, description, overlay);
 
-// eslint-disable-next-line
-introJs().start(); 
+if (localStorage.getItem('onboarding') === null) {
+  // eslint-disable-next-line
+  introJs().start(); 
+  localStorage.setItem('onboarding', 'true');
+}
+
+tourButton.addEventListener('click', () => {
+  // eslint-disable-next-line
+  introJs().start();
+});
 
 TimerObj.addEventListener('timer-complete', (e) => {
   if (e.detail.sessionIsWork) { // if it was a work mode

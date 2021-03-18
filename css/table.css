@@ -144,7 +144,7 @@ svg {
 .task-name,
 .task-length {
   font-size: 1em;
-  background: clear;
+  background-color: white;
   border-style: none;
   border-radius: 60vh;
   border-color: var(--header-color);
@@ -166,21 +166,6 @@ svg {
   width: 2em;
 }
 
-.task-submit { /* + button to replace with materialize css */
-  margin-left: 1vw;
-  width: 1.7em;
-  font-size: 1.4em;
-  background: clear;
-  border-style: none;
-  border-radius: 100vh;
-  border-color: var(--header-color);
-  padding-left: 0.1vw;
-  padding-right: 0.1vw;
-  color: black;
-  top: 49vh;
-  outline: none;
-  min-width: 1vw;
-}
 
 /* other table features: checkbox, delete button, scrollbar */
 
