@@ -58,7 +58,7 @@
         "branches": 80,
         "functions": 80,
         "lines": 60,
-        "statements": -10
+        "statements": -20
       }
     }
   },

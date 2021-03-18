@@ -1,5 +1,6 @@
 * {
   font-family: Helvetica, sans-serif;
+  color: white;
 }
 
 /* color variables for buttons, page, and timer */
@@ -21,17 +22,27 @@
   --timer-bg-color-short: #90afc5;
 
   /* toothpaste table theme */
-  --even-color: rgba(149, 218, 229, 0.603);
-  --odd-color: rgb(2, 177, 177);
   --header-color: darkcyan;
+  --even-color: rgba(149, 218, 229, 0.603);
+  --odd-color: var(--even-color);
+  --toothpaste: rgb(2, 177, 177);
   --tr-hover-color: #f2f2f279;
-  --td-border-radius: 30px;
+  --completed-task-color: rgb(131, 156, 170);
+  --table-bg-color: var(--toothpaste);
+  --scroll-color: var(--even-color);
+
+  /* table row spacing */
+  --td-border-radius: 22px;
+  --table-border: 12px;
+  --table-row-margin: 20px;
 
   /* shortbreak table theme */
-  --even-color-short: #54a6cf;
-  --odd-color-short: #79c4ea;
-  --header-color-short: #90afc5;
-  --tr-hover-color-short: #763626;
+  --even-color-short: #98c7e9;
+  --odd-color-short: var(--even-color-short);
+  --header-color-short: #4990b4;
+  --tr-hover-color-short: #bdd3df;
+  --scroll-color-short: var(--even-color-short);
+  --table-bg-color-short: #60afcc;
 }
 
 body {
@@ -39,8 +50,29 @@ body {
   transition-duration: 2s;
 }
 
-header {
+header,
+nav {
   overflow: auto;
+  background-color: var(--header-color);
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  display: inline;
+  float: right;
+}
+
+a.brand-logo {
+  margin-left: 1vw;
+}
+
+a.brand-logo li {
+  margin-left: 1vw;
 }
 
 .main-page {
@@ -51,6 +83,8 @@ header {
   background: var(--button-color);
   border-radius: 5px;
   color: var(--font-color);
+  padding: 0;
+  font-size: 70%;
 }
 
 .section-container {
@@ -94,6 +128,14 @@ header {
   max-width: 45%;
 }
 
+.buttons-div {
+  width: 300px;
+  height: 50px;
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 /* timer styling */
 #timerContainer {
   width: 400px;
@@ -118,33 +160,18 @@ header {
   position: relative;
   top: 0;
   bottom: 100px;
-  font-size: 240%;
-  margin: 50px;
-  height: 100px;
+  font-size: 600%;
+  margin: -20px;
+  height: 300px;
+  left: -40px;
 }
 
-#distractionButton {
-  position: absolute;
-  bottom: 5px;
-  right: 5px;
-  font-size: 40%;
-  border-style: solid;
-  border-width: 1px;
-  border-color: var(--button-border-color);
-}
-
-#startTimer {
-  border-style: solid;
-  border-width: 2px;
-  border-color: var(--button-border-color);
-}
-
-#FAQ {
-  background: #008b8b;
-  display: inline-block;
-  margin: auto;
-  width: 60%;
-  border: 3px solid #2f4f4f;
+#currentTask {
+  font-size: larger;
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  width: 400px;
   padding: 10px;
 }
 
@@ -199,13 +226,13 @@ html {
   position: relative;
   text-align: left;
   margin: 0;
-  font-size: 150%;
+  font-size: 300%;
 }
 
 #top-left-border span {
   position: absolute;
-  top: 30px;
-  left: 30px;
+  top: 0;
+  left: -140px;
   line-height: 0.3;
 }
 
@@ -213,12 +240,21 @@ html {
   position: relative;
   text-align: right;
   margin: 0;
-  font-size: 150%;
+  font-size: 300%;
 }
 
 #bottom-right-border span {
   position: absolute;
-  bottom: 50px;
-  right: 30px;
+  bottom: 20px;
+  right: -100px;
   line-height: 0.3;
+}
+
+.logo {
+  display: inline-block;
+  height: 100%;
+}
+
+.logo > img {
+  vertical-align: middle;
 }

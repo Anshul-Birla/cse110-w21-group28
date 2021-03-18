@@ -1,5 +1,5 @@
 import {
-  sessionStartName, workMode, shortBreakMode, longBreakMode, classNames, buttonText,
+  sessionStartName, workMode, shortBreakMode, longBreakMode, buttonText,
 } from './TimerVariables.js';
 /**
  * A class for the Timer object. Has functions to start the timer,
@@ -58,7 +58,15 @@ class Timer extends HTMLElement {
       this.stateQueue.push(workOrder[i]);
     }
 
+    this.sessionId = localStorage.getItem('pomoSessionId');
+    this.sessionId = ((this.sessionId === null) ? 0 : parseInt(this.sessionId, 10) + 1);
+
     this.addEventListeners();
+  }
+
+  resetPomoSessionId() {
+    this.sessionId = 0;
+    localStorage.setItem('pomoSessionId', this.sessionId);
   }
 
   /**
@@ -71,10 +79,17 @@ class Timer extends HTMLElement {
     const event = new CustomEvent('timer-complete', {
       detail: {
         sessionName: completedSession.name,
+        duration: completedSession.duration,
+        sessionIsWork: completedSession.isWork,
+        sessionId: this.sessionId,
       },
     });
 
     this.dispatchEvent(event);
+    if (!completedSession.isWork) {
+      this.sessionId += 1;
+      localStorage.setItem('pomoSessionId', this.sessionId);
+    }
     this.startTimer();
   }
 
@@ -87,6 +102,14 @@ class Timer extends HTMLElement {
     const session = this.stateQueue[0];
     this.state = session.name;
     this.displayStatus.textContent = this.state;
+    const event = new CustomEvent('timer-start', {
+      detail: {
+        sessionName: this.state,
+        sessionIsWork: session.isWork,
+      },
+    });
+
+    this.dispatchEvent(event);
     this.countdown(session.duration * 60);
   }
 
@@ -105,6 +128,8 @@ class Timer extends HTMLElement {
     for (let i = 0; i < workOrder.length; i += 1) {
       this.stateQueue.push(workOrder[i]);
     }
+    const event = new CustomEvent('timer-end');
+    this.dispatchEvent(event);
   }
 
   /**
@@ -139,14 +164,12 @@ class Timer extends HTMLElement {
    */
   addEventListeners() {
     this.startButton.addEventListener('click', () => {
-      if (this.startButton.textContent === buttonText.startTimerText) {
+      if (this.startButton.textContent.indexOf(buttonText.startTimerText) > -1) {
         this.startTimer();
-        this.startButton.textContent = buttonText.stopTimerText;
-        this.startButton.class = classNames.stopButton;
+        this.startButton.childNodes[0].nodeValue = buttonText.stopTimerText;
       } else {
         this.endTimer();
-        this.startButton.textContent = buttonText.startTimerText;
-        this.startButton.class = classNames.startButton;
+        this.startButton.childNodes[0].nodeValue = buttonText.startTimerText;
         document.getElementsByTagName('body')[0].classList.remove('short-break');
       }
     });

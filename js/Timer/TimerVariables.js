@@ -18,16 +18,11 @@ const longBreakMode = {
   isWork: false,
 };
 
-const classNames = {
-  stopButton: 'stopTimerButton',
-  startButton: 'startTimerButton',
-};
-
 const buttonText = {
   stopTimerText: 'End Day',
   startTimerText: 'Start',
 };
 
 export {
-  sessionStartName, workMode, shortBreakMode, longBreakMode, classNames, buttonText,
+  sessionStartName, workMode, shortBreakMode, longBreakMode, buttonText,
 };

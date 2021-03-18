@@ -1,6 +1,6 @@
 import { Timer } from '../js/Timer/Timer';
 import {
-  workMode, shortBreakMode, longBreakMode, classNames, buttonText,
+  workMode, shortBreakMode, longBreakMode, buttonText,
 } from '../js/Timer/TimerVariables';
 
 beforeEach(() => {
@@ -18,6 +18,7 @@ test('Test Initial State is Nothing', () => {
   const button = document.getElementById('start');
   const TimerObj = new Timer(button, null, null);
   expect(TimerObj.state).toBe('');
+  expect(TimerObj.sessionId).toBe(0);
 });
 
 test('Test First Iteration of Timer', () => {
@@ -43,6 +44,18 @@ test('Test That Queue Gets Updated During Second Iteration Of Timer', () => {
   expect(TimerObj.stateQueue[6]).toBe(longBreakMode);
 });
 
+test('Test That Multiple Iterations of the Timer Work', () => {
+  const displayTime = document.getElementById('displayTime');
+  const displayStatus = document.getElementById('displayStatus');
+  const button = document.getElementById('start');
+  const TimerObj = new Timer(button, displayTime, displayStatus);
+  jest.clearAllTimers();
+  TimerObj.startTimer();
+
+  jest.advanceTimersByTime(workMode.duration * 120 * 1000);
+  expect(TimerObj.sessionId).toBe(1);
+});
+
 test('Test That HTML Gets Updated During Second ', () => {
   const displayTime = document.getElementById('displayTime');
   const displayStatus = document.getElementById('displayStatus');
@@ -64,7 +77,6 @@ test('Test That Start Button Functions Properly ', () => {
   jest.clearAllTimers();
   button.click();
   expect(button.textContent).toBe(buttonText.stopTimerText);
-  expect(button.class).toBe(classNames.stopButton);
 });
 
 test('Test That Clicking Start Twice Changes HTML ', () => {
@@ -75,8 +87,7 @@ test('Test That Clicking Start Twice Changes HTML ', () => {
   jest.clearAllTimers();
   button.click();
   button.click();
-  expect(button.textContent).toBe(buttonText.startTimerText);
-  expect(button.class).toBe(classNames.startButton);
+  expect(TimerObj.startButton.textContent.indexOf(buttonText.startTimerText) > -1).toBe(true);
   expect(TimerObj.displayStatus.textContent).toBe('Pomo-Time!');
 });
 
@@ -89,5 +100,7 @@ test('Test That Timer Resets Properly When End Day is Clicked', () => {
   button.click();
   jest.advanceTimersByTime(workMode.duration * 60 * 1000);
   button.click();
+  TimerObj.resetPomoSessionId();
   expect(TimerObj.stateQueue[0]).toBe(workMode);
+  expect(TimerObj.sessionId).toBe(0);
 });
