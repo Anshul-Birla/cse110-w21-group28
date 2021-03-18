@@ -8,24 +8,24 @@ beforeEach(() => {
   <div id='overlay'></div>
   <button id="distractionButton" class = "pure-button">Distraction</button>
   <section class="form-popup" id="distract-popup">
-    <form class="form-container" id="distract-form-container">
+    <form class="form-container" id="distract-form">
       <h1>Report Distraction</h1>
 
       <label><b>Distraction Description</b></label>
-      <input type="text" placeholder="Enter a short description of the distraction" id="description">
+      <input type="text" placeholder="Enter a short description of the distraction" id="description" required="">
 
-      <button type="button" class="distractFormButton" id="submit-button">Submit</button>
+      <button type="submit" class="distractFormButton" id="submit-button">Submit</button>
       <button type="button" class="distractFormButton cancel" id="cancel-button">Cancel</button>
     </form>
   </section>`;
   const distractButton = document.getElementById('distractionButton');
   const distractPopUp = document.getElementById('distract-popup');
   const cancelButton = document.getElementById('cancel-button');
-  const submitButton = document.getElementById('submit-button');
+  const distractForm = document.getElementById('distract-form');
   const description = document.getElementById('description');
   const overlay = document.getElementById('overlay');
   // eslint-disable-next-line max-len
-  DistractionPage = new Distraction(distractButton, distractPopUp, cancelButton, submitButton, description, overlay);
+  DistractionPage = new Distraction(distractButton, distractPopUp, cancelButton, distractForm, description, overlay);
 });
 
 test('Test show and hide', () => {
@@ -46,7 +46,7 @@ test('Test show and hide', () => {
 test('submit first time', () => {
   DistractionPage.distractButton.click();
   DistractionPage.description.value = 'go to restroom';
-  DistractionPage.submitButton.click();
+  DistractionPage.distractForm.submit();
   setTimeout(() => {
     expect(DistractionPage.distractPopUp.style.display).toBe('none');
   }, 3000);
@@ -78,4 +78,12 @@ test('animation end event listener', () => {
 
   DistractionPage.overlay.dispatchEvent(event);
   expect(DistractionPage.overlay.style.animationName).toBe('');
+});
+
+test('click overlay to close', () => {
+  DistractionPage.distractButton.click();
+  DistractionPage.overlay.click();
+  setTimeout(() => {
+    expect(DistractionPage.distractPopUp.style.display).toBe('none');
+  }, 3000);
 });
