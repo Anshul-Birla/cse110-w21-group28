@@ -35,6 +35,9 @@
   color: black;
 }
 
+#settingsContent select *{
+  color: black;
+}
 #workSoundSelector {
   grid-column: 1;
   grid-row: 1;
