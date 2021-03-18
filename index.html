@@ -7,6 +7,7 @@
 	<link rel="stylesheet" href="./css/reduced-materialize.css" />
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" href="./css/buttons-min.css" />
+	<link rel="stylesheet" href="./css/ThirdParty/introjs.css" />
 	<link rel="stylesheet" href="./css/style.css" />
 	<link rel="stylesheet" href="./css/button.css" />
 	<link rel="stylesheet" href="./css/distraction-box.css" />
@@ -19,19 +20,33 @@
 	<link rel="icon" type="image/png" href="./assets/img/pomatoLogo3.png"> </head>
 
 <body>
+	<noscript>
+    <style type="text/css">
+      .main-page {display: none;}
+    </style>
+    <h1>
+      :(
+    </h1>
+    <h2>
+    It looks like your browser does not have Javascript enabled. Please turn it on in order to use this website properly
+  </h2>
+  </noscript>
+
 	<div id='overlay'></div>
+	<div class='main-page'>
 	<!-- Header bar at the top of the page for title text & navigation -->
 	<header data-title="Welcome!" data-intro="Welcome to our pomodoro app!" data-step='1'>
 		<nav>
-			<div class="nav-wrapper>">
+			<div class="nav-wrapper">
 				<a href="#!" class="brand-logo"><img src="./assets/img/logo2.png" height='60px'>
 					<li> Go Go Pomo! </li>
 				</a>
+				<div>
 				<ul class="right hide-on-med-and-down">
-					<li><a class="waves-effect waves-light btn" id="faqButton">FAQ<i class="material-icons right">help_outline</i></a></li>
-					<li><a class="waves-effect waves-light btn" id="statsButton">Statistics<i class="material-icons right">insert_chart</i></a></li>
-					<li><a class="btn" id="settingsButton">Settings<i class="material-icons right">settings</i></a></li>
-					<li><a class="btn" id="onboardingButton">TOUR<i class="material-icons right">replay</i></a></li>
+					<li><a class="waves-effect waves-light btn" id="faqButton"  data-title="Misc" data-intro="Click this FAQ Button for more information on the Pomodoro Technique" data-step='10'>FAQ<i class="material-icons right">help_outline</i></a></li>
+					<li><a class="waves-effect waves-light btn" id="statsButton" data-title="Misc" data-intro="You can see your statistics for the current day as well as the past year" data-step='11'>Statistics<i class="material-icons right">insert_chart</i></a></li>
+					<li><a class="btn" id="settingsButton" data-title="Misc" data-intro="If you would like to change the sounds of the app or enter into dark mode, click here" data-step='12'>Settings<i class="material-icons right">settings</i></a></li>
+					<li><a class="btn" id="onboardingButton" data-title="Misc" data-intro="If you would like to rerun the tutorial, click here" data-step='13'>TOUR<i class="material-icons right">replay</i></a></li>
 				</ul>
 			</div>
 		</nav>
@@ -39,33 +54,33 @@
 	<!-- Container for timer, timer buttons, and distraction button + prompt -->
 	<section id="timerContainer" class="section-container">
 		<div id="countdown">
-			<p id="modeDisplay"> Pomo-Time!</p>
+			<p id="modeDisplay" data-title="Timer" data-intro="This displays whether you should be working or be break" data-step='3' > Pomo-Time!</p>
 			<p id="top-left-border"> <span>┌</span> </p>
 			<p id="timeDisplay"> 25:00 </p>
 			<p id="bottom-right-border"> <span>┘</span> </p>
-			<button class="btn-large waves-light" id="startTimer">Start &nbsp;&nbsp;&nbsp;<i class="material-icons right">timer</i></button>
-			<button class="btn-large waves-effect waves-light  red lighten-2" id="distractionButton" disabled>Distraction <i class="material-icons right">warning</i></button>
+			<button class="btn-large waves-light" id="startTimer" data-title="Timer" data-intro="You can start the timer here" data-step='2'>Start &nbsp;&nbsp;&nbsp;<i class="material-icons right" >timer</i></button>
+			<button class="btn-large waves-effect waves-light  red lighten-2" id="distractionButton" data-title="Timer" data-intro="During a working session, you can log any distractions you had" data-step='4' disabled>Distraction <i class="material-icons right">warning</i></button>
 			<br> </div>
 	</section>
 	<br>
 	<!-- Container for current task -->
-	<section id="currentTask" class="section-container"> </section>
+	<section id="currentTask" class="section-container" data-title="Tasks" data-intro="The task you should currently be working on should be displayed here" data-step='8' > </section>
 	<!-- Container for task list -->
 	<section id='tasklist' class='section-container'>
-		<table id='todo'>
+		<table id='todo' data-title="Tasks" data-intro="Your tasks live in this table" data-step='5'>
 			<tr>
 				<th class='col1-checkbox'></th>
 				<th class='col2-task'>TASKS</th>
 				<th class='col3-pomos'>#</th>
 				<th class='col4-delete'>
-					<button id="delete-all-button" type='submit' class="btn-floating btn-small"><i class="material-icons">delete_forever</i></button>
+					<button data-title="Tasks" data-intro="If you would like to start fresh, press this button to delete all of your tasks" data-step='9' id="delete-all-button" type='submit' class="btn-floating btn-small"><i class="material-icons">delete_forever</i></button>
 				</th>
 			</tr>
 		</table>
 		<div id='form-container'>
 			<form id='add-todo' overflow>
-				<input type='text' name='task-name' placeholder='Enter task' class='task-name'>
-				<input type='number' name='task-length' placeholder='#' class='task-length' min='1' max='24' required>
+				<input type='text' name='task-name' placeholder='Enter task' class='task-name' data-title="Tasks" data-title="Tasks" data-intro="Enter the name of the task you would like to work on" data-step='6' required>
+				<input type='number' name='task-length' placeholder='#' class='task-length' min='1' max='24' data-title="Tasks" data-intro="Enter the number of 25 minute sessions you think the task will take" data-step='7' required>
 				<button id="add-button" type='submit' class="btn-floating btn-small"><i class="material-icons">add</i></button>
 			</form>
 		</div>
@@ -121,5 +136,7 @@
 </section>
 <script type="module" src="./js/App.js"></script>
 <script type="module" src="./js/FAQ/FAQ.js"></script>
+<script src="./js/ThirdParty/intro.js"></script>
+</div>
 </body>
 </html>

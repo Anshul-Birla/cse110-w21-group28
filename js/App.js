@@ -33,10 +33,11 @@ const StatsPage = new Statistics();
 const TDLDom = new TodoListDom(todoTable, addTodoForm, addTodoButton,
   deleteAllButton, currentTaskDiv);
 const TimerObj = new Timer(startTimerButton, timeDisplay, modeDisplay);
-// eslint-disable-next-line max-len
-const DistractionPage = new Distraction(distractButton, distractPopUp, cancelButton, distractForm, description, overlay);
+const DistractionPage = new Distraction(distractButton, distractPopUp,
+  cancelButton, distractForm, description, overlay);
 
-introJs().start(); // eslint-disable-line 
+// eslint-disable-next-line
+introJs().start(); 
 
 TimerObj.addEventListener('timer-complete', (e) => {
   if (e.detail.sessionIsWork) { // if it was a work mode

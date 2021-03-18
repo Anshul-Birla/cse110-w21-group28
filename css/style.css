@@ -1,6 +1,5 @@
 * {
   font-family: Helvetica, sans-serif;
-  color: white;
 }
 
 /* color variables for buttons, page, and timer */
@@ -52,7 +51,7 @@ body {
 
 header,
 nav {
-  overflow: auto;
+  overflow: hidden;
   background-color: var(--header-color);
 }
 
