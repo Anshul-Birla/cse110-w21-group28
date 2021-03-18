@@ -22,8 +22,6 @@
   --timer-bg-color-short: #90afc5;
 
   /* toothpaste table theme */
-  --even-color: rgba(149, 218, 229, 0.603);
-  --odd-color: rgb(2, 177, 177);
   --header-color: darkcyan;
   --even-color: rgba(149, 218, 229, 0.603);
   --odd-color: var(--even-color); /* replaces rgb(2, 177, 177); */

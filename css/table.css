@@ -14,12 +14,11 @@
 
 /* table itself + header, cells, rows, then columns styling */
 table {
-  table-layout: fixed;
   display: block;
   border-collapse: separate;
   border-spacing: 0 var(--table-border);
   table-layout: fixed; /* allows for word-wrap */
-  max-width: 100%;         /* allows for word-wrap */
+  max-width: 100%;     /* allows for word-wrap */
   min-height: 60vh;
   margin-top: -20px;
 }
@@ -28,7 +27,7 @@ th,
 td {
   padding: 15px;
   word-wrap: break-word; /* so that long tasks don't extend the table */
-  max-width: 200px;
+  max-width: 200px;      /* allows for word-wrap */
 }
 
 th {
