@@ -195,7 +195,7 @@ class TodoListDom {
    */
   onUncheckedTask(id) {
     const uncheckedTask = this.todoList.getTaskById(id);
-    let firstCompletedTaskIndex = this.getFirstCompletedTaskIndex();
+    const firstCompletedTaskIndex = this.getFirstCompletedTaskIndex();
     uncheckedTask.onDelete();
     this.todoList.addTaskToEnd(uncheckedTask);
     this.displayTask(uncheckedTask, firstCompletedTaskIndex);
@@ -206,10 +206,10 @@ class TodoListDom {
    */
   updateCurrentTask() {
     const nextTask = this.todoList.getCurrentTask();
-    if(this.currentTask !== null && !this.currentTask.checked){
+    if (this.currentTask !== null && !this.currentTask.checked) {
       this.currentTask.children[3].children[0].children[1].children[1].style.display = 'inline-block';
     }
-    if(nextTask !== null){
+    if (nextTask !== null) {
       nextTask.children[3].children[0].children[1].children[1].style.display = 'none';
     }
     if (this.currentTask === null && nextTask === null) {
