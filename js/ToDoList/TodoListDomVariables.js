@@ -1,3 +1,7 @@
+/**
+ * The object that stores the textContent for each HTML elements.
+ * @type {Object} HTMLAttributes
+ */
 const HTMLAttributes = {
   buttonDoneTextContent: 'Done',
   buttonAddTextContent: 'Add Task',
