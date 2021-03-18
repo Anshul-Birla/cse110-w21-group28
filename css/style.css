@@ -50,8 +50,29 @@ body {
   transition-duration: 2s;
 }
 
-header {
+header,
+nav {
   overflow: auto;
+  background-color: var(--header-color);
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  display: inline;
+  float: right;
+}
+
+a.brand-logo {
+  margin-left: 1vw;
+}
+
+a.brand-logo li {
+  margin-left: 1vw;
 }
 
 .pure-button {
@@ -135,17 +156,10 @@ header {
   position: relative;
   top: 0;
   bottom: 100px;
-  font-size: 240%;
-  margin: 50px;
-  height: 100px;
-}
-
-#distractionButton,
-#startTimer {
-  width: 48%;
-  border-style: solid;
-  border-width: 2px;
-  border-color: var(--button-border-color);
+  font-size: 600%;
+  margin: -20px;
+  height: 300px;
+  left: -40px;
 }
 
 #currentTask {
@@ -208,13 +222,13 @@ html {
   position: relative;
   text-align: left;
   margin: 0;
-  font-size: 150%;
+  font-size: 300%;
 }
 
 #top-left-border span {
   position: absolute;
-  top: 30px;
-  left: 30px;
+  top: 0;
+  left: -140px;
   line-height: 0.3;
 }
 
@@ -222,12 +236,21 @@ html {
   position: relative;
   text-align: right;
   margin: 0;
-  font-size: 150%;
+  font-size: 300%;
 }
 
 #bottom-right-border span {
   position: absolute;
-  bottom: 50px;
-  right: 30px;
+  bottom: 20px;
+  right: -100px;
   line-height: 0.3;
+}
+
+.logo {
+  display: inline-block;
+  height: 100%;
+}
+
+.logo > img {
+  vertical-align: middle;
 }
