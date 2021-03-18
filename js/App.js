@@ -146,8 +146,8 @@ statsButton.addEventListener('click', () => {
   StatsPage.updateDom();
   statsPopUp.style.display = 'block';
   parentDiv.style.display = 'block';
-  statsPopUp.style.animation = 'fadeEffect-popup 2s';
-  overlay.style.animation = 'fadeEffect-overlay 2s';
+  statsPopUp.style.animation = 'fadeEffect-popup 1s';
+  overlay.style.animation = 'fadeEffect-overlay 1s';
   parentDiv.setAttribute('class', 'slide-in');
   document.getElementById('overlay').style.display = 'block';
 });

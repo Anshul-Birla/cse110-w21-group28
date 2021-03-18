@@ -21,7 +21,7 @@
   width: 100vw;
   display: none;
   background-color: rgba(0, 0, 0, 0.75);
-  animation: fadeEffect-overlay 2s;
+  animation: fadeEffect-overlay 1s;
 }
 
 .close-stats-button {
