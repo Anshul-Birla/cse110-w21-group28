@@ -11,8 +11,8 @@
   <link rel="stylesheet" href="./css/animations.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Pomodoro</title>
-  <link rel="icon" 
-  type="image/png" 
+  <link rel="icon"
+  type="image/png"
   href="./assets/img/pomatoLogo3.png">
 </head>
 </head>
@@ -52,12 +52,16 @@
       <p id="bottom-right-border">
         <span>┘</span>
       </p>
-      <br>
-      <button id="startTimer" class="pure-button">Start</button>
-      <button id="distractionButton" class="pure-button">Distraction</button>
+      <div class="buttons-div">
+        <button id="startTimer" class="pure-button">Start</button>
+        <button id="distractionButton" class = "pure-button" disabled = "true">Distraction</button>
+      </div>
     </div>
   </section>
+  <!-- Container for current task -->
+  <section id="currentTask" class="section-container">
 
+  </section>
   <!-- Container for task list -->
   <section id='tasklist' class='section-container'>
     <table id='todo'>
@@ -65,8 +69,8 @@
         <th class='col1-checkbox'></th>
         <th class='col2-task'>TASKS</th>
         <th class='col3-pomos'>#</th>
-        <th class='col4-delete'><button id = "delete-all-button" class="delete-button" type="button">Delete All</button></th>
-      </tr>      
+        <th class='col4-delete'><button id = "delete-all-button" class="pure-button" type="button">Delete All</button></th>
+      </tr>
     </table>
 
     <div id='form-container'>
