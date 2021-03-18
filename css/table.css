@@ -135,8 +135,8 @@ svg {
   padding-top: 10px;
   padding-bottom: 10px;
   min-width: 500px;
-  border-radius: var(--td-border-radius);
-  transition-duration: 0s;
+  border-top-right-radius: var(--td-border-radius);
+  transition-duration: 2s;
 }
 
 /* checkbox and delete button styling */
