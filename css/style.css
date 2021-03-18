@@ -79,6 +79,8 @@ a.brand-logo li {
   background: var(--button-color);
   border-radius: 5px;
   color: var(--font-color);
+  padding: 0;
+  font-size: 70%;
 }
 
 .section-container {
@@ -122,6 +124,14 @@ a.brand-logo li {
   max-width: 45%;
 }
 
+.buttons-div {
+  width: 300px;
+  height: 50px;
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 /* timer styling */
 #timerContainer {
   width: 400px;
@@ -150,6 +160,15 @@ a.brand-logo li {
   margin: -20px;
   height: 300px;
   left: -40px;
+}
+
+#currentTask {
+  font-size: larger;
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  width: 400px;
+  padding: 10px;
 }
 
 #FAQ {
