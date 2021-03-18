@@ -18,7 +18,7 @@ table {
   border-collapse: separate;
   border-spacing: 0 var(--table-border);
   table-layout: fixed; /* allows for word-wrap */
-  max-width: 100%;     /* allows for word-wrap */
+  /* max-width: 100%;     /* allows for word-wrap */
   min-height: 60vh;
   margin-top: -20px;
   background-color: var(--toothpaste);
@@ -28,7 +28,7 @@ th,
 td {
   padding: 15px;
   word-wrap: break-word; /* so that long tasks don't extend the table */
-  max-width: 200px;      /* allows for word-wrap */
+  max-width: 200vw;      /* allows for word-wrap */
 }
 
 th {
@@ -40,17 +40,17 @@ th {
   position: -webkit-sticky;
   position: sticky;
   top: 0;
-  transition-duration: 2s;
+  transition-duration: 0s;
 }
 
 td {
   min-width: 50px;
-  transition-duration: 2s;
+  transition-duration: 0s;
 }
 
 tr {
   margin-top: 20px;
-  width: 100%;
+  /* width: 100%; */
 }
 
 tr:nth-child(even) td {
@@ -96,24 +96,24 @@ svg {
 }
 
 .col1-checkbox {
-  width: 10%;
+  width: 10vw;
 }
 
 .col3-pomos {
-  width: 12%;
+  width: 10vw;
 }
 
 .col4-delete {
-  width: 15%;
+  width: 10vw;
   text-align: center;
 }
 
 .col2-task {
-  width: 63%;
+  width: 100vw;
 }
 
 /* input form (add task) */
-#form-container {
+#form-container { /* div */
   position: -webkit-sticky;
   position: sticky;
   bottom: 0;
@@ -123,7 +123,7 @@ svg {
   border-top-right-radius: var(--td-border-radius);
 }
 
-#add-todo {
+#add-todo { /* form */
   position: -webkit-sticky;
   position: sticky;
   bottom: 0;
@@ -132,7 +132,7 @@ svg {
   padding-top: 10px;
   padding-bottom: 10px;
   border-radius: var(--td-border-radius);
-  transition-duration: 2s;
+  transition-duration: 0s;
 }
 
 .task-name,
