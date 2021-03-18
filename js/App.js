@@ -34,7 +34,7 @@ TimerObj.addEventListener('timer-start', (e) => {
   }
 });
 
-TimerObj.addEventListener('timer-end', (e) => {
+TimerObj.addEventListener('timer-end', () => {
   distractionButton.disabled = true;
 });
 
