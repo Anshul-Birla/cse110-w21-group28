@@ -124,7 +124,7 @@ svg {
   width: 100%;
   background-color: var(--page-bg-color);
   border-top-left-radius: var(--td-border-radius);
-  border-top-right-radius: var(--td-border-radius);
+  border-bottom-right-radius: var(--td-border-radius);
 }
 
 #add-todo { /* form */
@@ -136,7 +136,7 @@ svg {
   padding-top: 10px;
   padding-bottom: 10px;
   min-width: 500px;
-  border-top-right-radius: var(--td-border-radius);
+  border-bottom-right-radius: var(--td-border-radius);
   transition-duration: 2s;
 }
 
