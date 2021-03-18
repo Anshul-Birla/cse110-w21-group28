@@ -1,5 +1,6 @@
 class Distraction extends HTMLElement {
   /**
+   * Constructor for the distraction element
    * @param {HTMLButton} distractButton
    * @param {HTMLSection} distractPopUp
    * @param {HTMLButton} cancelButton
