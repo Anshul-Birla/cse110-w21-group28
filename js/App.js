@@ -54,3 +54,7 @@ window.addEventListener('click', (e) => {
     }
   }
 });
+
+document.getElementById("settingsButton").addEventListener('click', () => {
+  alert("HELLOOOO")
+})

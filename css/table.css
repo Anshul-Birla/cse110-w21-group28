@@ -131,7 +131,7 @@ svg {
 }
 
 /* checkbox and delete button styling */
-/* input[type='checkbox'] {
+input[type='checkbox'] {
   width: 20px;
   height: 20px;
   background: white;
@@ -141,7 +141,7 @@ svg {
 
 input[type='checkbox']:checked {
   box-shadow: 0 0 0 3px lime;
-} */
+}
 
 #delete-all-button {
   font-size: 12px;
