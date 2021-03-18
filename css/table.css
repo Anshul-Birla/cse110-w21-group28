@@ -150,7 +150,7 @@ svg {
   border-color: var(--header-color);
   height: 2.5em;
   padding-left: 1vw;
-  padding-right: 1vw; /* so that when a user enters a long task it doesn't go past the input bar */
+  padding-right: 2vw; /* so that when a user enters a long task it doesn't go past the input bar */
   color: black;
   top: 49vh;
   outline: none;
