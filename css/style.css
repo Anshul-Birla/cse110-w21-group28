@@ -215,3 +215,12 @@ html {
   right: 30px;
   line-height: 0.3;
 }
+
+.logo {
+  display: inline-block;
+  height: 100%;
+}
+
+.logo>img {
+  vertical-align: middle
+}
