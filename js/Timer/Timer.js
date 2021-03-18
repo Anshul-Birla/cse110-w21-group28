@@ -68,7 +68,7 @@ class Timer extends HTMLElement {
   onTimerComplete() {
     const completedSession = this.stateQueue.shift();
     this.stateQueue.push(completedSession);
-    const event = new CustomEvent('timer-start', {
+    const event = new CustomEvent('timer-complete', {
       detail: {
         sessionName: completedSession.name,
       },
