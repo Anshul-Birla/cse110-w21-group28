@@ -28,10 +28,11 @@ const closeStatsButton = document.getElementById('close-stats-button');
 const deleteAllButton = document.getElementById('delete-all-button');
 const overlay = document.getElementById('overlay');
 const statsTabBtn = document.getElementById('data');
-// const statsDistractBtn = document.getElementById('distraction');
+const currentTaskDiv = document.getElementById('currentTask');
 
 const StatsPage = new Statistics();
-const TDLDom = new TodoListDom(todoTable, addTodoForm, addTodoButton, deleteAllButton);
+const TDLDom = new TodoListDom(todoTable, addTodoForm, addTodoButton,
+  deleteAllButton, currentTaskDiv);
 const TimerObj = new Timer(startTimerButton, timeDisplay, modeDisplay);
 // eslint-disable-next-line max-len
 const DistractionPage = new Distraction(distractButton, distractPopUp, cancelButton, distractForm, description, overlay);
@@ -63,6 +64,19 @@ startTimerButton.addEventListener('click', () => {
     workModeColors();
   }
 });
+
+TimerObj.addEventListener('timer-start', (e) => {
+  if (e.detail.sessionIsWork) {
+    distractButton.disabled = false;
+  } else {
+    distractButton.disabled = true;
+  }
+});
+
+TimerObj.addEventListener('timer-end', () => {
+  distractButton.disabled = true;
+});
+
 
 document.body.addEventListener('focus-task', (e) => {
   TDLDom.onFocusTask(e.detail.taskID);

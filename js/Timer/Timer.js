@@ -102,6 +102,14 @@ class Timer extends HTMLElement {
     const session = this.stateQueue[0];
     this.state = session.name;
     this.displayStatus.textContent = this.state;
+    const event = new CustomEvent('timer-start', {
+      detail: {
+        sessionName: this.state,
+        sessionIsWork: session.isWork,
+      },
+    });
+
+    this.dispatchEvent(event);
     this.countdown(session.duration * 60);
   }
 
@@ -120,6 +128,8 @@ class Timer extends HTMLElement {
     for (let i = 0; i < workOrder.length; i += 1) {
       this.stateQueue.push(workOrder[i]);
     }
+    const event = new CustomEvent('timer-end');
+    this.dispatchEvent(event);
   }
 
   /**
