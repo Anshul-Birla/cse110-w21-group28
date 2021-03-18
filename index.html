@@ -13,6 +13,7 @@
 	<link rel="stylesheet" href="./css/faq-box.css" />
 	<link rel="stylesheet" href="./css/table.css" />
 	<link rel="stylesheet" href="./css/animations.css" />
+  <link rel="stylesheet" href="./css/stats.css" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Pomodoro</title>
 	<link rel="icon" type="image/png" href="./assets/img/pomatoLogo3.png"> </head>
@@ -28,7 +29,7 @@
 				</a>
 				<ul class="right hide-on-med-and-down">
 					<li><a class="waves-effect waves-light btn" id="faqButton">FAQ<i class="material-icons right">help_outline</i></a></li>
-					<li><a class="waves-effect waves-light btn" href="#Stats">Statistics<i class="material-icons right">insert_chart</i></a></li>
+					<li><a class="waves-effect waves-light btn" id="statsButton">Statistics<i class="material-icons right">insert_chart</i></a></li>
 					<li><a class="btn" id="settingsButton">Settings<i class="material-icons right">settings</i></a></li>
 					<li><a class="btn" id="onboardingButton">TOUR<i class="material-icons right">replay</i></a></li>
 				</ul>
@@ -57,7 +58,7 @@
 				<th class='col2-task'>TASKS</th>
 				<th class='col3-pomos'>#</th>
 				<th class='col4-delete'>
-					<button id="delete-all-button" type="button">Delete All</button>
+					<button id="delete-all-button" type='submit' class="btn-floating btn-small"><i class="material-icons">delete_forever</i></button>
 				</th>
 			</tr>
 		</table>
@@ -79,6 +80,24 @@
 			<button type="button" class="distractFormButton cancel" id="cancel-button">Cancel</button>
 		</form>
 	</section>
+   <!-- Linked section on page under task list for summary & statistics of work sessions -->
+   <section id="stats" class="linked-section">
+    <h2>Stats</h2>
+  </section>
+  <!-- Stats-->
+    <section class="stats-popup" id='stats-section'>
+      <div id='parentDiv' class='slide-out'>
+        <span class="close-stats-button" id='close-stats-button'>&times;</span>
+          <h2 class='statslabel'>Your Stats</h2>
+          <div class ="tab">
+            <button class="tab-btn" id="data" > Data </button>
+            <button class="tab-btn" id="distraction"> Distraction </button>
+          </div>
+          <div id='stats-info' class='stats-info-container'>
+          </div>
+          </div>
+      </div>
+    </section>
 	<!-- FAQ-->
 	<section class="faq">
 		<div id="FAQ">
@@ -105,7 +124,6 @@
 
 </section>
 <script type="module" src="./js/App.js"></script>
-<script type="module" src="./js/Distraction.js"></script>
 <script type="module" src="./js/FAQ/FAQ.js"></script>
 </body>
 </html>

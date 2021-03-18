@@ -173,7 +173,6 @@ class Task extends HTMLTableRowElement {
     deleteBtn.addEventListener('click', () => {
       this.onDelete();
     });
-
     return deleteBtn;
   }
 
@@ -326,6 +325,10 @@ class Task extends HTMLTableRowElement {
   checkOffTask() {
     this.checked = true;
     this.setAttribute('class', classNames.completedTaskClassName);
+    const event = new CustomEvent('task-checked-off', {
+    });
+
+    this.dispatchEvent(event);
     this.focusButton.parentElement.style.display = 'none';
     this.updateLocalStorage();
   }
@@ -344,7 +347,8 @@ class Task extends HTMLTableRowElement {
   onDelete() {
     this.remove();
     this.removeFromLocalStorage();
-    const event = new CustomEvent('task-deleted', {
+    // for actual task deletion
+    let event = new CustomEvent('task-deleted', {
       bubbles: true,
       composed: true,
       detail: {
@@ -352,6 +356,14 @@ class Task extends HTMLTableRowElement {
       },
     });
     document.body.dispatchEvent(event);
+
+    // for stats
+    event = new CustomEvent('task-deleted', {
+      detail: {
+        pomoSessions: this.totalSessions,
+      },
+    });
+    this.dispatchEvent(event);
   }
 }
 

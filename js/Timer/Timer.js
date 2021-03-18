@@ -58,7 +58,15 @@ class Timer extends HTMLElement {
       this.stateQueue.push(workOrder[i]);
     }
 
+    this.sessionId = localStorage.getItem('pomoSessionId');
+    this.sessionId = ((this.sessionId === null) ? 0 : parseInt(this.sessionId, 10) + 1);
+
     this.addEventListeners();
+  }
+
+  resetPomoSessionId() {
+    this.sessionId = 0;
+    localStorage.setItem('pomoSessionId', this.sessionId);
   }
 
   /**
@@ -71,10 +79,17 @@ class Timer extends HTMLElement {
     const event = new CustomEvent('timer-complete', {
       detail: {
         sessionName: completedSession.name,
+        duration: completedSession.duration,
+        sessionIsWork: completedSession.isWork,
+        sessionId: this.sessionId,
       },
     });
 
     this.dispatchEvent(event);
+    if (!completedSession.isWork) {
+      this.sessionId += 1;
+      localStorage.setItem('pomoSessionId', this.sessionId);
+    }
     this.startTimer();
   }
 
@@ -90,6 +105,7 @@ class Timer extends HTMLElement {
     const event = new CustomEvent('timer-start', {
       detail: {
         sessionName: this.state,
+        sessionIsWork: session.isWork,
       },
     });
 
