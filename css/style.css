@@ -28,6 +28,7 @@
   --toothpaste: rgb(2, 177, 177);
   --tr-hover-color: #f2f2f279;
   --completed-task-color: rgb(131, 156, 170);
+  --table-bg-color: var(--toothpaste);
   --scroll-color: var(--even-color);
 
   /* table row spacing */
@@ -39,8 +40,9 @@
   --even-color-short: #98c7e9;
   --odd-color-short: var(--even-color-short);
   --header-color-short: #478fb3;
-  --tr-hover-color-short: #65a9ca;
+  --tr-hover-color-short: #bdd3df;
   --scroll-color-short: var(--even-color-short);
+  --table-bg-color-short: rgba(149, 218, 229, 0.603);
 }
 
 body {

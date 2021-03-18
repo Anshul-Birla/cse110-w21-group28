@@ -8,6 +8,10 @@
   background-color: var(--header-color-short);
 }
 
+.short-break table {
+  background-color: var(--table-bg-color-short);
+}
+
 .short-break tr:hover td {
   background-image: linear-gradient(transparent, var(--tr-hover-color-short));
   transition-duration: 0;
