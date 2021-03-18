@@ -68,6 +68,11 @@
   width: 16px;
 }
 
+.distItem{
+  display: block;
+  float: none;
+}
+
 .stats-info {
   color: rgb(2, 177, 177);
   font-size: 36px;
