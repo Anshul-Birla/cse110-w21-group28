@@ -14,6 +14,7 @@ table {
   border-collapse: collapse;
   table-layout: fixed; /* allows for word-wrap */
   width: 100%;         /* allows for word-wrap */
+  min-width: 500px;
 }
 
 th,
@@ -98,6 +99,7 @@ svg {
   background-color: var(--header-color);
   padding-top: 10px;
   padding-bottom: 10px;
+  min-width: 500px;
   transition-duration: 2s;
 }
 
@@ -136,29 +138,24 @@ svg {
   border-style: solid;
   border-radius: 60vh;
   border-color: var(--header-color);
-  height: 2em;
-  padding-left: 0.5vw;
-  padding-right: 0.1vw; /* so that when a user enters a long task it doesn't go past the input bar */
+  height: 2.5em;
+  padding-left: 1vw;
+  padding-right: 1vw; /* so that when a user enters a long task it doesn't go past the input bar */
   color: black;
   top: 49vh; 
-  outline: none;
-  font-size: 100;
-  
+  outline: none;  
 }
 
 .task-name {
   /* width: calc(40% - 60px); */
-  width: 60%;
+  width: 58%;
   margin-left: 10%;
 
 }
 .task-length {
- width: 2.5em; 
- /* margin-left: 1.2vw; */
- 
- /* margin-left: 11.5vw; */
+ width: 2em; 
 }
-.task-submit {
+.task-submit { /* + button to replace with materialize css */
   margin-left: 1vw;
   width: 1.7em;
   font-size: 1.4em;
@@ -167,12 +164,13 @@ svg {
   border-radius: 100vh;
   border-color: var(--header-color);
   padding-left: 0.1vw;
-  padding-right: 0.1vw; /* so that when a user enters a long task it doesn't go past the input bar */
+  padding-right: 0.1vw;
   color: black;
   top: 49vh; 
   outline: none;
   min-width: 1vw;
 }
+
 input[type='checkbox'] {
   width: 20px;
   height: 20px;
