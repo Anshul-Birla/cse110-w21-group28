@@ -20,7 +20,7 @@ table {
   border-spacing: 0 var(--table-border);
   table-layout: fixed; /* allows for word-wrap */
   max-width: 100%;         /* allows for word-wrap */
-  /* min-height: 60vh; */
+  min-height: 60vh;
   margin-top: -20px;
 }
 
@@ -131,10 +131,7 @@ svg {
   background-color: var(--header-color);
   padding-top: 10px;
   padding-bottom: 10px;
-  border-top-left-radius: var(--td-border-radius);
-  border-bottom-left-radius: var(--td-border-radius);
-  border-top-right-radius: var(--td-border-radius);
-  border-bottom-right-radius: var(--td-border-radius);
+  border-radius: var(--td-border-radius);
   transition-duration: 2s;
 }
 
