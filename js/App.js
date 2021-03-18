@@ -34,6 +34,10 @@ TimerObj.addEventListener('timer-start', (e) => {
   }
 });
 
+TimerObj.addEventListener('timer-end', (e) => {
+  distractionButton.disabled = true;
+});
+
 document.body.addEventListener('focus-task', (e) => {
   TDLDom.onFocusTask(e.detail.taskID);
   TDLDom.updateCurrentTask();

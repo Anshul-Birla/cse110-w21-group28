@@ -112,6 +112,8 @@ class Timer extends HTMLElement {
     for (let i = 0; i < workOrder.length; i += 1) {
       this.stateQueue.push(workOrder[i]);
     }
+    const event = new CustomEvent('timer-end');
+    this.dispatchEvent(event);
   }
 
   /**
