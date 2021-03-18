@@ -2,3 +2,4 @@ node_modules/
 coverage/
 docs/
 .DS_STORE
+materialize.css

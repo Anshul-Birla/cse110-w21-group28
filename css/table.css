@@ -31,7 +31,7 @@ th,
 td {
   padding: 15px;
   word-wrap: break-word; /* so that long tasks don't extend the table */
-  max-width: 200vw;      /* allows for word-wrap */
+  max-width: 20vw;      /* allows for word-wrap */
 }
 
 th {
@@ -136,8 +136,7 @@ svg {
   padding-top: 10px;
   padding-bottom: 10px;
   min-width: 500px;
-  min-height: 20px;
-  border-radius: var(--td-border-radius);
+  border-top-right-radius: var(--td-border-radius);
   transition-duration: 2s;
 }
 
@@ -151,7 +150,7 @@ svg {
   border-color: var(--header-color);
   height: 2.5em;
   padding-left: 1vw;
-  padding-right: 1vw; /* so that when a user enters a long task it doesn't go past the input bar */
+  padding-right: 2vw; /* so that when a user enters a long task it doesn't go past the input bar */
   color: black;
   top: 49vh;
   outline: none;
