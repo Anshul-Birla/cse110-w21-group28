@@ -1,3 +1,4 @@
+/* color variables names and shades are in 'style.css' file and here are used as variables*/
 /* The Modal (background) */
 .modal {
   display: none; /* Hidden by default */
@@ -9,18 +10,18 @@
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(119, 136, 153, 0.6); 
+  background-color: var(--button-border-color);
 }
 
 /* Modal Content */
 .modal-content {
   position: relative;
-  background-color: cadetblue;
+  background-color: var(--page-bg-color);
   margin: auto;
   padding: 0;
-  border: 3px solid darkcyan;
+  border: 3px solid var(--header-color);
   width: 80%;
-  box-shadow: 0 4px 8px 0 #008b8b, 0 6px 20px 0 #008b8b;
+  box-shadow: 0 4px 8px 0 var(--header-color), 0 6px 20px 0 var(--header-color);
   -webkit-animation-name: animatetop;
   -webkit-animation-duration: 0.4s;
   animation-name: animatetop;
@@ -54,7 +55,7 @@
 
 /* The Close Button */
 .close {
-  color: white;
+  color: var(--font-color);
   float: right;
   font-size: 28px;
   font-weight: bold;
@@ -69,14 +70,14 @@
 
 .modal-header {
   padding: 2px 16px;
-  background-color: darkcyan;
-  color: white;
+  background-color: var(--header-color);
+  color: var(--font-color);
 }
 
 .modal-body { padding: 2px 16px; }
 
 .modal-footer {
   padding: 2px 16px;
-  background-color: darkcyan;
-  color: white;
+  background-color: var(--header-color);
+  color: var(--font-color);
 }
