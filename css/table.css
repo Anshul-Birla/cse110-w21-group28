@@ -103,13 +103,13 @@ svg {
   transition-duration: 2s;
 }
 
-/*.task-name,
+/* .task-name,
 .task-length {
   font-size: 20px;
   border-radius: 25px;
   height: 50px;
   padding-left: 15px;
-  padding-right: 15px; /* so that when a user enters a long task it doesn't go past the input bar 
+  padding-right: 15px; /* so that when a user enters a long task it doesn't go past the input bar
   color: black;
 }
 
@@ -130,9 +130,11 @@ svg {
   bottom: 10px;
   color: black;
   cursor: pointer;
-}*/
+} */
+
 /* checkbox and delete button styling */
-.task-name, .task-length {
+.task-name,
+.task-length {
   font-size: 1em;
   background: clear;
   border-style: solid;
@@ -142,19 +144,20 @@ svg {
   padding-left: 1vw;
   padding-right: 1vw; /* so that when a user enters a long task it doesn't go past the input bar */
   color: black;
-  top: 49vh; 
-  outline: none;  
+  top: 49vh;
+  outline: none;
 }
 
 .task-name {
   /* width: calc(40% - 60px); */
   width: 58%;
   margin-left: 10%;
+}
 
-}
 .task-length {
- width: 2em; 
+  width: 2em;
 }
+
 .task-submit { /* + button to replace with materialize css */
   margin-left: 1vw;
   width: 1.7em;
@@ -166,7 +169,7 @@ svg {
   padding-left: 0.1vw;
   padding-right: 0.1vw;
   color: black;
-  top: 49vh; 
+  top: 49vh;
   outline: none;
   min-width: 1vw;
 }
