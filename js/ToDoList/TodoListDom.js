@@ -14,7 +14,7 @@ class TodoListDom {
    * @param {HTMLButtonElement} submitBtn
    * @param {HTMLButtonElement} deleteAllBtn
    */
-  constructor(HTMLTable, HTMLForm, submitBtn, deleteAllBtn) {
+  constructor(HTMLTable, HTMLForm, submitBtn, deleteAllBtn, currentTaskDiv) {
     /**
      * Holds the TodoList so the Dom Manager can acess it
      * @type {ToDoList}
@@ -47,6 +47,11 @@ class TodoListDom {
      */
     this.currentTask = null;
 
+    /**
+     * The current task to be displayed
+     * @type {HTMLDiv}
+     */
+    this.currentTaskDiv = currentTaskDiv;
     this.setupEventListeners();
     this.renderLocalStorage();
   }
@@ -113,7 +118,8 @@ class TodoListDom {
       try {
         const task = this.todoList.addTask(name, sessions);
         this.updateCurrentTask();
-        this.displayTask(task);
+        const insertAtIndex = this.getFirstCompletedTaskIndex();
+        this.displayTask(task, insertAtIndex);
         this.form.reset();
       } catch (error) {
         // eslint-disable-next-line no-alert
@@ -133,10 +139,10 @@ class TodoListDom {
   /**
    * Adds a task to the bottom of the table OR adds it before the specified index
    * @param {HTMLTableRowElement} newTask - task you want added
-   * @param {HTMLTableRowElement} [index = undefined] - index you want to insert the task before
+   * @param {HTMLTableRowElement} [index = -1] - index you want to insert the task before
    */
-  displayTask(newTask, index = undefined) {
-    if (index === undefined) {
+  displayTask(newTask, index = -1) {
+    if (index === -1) {
       this.table.appendChild(newTask);
     } else {
       this.table.insertBefore(newTask, this.table.childNodes[index]);
@@ -166,9 +172,19 @@ class TodoListDom {
     checked off, not the new current task. Only works if the user
     can only check off the current task
     */
-    this.currentTask.onDelete();
-    this.displayTask(this.currentTask);
-    this.todoList.addTaskToEnd(this.currentTask);
+    const temp = this.currentTask;
+    temp.onDelete();
+    this.displayTask(temp);
+    this.todoList.addTaskToEnd(temp);
+  }
+
+  getFirstCompletedTaskIndex() {
+    let firstCompletedTaskIndex = -1;
+    for (let i = 2; i < this.table.childNodes.length && firstCompletedTaskIndex === -1; i += 1) {
+      if (this.table.childNodes[i].checked === true) firstCompletedTaskIndex = i;
+    }
+
+    return firstCompletedTaskIndex;
   }
 
   /**
@@ -179,11 +195,8 @@ class TodoListDom {
    */
   onUncheckedTask(id) {
     const uncheckedTask = this.todoList.getTaskById(id);
-    let firstCompletedTaskIndex = -1;
+    const firstCompletedTaskIndex = this.getFirstCompletedTaskIndex();
     uncheckedTask.onDelete();
-    for (let i = 2; i < this.table.childNodes.length && firstCompletedTaskIndex === -1; i += 1) {
-      if (this.table.childNodes[i].checked === true) firstCompletedTaskIndex = i;
-    }
     this.todoList.addTaskToEnd(uncheckedTask);
     this.displayTask(uncheckedTask, firstCompletedTaskIndex);
   }
@@ -192,7 +205,25 @@ class TodoListDom {
    * Updates the current task and changes its checkbox property accordingly
    */
   updateCurrentTask() {
-    this.currentTask = this.todoList.getCurrentTask();
+    const nextTask = this.todoList.getCurrentTask();
+    if (this.currentTask !== null && !this.currentTask.checked) {
+      this.currentTask.children[3].children[0].children[1].children[1].style.display = 'inline-block';
+    }
+    if (nextTask !== null) {
+      nextTask.children[3].children[0].children[1].children[1].style.display = 'none';
+    }
+    if (this.currentTask === null && nextTask === null) {
+      // no currentTask, nothing in table
+      this.currentTaskDiv.textContent = 'No current task';
+    } else if (this.currentTask === null && nextTask !== null) {
+      // no currentTask, something in table
+      this.currentTaskDiv.textContent = `Working on: ${nextTask.name}`;
+    } else if (this.currentTask !== null && nextTask === null) { // last task completed
+      this.currentTaskDiv.textContent = 'No current task';
+    } else if (this.currentTask !== nextTask) {
+      this.currentTaskDiv.textContent = `Working on: ${nextTask.name}`;
+    }
+    this.currentTask = nextTask;
     if (this.currentTask != null) this.currentTask.checkBox.disabled = false;
   }
 
@@ -213,8 +244,8 @@ class TodoListDom {
 
     const clickedTask = this.todoList.getTaskById(id);
     // disable the old tasks checkbox because it has not been clicked yet
-    this.currentTask.checkBox.disabled = true;
     clickedTask.onDelete();
+    this.currentTask.checkBox.disabled = true;
     this.displayTask(clickedTask, currentTaskIndex);
 
     // remove the task and add it back to the top
