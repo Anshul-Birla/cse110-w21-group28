@@ -32,6 +32,7 @@
 .short-break #form-container {
   background-color: var(--page-bg-color-short);
 }
+
 /* distraction popup animations */
 #overlay {
   position: fixed;
