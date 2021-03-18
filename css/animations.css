@@ -31,6 +31,7 @@
 
 .short-break #form-container {
   background-color: var(--page-bg-color-short);
+  transition-duration: 2s;
 }
 
 /* distraction popup animations */
