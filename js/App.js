@@ -1,10 +1,9 @@
 import { TodoListDom } from './ToDoList/TodoListDom.js';
 import { Timer } from './Timer/Timer.js';
-// import { workMode } from './Timer/TimerVariables.js';
 import { Statistics } from './Statistics/Statistics.js';
 import { Distraction } from './Distraction/Distraction.js';
-import { shortBreakColors, workModeColors } from './ChangeColors.js';
-import { breakModeSound, workModeSound } from './Sounds.js';
+import { shortBreakColors, workModeColors } from './Misc/ChangeColors.js';
+import { breakModeSound, workModeSound } from './Misc/Sounds.js';
 
 function after3amToday() {
   const currDate = new Date();
