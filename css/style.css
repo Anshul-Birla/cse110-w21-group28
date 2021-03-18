@@ -36,10 +36,11 @@
   --table-row-margin: 20px;
 
   /* shortbreak table theme */
-  --even-color-short: #54a6cf;
-  --odd-color-short: #79c4ea;
-  --header-color-short: #90afc5;
-  --tr-hover-color-short: #763626;
+  --even-color-short: #98c7e9;
+  --odd-color-short: var(--even-color-short);
+  --header-color-short: #478fb3;
+  --tr-hover-color-short: #65aacc;
+  --scroll-color-short: var(--even-color-short);
 }
 
 body {
