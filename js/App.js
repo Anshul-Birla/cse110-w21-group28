@@ -29,25 +29,35 @@ const deleteAllButton = document.getElementById('delete-all-button');
 const overlay = document.getElementById('overlay');
 const statsTabBtn = document.getElementById('data');
 const currentTaskDiv = document.getElementById('currentTask');
+const tourButton = document.getElementById('onboardingButton');
 
 const StatsPage = new Statistics();
 const TDLDom = new TodoListDom(todoTable, addTodoForm, addTodoButton,
   deleteAllButton, currentTaskDiv);
 const TimerObj = new Timer(startTimerButton, timeDisplay, modeDisplay);
-// eslint-disable-next-line max-len
-const DistractionPage = new Distraction(distractButton, distractPopUp, cancelButton, distractForm, description, overlay);
+const DistractionPage = new Distraction(distractButton, distractPopUp,
+  cancelButton, distractForm, description, overlay);
+
+if (localStorage.getItem('onboarding') === null) {
+  // eslint-disable-next-line
+  introJs().start(); 
+  localStorage.setItem('onboarding', 'true');
+}
+
+tourButton.addEventListener('click', () => {
+  // eslint-disable-next-line
+  introJs().start();
+});
 
 TimerObj.addEventListener('timer-complete', (e) => {
   if (e.detail.sessionIsWork) { // if it was a work mode
     TDLDom.onSessionComplete();
     StatsPage.addWorkTime(e.detail.duration);
     StatsPage.incrementActualPomoSessions();
-    // DistractionPage.hideButton();
     shortBreakColors();
     breakModeSound();
   } else {
     StatsPage.addTimeSpent(e.detail.duration);
-    // DistractionPage.showButton();
     workModeColors();
     workModeSound();
   }
@@ -63,9 +73,6 @@ startTimerButton.addEventListener('click', () => {
     const newDate = new Date(2000, 0, 1);
     localStorage.setItem('startDateTime', newDate);
     StatsPage.sessionStartDateTime = newDate;
-    // shortBreakColors();
-  } else {
-    // workModeColors();
   }
 });
 

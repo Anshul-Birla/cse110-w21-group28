@@ -81,5 +81,8 @@
         }
       ]
     ]
+  },
+  "dependencies": {
+    "intro.js": "^3.3.1"
   }
 }
