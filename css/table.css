@@ -120,7 +120,7 @@ svg {
   position: sticky;
   bottom: 0;
   width: 100%;
-  background-color: var(--page-bg-color);
+  background-color: transparent;
   border-top-left-radius: var(--td-border-radius);
   border-top-right-radius: var(--td-border-radius);
 }
