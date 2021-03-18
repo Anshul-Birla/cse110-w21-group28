@@ -1,6 +1,6 @@
 import { Timer } from '../js/Timer/Timer';
 import {
-  workMode, shortBreakMode, longBreakMode, classNames, buttonText,
+  workMode, shortBreakMode, longBreakMode, buttonText,
 } from '../js/Timer/TimerVariables';
 
 beforeEach(() => {

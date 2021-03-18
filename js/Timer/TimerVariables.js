@@ -18,7 +18,6 @@ const longBreakMode = {
   isWork: false,
 };
 
-
 const buttonText = {
   stopTimerText: 'End Day',
   startTimerText: 'Start',
