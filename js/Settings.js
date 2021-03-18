@@ -1,6 +1,18 @@
+/**
+ * @type {HTMLButtonElement}
+ */
 const settingsButton = document.getElementById('settingsButton');
+/**
+ * @type {HTMLButtonElement}
+ */
 const settingsPopup = document.getElementById('settingsPopup');
+/**
+ * @type {HTMLInputElement}
+ */
 const darkModeSwitch = document.getElementById('darkModeSwitch');
+/**
+ * @type {HTMLElement}
+ */
 const root = document.querySelector(':root');
 /**
  * handle the settings popup display
