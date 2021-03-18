@@ -11,7 +11,7 @@
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
-  background-color: var(--button-border-color);
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
 /* Modal Content */
