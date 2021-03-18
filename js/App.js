@@ -10,9 +10,12 @@ const todoTable = document.getElementById('todo');
 const addTodoForm = document.getElementById('add-todo');
 const addTodoButton = document.getElementById('add-button');
 const startTimerButton = document.getElementById('startTimer');
+const distractionButton = document.getElementById('distractionButton');
 const deleteAllButton = document.getElementById('delete-all-button');
+const currentTaskDiv = document.getElementById('currentTask');
 
-const TDLDom = new TodoListDom(todoTable, addTodoForm, addTodoButton, deleteAllButton);
+const TDLDom = new TodoListDom(todoTable, addTodoForm, addTodoButton,
+  deleteAllButton, currentTaskDiv);
 const TimerObj = new Timer(startTimerButton, timeDisplay, modeDisplay);
 
 TimerObj.addEventListener('timer-complete', (e) => {
@@ -26,6 +29,18 @@ TimerObj.addEventListener('timer-complete', (e) => {
   }
 });
 
+TimerObj.addEventListener('timer-start', (e) => {
+  if (e.detail.sessionName === workMode.name) {
+    distractionButton.disabled = false;
+  } else {
+    distractionButton.disabled = true;
+  }
+});
+
+TimerObj.addEventListener('timer-end', () => {
+  distractionButton.disabled = true;
+});
+
 document.body.addEventListener('focus-task', (e) => {
   TDLDom.onFocusTask(e.detail.taskID);
   TDLDom.updateCurrentTask();
@@ -33,6 +48,7 @@ document.body.addEventListener('focus-task', (e) => {
 
 document.body.addEventListener('task-deleted', (e) => {
   TDLDom.todoList.removeTask(e.detail.taskID);
+  TDLDom.updateCurrentTask();
 });
 
 document.body.addEventListener('checkbox-updated', (e) => {

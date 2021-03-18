@@ -7,13 +7,14 @@
   <link rel="stylesheet" href="./css/buttons-min.css"/>
   <link rel="stylesheet" href="./css/style.css" />
   <link rel="stylesheet" href="./css/distraction-box.css" />
+  <link rel="stylesheet" href="./css/faq-box.css" />
   <link rel="stylesheet" href="./css/table.css" />
   <link rel="stylesheet" href="./css/animations.css" />
   <link rel="stylesheet" href="./css/settings.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Pomodoro</title>
-  <link rel="icon" 
-  type="image/png" 
+  <link rel="icon"
+  type="image/png"
   href="./assets/img/pomatoLogo3.png">
 </head>
 </head>
@@ -37,7 +38,7 @@
           <a href="#Stats"></a>
         </button>
         <button id="faqButton" class="pure-button icons">
-          <a href="#FAQ"> <img src="./assets/img/question.png" width="35" height="35"> </a>
+          <img src="./assets/img/question.png" width="35" height="35">
         </button>
 
       </div>
@@ -102,14 +103,18 @@
       <p id="bottom-right-border">
         <span>┘</span>
       </p>
-      <br>
-      <button id="startTimer" class="pure-button">Start</button>
-      <button id="distractionButton" class="pure-button">Distraction</button>
+      <div class="buttons-div">
+        <button id="startTimer" class="pure-button">Start</button>
+        <button id="distractionButton" class = "pure-button" disabled = "true">Distraction</button>
+      </div>
     </div>
   </section>
   <!-- The audio cue -->
   <audio id="alert-sound" src="./assets/audio/air-horn.mp3"></audio>
+  <!-- Container for current task -->
+  <section id="currentTask" class="section-container">
 
+  </section>
   <!-- Container for task list -->
   <section id='tasklist' class='section-container'>
     <table id='todo'>
@@ -117,8 +122,8 @@
         <th class='col1-checkbox'></th>
         <th class='col2-task'>TASKS</th>
         <th class='col3-pomos'>#</th>
-        <th class='col4-delete'><button id = "delete-all-button" class="delete-button" type="button">Delete All</button></th>
-      </tr>      
+        <th class='col4-delete'><button id = "delete-all-button" class="pure-button" type="button">Delete All</button></th>
+      </tr>
     </table>
 
     <div id='form-container'>
@@ -130,15 +135,6 @@
     </div>
   </section>
 
-  <!-- Linked section on page under task list for summary & statistics of work sessions -->
-  <section id="stats" class="linked-section">
-    <h2>Stats</h2>
-  </section>
-
-  <!-- Linked section at bottom of page under stats for FAQ and instructions on using timer -->
-  <section id="faq" class="linked-section">
-    <h2>FAQ</h2>
-  </section>
 
   <!-- Distraction Box-->
   <section class="form-popup" id="distract-popup">
@@ -156,27 +152,30 @@
   <!-- FAQ-->
   <section class="faq">
   <div id="FAQ">
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <span class="close">&times;</span>
+          <h2>The Go Go Pomo Timer can help you with productivity</h2>
+        </div>
 
-      <h2>A Pomodoro Ranger is a Pomodoro Timer that would help with productivity</h2>
-
-      <h2>What is the Pomoranger Timer?</h2>
-  		<p>
-    Pomoranger is a Pomodoro Technique timer that works on your computer and mobile devices with an aim to increase your productivity, and reduce stress and anxiety of planning your time.
-    The aim of this app is to help you focus on any task you are working on, such as studying, writing, or coding.
-    This app is inspired by
+    <div class="modal-body">
+    <h2>What is the Go Go Pomo Timer?</h2>
+  	  <p>
+          Go Go Pomo is a Pomodoro Technique timer that works on your computer with an aim to increase your productivity and reduce the stress and anxiety of planning your time.
+          The aim of this app is to help you focus on any task you are working on, such as studying, writing, or coding.
+          This app is inspired by
     <a
       href='https://francescocirillo.com/pages/pomodoro-technique'
       target='_blank'
       rel='noopener'
-      >Pomodoro Technique</a
-    >
+      >Pomodoro Technique</a>
     which is a time management method developed by Francesco Cirillo.
   </p>
 
-    <div>
   <h2>What is the Pomodoro Technique?</h2>
     <p>
-      The Pomodoro Technique is created by Francesco Cirillo for a
+      The Pomodoro Technique is a technique created by Francesco Cirillo for a
       more productive way to work and study. The technique uses a
       timer to break down work into intervals, traditionally 25
       minutes in length, separated by short breaks. Each interval
@@ -190,33 +189,10 @@
         >Wikipedia</a
         >
     </p>
-</div>
 
 <div>
   <h2>
-    How to use the Pomodoro Timer?
-  </h2>
-  <ol>
-    <li><strong>Add tasks</strong> to work on today</li>
-    <li>
-      <strong>Set estimated number of pomodoros</strong> (1 pomodoro = 25 minutes) for each task
-    </li>
-    <li><strong>Write out and select a task</strong> to work on in the Todo list</li>
-    <li>
-      <strong>Start timer</strong> and focus on the task for 25 minutes per each task
-    </li>
-    <li>
-       <strong>Take a break</strong> for 5 minutes when the alarm changes color
-    </li>
-    <li>
-       <strong>Iterate</strong> pomodoros until you finish the tasks
-    </li>
-  </ol>
-</div>
-
-<div>
-  <h2>
-    Features of the Pomoranger Timer
+    Features of the Go Go Timer
   </h2>
   <ol>
     <li><strong>Simple use</strong> of the timer and functionality of the Pomodoro Technique</li>
@@ -229,12 +205,21 @@
     </li>
   </ol>
 </div>
-</section>
+</div>
 
+<div class="modal-footer">
+  <h2>Stay Productive!</h2>
+</div>
 
 </div>
+</div>
+</div>
+</div>
+
+</section>
 <script type="module" src="./js/App.js"></script>
 <script type="module" src="./js/Distraction.js"></script>
 <script type="module" src="./js/Settings.js"></script>
+<script type="module" src="./js/FAQ/FAQ.js"></script>
 </body>
 </html>

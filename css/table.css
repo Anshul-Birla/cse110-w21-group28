@@ -120,7 +120,7 @@ svg {
   position: sticky;
   bottom: 0;
   width: 100%;
-  background-color: var(--page-bg-color);
+  background-color: transparent;
   border-top-left-radius: var(--td-border-radius);
   border-top-right-radius: var(--td-border-radius);
 }
@@ -190,11 +190,9 @@ input[type='checkbox']:checked {
   border-width: 2px;
   border-color: var(--button-border-color);
   right: 10px;
-}
-
-.delete-button {
-  color: black;
-  border-radius: 40%;
+  background-color: transparent;
+  height: 4em;
+  width: 4em;
 }
 
 /* different color row for checked off tasks */
