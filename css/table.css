@@ -18,6 +18,7 @@ table {
   border-collapse: separate;
   border-spacing: 0 var(--table-border);
   table-layout: fixed; /* allows for word-wrap */
+
   /* max-width: 100%;     /* allows for word-wrap */
   min-height: 60vh;
   margin-top: -20px;
@@ -50,6 +51,7 @@ td {
 
 tr {
   margin-top: 20px;
+
   /* width: 100%; */
 }
 
