@@ -13,7 +13,11 @@
   <link rel="stylesheet" href="./css/table.css" />
   <link rel="stylesheet" href="./css/animations.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Pomo App</title>
+  <title>Pomodoro</title>
+  <link rel="icon" 
+  type="image/png" 
+  href="./assets/img/pomatoLogo3.png">
+</head>
 </head>
 
 <body>
@@ -37,7 +41,7 @@
     </h1> -->
     <nav>
       <div class="nav-wrapper>">
-        <a href="#!" class="brand-logo center">  <img src="./assets/img/logo.png" height="70px"></a>
+        <a href="#!" class="brand-logo"><img src="./assets/img/logo.png" height="60px"></a>
         <ul class="right hide-on-med-and-down">
           <li><a class="waves-effect waves-light btn" href="#FAQ"><i class="material-icons right">help_outline</i></a></li>
           <li><a class="waves-effect waves-light btn" href="#Stats"><i class="material-icons right">insert_chart</i></a></li>
@@ -68,6 +72,9 @@
       </button> -->
       <!-- <button id="startTimer" class="pure-button">Start</button> -->
       <button class="btn-large waves-effect waves-light  red darken-4" id="distractionButton">Distraction <i class="material-icons right">warning</i></button>
+      <br>
+      <!-- <button id="startTimer" class="pure-button">Start</button>
+      <button id="distractionButton" class="pure-button">Distraction</button> -->
     </div>
   </section>
 
@@ -75,24 +82,22 @@
 
   <!-- Container for task list -->
   <section id='tasklist' class='section-container'>
-    <!-- <h2>To Do</h2> -->
     <table id='todo'>
       <tr>
         <th class='col1-checkbox'></th>
         <th class='col2-task'>TASKS</th>
         <th class='col3-pomos'>#</th>
         <th class='col4-delete'><button id = "delete-all-button" class="delete-button" type="button">Delete All</button></th>
-      </tr>
+      </tr>      
     </table>
 
-    <!-- style = 'display: none;' originally an attribute in form and button but we want it always showing -->
-    <form id ='add-todo' overflow>
-      <input type='text' name='task-name' placeholder='Enter task' class='task-name'>
-      <input type='number' name='task-length' placeholder='Estimated # of pomos' class='task-length' min='1' max='24' required>
-      <!-- <input id = "add-button" type='submit' class='task-submit' value='+'> -->
-      
-      <button id="add-button" type='submit' class="btn-floating btn-large"><i class="material-icons">add</i></button>
-    </form>
+    <div id='form-container'>
+      <form id='add-todo' overflow>
+        <input type='text' name='task-name' placeholder='Enter task' class='task-name'>
+        <input type='number' name='task-length' placeholder='Estimated # of pomos' class='task-length' min='1' max='24' required>
+        <input id = "add-button" type='submit' class='task-submit' value='+'>
+      </form>
+    </div>
   </section>
 
   <!-- Linked section on page under task list for summary & statistics of work sessions -->
@@ -107,13 +112,13 @@
 
   <!-- Distraction Box-->
   <section class="form-popup" id="distract-popup">
-    <form class="form-container" id="distract-form-container">
-      <h1>Report Distraction</h1>
+    <form class="form-container" id="distract-form">
+      <h1 class='distraction-label'>Report Distraction</h1>
 
-      <label><b>Distraction Description</b></label>
-      <input type="text" placeholder="Enter a short description of the distraction" id="description">
+      <label class="distraction-label small">Distraction Description</label>
+      <input type="text" placeholder="Enter a short description of the distraction" id="description" required="">
 
-      <button type="button" class="distractFormButton" id="submit-button">Submit</button>
+      <button type="submit" class="distractFormButton" id="submit-button">Submit</button>
       <button type="button" class="distractFormButton cancel" id="cancel-button">Cancel</button>
     </form>
   </section>
