@@ -43,9 +43,11 @@ TimerObj.addEventListener('timer-complete', (e) => {
     StatsPage.addWorkTime(e.detail.duration);
     StatsPage.incrementActualPomoSessions();
     DistractionPage.hideButton();
+    shortBreakColors();
   } else {
     StatsPage.addTimeSpent(e.detail.duration);
     DistractionPage.showButton();
+    workModeColors();
   }
 });
 
@@ -59,9 +61,9 @@ startTimerButton.addEventListener('click', () => {
     const newDate = new Date(2000, 0, 1);
     localStorage.setItem('startDateTime', newDate);
     StatsPage.sessionStartDateTime = newDate;
-    shortBreakColors();
+    // shortBreakColors();
   } else {
-    workModeColors();
+    // workModeColors();
   }
 });
 
