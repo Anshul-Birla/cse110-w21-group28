@@ -1,16 +1,62 @@
+/**
+ * audio element for alert
+ * @type {HTMLAudioElement}
+ */
 const horn = document.getElementById('alert-sound');
-
+/**
+ * the selector for work sound
+ * @type {HTMLSelectElement}
+ */
 const workSoundSelector = document.getElementById('workSoundSelector');
+/**
+ * the selector for break sound
+ * @type {HTMLSelectElement}
+ */
 const breakSoundSelector = document.getElementById('breakSoundSelector');
+/**
+ * string constant for air horn path
+ * @type {String}
+ */
 const airHorn = './assets/audio/air-horn.mp3';
+/**
+ * string constant for celebration path
+ * @type {String}
+ */
 const celebration = './assets/audio/celebration.mp3';
+/**
+ * string constant for error path
+ * @type {String}
+ */
 const error = './assets/audio/error.mp3';
+/**
+ * string constant for noot path
+ * @type {String}
+ */
 const noot = './assets/audio/noot.mp3';
+/**
+ * string constant for ping path
+ * @type {String}
+ */
 const ping = './assets/audio/ping.mp3';
+/**
+ * string constant for siren path
+ * @type {String}
+ */
 const siren = './assets/audio/siren.mp3';
+/**
+ * mute switch element
+ * @type {HTMLInputElement}
+ */
 const muteSwitch = document.getElementById('muteSwitch');
-
+/**
+ * global to hold current selected path
+ * @type {String}
+ */
 let workModeSoundPath = airHorn;
+/**
+ * global to hold current selected path
+ * @type {String}
+ */
 let breakModeSoundPath = celebration;
 
 /**
