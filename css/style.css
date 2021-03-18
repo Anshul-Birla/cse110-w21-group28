@@ -39,10 +39,10 @@
   /* shortbreak table theme */
   --even-color-short: #98c7e9;
   --odd-color-short: var(--even-color-short);
-  --header-color-short: #478fb3;
+  --header-color-short: #4990b4;
   --tr-hover-color-short: #bdd3df;
   --scroll-color-short: var(--even-color-short);
-  --table-bg-color-short: rgba(149, 218, 229, 0.603);
+  --table-bg-color-short: #60afcc;
 }
 
 body {
