@@ -1,7 +1,7 @@
 const distractButton = document.getElementById('distractionButton');
 const distractPopUp = document.getElementById('distract-popup');
 const cancelButton = document.getElementById('cancel-button');
-const submitButton = document.getElementById('submit-button');
+const distractionForm = document.getElementById('distract-form');
 const overlay = document.getElementById('overlay');
 /**
  * This function will make the pop up disappear
@@ -28,7 +28,8 @@ cancelButton.addEventListener('click', () => {
   resetPopUp();
 });
 
-submitButton.addEventListener('click', () => {
+distractionForm.addEventListener('submit', (e) => {
+  e.preventDefault();
   const description = document.getElementById('description').value;
   const time = document.getElementById('timeDisplay').textContent;
   if (description !== '') {
@@ -57,4 +58,8 @@ overlay.addEventListener('animationend', (e) => {
     overlay.style.animationName = '';
     overlay.style.display = 'none';
   }
+});
+
+overlay.addEventListener('click', () => {
+  resetPopUp();
 });
