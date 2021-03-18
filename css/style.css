@@ -23,11 +23,18 @@
   --timer-bg-color-short: #90afc5;
 
   /* toothpaste table theme */
-  --even-color: rgba(149, 218, 229, 0.603);
-  --odd-color: rgb(2, 177, 177);
   --header-color: darkcyan;
+  --even-color: rgba(149, 218, 229, 0.603);
+  --odd-color: var(--even-color);
+  --toothpaste: rgb(2, 177, 177);
   --tr-hover-color: #f2f2f279;
-  --td-border-radius: 30px;
+  --completed-task-color: rgb(131, 156, 170);
+  --scroll-color: var(--even-color);
+
+  /* table row spacing */
+  --td-border-radius: 22px;
+  --table-border: 12px;
+  --table-row-margin: 20px;
 
   /* shortbreak table theme */
   --even-color-short: #54a6cf;

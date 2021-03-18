@@ -98,6 +98,7 @@ class Timer extends HTMLElement {
     this.end = true;
     this.displayStatus.textContent = sessionStartName;
     this.displayTime.textContent = '25:00';
+    document.title = 'Pomodoro';
     this.stateQueue = [];
     const workOrder = [workMode, shortBreakMode, workMode,
       shortBreakMode, workMode, shortBreakMode, workMode, longBreakMode];
@@ -122,6 +123,7 @@ class Timer extends HTMLElement {
       displayString = `${minutes}:${seconds}`;
     }
     this.displayTime.textContent = displayString;
+    document.title = `${this.state} ${displayString}`;
     duration -= 1;
     if (duration >= 0) {
       setTimeout(() => {
