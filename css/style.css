@@ -157,15 +157,6 @@ header {
   padding: 10px;
 }
 
-#FAQ {
-  background: #008b8b;
-  display: inline-block;
-  margin: auto;
-  width: 60%;
-  border: 3px solid #2f4f4f;
-  padding: 10px;
-}
-
 html {
   scroll-behavior: smooth;
 }
