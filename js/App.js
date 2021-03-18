@@ -9,6 +9,7 @@ const todoTable = document.getElementById('todo');
 const addTodoForm = document.getElementById('add-todo');
 const addTodoButton = document.getElementById('add-button');
 const startTimerButton = document.getElementById('startTimer');
+const distractionButton = document.getElementById('distractionButton');
 const deleteAllButton = document.getElementById('delete-all-button');
 const currentTaskDiv = document.getElementById('currentTask');
 
@@ -22,6 +23,14 @@ TimerObj.addEventListener('timer-complete', (e) => {
     shortBreakColors();
   } else {
     workModeColors();
+  }
+});
+
+TimerObj.addEventListener('timer-start', (e) => {
+  if (e.detail.sessionName === workMode.name) {
+    distractionButton.disabled = false;
+  } else {
+    distractionButton.disabled = true;
   }
 });
 
