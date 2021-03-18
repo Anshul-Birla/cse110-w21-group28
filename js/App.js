@@ -20,7 +20,7 @@ const statsButton = document.getElementById('statsButton');
 const distractButton = document.getElementById('distractionButton');
 const distractPopUp = document.getElementById('distract-popup');
 const cancelButton = document.getElementById('cancel-button');
-const submitButton = document.getElementById('submit-button');
+const distractForm = document.getElementById('distract-form');
 const description = document.getElementById('description');
 const statsPopUp = document.getElementById('stats-section');
 const parentDiv = document.getElementById('parentDiv');
@@ -34,7 +34,7 @@ const StatsPage = new Statistics();
 const TDLDom = new TodoListDom(todoTable, addTodoForm, addTodoButton, deleteAllButton);
 const TimerObj = new Timer(startTimerButton, timeDisplay, modeDisplay);
 // eslint-disable-next-line max-len
-const DistractionPage = new Distraction(distractButton, distractPopUp, cancelButton, submitButton, description, overlay);
+const DistractionPage = new Distraction(distractButton, distractPopUp, cancelButton, distractForm, description, overlay);
 
 TimerObj.addEventListener('timer-complete', (e) => {
   if (e.detail.sessionIsWork) { // if it was a work mode

@@ -3,14 +3,14 @@ class Distraction extends HTMLElement {
    * @param {HTMLButton} distractButton
    * @param {HTMLSection} distractPopUp
    * @param {HTMLButton} cancelButton
-   * @param {HTMLButton} submitButton
+   * @param {HTMLButton} distractForm
    */
-  constructor(distractButton, distractPopUp, cancelButton, submitButton, description, overlay) {
+  constructor(distractButton, distractPopUp, cancelButton, distractForm, description, overlay) {
     super();
     this.distractButton = distractButton;
     this.distractPopUp = distractPopUp;
     this.cancelButton = cancelButton;
-    this.submitButton = submitButton;
+    this.distractForm = distractForm;
     this.description = description;
     this.overlay = overlay;
     this.distractions = [];
@@ -39,7 +39,8 @@ class Distraction extends HTMLElement {
     });
 
     // Submit button fires event that App.js will catch and log
-    this.submitButton.addEventListener('click', () => {
+    this.distractForm.addEventListener('submit', (e) => {
+      e.preventDefault();
       const event = new CustomEvent('distraction-created', {
         detail: {
           date: new Date(),
