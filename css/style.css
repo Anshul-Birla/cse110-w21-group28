@@ -24,8 +24,8 @@
   /* toothpaste table theme */
   --header-color: darkcyan;
   --even-color: rgba(149, 218, 229, 0.603);
-  --odd-color: var(--even-color); 
-  --toothpaste: rgb(2, 177, 177); 
+  --odd-color: var(--even-color);
+  --toothpaste: rgb(2, 177, 177);
   --tr-hover-color: #f2f2f279;
   --completed-task-color: rgb(131, 156, 170);
   --scroll-color: var(--even-color);
