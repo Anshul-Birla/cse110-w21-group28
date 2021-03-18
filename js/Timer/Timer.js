@@ -35,8 +35,6 @@ class Timer extends HTMLElement {
      * @type {HTMLElement}
      */
     this.startButton = startButton;
-    console.log(startButton.childNodes[0]);
-    console.log(this.startButton.textContent.indexOf(buttonText.startTimerText));
     /**
      * HTML Tag that is reponsible for displaying the time remaining
      * @type {HTMLElement}
@@ -155,7 +153,6 @@ class Timer extends HTMLElement {
         this.startButton.childNodes[0].nodeValue = buttonText.stopTimerText;
         // this.startButton.class = classNames.stopButton;
       } else {
-        console.log('ON CLICK RAN');
         this.endTimer();
         this.startButton.textContent = buttonText.startTimerText;
         this.startButton.class = classNames.startButton;

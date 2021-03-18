@@ -136,7 +136,6 @@ svg {
   padding-top: 10px;
   padding-bottom: 10px;
   min-width: 500px;
-
   border-top-right-radius: var(--td-border-radius);
   transition-duration: 2s;
 }
