@@ -133,7 +133,7 @@ class Statistics extends HTMLElement {
     this.parentDiv.appendChild(this.avgDistractionsLabel);
 
     // Distraction List
-    this.distList = document.createElement('ul');
+    this.distList = document.createElement('ol');
     this.distList.setAttribute('class', 'dist-list');
     this.parentDiv.appendChild(this.distList);
     this.distListLabel = document.createElement('p');

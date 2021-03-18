@@ -343,7 +343,10 @@ class Task extends HTMLTableRowElement {
     this.checkBox.disabled = true;
     this.updateLocalStorage();
   }
-
+  
+  /**
+   * Deletes a task, remove from DOM, tasklist and localStorage
+   */
   onDelete() {
     this.remove();
     this.removeFromLocalStorage();
