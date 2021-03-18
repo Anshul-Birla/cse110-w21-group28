@@ -182,6 +182,10 @@ svg {
   min-width: 1vw;
 }
 
+::placeholder {
+  color: gray;
+}
+
 /* other table features: checkbox, delete button, scrollbar */
 
 /* larger checkbox */
