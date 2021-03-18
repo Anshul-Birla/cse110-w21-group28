@@ -16,6 +16,7 @@
   --font-color: white;
   --timer-bg-color: darkcyan;
 
+
   /* short break page colors */
   --page-bg-color-short: #336b87;
   --timer-bg-color-short: #90afc5;
@@ -42,6 +43,10 @@
   --tr-hover-color-short: #bdd3df;
   --scroll-color-short: var(--even-color-short);
   --table-bg-color-short: #60afcc;
+
+  /* distraction/settings background */
+  --modal-bg-color: #f1f1f1;
+  --modal-font-color: black;
 }
 
 body {
@@ -97,7 +102,7 @@ a.brand-logo li {
   display: flex;
   float: right;
   font-size: 0.5em;
-  width: 100px;
+  width: 150px;
   flex-wrap: wrap;
   justify-content: space-around;
 }
