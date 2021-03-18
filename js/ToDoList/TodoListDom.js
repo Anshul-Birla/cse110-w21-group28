@@ -206,6 +206,12 @@ class TodoListDom {
    */
   updateCurrentTask() {
     const nextTask = this.todoList.getCurrentTask();
+    if(this.currentTask !== null && !this.currentTask.checked){
+      this.currentTask.children[3].children[0].children[1].children[1].style.display = 'inline-block';
+    }
+    if(nextTask !== null){
+      nextTask.children[3].children[0].children[1].children[1].style.display = 'none';
+    }
     if (this.currentTask === null && nextTask === null) {
       // no currentTask, nothing in table
       this.currentTaskDiv.textContent = 'No current task';
