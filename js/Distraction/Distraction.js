@@ -1,3 +1,7 @@
+/**
+ * Distraction object, displayed when distraction button is clicked
+ * allow user to input distractions. Hide when other area is clicked.
+ */
 class Distraction extends HTMLElement {
   /**
    * Constructor for the distraction element
@@ -5,15 +9,51 @@ class Distraction extends HTMLElement {
    * @param {HTMLSection} distractPopUp
    * @param {HTMLButton} cancelButton
    * @param {HTMLButton} distractForm
+   * @param {HTMLInputElement} description
+   * @param {HTMLDivElement} overlay
    */
   constructor(distractButton, distractPopUp, cancelButton, distractForm, description, overlay) {
     super();
+    /**
+     * The button where users click to submit their distractions
+     * @type {HTMLButtonElement}
+     */
     this.distractButton = distractButton;
+
+    /**
+     * The section for displaying distraction form
+     * @type {HTMLSectionElement}
+     */
     this.distractPopUp = distractPopUp;
+
+    /**
+     * The button where users click to cancel their distractions
+     * @type {HTMLButtonElement}
+     */
     this.cancelButton = cancelButton;
+
+    /**
+     * The form where users input their distractions
+     * @type {HTMLFormElement}
+     */
     this.distractForm = distractForm;
+
+    /**
+     * Input element for logging a distraction
+     * @type {HTMLInputElement}
+     */
     this.description = description;
+
+    /**
+     * Overlay to darken popup backgrounds
+     * @type {HTMLDivElement}
+     */
     this.overlay = overlay;
+
+    /**
+     * Array of distractions
+     * @type {array}
+     */
     this.distractions = [];
     this.setupEventListeners();
   }
