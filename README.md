@@ -20,3 +20,9 @@ Start the webapp on a local server
 $ npm start
 ```
 To view the app, open the localhost url in Chrome.
+
+## Next Steps
+
+To view documentation for the app, visit [here]( https://anshul-birla.github.io/PomoDoc/) 
+
+To get started contributing, visit the [How to Contribute](https://github.com/Anshul-Birla/cse110-w21-group28/wiki/How-to-Contribute) in the wiki
