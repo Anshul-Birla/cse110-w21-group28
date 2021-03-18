@@ -50,7 +50,8 @@ body {
   transition-duration: 2s;
 }
 
-header, nav {
+header,
+nav {
   overflow: auto;
   background-color: var(--header-color);
 }
@@ -151,7 +152,6 @@ a.brand-logo li {
   left: -40px;
 }
 
-
 #FAQ {
   background: #008b8b;
   display: inline-block;
@@ -217,7 +217,7 @@ html {
 
 #top-left-border span {
   position: absolute;
-  top: 0px;
+  top: 0;
   left: -140px;
   line-height: 0.3;
 }
@@ -241,6 +241,6 @@ html {
   height: 100%;
 }
 
-.logo>img {
-  vertical-align: middle
+.logo > img {
+  vertical-align: middle;
 }

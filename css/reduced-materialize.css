@@ -45,43 +45,43 @@
 }
 
 .red {
-  background-color: #F44336 !important;
+  background-color: #f44336 !important;
 }
 
 .red-text {
-  color: #F44336 !important;
+  color: #f44336 !important;
 }
 
 .red.darken-1 {
-  background-color: #E53935 !important;
+  background-color: #e53935 !important;
 }
 
 .red-text.text-darken-1 {
-  color: #E53935 !important;
+  color: #e53935 !important;
 }
 
 .red.darken-2 {
-  background-color: #D32F2F !important;
+  background-color: #d32f2f !important;
 }
 
 .red-text.text-darken-2 {
-  color: #D32F2F !important;
+  color: #d32f2f !important;
 }
 
 .red.darken-3 {
-  background-color: #C62828 !important;
+  background-color: #c62828 !important;
 }
 
 .red-text.text-darken-3 {
-  color: #C62828 !important;
+  color: #c62828 !important;
 }
 
 .red.darken-4 {
-  background-color: #B71C1C !important;
+  background-color: #b71c1c !important;
 }
 
 .red-text.text-darken-4 {
-  color: #B71C1C !important;
+  color: #b71c1c !important;
 }
 
 /*! normalize.css v7.0.0 | MIT License | github.com/necolas/normalize.css */
@@ -97,10 +97,13 @@
 
 html {
   line-height: 1.15;
+
   /* 1 */
   -ms-text-size-adjust: 100%;
+
   /* 2 */
   -webkit-text-size-adjust: 100%;
+
   /* 2 */
 }
 
@@ -119,15 +122,18 @@ body {
  * Add the correct display in IE 9-.
  */
 
-header,nav,section {
+header,
+nav,
+section {
   display: block;
 }
 
-
 a {
   background-color: transparent;
+
   /* 1 */
   -webkit-text-decoration-skip: objects;
+
   /* 2 */
 }
 
@@ -143,7 +149,8 @@ a {
  * 1. Remove the inheritance of text transform in Firefox.
  */
 
-button,select {
+button,
+select {
   /* 1 */
   text-transform: none;
 }
@@ -154,8 +161,12 @@ button,select {
  * 2. Correct the inability to style clickable types in iOS and Safari.
  */
 
-button,html [type="button"],[type="reset"],[type="submit"] {
+button,
+html [type="button"],
+[type="reset"],
+[type="submit"] {
   -webkit-appearance: button;
+
   /* 2 */
 }
 
@@ -163,7 +174,10 @@ button,html [type="button"],[type="reset"],[type="submit"] {
  * Remove the inner border and padding in Firefox.
  */
 
-button::-moz-focus-inner,[type="button"]::-moz-focus-inner,[type="reset"]::-moz-focus-inner,[type="submit"]::-moz-focus-inner {
+button::-moz-focus-inner,
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]::-moz-focus-inner {
   border-style: none;
   padding: 0;
 }
@@ -172,10 +186,12 @@ button::-moz-focus-inner,[type="button"]::-moz-focus-inner,[type="reset"]::-moz-
  * Restore the focus styles unset by the previous rule.
  */
 
-button:-moz-focusring,[type="button"]:-moz-focusring,[type="reset"]:-moz-focusring,[type="submit"]:-moz-focusring {
+button:-moz-focusring,
+[type="button"]:-moz-focusring,
+[type="reset"]:-moz-focusring,
+[type="submit"]:-moz-focusring {
   outline: 1px dotted ButtonText;
 }
-
 
 a {
   color: #039be5;
@@ -183,14 +199,19 @@ a {
   -webkit-tap-highlight-color: transparent;
 }
 
-/* 2dp elevation modified*/
+/* 2dp elevation modified */
 
-nav,.btn,.btn-large,.btn-floating {
+nav,
+.btn,
+.btn-large,
+.btn-floating {
   -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
 }
 
-.btn:hover,.btn-large:hover,.btn-floating:hover {
+.btn:hover,
+.btn-large:hover,
+.btn-floating:hover {
   -webkit-box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 7px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -1px rgba(0, 0, 0, 0.2);
   box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 7px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -1px rgba(0, 0, 0, 0.2);
 }
@@ -356,7 +377,10 @@ nav a {
   color: #fff;
 }
 
-nav i,nav [class^="mdi-"],nav [class*="mdi-"],nav i.material-icons {
+nav i,
+nav [class^="mdi-"],
+nav [class*="mdi-"],
+nav i.material-icons {
   display: block;
   font-size: 24px;
   height: 56px;
@@ -383,7 +407,8 @@ nav .brand-logo {
     transform: translateX(-50%);
   }
 
-  nav .brand-logo.left,  nav .brand-logo.right {
+  nav .brand-logo.left,
+  nav .brand-logo.right {
     padding: 0;
     -webkit-transform: none;
     transform: none;
@@ -404,7 +429,10 @@ nav .brand-logo.right {
   padding: 0;
 }
 
-nav .brand-logo i,nav .brand-logo [class^="mdi-"],nav .brand-logo [class*="mdi-"],nav .brand-logo i.material-icons {
+nav .brand-logo i,
+nav .brand-logo [class^="mdi-"],
+nav .brand-logo [class*="mdi-"],
+nav .brand-logo i.material-icons {
   float: left;
   margin-right: 15px;
 }
@@ -420,15 +448,15 @@ nav ul {
 }
 
 nav ul li {
-  -webkit-transition: background-color .3s;
-  transition: background-color .3s;
+  -webkit-transition: background-color 0.3s;
+  transition: background-color 0.3s;
   float: left;
   padding: 0;
 }
 
 nav ul a {
-  -webkit-transition: background-color .3s;
-  transition: background-color .3s;
+  -webkit-transition: background-color 0.3s;
+  transition: background-color 0.3s;
   font-size: 1rem;
   color: #fff;
   display: block;
@@ -436,13 +464,19 @@ nav ul a {
   cursor: pointer;
 }
 
-nav ul a.btn,nav ul a.btn-large,nav ul a.btn-large,nav ul a.btn-floating {
+nav ul a.btn,
+nav ul a.btn-large,
+nav ul a.btn-large,
+nav ul a.btn-floating {
   margin-top: -2px;
   margin-left: 15px;
   margin-right: 15px;
 }
 
-nav ul a.btn > .material-icons,nav ul a.btn-large > .material-icons,nav ul a.btn-large > .material-icons,nav ul a.btn-floating > .material-icons {
+nav ul a.btn > .material-icons,
+nav ul a.btn-large > .material-icons,
+nav ul a.btn-large > .material-icons,
+nav ul a.btn-floating > .material-icons {
   height: inherit;
   line-height: inherit;
 }
@@ -460,7 +494,8 @@ nav form {
 }
 
 @media only screen and (min-width: 601px) {
-  nav,  nav .nav-wrapper i {
+  nav,
+  nav .nav-wrapper i {
     height: 64px;
     line-height: 64px;
   }
@@ -495,8 +530,8 @@ html {
   }
 }
 
-
-.btn,.btn-large {
+.btn,
+.btn-large {
   border: none;
   border-radius: 2px;
   display: inline-block;
@@ -508,46 +543,70 @@ html {
   -webkit-tap-highlight-color: transparent;
 }
 
-.btn:disabled,.btn-large:disabled,.btn-floating:disabled,.btn-large:disabled,.btn[disabled],.btn-large[disabled],.btn-floating[disabled],.btn-large[disabled] {
+.btn:disabled,
+.btn-large:disabled,
+.btn-floating:disabled,
+.btn-large:disabled,
+.btn[disabled],
+.btn-large[disabled],
+.btn-floating[disabled],
+.btn-large[disabled] {
   pointer-events: none;
-  background-color: #DFDFDF !important;
+  background-color: #dfdfdf !important;
   -webkit-box-shadow: none;
   box-shadow: none;
-  color: #9F9F9F !important;
+  color: #9f9f9f !important;
   cursor: default;
 }
 
-.btn:disabled:hover,.btn-large:disabled:hover,.btn-floating:disabled:hover,.btn-large:disabled:hover,.btn[disabled]:hover,.btn-large[disabled]:hover,.btn-floating[disabled]:hover,.btn-large[disabled]:hover {
-  background-color: #DFDFDF !important;
-  color: #9F9F9F !important;
+.btn:disabled:hover,
+.btn-large:disabled:hover,
+.btn-floating:disabled:hover,
+.btn-large:disabled:hover,
+.btn[disabled]:hover,
+.btn-large[disabled]:hover,
+.btn-floating[disabled]:hover,
+.btn-large[disabled]:hover {
+  background-color: #dfdfdf !important;
+  color: #9f9f9f !important;
 }
 
-.btn,.btn-large,.btn-floating,.btn-large {
+.btn,
+.btn-large,
+.btn-floating,
+.btn-large {
   font-size: 14px;
   outline: 0;
 }
 
-.btn i,.btn-large i,.btn-floating i,.btn-large i {
+.btn i,
+.btn-large i,
+.btn-floating i,
+.btn-large i {
   font-size: 1.3rem;
   line-height: inherit;
 }
 
-.btn:focus,.btn-large:focus,.btn-floating:focus {
+.btn:focus,
+.btn-large:focus,
+.btn-floating:focus {
   background-color: #1d7d74;
 }
 
-.btn,.btn-large {
+.btn,
+.btn-large {
   text-decoration: none;
   color: #fff;
   background-color: #26a69a;
   text-align: center;
-  letter-spacing: .5px;
-  -webkit-transition: background-color .2s ease-out;
-  transition: background-color .2s ease-out;
+  letter-spacing: 0.5px;
+  -webkit-transition: background-color 0.2s ease-out;
+  transition: background-color 0.2s ease-out;
   cursor: pointer;
 }
 
-.btn:hover,.btn-large:hover {
+.btn:hover,
+.btn-large:hover {
   background-color: #2bbbad;
 }
 
@@ -563,8 +622,8 @@ html {
   padding: 0;
   background-color: #26a69a;
   border-radius: 50%;
-  -webkit-transition: background-color .3s;
-  transition: background-color .3s;
+  -webkit-transition: background-color 0.3s;
+  transition: background-color 0.3s;
   cursor: pointer;
   vertical-align: middle;
 }
@@ -573,7 +632,7 @@ html {
   background-color: #26a69a;
 }
 
-.btn-floating:before {
+.btn-floating::before {
   border-radius: 0;
 }
 
@@ -632,11 +691,13 @@ button.btn-floating {
   -webkit-tap-highlight-color: transparent;
   vertical-align: middle;
   z-index: 1;
-  -webkit-transition: .3s ease-out;
-  transition: .3s ease-out;
+  -webkit-transition: 0.3s ease-out;
+  transition: 0.3s ease-out;
 }
 
-.waves-effect input[type="button"],.waves-effect input[type="reset"],.waves-effect input[type="submit"] {
+.waves-effect input[type="button"],
+.waves-effect input[type="reset"],
+.waves-effect input[type="submit"] {
   border: 0;
   font-style: normal;
   font-size: inherit;
@@ -713,11 +774,11 @@ button:focus {
     subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
  */
 
-/**************************/
+/*************************   */
 
 /* STYLES FOR THE SPINNER */
 
-/**************************/
+/*************************   */
 
 /*
  * Constants:
@@ -799,7 +860,8 @@ button:focus {
     -webkit-transform: rotate(1080deg);
   }
 
-  /* 4   * ARCSIZE */}
+  /* 4   * ARCSIZE */
+}
 
 @keyframes fill-unfill-rotate {
   12.5% {
@@ -849,7 +911,8 @@ button:focus {
     transform: rotate(1080deg);
   }
 
-  /* 4   * ARCSIZE */}
+  /* 4   * ARCSIZE */
+}
 
 @-webkit-keyframes blue-fade-in-out {
   from {

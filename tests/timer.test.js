@@ -64,7 +64,6 @@ test('Test That Start Button Functions Properly ', () => {
   jest.clearAllTimers();
   button.click();
   expect(button.textContent).toBe(buttonText.stopTimerText);
-  expect(button.class).toBe(classNames.stopButton);
 });
 
 test('Test That Clicking Start Twice Changes HTML ', () => {

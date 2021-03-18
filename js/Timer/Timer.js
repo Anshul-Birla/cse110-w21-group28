@@ -53,7 +53,6 @@ class Timer extends HTMLElement {
      */
     this.end = false;
 
-
     // this is the order for the timer. It will loop in this order.
     const workOrder = [workMode, shortBreakMode, workMode,
       shortBreakMode, workMode, shortBreakMode, workMode, longBreakMode];
@@ -147,7 +146,7 @@ class Timer extends HTMLElement {
         this.startButton.childNodes[0].nodeValue = buttonText.stopTimerText;
         // this.startButton.class = classNames.stopButton;
       } else {
-        console.log("ON CLICK RAN")
+        console.log('ON CLICK RAN');
         this.endTimer();
         this.startButton.textContent = buttonText.startTimerText;
         this.startButton.class = classNames.startButton;
