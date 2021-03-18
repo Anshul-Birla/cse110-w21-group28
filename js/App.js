@@ -42,11 +42,11 @@ TimerObj.addEventListener('timer-complete', (e) => {
     TDLDom.onSessionComplete();
     StatsPage.addWorkTime(e.detail.duration);
     StatsPage.incrementActualPomoSessions();
-    DistractionPage.hideButton();
+    // DistractionPage.hideButton();
     shortBreakColors();
   } else {
     StatsPage.addTimeSpent(e.detail.duration);
-    DistractionPage.showButton();
+    // DistractionPage.showButton();
     workModeColors();
   }
 });
