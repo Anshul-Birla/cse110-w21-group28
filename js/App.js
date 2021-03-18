@@ -4,6 +4,7 @@ import { Timer } from './Timer/Timer.js';
 import { Statistics } from './Statistics/Statistics.js';
 import { Distraction } from './Distraction/Distraction.js';
 import { shortBreakColors, workModeColors } from './ChangeColors.js';
+import { breakModeSound, workModeSound } from './Sounds.js';
 
 function after3amToday() {
   const currDate = new Date();
@@ -44,10 +45,12 @@ TimerObj.addEventListener('timer-complete', (e) => {
     StatsPage.incrementActualPomoSessions();
     // DistractionPage.hideButton();
     shortBreakColors();
+    breakModeSound();
   } else {
     StatsPage.addTimeSpent(e.detail.duration);
     // DistractionPage.showButton();
     workModeColors();
+    workModeSound();
   }
 });
 
