@@ -31,7 +31,7 @@ th,
 td {
   padding: 15px;
   word-wrap: break-word; /* so that long tasks don't extend the table */
-  max-width: 200vw;      /* allows for word-wrap */
+  max-width: 20vw;      /* allows for word-wrap */
 }
 
 th {
@@ -122,7 +122,7 @@ svg {
   position: sticky;
   bottom: 0;
   width: 100%;
-  background-color: transparent;
+  background-color: var(--page-bg-color);
   border-top-left-radius: var(--td-border-radius);
   border-top-right-radius: var(--td-border-radius);
 }
@@ -136,6 +136,7 @@ svg {
   padding-top: 10px;
   padding-bottom: 10px;
   min-width: 500px;
+
   border-top-right-radius: var(--td-border-radius);
   transition-duration: 2s;
 }
