@@ -74,8 +74,7 @@ test('Test That Clicking Start Twice Changes HTML ', () => {
   jest.clearAllTimers();
   button.click();
   button.click();
-  expect(button.textContent).toBe(buttonText.startTimerText);
-  expect(button.class).toBe(classNames.startButton);
+  expect(TimerObj.startButton.textContent.indexOf(buttonText.startTimerText) > -1).toBe(true);
   expect(TimerObj.displayStatus.textContent).toBe('Pomo-Time!');
 });
 

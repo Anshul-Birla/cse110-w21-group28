@@ -1,5 +1,5 @@
 import {
-  sessionStartName, workMode, shortBreakMode, longBreakMode, classNames, buttonText,
+  sessionStartName, workMode, shortBreakMode, longBreakMode, buttonText,
 } from './TimerVariables.js';
 /**
  * A class for the Timer object. Has functions to start the timer,
@@ -151,11 +151,9 @@ class Timer extends HTMLElement {
       if (this.startButton.textContent.indexOf(buttonText.startTimerText) > -1) {
         this.startTimer();
         this.startButton.childNodes[0].nodeValue = buttonText.stopTimerText;
-        // this.startButton.class = classNames.stopButton;
       } else {
         this.endTimer();
-        this.startButton.textContent = buttonText.startTimerText;
-        this.startButton.class = classNames.startButton;
+        this.startButton.childNodes[0].nodeValue = buttonText.startTimerText;
         document.getElementsByTagName('body')[0].classList.remove('short-break');
       }
     });
