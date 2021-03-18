@@ -1,22 +1,25 @@
 <!doctype html>
-
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <link rel="shortcut icon" href="#" />
+  <link rel="stylesheet" href="./css/reduced-materialize.css" />
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="./css/buttons-min.css"/>
   <link rel="stylesheet" href="./css/style.css" />
   <link rel="stylesheet" href="./css/distraction-box.css" />
+  <link rel="stylesheet" href="./css/button.css" />
   <link rel="stylesheet" href="./css/faq-box.css" />
   <link rel="stylesheet" href="./css/table.css" />
   <link rel="stylesheet" href="./css/animations.css" />
   <link rel="stylesheet" href="./css/settings.css" />
+  <link rel="stylesheet" href="./css/stats.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Pomodoro</title>
   <link rel="icon"
   type="image/png"
   href="./assets/img/pomatoLogo3.png">
-</head>
 </head>
 
 <body>
@@ -24,27 +27,20 @@
 
   <!-- Header bar at the top of the page for title text & navigation -->
   <header>
-    <h1>
-      Pomodoro Timer
-      <div class="icon-container">
-        <p>Settings</p>
-        <p>Stats</p>
-        <p>FAQ</p>        
-        <a id="settingsButton">
-          <img src="./assets/img/settings.svg" width="35" height="35">
-        </a>
-        <button id="statsButton" class="pure-button icons">
-          <img src="./assets/img/barchart.png" width="35" height="35">
-          <a href="#Stats"></a>
-        </button>
-        <button id="faqButton" class="pure-button icons">
-          <img src="./assets/img/question.png" width="35" height="35">
-        </button>
-
-      </div>
-    </h1>
-
-  </header>
+		<nav>
+			<div class="nav-wrapper>">
+				<a href="#!" class="brand-logo"><img src="./assets/img/logo2.png" height='60px'>
+					<li> Go Go Pomo! </li>
+				</a>
+				<ul class="right hide-on-med-and-down">
+					<li><a class="waves-effect waves-light btn" id="faqButton">FAQ<i class="material-icons right">help_outline</i></a></li>
+					<li><a class="waves-effect waves-light btn" id="statsButton">Statistics<i class="material-icons right">insert_chart</i></a></li>
+					<li><a class="btn" id="settingsButton">Settings<i class="material-icons right">settings</i></a></li>
+					<li><a class="btn" id="onboardingButton">TOUR<i class="material-icons right">replay</i></a></li>
+				</ul>
+			</div>
+		</nav>
+	</header>
 
   <!-- Settings popup -->
   <section id="settingsPopup">
@@ -91,24 +87,17 @@
   </section>
 
   <!-- Container for timer, timer buttons, and distraction button + prompt -->
-  <section id="timerContainer" class="section-container">
-    <div id="countdown">
-      <p id="modeDisplay"> Pomo-Time!</p>
-      <p id="top-left-border">
-        <span>┌</span>
-      </p>
-      <p id="timeDisplay">
-         25:00
-      </p>
-      <p id="bottom-right-border">
-        <span>┘</span>
-      </p>
-      <div class="buttons-div">
-        <button id="startTimer" class="pure-button">Start</button>
-        <button id="distractionButton" class = "pure-button" disabled = "true">Distraction</button>
-      </div>
-    </div>
-  </section>
+	<section id="timerContainer" class="section-container">
+		<div id="countdown">
+			<p id="modeDisplay"> Pomo-Time!</p>
+			<p id="top-left-border"> <span>┌</span> </p>
+			<p id="timeDisplay"> 25:00 </p>
+			<p id="bottom-right-border"> <span>┘</span> </p>
+			<button class="btn-large waves-light" id="startTimer">Start &nbsp;&nbsp;&nbsp;<i class="material-icons right">timer</i></button>
+			<button class="btn-large waves-effect waves-light  red lighten-2" id="distractionButton" disabled>Distraction <i class="material-icons right">warning</i></button>
+			<br> </div>
+	</section>
+	<br>
   <!-- The audio cue -->
   <audio id="alert-sound" src="./assets/audio/air-horn.mp3"></audio>
   <!-- Container for current task -->
@@ -117,104 +106,72 @@
   </section>
   <!-- Container for task list -->
   <section id='tasklist' class='section-container'>
-    <table id='todo'>
-      <tr>
-        <th class='col1-checkbox'></th>
-        <th class='col2-task'>TASKS</th>
-        <th class='col3-pomos'>#</th>
-        <th class='col4-delete'><button id = "delete-all-button" class="pure-button" type="button">Delete All</button></th>
-      </tr>
-    </table>
+		<table id='todo'>
+			<tr>
+				<th class='col1-checkbox'></th>
+				<th class='col2-task'>TASKS</th>
+				<th class='col3-pomos'>#</th>
+				<th class='col4-delete'>
+					<button id="delete-all-button" type='submit' class="btn-floating btn-small"><i class="material-icons">delete_forever</i></button>
+				</th>
+			</tr>
+		</table>
+		<div id='form-container'>
+			<form id='add-todo' overflow>
+				<input type='text' name='task-name' placeholder='Enter task' class='task-name'>
+				<input type='number' name='task-length' placeholder='#' class='task-length' min='1' max='24' required>
+				<button id="add-button" type='submit' class="btn-floating btn-small"><i class="material-icons">add</i></button>
+			</form>
+		</div>
+	</section>
 
-    <div id='form-container'>
-      <form id='add-todo' overflow>
-        <input type='text' name='task-name' placeholder='Enter task' class='task-name'>
-        <input type='number' name='task-length' placeholder='#' class='task-length' min='1' max='24' required>
-        <input id = "add-button" type='submit' class='task-submit' value='+'>
-      </form>
-    </div>
-  </section>
-
-
-  <!-- Distraction Box-->
-  <section class="form-popup" id="distract-popup">
-    <form class="form-container" id="distract-form">
-      <h1 class='distraction-label'>Report Distraction</h1>
-
-      <label class="distraction-label small">Distraction Description</label>
-      <input type="text" placeholder="Enter a short description of the distraction" id="description" required="">
-
-      <button type="submit" class="distractFormButton" id="submit-button">Submit</button>
-      <button type="button" class="distractFormButton cancel" id="cancel-button">Cancel</button>
-    </form>
-  </section>
-
-  <!-- FAQ-->
-  <section class="faq">
-  <div id="FAQ">
-    <div id="myModal" class="modal">
-      <div class="modal-content">
-        <div class="modal-header">
-          <span class="close">&times;</span>
-          <h2>The Go Go Pomo Timer can help you with productivity</h2>
-        </div>
-
-    <div class="modal-body">
-    <h2>What is the Go Go Pomo Timer?</h2>
-  	  <p>
-          Go Go Pomo is a Pomodoro Technique timer that works on your computer with an aim to increase your productivity and reduce the stress and anxiety of planning your time.
-          The aim of this app is to help you focus on any task you are working on, such as studying, writing, or coding.
-          This app is inspired by
-    <a
-      href='https://francescocirillo.com/pages/pomodoro-technique'
-      target='_blank'
-      rel='noopener'
-      >Pomodoro Technique</a>
-    which is a time management method developed by Francesco Cirillo.
-  </p>
-
-  <h2>What is the Pomodoro Technique?</h2>
-    <p>
-      The Pomodoro Technique is a technique created by Francesco Cirillo for a
-      more productive way to work and study. The technique uses a
-      timer to break down work into intervals, traditionally 25
-      minutes in length, separated by short breaks. Each interval
-      is known as a pomodoro, from the Italian word for 'tomato',
-      after the tomato-shaped kitchen timer that Cirillo used as a
-      university student. -
-      <a
-        href='https://en.wikipedia.org/wiki/Pomodoro_Technique'
-        target='_blank'
-        rel='noopener'
-        >Wikipedia</a
+	<!-- Distraction Box-->
+	<section class="form-popup" id="distract-popup">
+		<form class="form-container" id="distract-form">
+			<h1 class='distraction-label'>Report Distraction</h1>
+			<label class="distraction-label small">Distraction Description</label>
+			<input type="text" placeholder="Enter a short description of the distraction" id="description" required="">
+			<button type="submit" class="distractFormButton" id="submit-button">Submit</button>
+			<button type="button" class="distractFormButton cancel" id="cancel-button">Cancel</button>
+		</form>
+	</section>
+  <!-- Stats-->
+    <section class="stats-popup" id='stats-section'>
+      <div id='parentDiv' class='slide-out'>
+        <span class="close-stats-button" id='close-stats-button'>&times;</span>
+          <h2 class='statslabel'>Your Stats</h2>
+          <div class ="tab">
+            <button class="tab-btn" id="data" > Data </button>
+            <button class="tab-btn" id="distraction"> Distraction </button>
+          </div>
+          <div id='stats-info' class='stats-info-container'>
+          </div>
+          </div>
+      </div>
+    </section>
+	<!-- FAQ-->
+	<section class="faq">
+		<div id="FAQ">
+			<div id="myModal" class="modal">
+				<div class="modal-content">
+					<div class="modal-header"> <span class="close">&times;</span>
+						<h2>The Go Go Pomo Timer can help you with productivity</h2> </div>
+					<div class="modal-body">
+						<h2>What is the Go Go Pomo Timer?</h2>
+						<p> Go Go Pomo is a Pomodoro Technique timer that works on your computer with an aim to increase your productivity and reduce the stress and anxiety of planning your time. The aim of this app is to help you focus on any task you are working on, such as studying, writing, or coding. This app is inspired by <a href='https://francescocirillo.com/pages/pomodoro-technique' target='_blank' rel='noopener'>Pomodoro Technique</a> which is a time management method developed by Francesco Cirillo. </p>
+						<h2>What is the Pomodoro Technique?</h2>
+						<p> The Pomodoro Technique is a technique created by Francesco Cirillo for a more productive way to work and study. The technique uses a timer to break down work into intervals, traditionally 25 minutes in length, separated by short breaks. Each interval is known as a pomodoro, from the Italian word for 'tomato', after the tomato-shaped kitchen timer that Cirillo used as a university student. - <a href='https://en.wikipedia.org/wiki/Pomodoro_Technique' target='_blank' rel='noopener'>Wikipedia</a
         >
     </p>
+          </div>
 
-<div>
-  <h2>
-    Features of the Go Go Timer
-  </h2>
-  <ol>
-    <li><strong>Simple use</strong> of the timer and functionality of the Pomodoro Technique</li>
-    <li>
-      <strong>Todo List </strong> functionality to organize your tasks
-    </li>
-    <li><strong>Statistics </strong> feature to help monitor your progress</li>
-    <li>
-      <strong>Start timer</strong> and focus on the task for 25 minutes
-    </li>
-  </ol>
-</div>
-</div>
+      <div class="modal-footer">
+        <h2>Stay Productive!</h2>
+      </div>
 
-<div class="modal-footer">
-  <h2>Stay Productive!</h2>
-</div>
-
-</div>
-</div>
-</div>
-</div>
+      </div>
+    </div>
+  </div>
 
 </section>
 <script type="module" src="./js/App.js"></script>

@@ -178,3 +178,13 @@ test('Adding unchecked task to end of todolist when no checked tasks exist', () 
   aList.addTaskToEnd(uncheckedTask);
   expect(aList.taskList[4]).toBe(uncheckedTask);
 });
+
+test('Unchecked Task Event', () => {
+  const aList = new ToDoList();
+  aList.addTask('name', 1);
+  aList.addTask('name2', 1);
+  aList.addTask('name3', 1);
+  aList.addTask('name4', 1);
+  const event = new CustomEvent('task-unchecked', {});
+  aList.taskList[0].dispatchEvent(event);
+});

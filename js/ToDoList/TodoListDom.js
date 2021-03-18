@@ -1,5 +1,6 @@
 import { ToDoList } from './ToDoList.js';
 import { HTMLAttributes, TaskStorage } from './TodoListDomVariables.js';
+// import { Task } from './Task.js';
 
 /**
  * Class responsible for providing changes to the DOM for the TodoList
@@ -99,6 +100,17 @@ class TodoListDom {
       const currentSession = window.localData[i][TaskStorage.currentSessionIndex];
       const completed = window.localData[i][TaskStorage.checkedIndex];
       const task = this.todoList.addTask(name, totalSession, currentSession, completed, true);
+      task.addEventListener('task-checked-off', () => {
+        const event = new CustomEvent('task-checked-off', {
+        });
+        this.todoList.dispatchEvent(event);
+      });
+      task.addEventListener('task-unchecked', () => {
+        const event = new CustomEvent('task-unchecked', {
+        });
+        this.todoList.dispatchEvent(event);
+      });
+      // task.updatePomoSessions();
       this.displayTask(task);
     }
 
@@ -124,7 +136,7 @@ class TodoListDom {
       } catch (error) {
         // eslint-disable-next-line no-alert
         alert('Invalid input. Please try again');
-        console.log(error);
+        // console.log(error);
       }
     });
 
