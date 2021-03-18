@@ -18,6 +18,8 @@ table {
   border-collapse: separate;
   border-spacing: 0 var(--table-border);
   table-layout: fixed; /* allows for word-wrap */
+  width: 100%;
+  min-width: 500px;
 
   /* max-width: 100%;     /* allows for word-wrap */
   min-height: 60vh;
@@ -120,7 +122,7 @@ svg {
   position: sticky;
   bottom: 0;
   width: 100%;
-  background-color: transparent;
+  background-color: var(--page-bg-color);
   border-top-left-radius: var(--td-border-radius);
   border-top-right-radius: var(--td-border-radius);
 }
@@ -133,37 +135,52 @@ svg {
   background-color: var(--header-color);
   padding-top: 10px;
   padding-bottom: 10px;
+  min-width: 500px;
+  min-height: 20px;
   border-radius: var(--td-border-radius);
-  transition-duration: 0s;
+  transition-duration: 2s;
 }
 
+/* checkbox and delete button styling */
 .task-name,
 .task-length {
-  font-size: 20px;
-  border-radius: 25px;
-  height: 50px;
-  padding-left: 15px;
-  padding-right: 15px; /* so that when a user enters a long task it doesn't go past the input bar */
+  font-size: 1em;
+  background: clear;
+  border-style: none;
+  border-radius: 60vh;
+  border-color: var(--header-color);
+  height: 2.5em;
+  padding-left: 1vw;
+  padding-right: 1vw; /* so that when a user enters a long task it doesn't go past the input bar */
   color: black;
+  top: 49vh;
+  outline: none;
 }
 
 .task-name {
-  width: calc(56% - 60px);
+  /* width: calc(40% - 60px); */
+  width: 58%;
+  margin-left: 10%;
 }
 
 .task-length {
-  width: calc(42% - 60px);
+  width: 2em;
 }
 
-.task-submit {
-  font-size: 40px;
-  border-radius: 100%;
-  height: 60px;
-  width: 60px;
-  position: absolute;
-  bottom: 10px;
+.task-submit { /* + button to replace with materialize css */
+  margin-left: 1vw;
+  width: 1.7em;
+  font-size: 1.4em;
+  background: clear;
+  border-style: none;
+  border-radius: 100vh;
+  border-color: var(--header-color);
+  padding-left: 0.1vw;
+  padding-right: 0.1vw;
   color: black;
-  cursor: pointer;
+  top: 49vh;
+  outline: none;
+  min-width: 1vw;
 }
 
 /* other table features: checkbox, delete button, scrollbar */
