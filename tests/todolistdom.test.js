@@ -33,6 +33,9 @@ beforeEach(() => {
   addBtnLocation = document.getElementById('add-button');
   deleteBtnLocation = document.getElementById('delete-all-button');
   myDOM = new TodoListDom(tableLocation, formLocation, addBtnLocation, deleteBtnLocation);
+  document.body.addEventListener('task-deleted', (e) => {
+    myDOM.todoList.removeTask(e.detail.taskID);
+  });
 });
 
 test('Valid construction of TDLDom', () => {
@@ -263,6 +266,7 @@ test('Unchecking a task brings it to the bottom of the unchecked tasks', () => {
   myDOM.updateCurrentTask();
   tableLocation.children[3].checked = false;
   myDOM.onUncheckedTask(tableLocation.children[3].id);
+  myDOM.updateCurrentTask();
 
   expect(tableLocation.children[1].taskText.textContent).toBe('Task3');
   expect(tableLocation.children[2].taskText.textContent).toBe('Task2');
