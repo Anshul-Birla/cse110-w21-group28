@@ -67,6 +67,7 @@ startTimerButton.addEventListener('click', () => {
   }
 });
 
+// Disable / enable the distraction button during break / work mode
 TimerObj.addEventListener('timer-start', (e) => {
   if (e.detail.sessionIsWork) {
     distractButton.disabled = false;
@@ -75,6 +76,7 @@ TimerObj.addEventListener('timer-start', (e) => {
   }
 });
 
+// Disable the distraction button after End Day
 TimerObj.addEventListener('timer-end', () => {
   distractButton.disabled = true;
 });

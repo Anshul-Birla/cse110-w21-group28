@@ -190,6 +190,10 @@ class TodoListDom {
     this.todoList.addTaskToEnd(temp);
   }
 
+  /**
+    * This function returns the index of the first completed task,
+    * used when new tasks/ unchecked tasks are added.
+    */
   getFirstCompletedTaskIndex() {
     let firstCompletedTaskIndex = -1;
     for (let i = 2; i < this.table.childNodes.length && firstCompletedTaskIndex === -1; i += 1) {
