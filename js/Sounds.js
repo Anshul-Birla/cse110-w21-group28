@@ -39,7 +39,7 @@ export function breakModeSound() {
 
 /**
  * Handles the changing of the sounds in settings.
- * @param {Event} e 
+ * @param {Event} e
  */
 function changeSound(e) {
   let path;

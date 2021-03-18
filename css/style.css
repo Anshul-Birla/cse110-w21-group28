@@ -16,7 +16,7 @@
   --page-bg-color: cadetblue;
   --font-color: white;
   --timer-bg-color: darkcyan;
-   
+
 
   /* short break page colors */
   --page-bg-color-short: #336b87;
@@ -44,6 +44,10 @@
   --tr-hover-color-short: #bdd3df;
   --scroll-color-short: var(--even-color-short);
   --table-bg-color-short: #60afcc;
+
+  /* distraction/settings background */
+  --modal-bg-color: #f1f1f1;
+  --modal-font-color: black;
 }
 
 body {
