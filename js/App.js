@@ -52,8 +52,9 @@ startTimerButton.addEventListener('click', () => {
   if (StatsPage.dataToCompressExists()) {
     StatsPage.clearData();
   }
-  if (startTimerButton.textContent === 'Start') { // Button text updates before this
+  if (startTimerButton.childNodes[0].nodeValue === 'Start') { // Button text updates before this
     StatsPage.compressStats();
+    // Definitely in the past so data is cleared when Start Day is clicked
     const newDate = new Date(2000, 0, 1);
     localStorage.setItem('startDateTime', newDate);
     StatsPage.sessionStartDateTime = newDate;
@@ -114,7 +115,7 @@ TDLDom.todoList.addEventListener('task-unchecked', () => {
 
 TDLDom.todoList.addEventListener('task-deleted', (e) => {
   StatsPage.deleteExpectedPomoSessions(e.detail.pomoSessions);
-}, true);
+});
 
 DistractionPage.addEventListener('distraction-created', (e) => {
   e.detail.pomoSessionId = TimerObj.sessionId;
@@ -141,6 +142,8 @@ closeStatsButton.addEventListener('click', () => {
   document.getElementById('overlay').style.display = 'none';
 });
 
+// If it's after 3a.m. today and the last time that "Start Day" was clicked was
+// before 3a.m. today, compress stats and clear data
 if (after3amToday() && StatsPage.dataToCompressExists()) {
   StatsPage.compressStats();
   StatsPage.clearData();

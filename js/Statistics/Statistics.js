@@ -6,6 +6,30 @@ class Statistics extends HTMLElement {
      * @type {Object[]} Array that stores the distraction & which pomo session it happened during
      */
     this.distractionList = [];
+    /**
+     * @type {Number} Total number of minutes spent
+     */
+    this.totalMins = 0;
+    /**
+    * @type {Number} Total number of minutes spent working
+    */
+    this.workMins = 0;
+    /**
+    * @type {Number} Total number of tasks completed
+    */
+    this.tasksCompleted = 0;
+    /**
+    * @type {Number} Sum of projected number of pomo sessions expected over all Tasks
+    */
+    this.expectedPomoSessions = 0;
+    /**
+    * @type {Number} Sum of actual number of pomo sessions spent on all Tasks
+    */
+    this.actualPomoSessions = 0;
+    /**
+    * @type {Date} Start date/time stamp of current work day
+    */
+    this.sessionStartDateTime = new Date();
     this.addHTMLChildren();
     this.addEventListeners();
     this.loadFromLocalStorage();
@@ -13,7 +37,7 @@ class Statistics extends HTMLElement {
   }
 
   /**
-   * @description Adds all child HTML elements to the statistics popup
+   *  Adds all child HTML elements to the statistics popup
    */
   addHTMLChildren() {
     this.parentDiv = document.getElementById('stats-info');
@@ -120,7 +144,7 @@ class Statistics extends HTMLElement {
   }
 
   /**
-   * @description Creates a list item for each logged distraction
+   *  Creates a list item for each logged distraction
    */
   updateDistractionList() {
     const content = document.getElementsByClassName('distItem');
@@ -140,7 +164,7 @@ class Statistics extends HTMLElement {
   }
 
   /**
-   * @description Creates event listeners for toggling tabs within the stats popup
+   *  Creates event listeners for toggling tabs within the stats popup
    */
   addEventListeners() {
     const statsDistractBtn = document.getElementById('distraction');
@@ -196,7 +220,7 @@ class Statistics extends HTMLElement {
   }
 
   /**
-   * @description Updates the HTML elements to display values of local variables. Called when stats button is called.
+   *  Updates the HTML elements to display values of local variables. Called when stats button is called.
    */
   updateDom() {
     this.timePerTask.textContent = this.getAverageTimePerTask();
@@ -211,7 +235,7 @@ class Statistics extends HTMLElement {
   }
 
   /**
-   * @description Increments by one every time a task is marked as completed
+   *  Increments by one every time a task is marked as completed
    */
   incrementTasksCompleted() {
     this.tasksCompleted += 1;
@@ -219,7 +243,7 @@ class Statistics extends HTMLElement {
   }
 
   /**
-   * @description Decrements by one every time a task is marked as not-completed given that there are tasks that can be uncompleted. Updates local storage when called.
+   *  Decrements by one every time a task is marked as not-completed given that there are tasks that can be uncompleted. Updates local storage when called.
    */
   decrementTasksCompleted() {
     if (this.tasksCompleted > 0) {
@@ -229,7 +253,7 @@ class Statistics extends HTMLElement {
   }
 
   /**
-   * @description Adds a distraction (represented by a JSON object) to the list of distractions. Updates local storage when called.
+   *  Adds a distraction (represented by a JSON object) to the list of distractions. Updates local storage when called.
    * @param {JSON Object} distraction Distraction to be added
    */
   addDistraction(distraction) {
@@ -238,7 +262,7 @@ class Statistics extends HTMLElement {
   }
 
   /**
-   * @description Gets the number of broken work sessions. If multiple distractions during one work session occurred, only counts as one unique broken pomo session.
+   *  Gets the number of broken work sessions. If multiple distractions during one work session occurred, only counts as one unique broken pomo session.
    * @returns {Number} Number of disrupted work sessions
    */
   getNumUniqueDistractions() {
@@ -247,7 +271,7 @@ class Statistics extends HTMLElement {
   }
 
   /**
-   * @description Counts average number of distractions per task
+   *  Counts average number of distractions per task
    * @returns {Number} Average number of distractions per task rounded to the nearest tenth
    */
   getAvgDistractionsPerTask() {
@@ -259,7 +283,7 @@ class Statistics extends HTMLElement {
   }
 
   /**
-   * @description Increments the total time spent. Updates local storage when called.
+   *  Increments the total time spent. Updates local storage when called.
    * @param {Number} numMins Number of minutes to increment count by
    */
   addTimeSpent(numMins) {
@@ -268,7 +292,7 @@ class Statistics extends HTMLElement {
   }
 
   /**
-   * @description Increments the work time spent. When work time incremented, so is total time spent (runs as separate method call to addTimeSpent())
+   *  Increments the work time spent. When work time incremented, so is total time spent (runs as separate method call to addTimeSpent())
    * @param {Number} numMins Number of minutes to increment work count by
    */
   addWorkTime(numMins) {
@@ -277,7 +301,7 @@ class Statistics extends HTMLElement {
   }
 
   /**
-   * @description Increments the planned number of pomo sessions for the work day. Should be called each time a task is added.
+   *  Increments the planned number of pomo sessions for the work day. Should be called each time a task is added.
    * @param {Number} numSessions Number of sessions to increment count by
    */
   addExpectedPomoSessions(numSessions) {
@@ -286,7 +310,7 @@ class Statistics extends HTMLElement {
   }
 
   /**
-   * @description Decrements the planned number of pomo sessions for the work day. Should be called each time a task is deleted. Only decrements if new tasks were added during the current work day.
+   *  Decrements the planned number of pomo sessions for the work day. Should be called each time a task is deleted. Only decrements if new tasks were added during the current work day.
    * @param {Number} numSessions Number of sessions to decrement count by
    */
   deleteExpectedPomoSessions(numSessions) {
@@ -297,7 +321,7 @@ class Statistics extends HTMLElement {
   }
 
   /**
-   * @description Increments the number of completed pomo sessions for the work day. Should be called each time the timer finishes a work session. Updates local storage when called
+   *  Increments the number of completed pomo sessions for the work day. Should be called each time the timer finishes a work session. Updates local storage when called
    */
   incrementActualPomoSessions() {
     this.actualPomoSessions += 1;
@@ -305,17 +329,17 @@ class Statistics extends HTMLElement {
   }
 
   /**
-   * @returns {Number} Average work minutes per completed task
+   * @returns {Number} Average work minutes per completed task rounded to the nearest whole minute
    */
   getAverageTimePerTask() {
     if (this.tasksCompleted > 0) {
-      return this.workMins / this.tasksCompleted;
+      return Math.round(this.workMins / this.tasksCompleted);
     }
     return 0;
   }
 
   /**
-   * @description Loads all variables from local storage or sets them to zero if not found
+   *  Loads all variables from local storage or sets them to zero if not found
    */
   loadFromLocalStorage() {
     // Loading variables as strings from local storage
@@ -354,7 +378,7 @@ class Statistics extends HTMLElement {
   }
 
   /**
-   * @description Writes all class variables to local storage
+   *  Writes all class variables to local storage
    */
   updateMinorLocalStorage() {
     localStorage.setItem('totalMins', this.totalMins);
@@ -367,7 +391,7 @@ class Statistics extends HTMLElement {
   }
 
   /**
-   * @description Deletes all history records that are older than one year. To be used with year-to-date information. Updates local storage only for history record when called.
+   *  Deletes all history records that are older than one year. To be used with year-to-date information. Updates local storage only for history record when called.
    */
   flushHistory() {
     const currDate = new Date();
@@ -381,7 +405,7 @@ class Statistics extends HTMLElement {
   }
 
   /**
-   * @description Sees if the last time that a day was started was earlier than 3 a.m. today. If the work day was started at 3 a.m. or later, do not clear data, treat everything as a single work day. Otherwise, would compress data into history and clear variables.
+   *  Sees if the last time that a day was started was earlier than 3 a.m. today. If the work day was started at 3 a.m. or later, do not clear data, treat everything as a single work day. Otherwise, would compress data into history and clear variables.
    * @returns {Boolean} False if session started on or after 3 a.m. today. Else True.
    * @todo Rewrite logic to match above description (one long if statement for false rather than four individual if statements for true)
    */
@@ -400,7 +424,7 @@ class Statistics extends HTMLElement {
   }
 
   /**
-   * @description Compresses necessary local variables to a history record and pushes the record to local storage. Should run when the End Day button is hit or when page loads and dataToCompressExists() === true. Dispatches reset-timer event to reset timer PomoSessionId to 0.
+   *  Compresses necessary local variables to a history record and pushes the record to local storage. Should run when the End Day button is hit or when page loads and dataToCompressExists() === true. Dispatches reset-timer event to reset timer PomoSessionId to 0.
    */
   compressStats() {
     if (this.totalMins > 0) {
@@ -418,33 +442,15 @@ class Statistics extends HTMLElement {
   }
 
   /**
-   * @description Resets all variables back to zeroed/empty values
+   *  Resets all variables back to zeroed/empty values
    */
   clearData() {
-    /**
-     * @type {Number} Total number of minutes spent
-     */
     this.totalMins = 0;
-    /**
-     * @type {Number} Total number of minutes spent working
-     */
     this.workMins = 0;
-    /**
-     * @type {Number} Total number of tasks completed
-     */
     this.tasksCompleted = 0;
-    /**
-     * @type {Number} Sum of projected number of pomo sessions expected over all Tasks
-     */
     this.expectedPomoSessions = 0;
-    /**
-     * @type {Number} Sum of actual number of pomo sessions spent on all Tasks
-     */
     this.actualPomoSessions = 0;
     this.distractionList = [];
-    /**
-     * @type {Date} Start date/time stamp of current work day
-     */
     this.sessionStartDateTime = new Date();
     this.updateMinorLocalStorage();
   }
