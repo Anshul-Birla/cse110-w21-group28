@@ -54,6 +54,18 @@
   max-height: 80%;
   overflow-y: scroll;
   text-align: center;
+  scroll-padding: 20px;
+}
+
+#parentDiv::-webkit-scrollbar-thumb {
+  background-color: var(--toothpaste);
+  border: 2px solid transparent;
+  border-radius: 8px;
+  background-clip: padding-box;
+}
+
+#parentDiv::-webkit-scrollbar {
+  width: 16px;
 }
 
 .stats-info {
