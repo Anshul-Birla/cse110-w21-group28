@@ -51,7 +51,11 @@ class Statistics extends HTMLElement {
    *  Adds all child HTML elements to the statistics popup
    */
   addHTMLChildren() {
-    this.parentDiv = document.getElementById(classNames.statsNumberClass);
+    /**
+     * The div to which the page is appended
+     * @type {HTMLDivElement}
+     */
+    this.parentDiv = document.getElementById('stats-info');
 
     // Tasks Completed
     /**
