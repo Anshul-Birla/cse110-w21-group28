@@ -47,11 +47,6 @@ class Task extends HTMLTableRowElement {
      */
     this.checked = completed;
 
-    // /**
-    //  * Keeps track if the task was deleted or not (used with the Todolist )
-    //  */
-    // this.deleted = false;
-
     /**
      * The checkbox attribute for the task
      * @type {HTMLInputElement}
@@ -234,30 +229,32 @@ class Task extends HTMLTableRowElement {
   }
 
   /**
-   * Sets up the last column of the todolist.
-   * @param {HTMLButtonElement} threeDotsButton
-   * @param {HTMLDivElement} deleteButton
-   * @param {HTMLDivElement} focusButton
+   * Sets up the last column of the todolist. Wraps things
+   * in the divs they need to be wrapped in. Add task
+   * and check HTML file to see structure that this creates
+   * @param {HTMLButtonElement} threeDotsButton - show more button
+   * @param {HTMLDivElement} deleteDiv - div where the delete button is located
+   * @param {HTMLDivElement} focusDiv - div where the focus button is located
    */
-  setupLastColumnToggle(threeDotsButton, deleteButton,
-    focusButton) {
+  setupLastColumnToggle(threeDotsButton, deleteDiv,
+    focusDiv) {
     const lastCol = document.createElement('td');
     const lastColDiv = document.createElement('div');
     const threeDotsDiv = document.createElement('div');
     const deleteFocusDiv = document.createElement('div');
 
     // wrap the delete and focus buttons in a div
-    deleteFocusDiv.className = 'double-buttons';
-    deleteFocusDiv.appendChild(deleteButton);
-    deleteFocusDiv.appendChild(focusButton);
+    deleteFocusDiv.className = classNames.doubleButtons;
+    deleteFocusDiv.appendChild(deleteDiv);
+    deleteFocusDiv.appendChild(focusDiv);
     // wrap the three dots button in a div
     threeDotsDiv.appendChild(threeDotsButton);
-    threeDotsDiv.className = 'triple-dots-touch';
+    threeDotsDiv.className = classNames.threeDotsWrapper;
 
     // make sure the delete and focus buttons are hidden
     deleteFocusDiv.style.display = 'none';
     lastColDiv.appendChild(threeDotsDiv);
-    lastColDiv.className = 'touch-target';
+    lastColDiv.className = classNames.lastCol;
     lastColDiv.appendChild(deleteFocusDiv);
     lastCol.appendChild(lastColDiv);
     this.appendChild(lastCol);
@@ -344,6 +341,9 @@ class Task extends HTMLTableRowElement {
     this.updateLocalStorage();
   }
 
+  /**
+   * Deletes a task, remove from DOM, tasklist and localStorage
+   */
   onDelete() {
     this.remove();
     this.removeFromLocalStorage();

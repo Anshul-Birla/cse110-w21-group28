@@ -11,9 +11,9 @@ class Timer extends HTMLElement {
    * Constructor of Time Object. Takes the HTML element of where
    * you want the time and the status of the timer to be implemented.
    * HTML Elements must have the 'textElement' attribute.
-   * @param {HTMLElement} startButton
-   * @param {HTMLElement} displayTime
-   * @param {HTMLElement} displayStatus
+   * @param {HTMLButtonElement} startButton - button that starts the button
+   * @param {HTMLParagraphElement} displayTime - area to display the time remaining
+   * @param {HTMLParagraphElement} displayStatus - area to display the status of the timer
    */
   constructor(startButton, displayTime, displayStatus) {
     super();
@@ -50,6 +50,13 @@ class Timer extends HTMLElement {
      * @type {Boolean}
      */
     this.end = false;
+    /**
+     * The sessionId. Increments on each working session. Stored in
+     * local storage to keep track of id on multiple sessions every day
+     * @type {Number}
+     */
+    this.sessionId = localStorage.getItem('pomoSessionId');
+    this.sessionId = ((this.sessionId === null) ? 0 : parseInt(this.sessionId, 10) + 1);
 
     // this is the order for the timer. It will loop in this order.
     const workOrder = [workMode, shortBreakMode, workMode,
@@ -58,12 +65,12 @@ class Timer extends HTMLElement {
       this.stateQueue.push(workOrder[i]);
     }
 
-    this.sessionId = localStorage.getItem('pomoSessionId');
-    this.sessionId = ((this.sessionId === null) ? 0 : parseInt(this.sessionId, 10) + 1);
-
     this.addEventListeners();
   }
 
+  /**
+   * Function that resets the pomo session id and stores it in local storage
+   */
   resetPomoSessionId() {
     this.sessionId = 0;
     localStorage.setItem('pomoSessionId', this.sessionId);

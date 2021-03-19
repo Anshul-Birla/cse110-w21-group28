@@ -10,10 +10,10 @@ import { HTMLAttributes, TaskStorage } from './TodoListDomVariables.js';
 class TodoListDom {
   /**
    * Initializes the TodoListDom object with its correct member variables
-   * @param {HTMLTableElement} HTMLTable
-   * @param {HTMLFormElement} HTMLForm
-   * @param {HTMLButtonElement} submitBtn
-   * @param {HTMLButtonElement} deleteAllBtn
+   * @param {HTMLTableElement} HTMLTable - Table where tasks will be stored
+   * @param {HTMLFormElement} HTMLForm - Form to add the task
+   * @param {HTMLButtonElement} submitBtn - Button to submit the entered tasks
+   * @param {HTMLButtonElement} deleteAllBtn - Delete all tasks button
    */
   constructor(HTMLTable, HTMLForm, submitBtn, deleteAllBtn, currentTaskDiv) {
     /**
@@ -190,6 +190,10 @@ class TodoListDom {
     this.todoList.addTaskToEnd(temp);
   }
 
+  /**
+    * This function returns the index of the first completed task,
+    * used when new tasks/ unchecked tasks are added.
+    */
   getFirstCompletedTaskIndex() {
     let firstCompletedTaskIndex = -1;
     for (let i = 2; i < this.table.childNodes.length && firstCompletedTaskIndex === -1; i += 1) {

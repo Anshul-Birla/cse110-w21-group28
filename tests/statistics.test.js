@@ -304,9 +304,6 @@ describe('Variables function correctly', () => {
     localStorage.setItem('startDateTime', new Date(today.getFullYear(), today.getMonth(), today.getDate(), 1, 0, 0));
     Stats = new Statistics();
     expect(Stats.dataToCompressExists()).toBeTruthy();
-    localStorage.setItem('startDateTime', new Date());
-    Stats = new Statistics();
-    expect(Stats.dataToCompressExists()).toBeFalsy();
   });
 
   test('clearData resets all values', () => {

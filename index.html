@@ -9,7 +9,6 @@
 	<link rel="stylesheet" href="./css/ThirdParty/introjs.css" />
   <link rel="stylesheet" href="./css/style.css" />
   <link rel="stylesheet" href="./css/distraction-box.css" />
-  <!-- <link rel="stylesheet" href="./css/button.css" /> -->
   <link rel="stylesheet" href="./css/faq-box.css" />
   <link rel="stylesheet" href="./css/table.css" />
   <link rel="stylesheet" href="./css/animations.css" />
@@ -46,7 +45,7 @@
 				</a>
 				<ul class="right hide-on-med-and-down">
 					<li><a class="waves-effect waves-light btn" id="faqButton"  data-title="Misc" data-intro="Click this FAQ Button for more information on the Pomodoro Technique" data-step='10'>FAQ<i class="material-icons right">help_outline</i></a></li>
-					<li><a class="waves-effect waves-light btn" id="statsButton" data-title="Misc" data-intro="You can see your statistics for the current day as well as the past year" data-step='11'>Statistics<i class="material-icons right">insert_chart</i></a></li>
+					<li><a class="waves-effect waves-light btn" id="statsButton" data-title="Misc" data-intro="You can see your statistics for the current day here" data-step='11'>Statistics<i class="material-icons right">insert_chart</i></a></li>
 					<li><a class="btn" id="settingsButton" data-title="Misc" data-intro="If you would like to change the sounds of the app or enter into dark mode, click here" data-step='12'>Settings<i class="material-icons right">settings</i></a></li>
 					<li><a class="btn" id="onboardingButton" data-title="Misc" data-intro="If you would like to rerun the tutorial, click here" data-step='13'>TOUR<i class="material-icons right">replay</i></a></li>
 				</ul>
@@ -130,7 +129,7 @@
 		<div id='form-container'>
 			<form id='add-todo' overflow data-title="Tasks" data-intro="Here you can enter the name as well as the amount of 25 minute pomo-sessions your task will take" data-step='7'>
 				<input type='text' name='task-name' placeholder='Enter task' class='task-name' required>
-				<input type='number' name='task-length' placeholder='#' class='task-length' min='1' max='24' required>
+				<input type='number' name='task-length' placeholder='#' class='task-length' min='1' max='9' required>
 				<button id="add-button" type='submit' class="btn-floating btn-small"><i class="material-icons">add</i></button>
 			</form>
 		</div>

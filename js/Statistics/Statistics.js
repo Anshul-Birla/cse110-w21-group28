@@ -1,5 +1,16 @@
-/* eslint-disable max-len */
+import { classNames, storageItemNames } from './StatisticsVariables.js';
+
+/**
+ * A class for the Statistics object. Has functions for incrementing
+ * and decrementing expected and actual pomo sessions,
+ * total time and work time spent, and storing distractions.
+ * Also handles local storage elements for stats.
+ */
 class Statistics extends HTMLElement {
+  /**
+   * Constructor of Statistics object. Initializes all variables to zero,
+   * overwrites them from memory if available, updates DOM.
+   */
   constructor() {
     super();
     /**
@@ -40,48 +51,84 @@ class Statistics extends HTMLElement {
    *  Adds all child HTML elements to the statistics popup
    */
   addHTMLChildren() {
+    /**
+     * The div to which the page is appended
+     * @type {HTMLDivElement}
+     */
     this.parentDiv = document.getElementById('stats-info');
 
     // Tasks Completed
+    /**
+     * Number of tasks completed
+     * @type {HTMLParagraphElement}
+     */
     this.tasksCompletedP = document.createElement('p');
     this.tasksCompletedP.setAttribute('id', 'stats_tasksCompleted');
-    this.tasksCompletedP.setAttribute('class', 'stats-info');
+    this.tasksCompletedP.setAttribute('class', classNames.statsNumberClass);
+    /**
+     *  Label for number of tasks completed
+     * @type {HTMLParagraphElement}
+     */
     this.tasksCompletedPLabel = document.createElement('p');
     this.tasksCompletedPLabel.setAttribute('id', 'stats_tasksCompletedLabel');
-    this.tasksCompletedPLabel.setAttribute('class', 'stats-info-label');
+    this.tasksCompletedPLabel.setAttribute('class', classNames.statsLabelClass);
     this.tasksCompletedPLabel.textContent = 'Tasks Completed';
     this.parentDiv.appendChild(this.tasksCompletedP);
     this.parentDiv.appendChild(this.tasksCompletedPLabel);
 
     // Total Time Spent
+    /**
+     * Total time spent
+     * @type {HTMLParagraphElement}
+     */
     this.timeSpent = document.createElement('p');
     this.timeSpent.setAttribute('id', 'stats_totalTime');
-    this.timeSpent.setAttribute('class', 'stats-info');
+    this.timeSpent.setAttribute('class', classNames.statsNumberClass);
+    /**
+     * Label for total time spent
+     * @type {HTMLParagraphElement}
+     */
     this.timeSpentLabel = document.createElement('p');
     this.timeSpentLabel.setAttribute('id', 'stats_timeSpentLabel');
-    this.timeSpentLabel.setAttribute('class', 'stats-info-label');
+    this.timeSpentLabel.setAttribute('class', classNames.statsLabelClass);
     this.timeSpentLabel.textContent = 'Total Minutes';
     this.parentDiv.appendChild(this.timeSpent);
     this.parentDiv.appendChild(this.timeSpentLabel);
 
     // Time spent working
+    /**
+     *  Total time spent working
+     * @type {HTMLParagraphElement}
+     */
     this.timeWorking = document.createElement('p');
     this.timeWorking.setAttribute('id', 'stats_workTime');
-    this.timeWorking.setAttribute('class', 'stats-info');
+    this.timeWorking.setAttribute('class', classNames.statsNumberClass);
+    /**
+     * Label for total time spent working
+     * @type {HTMLParagraphElement}
+     */
     this.timeWorkingLabel = document.createElement('p');
     this.timeWorkingLabel.setAttribute('id', 'stats_timeWorkingLabel');
-    this.timeWorkingLabel.setAttribute('class', 'stats-info-label');
+    this.timeWorkingLabel.setAttribute('class', classNames.statsLabelClass);
     this.timeWorkingLabel.textContent = 'Working Minutes';
     this.parentDiv.appendChild(this.timeWorking);
     this.parentDiv.appendChild(this.timeWorkingLabel);
 
     // Average time per task
+    /**
+     *  Average time per task
+     * @type {HTMLParagraphElement}
+     */
     this.timePerTask = document.createElement('p');
     this.timePerTask.setAttribute('id', 'stats_timePerTask');
-    this.timePerTask.setAttribute('class', 'stats-info');
+    this.timePerTask.setAttribute('class', classNames.statsNumberClass);
+    /**
+     * Label for avg time per task
+     * @type {HTMLParagraphElement}
+     */
     this.timePerTaskLabel = document.createElement('p');
     this.timePerTaskLabel.setAttribute('id', 'stats_timePerTaskLabel');
-    this.timePerTaskLabel.setAttribute('class', 'stats-info-label');
+    this.timePerTaskLabel.setAttribute('class', classNames.statsLabelClass);
     this.timePerTaskLabel.textContent = 'Minutes per Task';
     this.parentDiv.appendChild(this.timePerTask);
     this.parentDiv.appendChild(this.timePerTaskLabel);
@@ -89,56 +136,95 @@ class Statistics extends HTMLElement {
     /* Adding things to Distraction Tab */
 
     // Number of Broken Session
+    /**
+     * Total number of unique broken sessions
+     * @type {HTMLParagraphElement}
+     */
     this.brokenSessions = document.createElement('p');
     this.brokenSessions.setAttribute('id', 'stats_numBrokenSessions');
-    this.brokenSessions.setAttribute('class', 'dist-info');
+    this.brokenSessions.setAttribute('class', classNames.distNumberClass);
+    /**
+     * Label for total number of unique broken sessions
+     * @type {HTMLParagraphElement}
+     */
     this.brokenSessionsLabel = document.createElement('p');
     this.brokenSessionsLabel.setAttribute('id', 'stats_brokenSessionsLabel');
-    this.brokenSessionsLabel.setAttribute('class', 'dist-info-label');
+    this.brokenSessionsLabel.setAttribute('class', classNames.distLabelClass);
     this.brokenSessionsLabel.textContent = 'Broken Sessions';
     this.parentDiv.appendChild(this.brokenSessions);
     this.parentDiv.appendChild(this.brokenSessionsLabel);
 
     // Number of Expected Pomo Sessions;
+    /**
+     * Total projected number of pomo sessions
+     * @type {HTMLParagraphElement}
+     */
     this.expectedPomoSessionsData = document.createElement('p');
     this.expectedPomoSessionsData.setAttribute('id', 'stats_expectedPomoSesh');
-    this.expectedPomoSessionsData.setAttribute('class', 'stats-info');
+    this.expectedPomoSessionsData.setAttribute('class', classNames.statsNumberClass);
+    /**
+     * Label for projected number of pomo sessions
+     * @type {HTMLParagraphElement}
+     */
     this.expectedPomoSessionsLabel = document.createElement('p');
     this.expectedPomoSessionsLabel.setAttribute('id', 'stats_expectedPomoSesLabel');
-    this.expectedPomoSessionsLabel.setAttribute('class', 'stats-info-label');
+    this.expectedPomoSessionsLabel.setAttribute('class', classNames.statsLabelClass);
     this.expectedPomoSessionsLabel.textContent = 'Expected Pomo Sessions';
     this.parentDiv.appendChild(this.expectedPomoSessionsData);
     this.parentDiv.appendChild(this.expectedPomoSessionsLabel);
 
     // Number of Actual Pomo Sessions
+    /**
+     * Total number of working pomo sessions
+     * @type {HTMLParagraphElement}
+     */
     this.actualPomoSessionsData = document.createElement('p');
     this.actualPomoSessionsData.setAttribute('id', 'stats_actualPomo');
-    this.actualPomoSessionsData.setAttribute('class', 'stats-info');
+    this.actualPomoSessionsData.setAttribute('class', classNames.statsNumberClass);
+    /**
+     * Label for total number of working pomo sessions
+     * @type {HTMLParagraphElement} L
+     */
     this.actualPomoSessionsLabel = document.createElement('p');
     this.actualPomoSessionsLabel.setAttribute('id', 'stats_actualPomoSesLabel');
-    this.actualPomoSessionsLabel.setAttribute('class', 'stats-info-label');
+    this.actualPomoSessionsLabel.setAttribute('class', classNames.statsLabelClass);
     this.actualPomoSessionsLabel.textContent = 'Actual Pomo Sessions';
     this.parentDiv.appendChild(this.actualPomoSessionsData);
     this.parentDiv.appendChild(this.actualPomoSessionsLabel);
 
     // Average Number of Distractions Per Task
+    /**
+     * Average number of distractions per task
+     * @type {HTMLParagraphElement}
+     */
     this.avgDistractions = document.createElement('p');
     this.avgDistractions.setAttribute('id', 'dist_avgDistractions');
-    this.avgDistractions.setAttribute('class', 'dist-info');
+    this.avgDistractions.setAttribute('class', classNames.distNumberClass);
+    /**
+     * Label for average distractions per task
+     * @type {HTMLParagraphElement}
+     */
     this.avgDistractionsLabel = document.createElement('p');
     this.avgDistractionsLabel.setAttribute('id', 'dist_avgDistractionLabel');
-    this.avgDistractionsLabel.setAttribute('class', 'dist-info-label');
+    this.avgDistractionsLabel.setAttribute('class', classNames.distLabelClass);
     this.avgDistractionsLabel.textContent = 'Average Distractions Per Task';
     this.parentDiv.appendChild(this.avgDistractions);
     this.parentDiv.appendChild(this.avgDistractionsLabel);
 
     // Distraction List
+    /**
+     * List of distractions
+     * @type {HTMLUListElement}
+     */
     this.distList = document.createElement('ul');
     this.distList.setAttribute('class', 'dist-list');
     this.parentDiv.appendChild(this.distList);
+    /**
+     * @type {HTMLParagraphElement} Label for list of distractions
+     */
     this.distListLabel = document.createElement('p');
     this.distListLabel.setAttribute('id', 'dist_listLabel');
-    this.distListLabel.setAttribute('class', 'dist-info-label');
+    this.distListLabel.setAttribute('class', classNames.distLabelClass);
     this.distListLabel.textContent = 'Distraction List';
     this.parentDiv.appendChild(this.distListLabel);
   }
@@ -155,6 +241,9 @@ class Statistics extends HTMLElement {
       i = content.length;
     }
     while (i < this.distractionList.length) {
+      /**
+       * @type {HTMLLIElement} Row for distraction
+       */
       this.listElement = document.createElement('li');
       this.listElement.setAttribute('class', 'distItem');
       this.listElement.textContent = this.distractionList[i].description;
@@ -170,17 +259,20 @@ class Statistics extends HTMLElement {
     const statsDistractBtn = document.getElementById('distraction');
     const statsTabBtn = document.getElementById('data');
 
-    // Clicking the Distraction button on the Statistics popup generates the distraction views and hides the data information
+    /*
+    Clicking the Distraction button on the Statistics popup generates the
+    distraction views and hides the data information
+    */
     statsDistractBtn.addEventListener('click', () => {
-      statsTabBtn.className = 'tab-btn';
-      let content = document.getElementsByClassName('stats-info');
-      let contentlabel = document.getElementsByClassName('stats-info-label');
+      statsTabBtn.className = classNames.nonActiveTabClass;
+      let content = document.getElementsByClassName(classNames.statsNumberClass);
+      let contentlabel = document.getElementsByClassName(classNames.statsLabelClass);
       for (let i = 0; i < content.length; i += 1) {
         content[i].style.display = 'none';
         contentlabel[i].style.display = 'none';
       }
-      content = document.getElementsByClassName('dist-info');
-      contentlabel = document.getElementsByClassName('dist-info-label');
+      content = document.getElementsByClassName(classNames.distNumberClass);
+      contentlabel = document.getElementsByClassName(classNames.distLabelClass);
       document.getElementsByClassName('dist-list')[0].style.display = 'block';
       for (let i = 0; i < content.length; i += 1) {
         content[i].style.display = 'block';
@@ -188,14 +280,17 @@ class Statistics extends HTMLElement {
       for (let i = 0; i < contentlabel.length; i += 1) {
         contentlabel[i].style.display = 'block';
       }
-      statsDistractBtn.className = 'tab-btn-active';
+      statsDistractBtn.className = classNames.activeTabClass;
     });
 
-    // Clicking on Data button within the Statistics popup generates the data views and hides distraction data
+    /*
+      Clicking on Data button within the Statistics popup generates
+      the data views and hides distraction data
+    */
     statsTabBtn.addEventListener('click', () => {
-      statsDistractBtn.className = 'tab-btn';
-      let content = document.getElementsByClassName('dist-info');
-      let contentlabel = document.getElementsByClassName('dist-info-label');
+      statsDistractBtn.className = classNames.nonActiveTabClass;
+      let content = document.getElementsByClassName(classNames.distNumberClass);
+      let contentlabel = document.getElementsByClassName(classNames.distLabelClass);
       for (let i = 0; i < content.length; i += 1) {
         content[i].style.display = 'none';
       }
@@ -203,13 +298,13 @@ class Statistics extends HTMLElement {
         contentlabel[i].style.display = 'none';
       }
       document.getElementsByClassName('dist-list')[0].style.display = 'none';
-      content = document.getElementsByClassName('stats-info');
-      contentlabel = document.getElementsByClassName('stats-info-label');
+      content = document.getElementsByClassName(classNames.statsNumberClass);
+      contentlabel = document.getElementsByClassName(classNames.statsLabelClass);
       for (let i = 0; i < content.length; i += 1) {
         content[i].style.display = 'block';
         contentlabel[i].style.display = 'block';
       }
-      statsTabBtn.className = 'tab-btn-active';
+      statsTabBtn.className = classNames.activeTabClass;
     });
 
     // Clicking outside of the popup closes the popup
@@ -220,7 +315,8 @@ class Statistics extends HTMLElement {
   }
 
   /**
-   *  Updates the HTML elements to display values of local variables. Called when stats button is called.
+   *  Updates the HTML elements to display values of local variables.
+   * Called when stats button is called.
    */
   updateDom() {
     this.timePerTask.textContent = this.getAverageTimePerTask();
@@ -243,7 +339,8 @@ class Statistics extends HTMLElement {
   }
 
   /**
-   *  Decrements by one every time a task is marked as not-completed given that there are tasks that can be uncompleted. Updates local storage when called.
+   *  Decrements by one every time a task is marked as not-completed given that
+   * there are tasks that can be uncompleted. Updates local storage when called.
    */
   decrementTasksCompleted() {
     if (this.tasksCompleted > 0) {
@@ -253,7 +350,8 @@ class Statistics extends HTMLElement {
   }
 
   /**
-   *  Adds a distraction (represented by a JSON object) to the list of distractions. Updates local storage when called.
+   * Adds a distraction (represented by a JSON object) to the list of distractions.
+   * Updates local storage when called.
    * @param {JSON Object} distraction Distraction to be added
    */
   addDistraction(distraction) {
@@ -262,7 +360,8 @@ class Statistics extends HTMLElement {
   }
 
   /**
-   *  Gets the number of broken work sessions. If multiple distractions during one work session occurred, only counts as one unique broken pomo session.
+   *  Gets the number of broken work sessions. If multiple distractions
+   * during one work session occurred, only counts as one unique broken pomo session.
    * @returns {Number} Number of disrupted work sessions
    */
   getNumUniqueDistractions() {
@@ -292,7 +391,8 @@ class Statistics extends HTMLElement {
   }
 
   /**
-   *  Increments the work time spent. When work time incremented, so is total time spent (runs as separate method call to addTimeSpent())
+   *  Increments the work time spent. When work time incremented, so is total time spent
+   * (runs as separate method call to addTimeSpent())
    * @param {Number} numMins Number of minutes to increment work count by
    */
   addWorkTime(numMins) {
@@ -301,7 +401,8 @@ class Statistics extends HTMLElement {
   }
 
   /**
-   *  Increments the planned number of pomo sessions for the work day. Should be called each time a task is added.
+   *  Increments the planned number of pomo sessions for the work day.
+   * Should be called each time a task is added.
    * @param {Number} numSessions Number of sessions to increment count by
    */
   addExpectedPomoSessions(numSessions) {
@@ -310,7 +411,9 @@ class Statistics extends HTMLElement {
   }
 
   /**
-   *  Decrements the planned number of pomo sessions for the work day. Should be called each time a task is deleted. Only decrements if new tasks were added during the current work day.
+   *  Decrements the planned number of pomo sessions for the work day.
+   * Should be called each time a task is deleted. Only decrements if new tasks
+   * were added during the current work day.
    * @param {Number} numSessions Number of sessions to decrement count by
    */
   deleteExpectedPomoSessions(numSessions) {
@@ -321,7 +424,9 @@ class Statistics extends HTMLElement {
   }
 
   /**
-   *  Increments the number of completed pomo sessions for the work day. Should be called each time the timer finishes a work session. Updates local storage when called
+   * Increments the number of completed pomo sessions for the work day.
+   * Should be called each time the timer finishes a work session.
+   * Updates local storage when called
    */
   incrementActualPomoSessions() {
     this.actualPomoSessions += 1;
@@ -342,29 +447,41 @@ class Statistics extends HTMLElement {
    *  Loads all variables from local storage or sets them to zero if not found
    */
   loadFromLocalStorage() {
-    // Loading variables as strings from local storage
+    /**
+     * @type {Object[]} Loading variables as strings from local storage
+     */
     this.history = JSON.parse(localStorage.getItem('statsHistory'));
     if (this.history === null) {
       this.history = [];
     }
-    this.totalMins = localStorage.getItem('totalMins');
-    this.workMins = localStorage.getItem('workMins');
-    this.tasksCompleted = localStorage.getItem('tasksCompleted');
-    this.expectedPomoSessions = localStorage.getItem('expectedPomoSessions');
-    this.actualPomoSessions = localStorage.getItem('actualPomoSessions');
-    this.distractionList = localStorage.getItem('currDistractionList');
-    this.sessionStartDateTime = localStorage.getItem('startDateTime');
+    this.totalMins = localStorage.getItem(storageItemNames.totalMins);
+    this.workMins = localStorage.getItem(storageItemNames.workMins);
+    this.tasksCompleted = localStorage.getItem(storageItemNames.tasksCompleted);
+    this.expectedPomoSessions = localStorage.getItem(storageItemNames.expectedPomoSessions);
+    this.actualPomoSessions = localStorage.getItem(storageItemNames.actualPomoSessions);
+    this.distractionList = localStorage.getItem(storageItemNames.currDistractionList);
+    this.sessionStartDateTime = localStorage.getItem(storageItemNames.startDateTime);
 
-    // If string was not found, set to zero/empty value. If string was found, parse the string for it's value
+    /*
+    If string was not found, set to zero/empty value.
+    If string was found, parse the string for it's value
+    */
     this.totalMins = ((this.totalMins !== null) ? parseInt(this.totalMins, 10) : 0);
     this.workMins = ((this.workMins !== null) ? parseInt(this.workMins, 10) : 0);
     this.tasksCompleted = ((this.tasksCompleted !== null) ? parseInt(this.tasksCompleted, 10) : 0);
-    this.expectedPomoSessions = ((this.expectedPomoSessions !== null) ? parseInt(this.expectedPomoSessions, 10) : 0);
-    this.actualPomoSessions = ((this.actualPomoSessions !== null) ? parseInt(this.actualPomoSessions, 10) : 0);
-    this.tasksCompleted = ((this.tasksCompleted !== null) ? parseInt(this.tasksCompleted, 10) : 0);
-    this.sessionStartDateTime = ((this.sessionStartDateTime !== null) ? new Date(this.sessionStartDateTime) : new Date());
+    this.expectedPomoSessions = ((this.expectedPomoSessions !== null)
+      ? parseInt(this.expectedPomoSessions, 10) : 0);
+    this.actualPomoSessions = ((this.actualPomoSessions !== null)
+      ? parseInt(this.actualPomoSessions, 10) : 0);
+    this.tasksCompleted = ((this.tasksCompleted !== null)
+      ? parseInt(this.tasksCompleted, 10) : 0);
+    this.sessionStartDateTime = ((this.sessionStartDateTime !== null)
+      ? new Date(this.sessionStartDateTime) : new Date());
 
-    // Split the list of distractions from the string into individual distractions and turn date strings into date objects
+    /*
+    Split the list of distractions from the string into individual distractions
+    and turn date strings into date objects
+    */
     if (this.distractionList !== null) {
       this.distractionList = JSON.parse(this.distractionList);
       // eslint-disable-next-line no-restricted-syntax, guard-for-in
@@ -381,17 +498,19 @@ class Statistics extends HTMLElement {
    *  Writes all class variables to local storage
    */
   updateMinorLocalStorage() {
-    localStorage.setItem('totalMins', this.totalMins);
-    localStorage.setItem('workMins', this.workMins);
-    localStorage.setItem('tasksCompleted', this.tasksCompleted);
-    localStorage.setItem('expectedPomoSessions', this.expectedPomoSessions);
-    localStorage.setItem('actualPomoSessions', this.actualPomoSessions);
-    localStorage.setItem('currDistractionList', JSON.stringify(this.distractionList));
-    localStorage.setItem('startDateTime', this.sessionStartDateTime);
+    localStorage.setItem(storageItemNames.totalMins, this.totalMins);
+    localStorage.setItem(storageItemNames.workMins, this.workMins);
+    localStorage.setItem(storageItemNames.tasksCompleted, this.tasksCompleted);
+    localStorage.setItem(storageItemNames.expectedPomoSessions, this.expectedPomoSessions);
+    localStorage.setItem(storageItemNames.actualPomoSessions, this.actualPomoSessions);
+    localStorage.setItem(storageItemNames.currDistractionList,
+      JSON.stringify(this.distractionList));
+    localStorage.setItem(storageItemNames.startDateTime, this.sessionStartDateTime);
   }
 
   /**
-   *  Deletes all history records that are older than one year. To be used with year-to-date information. Updates local storage only for history record when called.
+   *  Deletes all history records that are older than one year. To be used with
+   *  year-to-date information. Updates local storage only for history record when called.
    */
   flushHistory() {
     const currDate = new Date();
@@ -405,9 +524,11 @@ class Statistics extends HTMLElement {
   }
 
   /**
-   *  Sees if the last time that a day was started was earlier than 3 a.m. today. If the work day was started at 3 a.m. or later, do not clear data, treat everything as a single work day. Otherwise, would compress data into history and clear variables.
+   *  Sees if the last time that a day was started was earlier than 3 a.m. today.
+   * If the work day was started at 3 a.m. or later, do not clear data,
+   * treat everything as a single work day.
+   * Otherwise, would compress data into history and clear variables.
    * @returns {Boolean} False if session started on or after 3 a.m. today. Else True.
-   * @todo Rewrite logic to match above description (one long if statement for false rather than four individual if statements for true)
    */
   dataToCompressExists() {
     const currDate = new Date();
@@ -424,7 +545,10 @@ class Statistics extends HTMLElement {
   }
 
   /**
-   *  Compresses necessary local variables to a history record and pushes the record to local storage. Should run when the End Day button is hit or when page loads and dataToCompressExists() === true. Dispatches reset-timer event to reset timer PomoSessionId to 0.
+   * Compresses necessary local variables to a history record and
+   * pushes the record to local storage.
+   * Should run when the End Day button is hit or when page loads and
+   * dataToCompressExists() true. Dispatches reset-timer event to reset timer PomoSessionId to 0.
    */
   compressStats() {
     if (this.totalMins > 0) {

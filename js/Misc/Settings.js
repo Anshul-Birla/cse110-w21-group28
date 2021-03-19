@@ -1,3 +1,7 @@
+import {
+  pageBGColor, headerColor, evenColor, toothpaste,
+  tableBG, modalBGColor, modalFontColor,
+} from './MiscVariables.js';
 /**
  * @type {HTMLButtonElement}
  */
@@ -30,26 +34,26 @@ settingsButton.addEventListener('click', () => {
  */
 darkModeSwitch.addEventListener('change', () => {
   if (darkModeSwitch.checked) {
-    root.style.setProperty('--page-bg-color', '#363636');
-    root.style.setProperty('--page-bg-color-short', '#363636');
-    root.style.setProperty('--header-color', '#2d2c2b');
-    root.style.setProperty('--header-color-short', '#2d2c2b');
-    root.style.setProperty('--even-color', 'lightslategray');
-    root.style.setProperty('--even-color-short', 'lightslategray');
-    root.style.setProperty('--toothpaste', '#2d2c2b');
-    root.style.setProperty('--table-bg-color-short', '#2d2c2b');
-    root.style.setProperty('--modal-bg-color', '#2d2c2b');
-    root.style.setProperty('--modal-font-color', 'white');
+    root.style.setProperty(pageBGColor.name, pageBGColor.darkVal);
+    root.style.setProperty(pageBGColor.shortName, pageBGColor.darkVal);
+    root.style.setProperty(headerColor.name, headerColor.darkVal);
+    root.style.setProperty(headerColor.shortName, headerColor.darkVal);
+    root.style.setProperty(evenColor.name, evenColor.darkVal);
+    root.style.setProperty(evenColor.shortName, evenColor.darkVal);
+    root.style.setProperty(toothpaste.name, toothpaste.darkVal);
+    root.style.setProperty(tableBG.name, tableBG.darkVal);
+    root.style.setProperty(modalBGColor.name, modalBGColor.darkVal);
+    root.style.setProperty(modalFontColor.name, modalFontColor.darkVal);
   } else {
-    root.style.setProperty('--page-bg-color', 'cadetblue');
-    root.style.setProperty('--page-bg-color-short', '#336b87');
-    root.style.setProperty('--header-color', 'darkcyan');
-    root.style.setProperty('--header-color-short', '#4990b4');
-    root.style.setProperty('--even-color', 'rgba(149, 218, 229, 0.603)');
-    root.style.setProperty('--even-color-short', '#98c7e9');
-    root.style.setProperty('--toothpaste', 'rgb(2, 177, 177)');
-    root.style.setProperty('--table-bg-color-short', '#60afcc');
-    root.style.setProperty('--modal-bg-color', '#f1f1f1');
-    root.style.setProperty('--modal-font-color', 'black');
+    root.style.setProperty(pageBGColor.name, pageBGColor.val);
+    root.style.setProperty(pageBGColor.shortName, pageBGColor.val);
+    root.style.setProperty(headerColor.name, headerColor.val);
+    root.style.setProperty(headerColor.shortName, headerColor.val);
+    root.style.setProperty(evenColor.name, evenColor.val);
+    root.style.setProperty(evenColor.shortName, evenColor.val);
+    root.style.setProperty(toothpaste.name, toothpaste.val);
+    root.style.setProperty(tableBG.name, tableBG.val);
+    root.style.setProperty(modalBGColor.name, modalBGColor.val);
+    root.style.setProperty(modalFontColor.name, modalFontColor.val);
   }
 });

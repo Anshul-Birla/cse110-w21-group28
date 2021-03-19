@@ -262,3 +262,9 @@ html {
 .logo > img {
   vertical-align: middle;
 }
+
+a {
+  color: white;
+  background-color: transparent;
+  text-decoration: underline;
+}
