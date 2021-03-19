@@ -110,7 +110,6 @@ class TodoListDom {
         });
         this.todoList.dispatchEvent(event);
       });
-      // task.updatePomoSessions();
       this.displayTask(task);
     }
 
