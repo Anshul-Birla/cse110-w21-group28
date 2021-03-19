@@ -26,5 +26,5 @@
             }
         }
     ],
-    "ignorePatterns": ["docs/*"]
+    "ignorePatterns": ["docs/*", "js/ThirdParty/*"]
 }

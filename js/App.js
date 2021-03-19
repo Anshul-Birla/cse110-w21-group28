@@ -2,7 +2,8 @@ import { TodoListDom } from './ToDoList/TodoListDom.js';
 import { Timer } from './Timer/Timer.js';
 import { Statistics } from './Statistics/Statistics.js';
 import { Distraction } from './Distraction/Distraction.js';
-import { shortBreakColors, workModeColors } from './ChangeColors.js';
+import { shortBreakColors, workModeColors } from './Misc/ChangeColors.js';
+import { breakModeSound, workModeSound } from './Misc/Sounds.js';
 
 /**
  * Used to see if data needs to be cleared or not (if timer is started after 3 a.m. or not)
@@ -89,6 +90,7 @@ const statsTabBtn = document.getElementById('data');
  * @type {HTMLElement} Section for showing which task is currently in progress
  */
 const currentTaskDiv = document.getElementById('currentTask');
+const tourButton = document.getElementById('onboardingButton');
 
 /**
  * @type {Statistics}
@@ -107,8 +109,19 @@ const TimerObj = new Timer(startTimerButton, timeDisplay, modeDisplay);
 /**
  * @type {Distraction}
  */
-// eslint-disable-next-line max-len
-const DistractionPage = new Distraction(distractButton, distractPopUp, cancelButton, distractForm, description, overlay);
+const DistractionPage = new Distraction(distractButton, distractPopUp,
+  cancelButton, distractForm, description, overlay);
+
+if (localStorage.getItem('onboarding') === null) {
+  // eslint-disable-next-line
+  introJs().start(); 
+  localStorage.setItem('onboarding', 'true');
+}
+
+tourButton.addEventListener('click', () => {
+  // eslint-disable-next-line
+  introJs().start();
+});
 
 /**
  * When timer is complete, if a work session was completed then:
@@ -126,9 +139,11 @@ TimerObj.addEventListener('timer-complete', (e) => {
     StatsPage.addWorkTime(e.detail.duration);
     StatsPage.incrementActualPomoSessions();
     shortBreakColors();
+    breakModeSound();
   } else {
     StatsPage.addTimeSpent(e.detail.duration);
     workModeColors();
+    workModeSound();
   }
 });
 
