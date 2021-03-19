@@ -1,5 +1,5 @@
 /**
- * break names
+ * Names for break
  * @type {Object}
 */
 const breakNames = {
@@ -8,7 +8,7 @@ const breakNames = {
 };
 
 /**
- * page bg color vars
+ * Background color for the page
  * @type {Object}
  */
 const pageBGColor = {
@@ -20,7 +20,7 @@ const pageBGColor = {
 };
 
 /**
- * header color vars
+ * Color for the header
  * @type {Object}
  */
 const headerColor = {
@@ -32,7 +32,7 @@ const headerColor = {
 };
 
 /**
- * even color vars
+ * Color for even tr
  * @type {Object}
  */
 const evenColor = {
@@ -44,7 +44,7 @@ const evenColor = {
 };
 
 /**
- * toothpaste var
+ * Toothpaste-esque colors
  * @type {Object}
  */
 const toothpaste = {
@@ -54,7 +54,7 @@ const toothpaste = {
 };
 
 /**
- * tablebg var
+ * Background color for table
  * @type {Object}
  */
 const tableBG = {
@@ -64,7 +64,7 @@ const tableBG = {
 };
 
 /**
- * modal bg var
+ * Modal background color
  * @type {Object}
  */
 const modalBGColor = {
@@ -74,7 +74,7 @@ const modalBGColor = {
 };
 
 /**
- * modal font var
+ * Font for modal
  * @type {Object}
  */
 const modalFontColor = {
