@@ -17,7 +17,7 @@ function after3amToday() {
 
 /**
  * Location where time is displayed
- * @type {HTMLParagraphElement} 
+ * @type {HTMLParagraphElement}
  */
 const timeDisplay = document.getElementById('timeDisplay');
 
@@ -29,13 +29,13 @@ const modeDisplay = document.getElementById('modeDisplay');
 
 /**
  * Table where ToDo List is housed
- * @type {HTMLTableElement} 
+ * @type {HTMLTableElement}
  */
 const todoTable = document.getElementById('todo');
 
 /**
  * Form for inputting new tasks
- * @type {HTMLFormElement} 
+ * @type {HTMLFormElement}
  */
 const addTodoForm = document.getElementById('add-todo');
 
@@ -47,25 +47,25 @@ const addTodoButton = document.getElementById('add-button');
 
 /**
  * Button to start the timer
- * @type {HTMLButtonElement} 
+ * @type {HTMLButtonElement}
  */
 const startTimerButton = document.getElementById('startTimer');
 
 /**
  * Button to display the statistics popup
- * @type {HTMLButtonElement} 
+ * @type {HTMLButtonElement}
  */
 const statsButton = document.getElementById('statsButton');
 
 /**
  * Button to log a distraction
- * @type {HTMLButtonElement} 
+ * @type {HTMLButtonElement}
  */
 const distractButton = document.getElementById('distractionButton');
 
 /**
  * Section which houses the distraction popup
- * @type {HTMLElement} 
+ * @type {HTMLElement}
  */
 const distractPopUp = document.getElementById('distract-popup');
 
@@ -83,54 +83,54 @@ const distractForm = document.getElementById('distract-form');
 
 /**
  * Input element for logging a distraction
- * @type {HTMLInputElement} 
+ * @type {HTMLInputElement}
  */
 const description = document.getElementById('description');
 
 /**
  * Section which houses the statistics popup
- * @type {HTMLElement} 
+ * @type {HTMLElement}
  */
 const statsPopUp = document.getElementById('stats-section');
 
 /**
  * Div which houses the text elements inside the statistics popup
- * @type {HTMLDivElement} 
+ * @type {HTMLDivElement}
  */
 const parentDiv = document.getElementById('parentDiv');
 
 /**
  * Button to close the statitics popup
- * @type {HTMLButtonElement} 
+ * @type {HTMLButtonElement}
  */
 const closeStatsButton = document.getElementById('close-stats-button');
 
 /**
  * Button to delete all tasks
- * @type {HTMLButtonElement} 
+ * @type {HTMLButtonElement}
  */
 const deleteAllButton = document.getElementById('delete-all-button');
 
 /**
  * Overlay to darken popup backgrounds
- * @type {HTMLDivElement} 
+ * @type {HTMLDivElement}
  */
 const overlay = document.getElementById('overlay');
 
 /**
  * Button to toggle "Data" tab within the Statistics popup
- * @type {HTMLButtonElement} 
+ * @type {HTMLButtonElement}
  */
 const statsTabBtn = document.getElementById('data');
 /**
  * Section for showing which task is currently in progress
- * @type {HTMLElement} 
+ * @type {HTMLElement}
  */
 const currentTaskDiv = document.getElementById('currentTask');
 
 /**
  * Button to start the tour of the page
- * @type {HTMLButtonElement} 
+ * @type {HTMLButtonElement}
  */
 const tourButton = document.getElementById('onboardingButton');
 
@@ -264,7 +264,7 @@ document.body.addEventListener('checkbox-updated', (e) => {
 /**
  * This function determines if someone clicked the area where the delete
  * and the focus button show up, in order to hide them if the cursor was
- * clicked somewhere else 
+ * clicked somewhere else
  */
 window.addEventListener('click', (e) => {
   const lastColumnElements = document.getElementsByClassName(classNames.lastCol);
