@@ -47,11 +47,6 @@ class Task extends HTMLTableRowElement {
      */
     this.checked = completed;
 
-    // /**
-    //  * Keeps track if the task was deleted or not (used with the Todolist )
-    //  */
-    // this.deleted = false;
-
     /**
      * The checkbox attribute for the task
      * @type {HTMLInputElement}
@@ -234,13 +229,15 @@ class Task extends HTMLTableRowElement {
   }
 
   /**
-   * Sets up the last column of the todolist.
-   * @param {HTMLButtonElement} threeDotsButton
-   * @param {HTMLDivElement} deleteButton
-   * @param {HTMLDivElement} focusButton
+   * Sets up the last column of the todolist. Wraps things
+   * in the divs they need to be wrapped in. Add task
+   * and check HTML file to see structure that this creates
+   * @param {HTMLButtonElement} threeDotsButton - show more button
+   * @param {HTMLDivElement} deleteDiv - div where the delete button is located
+   * @param {HTMLDivElement} focusDiv - div where the focus button is located
    */
-  setupLastColumnToggle(threeDotsButton, deleteButton,
-    focusButton) {
+  setupLastColumnToggle(threeDotsButton, deleteDiv,
+    focusDiv) {
     const lastCol = document.createElement('td');
     const lastColDiv = document.createElement('div');
     const threeDotsDiv = document.createElement('div');
@@ -248,8 +245,8 @@ class Task extends HTMLTableRowElement {
 
     // wrap the delete and focus buttons in a div
     deleteFocusDiv.className = classNames.doubleButtons;
-    deleteFocusDiv.appendChild(deleteButton);
-    deleteFocusDiv.appendChild(focusButton);
+    deleteFocusDiv.appendChild(deleteDiv);
+    deleteFocusDiv.appendChild(focusDiv);
     // wrap the three dots button in a div
     threeDotsDiv.appendChild(threeDotsButton);
     threeDotsDiv.className = classNames.threeDotsWrapper;

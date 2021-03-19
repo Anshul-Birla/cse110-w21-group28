@@ -11,9 +11,9 @@ class Timer extends HTMLElement {
    * Constructor of Time Object. Takes the HTML element of where
    * you want the time and the status of the timer to be implemented.
    * HTML Elements must have the 'textElement' attribute.
-   * @param {HTMLElement} startButton
-   * @param {HTMLElement} displayTime
-   * @param {HTMLElement} displayStatus
+   * @param {HTMLButtonElement} startButton - button that starts the button
+   * @param {HTMLParagraphElement} displayTime - area to display the time remaining
+   * @param {HTMLParagraphElement} displayStatus - area to display the status of the timer
    */
   constructor(startButton, displayTime, displayStatus) {
     super();

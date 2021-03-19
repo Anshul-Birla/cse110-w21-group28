@@ -10,10 +10,10 @@ import { HTMLAttributes, TaskStorage } from './TodoListDomVariables.js';
 class TodoListDom {
   /**
    * Initializes the TodoListDom object with its correct member variables
-   * @param {HTMLTableElement} HTMLTable
-   * @param {HTMLFormElement} HTMLForm
-   * @param {HTMLButtonElement} submitBtn
-   * @param {HTMLButtonElement} deleteAllBtn
+   * @param {HTMLTableElement} HTMLTable - Table where tasks will be stored
+   * @param {HTMLFormElement} HTMLForm - Form to add the task
+   * @param {HTMLButtonElement} submitBtn - Button to submit the entered tasks
+   * @param {HTMLButtonElement} deleteAllBtn - Delete all tasks button
    */
   constructor(HTMLTable, HTMLForm, submitBtn, deleteAllBtn, currentTaskDiv) {
     /**

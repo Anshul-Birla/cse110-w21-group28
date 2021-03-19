@@ -5,12 +5,12 @@
 class Distraction extends HTMLElement {
   /**
    * Constructor for the distraction element
-   * @param {HTMLButton} distractButton
-   * @param {HTMLSection} distractPopUp
-   * @param {HTMLButton} cancelButton
-   * @param {HTMLButton} distractForm
-   * @param {HTMLInputElement} description
-   * @param {HTMLDivElement} overlay
+   * @param {HTMLButton} distractButton - button to click to log distraction
+   * @param {HTMLSection} distractPopUp - pop up that should show for distraction
+   * @param {HTMLButton} cancelButton - button to cancel inputting a distraction
+   * @param {HTMLFormElement} distractForm - form to input distraction
+   * @param {HTMLInputElement} description - where users input the distracton
+   * @param {HTMLDivElement} overlay  - overlay to darken background
    */
   constructor(distractButton, distractPopUp, cancelButton, distractForm, description, overlay) {
     super();
