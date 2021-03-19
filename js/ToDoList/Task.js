@@ -50,7 +50,6 @@ class Task extends HTMLTableRowElement {
     // /**
     //  * Keeps track if the task was deleted or not (used with the Todolist )
     //  */
-    // this.deleted = false;
 
     /**
      * The checkbox attribute for the task
