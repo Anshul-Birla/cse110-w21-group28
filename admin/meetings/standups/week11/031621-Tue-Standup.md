@@ -8,7 +8,7 @@ Kewen Zhao
 Fixed local storage
 + *Plans for today:*
 display current Task
-+ *Any blockers?*no
++ *Any blockers?* no
 
 Ryan Nishimoto  
 + *Previous work day progress:*
