@@ -50,19 +50,22 @@ class Statistics extends HTMLElement {
    */
   addHTMLChildren() {
     /**
-     * @type {HTMLDivElement} Parent div to which all stats text children will be added
+     * Parent div to which all stats text children will be added
+     * @type {HTMLDivElement}
      */
     this.parentDiv = document.getElementById('stats-info');
 
     // Tasks Completed
     /**
-     * @type {HTMLParagraphElement} Number of tasks completed
+     * Number of tasks completed
+     * @type {HTMLParagraphElement}
      */
     this.tasksCompletedP = document.createElement('p');
     this.tasksCompletedP.setAttribute('id', 'stats_tasksCompleted');
     this.tasksCompletedP.setAttribute('class', 'stats-info');
     /**
-     * @type {HTMLParagraphElement} Label for number of tasks completed
+     *  Label for number of tasks completed
+     * @type {HTMLParagraphElement}
      */
     this.tasksCompletedPLabel = document.createElement('p');
     this.tasksCompletedPLabel.setAttribute('id', 'stats_tasksCompletedLabel');
@@ -73,13 +76,15 @@ class Statistics extends HTMLElement {
 
     // Total Time Spent
     /**
-     * @type {HTMLParagraphElement} Total time spent
+     * Total time spent
+     * @type {HTMLParagraphElement}
      */
     this.timeSpent = document.createElement('p');
     this.timeSpent.setAttribute('id', 'stats_totalTime');
     this.timeSpent.setAttribute('class', 'stats-info');
     /**
-     * @type {HTMLParagraphElement} Label for total time spent
+     * Label for total time spent
+     * @type {HTMLParagraphElement}
      */
     this.timeSpentLabel = document.createElement('p');
     this.timeSpentLabel.setAttribute('id', 'stats_timeSpentLabel');
@@ -90,13 +95,15 @@ class Statistics extends HTMLElement {
 
     // Time spent working
     /**
-     * @type {HTMLParagraphElement} Total time spent working
+     *  Total time spent working
+     * @type {HTMLParagraphElement}
      */
     this.timeWorking = document.createElement('p');
     this.timeWorking.setAttribute('id', 'stats_workTime');
     this.timeWorking.setAttribute('class', 'stats-info');
     /**
-     * @type {HTMLParagraphElement} Label for total time spent working
+     * Label for total time spent working
+     * @type {HTMLParagraphElement}
      */
     this.timeWorkingLabel = document.createElement('p');
     this.timeWorkingLabel.setAttribute('id', 'stats_timeWorkingLabel');
@@ -107,13 +114,15 @@ class Statistics extends HTMLElement {
 
     // Average time per task
     /**
-     * @type {HTMLParagraphElement} Average time per task
+     *  Average time per task
+     * @type {HTMLParagraphElement}
      */
     this.timePerTask = document.createElement('p');
     this.timePerTask.setAttribute('id', 'stats_timePerTask');
     this.timePerTask.setAttribute('class', 'stats-info');
     /**
-     * @type {HTMLParagraphElement} Label for avg time per task
+     * Label for avg time per task
+     * @type {HTMLParagraphElement}
      */
     this.timePerTaskLabel = document.createElement('p');
     this.timePerTaskLabel.setAttribute('id', 'stats_timePerTaskLabel');
@@ -126,13 +135,15 @@ class Statistics extends HTMLElement {
 
     // Number of Broken Session
     /**
-     * @type {HTMLParagraphElement} Total number of unique broken sessions
+     * Total number of unique broken sessions
+     * @type {HTMLParagraphElement}
      */
     this.brokenSessions = document.createElement('p');
     this.brokenSessions.setAttribute('id', 'stats_numBrokenSessions');
     this.brokenSessions.setAttribute('class', 'dist-info');
     /**
-     * @type {HTMLParagraphElement} Label for total number of unique broken sessions
+     * Label for total number of unique broken sessions
+     * @type {HTMLParagraphElement}
      */
     this.brokenSessionsLabel = document.createElement('p');
     this.brokenSessionsLabel.setAttribute('id', 'stats_brokenSessionsLabel');
@@ -143,13 +154,15 @@ class Statistics extends HTMLElement {
 
     // Number of Expected Pomo Sessions;
     /**
-     * @type {HTMLParagraphElement} Total projected number of pomo sessions
+     * Total projected number of pomo sessions
+     * @type {HTMLParagraphElement}
      */
     this.expectedPomoSessionsData = document.createElement('p');
     this.expectedPomoSessionsData.setAttribute('id', 'stats_expectedPomoSesh');
     this.expectedPomoSessionsData.setAttribute('class', 'stats-info');
     /**
-     * @type {HTMLParagraphElement} Label for projected number of pomo sessions
+     * Label for projected number of pomo sessions
+     * @type {HTMLParagraphElement}
      */
     this.expectedPomoSessionsLabel = document.createElement('p');
     this.expectedPomoSessionsLabel.setAttribute('id', 'stats_expectedPomoSesLabel');
@@ -160,13 +173,15 @@ class Statistics extends HTMLElement {
 
     // Number of Actual Pomo Sessions
     /**
-     * @type {HTMLParagraphElement} Total number of working pomo sessions
+     * Total number of working pomo sessions
+     * @type {HTMLParagraphElement}
      */
     this.actualPomoSessionsData = document.createElement('p');
     this.actualPomoSessionsData.setAttribute('id', 'stats_actualPomo');
     this.actualPomoSessionsData.setAttribute('class', 'stats-info');
     /**
-     * @type {HTMLParagraphElement} Label for total number of working pomo sessions
+     * Label for total number of working pomo sessions
+     * @type {HTMLParagraphElement} L
      */
     this.actualPomoSessionsLabel = document.createElement('p');
     this.actualPomoSessionsLabel.setAttribute('id', 'stats_actualPomoSesLabel');
@@ -177,13 +192,15 @@ class Statistics extends HTMLElement {
 
     // Average Number of Distractions Per Task
     /**
-     * @type {HTMLParagraphElement} Average number of distractions per task
+     * Average number of distractions per task
+     * @type {HTMLParagraphElement}
      */
     this.avgDistractions = document.createElement('p');
     this.avgDistractions.setAttribute('id', 'dist_avgDistractions');
     this.avgDistractions.setAttribute('class', 'dist-info');
     /**
-     * @type {HTMLParagraphElement} Label for average distractions per task
+     * Label for average distractions per task
+     * @type {HTMLParagraphElement}
      */
     this.avgDistractionsLabel = document.createElement('p');
     this.avgDistractionsLabel.setAttribute('id', 'dist_avgDistractionLabel');
@@ -194,7 +211,8 @@ class Statistics extends HTMLElement {
 
     // Distraction List
     /**
-     * @type {HTMLUListElement} List of distractions
+     * List of distractions
+     * @type {HTMLUListElement}
      */
     this.distList = document.createElement('ul');
     this.distList.setAttribute('class', 'dist-list');

@@ -86,6 +86,7 @@ class ToDoList extends HTMLElement {
   /**
    * Adds a task to local storage
    *  @param {Task} task - Task to be added
+   * @param {Number} [index = undefined] - Index to add at. Default to end of local storage
    */
   // eslint-disable-next-line class-methods-use-this
   addTaskToLocalStorage(task, index = undefined) {

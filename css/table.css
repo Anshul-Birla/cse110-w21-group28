@@ -19,8 +19,8 @@ table {
   border-spacing: 0 var(--table-border);
   table-layout: fixed; /* allows for word-wrap */
   width: 100%;
-  min-height = 45vh;
-  min-width: 500px;
+  min-height = 45vh
+  min-width: 500px;45vhmin-width
 
   /* max-width: 100%;     /* allows for word-wrap */
   min-height: 60vh;
