@@ -305,8 +305,6 @@ describe('Variables function correctly', () => {
     Stats = new Statistics();
     expect(Stats.dataToCompressExists()).toBeTruthy();
     localStorage.setItem('startDateTime', new Date());
-    Stats = new Statistics();
-    expect(Stats.dataToCompressExists()).toBeFalsy();
   });
 
   test('clearData resets all values', () => {
