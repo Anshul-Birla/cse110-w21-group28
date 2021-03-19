@@ -1,3 +1,5 @@
+import { classNames, storageItemNames } from './StatisticsVariables.js';
+
 /* eslint-disable max-len */
 /**
  * A class for the Statistics object. Has functions for incrementing
@@ -49,11 +51,7 @@ class Statistics extends HTMLElement {
    *  Adds all child HTML elements to the statistics popup
    */
   addHTMLChildren() {
-    /**
-     * Parent div to which all stats text children will be added
-     * @type {HTMLDivElement}
-     */
-    this.parentDiv = document.getElementById('stats-info');
+    this.parentDiv = document.getElementById(classNames.statsNumberClass);
 
     // Tasks Completed
     /**
@@ -62,14 +60,14 @@ class Statistics extends HTMLElement {
      */
     this.tasksCompletedP = document.createElement('p');
     this.tasksCompletedP.setAttribute('id', 'stats_tasksCompleted');
-    this.tasksCompletedP.setAttribute('class', 'stats-info');
+    this.tasksCompletedP.setAttribute('class', classNames.statsNumberClass);
     /**
      *  Label for number of tasks completed
      * @type {HTMLParagraphElement}
      */
     this.tasksCompletedPLabel = document.createElement('p');
     this.tasksCompletedPLabel.setAttribute('id', 'stats_tasksCompletedLabel');
-    this.tasksCompletedPLabel.setAttribute('class', 'stats-info-label');
+    this.tasksCompletedPLabel.setAttribute('class', classNames.statsLabelClass);
     this.tasksCompletedPLabel.textContent = 'Tasks Completed';
     this.parentDiv.appendChild(this.tasksCompletedP);
     this.parentDiv.appendChild(this.tasksCompletedPLabel);
@@ -81,14 +79,14 @@ class Statistics extends HTMLElement {
      */
     this.timeSpent = document.createElement('p');
     this.timeSpent.setAttribute('id', 'stats_totalTime');
-    this.timeSpent.setAttribute('class', 'stats-info');
+    this.timeSpent.setAttribute('class', classNames.statsNumberClass);
     /**
      * Label for total time spent
      * @type {HTMLParagraphElement}
      */
     this.timeSpentLabel = document.createElement('p');
     this.timeSpentLabel.setAttribute('id', 'stats_timeSpentLabel');
-    this.timeSpentLabel.setAttribute('class', 'stats-info-label');
+    this.timeSpentLabel.setAttribute('class', classNames.statsLabelClass);
     this.timeSpentLabel.textContent = 'Total Minutes';
     this.parentDiv.appendChild(this.timeSpent);
     this.parentDiv.appendChild(this.timeSpentLabel);
@@ -100,14 +98,14 @@ class Statistics extends HTMLElement {
      */
     this.timeWorking = document.createElement('p');
     this.timeWorking.setAttribute('id', 'stats_workTime');
-    this.timeWorking.setAttribute('class', 'stats-info');
+    this.timeWorking.setAttribute('class', classNames.statsNumberClass);
     /**
      * Label for total time spent working
      * @type {HTMLParagraphElement}
      */
     this.timeWorkingLabel = document.createElement('p');
     this.timeWorkingLabel.setAttribute('id', 'stats_timeWorkingLabel');
-    this.timeWorkingLabel.setAttribute('class', 'stats-info-label');
+    this.timeWorkingLabel.setAttribute('class', classNames.statsLabelClass);
     this.timeWorkingLabel.textContent = 'Working Minutes';
     this.parentDiv.appendChild(this.timeWorking);
     this.parentDiv.appendChild(this.timeWorkingLabel);
@@ -119,14 +117,14 @@ class Statistics extends HTMLElement {
      */
     this.timePerTask = document.createElement('p');
     this.timePerTask.setAttribute('id', 'stats_timePerTask');
-    this.timePerTask.setAttribute('class', 'stats-info');
+    this.timePerTask.setAttribute('class', classNames.statsNumberClass);
     /**
      * Label for avg time per task
      * @type {HTMLParagraphElement}
      */
     this.timePerTaskLabel = document.createElement('p');
     this.timePerTaskLabel.setAttribute('id', 'stats_timePerTaskLabel');
-    this.timePerTaskLabel.setAttribute('class', 'stats-info-label');
+    this.timePerTaskLabel.setAttribute('class', classNames.statsLabelClass);
     this.timePerTaskLabel.textContent = 'Minutes per Task';
     this.parentDiv.appendChild(this.timePerTask);
     this.parentDiv.appendChild(this.timePerTaskLabel);
@@ -140,14 +138,14 @@ class Statistics extends HTMLElement {
      */
     this.brokenSessions = document.createElement('p');
     this.brokenSessions.setAttribute('id', 'stats_numBrokenSessions');
-    this.brokenSessions.setAttribute('class', 'dist-info');
+    this.brokenSessions.setAttribute('class', classNames.distNumberClass);
     /**
      * Label for total number of unique broken sessions
      * @type {HTMLParagraphElement}
      */
     this.brokenSessionsLabel = document.createElement('p');
     this.brokenSessionsLabel.setAttribute('id', 'stats_brokenSessionsLabel');
-    this.brokenSessionsLabel.setAttribute('class', 'dist-info-label');
+    this.brokenSessionsLabel.setAttribute('class', classNames.distLabelClass);
     this.brokenSessionsLabel.textContent = 'Broken Sessions';
     this.parentDiv.appendChild(this.brokenSessions);
     this.parentDiv.appendChild(this.brokenSessionsLabel);
@@ -159,14 +157,14 @@ class Statistics extends HTMLElement {
      */
     this.expectedPomoSessionsData = document.createElement('p');
     this.expectedPomoSessionsData.setAttribute('id', 'stats_expectedPomoSesh');
-    this.expectedPomoSessionsData.setAttribute('class', 'stats-info');
+    this.expectedPomoSessionsData.setAttribute('class', classNames.statsNumberClass);
     /**
      * Label for projected number of pomo sessions
      * @type {HTMLParagraphElement}
      */
     this.expectedPomoSessionsLabel = document.createElement('p');
     this.expectedPomoSessionsLabel.setAttribute('id', 'stats_expectedPomoSesLabel');
-    this.expectedPomoSessionsLabel.setAttribute('class', 'stats-info-label');
+    this.expectedPomoSessionsLabel.setAttribute('class', classNames.statsLabelClass);
     this.expectedPomoSessionsLabel.textContent = 'Expected Pomo Sessions';
     this.parentDiv.appendChild(this.expectedPomoSessionsData);
     this.parentDiv.appendChild(this.expectedPomoSessionsLabel);
@@ -178,14 +176,14 @@ class Statistics extends HTMLElement {
      */
     this.actualPomoSessionsData = document.createElement('p');
     this.actualPomoSessionsData.setAttribute('id', 'stats_actualPomo');
-    this.actualPomoSessionsData.setAttribute('class', 'stats-info');
+    this.actualPomoSessionsData.setAttribute('class', classNames.statsNumberClass);
     /**
      * Label for total number of working pomo sessions
      * @type {HTMLParagraphElement} L
      */
     this.actualPomoSessionsLabel = document.createElement('p');
     this.actualPomoSessionsLabel.setAttribute('id', 'stats_actualPomoSesLabel');
-    this.actualPomoSessionsLabel.setAttribute('class', 'stats-info-label');
+    this.actualPomoSessionsLabel.setAttribute('class', classNames.statsLabelClass);
     this.actualPomoSessionsLabel.textContent = 'Actual Pomo Sessions';
     this.parentDiv.appendChild(this.actualPomoSessionsData);
     this.parentDiv.appendChild(this.actualPomoSessionsLabel);
@@ -197,14 +195,14 @@ class Statistics extends HTMLElement {
      */
     this.avgDistractions = document.createElement('p');
     this.avgDistractions.setAttribute('id', 'dist_avgDistractions');
-    this.avgDistractions.setAttribute('class', 'dist-info');
+    this.avgDistractions.setAttribute('class', classNames.distNumberClass);
     /**
      * Label for average distractions per task
      * @type {HTMLParagraphElement}
      */
     this.avgDistractionsLabel = document.createElement('p');
     this.avgDistractionsLabel.setAttribute('id', 'dist_avgDistractionLabel');
-    this.avgDistractionsLabel.setAttribute('class', 'dist-info-label');
+    this.avgDistractionsLabel.setAttribute('class', classNames.distLabelClass);
     this.avgDistractionsLabel.textContent = 'Average Distractions Per Task';
     this.parentDiv.appendChild(this.avgDistractions);
     this.parentDiv.appendChild(this.avgDistractionsLabel);
@@ -222,7 +220,7 @@ class Statistics extends HTMLElement {
      */
     this.distListLabel = document.createElement('p');
     this.distListLabel.setAttribute('id', 'dist_listLabel');
-    this.distListLabel.setAttribute('class', 'dist-info-label');
+    this.distListLabel.setAttribute('class', classNames.distLabelClass);
     this.distListLabel.textContent = 'Distraction List';
     this.parentDiv.appendChild(this.distListLabel);
   }
@@ -259,15 +257,15 @@ class Statistics extends HTMLElement {
 
     // Clicking the Distraction button on the Statistics popup generates the distraction views and hides the data information
     statsDistractBtn.addEventListener('click', () => {
-      statsTabBtn.className = 'tab-btn';
-      let content = document.getElementsByClassName('stats-info');
-      let contentlabel = document.getElementsByClassName('stats-info-label');
+      statsTabBtn.className = classNames.nonActiveTabClass;
+      let content = document.getElementsByClassName(classNames.statsNumberClass);
+      let contentlabel = document.getElementsByClassName(classNames.statsLabelClass);
       for (let i = 0; i < content.length; i += 1) {
         content[i].style.display = 'none';
         contentlabel[i].style.display = 'none';
       }
-      content = document.getElementsByClassName('dist-info');
-      contentlabel = document.getElementsByClassName('dist-info-label');
+      content = document.getElementsByClassName(classNames.distNumberClass);
+      contentlabel = document.getElementsByClassName(classNames.distLabelClass);
       document.getElementsByClassName('dist-list')[0].style.display = 'block';
       for (let i = 0; i < content.length; i += 1) {
         content[i].style.display = 'block';
@@ -275,14 +273,14 @@ class Statistics extends HTMLElement {
       for (let i = 0; i < contentlabel.length; i += 1) {
         contentlabel[i].style.display = 'block';
       }
-      statsDistractBtn.className = 'tab-btn-active';
+      statsDistractBtn.className = classNames.activeTabClass;
     });
 
     // Clicking on Data button within the Statistics popup generates the data views and hides distraction data
     statsTabBtn.addEventListener('click', () => {
-      statsDistractBtn.className = 'tab-btn';
-      let content = document.getElementsByClassName('dist-info');
-      let contentlabel = document.getElementsByClassName('dist-info-label');
+      statsDistractBtn.className = classNames.nonActiveTabClass;
+      let content = document.getElementsByClassName(classNames.distNumberClass);
+      let contentlabel = document.getElementsByClassName(classNames.distLabelClass);
       for (let i = 0; i < content.length; i += 1) {
         content[i].style.display = 'none';
       }
@@ -290,13 +288,13 @@ class Statistics extends HTMLElement {
         contentlabel[i].style.display = 'none';
       }
       document.getElementsByClassName('dist-list')[0].style.display = 'none';
-      content = document.getElementsByClassName('stats-info');
-      contentlabel = document.getElementsByClassName('stats-info-label');
+      content = document.getElementsByClassName(classNames.statsNumberClass);
+      contentlabel = document.getElementsByClassName(classNames.statsLabelClass);
       for (let i = 0; i < content.length; i += 1) {
         content[i].style.display = 'block';
         contentlabel[i].style.display = 'block';
       }
-      statsTabBtn.className = 'tab-btn-active';
+      statsTabBtn.className = classNames.activeTabClass;
     });
 
     // Clicking outside of the popup closes the popup
@@ -436,13 +434,13 @@ class Statistics extends HTMLElement {
     if (this.history === null) {
       this.history = [];
     }
-    this.totalMins = localStorage.getItem('totalMins');
-    this.workMins = localStorage.getItem('workMins');
-    this.tasksCompleted = localStorage.getItem('tasksCompleted');
-    this.expectedPomoSessions = localStorage.getItem('expectedPomoSessions');
-    this.actualPomoSessions = localStorage.getItem('actualPomoSessions');
-    this.distractionList = localStorage.getItem('currDistractionList');
-    this.sessionStartDateTime = localStorage.getItem('startDateTime');
+    this.totalMins = localStorage.getItem(storageItemNames.totalMins);
+    this.workMins = localStorage.getItem(storageItemNames.workMins);
+    this.tasksCompleted = localStorage.getItem(storageItemNames.tasksCompleted);
+    this.expectedPomoSessions = localStorage.getItem(storageItemNames.expectedPomoSessions);
+    this.actualPomoSessions = localStorage.getItem(storageItemNames.actualPomoSessions);
+    this.distractionList = localStorage.getItem(storageItemNames.currDistractionList);
+    this.sessionStartDateTime = localStorage.getItem(storageItemNames.startDateTime);
 
     // If string was not found, set to zero/empty value. If string was found, parse the string for it's value
     this.totalMins = ((this.totalMins !== null) ? parseInt(this.totalMins, 10) : 0);
@@ -470,13 +468,13 @@ class Statistics extends HTMLElement {
    *  Writes all class variables to local storage
    */
   updateMinorLocalStorage() {
-    localStorage.setItem('totalMins', this.totalMins);
-    localStorage.setItem('workMins', this.workMins);
-    localStorage.setItem('tasksCompleted', this.tasksCompleted);
-    localStorage.setItem('expectedPomoSessions', this.expectedPomoSessions);
-    localStorage.setItem('actualPomoSessions', this.actualPomoSessions);
-    localStorage.setItem('currDistractionList', JSON.stringify(this.distractionList));
-    localStorage.setItem('startDateTime', this.sessionStartDateTime);
+    localStorage.setItem(storageItemNames.totalMins, this.totalMins);
+    localStorage.setItem(storageItemNames.workMins, this.workMins);
+    localStorage.setItem(storageItemNames.tasksCompleted, this.tasksCompleted);
+    localStorage.setItem(storageItemNames.expectedPomoSessions, this.expectedPomoSessions);
+    localStorage.setItem(storageItemNames.actualPomoSessions, this.actualPomoSessions);
+    localStorage.setItem(storageItemNames.currDistractionList, JSON.stringify(this.distractionList));
+    localStorage.setItem(storageItemNames.startDateTime, this.sessionStartDateTime);
   }
 
   /**
