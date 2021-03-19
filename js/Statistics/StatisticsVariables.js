@@ -19,7 +19,7 @@ const storageItemNames = {
   totalMins: 'totalMins',
   workMins: 'workMins',
   tasksCompleted: 'tasksCompleted',
-  expectedPomos: 'expectedPomoSessions',
+  expectedPomoSessions: 'expectedPomoSessions',
   actualPomoSessions: 'actualPomoSessions',
   currDistractionList: 'currDistractionList',
   startDateTime: 'startDateTime'
