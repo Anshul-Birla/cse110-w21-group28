@@ -19,6 +19,7 @@ table {
   border-spacing: 0 var(--table-border);
   table-layout: fixed; /* allows for word-wrap */
   width: 100%;
+  min-height = 45vh;
   min-width: 500px;
 
   /* max-width: 100%;     /* allows for word-wrap */
@@ -123,7 +124,7 @@ svg {
   bottom: 0;
   width: 100%;
   background-color: var(--page-bg-color);
-  border-top-left-radius: var(--td-border-radius);
+  border-bottom-left-radius: var(--td-border-radius);
   border-bottom-right-radius: var(--td-border-radius);
 }
 
@@ -136,6 +137,7 @@ svg {
   padding-top: 10px;
   padding-bottom: 10px;
   min-width: 500px;
+  border-bottom-left-radius: var(--td-border-radius);
   border-bottom-right-radius: var(--td-border-radius);
   transition-duration: 2s;
 }
@@ -164,6 +166,7 @@ svg {
 .task-length {
   width: 2em;
   margin-right: 2vw; /* so that when a user enters a long task it doesn't go past the input bar */
+  margin-right: 4vw;
 }
 
 .task-submit { /* + button to replace with materialize css */
