@@ -4,6 +4,7 @@ import { Statistics } from './Statistics/Statistics.js';
 import { Distraction } from './Distraction/Distraction.js';
 import { shortBreakColors, workModeColors } from './Misc/ChangeColors.js';
 import { breakModeSound, workModeSound } from './Misc/Sounds.js';
+import { classNames } from './ToDoList/TaskVariables.js';
 
 /**
  * Used to see if data needs to be cleared or not (if timer is started after 3 a.m. or not)
@@ -15,81 +16,122 @@ function after3amToday() {
 }
 
 /**
- * @type {HTMLParagraphElement} Location where time is displayed
+ * Location where time is displayed
+ * @type {HTMLParagraphElement} 
  */
 const timeDisplay = document.getElementById('timeDisplay');
+
 /**
- * @type {HTMLParagraphElement} Location where current pomo session type  is displayed
+ *  Location where current pomo session type  is displayed
+ * @type {HTMLParagraphElement}
  */
 const modeDisplay = document.getElementById('modeDisplay');
+
 /**
- * @type {HTMLTableElement} Table where ToDo List is housed
+ * Table where ToDo List is housed
+ * @type {HTMLTableElement} 
  */
 const todoTable = document.getElementById('todo');
+
 /**
- * @type {HTMLFormElement} Form for inputting new tasks
+ * Form for inputting new tasks
+ * @type {HTMLFormElement} 
  */
 const addTodoForm = document.getElementById('add-todo');
+
 /**
- * @type {HTMLButtonElement} Button to submit addTodoForm
+ * Button to submit addTodoForm
+ * @type {HTMLButtonElement}
  */
 const addTodoButton = document.getElementById('add-button');
+
 /**
- * @type {HTMLButtonElement} Button to start the timer
+ * Button to start the timer
+ * @type {HTMLButtonElement} 
  */
 const startTimerButton = document.getElementById('startTimer');
+
 /**
- * @type {HTMLButtonElement} Button to display the statistics popup
+ * Button to display the statistics popup
+ * @type {HTMLButtonElement} 
  */
 const statsButton = document.getElementById('statsButton');
+
 /**
- * @type {HTMLButtonElement} Button to log a distraction
+ * Button to log a distraction
+ * @type {HTMLButtonElement} 
  */
 const distractButton = document.getElementById('distractionButton');
+
 /**
- * @type {HTMLElement} Section which houses the distraction popup
+ * Section which houses the distraction popup
+ * @type {HTMLElement} 
  */
 const distractPopUp = document.getElementById('distract-popup');
+
 /**
- * @type {HTMLButtonElement} Button to cancel logging a distraction
+ * Button to cancel logging a distraction
+ * @type {HTMLButtonElement}
  */
 const cancelButton = document.getElementById('cancel-button');
+
 /**
- * @type {HTMLFormElement} Form for entering a new distraction
+ * Form for entering a new distraction
+ * @type {HTMLFormElement}
  */
 const distractForm = document.getElementById('distract-form');
+
 /**
- * @type {HTMLInputElement} Input element for logging a distraction
+ * Input element for logging a distraction
+ * @type {HTMLInputElement} 
  */
 const description = document.getElementById('description');
+
 /**
- * @type {HTMLElement} Section which houses the statistics popup
+ * Section which houses the statistics popup
+ * @type {HTMLElement} 
  */
 const statsPopUp = document.getElementById('stats-section');
+
 /**
- * @type {HTMLDivElement} Div which houses the text elements inside the statistics popup
+ * Div which houses the text elements inside the statistics popup
+ * @type {HTMLDivElement} 
  */
 const parentDiv = document.getElementById('parentDiv');
+
 /**
- * @type {HTMLButtonElement} Button to close the statitics popup
+ * Button to close the statitics popup
+ * @type {HTMLButtonElement} 
  */
 const closeStatsButton = document.getElementById('close-stats-button');
+
 /**
- * @type {HTMLButtonElement} Button to delete all tasks
+ * Button to delete all tasks
+ * @type {HTMLButtonElement} 
  */
 const deleteAllButton = document.getElementById('delete-all-button');
+
 /**
- * @type {HTMLDivElement} Overlay to darken popup backgrounds
+ * Overlay to darken popup backgrounds
+ * @type {HTMLDivElement} 
  */
 const overlay = document.getElementById('overlay');
+
 /**
- * @type {HTMLButtonElement} Button to toggle "Data" tab within the Statistics popup
+ * Button to toggle "Data" tab within the Statistics popup
+ * @type {HTMLButtonElement} 
  */
 const statsTabBtn = document.getElementById('data');
 /**
- * @type {HTMLElement} Section for showing which task is currently in progress
+ * Section for showing which task is currently in progress
+ * @type {HTMLElement} 
  */
 const currentTaskDiv = document.getElementById('currentTask');
+
+/**
+ * Button to start the tour of the page
+ * @type {HTMLButtonElement} 
+ */
 const tourButton = document.getElementById('onboardingButton');
 
 /**
@@ -112,12 +154,16 @@ const TimerObj = new Timer(startTimerButton, timeDisplay, modeDisplay);
 const DistractionPage = new Distraction(distractButton, distractPopUp,
   cancelButton, distractForm, description, overlay);
 
+// if the user has not already visited the page, run the introduction
 if (localStorage.getItem('onboarding') === null) {
   // eslint-disable-next-line
   introJs().start(); 
   localStorage.setItem('onboarding', 'true');
 }
 
+/**
+ * Event listener for the tour button to play the tour
+ */
 tourButton.addEventListener('click', () => {
   // eslint-disable-next-line
   introJs().start();
@@ -186,17 +232,27 @@ TimerObj.addEventListener('timer-end', () => {
   distractButton.disabled = true;
 });
 
+/**
+ * Event that fires when someone focuses on a certain task
+ */
 document.body.addEventListener('focus-task', (e) => {
   TDLDom.onFocusTask(e.detail.taskID);
   TDLDom.updateCurrentTask();
 });
 
+/**
+ * Event that fires when someone deletes a task
+ */
 document.body.addEventListener('task-deleted', (e) => {
   TDLDom.todoList.removeTask(e.detail.taskID);
   TDLDom.updateCurrentTask();
 });
 
+/**
+ * Event that fires when someone checks/unchecks checkbox
+ */
 document.body.addEventListener('checkbox-updated', (e) => {
+  // chechBoxstate is the updated checkbox state (state after event happened)
   if (e.detail.checkBoxState === true) {
     TDLDom.onCompletedTask();
   } else {
@@ -205,8 +261,13 @@ document.body.addEventListener('checkbox-updated', (e) => {
   TDLDom.updateCurrentTask();
 });
 
+/**
+ * This function determines if someone clicked the area where the delete
+ * and the focus button show up, in order to hide them if the cursor was
+ * clicked somewhere else 
+ */
 window.addEventListener('click', (e) => {
-  const lastColumnElements = document.getElementsByClassName('touch-target');
+  const lastColumnElements = document.getElementsByClassName(classNames.lastCol);
   let touchedButton = false;
 
   for (let i = 0; i < lastColumnElements.length && !touchedButton; i += 1) {
@@ -214,8 +275,8 @@ window.addEventListener('click', (e) => {
   }
 
   if (!touchedButton) {
-    const buttonPairList = document.getElementsByClassName('double-buttons');
-    const threeDotButtonList = document.getElementsByClassName('triple-dots-touch');
+    const buttonPairList = document.getElementsByClassName(classNames.doubleButtons);
+    const threeDotButtonList = document.getElementsByClassName(classNames.threeDotsWrapper);
     for (let i = 0; i < buttonPairList.length; i += 1) {
       buttonPairList[i].style.display = 'none';
       threeDotButtonList[i].style.display = 'block';

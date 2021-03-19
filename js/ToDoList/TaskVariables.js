@@ -9,6 +9,9 @@ const classNames = {
   focusSvg: 'focus-svg',
   deleteSvg: 'delete-svg',
   threeDots: 'three-dots',
+  threeDotsWrapper: 'triple-dots-touch',
+  doubleButtons: 'double-buttons',
+  lastCol: 'touch-target',
 };
 
 /**

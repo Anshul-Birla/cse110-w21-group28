@@ -247,17 +247,17 @@ class Task extends HTMLTableRowElement {
     const deleteFocusDiv = document.createElement('div');
 
     // wrap the delete and focus buttons in a div
-    deleteFocusDiv.className = 'double-buttons';
+    deleteFocusDiv.className = classNames.doubleButtons;
     deleteFocusDiv.appendChild(deleteButton);
     deleteFocusDiv.appendChild(focusButton);
     // wrap the three dots button in a div
     threeDotsDiv.appendChild(threeDotsButton);
-    threeDotsDiv.className = 'triple-dots-touch';
+    threeDotsDiv.className = classNames.threeDotsWrapper;
 
     // make sure the delete and focus buttons are hidden
     deleteFocusDiv.style.display = 'none';
     lastColDiv.appendChild(threeDotsDiv);
-    lastColDiv.className = 'touch-target';
+    lastColDiv.className = classNames.lastCol;
     lastColDiv.appendChild(deleteFocusDiv);
     lastCol.appendChild(lastColDiv);
     this.appendChild(lastCol);
