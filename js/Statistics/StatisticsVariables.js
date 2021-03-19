@@ -8,7 +8,7 @@ const classNames = {
   distNumberClass: 'dist-info',
   distLabelClass: 'dist-info-label',
   activeTabClass: 'tab-btn-active',
-  nonActiveTabClass: 'tab-btn'
+  nonActiveTabClass: 'tab-btn',
 };
 
 /**
@@ -22,7 +22,7 @@ const storageItemNames = {
   expectedPomoSessions: 'expectedPomoSessions',
   actualPomoSessions: 'actualPomoSessions',
   currDistractionList: 'currDistractionList',
-  startDateTime: 'startDateTime'
+  startDateTime: 'startDateTime',
 };
 
 export { classNames, storageItemNames };

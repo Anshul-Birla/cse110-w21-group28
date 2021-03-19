@@ -1,6 +1,5 @@
 import { classNames, storageItemNames } from './StatisticsVariables.js';
 
-/* eslint-disable max-len */
 /**
  * A class for the Statistics object. Has functions for incrementing
  * and decrementing expected and actual pomo sessions,
@@ -9,7 +8,8 @@ import { classNames, storageItemNames } from './StatisticsVariables.js';
  */
 class Statistics extends HTMLElement {
   /**
-   * Constructor of Statistics object. Initializes all variables to zero, overwrites them from memory if available, updates DOM.
+   * Constructor of Statistics object. Initializes all variables to zero,
+   * overwrites them from memory if available, updates DOM.
    */
   constructor() {
     super();
@@ -259,7 +259,10 @@ class Statistics extends HTMLElement {
     const statsDistractBtn = document.getElementById('distraction');
     const statsTabBtn = document.getElementById('data');
 
-    // Clicking the Distraction button on the Statistics popup generates the distraction views and hides the data information
+    /*
+    Clicking the Distraction button on the Statistics popup generates the
+    distraction views and hides the data information
+    */
     statsDistractBtn.addEventListener('click', () => {
       statsTabBtn.className = classNames.nonActiveTabClass;
       let content = document.getElementsByClassName(classNames.statsNumberClass);
@@ -280,7 +283,10 @@ class Statistics extends HTMLElement {
       statsDistractBtn.className = classNames.activeTabClass;
     });
 
-    // Clicking on Data button within the Statistics popup generates the data views and hides distraction data
+    /*
+      Clicking on Data button within the Statistics popup generates
+      the data views and hides distraction data
+    */
     statsTabBtn.addEventListener('click', () => {
       statsDistractBtn.className = classNames.nonActiveTabClass;
       let content = document.getElementsByClassName(classNames.distNumberClass);
@@ -309,7 +315,8 @@ class Statistics extends HTMLElement {
   }
 
   /**
-   *  Updates the HTML elements to display values of local variables. Called when stats button is called.
+   *  Updates the HTML elements to display values of local variables.
+   * Called when stats button is called.
    */
   updateDom() {
     this.timePerTask.textContent = this.getAverageTimePerTask();
@@ -332,7 +339,8 @@ class Statistics extends HTMLElement {
   }
 
   /**
-   *  Decrements by one every time a task is marked as not-completed given that there are tasks that can be uncompleted. Updates local storage when called.
+   *  Decrements by one every time a task is marked as not-completed given that
+   * there are tasks that can be uncompleted. Updates local storage when called.
    */
   decrementTasksCompleted() {
     if (this.tasksCompleted > 0) {
@@ -342,7 +350,8 @@ class Statistics extends HTMLElement {
   }
 
   /**
-   *  Adds a distraction (represented by a JSON object) to the list of distractions. Updates local storage when called.
+   * Adds a distraction (represented by a JSON object) to the list of distractions.
+   * Updates local storage when called.
    * @param {JSON Object} distraction Distraction to be added
    */
   addDistraction(distraction) {
@@ -351,7 +360,8 @@ class Statistics extends HTMLElement {
   }
 
   /**
-   *  Gets the number of broken work sessions. If multiple distractions during one work session occurred, only counts as one unique broken pomo session.
+   *  Gets the number of broken work sessions. If multiple distractions
+   * during one work session occurred, only counts as one unique broken pomo session.
    * @returns {Number} Number of disrupted work sessions
    */
   getNumUniqueDistractions() {
@@ -381,7 +391,8 @@ class Statistics extends HTMLElement {
   }
 
   /**
-   *  Increments the work time spent. When work time incremented, so is total time spent (runs as separate method call to addTimeSpent())
+   *  Increments the work time spent. When work time incremented, so is total time spent
+   * (runs as separate method call to addTimeSpent())
    * @param {Number} numMins Number of minutes to increment work count by
    */
   addWorkTime(numMins) {
@@ -390,7 +401,8 @@ class Statistics extends HTMLElement {
   }
 
   /**
-   *  Increments the planned number of pomo sessions for the work day. Should be called each time a task is added.
+   *  Increments the planned number of pomo sessions for the work day.
+   * Should be called each time a task is added.
    * @param {Number} numSessions Number of sessions to increment count by
    */
   addExpectedPomoSessions(numSessions) {
@@ -399,7 +411,9 @@ class Statistics extends HTMLElement {
   }
 
   /**
-   *  Decrements the planned number of pomo sessions for the work day. Should be called each time a task is deleted. Only decrements if new tasks were added during the current work day.
+   *  Decrements the planned number of pomo sessions for the work day.
+   * Should be called each time a task is deleted. Only decrements if new tasks
+   * were added during the current work day.
    * @param {Number} numSessions Number of sessions to decrement count by
    */
   deleteExpectedPomoSessions(numSessions) {
@@ -410,7 +424,9 @@ class Statistics extends HTMLElement {
   }
 
   /**
-   *  Increments the number of completed pomo sessions for the work day. Should be called each time the timer finishes a work session. Updates local storage when called
+   * Increments the number of completed pomo sessions for the work day.
+   * Should be called each time the timer finishes a work session.
+   * Updates local storage when called
    */
   incrementActualPomoSessions() {
     this.actualPomoSessions += 1;
@@ -446,16 +462,26 @@ class Statistics extends HTMLElement {
     this.distractionList = localStorage.getItem(storageItemNames.currDistractionList);
     this.sessionStartDateTime = localStorage.getItem(storageItemNames.startDateTime);
 
-    // If string was not found, set to zero/empty value. If string was found, parse the string for it's value
+    /*
+    If string was not found, set to zero/empty value.
+    If string was found, parse the string for it's value
+    */
     this.totalMins = ((this.totalMins !== null) ? parseInt(this.totalMins, 10) : 0);
     this.workMins = ((this.workMins !== null) ? parseInt(this.workMins, 10) : 0);
     this.tasksCompleted = ((this.tasksCompleted !== null) ? parseInt(this.tasksCompleted, 10) : 0);
-    this.expectedPomoSessions = ((this.expectedPomoSessions !== null) ? parseInt(this.expectedPomoSessions, 10) : 0);
-    this.actualPomoSessions = ((this.actualPomoSessions !== null) ? parseInt(this.actualPomoSessions, 10) : 0);
-    this.tasksCompleted = ((this.tasksCompleted !== null) ? parseInt(this.tasksCompleted, 10) : 0);
-    this.sessionStartDateTime = ((this.sessionStartDateTime !== null) ? new Date(this.sessionStartDateTime) : new Date());
+    this.expectedPomoSessions = ((this.expectedPomoSessions !== null)
+      ? parseInt(this.expectedPomoSessions, 10) : 0);
+    this.actualPomoSessions = ((this.actualPomoSessions !== null)
+      ? parseInt(this.actualPomoSessions, 10) : 0);
+    this.tasksCompleted = ((this.tasksCompleted !== null)
+      ? parseInt(this.tasksCompleted, 10) : 0);
+    this.sessionStartDateTime = ((this.sessionStartDateTime !== null)
+      ? new Date(this.sessionStartDateTime) : new Date());
 
-    // Split the list of distractions from the string into individual distractions and turn date strings into date objects
+    /*
+    Split the list of distractions from the string into individual distractions
+    and turn date strings into date objects
+    */
     if (this.distractionList !== null) {
       this.distractionList = JSON.parse(this.distractionList);
       // eslint-disable-next-line no-restricted-syntax, guard-for-in
@@ -477,12 +503,14 @@ class Statistics extends HTMLElement {
     localStorage.setItem(storageItemNames.tasksCompleted, this.tasksCompleted);
     localStorage.setItem(storageItemNames.expectedPomoSessions, this.expectedPomoSessions);
     localStorage.setItem(storageItemNames.actualPomoSessions, this.actualPomoSessions);
-    localStorage.setItem(storageItemNames.currDistractionList, JSON.stringify(this.distractionList));
+    localStorage.setItem(storageItemNames.currDistractionList,
+      JSON.stringify(this.distractionList));
     localStorage.setItem(storageItemNames.startDateTime, this.sessionStartDateTime);
   }
 
   /**
-   *  Deletes all history records that are older than one year. To be used with year-to-date information. Updates local storage only for history record when called.
+   *  Deletes all history records that are older than one year. To be used with
+   *  year-to-date information. Updates local storage only for history record when called.
    */
   flushHistory() {
     const currDate = new Date();
@@ -496,9 +524,11 @@ class Statistics extends HTMLElement {
   }
 
   /**
-   *  Sees if the last time that a day was started was earlier than 3 a.m. today. If the work day was started at 3 a.m. or later, do not clear data, treat everything as a single work day. Otherwise, would compress data into history and clear variables.
+   *  Sees if the last time that a day was started was earlier than 3 a.m. today.
+   * If the work day was started at 3 a.m. or later, do not clear data,
+   * treat everything as a single work day.
+   * Otherwise, would compress data into history and clear variables.
    * @returns {Boolean} False if session started on or after 3 a.m. today. Else True.
-   * @todo Rewrite logic to match above description (one long if statement for false rather than four individual if statements for true)
    */
   dataToCompressExists() {
     const currDate = new Date();
@@ -515,7 +545,10 @@ class Statistics extends HTMLElement {
   }
 
   /**
-   *  Compresses necessary local variables to a history record and pushes the record to local storage. Should run when the End Day button is hit or when page loads and dataToCompressExists() === true. Dispatches reset-timer event to reset timer PomoSessionId to 0.
+   * Compresses necessary local variables to a history record and
+   * pushes the record to local storage.
+   * Should run when the End Day button is hit or when page loads and
+   * dataToCompressExists() true. Dispatches reset-timer event to reset timer PomoSessionId to 0.
    */
   compressStats() {
     if (this.totalMins > 0) {
